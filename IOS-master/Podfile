@@ -1,0 +1,22 @@
+platform :ios , '10.0'
+use_frameworks!
+
+target "Flipr" do
+    pod 'Fabric'
+    pod 'Crashlytics'
+    pod 'BAFluidView', '~> 0.2'
+    pod 'Alamofire', '~> 4.9.1'
+    pod 'AlamofireImage', '~> 3.6.0'
+    pod 'Device'
+    pod 'NVActivityIndicatorView'
+    pod 'SwifterSwift'
+    pod 'ActiveLabel'
+    pod 'IQKeyboardManagerSwift'
+    pod 'SideMenu', :git => 'https://github.com/jonkykong/SideMenu.git'
+    pod 'BarcodeScanner'
+    pod 'Charts', '~> 3.0'
+    pod 'GooglePlaces'
+    pod 'JGProgressHUD', '~> 1.4'
+    pod 'SwiftVideoBackground', '~> 3.0'
+    pod 'RangeSeekSlider'
+end
