@@ -301,7 +301,7 @@ class DashboardViewController: UIViewController {
         UIView.transition(with:  self.redoxChangeButton, duration: 0.4,
                           options: .transitionCrossDissolve,
                           animations: {
-                            self.notificationDisabledButton.isHidden = value
+                            self.redoxChangeButton.isHidden = value
                           })
         
     }

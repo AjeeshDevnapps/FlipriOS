@@ -143,6 +143,11 @@ class ProductTableViewController: UITableViewController, ProductTypeTableViewCon
     
     @IBAction func addButtonAction(_ sender: Any) {
         
+        self.addProduct()
+
+    }
+    
+    func addProduct(){
         if TARGET_OS_SIMULATOR != 0 {
             
             enterEANButtonAction()
@@ -155,7 +160,7 @@ class ProductTableViewController: UITableViewController, ProductTypeTableViewCon
             
             // Strings
             barcodeScannerController.headerViewController.titleLabel.text = "New product".localized
-            barcodeScannerController.headerViewController.closeButton.setTitle("Cancel".localized, for: .normal) 
+            barcodeScannerController.headerViewController.closeButton.setTitle("Cancel".localized, for: .normal)
             barcodeScannerController.cameraViewController.settingsButton.setTitle("Settings".localized, for: .normal)
             barcodeScannerController.messageViewController.textLabel.text = "Place the product barcode in the center. The search will start automatically.".localized
             
@@ -191,7 +196,6 @@ class ProductTableViewController: UITableViewController, ProductTypeTableViewCon
                 button.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
             })
         }
-
     }
     
     @objc func buttonAction(sender: UIButton!) {
@@ -610,8 +614,9 @@ class ProductTableViewController: UITableViewController, ProductTypeTableViewCon
             if let poolId = Pool.currentPool?.id {
                 
                 let hud = JGProgressHUD(style:.dark)
-                hud?.show(in: self.navigationController!.view)
-                
+//                hud?.show(in: self.navigationController!.view)
+                hud?.show(in: self.view)
+
                 if let newProduct = self.newProduct {
                     
                     print("Add stock with poolID: \(poolId), EAN: \(newProduct.EAN), quantity \(value)")
@@ -678,8 +683,9 @@ class ProductTableViewController: UITableViewController, ProductTypeTableViewCon
                 (result : UIAlertAction) -> Void in
                 
                 let hud = JGProgressHUD(style:.dark)
-                hud?.show(in: self.navigationController!.view)
-                
+//                hud?.show(in: self.navigationController!.view)
+                hud?.show(in: self.view)
+
                 print("Delete stock with poolID: \(poolId), stock id: \(button.stock!.id)")
                 
                 Alamofire.request(Router.deleteStock(poolId: poolId, stockId: button.stock!.id)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
@@ -744,7 +750,8 @@ class ProductTableViewController: UITableViewController, ProductTypeTableViewCon
                 if let poolId = Pool.currentPool?.id {
                     
                     let hud = JGProgressHUD(style:.dark)
-                    hud?.show(in: self.navigationController!.view)
+//                    hud?.show(in: self.navigationController!.view)
+                    hud?.show(in: self.view)
 
                         
                         print("Update stock with poolID: \(poolId), quantity \(value)")

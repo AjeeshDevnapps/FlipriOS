@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		480CF2BD25DCEAA800429906 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480CF2BC25DCEAA800429906 /* SettingsViewController.swift */; };
+		480CF2D325DD305800429906 /* NotificationSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480CF2D225DD305800429906 /* NotificationSwitchTableViewCell.swift */; };
+		481624E325DD7E750085F3C4 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481624E225DD7E750085F3C4 /* AccountViewController.swift */; };
+		481624E625DD91F50085F3C4 /* RoundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481624E525DD91F50085F3C4 /* RoundShadowView.swift */; };
 		4828D37125C0604500F95683 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4828D37025C0604500F95683 /* Notifications.storyboard */; };
 		4828D37525C0705200F95683 /* NotificationsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828D37425C0705200F95683 /* NotificationsAlertViewController.swift */; };
+		484BEE3B25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484BEE3A25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift */; };
 		B50009841F0101DB00A84A4F /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50009831F0101DB00A84A4F /* StockTableViewCell.swift */; };
 		B503971022C4AD56005B9D30 /* Flipr-eau2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B503970F22C4AD56005B9D30 /* Flipr-eau2.mp4 */; };
 		B503971222C50A58005B9D30 /* FunCamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503971122C50A58005B9D30 /* FunCamViewController.swift */; };
@@ -124,8 +129,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		480CF2BC25DCEAA800429906 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		480CF2D225DD305800429906 /* NotificationSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchTableViewCell.swift; sourceTree = "<group>"; };
+		481624E225DD7E750085F3C4 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		481624E525DD91F50085F3C4 /* RoundShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundShadowView.swift; sourceTree = "<group>"; };
 		4828D37025C0604500F95683 /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		4828D37425C0705200F95683 /* NotificationsAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsAlertViewController.swift; sourceTree = "<group>"; };
+		484BEE3A25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsAndEquipmentsViewController.swift; sourceTree = "<group>"; };
 		4E4E35BA3EEE1FBFF4CD6392 /* Pods-Flipr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flipr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flipr/Pods-Flipr.release.xcconfig"; sourceTree = "<group>"; };
 		B50009831F0101DB00A84A4F /* StockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
 		B503970F22C4AD56005B9D30 /* Flipr-eau2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Flipr-eau2.mp4"; sourceTree = "<group>"; };
@@ -282,6 +292,16 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
+		484BEE3925DAFD2300A1D6AC /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				484BEE3A25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift */,
+				480CF2BC25DCEAA800429906 /* SettingsViewController.swift */,
+				481624E225DD7E750085F3C4 /* AccountViewController.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
 		8DE53968CCEDEEDDE573FE5B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +317,8 @@
 				B5FCC3472243A7410064370D /* SimplePageViewController.swift */,
 				B50009831F0101DB00A84A4F /* StockTableViewCell.swift */,
 				B5C8AF60208779C5007EB73D /* WaterLevelTableViewCell.swift */,
+				480CF2D225DD305800429906 /* NotificationSwitchTableViewCell.swift */,
+				481624E525DD91F50085F3C4 /* RoundShadowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -304,6 +326,7 @@
 		B518F0EA1E9F8DAF0092156C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				484BEE3925DAFD2300A1D6AC /* SideMenu */,
 				4828D37325C0701F00F95683 /* Notifications */,
 				B519693422300959000383E2 /* OnboardingViewController.swift */,
 				B518F0EB1E9F8DD40092156C /* SignInViewController.swift */,
@@ -726,6 +749,7 @@
 				B5FCC3482243A7410064370D /* SimplePageViewController.swift in Sources */,
 				B57131A722E9E98C00421705 /* Log.swift in Sources */,
 				B506F2FF1F5859DA006246A2 /* EquipmentTableViewController.swift in Sources */,
+				484BEE3B25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift in Sources */,
 				B59436E1225652580030F16D /* SubscriptionOptionTableViewCell.swift in Sources */,
 				B518F0F31E9FC0840092156C /* UIButton+Activity.swift in Sources */,
 				B5FE6BF1241F71E70031853D /* Extensions.swift in Sources */,
@@ -740,6 +764,7 @@
 				B519F849244D801600477DD1 /* HUB.swift in Sources */,
 				B532455A1EB34B500001A46F /* Error+Code.swift in Sources */,
 				B53A7D5C1E8BB95800AC03C0 /* BLEManager.swift in Sources */,
+				480CF2BD25DCEAA800429906 /* SettingsViewController.swift in Sources */,
 				B5BD60281EF9574600B3A403 /* Product.swift in Sources */,
 				B5BE18D524485B97006CCB1E /* LandingViewController.swift in Sources */,
 				B581672B1EB0C65B00E2CDC7 /* StartViewController.swift in Sources */,
@@ -750,6 +775,7 @@
 				B54AED031EB8B02200174870 /* ValuePickerController.swift in Sources */,
 				B58E73531F73EDD60066B3E5 /* String+FliprDate.swift in Sources */,
 				B5FE6BED241F71E70031853D /* Decoder.swift in Sources */,
+				481624E325DD7E750085F3C4 /* AccountViewController.swift in Sources */,
 				B52A68B71EFAA4DF006585F5 /* ProductTypeTableViewController.swift in Sources */,
 				B555AF611EA959C30053163F /* EmailVerificationViewController.swift in Sources */,
 				B5F457B324C07365006C309A /* CablesSelectionViewController.swift in Sources */,
@@ -759,6 +785,7 @@
 				B519F847244D6DF700477DD1 /* HUBScanTableViewController.swift in Sources */,
 				B59436E5225652580030F16D /* PaidSubscription.swift in Sources */,
 				B53245621EB376320001A46F /* LightNavigationViewController.swift in Sources */,
+				480CF2D325DD305800429906 /* NotificationSwitchTableViewCell.swift in Sources */,
 				B53245581EB33F980001A46F /* Strip.swift in Sources */,
 				B551E9D0242503CF00C1788F /* HUBWifiNetwork.swift in Sources */,
 				B5CB6FDD1E80105E007F82BC /* DashboardViewController.swift in Sources */,
@@ -806,6 +833,7 @@
 				B557864324897E9300B5BDCD /* Planning.swift in Sources */,
 				B54A015C226483DA002EEC62 /* SubscriptionView.swift in Sources */,
 				B53086971F598B4600D7EFCF /* Equipment.swift in Sources */,
+				481624E625DD91F50085F3C4 /* RoundShadowView.swift in Sources */,
 				B59BEFAE1EA6663800F3AD73 /* Module.swift in Sources */,
 				B53C5E851E82C72F00C1C0FC /* CityPickerViewController.swift in Sources */,
 				B555AF631EA9FE8E0053163F /* CalibrationViewController.swift in Sources */,

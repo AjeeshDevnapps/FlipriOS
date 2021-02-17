@@ -151,14 +151,17 @@ class MenuViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 7
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         let bgColorView = UIView()
-        bgColorView.backgroundColor = K.Color.LightBlue
+//        bgColorView.backgroundColor = K.Color.LightBlue
+        bgColorView.backgroundColor = .white
         cell.selectedBackgroundView = bgColorView
-        
         return cell
     }
     
@@ -194,7 +197,23 @@ class MenuViewController: UITableViewController {
                 present(vc, animated: true, completion: nil)
             }
         }
-        if indexPath.row == 6 {
+        
+        else  if indexPath.row == 3 {
+            let eqpsVC = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "ProductsAndEquipmentsViewController") as! ProductsAndEquipmentsViewController
+            let navigationController = UINavigationController.init(rootViewController: eqpsVC)
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
+        else if indexPath.row == 5 {
+            let navigationController = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsNavigation") as! UINavigationController
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
+//
+        
+        if indexPath.row == 4 {
             if let pool = Pool.currentPool {
                 if let url = URL(string: pool.shopUrl) {
                     let vc = SFSafariViewController(url: url, entersReaderIfAvailable: false)
@@ -219,6 +238,8 @@ class MenuViewController: UITableViewController {
             }
             
         }
+        
+       
         
         if indexPath.row == 9 {
             if let url = URL(string: "BLOG_URL".localized.remotable) {
