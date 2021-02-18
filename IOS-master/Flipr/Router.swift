@@ -17,6 +17,7 @@ enum Router: URLRequestConvertible {
     case createUser(email: String, password: String, lastName: String, firstName: String, phone: String)
     case readAccountActivation(email: String)
     case resetPassword(email: String)
+    case changePassword(oldPassword: String, newPassword: String)
     case readUser
     case readUserNotifications
     case updateUserNotifications(activate: Bool)
@@ -111,6 +112,8 @@ enum Router: URLRequestConvertible {
             return .get
         case .resetPassword:
             return .post
+        case .changePassword:
+            return .put
         case .readUser:
             return .get
         case .readUserNotifications:
@@ -244,6 +247,8 @@ enum Router: URLRequestConvertible {
         case .readAccountActivation:
             return "accounts/isActivated"
         case .resetPassword:
+            return "pwd"
+        case .changePassword:
             return "pwd"
         case .readUser:
             return "accounts"
@@ -462,6 +467,14 @@ enum Router: URLRequestConvertible {
                 "email": email
             ]
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        
+        case .changePassword(let oldPassword, let newPassword):
+            let parameters: [String : Any] = [
+                "OldPassword": oldPassword,
+                "NewPassword": newPassword
+            ]
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        
         
         case .updateUserNotifications(let activate):
             let parameters: [String : Any] = [

@@ -16,6 +16,7 @@ private var fillColor: UIColor = .blue // the color applied to the shadowLayer, 
 class AccountViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var subscriptionLabel: UILabel!
+    @IBOutlet weak var subscriptionInfoLabel: UILabel!
     @IBOutlet weak var firstNameTxtFld: UITextField!
     @IBOutlet weak var lastNameTxtFld: UITextField!
     @IBOutlet weak var subsriptionImgView: UIImageView!
@@ -30,7 +31,8 @@ class AccountViewController: UIViewController {
         self.title = "Account"
         firstNameTxtFld.delegate = self
         lastNameTxtFld.delegate = self
-        subsriptionButton.isUserInteractionEnabled = false
+//        subsriptionButton.isUserInteractionEnabled = false
+//        subscriptionInfoLabel.isHidden = true
         detailsContainerView.clipsToBounds = true
         detailsContainerView.layer.cornerRadius = 15.0
         detailsContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
@@ -55,12 +57,12 @@ class AccountViewController: UIViewController {
         if isSubscriptionValid{
             self.subsriptionImgView.image = #imageLiteral(resourceName: "check-1")
             self.subscriptionLabel.text = "Active (Premier)"
+            subscriptionInfoLabel.isHidden = false
         }
         else{
             subsriptionButton.isUserInteractionEnabled = false
             self.subsriptionImgView.image = #imageLiteral(resourceName: "cross")
             self.subscriptionLabel.text = "Inactive - Subscribe here !"
-            
         }
         if (Module.currentModule?.moduleType == 1) || (Module.currentModule?.moduleType == 2){
             self.subsriptionImgView.image = #imageLiteral(resourceName: "check - blue")
@@ -89,6 +91,13 @@ class AccountViewController: UIViewController {
         }
     }
     
+    @IBAction func passwordChangeButtonClicked(){
+    
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "PasswordViewController") as? PasswordViewController {
+            self.navigationController?.pushViewController(vc)
+            
+        }
+    }
    
 
 }

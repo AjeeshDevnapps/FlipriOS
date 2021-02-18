@@ -302,6 +302,51 @@ class User {
             })
     }
     
+    
+    
+    static func changePassword(oldPassword:String, newPassword:String,completion: ((_ isSuccess: Bool, _ message: String?, _ error: Error?) -> Void)?) {
+        
+            Alamofire.request(Router.changePassword(oldPassword: oldPassword, newPassword: newPassword)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                
+                switch response.result {
+                    
+                case .success(let value):
+                    print("User change password - response.result.value: \(value)")
+                    if let resultResponse = value as? [String:Any] {
+                        if let activated = resultResponse ["Success"] as? Bool {
+                            let message = resultResponse["Message"] as? String
+                            if activated == true {
+                                completion?(true,message,nil)
+                            } else {
+                               
+                                completion?(false,message,nil)
+                            }
+                        } else {
+                            let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                            completion?(false, nil, error)
+                        }
+                        
+                    } else {
+                        let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                        completion?(false, nil, error)
+                    }
+                    
+                case .failure(let error):
+                    
+                    print("User change password did fail with error: \(error)")
+                    
+                    if let serverError = User.serverError(response: response) {
+                        completion?(false,nil, serverError)
+                    } else {
+                        completion?(false,nil, error)
+                    }
+                }
+            })
+    }
+    
+    
+    
+    
     func getAccount(completion: ((_ error: Error?) -> Void)?) {
         
         Alamofire.request(Router.readUser).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
