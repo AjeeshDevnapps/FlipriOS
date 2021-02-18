@@ -21,6 +21,7 @@ enum Router: URLRequestConvertible {
     case readUserNotifications
     case updateUserNotifications(activate: Bool)
     case updateLanguage
+    case updateUserInfo(lastName: String, firstName: String)
     
     case sendSubscriptionReceipt(data:Data)
     
@@ -117,6 +118,8 @@ enum Router: URLRequestConvertible {
         case .updateUserNotifications:
             return .put
         case .updateLanguage:
+            return .put
+        case .updateUserInfo:
             return .put
         case .sendSubscriptionReceipt:
             return .post
@@ -249,6 +252,8 @@ enum Router: URLRequestConvertible {
         case .updateUserNotifications:
             return "accounts/notifications"
         case .updateLanguage:
+            return "accounts"
+        case .updateUserInfo:
             return "accounts"
         case .sendSubscriptionReceipt:
             return "accounts/subscription/iTunes"
@@ -414,6 +419,17 @@ enum Router: URLRequestConvertible {
                 "Phone": phone,
                 "Lang": lang,
                 "Birthday":"1900-01-01T00:00:00.0000000+00:00",
+            ]
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+            
+        case .updateUserInfo( let lastName, let firstName):
+            var lang = "en"
+            if let preferredLanguage = Locale.current.languageCode {
+                lang = preferredLanguage
+            }
+            let parameters: [String : Any] = [
+                "Lastname": lastName,
+                "Firstname": firstName,
             ]
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         

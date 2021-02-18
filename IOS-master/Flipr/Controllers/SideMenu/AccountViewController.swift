@@ -18,6 +18,9 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var subscriptionLabel: UILabel!
     @IBOutlet weak var firstNameTxtFld: UITextField!
     @IBOutlet weak var lastNameTxtFld: UITextField!
+    @IBOutlet weak var subsriptionImgView: UIImageView!
+    @IBOutlet weak var subsriptionButton: UIButton!
+
     @IBOutlet weak var detailsContainerView: UIView!
     @IBOutlet weak var subscriptionContainerView: UIView!
     private var shadowLayer: CAShapeLayer!
@@ -25,7 +28,9 @@ class AccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Account"
-
+        firstNameTxtFld.delegate = self
+        lastNameTxtFld.delegate = self
+        subsriptionButton.isUserInteractionEnabled = false
         detailsContainerView.clipsToBounds = true
         detailsContainerView.layer.cornerRadius = 15.0
         detailsContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
@@ -35,6 +40,10 @@ class AccountViewController: UIViewController {
         subscriptionContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
 
         showDetails()
+        
+        
+        
+//        getHubInfo()
     }
     
     
@@ -42,28 +51,58 @@ class AccountViewController: UIViewController {
         self.emailLabel.text = User.currentUser?.email
         self.firstNameTxtFld.text = User.currentUser?.firstName
         self.lastNameTxtFld.text = User.currentUser?.lastName
+        let isSubscriptionValid = Module.currentModule?.isSubscriptionValid ?? false
+        if isSubscriptionValid{
+            self.subsriptionImgView.image = #imageLiteral(resourceName: "check-1")
+            self.subscriptionLabel.text = "Active (Premier)"
+        }
+        else{
+            subsriptionButton.isUserInteractionEnabled = false
+            self.subsriptionImgView.image = #imageLiteral(resourceName: "cross")
+            self.subscriptionLabel.text = "Inactive - Subscribe here !"
+            
+        }
+        if (Module.currentModule?.moduleType == 1) || (Module.currentModule?.moduleType == 2){
+            self.subsriptionImgView.image = #imageLiteral(resourceName: "check - blue")
+            self.subscriptionLabel.text = "No subscription needed"
+        }
 
     }
     
+    func updateUserName(fName:String, lName:String){
+        User.updateAccount(lastName: lName, firstName: fName) {
+            (error) in
+        }
+    }
     
-//    func addShadowLayers(){
-//        if shadowLayer == nil {
-//               shadowLayer = CAShapeLayer()
-//
-//                shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 10.0).cgPath
-//               shadowLayer.shadowColor = UIColor.black.cgColor
-//               shadowLayer.shadowPath = shadowLayer.path
-//               shadowLayer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-//               shadowLayer.shadowOpacity = 0.2
-//               shadowLayer.shadowRadius = 3
-//
-//               layer.insertSublayer(shadowLayer, at: 0)
-//           }
-//    }
-
+    
+    
+    func getHubInfo(){
+        User.currentUser?.getModule(completion: { (error) in
+            
+        })
+    }
+    
+    @IBAction func subscriptionButtonClicked(){
+        if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
    
 
 }
+
+extension AccountViewController: UITextFieldDelegate{
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print(textField.text)
+        self.updateUserName(fName: firstNameTxtFld.text ?? "", lName:  lastNameTxtFld.text ?? "")
+    }
+    
+   
+}
+
+
 
 
 extension UIView {

@@ -333,6 +333,40 @@ class User {
         })
     }
     
+    
+    static func updateAccount(lastName:String, firstName:String, completion: ((_ error: Error?) -> Void)?) {
+        
+        Alamofire.request(Router.updateUserInfo(lastName: lastName,firstName:firstName)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                print("Read User - response.result.value: \(value)")
+                if let user = value as? [String:Any] {
+                    User.currentUser?.update(withAttibutes: user)
+                    User.saveCurrentUserLocally()
+                    
+                    completion?(nil)
+                } else {
+                    let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                    completion?(error)
+                }
+                
+            case .failure(let error):
+                
+                print("Read User did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(serverError)
+                } else {
+                    completion?(error)
+                }
+            }
+        })
+    }
+    
+    
+    
     func getModule(completion: ((_ error: Error?) -> Void)?) {
         
         Alamofire.request(Router.getModules).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
