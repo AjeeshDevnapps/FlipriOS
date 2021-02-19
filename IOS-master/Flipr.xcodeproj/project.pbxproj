@@ -15,6 +15,10 @@
 		4828D37525C0705200F95683 /* NotificationsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828D37425C0705200F95683 /* NotificationsAlertViewController.swift */; };
 		483E23C325DEB89E00D2E619 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483E23C225DEB89E00D2E619 /* PasswordViewController.swift */; };
 		484BEE3B25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484BEE3A25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift */; };
+		48FC118D25DFE3B1001E1885 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC118C25DFE3B1001E1885 /* DevicesViewController.swift */; };
+		48FC119125DFE3C1001E1885 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119025DFE3C1001E1885 /* DeviceViewController.swift */; };
+		48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */; };
+		48FC119725DFE45D001E1885 /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48FC119625DFE45D001E1885 /* Devices.storyboard */; };
 		B50009841F0101DB00A84A4F /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50009831F0101DB00A84A4F /* StockTableViewCell.swift */; };
 		B503971022C4AD56005B9D30 /* Flipr-eau2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B503970F22C4AD56005B9D30 /* Flipr-eau2.mp4 */; };
 		B503971222C50A58005B9D30 /* FunCamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503971122C50A58005B9D30 /* FunCamViewController.swift */; };
@@ -138,6 +142,10 @@
 		4828D37425C0705200F95683 /* NotificationsAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsAlertViewController.swift; sourceTree = "<group>"; };
 		483E23C225DEB89E00D2E619 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		484BEE3A25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsAndEquipmentsViewController.swift; sourceTree = "<group>"; };
+		48FC118C25DFE3B1001E1885 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
+		48FC119025DFE3C1001E1885 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
+		48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddnewDeviceViewController.swift; sourceTree = "<group>"; };
+		48FC119625DFE45D001E1885 /* Devices.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Devices.storyboard; sourceTree = "<group>"; };
 		4E4E35BA3EEE1FBFF4CD6392 /* Pods-Flipr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flipr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flipr/Pods-Flipr.release.xcconfig"; sourceTree = "<group>"; };
 		B50009831F0101DB00A84A4F /* StockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
 		B503970F22C4AD56005B9D30 /* Flipr-eau2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Flipr-eau2.mp4"; sourceTree = "<group>"; };
@@ -282,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				4828D37025C0604500F95683 /* Notifications.storyboard */,
+				48FC119625DFE45D001E1885 /* Devices.storyboard */,
 			);
 			path = StoryBoard;
 			sourceTree = "<group>";
@@ -303,6 +312,16 @@
 				483E23C225DEB89E00D2E619 /* PasswordViewController.swift */,
 			);
 			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		48FC118B25DFE39B001E1885 /* Devices */ = {
+			isa = PBXGroup;
+			children = (
+				48FC118C25DFE3B1001E1885 /* DevicesViewController.swift */,
+				48FC119025DFE3C1001E1885 /* DeviceViewController.swift */,
+				48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */,
+			);
+			path = Devices;
 			sourceTree = "<group>";
 		};
 		8DE53968CCEDEEDDE573FE5B /* Pods */ = {
@@ -329,6 +348,7 @@
 		B518F0EA1E9F8DAF0092156C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				48FC118B25DFE39B001E1885 /* Devices */,
 				484BEE3925DAFD2300A1D6AC /* SideMenu */,
 				4828D37325C0701F00F95683 /* Notifications */,
 				B519693422300959000383E2 /* OnboardingViewController.swift */,
@@ -628,6 +648,7 @@
 				B503971022C4AD56005B9D30 /* Flipr-eau2.mp4 in Resources */,
 				B5713F16241163F800278166 /* HUB.storyboard in Resources */,
 				B58A373D1E79859B00C67F6C /* Assets.xcassets in Resources */,
+				48FC119725DFE45D001E1885 /* Devices.storyboard in Resources */,
 				B5CB6FE51E801D58007F82BC /* Lato-Light.ttf in Resources */,
 				B519F84F2450114F00477DD1 /* HUB.xcassets in Resources */,
 				B5F457C124C07BF6006C309A /* GUIDE_3.mp4 in Resources */,
@@ -791,11 +812,13 @@
 				480CF2D325DD305800429906 /* NotificationSwitchTableViewCell.swift in Sources */,
 				B53245581EB33F980001A46F /* Strip.swift in Sources */,
 				B551E9D0242503CF00C1788F /* HUBWifiNetwork.swift in Sources */,
+				48FC119125DFE3C1001E1885 /* DeviceViewController.swift in Sources */,
 				B5CB6FDD1E80105E007F82BC /* DashboardViewController.swift in Sources */,
 				B5FE6BEF241F71E70031853D /* CBOR.swift in Sources */,
 				B5FE6BF2241F71E70031853D /* MajorTypes.swift in Sources */,
 				B5B7B0072077C39D006DF6E7 /* ExpertModeViewController.swift in Sources */,
 				B553649820864EFD00E0727F /* WaterLevel.swift in Sources */,
+				48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */,
 				B555AF5F1EA8EC720053163F /* UIView+EmptyStateView.swift in Sources */,
 				B54676C82062B8C30052E131 /* ProductAttributesViewController.swift in Sources */,
 				4828D37525C0705200F95683 /* NotificationsAlertViewController.swift in Sources */,
@@ -839,6 +862,7 @@
 				B53086971F598B4600D7EFCF /* Equipment.swift in Sources */,
 				481624E625DD91F50085F3C4 /* RoundShadowView.swift in Sources */,
 				B59BEFAE1EA6663800F3AD73 /* Module.swift in Sources */,
+				48FC118D25DFE3B1001E1885 /* DevicesViewController.swift in Sources */,
 				B53C5E851E82C72F00C1C0FC /* CityPickerViewController.swift in Sources */,
 				B555AF631EA9FE8E0053163F /* CalibrationViewController.swift in Sources */,
 				B518F0EF1E9F90B70092156C /* User.swift in Sources */,
