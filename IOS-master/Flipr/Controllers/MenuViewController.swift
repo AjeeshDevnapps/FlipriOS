@@ -211,6 +211,14 @@ class MenuViewController: UITableViewController {
             self.present(navigationController, animated: true, completion: nil)
         }
         
+        else if indexPath.row == 6 {
+            let navigationController = UIStoryboard(name:"SideMenuViews", bundle: nil).instantiateViewController(withIdentifier: "HelpNavigation") as! UINavigationController
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
+        
+        
 //
         
         if indexPath.row == 4 {

@@ -15,6 +15,9 @@
 		4828D37525C0705200F95683 /* NotificationsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828D37425C0705200F95683 /* NotificationsAlertViewController.swift */; };
 		483E23C325DEB89E00D2E619 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483E23C225DEB89E00D2E619 /* PasswordViewController.swift */; };
 		484BEE3B25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484BEE3A25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift */; };
+		484CEB9D25E2AAE2005CD208 /* SideMenuViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 484CEB9C25E2AAE2005CD208 /* SideMenuViews.storyboard */; };
+		484CEBA025E2B06E005CD208 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484CEB9F25E2B06E005CD208 /* HelpViewController.swift */; };
+		48B2A7EC25E19B45001CCBCC /* DeviceInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B2A7EB25E19B45001CCBCC /* DeviceInfoTableViewCell.swift */; };
 		48FC118D25DFE3B1001E1885 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC118C25DFE3B1001E1885 /* DevicesViewController.swift */; };
 		48FC119125DFE3C1001E1885 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119025DFE3C1001E1885 /* DeviceViewController.swift */; };
 		48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */; };
@@ -142,6 +145,9 @@
 		4828D37425C0705200F95683 /* NotificationsAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsAlertViewController.swift; sourceTree = "<group>"; };
 		483E23C225DEB89E00D2E619 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		484BEE3A25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsAndEquipmentsViewController.swift; sourceTree = "<group>"; };
+		484CEB9C25E2AAE2005CD208 /* SideMenuViews.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenuViews.storyboard; sourceTree = "<group>"; };
+		484CEB9F25E2B06E005CD208 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		48B2A7EB25E19B45001CCBCC /* DeviceInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoTableViewCell.swift; sourceTree = "<group>"; };
 		48FC118C25DFE3B1001E1885 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
 		48FC119025DFE3C1001E1885 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
 		48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddnewDeviceViewController.swift; sourceTree = "<group>"; };
@@ -291,6 +297,7 @@
 			children = (
 				4828D37025C0604500F95683 /* Notifications.storyboard */,
 				48FC119625DFE45D001E1885 /* Devices.storyboard */,
+				484CEB9C25E2AAE2005CD208 /* SideMenuViews.storyboard */,
 			);
 			path = StoryBoard;
 			sourceTree = "<group>";
@@ -310,6 +317,7 @@
 				480CF2BC25DCEAA800429906 /* SettingsViewController.swift */,
 				481624E225DD7E750085F3C4 /* AccountViewController.swift */,
 				483E23C225DEB89E00D2E619 /* PasswordViewController.swift */,
+				484CEB9F25E2B06E005CD208 /* HelpViewController.swift */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -341,6 +349,7 @@
 				B5C8AF60208779C5007EB73D /* WaterLevelTableViewCell.swift */,
 				480CF2D225DD305800429906 /* NotificationSwitchTableViewCell.swift */,
 				481624E525DD91F50085F3C4 /* RoundShadowView.swift */,
+				48B2A7EB25E19B45001CCBCC /* DeviceInfoTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -644,6 +653,7 @@
 				B5F457BF24C07BF6006C309A /* GUIDE_2.mp4 in Resources */,
 				B58A37401E79859B00C67F6C /* LaunchScreen.storyboard in Resources */,
 				B57131A122E9AB9300421705 /* PoolLog.storyboard in Resources */,
+				484CEB9D25E2AAE2005CD208 /* SideMenuViews.storyboard in Resources */,
 				B5CB6FE41E801D58007F82BC /* Lato-Bold.ttf in Resources */,
 				B503971022C4AD56005B9D30 /* Flipr-eau2.mp4 in Resources */,
 				B5713F16241163F800278166 /* HUB.storyboard in Resources */,
@@ -821,6 +831,7 @@
 				48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */,
 				B555AF5F1EA8EC720053163F /* UIView+EmptyStateView.swift in Sources */,
 				B54676C82062B8C30052E131 /* ProductAttributesViewController.swift in Sources */,
+				48B2A7EC25E19B45001CCBCC /* DeviceInfoTableViewCell.swift in Sources */,
 				4828D37525C0705200F95683 /* NotificationsAlertViewController.swift in Sources */,
 				B57DE98C1F028FF300594261 /* RemoteControl.swift in Sources */,
 				B5C8AF61208779C5007EB73D /* WaterLevelTableViewCell.swift in Sources */,
@@ -846,6 +857,7 @@
 				B50BAC361EAEAF72004BE665 /* MenuViewController.swift in Sources */,
 				B519F85324534E3100477DD1 /* HUBViewController.swift in Sources */,
 				B519693522300959000383E2 /* OnboardingViewController.swift in Sources */,
+				484CEBA025E2B06E005CD208 /* HelpViewController.swift in Sources */,
 				B59436E3225652580030F16D /* Subscription.swift in Sources */,
 				B54AED071EB8E17600174870 /* Pool.swift in Sources */,
 				B518F0F61E9FD6BB0092156C /* SignUpViewController.swift in Sources */,

@@ -91,7 +91,11 @@ extension SettingsViewController: UITableViewDelegate,UITableViewDataSource {
         }
         
         else if indexPath.row == 2{
-            
+            let storyboard = UIStoryboard(name: "Devices", bundle: nil)
+//            let deviceVC = storyboard.instantiateViewController(withIdentifier: "DeviceViewController") as! DeviceViewController
+            let deviceVC = storyboard.instantiateViewController(withIdentifier: "DevicesViewController") as! DevicesViewController
+            self.navigationController?.pushViewController(deviceVC)
+
         }
         
         else if indexPath.row == 4 {

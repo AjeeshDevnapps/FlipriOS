@@ -83,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func updateUserData() {
         if let user = User.currentUser {
-            user.getModule(completion: { (error) in
+            user.getModule(completion: { (devices,error) in
                 if error != nil {
                 } else {
                     user.getPool(completion: { (error) in

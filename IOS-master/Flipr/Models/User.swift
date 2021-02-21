@@ -167,7 +167,7 @@ class User {
                             }
                         })
                         
-                        User.currentUser?.getModule(completion: { (error) in
+                        User.currentUser?.getModule(completion: { (devices,error) in
                             if error != nil {
                                 completion?(error)
                             } else {
@@ -412,7 +412,7 @@ class User {
     
     
     
-    func getModule(completion: ((_ error: Error?) -> Void)?) {
+    func getModule(completion: ((_ devices: [[String:Any]]?, _ error: Error?) -> Void)?) {
         
         Alamofire.request(Router.getModules).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             
@@ -443,10 +443,10 @@ class User {
                         Module.currentModule = module
                         Module.saveCurrentModuleLocally()
                     }
-                    completion?(nil)
+                    completion?(fliprs,nil)
                 } else {
                     let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
-                    completion?(error)
+                    completion?(nil, error)
                 }
                 
             case .failure(let error):
@@ -454,9 +454,9 @@ class User {
                 print("Get user modules did fail with error: \(error)")
                 
                 if let serverError = User.serverError(response: response) {
-                    completion?(serverError)
+                    completion?(nil,serverError)
                 } else {
-                    completion?(error)
+                    completion?(nil,error)
                 }
             }
         })
