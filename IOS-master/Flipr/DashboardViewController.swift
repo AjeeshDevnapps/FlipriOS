@@ -38,7 +38,8 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var waterTmpChangeButton: UIButton!
     @IBOutlet weak var phChangeButton: UIButton!
     @IBOutlet weak var redoxChangeButton: UIButton!
-    
+    @IBOutlet weak var quickActionButtonContainer: UIView!
+
     
     
     
@@ -104,7 +105,10 @@ class DashboardViewController: UIViewController {
         }
         
         self.view.clipsToBounds = true
-        
+//        self.quickActionButtonContainer.cornerRadius =  self.quickActionButtonContainer.frame.size.height / 2
+        quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
+        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius: self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.21)
+
         if Locale.current.languageCode != "fr" {
             let attributedTitle = NSAttributedString(string: "Alert in progress: act now!".localized, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor) : UIColor.white]))
             alertButton.setAttributedTitle(attributedTitle, for: .normal)
@@ -1851,6 +1855,15 @@ class DashboardViewController: UIViewController {
             vc.temperature = self.waterTemperatureLabel.text ?? ""
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func quickActionButtonAction(_ sender: Any) {
+    
+        let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "QuickActionViewController") as? QuickActionViewController {
+            viewController.modalPresentationStyle = .overCurrentContext
+            self.present(viewController, animated: true, completion: nil)
         }
     }
     

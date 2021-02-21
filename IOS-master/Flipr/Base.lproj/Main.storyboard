@@ -2079,6 +2079,46 @@
                                     <action selector="hubButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cnz-9k-NL4"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="63h-sv-QXJ">
+                                <rect key="frame" x="305" y="73" width="50" height="50"/>
+                                <subviews>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mfu-a4-666">
+                                        <rect key="frame" x="1" y="1" width="48" height="48"/>
+                                        <color key="backgroundColor" red="0.12941176469999999" green="0.2274509804" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="LDO-8U-Dac"/>
+                                            <constraint firstAttribute="width" constant="48" id="XdM-eo-9Y6"/>
+                                        </constraints>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more_vert - material" translatesAutoresizingMaskIntoConstraints="NO" id="5B9-k8-lYo">
+                                        <rect key="frame" x="23" y="17.5" width="4" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="dUD-L3-ALg"/>
+                                            <constraint firstAttribute="width" constant="4" id="gE8-Z2-Cq8"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlU-Kc-9P5">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="quickActionButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gv2-DX-8um"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="NlU-Kc-9P5" firstAttribute="leading" secondItem="63h-sv-QXJ" secondAttribute="leading" id="16w-bc-MnZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="NlU-Kc-9P5" secondAttribute="trailing" id="57z-Ec-KZm"/>
+                                    <constraint firstItem="5B9-k8-lYo" firstAttribute="centerX" secondItem="63h-sv-QXJ" secondAttribute="centerX" id="Iig-io-HnD"/>
+                                    <constraint firstItem="mfu-a4-666" firstAttribute="centerX" secondItem="63h-sv-QXJ" secondAttribute="centerX" id="Kuk-vj-1hw"/>
+                                    <constraint firstItem="NlU-Kc-9P5" firstAttribute="top" secondItem="63h-sv-QXJ" secondAttribute="top" id="RWc-Si-1oo"/>
+                                    <constraint firstItem="mfu-a4-666" firstAttribute="centerY" secondItem="63h-sv-QXJ" secondAttribute="centerY" id="Wt3-lu-4G7"/>
+                                    <constraint firstAttribute="height" constant="50" id="eFJ-WG-wVY"/>
+                                    <constraint firstAttribute="bottom" secondItem="NlU-Kc-9P5" secondAttribute="bottom" id="lYK-0R-ZgF"/>
+                                    <constraint firstItem="5B9-k8-lYo" firstAttribute="centerY" secondItem="63h-sv-QXJ" secondAttribute="centerY" id="m8d-NX-Had"/>
+                                    <constraint firstAttribute="width" constant="50" id="pab-99-vV5"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="duh-9s-ELD">
                                 <rect key="frame" x="26" y="360" width="157" height="180"/>
                                 <subviews>
@@ -2598,6 +2638,7 @@ Essai gratuit 7 jours</string>
                             <constraint firstItem="gUM-xT-DoI" firstAttribute="top" secondItem="q7Z-CE-eZV" secondAttribute="top" constant="-24" id="Mlb-hW-Dhr"/>
                             <constraint firstItem="duh-9s-ELD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="26" id="Nt9-km-6b4"/>
                             <constraint firstItem="7ke-Js-hZl" firstAttribute="top" secondItem="duh-9s-ELD" secondAttribute="bottom" constant="8" id="Qdw-ib-Sks"/>
+                            <constraint firstItem="63h-sv-QXJ" firstAttribute="centerX" secondItem="izL-mA-CAs" secondAttribute="centerX" constant="2" id="SEI-rw-vbm"/>
                             <constraint firstItem="7ke-Js-hZl" firstAttribute="centerX" secondItem="duh-9s-ELD" secondAttribute="centerX" id="SJa-Td-0i2"/>
                             <constraint firstAttribute="trailing" secondItem="Qk6-SS-fen" secondAttribute="trailing" id="T7L-ND-d8W"/>
                             <constraint firstItem="bb0-dd-SHO" firstAttribute="top" secondItem="aTn-AR-ALk" secondAttribute="top" constant="4" id="UE3-gv-V8U"/>
@@ -2618,6 +2659,7 @@ Essai gratuit 7 jours</string>
                             <constraint firstItem="xY0-MX-cBk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iWg-tf-TOs"/>
                             <constraint firstAttribute="bottom" secondItem="Qk6-SS-fen" secondAttribute="bottom" constant="-44" id="kbr-Dj-QKJ"/>
                             <constraint firstItem="963-Lk-PSi" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="17" id="lae-hm-cVE"/>
+                            <constraint firstItem="63h-sv-QXJ" firstAttribute="top" secondItem="izL-mA-CAs" secondAttribute="bottom" constant="-5" id="pd1-FJ-WEC"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="duh-9s-ELD" secondAttribute="bottom" constant="127" id="pxh-hz-hmU"/>
                             <constraint firstItem="aTn-AR-ALk" firstAttribute="leading" secondItem="bb0-dd-SHO" secondAttribute="trailing" id="rPM-vL-Rz8"/>
                             <constraint firstItem="Rgv-Ax-uiT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="32" id="saP-s4-ueU"/>
@@ -2664,6 +2706,7 @@ Essai gratuit 7 jours</string>
                         <outlet property="pHView" destination="duh-9s-ELD" id="eBy-BN-Cht"/>
                         <outlet property="phChangeButton" destination="7ke-Js-hZl" id="zum-zn-T5v"/>
                         <outlet property="phViewLeftConstraint" destination="Nt9-km-6b4" id="zZX-rm-6Dk"/>
+                        <outlet property="quickActionButtonContainer" destination="mfu-a4-666" id="f0b-kZ-ODi"/>
                         <outlet property="redoxChangeButton" destination="AwQ-05-5p4" id="1aC-1Y-ySm"/>
                         <outlet property="shareButton" destination="f2J-Ig-9cQ" id="Inq-e0-mVe"/>
                         <outlet property="startWeatherIcon" destination="SKf-6q-Rmb" id="6Se-C8-1gt"/>
@@ -5315,7 +5358,7 @@ Attention : cette opération est réservée aux utilisateurs expérimentés</str
                                                             <color key="textColor" red="0.1333333333" green="0.2274509804" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="788-Ky-kG9" customClass="RangeSeekSlider" customModule="RangeSeekSlider">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="788-Ky-kG9" customClass="RangeSeekSlider" customModule="RangeSeekSlider">
                                                             <rect key="frame" x="24" y="44" width="327" height="65"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <userDefinedRuntimeAttributes>
@@ -5616,7 +5659,7 @@ Attention : cette opération est réservée aux utilisateurs expérimentés</str
                                                             <color key="textColor" red="0.1333333333" green="0.2274509804" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zvb-BM-lq9" customClass="RangeSeekSlider" customModule="RangeSeekSlider">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zvb-BM-lq9" customClass="RangeSeekSlider" customModule="RangeSeekSlider">
                                                             <rect key="frame" x="24" y="43.5" width="327" height="65"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <userDefinedRuntimeAttributes>
@@ -10561,20 +10604,14 @@ DE BANDELETTE</string>
         </scene>
     </scenes>
     <designables>
-        <designable name="788-Ky-kG9">
-            <size key="intrinsicContentSize" width="-1" height="65"/>
-        </designable>
         <designable name="MrB-in-r1f">
-            <size key="intrinsicContentSize" width="563" height="16"/>
-        </designable>
-        <designable name="Zvb-BM-lq9">
-            <size key="intrinsicContentSize" width="-1" height="65"/>
+            <size key="intrinsicContentSize" width="562.5" height="16"/>
         </designable>
         <designable name="bHy-fG-Je8">
-            <size key="intrinsicContentSize" width="42" height="21"/>
+            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
         </designable>
         <designable name="y8m-OU-31f">
-            <size key="intrinsicContentSize" width="40" height="20"/>
+            <size key="intrinsicContentSize" width="39.5" height="19.5"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
@@ -10650,6 +10687,7 @@ DE BANDELETTE</string>
         <image name="menu_settings_black" width="19" height="19"/>
         <image name="menu_store_black" width="19" height="19"/>
         <image name="mesure" width="100" height="100"/>
+        <image name="more_vert - material" width="4" height="15"/>
         <image name="notificationsDisabled" width="18" height="18"/>
         <image name="ph7" width="230" height="242"/>
         <image name="photo" width="322" height="173"/>

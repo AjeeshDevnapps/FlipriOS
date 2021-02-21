@@ -47,9 +47,6 @@ class NotificationsAlertViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-//        UIView.animate(withDuration: 0.2) {
-//            self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-//        }
         UIView.animate(withDuration: 1.0, delay: 0, options: UIView.AnimationOptions(rawValue: 0), animations: {
             self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
         }, completion: nil)
