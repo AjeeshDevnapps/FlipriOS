@@ -23,7 +23,7 @@ class DevicesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Devices"
-        self.setupPages()
+//        self.setupPages()
         self.view.bringSubviewToFront(pageControl)
         getHubInfo()
         // Do any additional setup after loading the view.
@@ -47,11 +47,11 @@ class DevicesViewController: UIViewController {
     func configurePageViewController(state : Int) {
         let pageCntrl = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         self.pageController = pageCntrl
-        self.pageController?.view.frame = CGRect(x: 20, y: 100, width: self.view.frame.width - 40, height: self.view.frame.height - 100)
+        self.pageController?.view.frame = CGRect(x: 0, y: 100, width: self.view.frame.width, height: self.view.frame.height - 100)
         self.contentViewController = self.pageController
         self.addChild(self.contentViewController!)
         self.contentViewController?.didMove(toParent: self)
-        self.contentViewController!.view.frame = CGRect(x: 20, y: 100, width: self.view.frame.width - 40, height: self.view.frame.height - 100)
+        self.contentViewController!.view.frame = CGRect(x: 0, y: 100, width: self.view.frame.width, height: self.view.frame.height - 100)
         self.contentViewController?.view.clipsToBounds = false
         self.contentViewController!.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(self.contentViewController!.view)

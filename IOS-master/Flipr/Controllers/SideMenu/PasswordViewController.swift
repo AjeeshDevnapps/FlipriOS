@@ -41,7 +41,7 @@ class PasswordViewController: UIViewController {
         confirmPasswordTxtFldContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 25.0, opacity: 0.21)
         
         saveButton.layer.cornerRadius = 30.0
-        saveButton.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#3DA0FF"), radius: 30.0, opacity: 0.25)
+        saveButton.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#3DA0FF"), radius: 30.0, opacity: 0.5)
 
 
     }

@@ -20,7 +20,10 @@ class AddnewDeviceViewController: UIViewController {
     
 
     @IBAction func addButtonClicked(){
-    
+        let sb = UIStoryboard.init(name: "HUB", bundle: nil)
+         let vc = sb.instantiateViewController(withIdentifier: "ModuleTypeSelectionViewControllerID")
+            self.navigationController?.pushViewController(vc, animated: true)
+//        }
     }
 
 }

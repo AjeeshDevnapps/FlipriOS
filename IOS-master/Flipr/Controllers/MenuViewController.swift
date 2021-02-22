@@ -110,15 +110,22 @@ class MenuViewController: UITableViewController {
         logoutLabel.text = "Log out".localized
         
         if let name = Module.currentModule?.nickName {
-            fliprNameLabel.text = name
+            self.batteryLevelLabel.isHidden = false
+            batteryLevelLabel.text = name
         }
         
+        if let serialVal = Module.currentModule?.serial {
+            
+            fliprNameLabel.text = serialVal
+        }
+     /*
         if let level = UserDefaults.standard.object(forKey: "BatteryLevel") as? String, Module.currentModule != nil {
             self.batteryLevelLabel.text = level + "%"
             self.batteryLevelLabel.isHidden = false
         } else {
             self.batteryLevelLabel.isHidden = true
         }
+        */
         
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprBatteryDidRead, object: nil, queue: nil) { (notification) in
             if let level = UserDefaults.standard.object(forKey: "BatteryLevel") as? String, Module.currentModule != nil {

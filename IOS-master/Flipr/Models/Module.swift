@@ -153,6 +153,34 @@ class Module {
         
     }
     
+    
+    static func deactivate(serial: String, activationKey: String, completion: ((_ error:Error?) -> Void)?) {
+        
+        Alamofire.request(Router.addModule(serial: serial, activationKey: activationKey, delete:true)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                
+                completion?(nil)
+                Module.currentModule = nil
+//                UserDefaults.standard.removeObject(forKey:"CurrentModule")
+                
+            case .failure(let error):
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(serverError)
+                } else {
+                    completion?(error)
+                }
+            }
+            
+        })
+        
+    }
+
+    
+    
     static func activate(serial: String, activationKey: String, completion: ((_ error:Error?) -> Void)?) {
         
         Alamofire.request(Router.addModule(serial: serial, activationKey: activationKey, delete:false)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
