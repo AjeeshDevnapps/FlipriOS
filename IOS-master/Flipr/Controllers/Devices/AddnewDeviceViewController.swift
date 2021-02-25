@@ -14,7 +14,8 @@ class AddnewDeviceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addButton.layer.cornerRadius = 32
-        addButton.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#3DA0FF"), radius: 32.0, opacity: 0.25)
+        addButton.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#3DA0FF"), radius: 15.0, opacity: 0.5)
+
         // Do any additional setup after loading the view.
     }
     

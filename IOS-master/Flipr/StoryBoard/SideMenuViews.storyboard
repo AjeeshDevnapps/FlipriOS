@@ -197,7 +197,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hF2-8e-2Gp">
                                         <rect key="frame" x="28" y="79" width="319" height="65"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="faq" translatesAutoresizingMaskIntoConstraints="NO" id="k9c-G5-kCE">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trigger mesure" translatesAutoresizingMaskIntoConstraints="NO" id="k9c-G5-kCE">
                                                 <rect key="frame" x="10" y="0.5" width="64" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="80A-TM-nMT"/>
@@ -235,7 +235,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BnW-18-T1w">
                                         <rect key="frame" x="28" y="164" width="319" height="65"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="faq" translatesAutoresizingMaskIntoConstraints="NO" id="HR6-bS-ZN0">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smart scan bandelette" translatesAutoresizingMaskIntoConstraints="NO" id="HR6-bS-ZN0">
                                                 <rect key="frame" x="10" y="0.5" width="64" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="64" id="pwT-38-fSP"/>
@@ -273,7 +273,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h2S-br-bPj">
                                         <rect key="frame" x="28" y="249" width="319" height="65"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="faq" translatesAutoresizingMaskIntoConstraints="NO" id="pXj-VQ-9T8">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newcalibration" translatesAutoresizingMaskIntoConstraints="NO" id="pXj-VQ-9T8">
                                                 <rect key="frame" x="10" y="0.5" width="64" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="DWz-9L-Oha"/>
@@ -311,7 +311,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="75z-aU-aec">
                                         <rect key="frame" x="28" y="334" width="319" height="65"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="help" translatesAutoresizingMaskIntoConstraints="NO" id="kvk-eo-jdK">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newvidange" translatesAutoresizingMaskIntoConstraints="NO" id="kvk-eo-jdK">
                                                 <rect key="frame" x="10" y="0.5" width="64" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="64" id="0TH-ZJ-wAV"/>
@@ -349,7 +349,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i4v-aI-Hsm">
                                         <rect key="frame" x="28" y="419" width="319" height="65"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tips" translatesAutoresizingMaskIntoConstraints="NO" id="DHa-G2-dhl">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newstrip" translatesAutoresizingMaskIntoConstraints="NO" id="DHa-G2-dhl">
                                                 <rect key="frame" x="10" y="0.5" width="64" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="64" id="C5s-K7-XIq"/>
@@ -454,13 +454,31 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xbr-ck-mWK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-367" y="224"/>
+            <point key="canvasLocation" x="-407" y="224"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dc6-aF-TRC">
+            <objects>
+                <navigationController storyboardIdentifier="QuickActionNavigation" id="vD1-eE-nMh" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="tML-Id-XMM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jrr-XO-Lll" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1111" y="224"/>
         </scene>
     </scenes>
     <resources>
         <image name="faq" width="64" height="64"/>
         <image name="help" width="64" height="64"/>
+        <image name="newcalibration" width="64" height="64"/>
+        <image name="newstrip" width="64" height="64"/>
+        <image name="newvidange" width="64" height="64"/>
+        <image name="smart scan bandelette" width="64" height="64"/>
         <image name="tips" width="64" height="64"/>
+        <image name="trigger mesure" width="64" height="64"/>
         <image name="undraw_searching_p5ux" width="221" height="160"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

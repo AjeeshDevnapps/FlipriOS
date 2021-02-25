@@ -410,7 +410,56 @@ class User {
         })
     }
     
-    
+    func getModuleList(completion: ((_ devices: [[String:Any]]?, _ error: Error?) -> Void)?) {
+        
+        Alamofire.request(Router.getModules).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                print("Get user modules - response.result.value: \(value)")
+
+                if let modules = value as? [[String:Any]] {
+                    
+                    //On filtre sur ModuleType_Id = 1 pour retirer les HUB
+                    var fliprs:[[String:Any]] = []
+                    for mod in modules {
+                        if let type = mod["ModuleType_Id"] as? Int {
+                            if type == 1 {
+                                fliprs.append(mod)
+                            }
+                            if type == 2 {
+//                                let hub = HUB.init(withJSON: mod)
+//                                HUB.currentHUB = hub
+//                                HUB.saveCurrentHUBLocally()
+                            }
+                        }
+                    }
+                    
+                    if let JSON = fliprs.first {
+//                        let module = Module.init(withJSON: JSON)
+//                        Module.currentModule = module
+//                        Module.saveCurrentModuleLocally()
+                    }
+                    completion?(fliprs,nil)
+                } else {
+                    let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                    completion?(nil, error)
+                }
+                
+            case .failure(let error):
+                
+                print("Get user modules did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(nil,serverError)
+                } else {
+                    completion?(nil,error)
+                }
+            }
+        })
+    }
+
     
     func getModule(completion: ((_ devices: [[String:Any]]?, _ error: Error?) -> Void)?) {
         

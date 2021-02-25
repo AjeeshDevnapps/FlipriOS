@@ -24,16 +24,17 @@ class DevicesViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Devices"
 //        self.setupPages()
-        self.view.bringSubviewToFront(pageControl)
         getHubInfo()
         // Do any additional setup after loading the view.
     }
     
     func getHubInfo(){
-        User.currentUser?.getModule(completion: { (devices,error) in
+        User.currentUser?.getModuleList(completion: { (devices,error) in
             self.devicesDetails = devices
             self.setupPages()
+            self.view.bringSubviewToFront(self.pageControl)
         })
+        
     }
     
     func setupPages(){

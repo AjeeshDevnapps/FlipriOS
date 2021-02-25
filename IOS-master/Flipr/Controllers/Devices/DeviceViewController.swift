@@ -57,9 +57,8 @@ class DeviceViewController: UIViewController {
     
     func checkBluetoothConnection(){
         
-        let alertController = UIAlertController(title: "Bluetooth  check", message: "Please stand close to your device(max 1 meeter) and tap Perform check", preferredStyle: UIAlertController.Style.alert)
-        
-        let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.cancel)
+        let alertController = UIAlertController(title: "Bluetooth check", message: "Please stand close to your device (max 1 meter) and tap Perform check.", preferredStyle: .alert)
+        let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.default)
         
         let okAction = UIAlertAction(title: "Perform Check", style: UIAlertAction.Style.default)
         {
@@ -68,8 +67,8 @@ class DeviceViewController: UIViewController {
             self.startBluetoothCheck()
             
         }
-        alertController.addAction(cancelAction)
         alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -89,11 +88,11 @@ class DeviceViewController: UIViewController {
     
     @IBAction func forgetDeviceButtonClicked(){
        
-        let alertController = UIAlertController(title: "Unbind  Flipr", message: "Do you really want to unbind ? All measure and calibration data will be lost.", preferredStyle: UIAlertController.Style.alert)
+        let alertController = UIAlertController(title: "Unbind Flipr", message: "Do you really want to unbind ? All measure and calibration data will be lost.", preferredStyle: UIAlertController.Style.alert)
         
-        let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.cancel)
+        let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.default)
         
-        let okAction = UIAlertAction(title: "UNBIND", style: UIAlertAction.Style.default)
+        let okAction = UIAlertAction(title: "UNBIND", style: UIAlertAction.Style.cancel)
         {
             (result : UIAlertAction) -> Void in
             print("You pressed OK")
@@ -101,8 +100,8 @@ class DeviceViewController: UIViewController {
             self.forgetDevice()
             
         }
-        alertController.addAction(cancelAction)
         alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
 
     }
@@ -132,27 +131,49 @@ class DeviceViewController: UIViewController {
 extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
+
+            if devicewifiTypeCell == DeviceWifiCellType.MeasureInfo{
+                return 155
+            }else{
+                return 135
+            }
+        }
+        
+        if indexPath.row == 1 {
             return 275
         }
-        else if indexPath.row == 1 {
+        else if indexPath.row == 2 {
             return 66
         }
         return 200
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0{
+            if devicewifiTypeCell == DeviceWifiCellType.MeasureInfo{
+                return tableView.dequeueReusableCell(withIdentifier:"FliprDevice",
+                                                         for: indexPath)
+            }else{
+                return tableView.dequeueReusableCell(withIdentifier:"HubDevice",
+                                                         for: indexPath)
+            }
         
-
-        if indexPath.row == 0 {
+        }
+        else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier:"DeviceInfoTableViewCell",
                                                      for: indexPath) as! DeviceInfoTableViewCell
             
-           
+            if devicewifiTypeCell == DeviceWifiCellType.MeasureInfo{
+                cell.titleLabel.text = "Details"
+            }
+            else{
+                cell.titleLabel.text = "Name"
+            }
             if let name = devicesDetails?["NickName"] as? String  {
                 cell.nameLabel.text = name
             }
@@ -173,7 +194,7 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             return cell
         }
         
-        else if indexPath.row == 1{
+        else if indexPath.row == 2{
             if devicewifiTypeCell == DeviceWifiCellType.MeasureInfo{
                 let cell = tableView.dequeueReusableCell(withIdentifier:"DeviceWifiInfoTableViewCell",
                                                          for: indexPath) as! DeviceWifiInfoTableViewCell
@@ -201,7 +222,7 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
            
         }
         
-        else if indexPath.row == 2{
+        else if indexPath.row == 3{
             let cell = tableView.dequeueReusableCell(withIdentifier:"DeviceActionTableViewCell",
                                                      for: indexPath) as! DeviceActionTableViewCell
             if devicewifiTypeCell == DeviceWifiCellType.MeasureInfo{

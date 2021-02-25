@@ -309,6 +309,7 @@ class CalibrationViewController: UIViewController {
         
         if recalibration || calibrationType == .simpleMeasure {
             self.navigationController?.popToRootViewController(animated: true)
+            self.dismiss(animated: true, completion: nil)
         } else {
             if dismissEnabled {
                 self.dismiss(animated: true, completion: nil)

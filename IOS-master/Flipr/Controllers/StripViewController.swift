@@ -34,7 +34,8 @@ class StripViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))
+
         if recalibration == true {
             useNewStripVersion()
         } else if let moduleVersion = Module.currentModule?.version {
@@ -57,6 +58,10 @@ class StripViewController: UIViewController {
 
     }
     
+    @objc func closeButtonTapped(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func useNewStripVersion() {
         strip.version = 2
         let allSubviews = self.view.subviewsRecursive()
@@ -77,6 +82,10 @@ class StripViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func closeButtonClicked(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func valueButtonAction(_ sender: Any) {

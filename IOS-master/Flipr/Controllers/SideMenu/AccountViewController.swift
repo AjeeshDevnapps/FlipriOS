@@ -33,6 +33,7 @@ class AccountViewController: UIViewController {
         lastNameTxtFld.delegate = self
 //        subsriptionButton.isUserInteractionEnabled = false
 //        subscriptionInfoLabel.isHidden = true
+        subsriptionButton.isUserInteractionEnabled = false
         detailsContainerView.clipsToBounds = true
         detailsContainerView.layer.cornerRadius = 15.0
         detailsContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
@@ -45,7 +46,6 @@ class AccountViewController: UIViewController {
         
         
         
-//        getHubInfo()
     }
     
     
@@ -60,13 +60,14 @@ class AccountViewController: UIViewController {
             subscriptionInfoLabel.isHidden = false
         }
         else{
-            subsriptionButton.isUserInteractionEnabled = false
+            subsriptionButton.isUserInteractionEnabled = true
             self.subsriptionImgView.image = #imageLiteral(resourceName: "cross")
             self.subscriptionLabel.text = "Inactive - Subscribe here !"
         }
         if (Module.currentModule?.moduleType == 1) || (Module.currentModule?.moduleType == 2){
             self.subsriptionImgView.image = #imageLiteral(resourceName: "check - blue")
             self.subscriptionLabel.text = "No subscription needed"
+            subsriptionButton.isUserInteractionEnabled = false
         }
 
     }
@@ -80,7 +81,7 @@ class AccountViewController: UIViewController {
     
     
     func getHubInfo(){
-        User.currentUser?.getModule(completion: { (devices,error) in
+        User.currentUser?.getModuleList(completion: { (devices,error) in
         })
     }
     

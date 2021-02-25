@@ -18,7 +18,8 @@ class WaterLevelTableViewController: UITableViewController {
         super.viewDidLoad()
 
         self.title = "Draining".localized
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))
+
         var bakcgroundFileName = "BG"
         
         if let module = Module.currentModule {
@@ -46,6 +47,10 @@ class WaterLevelTableViewController: UITableViewController {
             self.present(navC, animated: true, completion: nil)
         }
         
+    }
+    
+    @objc func closeButtonTapped(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func deleteButtonAction(_ sender:Any) {

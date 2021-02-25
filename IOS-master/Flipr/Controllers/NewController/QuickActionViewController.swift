@@ -28,11 +28,17 @@ class QuickActionViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        UIView.animate(withDuration: 1.0, delay: 0, options: UIView.AnimationOptions(rawValue: 0), animations: {
-            self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+        UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions(rawValue: 0), animations: {
+            self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         }, completion: nil)
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     
     
     func setupViews(){
@@ -57,6 +63,23 @@ class QuickActionViewController: UIViewController {
     
     @IBAction func triggerMeasureButtonClicked(){
     
+        if let module = Module.currentModule {
+            if !module.isSubscriptionValid {
+                if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true, completion: nil)
+                }
+            } else {
+                
+                
+                let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+                if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
+                    viewController.calibrationType = .simpleMeasure
+                    viewController.modalPresentationStyle = .fullScreen
+                    self.present(viewController, animated: true, completion: nil)
+                }
+            }
+        }
     }
 
     @IBAction func expertModeButtonClicked(){
@@ -72,22 +95,72 @@ class QuickActionViewController: UIViewController {
     }
     
     @IBAction func newCalibrationButtonClicked(){
-
+        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+        let alert = UIAlertController(title: "Calibration".localized, message:"Are you sure you want to calibrate the probes again?".localized, preferredStyle:.alert)
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
+            if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
+                viewController.recalibration = true
+                viewController.calibrationType = .ph7
+                viewController.modalPresentationStyle = .fullScreen
+                self.present(viewController, animated: true, completion: nil)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Order a calibration kit".localized, style: .default, handler: { (action) in
+            if let url = URL(string:"https://www.goflipr.com/produit/kit-de-calibration/".remotable) {
+                UIApplication.shared.open(url, options: self.convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func drainingButtonClicked(){
-    
+//        WaterLevelTableViewController
+        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+        if let viewController = mainSb.instantiateViewController(withIdentifier: "WaterLevelTableViewController") as? WaterLevelTableViewController {
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.present(viewController, animated: true, completion: nil)
+//
+            let navigationController = LightNavigationViewController.init(rootViewController: viewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion:nil)
+
+        }
     }
     
     @IBAction func newStripTestButtonClicked(){
+        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+        let alert = UIAlertController(title: "Strip test".localized, message:"Are you sure you want to do a new strip test?".localized, preferredStyle:.alert)
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
+            if let viewController = mainSb.instantiateViewController(withIdentifier: "StripViewControllerID") as? StripViewController {
+                viewController.recalibration = true
+//                viewController.modalPresentationStyle = .fullScreen
+//                self.present(viewController, animated: true, completion: nil)
+//                let navigationController = LightNavigationViewController.init(rootViewController: viewController)
+//                navigationController.modalPresentationStyle = .fullScreen
+//                self.present(navigationController, animated: true, completion:nil)
+//                
+                viewController.modalPresentationStyle = .fullScreen
+                self.present(viewController, animated: true, completion: nil)
+
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Order a calibration kit".localized, style: .default, handler: { (action) in
+            if let url = URL(string:"https://www.goflipr.com/produit/kit-de-calibration/".remotable) {
+                UIApplication.shared.open(url, options: self.convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
         
     }
         
         
-        
-        
-        
-        
-    
+    // Helper function inserted by Swift 4.2 migrator.
+     func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+        return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+    }
+
+   
 
 }
