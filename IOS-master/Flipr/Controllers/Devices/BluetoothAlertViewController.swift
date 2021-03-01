@@ -17,6 +17,7 @@ class BluetoothAlertViewController: UIViewController {
     @IBOutlet weak var tapView: UIView!
     var centralManager:CBCentralManager!
     var flipr:CBPeripheral?
+    var isShowingActivityInticator = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,13 +42,15 @@ class BluetoothAlertViewController: UIViewController {
     }
     
     func showConnectionCheckingIndicator(){
+        perform(#selector(stopSearching), with: nil, afterDelay: 10)
         self.activityIndicator.isHidden = false
         self.messageLabel.text  = "Performing connection, please do not close app or lock your phone."
-        self.activityIndicator.startAnimating()
+        self.startActivityIndicator()
     }
 
     
     func showSuccess(){
+        stopActivityIndicator()
         self.activityIndicator.isHidden = true
         self.statusImageView.isHidden = false
         self.statusImageView.image = #imageLiteral(resourceName: "check")
@@ -55,10 +58,28 @@ class BluetoothAlertViewController: UIViewController {
     }
     
     func showFailure(){
+        stopActivityIndicator()
         self.activityIndicator.isHidden = true
         self.statusImageView.isHidden = false
         self.statusImageView.image = #imageLiteral(resourceName: "cross")
-        self.messageLabel.text  = "Device successfully connected via bluetooth."
+        self.messageLabel.text  = "Failed Device connecting via bluetooth."
+    }
+    
+    func startActivityIndicator(){
+        self.isShowingActivityInticator = true
+        self.activityIndicator.startAnimating()
+    }
+    
+    func stopActivityIndicator(){
+        self.isShowingActivityInticator = false
+        self.activityIndicator.stopAnimating()
+    }
+    
+    @objc func stopSearching(){
+        if self.isShowingActivityInticator{
+            self.centralManager.stopScan()
+            self.showFailure()
+        }
     }
 }
 
@@ -77,7 +98,6 @@ extension BluetoothAlertViewController: CBCentralManagerDelegate {
                 //self.centralManager.scanForPeripherals(withServices:nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey:true])
             } else {
                 print("Bluetooth not available.")
-                self.activityIndicator.stopAnimating()
                 self.showFailure()
                 self.messageLabel.text  = "Bluetooth not connected."
             }
@@ -100,7 +120,6 @@ extension BluetoothAlertViewController: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Central manager did connect to Flipr")
-        self.activityIndicator.stopAnimating()
         self.showSuccess()
         peripheral.discoverServices([CBUUID(string: "E302"),CBUUID(string: "F906")])
         self.showError(title: "", message: "")
@@ -108,13 +127,11 @@ extension BluetoothAlertViewController: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        self.activityIndicator.stopAnimating()
         self.showFailure()
         print("Central manager did fail to connect to Flipr: \(error?.localizedDescription)")
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        self.activityIndicator.stopAnimating()
         self.showFailure()
         print("Central manager did disconnect from device with name: \(peripheral.name), error: \(error?.localizedDescription)")
     }

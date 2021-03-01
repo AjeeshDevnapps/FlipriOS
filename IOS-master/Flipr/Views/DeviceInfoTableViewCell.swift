@@ -17,6 +17,7 @@ class DeviceInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var modelLabel: UILabel!
     @IBOutlet weak var serialLabel: UILabel!
     @IBOutlet weak var keyIdLabel: UILabel!
+    @IBOutlet weak var editButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()

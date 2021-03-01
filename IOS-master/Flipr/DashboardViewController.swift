@@ -93,7 +93,8 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        let tmp = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationControllerID") as? SideMenuNavigationController
+        tmp?.view.addShadow(offset: CGSize.init(width: 10, height: 10), color: UIColor.black, radius: 100.0, opacity:1.0)
         SideMenuManager.default.leftMenuNavigationController = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationControllerID") as? SideMenuNavigationController
         
         var settings = SideMenuSettings()
@@ -103,8 +104,9 @@ class DashboardViewController: UIViewController {
         if SideMenuManager.default.leftMenuNavigationController == nil {
             print("FUCK")
         }
-        
-        self.view.clipsToBounds = true
+//        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.view)
+        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.view, forMenu: .left)
+//        self.view.clipsToBounds = true
 //        self.quickActionButtonContainer.cornerRadius =  self.quickActionButtonContainer.frame.size.height / 2
         quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
         quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius: self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)

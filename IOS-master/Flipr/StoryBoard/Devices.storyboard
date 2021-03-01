@@ -75,21 +75,32 @@
                                                     <color key="textColor" red="0.67450980392156867" green="0.70196078431372544" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbD-qY-kIV">
-                                                    <rect key="frame" x="20" y="17" width="250" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="250" id="6R1-dn-Crr"/>
-                                                        <constraint firstAttribute="height" constant="20" id="xUf-f0-oeG"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                    <color key="textColor" red="0.12549019610000001" green="0.23921568630000001" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="gV2-iD-LtU">
+                                                    <rect key="frame" x="16" y="16" width="323" height="20"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbD-qY-kIV">
+                                                            <rect key="frame" x="0.0" y="0.0" width="152.5" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="xUf-f0-oeG"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                            <color key="textColor" red="0.12549019610000001" green="0.23921568630000001" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1o-SW-alZ">
+                                                            <rect key="frame" x="166.5" y="0.0" width="156.5" height="20"/>
+                                                            <state key="normal" image="editPencil"/>
+                                                            <connections>
+                                                                <action selector="changeDeviceName" destination="abu-Ui-zN9" eventType="touchUpInside" id="Gjf-1c-Shy"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lBC-Eg-RYx">
                                                     <rect key="frame" x="41" y="56" width="293" height="216"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFC-Mt-ZuI">
-                                                            <rect key="frame" x="23" y="22" width="39" height="16"/>
+                                                            <rect key="frame" x="23" y="22" width="38.5" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                             <color key="textColor" red="0.12549019610000001" green="0.23921568630000001" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -155,16 +166,18 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="lBC-Eg-RYx" firstAttribute="top" secondItem="lbD-qY-kIV" secondAttribute="bottom" constant="19" id="8Ts-ai-Wrv"/>
+                                                <constraint firstItem="lBC-Eg-RYx" firstAttribute="top" secondItem="gV2-iD-LtU" secondAttribute="bottom" constant="20" id="BCW-yz-BDR"/>
                                                 <constraint firstItem="lBC-Eg-RYx" firstAttribute="leading" secondItem="LzZ-AA-G27" secondAttribute="leading" constant="41" id="Bap-2i-ku1"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gV2-iD-LtU" secondAttribute="trailing" constant="20" id="DZu-gx-WaP"/>
                                                 <constraint firstAttribute="trailing" secondItem="lBC-Eg-RYx" secondAttribute="trailing" constant="41" id="KYt-it-s1k"/>
+                                                <constraint firstItem="gV2-iD-LtU" firstAttribute="leading" secondItem="LzZ-AA-G27" secondAttribute="leadingMargin" id="VRU-vH-xjW"/>
                                                 <constraint firstItem="kVk-S9-HIq" firstAttribute="top" secondItem="LzZ-AA-G27" secondAttribute="top" id="pIN-Rq-DbI"/>
+                                                <constraint firstItem="gV2-iD-LtU" firstAttribute="top" secondItem="kVk-S9-HIq" secondAttribute="bottom" id="rk4-jL-gjI"/>
                                                 <constraint firstItem="kVk-S9-HIq" firstAttribute="leading" secondItem="LzZ-AA-G27" secondAttribute="leading" constant="20" id="sfG-aB-PtE"/>
-                                                <constraint firstItem="lbD-qY-kIV" firstAttribute="top" secondItem="kVk-S9-HIq" secondAttribute="bottom" constant="1" id="tVo-9H-WmE"/>
-                                                <constraint firstItem="lbD-qY-kIV" firstAttribute="leading" secondItem="LzZ-AA-G27" secondAttribute="leading" constant="20" id="uxW-aM-PJK"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="editButton" destination="k1o-SW-alZ" id="PMT-1b-chS"/>
                                             <outlet property="keyIdLabel" destination="itU-7J-ytM" id="Z2V-Vt-ift"/>
                                             <outlet property="modelLabel" destination="926-ip-R1r" id="yoc-Eg-Ege"/>
                                             <outlet property="nameLabel" destination="lbD-qY-kIV" id="5DP-M2-RPF"/>
@@ -350,13 +363,13 @@
                                                     <rect key="frame" x="24" y="72" width="327" height="100"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WiFi setting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7N3-ze-6Ap">
-                                                            <rect key="frame" x="23" y="16" width="88" height="20"/>
+                                                            <rect key="frame" x="23" y="16" width="88" height="19.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                             <color key="textColor" red="0.12549019610000001" green="0.23921568630000001" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forget this device" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhW-Rg-t0v">
-                                                            <rect key="frame" x="23" y="67" width="150" height="20"/>
+                                                            <rect key="frame" x="23" y="67" width="150" height="19.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="150" id="kw2-CE-FlA"/>
                                                             </constraints>
@@ -639,6 +652,7 @@ EA
     <resources>
         <image name="addDevice" width="357" height="319"/>
         <image name="arrow_list" width="16" height="16"/>
+        <image name="editPencil" width="16" height="16"/>
         <image name="fliprDevice" width="119" height="200"/>
         <image name="hubDevice" width="141" height="136"/>
         <image name="wifi" catalog="system" width="128" height="91"/>

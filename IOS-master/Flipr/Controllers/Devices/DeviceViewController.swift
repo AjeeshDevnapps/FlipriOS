@@ -16,6 +16,7 @@ enum DeviceWifiCellType {
 
 class DeviceViewController: UIViewController {
     @IBOutlet weak var settingTable: UITableView!
+    
     var devicewifiTypeCell = DeviceWifiCellType.MeasureInfo
     var devicesDetails:  [String:Any]?
     var centralManager:CBCentralManager!
@@ -54,6 +55,25 @@ class DeviceViewController: UIViewController {
        
     }
     
+    
+    @IBAction func changeDeviceName(){
+        let alert = UIAlertController(title: "Name", message: nil, preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            if let name = self.devicesDetails?["NickName"] as? String  {
+                textField.placeholder  = name
+            }
+        }
+        let submitAction = UIAlertAction(title: "Update", style: .default) { [unowned alert] _ in
+            let newName = alert.textFields![0]
+            if newName.isEmpty{
+                self.showError(title: "Error".localized, message: "Please enter valid name")
+            }
+        }
+        let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.default)
+        alert.addAction(cancelAction)
+        alert.addAction(submitAction)
+        present(alert, animated: true)
+    }
     
     func checkBluetoothConnection(){
         
@@ -167,11 +187,13 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
         else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier:"DeviceInfoTableViewCell",
                                                      for: indexPath) as! DeviceInfoTableViewCell
-            
             if devicewifiTypeCell == DeviceWifiCellType.MeasureInfo{
                 cell.titleLabel.text = "Details"
+                cell.editButton.isHidden = true
+                cell.nameLabel.isHidden = true
             }
             else{
+                cell.editButton.isHidden = false
                 cell.titleLabel.text = "Name"
             }
             if let name = devicesDetails?["NickName"] as? String  {
