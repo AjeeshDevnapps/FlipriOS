@@ -109,15 +109,18 @@ class MenuViewController: UITableViewController {
         termsAndPrivacyLabel.text = "Terms and privacy".localized
         logoutLabel.text = "Log out".localized
         
-        if let name = Module.currentModule?.nickName {
-            self.batteryLevelLabel.isHidden = false
-            batteryLevelLabel.text = name
-        }
+//        if let name = Module.currentModule?.nickName {
+//            self.batteryLevelLabel.isHidden = false
+//            batteryLevelLabel.text = name
+//        }
         
-        if let serialVal = Module.currentModule?.serial {
-            
-            fliprNameLabel.text = serialVal
-        }
+//        if let moduleType = Module.currentModule?.moduleType {
+//            if moduleType == 1{
+//                fliprNameLabel.text = "Flipr"
+//            }else{
+//                fliprNameLabel.text = "Hub"
+//            }
+//        }
      /*
         if let level = UserDefaults.standard.object(forKey: "BatteryLevel") as? String, Module.currentModule != nil {
             self.batteryLevelLabel.text = level + "%"
@@ -129,14 +132,22 @@ class MenuViewController: UITableViewController {
         
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprBatteryDidRead, object: nil, queue: nil) { (notification) in
             if let level = UserDefaults.standard.object(forKey: "BatteryLevel") as? String, Module.currentModule != nil {
-                self.batteryLevelLabel.text = level + "%"
-                self.batteryLevelLabel.isHidden = false
+//                self.batteryLevelLabel.text = level + "%"
+//                self.batteryLevelLabel.isHidden = false
             } else {
-                self.batteryLevelLabel.isHidden = true
+//                self.batteryLevelLabel.isHidden = true
             }
         }
         
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.getDeviceDetails()
+    }
+    
+   
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -145,6 +156,32 @@ class MenuViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getDeviceDetails(){
+        User.currentUser?.getModuleList(completion: { (devices,error) in
+//                self.devicesDetails = devices
+            if let deviceInfo = devices?.first{
+                if let name = deviceInfo["Serial"] as? String  {
+                    self.fliprNameLabel.text = name
+                }
+                if let moduleType = deviceInfo["ModuleType_Id"] as? Int  {
+                    if moduleType == 1{
+                        self.batteryLevelLabel.text = "Flipr"
+                        if let info = deviceInfo["CommercialType"] as? [String: AnyObject] {
+                            if let type = info["Value"] as? String  {
+                                self.batteryLevelLabel.text?.append(" ")
+                                self.batteryLevelLabel.text?.append(type)
+                            }
+                        }
+                    }else{
+                        self.batteryLevelLabel.text = "Hub"
+                    }
+                }
+            }
+           
+        })
+        
     }
     
     @IBAction func addFliprStartButtonAction(_ sender: Any) {

@@ -441,7 +441,7 @@ class User {
 //                        Module.currentModule = module
 //                        Module.saveCurrentModuleLocally()
                     }
-                    completion?(fliprs,nil)
+                    completion?(modules,nil)
                 } else {
                     let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
                     completion?(nil, error)

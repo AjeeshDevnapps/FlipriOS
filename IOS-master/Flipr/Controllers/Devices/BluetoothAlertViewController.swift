@@ -18,7 +18,7 @@ class BluetoothAlertViewController: UIViewController {
     var centralManager:CBCentralManager!
     var flipr:CBPeripheral?
     var isShowingActivityInticator = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -27,18 +27,17 @@ class BluetoothAlertViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    
     func setupViews(){
         containerView.layer.cornerRadius = 15
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.tapView.addGestureRecognizer(tap)
-
+        
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         self.tapView.backgroundColor = UIColor.clear
         self.dismiss(animated: false, completion: nil)
-        print("Hello World")
     }
     
     func showConnectionCheckingIndicator(){
@@ -47,7 +46,7 @@ class BluetoothAlertViewController: UIViewController {
         self.messageLabel.text  = "Performing connection, please do not close app or lock your phone."
         self.startActivityIndicator()
     }
-
+    
     
     func showSuccess(){
         stopActivityIndicator()
@@ -62,7 +61,7 @@ class BluetoothAlertViewController: UIViewController {
         self.activityIndicator.isHidden = true
         self.statusImageView.isHidden = false
         self.statusImageView.image = #imageLiteral(resourceName: "cross")
-        self.messageLabel.text  = "Failed Device connecting via bluetooth."
+        self.messageLabel.text  = "Failed to connect to device via Bluetooth, please check connection."
     }
     
     func startActivityIndicator(){
@@ -111,7 +110,7 @@ extension BluetoothAlertViewController: CBCentralManagerDelegate {
         print("Flipr device discovered with name:\(peripheral.name) , identifier: \(peripheral.identifier)")
         central.stopScan()
         print("CBCentralManager stop scanning for Flipr devices")
-            
+        
         flipr = peripheral
         peripheral.delegate = self
         central.connect(flipr!, options: nil)
@@ -140,7 +139,7 @@ extension BluetoothAlertViewController: CBCentralManagerDelegate {
 
 //MARK: - Core bluetooth peripheral delegate
 extension BluetoothAlertViewController: CBPeripheralDelegate {
-
+    
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         
         if let services = peripheral.services {
@@ -164,7 +163,7 @@ extension BluetoothAlertViewController: CBPeripheralDelegate {
                 i = i+1
             }
         }
-
+        
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {

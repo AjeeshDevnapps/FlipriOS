@@ -25,7 +25,7 @@ class HUB {
     var plannings:[Planning] = []
     
     var activationDate = Date(timeIntervalSince1970: 0)
-    
+    var response :[String:Any]?
     
     init(serial: String) {
         self.serial = serial
@@ -52,6 +52,7 @@ class HUB {
             return nil
         }
         self.init(serial: serial)
+        self.response = JSON
         if let activationKey = JSON["ActivationKey"] as? String {
             self.activationKey = activationKey
         }
