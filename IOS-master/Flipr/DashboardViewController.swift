@@ -93,8 +93,8 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        let tmp = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationControllerID") as? SideMenuNavigationController
-        tmp?.view.addShadow(offset: CGSize.init(width: 10, height: 10), color: UIColor.black, radius: 100.0, opacity:1.0)
+//        let tmp = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationControllerID") as? SideMenuNavigationController
+//        tmp?.view.addShadow(offset: CGSize.init(width: 10, height: 10), color: UIColor.black, radius: 100.0, opacity:1.0)
         SideMenuManager.default.leftMenuNavigationController = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationControllerID") as? SideMenuNavigationController
         
         var settings = SideMenuSettings()
@@ -104,12 +104,11 @@ class DashboardViewController: UIViewController {
         if SideMenuManager.default.leftMenuNavigationController == nil {
             print("FUCK")
         }
-//        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.view)
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.view, forMenu: .left)
 //        self.view.clipsToBounds = true
 //        self.quickActionButtonContainer.cornerRadius =  self.quickActionButtonContainer.frame.size.height / 2
-        quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
-        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius: self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
+//        quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
+//        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius: self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
 
         if Locale.current.languageCode != "fr" {
             let attributedTitle = NSAttributedString(string: "Alert in progress: act now!".localized, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor) : UIColor.white]))
@@ -1952,15 +1951,21 @@ fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Ke
 
 extension DashboardViewController: AlertPresentViewDelegate{
     func settingsButtonClicked(type:AlertType){
-        
-        if let navigationController = self.storyboard?.instantiateViewController(withIdentifier: "SettingsNavingation") as? UINavigationController {
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ExpertModeViewController") as? ExpertModeViewController {
-                navigationController.modalPresentationStyle = .fullScreen
-                viewController.isDirectPresenting = true
-                navigationController.setViewControllers([viewController], animated: false)
-                self.present(navigationController, animated: true, completion: nil)
+        if type == .Notification{
+            let navigationController = self.storyboard?.instantiateViewController(withIdentifier: "SettingsNavigation") as! UINavigationController
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
+        }else{
+            if let navigationController = self.storyboard?.instantiateViewController(withIdentifier: "SettingsNavingation") as? UINavigationController {
+                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ExpertModeViewController") as? ExpertModeViewController {
+                    navigationController.modalPresentationStyle = .fullScreen
+                    viewController.isDirectPresenting = true
+                    navigationController.setViewControllers([viewController], animated: false)
+                    self.present(navigationController, animated: true, completion: nil)
+                }
             }
         }
+       
     }
     
     

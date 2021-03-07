@@ -11,7 +11,7 @@ import JGProgressHUD
 
 class DevicesViewController: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
-
+    
     var pageController: UIPageViewController!
     var controllers = [UIViewController]()
     var contentViewController : UIViewController?
@@ -23,20 +23,21 @@ class DevicesViewController: UIViewController {
     var hub:HUB?
     var hubs:[HUB] = []
     let hud = JGProgressHUD(style:.dark)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Devices"
-//        self.setupPages()
+        //        self.setupPages()
+        AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi = true 
         self.pageControl.isHidden = true
         getFlprInfo()
         // Do any additional setup after loading the view.
     }
     
     func getFlprInfo(){
-//        hud?.show(in: self.navigationController!.view)
+        //        hud?.show(in: self.navigationController!.view)
         hud?.show(in: self.navigationController!.view)
-
+        
         User.currentUser?.getModuleList(completion: { (devices,error) in
             if (error != nil) {
                 self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
@@ -46,7 +47,7 @@ class DevicesViewController: UIViewController {
                 self.devicesDetails = devices
                 self.hud?.dismiss(afterDelay: 0)
                 self.setupDevicesList()
-//                self.getHubDetails()
+                //                self.getHubDetails()
             }
         })
     }
@@ -54,8 +55,8 @@ class DevicesViewController: UIViewController {
     func getHubDetails(){
         Pool.currentPool?.getHUBS(completion: { (hubs, error) in
             if error != nil {
-//                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-//                hud?.textLabel.text = error?.localizedDescription
+                //                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                //                hud?.textLabel.text = error?.localizedDescription
                 self.hud?.dismiss(afterDelay: 3)
                 self.setupDevicesList()
             } else if hubs != nil {
@@ -101,14 +102,14 @@ class DevicesViewController: UIViewController {
         self.pageController!.delegate = self
         self.pageController!.dataSource = self
         if let page = self.viewControllerAtIndex(index: state){
-//            self.eventlistViewController = page as? EventListViewController
+            //            self.eventlistViewController = page as? EventListViewController
             //self.cellHolderTableVC?.selectionDelegate = self
             let viewControllers = [page]
             self.pageController!.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
         }
         
     }
-  
+    
     
     func viewControllerAtIndex(index: Int) -> UIViewController? {
         
@@ -143,12 +144,12 @@ class DevicesViewController: UIViewController {
         }
         
         
-       
+        
     }
     
     
-   
-
+    
+    
 }
 
 
@@ -182,14 +183,6 @@ extension DevicesViewController: UIPageViewControllerDataSource,UIPageViewContro
             self.nextPage = vc.view.tag
             print(vc.view.tag)
             pageControl.currentPage = self.nextPage
-//            if let type = self.eventCategory?[vc.view.tag]{
-//                if eventCategory != nil{
-//                    //                AppSharedData.sharedInstance.newsCachedDataDict?[selectedCategory: newsResponse]
-//                }
-//                let typeId : Int = (type.id)!
-//                selectedCategory = typeId
-//                self.eventCategoryCollectionView.reloadData()
-//            }
         }
     }
     

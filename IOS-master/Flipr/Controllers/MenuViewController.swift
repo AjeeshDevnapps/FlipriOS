@@ -9,6 +9,7 @@
 import UIKit
 import SideMenu
 import SafariServices
+import JGProgressHUD
 
 class MenuViewController: UITableViewController {
 
@@ -36,7 +37,8 @@ class MenuViewController: UITableViewController {
 
     
     var expandMoreCells = false
-    
+    let hud = JGProgressHUD(style:.dark)
+
     
     override func viewDidLoad() {
         
@@ -144,7 +146,12 @@ class MenuViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.getDeviceDetails()
+        if AppSharedData.sharedInstance.isNeedtoCallModulesApiForSideMenu{
+            self.getDeviceDetails()
+        }else{
+            self.fliprNameLabel.text = AppSharedData.sharedInstance.serialKey
+            self.batteryLevelLabel.text = AppSharedData.sharedInstance.deviceName
+        }
     }
     
    
@@ -159,11 +166,17 @@ class MenuViewController: UITableViewController {
     }
     
     func getDeviceDetails(){
+        hud?.show(in: self.navigationController!.view)
         User.currentUser?.getModuleList(completion: { (devices,error) in
 //                self.devicesDetails = devices
+//            self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+//            self.hud?.textLabel.text = error?.localizedDescription
+            self.hud?.dismiss()
             if let deviceInfo = devices?.first{
+                AppSharedData.sharedInstance.isNeedtoCallModulesApiForSideMenu = false
                 if let name = deviceInfo["Serial"] as? String  {
                     self.fliprNameLabel.text = name
+                    AppSharedData.sharedInstance.serialKey = self.fliprNameLabel.text ?? ""
                 }
                 if let moduleType = deviceInfo["ModuleType_Id"] as? Int  {
                     if moduleType == 1{
@@ -174,8 +187,10 @@ class MenuViewController: UITableViewController {
                                 self.batteryLevelLabel.text?.append(type)
                             }
                         }
+                        AppSharedData.sharedInstance.deviceName = self.batteryLevelLabel.text ?? ""
                     }else{
                         self.batteryLevelLabel.text = "Hub"
+                        AppSharedData.sharedInstance.deviceName = "Hub"
                     }
                 }
             }

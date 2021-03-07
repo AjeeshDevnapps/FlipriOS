@@ -25,28 +25,30 @@ class DeviceViewController: UIViewController {
     var hubName = ""
     var hubState = 0
     var hubBehavior = ""
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-//        if let vers = devicesDetails?["ModuleType_Id"] as? Int {
-//            if vers == 1{
-//                devicewifiTypeCell = DeviceWifiCellType.MeasureInfo
-//            }else{
-//                devicewifiTypeCell = DeviceWifiCellType.StatusInfo
-//            }
-//        }
+        //        if let vers = devicesDetails?["ModuleType_Id"] as? Int {
+        //            if vers == 1{
+        //                devicewifiTypeCell = DeviceWifiCellType.MeasureInfo
+        //            }else{
+        //                devicewifiTypeCell = DeviceWifiCellType.StatusInfo
+        //            }
+        //        }
         // Do any additional setup after loading the view.
     }
     
-   
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if self.devicewifiTypeCell == .Hub{
-            self.getHubDetails()
+            if AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi{
+                self.getHubDetails()
+            }
         }
     }
     
@@ -56,12 +58,13 @@ class DeviceViewController: UIViewController {
         hud?.show(in: self.navigationController!.view)
         Pool.currentPool?.getHUBS(completion: { (hubs, error) in
             if error != nil {
-//                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-//                hud?.textLabel.text = error?.localizedDescription
-               hud?.dismiss()
+                //                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                //                hud?.textLabel.text = error?.localizedDescription
+                hud?.dismiss()
             } else if hubs != nil {
+                AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi = false
                 if hubs!.count > 0 {
-//                    self.hubs = hubs!
+                    //                    self.hubs = hubs!
                     for hubObj in hubs! {
                         if let hubDetails = hubObj.response{
                             self.hubDetails(data: hubDetails)
@@ -84,11 +87,11 @@ class DeviceViewController: UIViewController {
             self.hubState = value
         }
         self.settingTable.reloadData()
-
+        
     }
     
     func startBluetoothCheck(){
-//        centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
+        //        centralManager = CBCentralManager(delegate: self, queue: DispatchQueue.main)
         if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "BluetoothAlertViewController") as? BluetoothAlertViewController {
             viewController.modalPresentationStyle = .overCurrentContext
             self.present(viewController, animated: false, completion: nil)
@@ -100,77 +103,78 @@ class DeviceViewController: UIViewController {
         if devicewifiTypeCell == DeviceWifiCellType.Flipr{
             self.checkBluetoothConnection()
         }else{
-//            self.showWifiSettings()
+            //            self.showWifiSettings()
             self.checkBluetoothConnection()
-
+            
         }
-       
+        
     }
     
     
     @IBAction func changeDeviceName(){
+        
+        var nameTextField: UITextField?
+        
+        let alertController = UIAlertController(title: "Rename".localized, message: "Enter the new name".localized, preferredStyle: .alert)
+        let sendAction = UIAlertAction(title: "Save".localized, style: .default, handler: { (action) -> Void in
+            print("Send Button Pressed, email : \(nameTextField?.text)")
+            guard let newName = nameTextField!.text, !newName.isEmpty else{
+                self.showError(title: "Error".localized, message: "Please enter valid name")
+                return
+            }
             
-            var nameTextField: UITextField?
+            let hud = JGProgressHUD(style:.dark)
+            hud?.show(in: self.navigationController!.view)
             
-            let alertController = UIAlertController(title: "Rename".localized, message: "Enter the new name".localized, preferredStyle: .alert)
-            let sendAction = UIAlertAction(title: "Save".localized, style: .default, handler: { (action) -> Void in
-                print("Send Button Pressed, email : \(nameTextField?.text)")
-                guard let newName = nameTextField!.text, !newName.isEmpty else{
-                    self.showError(title: "Error".localized, message: "Please enter valid name")
-                    return
+            HUB.currentHUB!.updateEquipmentName(value: nameTextField!.text!, completion: { (error) in
+                if (error != nil) {
+                    hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                    hud?.textLabel.text = error?.localizedDescription
+                    hud?.dismiss(afterDelay: 3)
+                } else {
+//                    AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi = false
+                    HUB.currentHUB!.equipementName = nameTextField!.text!
+                    self.hubName = nameTextField!.text!
+                    //                        self.hubButton.setTitle(nameTextField!.text!, for: .normal)
+                    hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    hud?.dismiss(afterDelay: 0)
+                    self.settingTable.reloadData()
                 }
-                
-                let hud = JGProgressHUD(style:.dark)
-                hud?.show(in: self.navigationController!.view)
-                
-                HUB.currentHUB!.updateEquipmentName(value: nameTextField!.text!, completion: { (error) in
-                    if (error != nil) {
-                        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-                        hud?.textLabel.text = error?.localizedDescription
-                        hud?.dismiss(afterDelay: 3)
-                    } else {
-                        HUB.currentHUB!.equipementName = nameTextField!.text!
-                        self.hubName = nameTextField!.text!
-                        self.settingTable.reloadData()
-//                        self.hubButton.setTitle(nameTextField!.text!, for: .normal)
-                        hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
-                        hud?.dismiss(afterDelay: 1)
-                    }
-                })
-                
             })
             
-            //sendAction.isEnabled = (loginTextField?.text?.isEmail)!
-            
-            let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel) { (action) -> Void in
-                print("Cancel Button Pressed")
-            }
-            alertController.addAction(sendAction)
-            alertController.addAction(cancelAction)
-            alertController.addTextField { (textField) -> Void in
-                nameTextField = textField
-                nameTextField?.text =  self.hubName
-                nameTextField?.placeholder = "Name...".localized
-            }
-            present(alertController, animated: true, completion: nil)
+        })
+        
+        //sendAction.isEnabled = (loginTextField?.text?.isEmail)!
+        
+        let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel) { (action) -> Void in
+            print("Cancel Button Pressed")
+        }
+        alertController.addAction(sendAction)
+        alertController.addAction(cancelAction)
+        alertController.addTextField { (textField) -> Void in
+            nameTextField = textField
+            //                nameTextField?.text =  self.hubName
+            nameTextField?.placeholder = "Name...".localized
+        }
+        present(alertController, animated: true, completion: nil)
         /*
-        let alert = UIAlertController(title: "Name", message: nil, preferredStyle: .alert)
-        alert.addTextField { (textField) in
-            if let name = self.devicesDetails?["NickName"] as? String  {
-                textField.placeholder  = name
-            }
-        }
-        let submitAction = UIAlertAction(title: "Update", style: .default) { [unowned alert] _ in
-            let newName = alert.textFields![0]
-            if newName.isEmpty{
-                self.showError(title: "Error".localized, message: "Please enter valid name")
-            }
-        }
-        let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.default)
-        alert.addAction(cancelAction)
-        alert.addAction(submitAction)
-        present(alert, animated: true)
- */
+         let alert = UIAlertController(title: "Name", message: nil, preferredStyle: .alert)
+         alert.addTextField { (textField) in
+         if let name = self.devicesDetails?["NickName"] as? String  {
+         textField.placeholder  = name
+         }
+         }
+         let submitAction = UIAlertAction(title: "Update", style: .default) { [unowned alert] _ in
+         let newName = alert.textFields![0]
+         if newName.isEmpty{
+         self.showError(title: "Error".localized, message: "Please enter valid name")
+         }
+         }
+         let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.default)
+         alert.addAction(cancelAction)
+         alert.addAction(submitAction)
+         present(alert, animated: true)
+         */
     }
     
     func checkBluetoothConnection(){
@@ -205,7 +209,7 @@ class DeviceViewController: UIViewController {
     
     
     @IBAction func forgetDeviceButtonClicked(){
-       
+        
         let alertController = UIAlertController(title: "Unbind Flipr", message: "Do you really want to unbind ? All measure and calibration data will be lost.", preferredStyle: UIAlertController.Style.alert)
         
         let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.default)
@@ -221,10 +225,10 @@ class DeviceViewController: UIViewController {
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
-
+        
     }
     
-
+    
     func forgetDevice(){
         let serial = devicesDetails?["Serial"] as? String
         let activationKey = devicesDetails?["ActivationKey"] as? String
@@ -242,8 +246,8 @@ class DeviceViewController: UIViewController {
             
         })
     }
-
-
+    
+    
 }
 
 extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
@@ -254,7 +258,7 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-
+            
             if devicewifiTypeCell == DeviceWifiCellType.Flipr{
                 return 155
             }else{
@@ -275,12 +279,12 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
         if indexPath.row == 0{
             if devicewifiTypeCell == DeviceWifiCellType.Flipr{
                 return tableView.dequeueReusableCell(withIdentifier:"FliprDevice",
-                                                         for: indexPath)
+                                                     for: indexPath)
             }else{
                 return tableView.dequeueReusableCell(withIdentifier:"HubDevice",
-                                                         for: indexPath)
+                                                     for: indexPath)
             }
-        
+            
         }
         else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier:"DeviceInfoTableViewCell",
@@ -291,13 +295,15 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
                 cell.nameLabel.isHidden = true
             }
             else{
-                cell.editButton.isHidden = false
                 cell.titleLabel.text = "Name"
                 cell.nameLabel.text = self.hubName.capitalizingFirstLetter()
+                UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(rawValue: 0), animations: {
+                    cell.editButton.isHidden = false
+                }, completion: nil)
             }
-//            if let name = devicesDetails?["NickName"] as? String  {
-//                cell.nameLabel.text = name
-//            }
+            //            if let name = devicesDetails?["NickName"] as? String  {
+            //                cell.nameLabel.text = name
+            //            }
             
             if let serial = devicesDetails?["Serial"] as? String  {
                 cell.serialLabel.text = serial
@@ -305,7 +311,7 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             if let activationKey = devicesDetails?["ActivationKey"] as? String {
                 cell.keyIdLabel.text = activationKey
             }
-          
+            
             if let deviceType = devicesDetails?["ModuleType_Id"] as? Int {
                 if deviceType == 1 {
                     cell.modelLabel.text = "Flipr"
@@ -332,7 +338,7 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "EEE. dd/MM"
                         cell.valueLabel.text = "\(dateFormatter.string(from: lastDate))"
-//                        Module.currentModule?.rawlastMeasure = dateFormatter.string(from: lastDate)
+                        //                        Module.currentModule?.rawlastMeasure = dateFormatter.string(from: lastDate)
                     }
                 }
                 return cell
@@ -344,7 +350,7 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
                 cell.modeLabel.text = " " + self.hubBehavior.capitalizingFirstLetter()
                 return cell
             }
-           
+            
         }
         
         else if indexPath.row == 3{
@@ -358,30 +364,30 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             }
             return cell
         }
-//        else if indexPath.row == 3{
-//            let cell = tableView.dequeueReusableCell(withIdentifier:"NotificationCell",
-//                                                     for: indexPath) as! NotificationSwitchTableViewCell
-//            return cell
-//        }
+        //        else if indexPath.row == 3{
+        //            let cell = tableView.dequeueReusableCell(withIdentifier:"NotificationCell",
+        //                                                     for: indexPath) as! NotificationSwitchTableViewCell
+        //            return cell
+        //        }
         
-       
+        
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"LogOutCell",
                                                      for: indexPath)
             return cell
         }
         
-       
-       
+        
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
-       
+        
+        
     }
     
     @IBAction func alertsActivationSwitchValueChanged(_ sender: UISwitch) {
-
+        
     }
     
     
@@ -411,7 +417,7 @@ extension DeviceViewController: CBCentralManagerDelegate {
         print("Flipr device discovered with name:\(peripheral.name) , identifier: \(peripheral.identifier)")
         central.stopScan()
         print("CBCentralManager stop scanning for Flipr devices")
-            
+        
         flipr = peripheral
         peripheral.delegate = self
         central.connect(flipr!, options: nil)
@@ -437,7 +443,7 @@ extension DeviceViewController: CBCentralManagerDelegate {
 
 //MARK: - Core bluetooth peripheral delegate
 extension DeviceViewController: CBPeripheralDelegate {
-
+    
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         
         if let services = peripheral.services {
@@ -461,7 +467,7 @@ extension DeviceViewController: CBPeripheralDelegate {
                 i = i+1
             }
         }
-
+        
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
