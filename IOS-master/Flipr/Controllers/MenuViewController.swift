@@ -49,7 +49,7 @@ class MenuViewController: UITableViewController {
             batteryLevelLabel.isHidden = true
             batteryImageView.isHidden = true
         } else {
-            addFliprStartButton.isHidden = true
+//            addFliprStartButton.isHidden = true
             batteryLevelLabel.isHidden = false
             batteryImageView.isHidden = false
         }
@@ -184,7 +184,11 @@ class MenuViewController: UITableViewController {
                         if let info = deviceInfo["CommercialType"] as? [String: AnyObject] {
                             if let type = info["Value"] as? String  {
                                 self.batteryLevelLabel.text?.append(" ")
-                                self.batteryLevelLabel.text?.append(type)
+                                if type == "Pro" {
+                                    self.batteryLevelLabel.text = "Start MAX"
+                                }else{
+                                    self.batteryLevelLabel.text?.append(type)
+                                }
                             }
                         }
                         AppSharedData.sharedInstance.deviceName = self.batteryLevelLabel.text ?? ""

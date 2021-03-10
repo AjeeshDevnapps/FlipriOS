@@ -297,8 +297,9 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             else{
                 cell.titleLabel.text = "Name"
                 cell.nameLabel.text = self.hubName.capitalizingFirstLetter()
-                UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(rawValue: 0), animations: {
+                UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseIn, animations: {
                     cell.editButton.isHidden = false
+                    cell.nameLabel.isHidden = false
                 }, completion: nil)
             }
             //            if let name = devicesDetails?["NickName"] as? String  {
@@ -319,6 +320,11 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
                         if let type = info["Value"] as? String  {
                             cell.modelLabel.text?.append(" ")
                             cell.modelLabel.text?.append(type)
+                            if type == "Pro" {
+                                cell.modelLabel.text = "Start MAX"
+                            }else{
+                                cell.modelLabel.text?.append(type)
+                            }
                         }
                     }
                 }else{

@@ -28,9 +28,9 @@ class QuickActionViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions(rawValue: 0), animations: {
-            self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
-        }, completion: nil)
+//        UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions(rawValue: 0), animations: {
+//            self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+//        }, completion: nil)
 
     }
     
@@ -39,7 +39,13 @@ class QuickActionViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-    
+    func showBackgroundView(){
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn, animations: {
+                    self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+                }, completion: nil)
+
+//        self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+    }
     
     func setupViews(){
         triggerContainerView.layer.cornerRadius = 15.0

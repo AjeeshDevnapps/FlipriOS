@@ -1864,7 +1864,9 @@ class DashboardViewController: UIViewController {
         let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "QuickActionViewController") as? QuickActionViewController {
             viewController.modalPresentationStyle = .overCurrentContext
-            self.present(viewController, animated: true, completion: nil)
+            self.present(viewController, animated: true) {
+                viewController.showBackgroundView()
+            }
         }
     }
     
