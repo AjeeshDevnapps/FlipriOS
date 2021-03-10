@@ -80,10 +80,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         var settings = SideMenuSettings()
         settings.presentationStyle = .menuSlideIn
         settings.enableSwipeToDismissGesture = true
-        settings.presentationStyle.onTopShadowRadius = 5
-        settings.presentationStyle.onTopShadowColor = .black
-        settings.presentationStyle.onTopShadowOffset = .zero
-        settings.presentationStyle.onTopShadowOpacity = 1
+//        settings.presentationStyle.onTopShadowRadius = 5
+//        settings.presentationStyle.onTopShadowColor = .black
+//        settings.presentationStyle.onTopShadowOffset = .zero
+//        settings.presentationStyle.onTopShadowOpacity = 1
+//        settings.blurEffectStyle = .dark
         SideMenuManager.default.leftMenuNavigationController?.settings = settings
         
 
