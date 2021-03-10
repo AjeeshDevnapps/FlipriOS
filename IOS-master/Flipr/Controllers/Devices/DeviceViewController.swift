@@ -86,7 +86,11 @@ class DeviceViewController: UIViewController {
         if let value = data["StateEquipment"] as? Int  {
             self.hubState = value
         }
-        self.settingTable.reloadData()
+//        self.settingTable.reloadData()
+        let indexPathRow:Int = 1
+        let indexPosition = IndexPath(row: indexPathRow, section: 0)
+        settingTable.reloadRows(at: [indexPosition], with: .none)
+
         
     }
     
@@ -297,10 +301,10 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             else{
                 cell.titleLabel.text = "Name"
                 cell.nameLabel.text = self.hubName.capitalizingFirstLetter()
-                UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseIn, animations: {
+//                UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseIn, animations: {
                     cell.editButton.isHidden = false
                     cell.nameLabel.isHidden = false
-                }, completion: nil)
+//                }, completion: nil)
             }
             //            if let name = devicesDetails?["NickName"] as? String  {
             //                cell.nameLabel.text = name

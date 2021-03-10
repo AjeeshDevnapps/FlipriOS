@@ -9,10 +9,11 @@
 import UIKit
 
 class SideMenuViewController: UIViewController {
+    @IBOutlet weak var menuTable: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        self.menuTable.addShadow(offset: CGSize.init(width: 0, height: 0), color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.25), radius: 45.0, opacity:1.0)
         // Do any additional setup after loading the view.
     }
     
