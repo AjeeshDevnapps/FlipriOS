@@ -260,7 +260,8 @@ class CalibrationViewController: UIViewController {
                         
                     } else {
                         if self.calibrationType == .simpleMeasure {
-                            self.navigationController?.dismiss(animated: true, completion: nil)
+                            self.dismiss(animated: true, completion: nil)
+//                            self.navigationController?.dismiss(animated: true, completion: nil)
                         } else {
                             if self.calibrationType == .ph7 {
                                 Module.currentModule?.pH7CalibrationDone = true
@@ -308,7 +309,7 @@ class CalibrationViewController: UIViewController {
     @IBAction func backButtonAction(_ sender: Any) {
         
         if recalibration || calibrationType == .simpleMeasure {
-            self.navigationController?.popToRootViewController(animated: true)
+//            self.navigationController?.popToRootViewController(animated: true)
             self.dismiss(animated: true, completion: nil)
         } else {
             if dismissEnabled {

@@ -193,8 +193,8 @@ class MenuViewController: UITableViewController {
                         }
                         AppSharedData.sharedInstance.deviceName = self.batteryLevelLabel.text ?? ""
                     }else{
-                        self.batteryLevelLabel.text = "Hub"
-                        AppSharedData.sharedInstance.deviceName = "Hub"
+                        self.batteryLevelLabel.text = "Flipr"
+                        AppSharedData.sharedInstance.deviceName = "Flipr"
                     }
                 }
             }

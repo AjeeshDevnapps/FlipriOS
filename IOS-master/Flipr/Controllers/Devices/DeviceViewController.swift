@@ -28,16 +28,6 @@ class DeviceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        //        if let vers = devicesDetails?["ModuleType_Id"] as? Int {
-        //            if vers == 1{
-        //                devicewifiTypeCell = DeviceWifiCellType.MeasureInfo
-        //            }else{
-        //                devicewifiTypeCell = DeviceWifiCellType.StatusInfo
-        //            }
-        //        }
-        // Do any additional setup after loading the view.
     }
     
     
@@ -86,11 +76,12 @@ class DeviceViewController: UIViewController {
         if let value = data["StateEquipment"] as? Int  {
             self.hubState = value
         }
-//        self.settingTable.reloadData()
+        //        self.settingTable.reloadData()
         let indexPathRow:Int = 1
         let indexPosition = IndexPath(row: indexPathRow, section: 0)
-        settingTable.reloadRows(at: [indexPosition], with: .none)
-
+        let indexPositionStatus = IndexPath(row: 2, section: 0)
+        settingTable.reloadRows(at: [indexPosition,indexPositionStatus], with: .none)
+        
         
     }
     
@@ -136,7 +127,7 @@ class DeviceViewController: UIViewController {
                     hud?.textLabel.text = error?.localizedDescription
                     hud?.dismiss(afterDelay: 3)
                 } else {
-//                    AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi = false
+                    //                    AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi = false
                     HUB.currentHUB!.equipementName = nameTextField!.text!
                     self.hubName = nameTextField!.text!
                     //                        self.hubButton.setTitle(nameTextField!.text!, for: .normal)
@@ -257,7 +248,11 @@ class DeviceViewController: UIViewController {
 extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        if self.devicewifiTypeCell == .Hub{
+            return 4
+        }else{
+            return 3
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -301,10 +296,10 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             else{
                 cell.titleLabel.text = "Name"
                 cell.nameLabel.text = self.hubName.capitalizingFirstLetter()
-//                UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseIn, animations: {
-                    cell.editButton.isHidden = false
-                    cell.nameLabel.isHidden = false
-//                }, completion: nil)
+                //                UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseIn, animations: {
+                cell.editButton.isHidden = false
+                cell.nameLabel.isHidden = false
+                //                }, completion: nil)
             }
             //            if let name = devicesDetails?["NickName"] as? String  {
             //                cell.nameLabel.text = name

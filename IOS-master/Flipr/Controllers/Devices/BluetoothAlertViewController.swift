@@ -41,7 +41,7 @@ class BluetoothAlertViewController: UIViewController {
     }
     
     func showConnectionCheckingIndicator(){
-        perform(#selector(stopSearching), with: nil, afterDelay: 10)
+        perform(#selector(stopSearching), with: nil, afterDelay: 50)
         self.activityIndicator.isHidden = false
         self.messageLabel.text  = "Performing connection, please do not close app or lock your phone."
         self.startActivityIndicator()
