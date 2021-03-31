@@ -167,7 +167,7 @@ class User {
                             }
                         })
                         
-                        User.currentUser?.getModule(completion: { (error) in
+                        User.currentUser?.getModule(completion: { (devices,error) in
                             if error != nil {
                                 completion?(error)
                             } else {
@@ -302,6 +302,51 @@ class User {
             })
     }
     
+    
+    
+    static func changePassword(oldPassword:String, newPassword:String,completion: ((_ isSuccess: Bool, _ message: String?, _ error: Error?) -> Void)?) {
+        
+            Alamofire.request(Router.changePassword(oldPassword: oldPassword, newPassword: newPassword)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                
+                switch response.result {
+                    
+                case .success(let value):
+                    print("User change password - response.result.value: \(value)")
+                    if let resultResponse = value as? [String:Any] {
+                        if let activated = resultResponse ["Success"] as? Bool {
+                            let message = resultResponse["Message"] as? String
+                            if activated == true {
+                                completion?(true,message,nil)
+                            } else {
+                               
+                                completion?(false,message,nil)
+                            }
+                        } else {
+                            let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                            completion?(false, nil, error)
+                        }
+                        
+                    } else {
+                        let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                        completion?(false, nil, error)
+                    }
+                    
+                case .failure(let error):
+                    
+                    print("User change password did fail with error: \(error)")
+                    
+                    if let serverError = User.serverError(response: response) {
+                        completion?(false,nil, serverError)
+                    } else {
+                        completion?(false,nil, error)
+                    }
+                }
+            })
+    }
+    
+    
+    
+    
     func getAccount(completion: ((_ error: Error?) -> Void)?) {
         
         Alamofire.request(Router.readUser).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
@@ -333,7 +378,90 @@ class User {
         })
     }
     
-    func getModule(completion: ((_ error: Error?) -> Void)?) {
+    
+    static func updateAccount(lastName:String, firstName:String, completion: ((_ error: Error?) -> Void)?) {
+        
+        Alamofire.request(Router.updateUserInfo(lastName: lastName,firstName:firstName)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                print("Read User - response.result.value: \(value)")
+                if let user = value as? [String:Any] {
+                    User.currentUser?.update(withAttibutes: user)
+                    User.saveCurrentUserLocally()
+                    
+                    completion?(nil)
+                } else {
+                    let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                    completion?(error)
+                }
+                
+            case .failure(let error):
+                
+                print("Read User did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(serverError)
+                } else {
+                    completion?(error)
+                }
+            }
+        })
+    }
+    
+    func getModuleList(completion: ((_ devices: [[String:Any]]?, _ error: Error?) -> Void)?) {
+        
+        Alamofire.request(Router.getModules).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                print("Get user modules - response.result.value: \(value)")
+
+                if let modules = value as? [[String:Any]] {
+                    
+                    //On filtre sur ModuleType_Id = 1 pour retirer les HUB
+                    var fliprs:[[String:Any]] = []
+                    for mod in modules {
+                        if let type = mod["ModuleType_Id"] as? Int {
+                            if type == 1 {
+                                fliprs.append(mod)
+                            }
+                            if type == 2 {
+//                                let hub = HUB.init(withJSON: mod)
+//                                HUB.currentHUB = hub
+//                                HUB.saveCurrentHUBLocally()
+                            }
+                        }
+                    }
+                    
+                    if let JSON = fliprs.first {
+//                        let module = Module.init(withJSON: JSON)
+//                        Module.currentModule = module
+//                        Module.saveCurrentModuleLocally()
+                    }
+                    completion?(modules,nil)
+                } else {
+                    let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                    completion?(nil, error)
+                }
+                
+            case .failure(let error):
+                
+                print("Get user modules did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(nil,serverError)
+                } else {
+                    completion?(nil,error)
+                }
+            }
+        })
+    }
+
+    
+    func getModule(completion: ((_ devices: [[String:Any]]?, _ error: Error?) -> Void)?) {
         
         Alamofire.request(Router.getModules).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             
@@ -364,10 +492,10 @@ class User {
                         Module.currentModule = module
                         Module.saveCurrentModuleLocally()
                     }
-                    completion?(nil)
+                    completion?(fliprs,nil)
                 } else {
                     let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
-                    completion?(error)
+                    completion?(nil, error)
                 }
                 
             case .failure(let error):
@@ -375,9 +503,9 @@ class User {
                 print("Get user modules did fail with error: \(error)")
                 
                 if let serverError = User.serverError(response: response) {
-                    completion?(serverError)
+                    completion?(nil,serverError)
                 } else {
-                    completion?(error)
+                    completion?(nil,error)
                 }
             }
         })

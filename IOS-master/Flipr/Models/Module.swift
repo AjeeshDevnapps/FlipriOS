@@ -25,6 +25,7 @@ class Module {
     var rawWaterTemperature:String?
     
     var version:Int?
+    var moduleType:Int?
     
     var isStart = false
     var isSubscriptionValid = false
@@ -72,6 +73,9 @@ class Module {
         if let vers = JSON["Version"] as? Int {
             version = vers
         }
+        if let vers = JSON["ModuleType_Id"] as? Int {
+            moduleType = vers
+        }
         if let status = JSON["Status"] as? [String:Any] {
             if let dateTime = status["DateTime"] as? String {
                 if let date = dateTime.fliprDate {
@@ -104,6 +108,9 @@ class Module {
         JSON.updateValue(isForSpa, forKey: "IsForSpa")
         if let version = self.version {
             JSON.updateValue(version, forKey: "Version")
+        }
+        if let moduleType = self.moduleType {
+            JSON.updateValue(moduleType, forKey: "moduleType")
         }
         JSON.updateValue(isSubscriptionValid, forKey: "IsSubscriptionValid")
         
@@ -145,6 +152,34 @@ class Module {
         
         
     }
+    
+    
+    static func deactivate(serial: String, activationKey: String, completion: ((_ error:Error?) -> Void)?) {
+        
+        Alamofire.request(Router.addModule(serial: serial, activationKey: activationKey, delete:true)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                
+                completion?(nil)
+                Module.currentModule = nil
+//                UserDefaults.standard.removeObject(forKey:"CurrentModule")
+                
+            case .failure(let error):
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(serverError)
+                } else {
+                    completion?(error)
+                }
+            }
+            
+        })
+        
+    }
+
+    
     
     static func activate(serial: String, activationKey: String, completion: ((_ error:Error?) -> Void)?) {
         

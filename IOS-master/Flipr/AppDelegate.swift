@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
+        AppSharedData.sharedInstance.isNeedtoCallModulesApiForSideMenu = true
 
         
         AppReview.shared.activate(appID: "1225898851", feedbackEmails: ["contact@goflipr.com"])
@@ -69,21 +70,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         EmptyStateViewTheme.shared.messageColor = .lightGray
         EmptyStateViewTheme.shared.activityIndicatorColor = K.Color.LightBlue
         
-        SideMenuManager.default.menuPresentMode = .menuSlideIn
-        SideMenuManager.default.menuFadeStatusBar = false
-        SideMenuManager.default.menuWidth = 280
+//        SideMenuManager.default.menuPresentMode = .menuSlideIn
+//        SideMenuManager.default.menuFadeStatusBar = false
+//        SideMenuManager.default.menuWidth = 280
         
         let sb = UIStoryboard.init(name: "Main", bundle: nil)
 
         SideMenuManager.default.leftMenuNavigationController = sb.instantiateViewController(withIdentifier: "UISideMenuNavigationControllerID") as? SideMenuNavigationController
         var settings = SideMenuSettings()
         settings.presentationStyle = .menuSlideIn
+        settings.enableSwipeToDismissGesture = true
+//        settings.presentationStyle.onTopShadowRadius = 5
+//        settings.presentationStyle.onTopShadowColor = .black
+//        settings.presentationStyle.onTopShadowOffset = .zero
+//        settings.presentationStyle.onTopShadowOpacity = 1
+//        settings.blurEffectStyle = .dark
         SideMenuManager.default.leftMenuNavigationController?.settings = settings
+        
+
     }
     
     func updateUserData() {
         if let user = User.currentUser {
-            user.getModule(completion: { (error) in
+            user.getModule(completion: { (devices,error) in
                 if error != nil {
                 } else {
                     user.getPool(completion: { (error) in

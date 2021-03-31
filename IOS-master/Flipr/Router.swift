@@ -17,10 +17,12 @@ enum Router: URLRequestConvertible {
     case createUser(email: String, password: String, lastName: String, firstName: String, phone: String)
     case readAccountActivation(email: String)
     case resetPassword(email: String)
+    case changePassword(oldPassword: String, newPassword: String)
     case readUser
     case readUserNotifications
     case updateUserNotifications(activate: Bool)
     case updateLanguage
+    case updateUserInfo(lastName: String, firstName: String)
     
     case sendSubscriptionReceipt(data:Data)
     
@@ -110,6 +112,8 @@ enum Router: URLRequestConvertible {
             return .get
         case .resetPassword:
             return .post
+        case .changePassword:
+            return .put
         case .readUser:
             return .get
         case .readUserNotifications:
@@ -117,6 +121,8 @@ enum Router: URLRequestConvertible {
         case .updateUserNotifications:
             return .put
         case .updateLanguage:
+            return .put
+        case .updateUserInfo:
             return .put
         case .sendSubscriptionReceipt:
             return .post
@@ -242,6 +248,8 @@ enum Router: URLRequestConvertible {
             return "accounts/isActivated"
         case .resetPassword:
             return "pwd"
+        case .changePassword:
+            return "pwd"
         case .readUser:
             return "accounts"
         case .readUserNotifications:
@@ -249,6 +257,8 @@ enum Router: URLRequestConvertible {
         case .updateUserNotifications:
             return "accounts/notifications"
         case .updateLanguage:
+            return "accounts"
+        case .updateUserInfo:
             return "accounts"
         case .sendSubscriptionReceipt:
             return "accounts/subscription/iTunes"
@@ -416,6 +426,17 @@ enum Router: URLRequestConvertible {
                 "Birthday":"1900-01-01T00:00:00.0000000+00:00",
             ]
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+            
+        case .updateUserInfo( let lastName, let firstName):
+            var lang = "en"
+            if let preferredLanguage = Locale.current.languageCode {
+                lang = preferredLanguage
+            }
+            let parameters: [String : Any] = [
+                "Lastname": lastName,
+                "Firstname": firstName,
+            ]
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         
         case .readAccountActivation(let email):
             let parameters: [String : Any] = [
@@ -446,6 +467,14 @@ enum Router: URLRequestConvertible {
                 "email": email
             ]
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        
+        case .changePassword(let oldPassword, let newPassword):
+            let parameters: [String : Any] = [
+                "OldPassword": oldPassword,
+                "NewPassword": newPassword
+            ]
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        
         
         case .updateUserNotifications(let activate):
             let parameters: [String : Any] = [

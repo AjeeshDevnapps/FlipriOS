@@ -9,6 +9,7 @@
 import UIKit
 import SideMenu
 import SafariServices
+import JGProgressHUD
 
 class MenuViewController: UITableViewController {
 
@@ -36,7 +37,8 @@ class MenuViewController: UITableViewController {
 
     
     var expandMoreCells = false
-    
+    let hud = JGProgressHUD(style:.dark)
+
     
     override func viewDidLoad() {
         
@@ -47,7 +49,7 @@ class MenuViewController: UITableViewController {
             batteryLevelLabel.isHidden = true
             batteryImageView.isHidden = true
         } else {
-            addFliprStartButton.isHidden = true
+//            addFliprStartButton.isHidden = true
             batteryLevelLabel.isHidden = false
             batteryImageView.isHidden = false
         }
@@ -109,27 +111,50 @@ class MenuViewController: UITableViewController {
         termsAndPrivacyLabel.text = "Terms and privacy".localized
         logoutLabel.text = "Log out".localized
         
-        if let name = Module.currentModule?.nickName {
-            fliprNameLabel.text = name
-        }
+//        if let name = Module.currentModule?.nickName {
+//            self.batteryLevelLabel.isHidden = false
+//            batteryLevelLabel.text = name
+//        }
         
+//        if let moduleType = Module.currentModule?.moduleType {
+//            if moduleType == 1{
+//                fliprNameLabel.text = "Flipr"
+//            }else{
+//                fliprNameLabel.text = "Hub"
+//            }
+//        }
+     /*
         if let level = UserDefaults.standard.object(forKey: "BatteryLevel") as? String, Module.currentModule != nil {
             self.batteryLevelLabel.text = level + "%"
             self.batteryLevelLabel.isHidden = false
         } else {
             self.batteryLevelLabel.isHidden = true
         }
+        */
         
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprBatteryDidRead, object: nil, queue: nil) { (notification) in
             if let level = UserDefaults.standard.object(forKey: "BatteryLevel") as? String, Module.currentModule != nil {
-                self.batteryLevelLabel.text = level + "%"
-                self.batteryLevelLabel.isHidden = false
+//                self.batteryLevelLabel.text = level + "%"
+//                self.batteryLevelLabel.isHidden = false
             } else {
-                self.batteryLevelLabel.isHidden = true
+//                self.batteryLevelLabel.isHidden = true
             }
         }
         
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if AppSharedData.sharedInstance.isNeedtoCallModulesApiForSideMenu{
+            self.getDeviceDetails()
+        }else{
+            self.fliprNameLabel.text = AppSharedData.sharedInstance.serialKey
+            self.batteryLevelLabel.text = AppSharedData.sharedInstance.deviceName
+        }
+    }
+    
+   
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -138,6 +163,44 @@ class MenuViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getDeviceDetails(){
+        hud?.show(in: self.navigationController!.view)
+        User.currentUser?.getModuleList(completion: { (devices,error) in
+//                self.devicesDetails = devices
+//            self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+//            self.hud?.textLabel.text = error?.localizedDescription
+            self.hud?.dismiss()
+            if let deviceInfo = devices?.first{
+                AppSharedData.sharedInstance.isNeedtoCallModulesApiForSideMenu = false
+                if let name = deviceInfo["Serial"] as? String  {
+                    self.fliprNameLabel.text = name
+                    AppSharedData.sharedInstance.serialKey = self.fliprNameLabel.text ?? ""
+                }
+                if let moduleType = deviceInfo["ModuleType_Id"] as? Int  {
+                    if moduleType == 1{
+                        self.batteryLevelLabel.text = "Flipr"
+                        if let info = deviceInfo["CommercialType"] as? [String: AnyObject] {
+                            if let type = info["Value"] as? String  {
+                                self.batteryLevelLabel.text?.append(" ")
+                                if type == "Pro" {
+                                    self.batteryLevelLabel.text = "Start MAX"
+                                }else{
+                                    self.batteryLevelLabel.text?.append(type)
+                                }
+                            }
+                        }
+                        AppSharedData.sharedInstance.deviceName = self.batteryLevelLabel.text ?? ""
+                    }else{
+                        self.batteryLevelLabel.text = "Flipr"
+                        AppSharedData.sharedInstance.deviceName = "Flipr"
+                    }
+                }
+            }
+           
+        })
+        
     }
     
     @IBAction func addFliprStartButtonAction(_ sender: Any) {
@@ -151,14 +214,17 @@ class MenuViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 7
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         let bgColorView = UIView()
-        bgColorView.backgroundColor = K.Color.LightBlue
+//        bgColorView.backgroundColor = K.Color.LightBlue
+        bgColorView.backgroundColor = .white
         cell.selectedBackgroundView = bgColorView
-        
         return cell
     }
     
@@ -194,7 +260,31 @@ class MenuViewController: UITableViewController {
                 present(vc, animated: true, completion: nil)
             }
         }
-        if indexPath.row == 6 {
+        
+        else  if indexPath.row == 3 {
+            let eqpsVC = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "ProductsAndEquipmentsViewController") as! ProductsAndEquipmentsViewController
+            let navigationController = UINavigationController.init(rootViewController: eqpsVC)
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
+        else if indexPath.row == 5 {
+            let navigationController = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsNavigation") as! UINavigationController
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
+        else if indexPath.row == 6 {
+            let navigationController = UIStoryboard(name:"SideMenuViews", bundle: nil).instantiateViewController(withIdentifier: "HelpNavigation") as! UINavigationController
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
+        
+        
+//
+        
+        if indexPath.row == 4 {
             if let pool = Pool.currentPool {
                 if let url = URL(string: pool.shopUrl) {
                     let vc = SFSafariViewController(url: url, entersReaderIfAvailable: false)
@@ -219,6 +309,8 @@ class MenuViewController: UITableViewController {
             }
             
         }
+        
+       
         
         if indexPath.row == 9 {
             if let url = URL(string: "BLOG_URL".localized.remotable) {

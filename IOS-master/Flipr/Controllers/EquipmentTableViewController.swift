@@ -97,7 +97,12 @@ class EquipmentTableViewController: UITableViewController {
     
     @IBAction func saveButtonAction(_ sender: Any) {
         
-
+        self.save()
+    
+    }
+    
+    
+    func save(){
         UserDefaults.standard.set(true, forKey: "EquipmentCount")
         
         var activeEquipmentIds = [Int]()
@@ -111,7 +116,8 @@ class EquipmentTableViewController: UITableViewController {
         print("Active equipments: \(activeEquipmentIds)")
         
         let hud = JGProgressHUD(style:.dark)
-        hud?.show(in: self.navigationController!.view)
+//        hud?.show(in: self.navigationController!.view)
+        hud?.show(in: self.view)
         
         Alamofire.request(Router.updatePoolEquipments(poolId: Pool.currentPool!.id!, equipmentIds: activeEquipmentIds)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             

@@ -22,11 +22,11 @@ open class SideMenuPresentationStyle: InitializableClass {
     /// The color of the shadow applied to the top most view.
     open var onTopShadowColor: UIColor = .black
     /// The radius of the shadow applied to the top most view.
-    open var onTopShadowRadius: CGFloat = 5
+    open var onTopShadowRadius: CGFloat = 45
     /// The opacity of the shadow applied to the top most view.
-    open var onTopShadowOpacity: Float = 0
+    open var onTopShadowOpacity: Float = 0.25
     /// The offset of the shadow applied to the top most view.
-    open var onTopShadowOffset: CGSize = .zero
+    open var onTopShadowOffset: CGSize = CGSize.init(width: 0, height: 2)
     /// The ending alpha of the presenting view when the menu is fully displayed.
     open var presentingEndAlpha: CGFloat = 1
     /// The amount the presenting view is translated along the x-axis. Zero is stationary, negative values are off-screen, positive values are on screen.
