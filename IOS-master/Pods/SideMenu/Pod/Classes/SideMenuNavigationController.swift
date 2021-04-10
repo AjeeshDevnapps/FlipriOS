@@ -560,7 +560,7 @@ private extension SideMenuNavigationController {
 
         let blurEffect = UIBlurEffect(style: blurEffectStyle)
         let blurView = UIVisualEffectView(effect: blurEffect)
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = UIColor.clear
         if let tableViewController = topViewController as? UITableViewController {
             tableViewController.tableView.backgroundView = blurView
             tableViewController.tableView.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
@@ -569,10 +569,7 @@ private extension SideMenuNavigationController {
             blurView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             blurView.frame = view.bounds
             view.insertSubview(blurView, at: 0)
-          
         }
-        view.layer.borderColor = UIColor.red.cgColor
-        view.layer.borderWidth = 10
     }
 
     func removeBlur() {

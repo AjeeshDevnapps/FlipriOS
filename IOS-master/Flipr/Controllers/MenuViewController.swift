@@ -172,12 +172,37 @@ class MenuViewController: UITableViewController {
 //            self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
 //            self.hud?.textLabel.text = error?.localizedDescription
             self.hud?.dismiss()
-            if let deviceInfo = devices?.first{
+            var flipr:[String:Any]!
+            if let modules = devices as? [[String:Any]] {
+                for mod in modules {
+                    if let type = mod["ModuleType_Id"] as? Int {
+                        if type == 1 {
+                            flipr = mod
+                        }
+                    }
+                }
+            }
+           
+            if let deviceInfo = flipr{
                 AppSharedData.sharedInstance.isNeedtoCallModulesApiForSideMenu = false
                 if let name = deviceInfo["Serial"] as? String  {
                     self.fliprNameLabel.text = name
                     AppSharedData.sharedInstance.serialKey = self.fliprNameLabel.text ?? ""
                 }
+                self.batteryLevelLabel.text = "Flipr"
+                if let info = deviceInfo["CommercialType"] as? [String: AnyObject] {
+                    if let type = info["Value"] as? String  {
+                        self.batteryLevelLabel.text?.append(" ")
+                        if type == "Pro" {
+                            self.batteryLevelLabel.text = "Start MAX"
+                        }else{
+                            self.batteryLevelLabel.text?.append(type)
+                        }
+                    }
+                }
+                AppSharedData.sharedInstance.deviceName = self.batteryLevelLabel.text ?? ""
+                
+                /*
                 if let moduleType = deviceInfo["ModuleType_Id"] as? Int  {
                     if moduleType == 1{
                         self.batteryLevelLabel.text = "Flipr"
@@ -194,9 +219,21 @@ class MenuViewController: UITableViewController {
                         AppSharedData.sharedInstance.deviceName = self.batteryLevelLabel.text ?? ""
                     }else{
                         self.batteryLevelLabel.text = "Flipr"
-                        AppSharedData.sharedInstance.deviceName = "Flipr"
+                        if let info = deviceInfo["CommercialType"] as? [String: AnyObject] {
+                            if let type = info["Value"] as? String  {
+                                self.batteryLevelLabel.text?.append(" ")
+//                                if type == "Pro" {
+//                                    self.batteryLevelLabel.text = "Start MAX"
+//                                }else{
+                                    self.batteryLevelLabel.text?.append(type)
+//                                }
+                            }
+                        }
+                        AppSharedData.sharedInstance.deviceName = self.batteryLevelLabel.text ?? ""
                     }
                 }
+                
+                */
             }
            
         })
