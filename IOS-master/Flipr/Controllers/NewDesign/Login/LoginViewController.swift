@@ -56,6 +56,11 @@ class LoginViewController: UIViewController {
         
     }
     
+    @IBAction func signupButtonAction(_ sender: Any) {
+        let signupView = UIStoryboard.init(name: "Signup", bundle: nil).instantiateViewController(withIdentifier: "SignUpEmailController") as! SignUpEmailController
+        self.navigationController?.pushViewController(signupView)
+    }
+    
     @IBAction func signInButtonAction(_ sender: Any) {
         
         guard let email = emailTextField.text, let password = emailTextField.text else {

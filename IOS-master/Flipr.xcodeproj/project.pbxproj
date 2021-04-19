@@ -29,6 +29,14 @@
 		48A912A225F8EC2900EF863D /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A912A125F8EC2900EF863D /* SideMenuViewController.swift */; };
 		48B2A7EC25E19B45001CCBCC /* DeviceInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B2A7EB25E19B45001CCBCC /* DeviceInfoTableViewCell.swift */; };
 		48C39C5C2618A0F5006EF569 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C39C5B2618A0F5006EF569 /* ForgotPasswordViewController.swift */; };
+		48E3F2CF2621E829005AF612 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E3F2CA2621E828005AF612 /* LoadingViewController.swift */; };
+		48E3F2D02621E829005AF612 /* EmailVerifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E3F2CE2621E829005AF612 /* EmailVerifyMessageViewController.swift */; };
+		48E3F2D12621E829005AF612 /* SignUpEmailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E3F2CB2621E828005AF612 /* SignUpEmailController.swift */; };
+		48E3F2D22621E829005AF612 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E3F2C92621E827005AF612 /* CustomTextField.swift */; };
+		48E3F2D32621E829005AF612 /* EmailVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E3F2CC2621E828005AF612 /* EmailVerifyViewController.swift */; };
+		48E3F2D42621E829005AF612 /* UIViewController+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E3F2C82621E827005AF612 /* UIViewController+Helper.swift */; };
+		48E3F2DC2621EB37005AF612 /* SignUpProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E3F2DB2621EB36005AF612 /* SignUpProfileController.swift */; };
+		48E3F2DF2621EC92005AF612 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E3F2CD2621E828005AF612 /* Signup.storyboard */; };
 		48FC118D25DFE3B1001E1885 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC118C25DFE3B1001E1885 /* DevicesViewController.swift */; };
 		48FC119125DFE3C1001E1885 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119025DFE3C1001E1885 /* DeviceViewController.swift */; };
 		48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */; };
@@ -170,6 +178,14 @@
 		48A912A125F8EC2900EF863D /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		48B2A7EB25E19B45001CCBCC /* DeviceInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoTableViewCell.swift; sourceTree = "<group>"; };
 		48C39C5B2618A0F5006EF569 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		48E3F2C82621E827005AF612 /* UIViewController+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helper.swift"; sourceTree = "<group>"; };
+		48E3F2C92621E827005AF612 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		48E3F2CA2621E828005AF612 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		48E3F2CB2621E828005AF612 /* SignUpEmailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailController.swift; sourceTree = "<group>"; };
+		48E3F2CC2621E828005AF612 /* EmailVerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerifyViewController.swift; sourceTree = "<group>"; };
+		48E3F2CD2621E828005AF612 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
+		48E3F2CE2621E829005AF612 /* EmailVerifyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerifyMessageViewController.swift; sourceTree = "<group>"; };
+		48E3F2DB2621EB36005AF612 /* SignUpProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpProfileController.swift; sourceTree = "<group>"; };
 		48FC118C25DFE3B1001E1885 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
 		48FC119025DFE3C1001E1885 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
 		48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddnewDeviceViewController.swift; sourceTree = "<group>"; };
@@ -405,6 +421,21 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
+		48E3F2D62621E833005AF612 /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				48E3F2DB2621EB36005AF612 /* SignUpProfileController.swift */,
+				48E3F2C92621E827005AF612 /* CustomTextField.swift */,
+				48E3F2CE2621E829005AF612 /* EmailVerifyMessageViewController.swift */,
+				48E3F2CC2621E828005AF612 /* EmailVerifyViewController.swift */,
+				48E3F2CA2621E828005AF612 /* LoadingViewController.swift */,
+				48E3F2CD2621E828005AF612 /* Signup.storyboard */,
+				48E3F2CB2621E828005AF612 /* SignUpEmailController.swift */,
+				48E3F2C82621E827005AF612 /* UIViewController+Helper.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
 		48FC118B25DFE39B001E1885 /* Devices */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,6 +600,7 @@
 		B58A37341E79859B00C67F6C /* Flipr */ = {
 			isa = PBXGroup;
 			children = (
+				48E3F2D62621E833005AF612 /* Signup */,
 				4828D36F25C0602300F95683 /* StoryBoard */,
 				B57DE98B1F028FF300594261 /* RemoteControl.swift */,
 				B532455B1EB363770001A46F /* Omnisense.framework */,
@@ -741,6 +773,7 @@
 				B5F457C024C07BF6006C309A /* GUIDE_1.mp4 in Resources */,
 				B5F457BF24C07BF6006C309A /* GUIDE_2.mp4 in Resources */,
 				B58A37401E79859B00C67F6C /* LaunchScreen.storyboard in Resources */,
+				48E3F2DF2621EC92005AF612 /* Signup.storyboard in Resources */,
 				B57131A122E9AB9300421705 /* PoolLog.storyboard in Resources */,
 				489BD3D426146A33007E9BEF /* LoginSignup.storyboard in Resources */,
 				484CEB9D25E2AAE2005CD208 /* SideMenuViews.storyboard in Resources */,
@@ -868,6 +901,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48E3F2D02621E829005AF612 /* EmailVerifyMessageViewController.swift in Sources */,
 				B5FE6BEE241F71E70031853D /* MyNSObject.swift in Sources */,
 				B55364962086420A00E0727F /* WaterLevelTableViewController.swift in Sources */,
 				B5FCC3482243A7410064370D /* SimplePageViewController.swift in Sources */,
@@ -938,6 +972,7 @@
 				B574F5081E953783009294EA /* PoolViewController.swift in Sources */,
 				B5BE18D924486291006CCB1E /* HubTypeSelectionViewController.swift in Sources */,
 				B5DDDC8A1F0A6A240073E5B8 /* HistoricViewController.swift in Sources */,
+				48E3F2D12621E829005AF612 /* SignUpEmailController.swift in Sources */,
 				B59436E2225652580030F16D /* SubscriptionService.swift in Sources */,
 				B5B560B22230E9D800E00696 /* AlertTableViewController.swift in Sources */,
 				B519F8512452B00B00477DD1 /* CongratsViewController.swift in Sources */,
@@ -958,6 +993,7 @@
 				B59436E3225652580030F16D /* Subscription.swift in Sources */,
 				B54AED071EB8E17600174870 /* Pool.swift in Sources */,
 				B518F0F61E9FD6BB0092156C /* SignUpViewController.swift in Sources */,
+				48E3F2D22621E829005AF612 /* CustomTextField.swift in Sources */,
 				B58B2A54224A7C390003BE46 /* SubscriptionTableViewController.swift in Sources */,
 				B53C5E871E82CDA400C1C0FC /* TableViewController.swift in Sources */,
 				B518F0EC1E9F8DD40092156C /* SignInViewController.swift in Sources */,
@@ -969,8 +1005,11 @@
 				B57131A322E9AE3700421705 /* PoolLogTableViewController.swift in Sources */,
 				B5FBF6A622EB2CD4003FBF49 /* PoolLogViewController.swift in Sources */,
 				B557864324897E9300B5BDCD /* Planning.swift in Sources */,
+				48E3F2DC2621EB37005AF612 /* SignUpProfileController.swift in Sources */,
 				B54A015C226483DA002EEC62 /* SubscriptionView.swift in Sources */,
+				48E3F2D32621E829005AF612 /* EmailVerifyViewController.swift in Sources */,
 				B53086971F598B4600D7EFCF /* Equipment.swift in Sources */,
+				48E3F2CF2621E829005AF612 /* LoadingViewController.swift in Sources */,
 				48493D6925F54259008672DD /* AppSharedData.swift in Sources */,
 				481624E625DD91F50085F3C4 /* RoundShadowView.swift in Sources */,
 				B59BEFAE1EA6663800F3AD73 /* Module.swift in Sources */,
@@ -979,6 +1018,7 @@
 				B555AF631EA9FE8E0053163F /* CalibrationViewController.swift in Sources */,
 				B518F0EF1E9F90B70092156C /* User.swift in Sources */,
 				B5435AAF1EC3014600C7FF10 /* AlertViewController.swift in Sources */,
+				48E3F2D42621E829005AF612 /* UIViewController+Helper.swift in Sources */,
 				B5F457B124C05D4E006C309A /* VideoHelpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
