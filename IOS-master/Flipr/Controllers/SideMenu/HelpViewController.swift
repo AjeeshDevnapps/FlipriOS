@@ -13,10 +13,18 @@ class HelpViewController: UIViewController {
     @IBOutlet weak var tipsContainerView: UIView!
     @IBOutlet weak var faqContainerView: UIView!
     @IBOutlet weak var helpContainerView: UIView!
+    @IBOutlet weak var tipLbl: UILabel!
+    @IBOutlet weak var faqLbl: UILabel!
+    @IBOutlet weak var helpLbl: UILabel!
+    @IBOutlet weak var provacyButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Help"
+        self.title = "Help".localized
+        self.tipLbl.text = "Tips & Tricks".localized
+        self.faqLbl.text = "FAQ".localized
+        self.helpLbl.text = "I need help !".localized
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))
         setupViews()
         // Do any additional setup after loading the view.

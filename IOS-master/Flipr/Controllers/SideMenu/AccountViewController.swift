@@ -25,10 +25,30 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var detailsContainerView: UIView!
     @IBOutlet weak var subscriptionContainerView: UIView!
     private var shadowLayer: CAShapeLayer!
+    
+    @IBOutlet weak var loginLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var fNameLabel: UILabel!
+    @IBOutlet weak var lNameLabel: UILabel!
+    @IBOutlet weak var subscriptionTitleLabel: UILabel!
+    @IBOutlet weak var tapToChangeLabel: UILabel!
+
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Account"
+        self.title = "Account".localized
+        
+        self.loginLabel.text = "Login".localized
+        self.passwordLabel.text = "Password".localized
+        self.fNameLabel.text = "First name".localized
+        self.lNameLabel.text = "Last name".localized
+        self.subscriptionTitleLabel.text = "Subscriptions".localized
+        self.firstNameTxtFld.placeholder = "First name".localized
+        self.lastNameTxtFld.placeholder = "Last name".localized
+        self.subscriptionInfoLabel.text = "You can unsubscribe anytime from App Store settings".localized
+        self.tapToChangeLabel.text = "Tap to change".localized
+
         firstNameTxtFld.delegate = self
         lastNameTxtFld.delegate = self
 //        subsriptionButton.isUserInteractionEnabled = false

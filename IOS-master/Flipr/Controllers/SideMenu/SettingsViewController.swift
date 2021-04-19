@@ -15,7 +15,8 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Settings"
+        self.title = "Settings".localized
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))
         self.settingTable.tableFooterView = UIView()
         self.settingTable.isScrollEnabled = false
