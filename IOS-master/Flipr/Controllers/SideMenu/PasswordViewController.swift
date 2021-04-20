@@ -18,16 +18,28 @@ class PasswordViewController: UIViewController {
     @IBOutlet weak var oldPasswordTxtFldContainerView: UIView!
     @IBOutlet weak var newPasswordTxtFldContainerView: UIView!
     @IBOutlet weak var confirmPasswordTxtFldContainerView: UIView!
+    @IBOutlet weak var forgotButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Password"
+        self.title = "Password".localized
+      
+
+        saveButton.setTitle("Save".localized, for: .normal)
+        forgotButton.setTitle("Forgot password?".localized, for: .normal)
+        oldPasswordTxtFld.placeholder = "Old Password".localized
+        newPasswordTxtFld.placeholder = "New Password".localized
+        newPasswordTxtFld.placeholder = "Type new password again".localized
+
         setupUI()
+        
         // Do any additional setup after loading the view.
     }
     
     
     func setupUI(){
+        
+        
         oldPasswordTxtFld.placeholderColor(color: UIColor.init(hexString: "#203D52"))
         oldPasswordTxtFldContainerView.layer.cornerRadius = 25.0
         oldPasswordTxtFldContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 25.0, opacity: 0.21)
@@ -54,39 +66,39 @@ class PasswordViewController: UIViewController {
         }
         
         if oldpwd.count == 0 {
-            self.showError(title: "Error".localized, message: "Please enter old password")
+            self.showError(title: "Error".localized, message: "Please enter old password".localized)
             oldPasswordTxtFld.becomeFirstResponder()
             return
         }
         
         if newpwd.count == 0 {
-            self.showError(title: "Error".localized, message: "Please enter new password")
+            self.showError(title: "Error".localized, message: "Please enter new password".localized)
             oldPasswordTxtFld.becomeFirstResponder()
             return
         }
         
         if confmpwd.count == 0 {
-            self.showError(title: "Error".localized, message: "Please enter confirm password")
+            self.showError(title: "Error".localized, message: "Please enter confirm password".localized)
             oldPasswordTxtFld.becomeFirstResponder()
             return
         }
         
         if newpwd != confmpwd{
-            self.showError(title: "Error".localized, message: "Password miss match")
+            self.showError(title: "Error".localized, message: "Password miss match".localized)
             return
         }
         
         User.changePassword(oldPassword: oldpwd, newPassword:newpwd ) { (isSuccess, msg, error) in
             if error == nil {
                 if isSuccess {
-                    self.showSuccess(title: "Success", message: "Password has been updated successfully")
+                    self.showSuccess(title: "Success".localized, message: "Password has been updated successfully".localized)
                     self.navigationController?.popViewController()
                 }else{
-                    self.showError(title: "Erreur", message: msg ?? "")
+                    self.showError(title: "Error".localized, message: msg ?? "")
                 }
             }
             else {
-                self.showError(title: "Erreur", message: error?.localizedDescription)
+                self.showError(title: "Error".localized, message: error?.localizedDescription)
             }
         }
         
@@ -98,7 +110,7 @@ class PasswordViewController: UIViewController {
         
         let alertController = UIAlertController(title: "Forgot password?".localized, message: "Enter your account email address to receive a reset link.".localized, preferredStyle: .alert)
         let sendAction = UIAlertAction(title: "Send".localized, style: .default, handler: { (action) -> Void in
-            print("Send Button Pressed, email : \(loginTextField?.text)")
+//            print("Send Button Pressed, email : \(loginTextField?.text)")
             
             let hud = JGProgressHUD(style:.dark)
             hud?.show(in: self.navigationController!.view)
