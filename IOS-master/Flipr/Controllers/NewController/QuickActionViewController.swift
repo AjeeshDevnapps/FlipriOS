@@ -16,6 +16,14 @@ class QuickActionViewController: UIViewController {
     @IBOutlet weak var newStripContainerView: UIView!
     @IBOutlet weak var tapView: UIView!
     @IBOutlet weak var containerView: UIView!
+    
+    @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var measurementLbl: UILabel!
+    @IBOutlet weak var expertLbl: UILabel!
+    @IBOutlet weak var callibrationLbl: UILabel!
+    @IBOutlet weak var drainingLbl: UILabel!
+    @IBOutlet weak var stripTestLbl: UILabel!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +56,13 @@ class QuickActionViewController: UIViewController {
     }
     
     func setupViews(){
+        titleLbl.text = "Quick Actions".localized
+        measurementLbl.text = "Trigger a Measurement".localized
+        expertLbl.text  = "Expert Mode".localized
+        callibrationLbl.text  = "New Calibration".localized
+        drainingLbl.text  = "Draining".localized
+        stripTestLbl.text  = "New strip test".localized
+
         triggerContainerView.layer.cornerRadius = 15.0
         triggerContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
         expertContainerView.layer.cornerRadius = 15.0

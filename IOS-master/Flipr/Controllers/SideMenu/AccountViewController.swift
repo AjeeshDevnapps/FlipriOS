@@ -76,17 +76,17 @@ class AccountViewController: UIViewController {
         let isSubscriptionValid = Module.currentModule?.isSubscriptionValid ?? false
         if isSubscriptionValid{
             self.subsriptionImgView.image = #imageLiteral(resourceName: "check-1")
-            self.subscriptionLabel.text = "Active (Premier)"
+            self.subscriptionLabel.text = "Active (Premier)".localized
             subscriptionInfoLabel.isHidden = false
         }
         else{
             subsriptionButton.isUserInteractionEnabled = true
             self.subsriptionImgView.image = #imageLiteral(resourceName: "cross")
-            self.subscriptionLabel.text = "Inactive - Subscribe here !"
+            self.subscriptionLabel.text = "Inactive - Subscribe here !".localized
         }
         if (Module.currentModule?.moduleType == 1) || (Module.currentModule?.moduleType == 2){
             self.subsriptionImgView.image = #imageLiteral(resourceName: "check - blue")
-            self.subscriptionLabel.text = "No subscription needed"
+            self.subscriptionLabel.text = "No subscription needed".localized
             subsriptionButton.isUserInteractionEnabled = false
         }
 

@@ -362,10 +362,10 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"DeviceActionTableViewCell",
                                                      for: indexPath) as! DeviceActionTableViewCell
             if devicewifiTypeCell == DeviceWifiCellType.Flipr{
-                cell.actionTitleLabel.text = "Perform Bluetooth check"
+                cell.actionTitleLabel.text = "Perform Bluetooth check".localized
                 
             }else{
-                cell.actionTitleLabel.text = "WiFi settings"
+                cell.actionTitleLabel.text = "WiFi settings".localized
             }
             return cell
         }

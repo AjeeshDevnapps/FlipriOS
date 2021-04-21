@@ -33,6 +33,10 @@ class MenuViewController: UITableViewController {
     @IBOutlet weak var logoutLabel: UILabel!
     @IBOutlet weak var moreLabel: UILabel!
     
+    @IBOutlet weak var storeLabel: UILabel!
+    @IBOutlet weak var settingsLabel: UILabel!
+    @IBOutlet weak var helpLabel: UILabel!
+
     @IBOutlet weak var photoHeaderImageView: UIImageView!
 
     
@@ -90,6 +94,13 @@ class MenuViewController: UITableViewController {
         historyLabel.text = "History".localized
         actionsLabel.text = "Actions".localized
         myPoolLabel.text = "My pool".localized
+        
+        
+        storeLabel.text = "Store".localized
+        settingsLabel.text = "Settings".localized
+        helpLabel.text = "Help".localized
+
+        
         if let module = Module.currentModule {
             if module.isForSpa {
                 myPoolLabel.text = "My spa".localized
