@@ -289,7 +289,7 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"DeviceInfoTableViewCell",
                                                      for: indexPath) as! DeviceInfoTableViewCell
             if devicewifiTypeCell == DeviceWifiCellType.Flipr{
-                cell.titleLabel.text = "Details"
+                cell.titleLabel.text = "Details".localized
                 cell.editButton.isHidden = true
                 cell.nameLabel.isHidden = true
             }

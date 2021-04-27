@@ -32,6 +32,7 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var lNameLabel: UILabel!
     @IBOutlet weak var subscriptionTitleLabel: UILabel!
     @IBOutlet weak var tapToChangeLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
 
     
 
@@ -48,6 +49,7 @@ class AccountViewController: UIViewController {
         self.lastNameTxtFld.placeholder = "Last name".localized
         self.subscriptionInfoLabel.text = "You can unsubscribe anytime from App Store settings".localized
         self.tapToChangeLabel.text = "Tap to change".localized
+        self.titleLabel.text  = "My info".localized
 
         firstNameTxtFld.delegate = self
         lastNameTxtFld.delegate = self

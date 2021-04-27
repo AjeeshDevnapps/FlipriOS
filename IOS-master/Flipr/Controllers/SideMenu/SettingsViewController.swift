@@ -162,7 +162,7 @@ extension SettingsViewController: UITableViewDelegate,UITableViewDataSource {
             switch response.result {
                 
             case .success(let value):
-                UserDefaults.standard.set(sender.isOn, forKey: notificationOnOffValuesKey)
+                UserDefaults.standard.set(!sender.isOn, forKey: notificationOnOffValuesKey)
                 NotificationCenter.default.post(name: K.Notifications.NotificationSetttingsChanged, object: nil)
                 print("update notification with success: \(value)")
                 hud?.indicatorView = JGProgressHUDSuccessIndicatorView()

@@ -29,7 +29,7 @@ class PasswordViewController: UIViewController {
         forgotButton.setTitle("Forgot password?".localized, for: .normal)
         oldPasswordTxtFld.placeholder = "Old Password".localized
         newPasswordTxtFld.placeholder = "New Password".localized
-        newPasswordTxtFld.placeholder = "Type new password again".localized
+        confirmPasswordTxtFld.placeholder = "Type new password again".localized
 
         setupUI()
         

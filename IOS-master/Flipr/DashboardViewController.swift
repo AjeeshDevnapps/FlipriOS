@@ -316,7 +316,7 @@ class DashboardViewController: UIViewController {
                 if let JSON = value as? [String:Any] {
                     
                     if let value = JSON["Value"] as? Bool {
-                        UserDefaults.standard.set(value, forKey: notificationOnOffValuesKey)
+                        UserDefaults.standard.set(!value, forKey: notificationOnOffValuesKey)
                         NotificationCenter.default.post(name: K.Notifications.NotificationSetttingsChanged, object: nil)
                     }
                     
@@ -387,7 +387,7 @@ class DashboardViewController: UIViewController {
         UIView.transition(with:  self.notificationDisabledButton, duration: 0.4,
                           options: .transitionCrossDissolve,
                           animations: {
-                            self.notificationDisabledButton.isHidden = value
+                            self.notificationDisabledButton.isHidden = !value
                           })
     }
     

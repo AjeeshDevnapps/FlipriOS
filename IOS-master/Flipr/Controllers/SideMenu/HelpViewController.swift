@@ -24,7 +24,7 @@ class HelpViewController: UIViewController {
         self.tipLbl.text = "Tips & Tricks".localized
         self.faqLbl.text = "FAQ".localized
         self.helpLbl.text = "I need help !".localized
-
+        provacyButton.setTitle("Terms & privacy".localized, for: .normal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))
         setupViews()
         // Do any additional setup after loading the view.

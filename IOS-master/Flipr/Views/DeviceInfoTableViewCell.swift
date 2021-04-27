@@ -50,7 +50,7 @@ class DeviceWifiInfoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         wifeView.layer.cornerRadius = 10.0
-        titleLabel.text = "Last Measure".localized
+        titleLabel.text = "Last measure".localized
         // Initialization code
     }
 

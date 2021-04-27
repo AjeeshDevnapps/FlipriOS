@@ -478,7 +478,7 @@ enum Router: URLRequestConvertible {
         
         case .updateUserNotifications(let activate):
             let parameters: [String : Any] = [
-                "Value": activate
+                "Value": !activate
             ]
             print("updateUserNotifications: \(parameters)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
