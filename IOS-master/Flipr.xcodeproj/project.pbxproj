@@ -28,6 +28,7 @@
 		489BD3DB261474D9007E9BEF /* FliprSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489BD3DA261474D9007E9BEF /* FliprSplashViewController.swift */; };
 		48A912A225F8EC2900EF863D /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A912A125F8EC2900EF863D /* SideMenuViewController.swift */; };
 		48B2A7EC25E19B45001CCBCC /* DeviceInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B2A7EB25E19B45001CCBCC /* DeviceInfoTableViewCell.swift */; };
+		48B421882639DC8C005D0AB2 /* FliprDevice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48B421872639DC8C005D0AB2 /* FliprDevice.storyboard */; };
 		48C39C5C2618A0F5006EF569 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C39C5B2618A0F5006EF569 /* ForgotPasswordViewController.swift */; };
 		48E3F2CF2621E829005AF612 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E3F2CA2621E828005AF612 /* LoadingViewController.swift */; };
 		48E3F2D02621E829005AF612 /* EmailVerifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E3F2CE2621E829005AF612 /* EmailVerifyMessageViewController.swift */; };
@@ -177,6 +178,7 @@
 		489BD3DA261474D9007E9BEF /* FliprSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprSplashViewController.swift; sourceTree = "<group>"; };
 		48A912A125F8EC2900EF863D /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		48B2A7EB25E19B45001CCBCC /* DeviceInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoTableViewCell.swift; sourceTree = "<group>"; };
+		48B421872639DC8C005D0AB2 /* FliprDevice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FliprDevice.storyboard; sourceTree = "<group>"; };
 		48C39C5B2618A0F5006EF569 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		48E3F2C82621E827005AF612 /* UIViewController+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helper.swift"; sourceTree = "<group>"; };
 		48E3F2C92621E827005AF612 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 		4828D36F25C0602300F95683 /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
+				48B421842639DC61005D0AB2 /* Flipr */,
 				489BD3D226146A14007E9BEF /* LoginAndSignup */,
 				4828D37025C0604500F95683 /* Notifications.storyboard */,
 				48FC119625DFE45D001E1885 /* Devices.storyboard */,
@@ -419,6 +422,14 @@
 				489BD3DA261474D9007E9BEF /* FliprSplashViewController.swift */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		48B421842639DC61005D0AB2 /* Flipr */ = {
+			isa = PBXGroup;
+			children = (
+				48B421872639DC8C005D0AB2 /* FliprDevice.storyboard */,
+			);
+			path = Flipr;
 			sourceTree = "<group>";
 		};
 		48E3F2D62621E833005AF612 /* Signup */ = {
@@ -780,6 +791,7 @@
 				B5CB6FE41E801D58007F82BC /* Lato-Bold.ttf in Resources */,
 				B503971022C4AD56005B9D30 /* Flipr-eau2.mp4 in Resources */,
 				B5713F16241163F800278166 /* HUB.storyboard in Resources */,
+				48B421882639DC8C005D0AB2 /* FliprDevice.storyboard in Resources */,
 				B58A373D1E79859B00C67F6C /* Assets.xcassets in Resources */,
 				48FC119725DFE45D001E1885 /* Devices.storyboard in Resources */,
 				B5CB6FE51E801D58007F82BC /* Lato-Light.ttf in Resources */,
