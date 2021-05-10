@@ -9,6 +9,7 @@
 import UIKit
 import CoreBluetooth
 import JGProgressHUD
+import Alamofire
 
 enum DeviceWifiCellType {
     case Flipr
@@ -230,7 +231,25 @@ class DeviceViewController: UIViewController {
         if serial == nil || activationKey == nil {
             return
         }
+     
+        Alamofire.request(Router.removeModule(serialId: serial ?? "")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                
+                print("Delete HUB response.result.value: \(value)")
+                self.navigationController?.popViewController()
+
+            case .failure(let error):
+                
+                print("Delete HUB did fail with error: \(error)")
+                
+            }
+            
+        })
         
+      /*
         Module.deactivate(serial:serial ?? "" , activationKey: activationKey ?? "", completion: { (error) in
             if error != nil {
                 self.showError(title: "Error".localized, message: error?.localizedDescription)
@@ -240,6 +259,8 @@ class DeviceViewController: UIViewController {
             
             
         })
+        
+        */
     }
     
     

@@ -110,7 +110,7 @@ class DashboardViewController: UIViewController {
 //        self.view.clipsToBounds = true
 //        self.quickActionButtonContainer.cornerRadius =  self.quickActionButtonContainer.frame.size.height / 2
 //        quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
-//        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius: self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
+//        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius:         self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
 
         if Locale.current.languageCode != "fr" {
             let attributedTitle = NSAttributedString(string: "Alert in progress: act now!".localized, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor) : UIColor.white]))
@@ -137,7 +137,6 @@ class DashboardViewController: UIViewController {
             self.bleMeasureHasBeenSent = false
             self.refresh()
             self.perform(#selector(self.callGetStatusApis), with: nil, afterDelay: 3)
-            
         }
         
         NotificationCenter.default.addObserver(forName: FliprLocationDidChange, object: nil, queue: nil) { (notification) in
@@ -190,10 +189,10 @@ class DashboardViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil, queue: nil) { (notification) in
             self.manageRedoxValueChangeButtton()
         }
-        
-        //        self.getNotificationStatus()
-        //        self.getThresholdValues()
-        
+      
+        NotificationCenter.default.addObserver(forName: K.Notifications.PoolSettingsUpdated, object: nil, queue: nil) { (notification) in
+            self.callGetStatusApis()
+        }
         
         self.perform(#selector(self.callGetStatusApis), with: nil, afterDelay: 3)
         
@@ -316,7 +315,7 @@ class DashboardViewController: UIViewController {
                 if let JSON = value as? [String:Any] {
                     
                     if let value = JSON["Value"] as? Bool {
-                        UserDefaults.standard.set(!value, forKey: notificationOnOffValuesKey)
+                        UserDefaults.standard.set(value, forKey: notificationOnOffValuesKey)
                         NotificationCenter.default.post(name: K.Notifications.NotificationSetttingsChanged, object: nil)
                     }
                     

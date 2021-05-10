@@ -42,7 +42,7 @@ class CalibrationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         if let module = Module.currentModule {
             if module.isForSpa {
                 //backgroundImageView.image = UIImage(named:"BG_spa")

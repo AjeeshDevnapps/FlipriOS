@@ -24,6 +24,7 @@ class QuickActionViewController: UIViewController {
     @IBOutlet weak var drainingLbl: UILabel!
     @IBOutlet weak var stripTestLbl: UILabel!
 
+    @IBOutlet  var bottonContainerContraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,9 @@ class QuickActionViewController: UIViewController {
     }
     
     func setupViews(){
+        if UIScreen.main.nativeBounds.height < 1334{
+            bottonContainerContraint.constant = 576 - 70
+        }
         titleLbl.text = "Quick Actions".localized
         measurementLbl.text = "Trigger a Measurement".localized
         expertLbl.text  = "Expert Mode".localized
@@ -124,7 +128,9 @@ class QuickActionViewController: UIViewController {
                 viewController.recalibration = true
                 viewController.calibrationType = .ph7
                 viewController.modalPresentationStyle = .fullScreen
-                self.present(viewController, animated: true, completion: nil)
+                let nav = UINavigationController.init(rootViewController: viewController)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
             }
         }))
         alert.addAction(UIAlertAction(title: "Order a calibration kit".localized, style: .default, handler: { (action) in

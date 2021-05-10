@@ -53,7 +53,7 @@ class MenuViewController: UITableViewController {
             batteryLevelLabel.isHidden = true
             batteryImageView.isHidden = true
         } else {
-//            addFliprStartButton.isHidden = true
+            addFliprStartButton.isHidden = true
             batteryLevelLabel.isHidden = false
             batteryImageView.isHidden = false
         }

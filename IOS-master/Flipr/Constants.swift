@@ -48,6 +48,8 @@ struct K {
         static let NotificationTmpDefalutValueChangedChanged = Notification.Name("fr.isee-u.NotificationTmpDefalutValueChangedChanged")
         static let NotificationThresholdDefalutValueChangedChanged = Notification.Name("fr.isee-u.NotificationThresholdDefalutValueChangedChanged")
 
+        static let PoolSettingsUpdated = Notification.Name("fr.isee-u.PoolSettingsUpdated")
+
 
     }
 }
