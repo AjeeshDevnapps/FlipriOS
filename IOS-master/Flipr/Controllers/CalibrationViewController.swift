@@ -33,7 +33,9 @@ class CalibrationViewController: UIViewController {
     
     var calibrationType:CalibrationType = .ph7
     var measuresTimer : Timer?
-    
+    var checkCalibrationStruckTimer : Timer?
+    var isCalibrationStrucked = false
+
     var dismissEnabled = false
     
     var isFlipr2 = false
@@ -141,7 +143,13 @@ class CalibrationViewController: UIViewController {
         
         self.perform(#selector(self.checkForDeviceSearchingTimeOut), with: nil, afterDelay: 20)
         self.perform(#selector(self.checkForDeviceConnectingTimeOut), with: nil, afterDelay: 60)
-        
+        isCalibrationStrucked = true
+        self.checkCalibrationStruckTimer = Timer.scheduledTimer(timeInterval: 180,
+                                                  target: self,
+                                                  selector: #selector(self.checkForAppStrucked),
+                                                  userInfo: nil,
+                                                  repeats: true)
+
         BLEManager.shared.startMeasure { (error) in
             
             BLEManager.shared.doAcq = false
@@ -185,6 +193,28 @@ class CalibrationViewController: UIViewController {
             self.backButton.isEnabled = true
         }
     }
+    
+    @objc func checkForAppStrucked() {
+        
+        if self.isCalibrationStrucked{
+            if self.calibrationType == .ph7 {
+                Module.currentModule?.pH7CalibrationDone = true
+                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
+                    self.invalidateStruckChecktimer()
+                    viewController.calibrationType = .ph4
+                    viewController.recalibration = self.recalibration
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
+            }else{
+                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "StripViewControllerID") {
+                    self.invalidateStruckChecktimer()
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
+            }
+           
+        }
+    }
+    
     
     @objc func checkForDeviceSearchingTimeOut() {
         print("checkForDeviceSearchingTimeOut(), BLEManager.shared.centralManager.isScanning = \(BLEManager.shared.centralManager.isScanning)")
@@ -260,12 +290,14 @@ class CalibrationViewController: UIViewController {
                         
                     } else {
                         if self.calibrationType == .simpleMeasure {
+                            self.invalidateStruckChecktimer()
                             self.dismiss(animated: true, completion: nil)
 //                            self.navigationController?.dismiss(animated: true, completion: nil)
                         } else {
                             if self.calibrationType == .ph7 {
                                 Module.currentModule?.pH7CalibrationDone = true
                                 if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
+                                    self.invalidateStruckChecktimer()
                                     viewController.calibrationType = .ph4
                                     viewController.recalibration = self.recalibration
                                     self.navigationController?.pushViewController(viewController, animated: true)
@@ -274,9 +306,11 @@ class CalibrationViewController: UIViewController {
                                 Module.currentModule?.pH4CalibrationDone = true
                                 
                                 if self.recalibration {
+                                    self.invalidateStruckChecktimer()
                                     self.dismiss(animated: true, completion: nil)
                                 } else {
                                     if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "StripViewControllerID") {
+                                        self.invalidateStruckChecktimer()
                                         self.navigationController?.pushViewController(viewController, animated: true)
                                     }
                                 }
@@ -310,9 +344,11 @@ class CalibrationViewController: UIViewController {
         
         if recalibration || calibrationType == .simpleMeasure {
 //            self.navigationController?.popToRootViewController(animated: true)
+            self.invalidateStruckChecktimer()
             self.dismiss(animated: true, completion: nil)
         } else {
             if dismissEnabled {
+                self.invalidateStruckChecktimer()
                 self.dismiss(animated: true, completion: nil)
             } else {
                 let alertController = UIAlertController(title: "LOGOUT_TITLE".localized, message: "Are you sure you want to log out?".localized, preferredStyle: UIAlertController.Style.alert)
@@ -329,7 +365,7 @@ class CalibrationViewController: UIViewController {
                     }
                     
                     User.logout()
-                    
+                    self.invalidateStruckChecktimer()
                     self.navigationController?.popToRootViewController(animated: true)
                     
                 }
@@ -361,6 +397,11 @@ class CalibrationViewController: UIViewController {
             playerViewController.player!.play()
         }
         
+    }
+    
+    func invalidateStruckChecktimer(){
+        self.isCalibrationStrucked = false
+        self.checkCalibrationStruckTimer?.invalidate()
     }
     
     

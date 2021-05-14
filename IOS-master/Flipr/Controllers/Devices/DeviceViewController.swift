@@ -232,7 +232,7 @@ class DeviceViewController: UIViewController {
             return
         }
      
-        Alamofire.request(Router.removeModule(serialId: serial ?? "")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+        Alamofire.request(Router.forgetModuleEquipment(serial: serial ?? "", code: "20")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             
             switch response.result {
                 

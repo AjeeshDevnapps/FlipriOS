@@ -96,6 +96,14 @@ class OnboardingViewController: UIViewController {
         */
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        if User.currentUser == nil {
+//            try? VideoBackground.shared.play(view: view, videoName: "Flipr-eau2", videoType: "mp4", isMuted: true, darkness: 0.0, willLoopVideo: true, setAudioSessionAmbient: false)
+//        }
+        
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.25, animations: {
@@ -103,9 +111,9 @@ class OnboardingViewController: UIViewController {
         }) { (succes) in
             self.loadingView.isHidden = true
         }
-        if User.currentUser == nil {
+//        if User.currentUser == nil {
             try? VideoBackground.shared.play(view: view, videoName: "Flipr-eau2", videoType: "mp4", isMuted: true, darkness: 0.0, willLoopVideo: true, setAudioSessionAmbient: false)
-        }
+//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
