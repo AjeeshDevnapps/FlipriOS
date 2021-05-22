@@ -94,6 +94,42 @@ class User {
         }
     }
     
+    static func signup(email: String, completion: ((_ error:Error?) -> Void)?) {
+        
+        Alamofire.request(Router.createNewUser(email: email)).validate(statusCode: 200..<300).responseJSON { response in
+            switch response.result {
+            case.success(let value):
+                if let JSON = value as? [String: Any] {
+                    print("JSON: \(JSON)")
+                    if let success = JSON["Success"] as? Bool {
+                        if success == false {
+                            let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Oups, we're sorry but something went wrong :/".localized])
+                            completion?(error)
+                        } else {
+                            if let password = JSON["Pass"] as? String {
+                                UserDefaults.standard.set(password, forKey: "TempPass")
+                                UserDefaults.standard.set(email, forKey: "CurrentUserEmail")
+                            }
+                             completion?(nil)
+                        }
+                    } else {
+                        let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                        completion?(error)
+                    }
+                } else {
+                   print("response.result.value: \(response.result.value)")
+                   let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                   completion?(error)
+               }
+            case .failure(let error):
+                if let serverError = User.serverError(response: response) {
+                    completion?(serverError)
+                } else {
+                    completion?(error)
+                }
+            }
+        }
+    }
     
     static func signup(email: String, password: String, lastName: String,firstName: String, phone: String, completion: ((_ error:Error?) -> Void)?) {
         
@@ -191,7 +227,7 @@ class User {
                                     }
                                 })
                                 //User.currentUser?.getAccount(completion: completion)
-                                */ 
+                                */
                             }
                         })
                         
@@ -410,6 +446,37 @@ class User {
         })
     }
     
+    static func updateUserProfile(lastName:String, firstName:String, password: String, completion: ((_ error: Error?) -> Void)?) {
+        
+        Alamofire.request(Router.updateUserProfile(firstName: firstName, lastName: lastName, password: password)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                print("Read User - response.result.value: \(value)")
+                if let user = value as? [String:Any] {
+                    User.currentUser?.update(withAttibutes: user)
+                    User.saveCurrentUserLocally()
+                    
+                    completion?(nil)
+                } else {
+                    let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                    completion?(error)
+                }
+                
+            case .failure(let error):
+                
+                print("Read User did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(serverError)
+                } else {
+                    completion?(error)
+                }
+            }
+        })
+    }
+
     func getModuleList(completion: ((_ devices: [[String:Any]]?, _ error: Error?) -> Void)?) {
         
         Alamofire.request(Router.getModules).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
@@ -604,6 +671,7 @@ class User {
     }
     
 }
+
 
 
 

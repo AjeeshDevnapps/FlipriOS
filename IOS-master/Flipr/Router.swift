@@ -13,6 +13,8 @@ import Alamofire
 
 enum Router: URLRequestConvertible {
     
+    case updateUserProfile(firstName: String, lastName: String, password: String)
+    case createNewUser(email: String)
     case authentifyUser(email: String, password: String)
     case createUser(email: String, password: String, lastName: String, firstName: String, phone: String)
     case readAccountActivation(email: String)
@@ -234,6 +236,10 @@ enum Router: URLRequestConvertible {
             return .post
         case .deleteHUBPlanning:
             return .delete
+        case .createNewUser:
+            return .post
+        case .updateUserProfile:
+            return .put
         }
     }
     
@@ -382,6 +388,10 @@ enum Router: URLRequestConvertible {
             return "hub/\(serial)/DeleteSinglePlanning"
         case .updateHUBPlannings(let serial, _):
             return "hub/\(serial)/AddPlannings"
+        case .createNewUser:
+            return "accounts/new"
+        case .updateUserProfile(_ ,_ ,_):
+            return "accounts/all"
         }
     }
     
@@ -402,7 +412,25 @@ enum Router: URLRequestConvertible {
         urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         
         switch self {
-        
+        case .createNewUser(let email):
+            var lang = "en"
+            if let preferredLanguage = Locale.current.languageCode {
+                lang = preferredLanguage
+            }
+            let parameters: [String : Any] = [
+                "email": email,
+                "lang": lang
+            ]
+            urlRequest = try URLEncoding.queryString.encode(urlRequest, with: parameters)
+        case .updateUserProfile(let firstName, let lastName, let password):
+            let parameters: [String: Any] = [
+                "firstname": firstName,
+                "lastname": lastName
+            ]
+            if let url = urlRequest.url?.absoluteString {
+                urlRequest.url = URL(string: url + "?NewPass=\(password)")
+            }
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         case .authentifyUser(let email, let password):
             let parameters: [String : Any] = [
                 "username": email,
@@ -437,7 +465,7 @@ enum Router: URLRequestConvertible {
                 "Firstname": firstName,
             ]
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-        
+            
         case .readAccountActivation(let email):
             let parameters: [String : Any] = [
                 "email": email,
@@ -679,3 +707,4 @@ enum Router: URLRequestConvertible {
         return urlRequest
     }
 }
+

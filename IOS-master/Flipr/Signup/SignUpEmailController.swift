@@ -2,7 +2,7 @@
 //  SignUpEmailController.swift
 //  Flipr
 //
-//  Created by Vishnu T Vijay on 02/04/21.
+//  Created by Ajeesh T S on 02/04/21.
 //  Copyright © 2021 I See U. All rights reserved.
 //
 
@@ -82,9 +82,11 @@ class SignUpEmailController: UIViewController, UITextFieldDelegate {
         self.signUpButton.layer.cornerRadius = 12
     }
     
+    
     @objc func updateTextFieldAppearance() {
         signUpButton.backgroundColor = (textField.text != "") ? #colorLiteral(red: 0.06643301994, green: 0.08944996446, blue: 0.162193656, alpha: 1) : #colorLiteral(red: 0.4690234661, green: 0.4782367945, blue: 0.5128742456, alpha: 1)
     }
+    
     
     //MARK:-  IBActions
     @IBAction func signUp(_ sender: UIButton) {

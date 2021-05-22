@@ -2,7 +2,7 @@
 //  EmailVerifyMessageViewController.swift
 //  Flipr
 //
-//  Created by Vishnu T Vijay on 06/04/21.
+//  Created by Ajeesh T S on 06/04/21.
 //  Copyright © 2021 I See U. All rights reserved.
 //
 

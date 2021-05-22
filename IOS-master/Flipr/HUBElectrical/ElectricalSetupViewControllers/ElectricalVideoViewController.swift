@@ -2,7 +2,7 @@
 //  ElectricalVideoViewController.swift
 //  Flipr
 //
-//  Created by Vishnu T Vijay on 09/05/21.
+//  Created by Ajeesh T S on 09/05/21.
 //  Copyright © 2021 I See U. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  PoolLocationViewController.swift
 //  Flipr
 //
-//  Created by Vishnu T Vijay on 21/04/21.
+//  Created by Ajeesh T S on 21/04/21.
 //  Copyright © 2021 I See U. All rights reserved.
 //
 
@@ -47,8 +47,8 @@ class PoolLocationViewController: UIViewController, UITableViewDataSource, UITab
         mapView.layer.masksToBounds = true
         searchTF.externalDelegate = self
         let img = UIImage(named: "map-pin")
-        searchTF.addPaddingLeftButton(target: self, img!, padding: 30, action: #selector(mapIconClickTF))
-        searchTF.editRectLeftPadding = 40
+//        searchTF.addPaddingLeftButton(target: self, img!, padding: 30, action: #selector(mapIconClickTF))
+//        searchTF.editRectLeftPadding = 40
         searchTF.becomeFirstResponder()
         searchTF.placeholder = "Search a city...".localized
         searchTF.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)

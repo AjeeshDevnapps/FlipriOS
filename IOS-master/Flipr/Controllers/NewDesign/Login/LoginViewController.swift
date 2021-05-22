@@ -63,7 +63,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func signInButtonAction(_ sender: Any) {
         
-        guard let email = emailTextField.text, let password = emailTextField.text else {
+        guard let email = emailTextField.text, let password = passwordTextField.text else {
             self.showError(title: "Error".localized, message: "All fields are mandatory".localized)
             return
         }
@@ -75,7 +75,7 @@ class LoginViewController: UIViewController {
         }
         else
         
-        if password.count == 0 {
+        if password.count < 1 {
             self.showError(title: "Error".localized, message: "Please enter your password".localized)
             passwordTextField.becomeFirstResponder()
             return

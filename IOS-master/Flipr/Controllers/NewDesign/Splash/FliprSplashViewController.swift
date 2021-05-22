@@ -24,46 +24,53 @@ extension UIView {
 }
 
 class FliprSplashViewController: UIViewController {
-    @IBOutlet weak var rightAnimationView: UIImageView!
+    @IBOutlet weak var rightAnimationImageView: UIImageView!
+    @IBOutlet weak var leftAnimationImageView: UIImageView!
+    @IBOutlet weak var waveAnimationImageView: UIImageView!
+    @IBOutlet weak var logoImageView: UIImageView!
+
     @IBOutlet weak var rightAnimationContainerView: UIView!
+    
+    @IBOutlet weak var waveAnimationImageViewYpost: NSLayoutConstraint!
+    @IBOutlet weak var logoImageViewYpost: NSLayoutConstraint!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      
-        let view1 = UILabel()
-        view1.frame = CGRect(x: 0, y: 0, width: 152.78, height: 401.99)
-        view1.backgroundColor = .white
+        perform(#selector(showWaveAnimation), with: nil, afterDelay: 0.5)
 
-        let image0 = UIImage(named: "illustration right.png")?.cgImage
-        let layer0 = CALayer()
-        layer0.contents = image0
-        layer0.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 2.63, b: 0, c: 0, d: 1, tx: -0.82, ty: 0))
-        layer0.compositingFilter = "overlayBlendMode"
-        layer0.bounds = view.bounds
-        layer0.position = view.center
-        view1.layer.addSublayer(layer0)
-
-
-    //    var parent = self.view!
-        self.view.addSubview(view1)
-        view1.translatesAutoresizingMaskIntoConstraints = false
-        
-     ///   UIView.animate(withDuration: 1.0, animations: {
-         //   self.rightAnimationContainerView.transform = .identity
-//            self.rightAnimationView.transform.rotated(by: CGFloat(Double.pi / 2))
-     //   })
-        // Do any additional setup after loading the view.
+        addRightImage()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @objc func showEducationScreen(){
+        
     }
-    */
+    
+    
+    func addRightImage(){
+        self.rightAnimationImageView.transform = CGAffineTransform(translationX: 110.0, y: 0.0)
+        self.leftAnimationImageView.transform = CGAffineTransform(translationX: -58.0, y: 0.0)
 
+        UIView.animate(withDuration: 1, animations: {
+            let rightRotationMatrix = CGAffineTransform(rotationAngle: -0.01)
+            let rightTranslationMatrix = CGAffineTransform(translationX: 0.0, y: 0.0)
+            self.rightAnimationImageView.transform = rightRotationMatrix.concatenating(rightTranslationMatrix)
+            let leftRotationMatrix = CGAffineTransform(rotationAngle: 0.01)
+            let leftTranslationMatrix = CGAffineTransform(translationX: 0.0, y: 0.0)
+            self.leftAnimationImageView.transform = leftRotationMatrix.concatenating(leftTranslationMatrix)
+        })
+        
+    }
+    
+    
+    @objc func showWaveAnimation(){
+        waveAnimationImageView.isHidden = false
+        self.waveAnimationImageViewYpost.constant = 0
+        self.logoImageViewYpost.constant =  self.logoImageViewYpost.constant - 100
+        UIView.animate(withDuration: 0.5) {
+            self.logoImageView.transform = self.logoImageView.transform.scaledBy(x: 0.8, y: 0.8)
+            self.view.layoutIfNeeded()
+        }
+    }
 }
