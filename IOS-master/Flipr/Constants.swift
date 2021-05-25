@@ -29,6 +29,7 @@ struct K {
     struct Notifications {
         static let SessionExpired = Notification.Name("fr.isee-u.SessionExpired")
         static let FliprDiscovered = Notification.Name("fr.isee-u.FliprDiscovered")
+        static let FliprNotDiscovered = Notification.Name("fr.isee-u.FliprNotDiscovered")
         static let FliprSerialRead = Notification.Name("fr.isee-u.FliprSerialRead")
         static let FliprConnected = Notification.Name("fr.isee-u.FliprConnected")
         static let FliprDidRead = Notification.Name("fr.isee-u.FliprDidRead")
@@ -38,6 +39,9 @@ struct K {
         static let AlertDidClose = Notification.Name("fr.isee-u.AlertDidClose")
         static let BackFromWintering = Notification.Name("fr.isee-u.BackFromWintering")
         
+        static let BluetoothNotAvailble = Notification.Name("fr.isee-u.BluetoothNotAvailble")
+        static let BluetoothOff = Notification.Name("fr.isee-u.BluetoothOff")
+
         static let HUBDiscovered = Notification.Name("fr.isee-u.HUBDiscovered")
         static let HUBSerialRead = Notification.Name("fr.isee-u.HUBSerialRead")
         static let HUBConnected = Notification.Name("fr.isee-u.HUBConnected")

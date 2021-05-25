@@ -36,8 +36,8 @@ class ModuleTypeSelectionViewController: UIViewController {
        }
     
     @IBAction func startButtonAction(_ sender: Any) {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "ActivationViewControllerID")
+        let fliprStoryboard = UIStoryboard(name: "FliprDevice", bundle: nil)
+        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddFliprViewController")
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
     @IBOutlet weak var emailLbl: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var emailContainerView: UIView!
@@ -36,6 +36,7 @@ class LoginViewController: UIViewController {
     }
     
     func setupViews(){
+        self.navigationController?.isNavigationBarHidden = false
         self.emailContainerView.roundCorner(corner: 8)
         self.passwordContainerView.roundCorner(corner: 8)
     }
@@ -227,5 +228,33 @@ extension LoginViewController: UITextFieldDelegate {
             break
         }
         return true
+    }
+}
+
+extension LoginViewController{
+    
+    func presentActivationController(animated:Bool) {
+        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ActivationViewControllerID") {
+            self.navigationController?.pushViewController(viewController, animated: animated)
+        }
+    }
+    
+    func presentStripController(animated:Bool) {
+        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "StripViewControllerID") {
+            self.navigationController?.pushViewController(viewController, animated: animated)
+        }
+    }
+    
+    func presentEmailVerificationController(animated:Bool) {
+        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "EmailVerificationViewControllerID") {
+            self.navigationController?.pushViewController(viewController, animated: animated)
+        }
+    }
+    
+    func presentCalibrationViewController(type:CalibrationType, animated:Bool) {
+        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
+            viewController.calibrationType = type
+            self.navigationController?.pushViewController(viewController, animated: animated)
+        }
     }
 }

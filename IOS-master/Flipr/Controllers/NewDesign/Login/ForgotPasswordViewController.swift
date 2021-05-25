@@ -16,6 +16,7 @@ class ForgotPasswordViewController: BaseViewController {
     @IBOutlet weak var submitButton: UIButton!
 
     override func viewDidLoad() {
+        self.backButtonTitle = "Se connecter"
         super.viewDidLoad()
         self.title = "Réinitialiser mon mot de passe"
         self.setupViews()

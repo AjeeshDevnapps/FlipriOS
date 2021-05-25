@@ -52,6 +52,10 @@
 		48B2A7EC25E19B45001CCBCC /* DeviceInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B2A7EB25E19B45001CCBCC /* DeviceInfoTableViewCell.swift */; };
 		48B421882639DC8C005D0AB2 /* FliprDevice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48B421872639DC8C005D0AB2 /* FliprDevice.storyboard */; };
 		48C39C5C2618A0F5006EF569 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C39C5B2618A0F5006EF569 /* ForgotPasswordViewController.swift */; };
+		48C72BC8265C3567002042D5 /* FliperListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C72BC7265C3567002042D5 /* FliperListViewController.swift */; };
+		48C8E4F3265D21490000FDA8 /* KeyEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C8E4F2265D21490000FDA8 /* KeyEnterViewController.swift */; };
+		48C8E4F6265D6DC60000FDA8 /* FliprActivationSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C8E4F5265D6DC50000FDA8 /* FliprActivationSuccessViewController.swift */; };
+		48C9468C265AAADC00C018A7 /* AddFliprViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C9468B265AAADC00C018A7 /* AddFliprViewController.swift */; };
 		48FC118D25DFE3B1001E1885 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC118C25DFE3B1001E1885 /* DevicesViewController.swift */; };
 		48FC119125DFE3C1001E1885 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119025DFE3C1001E1885 /* DeviceViewController.swift */; };
 		48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */; };
@@ -216,6 +220,10 @@
 		48B2A7EB25E19B45001CCBCC /* DeviceInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoTableViewCell.swift; sourceTree = "<group>"; };
 		48B421872639DC8C005D0AB2 /* FliprDevice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FliprDevice.storyboard; sourceTree = "<group>"; };
 		48C39C5B2618A0F5006EF569 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		48C72BC7265C3567002042D5 /* FliperListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliperListViewController.swift; sourceTree = "<group>"; };
+		48C8E4F2265D21490000FDA8 /* KeyEnterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEnterViewController.swift; sourceTree = "<group>"; };
+		48C8E4F5265D6DC50000FDA8 /* FliprActivationSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprActivationSuccessViewController.swift; sourceTree = "<group>"; };
+		48C9468B265AAADC00C018A7 /* AddFliprViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFliprViewController.swift; sourceTree = "<group>"; };
 		48FC118C25DFE3B1001E1885 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
 		48FC119025DFE3C1001E1885 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
 		48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddnewDeviceViewController.swift; sourceTree = "<group>"; };
@@ -463,6 +471,7 @@
 		489BD3D72614749D007E9BEF /* NewDesign */ = {
 			isa = PBXGroup;
 			children = (
+				48C9468A265AAA8700C018A7 /* Add Flipr */,
 				489BD3D9261474C1007E9BEF /* Splash */,
 				489BD3D8261474AB007E9BEF /* Login */,
 			);
@@ -493,6 +502,17 @@
 				48B421872639DC8C005D0AB2 /* FliprDevice.storyboard */,
 			);
 			path = Flipr;
+			sourceTree = "<group>";
+		};
+		48C9468A265AAA8700C018A7 /* Add Flipr */ = {
+			isa = PBXGroup;
+			children = (
+				48C9468B265AAADC00C018A7 /* AddFliprViewController.swift */,
+				48C72BC7265C3567002042D5 /* FliperListViewController.swift */,
+				48C8E4F2265D21490000FDA8 /* KeyEnterViewController.swift */,
+				48C8E4F5265D6DC50000FDA8 /* FliprActivationSuccessViewController.swift */,
+			);
+			path = "Add Flipr";
 			sourceTree = "<group>";
 		};
 		48E3F2D62621E833005AF612 /* Signup */ = {
@@ -988,6 +1008,7 @@
 				B506F2FF1F5859DA006246A2 /* EquipmentTableViewController.swift in Sources */,
 				489BD3DB261474D9007E9BEF /* FliprSplashViewController.swift in Sources */,
 				484BEE3B25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift in Sources */,
+				48C8E4F3265D21490000FDA8 /* KeyEnterViewController.swift in Sources */,
 				B59436E1225652580030F16D /* SubscriptionOptionTableViewCell.swift in Sources */,
 				B518F0F31E9FC0840092156C /* UIButton+Activity.swift in Sources */,
 				4880E1EF26558C09006D4472 /* DescribeMyPoolViewController.swift in Sources */,
@@ -1069,6 +1090,7 @@
 				B59436E2225652580030F16D /* SubscriptionService.swift in Sources */,
 				B5B560B22230E9D800E00696 /* AlertTableViewController.swift in Sources */,
 				B519F8512452B00B00477DD1 /* CongratsViewController.swift in Sources */,
+				48C72BC8265C3567002042D5 /* FliperListViewController.swift in Sources */,
 				B5FE6BF0241F71E70031853D /* Encoder.swift in Sources */,
 				B55DC6BB20529F26001D1B08 /* ProductViewController.swift in Sources */,
 				484D023026566E38002536AC /* SignUpEmailController.swift in Sources */,
@@ -1096,11 +1118,13 @@
 				484CEBA425E2DAC9005CD208 /* QuickActionViewController.swift in Sources */,
 				B5FE070F1EB9CE2800962AEE /* City.swift in Sources */,
 				48A912A225F8EC2900EF863D /* SideMenuViewController.swift in Sources */,
+				48C8E4F6265D6DC60000FDA8 /* FliprActivationSuccessViewController.swift in Sources */,
 				B57F99F61EC4510300417C0F /* Bundle+version.swift in Sources */,
 				484D022E26566E38002536AC /* SignUpProfileController.swift in Sources */,
 				B57131A322E9AE3700421705 /* PoolLogTableViewController.swift in Sources */,
 				B5FBF6A622EB2CD4003FBF49 /* PoolLogViewController.swift in Sources */,
 				B557864324897E9300B5BDCD /* Planning.swift in Sources */,
+				48C9468C265AAADC00C018A7 /* AddFliprViewController.swift in Sources */,
 				B54A015C226483DA002EEC62 /* SubscriptionView.swift in Sources */,
 				B53086971F598B4600D7EFCF /* Equipment.swift in Sources */,
 				48493D6925F54259008672DD /* AppSharedData.swift in Sources */,

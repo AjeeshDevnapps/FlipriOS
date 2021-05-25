@@ -34,6 +34,7 @@ class DevicesViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
     func getFlprInfo(){
         //        hud?.show(in: self.navigationController!.view)
         hud?.show(in: self.navigationController!.view)
@@ -51,6 +52,7 @@ class DevicesViewController: UIViewController {
             }
         })
     }
+    
     
     func getHubDetails(){
         Pool.currentPool?.getHUBS(completion: { (hubs, error) in

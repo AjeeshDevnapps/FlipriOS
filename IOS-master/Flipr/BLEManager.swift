@@ -72,8 +72,11 @@ class BLEManager: NSObject {
     var module:Module?
     
     var isConnecting = false
-    
+    var stopScanning = false
+
     func startUpCentralManager(connectAutomatically connect:Bool, sendMeasure send:Bool) {
+        self.stopScanning = false
+        perform(#selector(setTimeLimit), with: nil, afterDelay: 60)
         sendMeasureAfterConnection = send
         connectAfterDiscovery = connect
         
@@ -86,6 +89,10 @@ class BLEManager: NSObject {
             print("CBCentralManager start scanning for Flipr devices (already initialized)")
         }
         
+    }
+    
+    @objc func setTimeLimit(){
+        self.stopScanning = true
     }
     
     func activateFlipr(activate: Bool, completion: ((_ error: Error?) -> Void)?) {
@@ -234,7 +241,13 @@ extension BLEManager: CBCentralManagerDelegate {
                 
                 //self.centralManager.scanForPeripherals(withServices:[FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey:false])
                 //self.centralManager.scanForPeripherals(withServices:nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey:true])
-            } else {
+            }
+//            else if central.state == CBManagerState.poweredOff {
+//                NotificationCenter.default.post(name: K.Notifications.BluetoothOff, object: nil, userInfo: nil)
+//            }
+            
+            else {
+                NotificationCenter.default.post(name: K.Notifications.BluetoothNotAvailble, object: nil, userInfo: nil)
                 print("Bluetooth not available.")
             }
         } else {
@@ -244,6 +257,11 @@ extension BLEManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         
+        if self.stopScanning{
+            central.stopScan()
+            NotificationCenter.default.post(name: K.Notifications.FliprNotDiscovered, object: nil)
+            return
+        }
         if let name = peripheral.name {
             
             if !name.hasPrefix("Flipr 00") && !name.hasPrefix("FliprHUB") {
@@ -266,7 +284,7 @@ extension BLEManager: CBCentralManagerDelegate {
                     return
                 }
             }
-            
+            self.stopScanning = false
             flipr = peripheral
             peripheral.delegate = self
             
@@ -283,6 +301,8 @@ extension BLEManager: CBCentralManagerDelegate {
             }
             
         }
+        
+       
 
     }
     

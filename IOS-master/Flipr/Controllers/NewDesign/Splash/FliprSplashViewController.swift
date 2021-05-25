@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 extension UIView {
 
@@ -23,7 +24,7 @@ extension UIView {
     }
 }
 
-class FliprSplashViewController: UIViewController {
+class FliprSplashViewController: BaseViewController {
     @IBOutlet weak var rightAnimationImageView: UIImageView!
     @IBOutlet weak var leftAnimationImageView: UIImageView!
     @IBOutlet weak var waveAnimationImageView: UIImageView!
@@ -33,18 +34,28 @@ class FliprSplashViewController: UIViewController {
     
     @IBOutlet weak var waveAnimationImageViewYpost: NSLayoutConstraint!
     @IBOutlet weak var logoImageViewYpost: NSLayoutConstraint!
+    
+    var userStatusChecking = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        userStatusChecking = true
         perform(#selector(showWaveAnimation), with: nil, afterDelay: 0.5)
-
+        perform(#selector(showEducationScreen), with: nil, afterDelay: 2.0)
         addRightImage()
+        checkUserStatus()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
     
     @objc func showEducationScreen(){
-        
+        if userStatusChecking == false{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginEducationViewOneController") as! LoginEducationOneViewController
+            self.navigationController?.pushViewController(vc)
+        }
     }
     
     
@@ -71,6 +82,94 @@ class FliprSplashViewController: UIViewController {
         UIView.animate(withDuration: 0.5) {
             self.logoImageView.transform = self.logoImageView.transform.scaledBy(x: 0.8, y: 0.8)
             self.view.layoutIfNeeded()
+        }
+    }
+    
+    func checkUserStatus(){
+        
+        if User.currentUser == nil {
+            userStatusChecking = false
+        }
+        
+        if let user = User.currentUser {
+            Omnisense.currentUser().registered = true
+            Omnisense.saveCurrentUser()
+            
+            Alamofire.request(Router.updateLanguage).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let value):
+                    print("Update language response: \(value)")
+                case .failure(let error):
+                    print("Update language error: \(error.localizedDescription)")
+                }
+            })
+            if let module = Module.currentModule {
+                if !module.pH7CalibrationDone {
+                    presentCalibrationViewController(type:.ph7, animated: false)
+                } else if !module.pH4CalibrationDone {
+                    presentCalibrationViewController(type:.ph4, animated: false)
+                } else {
+                    presentDashboard(animated: false)
+                }
+            } else if user.isActivated == false {
+                //presentEmailVerificationController(animated: false)
+                //Il doit se reconnecter car on ne sauvegarde pas le password
+            } else {
+                
+                if HUB.currentHUB != nil {
+                    presentDashboard(animated: false)
+                } else {
+                    presentLandingController(animated: false)
+                }
+            }
+        }
+        
+    }
+    
+    
+}
+
+
+extension FliprSplashViewController{
+    
+    func presentDashboard(animated:Bool) {
+        let mainSB = UIStoryboard.init(name: "Main", bundle: nil)
+        let dashboard = mainSB.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+        dashboard.modalTransitionStyle = .flipHorizontal
+        dashboard.modalPresentationStyle = .fullScreen
+        self.present(dashboard, animated: animated, completion: {
+        })
+    }
+    
+    func presentLandingController(animated:Bool) {
+        let hubStoryboard = UIStoryboard(name: "HUB", bundle: nil)
+        let viewController = hubStoryboard.instantiateViewController(withIdentifier: "LandingViewControllerID")
+        self.navigationController?.pushViewController(viewController, animated: animated)
+    }
+    
+    func presentActivationController(animated:Bool) {
+        let mainSB = UIStoryboard.init(name: "Main", bundle: nil)
+        let viewController = mainSB.instantiateViewController(withIdentifier: "ActivationViewControllerID")
+        self.navigationController?.pushViewController(viewController, animated: animated)
+    }
+    
+    func presentStripController(animated:Bool) {
+        let mainSB = UIStoryboard.init(name: "Main", bundle: nil)
+        let viewController = mainSB.instantiateViewController(withIdentifier: "StripViewControllerID")
+        self.navigationController?.pushViewController(viewController, animated: animated)
+    }
+    
+    func presentEmailVerificationController(animated:Bool) {
+        let mainSB = UIStoryboard.init(name: "Main", bundle: nil)
+         let viewController = mainSB.instantiateViewController(withIdentifier: "EmailVerificationViewControllerID")
+            self.navigationController?.pushViewController(viewController, animated: animated)
+    }
+    
+    func presentCalibrationViewController(type:CalibrationType, animated:Bool) {
+        let mainSB = UIStoryboard.init(name: "Main", bundle: nil)
+        if let viewController = mainSB.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController{
+            viewController.calibrationType = type
+            self.navigationController?.pushViewController(viewController, animated: animated)
         }
     }
 }
