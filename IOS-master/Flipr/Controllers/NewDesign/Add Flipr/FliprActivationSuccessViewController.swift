@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FliprActivationSuccessViewController: UIViewController {
+class FliprActivationSuccessViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,11 +18,15 @@ class FliprActivationSuccessViewController: UIViewController {
     
 
     @IBAction func nextButtonClicked() {
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "KeyEnterViewController") as? KeyEnterViewController{
-//            vc.serialKey = serialKey
-//            vc.flipType = flipType
-//            self.navigationController?.pushViewController(vc)
+        
+        if AppSharedData.sharedInstance.isAddingDeviceFromPresentedVCFlow{
+            let sb = UIStoryboard(name: "Calibration", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
+//            self.dismiss(animated: true, completion: nil)
+        }else{
+            
         }
+       
     }
 
 

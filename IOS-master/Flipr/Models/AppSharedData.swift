@@ -16,6 +16,8 @@ class AppSharedData: NSObject {
     var serialKey = ""
     var deviceName = ""
 
+    var isAddingDeviceFromPresentedVCFlow : Bool = false
+    
     private override init() {
         
     }

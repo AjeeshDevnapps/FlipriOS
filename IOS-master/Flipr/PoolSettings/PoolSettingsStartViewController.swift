@@ -33,10 +33,11 @@ class PoolSettingsStartViewController: UIViewController {
     var isCaliberated: Bool = true
     var isPoolConnected: Bool = true
     var isPoolDescribed: Bool = false
+    var isPresentedFlow: Bool = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
 
         slLblFirst.roundCorner(corner: slLblFirst.width / 2)
         slLblSecond.roundCorner(corner: slLblSecond.width / 2)
@@ -56,8 +57,24 @@ class PoolSettingsStartViewController: UIViewController {
         accesory3Btn.isHidden = false
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     @IBAction func backButton(_ sender: UIButton) {
-        goBack()
+        if self.isPresentedFlow{
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            goBack()
+        }
+    }
+    
+    @IBAction func nextButton(_ sender: UIButton) {
+        let sb = UIStoryboard(name: "Calibration", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "CalibrationPh7IntroViewController") as! CalibrationPh7IntroViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

@@ -140,6 +140,11 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
         activationKey.append(otp3)
         activationKey.append(otp4)
         activationKey.append(otp5)
+        self.setIntialSetup(textField: otpTextField1)
+        self.setIntialSetup(textField: otpTextField2)
+        self.setIntialSetup(textField: otpTextField3)
+        self.setIntialSetup(textField: otpTextField4)
+        self.setIntialSetup(textField: otpTextField5)
         submitButton.isUserInteractionEnabled = true
         submitButton.backgroundColor =  #colorLiteral(red: 0.06643301994, green: 0.08944996446, blue: 0.162193656, alpha: 1)
     }

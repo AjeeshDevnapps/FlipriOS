@@ -105,12 +105,13 @@ class QuickActionViewController: UIViewController {
         let alert = UIAlertController(title: "Calibration".localized, message:"Are you sure you want to calibrate the probes again?".localized, preferredStyle:.alert)
         alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
-            if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
-                viewController.recalibration = true
-                viewController.calibrationType = .ph7
-                viewController.modalPresentationStyle = .fullScreen
-                self.present(viewController, animated: true, completion: nil)
-            }
+            self.showCalibrationView()
+//            if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
+//                viewController.recalibration = true
+//                viewController.calibrationType = .ph7
+//                viewController.modalPresentationStyle = .fullScreen
+//                self.present(viewController, animated: true, completion: nil)
+//            }
         }))
         alert.addAction(UIAlertAction(title: "Order a calibration kit".localized, style: .default, handler: { (action) in
             if let url = URL(string:"https://www.goflipr.com/produit/kit-de-calibration/".remotable) {
@@ -167,6 +168,14 @@ class QuickActionViewController: UIViewController {
         return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
     }
 
-   
+
+    func showCalibrationView(){
+        let sb = UIStoryboard(name: "Calibration", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
+        vc.isPresentedFlow = true
+        let navigationController = UINavigationController.init(rootViewController: vc)
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+    }
 
 }
