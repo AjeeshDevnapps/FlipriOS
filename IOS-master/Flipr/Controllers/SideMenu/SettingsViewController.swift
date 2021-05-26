@@ -15,7 +15,8 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Settings"
+        self.title = "Settings".localized
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))
         self.settingTable.tableFooterView = UIView()
         self.settingTable.isScrollEnabled = false
@@ -161,7 +162,7 @@ extension SettingsViewController: UITableViewDelegate,UITableViewDataSource {
             switch response.result {
                 
             case .success(let value):
-                UserDefaults.standard.set(sender.isOn, forKey: notificationOnOffValuesKey)
+                UserDefaults.standard.set(!sender.isOn, forKey: notificationOnOffValuesKey)
                 NotificationCenter.default.post(name: K.Notifications.NotificationSetttingsChanged, object: nil)
                 print("update notification with success: \(value)")
                 hud?.indicatorView = JGProgressHUDSuccessIndicatorView()

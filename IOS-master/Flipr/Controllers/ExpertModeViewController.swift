@@ -49,7 +49,9 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var lowTemperatureThresholdTextField: UITextField!
     @IBOutlet weak var alertActivationSwitch: UISwitch!
     
-    
+    @IBOutlet weak var pHTresholdLabel: UILabel!
+    @IBOutlet weak var temperatureAlertThersholdLabel: UILabel!
+
     @IBOutlet weak var highPHTresholdLabel: UILabel!
     @IBOutlet weak var lowPHTresholdLabel: UILabel!
     @IBOutlet weak var lowDisinfectantThreshold: UILabel!
@@ -96,6 +98,10 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
         conductivityValueLabel.text = Module.currentModule?.rawConductivity
         waterTemperatureValueLabel.text = Module.currentModule?.rawWaterTemperature
         
+        pHTresholdLabel.text = "pH alert threshold".localized
+        temperatureAlertThersholdLabel.text = "Temperature alert threshold (C°)".localized
+        
+        
         pHLabel.text = "pH".localized
         redoxLabel.text = "Redox".localized
         conductivityLabel.text = "Conductivity".localized
@@ -103,7 +109,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
         
         tresholdLabel.text = "Custom alert thresholds".localized
         tresholdDescriptionLabel.text = "Here you can change the ways in which Flipr can send you alerts.\nWarning: this operation is reserved for experienced users".localized
-        
+            
         highPHTresholdLabel.text = "High pH alert threshold".localized
         lowPHTresholdLabel.text = "Low pH alert threshold".localized
         lowDisinfectantThreshold.text = "Low disinfectant alert threshold".localized
@@ -254,7 +260,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
                         if let JSON = value as? [String:Any] {
                             
                             if let value = JSON["Value"] as? Bool {
-                                self.alertActivationSwitch.setOn(value, animated: false)
+                                self.alertActivationSwitch.setOn(!value, animated: false)
                                 self.alertActivationSwitch.isHidden = false
                             }
                             
@@ -322,7 +328,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
             switch response.result {
                 
             case .success(let value):
-                UserDefaults.standard.set(self.alertActivationSwitch.isOn, forKey: notificationOnOffValuesKey)
+                UserDefaults.standard.set(!self.alertActivationSwitch.isOn, forKey: notificationOnOffValuesKey)
                 NotificationCenter.default.post(name: K.Notifications.NotificationSetttingsChanged, object: nil)
                 print("update notification with success: \(value)")
                 hud?.indicatorView = JGProgressHUDSuccessIndicatorView()

@@ -35,7 +35,7 @@ class StripViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))
-
+        doneButton.roundCorner(corner: 12)
         if recalibration == true {
             useNewStripVersion()
         } else if let moduleVersion = Module.currentModule?.version {
@@ -164,7 +164,7 @@ class StripViewController: UIViewController {
 
     @IBAction func doneButtonAction(_ sender: Any) {
 
-        doneButtonWidthConstraint.constant = 44
+//        doneButtonWidthConstraint.constant = 44
         UIView.animate(withDuration: 0.25, animations: {
             self.view.layoutIfNeeded()
         }) { (success) in
@@ -184,15 +184,16 @@ class StripViewController: UIViewController {
                         NotificationCenter.default.post(name: FliprLogDidChanged, object: nil)
                         self.dismiss(animated: true, completion: nil)
                     } else {
-                        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "StartViewControllerID") {
-                            self.navigationController?.pushViewController(viewController, animated: true)
-                        }
+                        self.showFliprSuccessScreen()
+//                        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "StartViewControllerID") {
+//                            self.navigationController?.pushViewController(viewController, animated: true)
+//                        }
                     }
                     
                 }
                 
                 self.doneButton.hideActivityIndicator()
-                self.doneButtonWidthConstraint.constant = 200
+//                self.doneButtonWidthConstraint.constant = 200
                 UIView.animate(withDuration: 0.25, animations: {
                     self.view.layoutIfNeeded()
                 })
@@ -204,15 +205,12 @@ class StripViewController: UIViewController {
     
     
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func showFliprSuccessScreen(){
+        let sb =  UIStoryboard(name: "Calibration", bundle: nil)
+        let viewController = sb.instantiateViewController(withIdentifier: "CalibrationSuccessViewController") as! CalibrationSuccessViewController
+        viewController.recalibration = self.recalibration
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
-    */
 
 }
 

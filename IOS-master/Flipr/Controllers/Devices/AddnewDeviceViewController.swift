@@ -10,9 +10,11 @@ import UIKit
 
 class AddnewDeviceViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addLabel.text = "Add a new device !".localized
         addButton.layer.cornerRadius = 32
         addButton.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#3DA0FF"), radius: 15.0, opacity: 0.5)
 

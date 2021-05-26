@@ -32,7 +32,8 @@ enum Router: URLRequestConvertible {
     
     case addModule(serial: String, activationKey: String, delete: Bool)
     case addModuleEquipment(serial: String, code: String)
-    
+    case forgetModuleEquipment(serial: String, code: String)
+
     case getModules
     
     //case addStripTest(poolId:Int,params:[String:Any])
@@ -134,6 +135,8 @@ enum Router: URLRequestConvertible {
             return .post
         case .addModuleEquipment:
             return .post
+        case .forgetModuleEquipment:
+            return .put
         case .getModules:
             return .get
         case .addStripTest:
@@ -275,6 +278,9 @@ enum Router: URLRequestConvertible {
             return "modules/activate"
         case .addModuleEquipment(let serial, let code):
             return "hub/\(serial)/Equipment/Add/\(code)"
+        case .forgetModuleEquipment(let serial, let code):
+            return "modules/\(serial)/Status"
+            
         case .getModules:
             return "modules"
         
@@ -506,7 +512,7 @@ enum Router: URLRequestConvertible {
         
         case .updateUserNotifications(let activate):
             let parameters: [String : Any] = [
-                "Value": activate
+                "Value": !activate
             ]
             print("updateUserNotifications: \(parameters)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
@@ -697,6 +703,15 @@ enum Router: URLRequestConvertible {
         case .updateHUBPlannings(_, let attributes):
             print("update Plannings attributes: \(attributes)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: attributes)
+            
+        case .forgetModuleEquipment(_, _):
+            let parameters: [String : Any] = [
+                "Status": 20,
+                "Comments": "Changed made by the User"
+            ]
+            print("Add productAttributes with params: \(parameters)")
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+       
         default:
             break
         }

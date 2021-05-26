@@ -34,6 +34,7 @@ class PoolSettingsStartViewController: UIViewController {
     var isPoolConnected: Bool = true
     var isPoolDescribed: Bool = false
     var isPresentedFlow: Bool = false
+    var recalibration = false
 
     
     override func viewDidLoad() {
@@ -74,6 +75,7 @@ class PoolSettingsStartViewController: UIViewController {
     @IBAction func nextButton(_ sender: UIButton) {
         let sb = UIStoryboard(name: "Calibration", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "CalibrationPh7IntroViewController") as! CalibrationPh7IntroViewController
+        vc.recalibration = self.recalibration
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

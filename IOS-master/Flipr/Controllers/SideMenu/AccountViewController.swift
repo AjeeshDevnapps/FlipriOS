@@ -25,10 +25,32 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var detailsContainerView: UIView!
     @IBOutlet weak var subscriptionContainerView: UIView!
     private var shadowLayer: CAShapeLayer!
+    
+    @IBOutlet weak var loginLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var fNameLabel: UILabel!
+    @IBOutlet weak var lNameLabel: UILabel!
+    @IBOutlet weak var subscriptionTitleLabel: UILabel!
+    @IBOutlet weak var tapToChangeLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Account"
+        self.title = "Account".localized
+        
+        self.loginLabel.text = "Login".localized
+        self.passwordLabel.text = "Password".localized
+        self.fNameLabel.text = "First name".localized
+        self.lNameLabel.text = "Last name".localized
+        self.subscriptionTitleLabel.text = "Subscriptions".localized
+        self.firstNameTxtFld.placeholder = "First name".localized
+        self.lastNameTxtFld.placeholder = "Last name".localized
+        self.subscriptionInfoLabel.text = "You can unsubscribe anytime from App Store settings".localized
+        self.tapToChangeLabel.text = "Tap to change".localized
+        self.titleLabel.text  = "My info".localized
+
         firstNameTxtFld.delegate = self
         lastNameTxtFld.delegate = self
 //        subsriptionButton.isUserInteractionEnabled = false
@@ -56,17 +78,17 @@ class AccountViewController: UIViewController {
         let isSubscriptionValid = Module.currentModule?.isSubscriptionValid ?? false
         if isSubscriptionValid{
             self.subsriptionImgView.image = #imageLiteral(resourceName: "check-1")
-            self.subscriptionLabel.text = "Active (Premier)"
+            self.subscriptionLabel.text = "Active (Premier)".localized
             subscriptionInfoLabel.isHidden = false
         }
         else{
             subsriptionButton.isUserInteractionEnabled = true
             self.subsriptionImgView.image = #imageLiteral(resourceName: "cross")
-            self.subscriptionLabel.text = "Inactive - Subscribe here !"
+            self.subscriptionLabel.text = "Inactive - Subscribe here !".localized
         }
         if (Module.currentModule?.moduleType == 1) || (Module.currentModule?.moduleType == 2){
             self.subsriptionImgView.image = #imageLiteral(resourceName: "check - blue")
-            self.subscriptionLabel.text = "No subscription needed"
+            self.subscriptionLabel.text = "No subscription needed".localized
             subsriptionButton.isUserInteractionEnabled = false
         }
 

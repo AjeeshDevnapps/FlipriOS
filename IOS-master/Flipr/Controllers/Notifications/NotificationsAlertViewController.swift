@@ -58,7 +58,6 @@ class NotificationsAlertViewController: UIViewController {
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         self.tapView.backgroundColor = UIColor.clear
         self.dismiss(animated: true, completion: nil)
-        print("Hello World")
     }
 
     
@@ -81,15 +80,15 @@ class NotificationsAlertViewController: UIViewController {
             
             self.iconImageView.image = #imageLiteral(resourceName: "filterIcon")
             self.iconImageView.frame =  CGRect(x:  self.iconImageView.frame.origin.x, y:  self.iconImageView.frame.origin.y, width: 45, height:45)
-            headingLabel.text = "🚨     You customized alert thresholds."
-            contentLabel.text = "Alerts and notifications will be displayed following these new thresholds. You can change the thresholds at any time in Expert Mode."
-            settingsTitleLabel.text = "Threshold settings"
-            settingsTitleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+            headingLabel.text = "🚨     \("You customized alert thresholds.".localized)"
+            contentLabel.text = "Alerts and notifications will be displayed following these new thresholds. You can change the thresholds at any time in Expert Mode.".localized
+            settingsTitleLabel.text = "Threshold settings".localized
+            settingsTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         }else{
             self.iconImageView.image = #imageLiteral(resourceName: "notificationAlert")
-            headingLabel.text = "🚨     Alerts and notifications are turned off."
-            contentLabel.text = "Alerts and notifications are disabled. You can reactivate them at any time."
-            settingsTitleLabel.text = "Activate alerts and notifications"
+            headingLabel.text = "🚨     \("Alerts and notifications are turned off.".localized)"
+            contentLabel.text = "Alerts and notifications are disabled. You can reactivate them at any time.".localized
+            settingsTitleLabel.text = "Activate alerts and notifications".localized
         }
     }
     

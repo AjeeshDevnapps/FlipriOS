@@ -2723,7 +2723,7 @@ Essai gratuit 7 jours</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="707"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3m7-Qz-NeN">
-                                <rect key="frame" x="0.0" y="196.5" width="375" height="470.5"/>
+                                <rect key="frame" x="0.0" y="198" width="375" height="469"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AlertStepCell" rowHeight="87" id="589-JH-fLA">
@@ -2842,22 +2842,22 @@ Essai gratuit 7 jours</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view clipsSubviews="YES" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYU-71-zga">
-                                                    <rect key="frame" x="111" y="27" width="153" height="17"/>
+                                                    <rect key="frame" x="112" y="27" width="151" height="17"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C'est fait" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="GoB-9E-JOB">
-                                                            <rect key="frame" x="32" y="0.0" width="64" height="17"/>
+                                                            <rect key="frame" x="32" y="0.0" width="62" height="17"/>
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_result_picto" translatesAutoresizingMaskIntoConstraints="NO" id="sQy-OU-XOE">
-                                                            <rect key="frame" x="112" y="4" width="25" height="9"/>
+                                                            <rect key="frame" x="110" y="4" width="25" height="9"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="FnI-5B-6Vg"/>
                                                             </constraints>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aI9-y9-qYl">
-                                                            <rect key="frame" x="0.0" y="0.0" width="153" height="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="151" height="17"/>
                                                             <connections>
                                                                 <action selector="doneButtonAction:" destination="9fW-vg-EuM" eventType="touchUpInside" id="T5y-rs-KF0"/>
                                                             </connections>
@@ -2903,16 +2903,16 @@ Essai gratuit 7 jours</string>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2tn-GJ-YLn">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="240.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="242"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bg_Informations" translatesAutoresizingMaskIntoConstraints="NO" id="RbT-Ng-Xp5">
-                                        <rect key="frame" x="0.0" y="-373.5" width="375" height="614"/>
+                                        <rect key="frame" x="0.0" y="-372" width="375" height="614"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="614" id="QAR-sQ-r5g"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALERTE EN COURS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3j-Pe-4sp">
-                                        <rect key="frame" x="110" y="40" width="155" height="21"/>
+                                        <rect key="frame" x="113.5" y="40" width="148" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="SSK-gX-X7F"/>
                                         </constraints>
@@ -2941,13 +2941,13 @@ Essai gratuit 7 jours</string>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votre taux de pH est faible !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbU-nd-aMw">
-                                        <rect key="frame" x="16" y="121" width="343" height="22.5"/>
+                                        <rect key="frame" x="16" y="121" width="343" height="23"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suivez les recommandations ci-dessous pour le remonter" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtd-CL-2UN">
-                                        <rect key="frame" x="16" y="151.5" width="343" height="35"/>
+                                        <rect key="frame" x="16" y="152" width="343" height="36"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -4327,7 +4327,7 @@ Essai gratuit 7 jours</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DGZ-Ko-rLO">
-                                <rect key="frame" x="0.0" y="30" width="375" height="637"/>
+                                <rect key="frame" x="0.0" y="30.5" width="375" height="636.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="2Il-Bg-AuY">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="709"/>
@@ -4342,7 +4342,7 @@ Essai gratuit 7 jours</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dans un premier temps, nous allons créer votre compte. Remplissez soigneusement le formulaire ci-dessous." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZh-3n-Wji">
-                                                        <rect key="frame" x="16" y="101.5" width="343" height="52.5"/>
+                                                        <rect key="frame" x="16" y="100" width="343" height="54"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -4378,7 +4378,7 @@ Essai gratuit 7 jours</string>
                                                                 </connections>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GkB-9J-ZaV">
-                                                                <rect key="frame" x="24" y="18.5" width="39" height="19.5"/>
+                                                                <rect key="frame" x="24" y="18" width="39" height="19.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -4427,7 +4427,7 @@ Essai gratuit 7 jours</string>
                                                                 </connections>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mot de passe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ti9-Gr-giD">
-                                                                <rect key="frame" x="24" y="18" width="103" height="20.5"/>
+                                                                <rect key="frame" x="24" y="17.5" width="103" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -4476,7 +4476,7 @@ Essai gratuit 7 jours</string>
                                                                 </connections>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmer le mot de passe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zWp-f1-DrW">
-                                                                <rect key="frame" x="24" y="18" width="201" height="20.5"/>
+                                                                <rect key="frame" x="24" y="17.5" width="201" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -4525,7 +4525,7 @@ Essai gratuit 7 jours</string>
                                                                 </connections>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCd-G5-BMD">
-                                                                <rect key="frame" x="24" y="18" width="36.5" height="20.5"/>
+                                                                <rect key="frame" x="24" y="17.5" width="36.5" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -4574,7 +4574,7 @@ Essai gratuit 7 jours</string>
                                                                 </connections>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prénom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPc-vR-hd4">
-                                                                <rect key="frame" x="24" y="18" width="59" height="20.5"/>
+                                                                <rect key="frame" x="24" y="17.5" width="59" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -4623,7 +4623,7 @@ Essai gratuit 7 jours</string>
                                                                 </connections>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Téléphone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llg-2s-9ab">
-                                                                <rect key="frame" x="24" y="18" width="79.5" height="20.5"/>
+                                                                <rect key="frame" x="24" y="17.5" width="79.5" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -4714,7 +4714,7 @@ Essai gratuit 7 jours</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAISONS CONNAISSANCE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16e-Or-IfS">
-                                <rect key="frame" x="89" y="3" width="197.5" height="19"/>
+                                <rect key="frame" x="91" y="3" width="193" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                 <color key="textColor" red="0.1333333333" green="0.2274509804" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -5834,6 +5834,7 @@ Attention : cette opération est réservée aux utilisateurs expérimentés</str
                         <outlet property="lowTemperatureThersholdLabel" destination="xVH-h9-uK6" id="7Uo-UM-hOV"/>
                         <outlet property="lowTemperatureThresholdTextField" destination="8TM-4c-kmY" id="gEU-Xd-moe"/>
                         <outlet property="pHLabel" destination="582-QL-7fG" id="kgQ-CI-rWY"/>
+                        <outlet property="pHTresholdLabel" destination="bhN-wy-uFR" id="QxN-Tx-MnL"/>
                         <outlet property="pHValueLabel" destination="2GT-2l-z6t" id="MVm-xj-QCT"/>
                         <outlet property="phRangeSlider" destination="788-Ky-kG9" id="445-SI-aBH"/>
                         <outlet property="rangeSlider" destination="Zvb-BM-lq9" id="XEd-6b-Swc"/>
@@ -5841,6 +5842,7 @@ Attention : cette opération est réservée aux utilisateurs expérimentés</str
                         <outlet property="redoxLabel" destination="ReQ-fq-1VC" id="anx-h2-AnJ"/>
                         <outlet property="redoxValueLabel" destination="Ete-In-gOZ" id="rYf-gQ-iXG"/>
                         <outlet property="resetButton" destination="5XM-1F-oKh" id="8Vh-o6-niV"/>
+                        <outlet property="temperatureAlertThersholdLabel" destination="dGz-GM-1ki" id="7lk-qk-tQV"/>
                         <outlet property="tresholdDescriptionLabel" destination="GwN-nt-MSG" id="oKY-RI-S8K"/>
                         <outlet property="tresholdLabel" destination="OK8-V0-AMX" id="Ib0-hs-Aoh"/>
                         <outlet property="waterTemperatureLabel" destination="fJ5-RL-Stb" id="jyj-WG-ZwH"/>
@@ -6718,6 +6720,7 @@ Attention : cette opération est réservée aux utilisateurs expérimentés</str
                         <outlet property="batteryImageView" destination="GTg-RX-USq" id="CC2-ET-bRv"/>
                         <outlet property="batteryLevelLabel" destination="skG-eZ-MRp" id="Czs-L0-yUm"/>
                         <outlet property="fliprNameLabel" destination="YMG-dq-sJg" id="at4-10-iE0"/>
+                        <outlet property="helpLabel" destination="ssQ-fu-Kk3" id="pSd-2T-zvN"/>
                         <outlet property="historyLabel" destination="HgA-0C-qpz" id="xIQ-3A-cnw"/>
                         <outlet property="logoutLabel" destination="4oB-Dv-FEh" id="NBG-TY-dY2"/>
                         <outlet property="moreLabel" destination="waj-Ed-YqL" id="kmU-AA-c2a"/>
@@ -6727,6 +6730,8 @@ Attention : cette opération est réservée aux utilisateurs expérimentés</str
                         <outlet property="photoHeaderImageView" destination="LCA-S7-R1L" id="6Sy-4U-1vg"/>
                         <outlet property="pooLogLabel" destination="ECb-F6-tfn" id="a4S-lQ-L1c"/>
                         <outlet property="reviewFormLabel" destination="Dzj-a1-BTj" id="j5e-BZ-MP0"/>
+                        <outlet property="settingsLabel" destination="63s-uP-Q7j" id="vFg-Gg-gMg"/>
+                        <outlet property="storeLabel" destination="tZH-Wt-88v" id="D9O-RH-Lvz"/>
                         <outlet property="subscriptionImageView" destination="G2x-zX-4Ol" id="f3g-i9-stJ"/>
                         <outlet property="subscriptionImageView2" destination="6Sz-Jq-NfH" id="UAg-eM-YIj"/>
                         <outlet property="supportAndFAQLabel" destination="Lwm-BB-fVQ" id="Dbm-jI-CgS"/>
@@ -10151,7 +10156,7 @@ DE BANDELETTE</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fu4-bj-A6k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1049" y="513"/>
+            <point key="canvasLocation" x="-991" y="519"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PBj-AW-K1r">
@@ -10410,11 +10415,16 @@ DE BANDELETTE</string>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="accountContainerView" destination="pwz-Wz-UtK" id="2ma-0y-edh"/>
+                                            <outlet property="accountLbl" destination="LGG-TS-Tbp" id="Nm2-20-jAk"/>
                                             <outlet property="alertActivationSwitch" destination="B6E-xY-zfy" id="c6d-N7-mQ8"/>
                                             <outlet property="devicesContainerView" destination="Azi-zX-VTC" id="SLV-1S-B6A"/>
+                                            <outlet property="devicesLbl" destination="TXL-bM-2Tc" id="OrR-Yc-1Ef"/>
                                             <outlet property="logoutContainerView" destination="nv8-ru-P8u" id="tyX-4u-Lh9"/>
+                                            <outlet property="logoutLbl" destination="uAB-lB-86T" id="ECl-km-0eG"/>
                                             <outlet property="notificationContainerView" destination="8g7-hP-tud" id="nBs-kV-waQ"/>
+                                            <outlet property="notificationLbl" destination="dTq-yq-af8" id="ksr-ji-RBU"/>
                                             <outlet property="poolContainerView" destination="Z7z-sf-bTf" id="6MP-m1-Xhf"/>
+                                            <outlet property="poolLbl" destination="ke6-xt-jJ8" id="2xM-32-oR3"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AccountCell" rowHeight="85" id="Ibe-0f-StV" customClass="SettingsTableViewCell" customModule="Flipr" customModuleProvider="target">
@@ -10685,17 +10695,20 @@ DE BANDELETTE</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1cq-MG-YMh">
                                         <rect key="frame" x="0.0" y="0.0" width="331" height="50"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25q-fo-LBZ">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25q-fo-LBZ">
                                                 <rect key="frame" x="19" y="15.5" width="40" height="19.5"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="ix5-oC-VUI"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="ix5-oC-VUI"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoD-NI-D5l">
-                                                <rect key="frame" x="71" y="25" width="208" height="0.0"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" preservesSuperviewLayoutMargins="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoD-NI-D5l">
+                                                <rect key="frame" x="71" y="15" width="208" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="Ryn-Mf-3aK"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -10724,16 +10737,16 @@ DE BANDELETTE</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dck-nV-cSC">
                                         <rect key="frame" x="0.0" y="50" width="331" height="50"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYz-1f-Yb2">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYz-1f-Yb2">
                                                 <rect key="frame" x="19" y="15" width="70" height="20"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="70" id="y8G-1u-GuS"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="y8G-1u-GuS"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap to change " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXw-RJ-ebc">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="tap to change " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXw-RJ-ebc">
                                                 <rect key="frame" x="101" y="15.5" width="178" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <nil key="textColor"/>
@@ -10787,7 +10800,7 @@ DE BANDELETTE</string>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVS-M8-L8w">
                                                 <rect key="frame" x="19" y="15" width="85" height="20"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="85" id="N1l-iR-9bH"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="N1l-iR-9bH"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
@@ -10826,7 +10839,7 @@ DE BANDELETTE</string>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mu-tP-rmu">
                                                 <rect key="frame" x="19" y="15" width="85" height="20"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="85" id="PIj-Q3-puO"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="PIj-Q3-puO"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
@@ -10922,10 +10935,10 @@ DE BANDELETTE</string>
                                 <color key="textColor" red="0.67450980390000004" green="0.70196078429999997" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can unsubscribe anytime from Appstore settings." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKn-lw-uJI">
-                                <rect key="frame" x="20" y="435" width="332.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can unsubscribe anytime from Appstore settings." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKn-lw-uJI">
+                                <rect key="frame" x="20" y="435" width="335" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="8Z4-0a-OOf"/>
+                                    <constraint firstAttribute="height" constant="50" id="8Z4-0a-OOf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                 <color key="textColor" red="0.67450980390000004" green="0.70196078429999997" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
@@ -10935,6 +10948,7 @@ DE BANDELETTE</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Odh-Zq-4IC" firstAttribute="top" secondItem="r2V-QP-u1Z" secondAttribute="bottom" constant="18" id="2tT-jM-zoV"/>
+                            <constraint firstAttribute="trailing" secondItem="nKn-lw-uJI" secondAttribute="trailing" constant="20" id="48r-2P-m1y"/>
                             <constraint firstItem="eVk-g7-zSe" firstAttribute="top" secondItem="MBU-ZE-o0y" secondAttribute="bottom" constant="18" id="6xD-a1-fxL"/>
                             <constraint firstItem="r2V-QP-u1Z" firstAttribute="leading" secondItem="ZUk-fV-jiW" secondAttribute="leading" constant="20" id="7rR-xm-blj"/>
                             <constraint firstAttribute="trailing" secondItem="eVk-g7-zSe" secondAttribute="trailing" constant="22" id="8Ap-nU-4Rm"/>
@@ -10951,13 +10965,20 @@ DE BANDELETTE</string>
                     <connections>
                         <outlet property="detailsContainerView" destination="eVk-g7-zSe" id="Vgv-tr-9R4"/>
                         <outlet property="emailLabel" destination="PoD-NI-D5l" id="Wqn-3Z-Sfo"/>
+                        <outlet property="fNameLabel" destination="lVS-M8-L8w" id="xB3-sV-8MD"/>
                         <outlet property="firstNameTxtFld" destination="af7-xP-veH" id="tfp-MJ-b8B"/>
+                        <outlet property="lNameLabel" destination="1mu-tP-rmu" id="LWd-c5-eVy"/>
                         <outlet property="lastNameTxtFld" destination="sab-8D-fbp" id="r8s-F6-EsP"/>
+                        <outlet property="loginLabel" destination="25q-fo-LBZ" id="bSZ-YX-nes"/>
+                        <outlet property="passwordLabel" destination="BYz-1f-Yb2" id="Uta-MO-5tQ"/>
                         <outlet property="subscriptionContainerView" destination="Odh-Zq-4IC" id="v5x-Jm-H9x"/>
                         <outlet property="subscriptionInfoLabel" destination="nKn-lw-uJI" id="i4l-Y8-5Ap"/>
                         <outlet property="subscriptionLabel" destination="GVt-wX-X78" id="1Lc-j7-ht1"/>
+                        <outlet property="subscriptionTitleLabel" destination="r2V-QP-u1Z" id="WQq-bd-4Xz"/>
                         <outlet property="subsriptionButton" destination="H7D-iR-xC1" id="gXg-Ee-mVz"/>
                         <outlet property="subsriptionImgView" destination="Ht2-H6-dJS" id="Zhh-QZ-k0u"/>
+                        <outlet property="tapToChangeLabel" destination="JXw-RJ-ebc" id="YWu-ce-i7G"/>
+                        <outlet property="titleLabel" destination="MBU-ZE-o0y" id="X4V-7J-aie"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eCc-zX-ofU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -11015,7 +11036,7 @@ DE BANDELETTE</string>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rn0-u2-oZk">
                                 <rect key="frame" x="35" y="286" width="305" height="50"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type new password again" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7t3-MV-mj3">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type new password again" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="7t3-MV-mj3">
                                         <rect key="frame" x="20" y="15" width="273" height="20"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
@@ -11080,6 +11101,7 @@ DE BANDELETTE</string>
                     <connections>
                         <outlet property="confirmPasswordTxtFld" destination="7t3-MV-mj3" id="6hC-h7-XAX"/>
                         <outlet property="confirmPasswordTxtFldContainerView" destination="rn0-u2-oZk" id="jdA-VD-5X5"/>
+                        <outlet property="forgotButton" destination="4Ke-WB-zup" id="hWw-76-0ni"/>
                         <outlet property="newPasswordTxtFld" destination="fVo-cx-1df" id="ac0-De-81h"/>
                         <outlet property="newPasswordTxtFldContainerView" destination="332-bm-BYL" id="cJn-Dw-2MR"/>
                         <outlet property="oldPasswordTxtFld" destination="XEd-2G-oFj" id="NXo-IG-qTB"/>

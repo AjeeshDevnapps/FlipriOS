@@ -11,6 +11,7 @@ import AVKit
 
 class CalibrationChlorineIntroViewController: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
+    var recalibration = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +21,11 @@ class CalibrationChlorineIntroViewController: UIViewController {
     }
     
     @IBAction func nextButton(_ sender: UIButton) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Ph7CalibrationViewController") as! Ph7CalibrationViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChlorineCalibrationViewController") as! ChlorineCalibrationViewController
+        vc.recalibration = self.recalibration
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
     
     @IBAction func playVideoButtonAction(_ sender: Any) {
         if let videoURL = URL(string: "http://videoapp.goflipr.com/democalib.mp4".localized.remotable("CALIBRATION_VIDEO_URL")) {

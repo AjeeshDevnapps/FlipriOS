@@ -9,6 +9,7 @@
 import UIKit
 import CoreBluetooth
 import JGProgressHUD
+import Alamofire
 
 enum DeviceWifiCellType {
     case Flipr
@@ -230,7 +231,25 @@ class DeviceViewController: UIViewController {
         if serial == nil || activationKey == nil {
             return
         }
+     
+        Alamofire.request(Router.forgetModuleEquipment(serial: serial ?? "", code: "20")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                
+                print("Delete HUB response.result.value: \(value)")
+                self.navigationController?.popViewController()
+
+            case .failure(let error):
+                
+                print("Delete HUB did fail with error: \(error)")
+                
+            }
+            
+        })
         
+      /*
         Module.deactivate(serial:serial ?? "" , activationKey: activationKey ?? "", completion: { (error) in
             if error != nil {
                 self.showError(title: "Error".localized, message: error?.localizedDescription)
@@ -240,6 +259,8 @@ class DeviceViewController: UIViewController {
             
             
         })
+        
+        */
     }
     
     
@@ -289,7 +310,7 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"DeviceInfoTableViewCell",
                                                      for: indexPath) as! DeviceInfoTableViewCell
             if devicewifiTypeCell == DeviceWifiCellType.Flipr{
-                cell.titleLabel.text = "Details"
+                cell.titleLabel.text = "Details".localized
                 cell.editButton.isHidden = true
                 cell.nameLabel.isHidden = true
             }
@@ -362,10 +383,10 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier:"DeviceActionTableViewCell",
                                                      for: indexPath) as! DeviceActionTableViewCell
             if devicewifiTypeCell == DeviceWifiCellType.Flipr{
-                cell.actionTitleLabel.text = "Perform Bluetooth check"
+                cell.actionTitleLabel.text = "Perform Bluetooth check".localized
                 
             }else{
-                cell.actionTitleLabel.text = "WiFi settings"
+                cell.actionTitleLabel.text = "WiFi settings".localized
             }
             return cell
         }

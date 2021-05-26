@@ -16,6 +16,15 @@ class QuickActionViewController: UIViewController {
     @IBOutlet weak var newStripContainerView: UIView!
     @IBOutlet weak var tapView: UIView!
     @IBOutlet weak var containerView: UIView!
+    
+    @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var measurementLbl: UILabel!
+    @IBOutlet weak var expertLbl: UILabel!
+    @IBOutlet weak var callibrationLbl: UILabel!
+    @IBOutlet weak var drainingLbl: UILabel!
+    @IBOutlet weak var stripTestLbl: UILabel!
+
+    @IBOutlet  var bottonContainerContraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +57,16 @@ class QuickActionViewController: UIViewController {
     }
     
     func setupViews(){
+        if UIScreen.main.nativeBounds.height < 1334{
+            bottonContainerContraint.constant = 576 - 70
+        }
+        titleLbl.text = "Quick Actions".localized
+        measurementLbl.text = "Trigger a Measurement".localized
+        expertLbl.text  = "Expert Mode".localized
+        callibrationLbl.text  = "New Calibration".localized
+        drainingLbl.text  = "Draining".localized
+        stripTestLbl.text  = "New strip test".localized
+
         triggerContainerView.layer.cornerRadius = 15.0
         triggerContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
         expertContainerView.layer.cornerRadius = 15.0
@@ -110,7 +129,9 @@ class QuickActionViewController: UIViewController {
 //                viewController.recalibration = true
 //                viewController.calibrationType = .ph7
 //                viewController.modalPresentationStyle = .fullScreen
-//                self.present(viewController, animated: true, completion: nil)
+//                let nav = UINavigationController.init(rootViewController: viewController)
+//                nav.modalPresentationStyle = .fullScreen
+//                self.present(nav, animated: true, completion: nil)
 //            }
         }))
         alert.addAction(UIAlertAction(title: "Order a calibration kit".localized, style: .default, handler: { (action) in
@@ -168,14 +189,14 @@ class QuickActionViewController: UIViewController {
         return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
     }
 
-
+   
     func showCalibrationView(){
         let sb = UIStoryboard(name: "Calibration", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
         vc.isPresentedFlow = true
+        vc.recalibration = true
         let navigationController = UINavigationController.init(rootViewController: vc)
         navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)
     }
-
 }

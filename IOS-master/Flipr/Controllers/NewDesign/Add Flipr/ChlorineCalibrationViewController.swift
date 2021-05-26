@@ -1,5 +1,5 @@
 //
-//  Ph7CalibrationViewController.swift
+//  ChlorineCalibrationViewController.swift
 //  Flipr
 //
 //  Created by Ajeesh T S on 26/05/21.
@@ -8,20 +8,19 @@
 
 import UIKit
 
-class Ph7CalibrationViewController: BaseViewController {
+class ChlorineCalibrationViewController: BaseViewController {
     @IBOutlet weak var loaderView: UIView!
     @IBOutlet weak var successView: UIView!
 
     let measuresInterval:Double = 150
     var recalibration = false
-    var calibrationType:CalibrationType = .ph7
+    var calibrationType:CalibrationType = .ph4
     var measuresTimer : Timer?
     var dismissEnabled = false
     var isFlipr2 = false
     var isPresentedFlow: Bool = false
     var checkCalibrationStruckTimer : Timer?
     var isCalibrationStrucked = false
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,7 +129,7 @@ class Ph7CalibrationViewController: BaseViewController {
     @objc func checkForAppStrucked() {
     
         if self.isCalibrationStrucked{
-            self.showChlorineFlow()
+            self.showStripView()
         }
     }
     
@@ -202,7 +201,7 @@ class Ph7CalibrationViewController: BaseViewController {
                                 Module.currentModule?.pH7CalibrationDone = true
                                 self.loaderView.hideStateView()
                                 self.invalidateStruckChecktimer()
-                                self.showChlorineFlow()
+                                self.showStripView()
 //                                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
 //                                    viewController.calibrationType = .ph4
 //                                    viewController.recalibration = self.recalibration
@@ -250,14 +249,15 @@ class Ph7CalibrationViewController: BaseViewController {
     }
     
     
-    func showChlorineFlow(){
+    func showStripView(){
         self.successView.isHidden = false
         self.view.bringSubviewToFront( self.successView)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CalibrationChlorineIntroViewController") as! CalibrationChlorineIntroViewController
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "StripViewControllerID") as! StripViewController
             vc.recalibration = self.recalibration
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 
+  
 }

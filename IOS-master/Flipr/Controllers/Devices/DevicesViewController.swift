@@ -26,7 +26,7 @@ class DevicesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Devices"
+        self.title = "Devices".localized
         //        self.setupPages()
         AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi = true 
         self.pageControl.isHidden = true
