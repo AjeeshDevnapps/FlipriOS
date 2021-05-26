@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VTs-kU-pIa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VTs-kU-pIa">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -51,16 +51,29 @@
                                 <color key="textColor" red="0.29016065600000002" green="0.29021644590000001" blue="0.29015710950000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pex-jx-jSo">
+                                <rect key="frame" x="20" y="44" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="HFD-71-fZs"/>
+                                    <constraint firstAttribute="height" constant="45" id="fZa-YZ-FeD"/>
+                                </constraints>
+                                <state key="normal" image="arrow_back-1"/>
+                                <connections>
+                                    <action selector="backButtonAction:" destination="fFp-OC-vZh" eventType="touchUpInside" id="ZRL-8t-ur3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Mfc-B0-yMc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Zu-4q-g9z" firstAttribute="leading" secondItem="Mfc-B0-yMc" secondAttribute="leading" constant="48" id="0PA-Pn-f78"/>
+                            <constraint firstItem="Pex-jx-jSo" firstAttribute="leading" secondItem="Mfc-B0-yMc" secondAttribute="leading" constant="20" id="3kf-DT-ZxH"/>
                             <constraint firstItem="Mfc-B0-yMc" firstAttribute="trailing" secondItem="I0h-Th-Pn8" secondAttribute="trailing" constant="48" id="6fw-n9-EZN"/>
                             <constraint firstItem="cdT-LQ-Xfb" firstAttribute="leading" secondItem="Mfc-B0-yMc" secondAttribute="leading" id="B5f-6k-gnd"/>
                             <constraint firstItem="6Zu-4q-g9z" firstAttribute="top" secondItem="Mfc-B0-yMc" secondAttribute="top" constant="50" id="FNe-pd-xsT"/>
                             <constraint firstItem="cdT-LQ-Xfb" firstAttribute="trailing" secondItem="Mfc-B0-yMc" secondAttribute="trailing" id="HRc-Ph-V47"/>
                             <constraint firstItem="Mfc-B0-yMc" firstAttribute="bottom" secondItem="JdB-BT-c8V" secondAttribute="bottom" constant="50" id="Hde-E2-cSY"/>
+                            <constraint firstItem="Pex-jx-jSo" firstAttribute="top" secondItem="Mfc-B0-yMc" secondAttribute="top" id="PHy-Yh-M6h"/>
                             <constraint firstItem="Mfc-B0-yMc" firstAttribute="trailing" secondItem="6Zu-4q-g9z" secondAttribute="trailing" constant="48" id="co2-1l-JfJ"/>
                             <constraint firstItem="cdT-LQ-Xfb" firstAttribute="bottom" secondItem="JdB-BT-c8V" secondAttribute="bottom" id="eHY-FI-r8g"/>
                             <constraint firstItem="I0h-Th-Pn8" firstAttribute="top" secondItem="6Zu-4q-g9z" secondAttribute="bottom" constant="20" id="no5-Mj-paE"/>
@@ -2150,9 +2163,6 @@
         <image name="play_circle" width="20" height="20"/>
         <image name="rectangle" width="70.5" height="70.5"/>
         <image name="wheel-2" width="264" height="264"/>
-        <systemColor name="lightTextColor">
-            <color white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="lightTextColor">
             <color white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

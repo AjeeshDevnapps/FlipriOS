@@ -47,6 +47,11 @@ class ProductsAndEquipmentsViewController: UIViewController {
     
 
     func setupView(){
+        
+        segmentControl.setTitle("Products".localized, forSegmentAt: 0)
+        segmentControl.setTitle("Equipments".localized, forSegmentAt: 1)
+
+        
         let navigationBar = navigationController?.navigationBar
         navigationBar?.shadowColor = .clear
         segmentControl.addTarget(self, action: #selector(ProductsAndEquipmentsViewController.indexChanged(_:)), for: .valueChanged)

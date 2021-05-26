@@ -235,6 +235,7 @@ class PoolViewController: UITableViewController {
                             NotificationCenter.default.post(name: K.Notifications.BackFromWintering, object: nil)
                         })
                     } else {
+                        NotificationCenter.default.post(name: K.Notifications.PoolSettingsUpdated, object: nil)
                         self.dismiss(animated: true, completion:nil)
                     }
                 }

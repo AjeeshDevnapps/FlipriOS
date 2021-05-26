@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -171,7 +171,11 @@
                     <navigationItem key="navigationItem" id="c0U-q4-Cba"/>
                     <connections>
                         <outlet property="faqContainerView" destination="T43-um-DFc" id="0wV-2b-7pf"/>
+                        <outlet property="faqLbl" destination="EEA-1E-ekR" id="dic-1N-jK6"/>
                         <outlet property="helpContainerView" destination="AdJ-HR-8oZ" id="rvM-bc-mtq"/>
+                        <outlet property="helpLbl" destination="eOc-H2-Fzv" id="e93-P6-jys"/>
+                        <outlet property="provacyButton" destination="wpK-n5-XXG" id="ofZ-1U-yXh"/>
+                        <outlet property="tipLbl" destination="Nri-oD-2xw" id="mzI-mN-cTg"/>
                         <outlet property="tipsContainerView" destination="ROT-c5-iwK" id="uVn-mY-zP7"/>
                     </connections>
                 </viewController>
@@ -427,12 +431,19 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottonContainerContraint" destination="69c-ni-HkG" id="Nf2-dr-ShK"/>
                         <outlet property="calibrationContainerView" destination="h2S-br-bPj" id="dyx-GK-8Dd"/>
+                        <outlet property="callibrationLbl" destination="qCS-La-3r1" id="Joh-T0-bjs"/>
                         <outlet property="containerView" destination="qBX-Qi-InW" id="pH0-OF-wZh"/>
                         <outlet property="drainingContainerView" destination="75z-aU-aec" id="c1v-ch-vE9"/>
+                        <outlet property="drainingLbl" destination="z0g-h5-jU2" id="U37-Yg-3qI"/>
                         <outlet property="expertContainerView" destination="BnW-18-T1w" id="L0r-o4-sJG"/>
+                        <outlet property="expertLbl" destination="hgO-ih-XfP" id="YiW-s1-Zko"/>
+                        <outlet property="measurementLbl" destination="mjD-ln-42V" id="7QD-h6-i2p"/>
                         <outlet property="newStripContainerView" destination="i4v-aI-Hsm" id="QK4-V0-jY3"/>
+                        <outlet property="stripTestLbl" destination="ely-ZF-6tl" id="xqN-c7-wRE"/>
                         <outlet property="tapView" destination="g7d-9t-nad" id="1L0-Qa-Yxa"/>
+                        <outlet property="titleLbl" destination="Aco-pa-t77" id="phQ-s8-NOE"/>
                         <outlet property="triggerContainerView" destination="hF2-8e-2Gp" id="5S5-cb-AfH"/>
                     </connections>
                 </viewController>

@@ -19,6 +19,7 @@
 		484CEB9D25E2AAE2005CD208 /* SideMenuViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 484CEB9C25E2AAE2005CD208 /* SideMenuViews.storyboard */; };
 		484CEBA025E2B06E005CD208 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484CEB9F25E2B06E005CD208 /* HelpViewController.swift */; };
 		484CEBA425E2DAC9005CD208 /* QuickActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484CEBA325E2DAC9005CD208 /* QuickActionViewController.swift */; };
+		4887549826493B470035A242 /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4887549726493B470035A242 /* DeviceSize.swift */; };
 		488FB98225E41B1F006C2887 /* BluetoothAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488FB98125E41B1F006C2887 /* BluetoothAlertViewController.swift */; };
 		48A912A225F8EC2900EF863D /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A912A125F8EC2900EF863D /* SideMenuViewController.swift */; };
 		48B2A7EC25E19B45001CCBCC /* DeviceInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B2A7EB25E19B45001CCBCC /* DeviceInfoTableViewCell.swift */; };
@@ -153,6 +154,7 @@
 		484CEB9C25E2AAE2005CD208 /* SideMenuViews.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenuViews.storyboard; sourceTree = "<group>"; };
 		484CEB9F25E2B06E005CD208 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		484CEBA325E2DAC9005CD208 /* QuickActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionViewController.swift; sourceTree = "<group>"; };
+		4887549726493B470035A242 /* DeviceSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSize.swift; sourceTree = "<group>"; };
 		488FB98125E41B1F006C2887 /* BluetoothAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothAlertViewController.swift; sourceTree = "<group>"; };
 		48A912A125F8EC2900EF863D /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		48B2A7EB25E19B45001CCBCC /* DeviceInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 				B53245591EB34B500001A46F /* Error+Code.swift */,
 				B57F99F51EC4510300417C0F /* Bundle+version.swift */,
 				B58E73521F73EDD60066B3E5 /* String+FliprDate.swift */,
+				4887549726493B470035A242 /* DeviceSize.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -631,7 +634,7 @@
 				TargetAttributes = {
 					B58A37311E79859B00C67F6C = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = Q6MUCXXECZ;
+						DevelopmentTeam = 6M9RZXR8UH;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -860,6 +863,7 @@
 				B574F50A1E953D82009294EA /* Router.swift in Sources */,
 				B5E1F1F620874D51008AED25 /* ActionsViewController.swift in Sources */,
 				B574F5081E953783009294EA /* PoolViewController.swift in Sources */,
+				4887549826493B470035A242 /* DeviceSize.swift in Sources */,
 				B5BE18D924486291006CCB1E /* HubTypeSelectionViewController.swift in Sources */,
 				B5DDDC8A1F0A6A240073E5B8 /* HistoricViewController.swift in Sources */,
 				B59436E2225652580030F16D /* SubscriptionService.swift in Sources */,
@@ -1052,11 +1056,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Flipr/Flipr.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = Q6MUCXXECZ;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flipr",
@@ -1064,8 +1068,8 @@
 				INFOPLIST_FILE = Flipr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flipr.test;
+				MARKETING_VERSION = 2.6.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1087,8 +1091,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = Q6MUCXXECZ;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flipr",
@@ -1096,8 +1100,8 @@
 				INFOPLIST_FILE = Flipr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flipr.test;
+				MARKETING_VERSION = 2.6.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

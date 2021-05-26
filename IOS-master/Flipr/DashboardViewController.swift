@@ -13,6 +13,8 @@ import Device
 import CoreMotion
 import SideMenu
 import SafariServices
+import AdSupport
+import AppTrackingTransparency
 
 let FliprLocationDidChange = Notification.Name("FliprLocationDidChange")
 let FliprDataPosted = Notification.Name("FliprDataDidPosted")
@@ -108,7 +110,7 @@ class DashboardViewController: UIViewController {
 //        self.view.clipsToBounds = true
 //        self.quickActionButtonContainer.cornerRadius =  self.quickActionButtonContainer.frame.size.height / 2
 //        quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
-//        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius: self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
+//        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius:         self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
 
         if Locale.current.languageCode != "fr" {
             let attributedTitle = NSAttributedString(string: "Alert in progress: act now!".localized, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor) : UIColor.white]))
@@ -135,7 +137,6 @@ class DashboardViewController: UIViewController {
             self.bleMeasureHasBeenSent = false
             self.refresh()
             self.perform(#selector(self.callGetStatusApis), with: nil, afterDelay: 3)
-            
         }
         
         NotificationCenter.default.addObserver(forName: FliprLocationDidChange, object: nil, queue: nil) { (notification) in
@@ -188,10 +189,10 @@ class DashboardViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil, queue: nil) { (notification) in
             self.manageRedoxValueChangeButtton()
         }
-        
-        //        self.getNotificationStatus()
-        //        self.getThresholdValues()
-        
+      
+        NotificationCenter.default.addObserver(forName: K.Notifications.PoolSettingsUpdated, object: nil, queue: nil) { (notification) in
+            self.callGetStatusApis()
+        }
         
         self.perform(#selector(self.callGetStatusApis), with: nil, afterDelay: 3)
         
@@ -219,6 +220,8 @@ class DashboardViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
         }
         
+        self.appTrackingRequestPermission()
+        
         /*
          readBLEMeasure(completion: { (error) in
          if error != nil {
@@ -242,6 +245,35 @@ class DashboardViewController: UIViewController {
         super.viewDidAppear(animated)
         
         AppReview.shared.requestReviewIfNeeded()
+    }
+    
+    func appTrackingRequestPermission() {
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                case .authorized:
+                    // Tracking authorization dialog was shown
+                    // and we are authorized
+                    print("Authorized")
+                    
+                    // Now that we are authorized we can get the IDFA
+                    print(ASIdentifierManager.shared().advertisingIdentifier)
+                case .denied:
+                    // Tracking authorization dialog was
+                    // shown and permission is denied
+                    print("Denied")
+                case .notDetermined:
+                    // Tracking authorization dialog has not been shown
+                    print("Not Determined")
+                case .restricted:
+                    print("Restricted")
+                @unknown default:
+                    print("Unknown")
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     @objc func callGetStatusApis(){
@@ -354,7 +386,7 @@ class DashboardViewController: UIViewController {
         UIView.transition(with:  self.notificationDisabledButton, duration: 0.4,
                           options: .transitionCrossDissolve,
                           animations: {
-                            self.notificationDisabledButton.isHidden = value
+                            self.notificationDisabledButton.isHidden = !value
                           })
     }
     

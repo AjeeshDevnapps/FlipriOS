@@ -31,7 +31,7 @@ class PoolLogTableViewController: UITableViewController, PoolLogViewControllerDe
         }
         
         if let module = Module.currentModule {
-            if module.isSubscriptionValid {
+//            if module.isSubscriptionValid {
                 NotificationCenter.default.addObserver(forName: FliprLogDidChanged, object: nil, queue: nil) { (notification) in
                     self.logs = [Log]()
                     self.tableView.reloadData()
@@ -42,13 +42,13 @@ class PoolLogTableViewController: UITableViewController, PoolLogViewControllerDe
                 
                 self.view.showEmptyStateViewLoading(title: nil, message: nil)
                 refresh()
-            } else {
-                self.view.showEmptyStateView(image: nil, title: "[Texte à mettre]", message: "[Texte à mettre]", buttonTitle: "Upgrade to Flipr Infinite".localized) {
-                    if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
-                        self.present(vc, animated: true, completion: nil)
-                    }
-                }
-            }
+//            } else {
+//                self.view.showEmptyStateView(image: nil, title: "[Texte à mettre]", message: "[Texte à mettre]", buttonTitle: "Upgrade to Flipr Infinite".localized) {
+//                    if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
+//                        self.present(vc, animated: true, completion: nil)
+//                    }
+//                }
+//            }
         } else {
             
         }
