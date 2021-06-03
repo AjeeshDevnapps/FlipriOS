@@ -101,7 +101,6 @@ class DeviceViewController: UIViewController {
         }else{
             //            self.showWifiSettings()
             self.checkBluetoothConnection()
-            
         }
         
     }

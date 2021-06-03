@@ -20,7 +20,9 @@ class FliprListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         fliprDetailsContainerView.roundCorner(corner: 12)
+        fliprDetailsContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
         self.serialKeyLabel.text = serialKey
         self.typeLabel.text = flipType
 //        selectButton.addTarget(self, action: #selector(fliprSelectButtonAction), for: .touchUpInside)

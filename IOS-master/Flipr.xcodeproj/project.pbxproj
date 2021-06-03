@@ -11,6 +11,7 @@
 		480CF2D325DD305800429906 /* NotificationSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480CF2D225DD305800429906 /* NotificationSwitchTableViewCell.swift */; };
 		481624E325DD7E750085F3C4 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481624E225DD7E750085F3C4 /* AccountViewController.swift */; };
 		481624E625DD91F50085F3C4 /* RoundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481624E525DD91F50085F3C4 /* RoundShadowView.swift */; };
+		481F3637265FF5D100BBD858 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481F362E265FF5CD00BBD858 /* WelcomeViewController.swift */; };
 		481FF002265D7D6E000DC977 /* Calibration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481FF001265D7D6E000DC977 /* Calibration.storyboard */; };
 		4828D37125C0604500F95683 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4828D37025C0604500F95683 /* Notifications.storyboard */; };
 		4828D37525C0705200F95683 /* NotificationsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828D37425C0705200F95683 /* NotificationsAlertViewController.swift */; };
@@ -21,15 +22,6 @@
 		484CEB9D25E2AAE2005CD208 /* SideMenuViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 484CEB9C25E2AAE2005CD208 /* SideMenuViews.storyboard */; };
 		484CEBA025E2B06E005CD208 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484CEB9F25E2B06E005CD208 /* HelpViewController.swift */; };
 		484CEBA425E2DAC9005CD208 /* QuickActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484CEBA325E2DAC9005CD208 /* QuickActionViewController.swift */; };
-		484D022C26566E38002536AC /* EmailVerifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484D022326566E36002536AC /* EmailVerifyMessageViewController.swift */; };
-		484D022D26566E38002536AC /* EmailVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484D022426566E36002536AC /* EmailVerifyViewController.swift */; };
-		484D022E26566E38002536AC /* SignUpProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484D022526566E36002536AC /* SignUpProfileController.swift */; };
-		484D022F26566E38002536AC /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484D022626566E37002536AC /* WelcomeViewController.swift */; };
-		484D023026566E38002536AC /* SignUpEmailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484D022726566E37002536AC /* SignUpEmailController.swift */; };
-		484D023126566E38002536AC /* UIViewController+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484D022826566E37002536AC /* UIViewController+Helper.swift */; };
-		484D023226566E38002536AC /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 484D022926566E37002536AC /* Signup.storyboard */; };
-		484D023326566E38002536AC /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484D022A26566E37002536AC /* LoadingViewController.swift */; };
-		484D023426566E38002536AC /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484D022B26566E37002536AC /* CustomTextField.swift */; };
 		48691A41265EB11E00E977BB /* CalibrationChlorineIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48691A40265EB11E00E977BB /* CalibrationChlorineIntroViewController.swift */; };
 		48691A5C265EC23500E977BB /* ChlorineCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48691A5B265EC23500E977BB /* ChlorineCalibrationViewController.swift */; };
 		48691A5F265ECA1100E977BB /* CalibrationSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48691A5E265ECA1100E977BB /* CalibrationSuccessViewController.swift */; };
@@ -40,14 +32,31 @@
 		4880E1F226558C09006D4472 /* PoolLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E1EB26558C09006D4472 /* PoolLocationViewController.swift */; };
 		4880E1F326558C09006D4472 /* PoolUsageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E1EC26558C09006D4472 /* PoolUsageViewController.swift */; };
 		4880E1F426558C09006D4472 /* PoolSettingsStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E1ED26558C09006D4472 /* PoolSettingsStartViewController.swift */; };
-		4880E1FA26558C42006D4472 /* ElectricalVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E1F726558C41006D4472 /* ElectricalVideoViewController.swift */; };
-		4880E1FB26558C42006D4472 /* ElectricalCableSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E1F826558C42006D4472 /* ElectricalCableSelectionViewController.swift */; };
-		4880E1FC26558C42006D4472 /* SetupFifthStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E1F926558C42006D4472 /* SetupFifthStepViewController.swift */; };
-		4880E20226558C63006D4472 /* HUBElectrical.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4880E1FF26558C63006D4472 /* HUBElectrical.storyboard */; };
-		4880E20326558C63006D4472 /* ElectricalSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E20026558C63006D4472 /* ElectricalSetupViewController.swift */; };
-		4880E20426558C63006D4472 /* ElectricalSetupPrepareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E20126558C63006D4472 /* ElectricalSetupPrepareViewController.swift */; };
 		4887549826493B470035A242 /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4887549726493B470035A242 /* DeviceSize.swift */; };
 		488FB98225E41B1F006C2887 /* BluetoothAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488FB98125E41B1F006C2887 /* BluetoothAlertViewController.swift */; };
+		4895F74D2667F4D300FA8ED3 /* EmailVerifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7452667F4D200FA8ED3 /* EmailVerifyMessageViewController.swift */; };
+		4895F74E2667F4D300FA8ED3 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7462667F4D200FA8ED3 /* LoadingViewController.swift */; };
+		4895F7502667F4D300FA8ED3 /* SignUpEmailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7482667F4D200FA8ED3 /* SignUpEmailController.swift */; };
+		4895F7512667F4D300FA8ED3 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7492667F4D200FA8ED3 /* CustomTextField.swift */; };
+		4895F7522667F4D300FA8ED3 /* SignUpProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F74A2667F4D300FA8ED3 /* SignUpProfileController.swift */; };
+		4895F7532667F4D300FA8ED3 /* UIViewController+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F74B2667F4D300FA8ED3 /* UIViewController+Helper.swift */; };
+		4895F7542667F4D300FA8ED3 /* EmailVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F74C2667F4D300FA8ED3 /* EmailVerifyViewController.swift */; };
+		4895F7582667FD4500FA8ED3 /* DeviceListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7572667FD4500FA8ED3 /* DeviceListTableViewCell.swift */; };
+		4895F75E2668000E00FA8ED3 /* HUBOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F75B2668000D00FA8ED3 /* HUBOnboardingViewController.swift */; };
+		4895F75F2668000E00FA8ED3 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F75C2668000D00FA8ED3 /* OnboardingCollectionViewCell.swift */; };
+		4895F7602668000E00FA8ED3 /* HUBOnboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4895F75D2668000D00FA8ED3 /* HUBOnboarding.storyboard */; };
+		4895F7682668002D00FA8ED3 /* HUBPairingSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7632668002A00FA8ED3 /* HUBPairingSuccessViewController.swift */; };
+		4895F7692668002D00FA8ED3 /* WifiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7642668002A00FA8ED3 /* WifiListViewController.swift */; };
+		4895F76A2668002D00FA8ED3 /* HUBDevicePairing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4895F7652668002B00FA8ED3 /* HUBDevicePairing.storyboard */; };
+		4895F76B2668002D00FA8ED3 /* HUBNamingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7662668002B00FA8ED3 /* HUBNamingViewController.swift */; };
+		4895F76C2668002D00FA8ED3 /* WifiListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7672668002C00FA8ED3 /* WifiListTableViewCell.swift */; };
+		4895F7712668024D00FA8ED3 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4895F7702668024D00FA8ED3 /* Signup.storyboard */; };
+		4895F778266803AF00FA8ED3 /* ElectricalSetupPrepareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F775266803AE00FA8ED3 /* ElectricalSetupPrepareViewController.swift */; };
+		4895F779266803AF00FA8ED3 /* ElectricalSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F776266803AF00FA8ED3 /* ElectricalSetupViewController.swift */; };
+		4895F77A266803AF00FA8ED3 /* HUBElectrical.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4895F777266803AF00FA8ED3 /* HUBElectrical.storyboard */; };
+		4895F780266803D000FA8ED3 /* ElectricalCableSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F77D266803CF00FA8ED3 /* ElectricalCableSelectionViewController.swift */; };
+		4895F781266803D000FA8ED3 /* SetupFifthStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F77E266803D000FA8ED3 /* SetupFifthStepViewController.swift */; };
+		4895F782266803D000FA8ED3 /* ElectricalVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F77F266803D000FA8ED3 /* ElectricalVideoViewController.swift */; };
 		48980EA1261704C6009A0F24 /* RoundBorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48980EA0261704C6009A0F24 /* RoundBorderedButton.swift */; };
 		48980EA526170C15009A0F24 /* LoginEducationViewOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48980EA426170C14009A0F24 /* LoginEducationViewOneController.swift */; };
 		48980EA926171E1E009A0F24 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48980EA826171E1E009A0F24 /* BaseViewController.swift */; };
@@ -63,6 +72,8 @@
 		48C8E4F3265D21490000FDA8 /* KeyEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C8E4F2265D21490000FDA8 /* KeyEnterViewController.swift */; };
 		48C8E4F6265D6DC60000FDA8 /* FliprActivationSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C8E4F5265D6DC50000FDA8 /* FliprActivationSuccessViewController.swift */; };
 		48C9468C265AAADC00C018A7 /* AddFliprViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C9468B265AAADC00C018A7 /* AddFliprViewController.swift */; };
+		48F49ABC2666A44000DFB18B /* AddHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F49ABB2666A44000DFB18B /* AddHubViewController.swift */; };
+		48F49ABF2666B3D200DFB18B /* HubListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F49ABE2666B3D200DFB18B /* HubListViewController.swift */; };
 		48FC118D25DFE3B1001E1885 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC118C25DFE3B1001E1885 /* DevicesViewController.swift */; };
 		48FC119125DFE3C1001E1885 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119025DFE3C1001E1885 /* DeviceViewController.swift */; };
 		48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */; };
@@ -186,6 +197,7 @@
 		480CF2D225DD305800429906 /* NotificationSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		481624E225DD7E750085F3C4 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		481624E525DD91F50085F3C4 /* RoundShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundShadowView.swift; sourceTree = "<group>"; };
+		481F362E265FF5CD00BBD858 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		481FF001265D7D6E000DC977 /* Calibration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calibration.storyboard; sourceTree = "<group>"; };
 		4828D37025C0604500F95683 /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		4828D37425C0705200F95683 /* NotificationsAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsAlertViewController.swift; sourceTree = "<group>"; };
@@ -196,15 +208,6 @@
 		484CEB9C25E2AAE2005CD208 /* SideMenuViews.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenuViews.storyboard; sourceTree = "<group>"; };
 		484CEB9F25E2B06E005CD208 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		484CEBA325E2DAC9005CD208 /* QuickActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionViewController.swift; sourceTree = "<group>"; };
-		484D022326566E36002536AC /* EmailVerifyMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailVerifyMessageViewController.swift; path = "../../../../Downloads/IOS-master-3/Flipr/Signup/EmailVerifyMessageViewController.swift"; sourceTree = "<group>"; };
-		484D022426566E36002536AC /* EmailVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailVerifyViewController.swift; path = "../../../../Downloads/IOS-master-3/Flipr/Signup/EmailVerifyViewController.swift"; sourceTree = "<group>"; };
-		484D022526566E36002536AC /* SignUpProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpProfileController.swift; path = "../../../../Downloads/IOS-master-3/Flipr/Signup/SignUpProfileController.swift"; sourceTree = "<group>"; };
-		484D022626566E37002536AC /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		484D022726566E37002536AC /* SignUpEmailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpEmailController.swift; path = "../../../../Downloads/IOS-master-3/Flipr/Signup/SignUpEmailController.swift"; sourceTree = "<group>"; };
-		484D022826566E37002536AC /* UIViewController+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Helper.swift"; path = "../../../../Downloads/IOS-master-3/Flipr/Signup/UIViewController+Helper.swift"; sourceTree = "<group>"; };
-		484D022926566E37002536AC /* Signup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Signup.storyboard; path = "../../../../Downloads/IOS-master-3/Flipr/Signup/Signup.storyboard"; sourceTree = "<group>"; };
-		484D022A26566E37002536AC /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingViewController.swift; path = "../../../../Downloads/IOS-master-3/Flipr/Signup/LoadingViewController.swift"; sourceTree = "<group>"; };
-		484D022B26566E37002536AC /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomTextField.swift; path = "../../../../Downloads/IOS-master-3/Flipr/Signup/CustomTextField.swift"; sourceTree = "<group>"; };
 		48691A40265EB11E00E977BB /* CalibrationChlorineIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationChlorineIntroViewController.swift; sourceTree = "<group>"; };
 		48691A5B265EC23500E977BB /* ChlorineCalibrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChlorineCalibrationViewController.swift; sourceTree = "<group>"; };
 		48691A5E265ECA1100E977BB /* CalibrationSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationSuccessViewController.swift; sourceTree = "<group>"; };
@@ -215,14 +218,31 @@
 		4880E1EB26558C09006D4472 /* PoolLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoolLocationViewController.swift; sourceTree = "<group>"; };
 		4880E1EC26558C09006D4472 /* PoolUsageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoolUsageViewController.swift; sourceTree = "<group>"; };
 		4880E1ED26558C09006D4472 /* PoolSettingsStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoolSettingsStartViewController.swift; sourceTree = "<group>"; };
-		4880E1F726558C41006D4472 /* ElectricalVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElectricalVideoViewController.swift; sourceTree = "<group>"; };
-		4880E1F826558C42006D4472 /* ElectricalCableSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElectricalCableSelectionViewController.swift; sourceTree = "<group>"; };
-		4880E1F926558C42006D4472 /* SetupFifthStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupFifthStepViewController.swift; sourceTree = "<group>"; };
-		4880E1FF26558C63006D4472 /* HUBElectrical.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HUBElectrical.storyboard; sourceTree = "<group>"; };
-		4880E20026558C63006D4472 /* ElectricalSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElectricalSetupViewController.swift; sourceTree = "<group>"; };
-		4880E20126558C63006D4472 /* ElectricalSetupPrepareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElectricalSetupPrepareViewController.swift; sourceTree = "<group>"; };
 		4887549726493B470035A242 /* DeviceSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSize.swift; sourceTree = "<group>"; };
 		488FB98125E41B1F006C2887 /* BluetoothAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothAlertViewController.swift; sourceTree = "<group>"; };
+		4895F7452667F4D200FA8ED3 /* EmailVerifyMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerifyMessageViewController.swift; sourceTree = "<group>"; };
+		4895F7462667F4D200FA8ED3 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		4895F7482667F4D200FA8ED3 /* SignUpEmailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpEmailController.swift; sourceTree = "<group>"; };
+		4895F7492667F4D200FA8ED3 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		4895F74A2667F4D300FA8ED3 /* SignUpProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpProfileController.swift; sourceTree = "<group>"; };
+		4895F74B2667F4D300FA8ED3 /* UIViewController+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helper.swift"; sourceTree = "<group>"; };
+		4895F74C2667F4D300FA8ED3 /* EmailVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerifyViewController.swift; sourceTree = "<group>"; };
+		4895F7572667FD4500FA8ED3 /* DeviceListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListTableViewCell.swift; sourceTree = "<group>"; };
+		4895F75B2668000D00FA8ED3 /* HUBOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUBOnboardingViewController.swift; sourceTree = "<group>"; };
+		4895F75C2668000D00FA8ED3 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		4895F75D2668000D00FA8ED3 /* HUBOnboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HUBOnboarding.storyboard; sourceTree = "<group>"; };
+		4895F7632668002A00FA8ED3 /* HUBPairingSuccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUBPairingSuccessViewController.swift; sourceTree = "<group>"; };
+		4895F7642668002A00FA8ED3 /* WifiListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiListViewController.swift; sourceTree = "<group>"; };
+		4895F7652668002B00FA8ED3 /* HUBDevicePairing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HUBDevicePairing.storyboard; sourceTree = "<group>"; };
+		4895F7662668002B00FA8ED3 /* HUBNamingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUBNamingViewController.swift; sourceTree = "<group>"; };
+		4895F7672668002C00FA8ED3 /* WifiListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiListTableViewCell.swift; sourceTree = "<group>"; };
+		4895F7702668024D00FA8ED3 /* Signup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
+		4895F775266803AE00FA8ED3 /* ElectricalSetupPrepareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElectricalSetupPrepareViewController.swift; sourceTree = "<group>"; };
+		4895F776266803AF00FA8ED3 /* ElectricalSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElectricalSetupViewController.swift; sourceTree = "<group>"; };
+		4895F777266803AF00FA8ED3 /* HUBElectrical.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HUBElectrical.storyboard; sourceTree = "<group>"; };
+		4895F77D266803CF00FA8ED3 /* ElectricalCableSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElectricalCableSelectionViewController.swift; sourceTree = "<group>"; };
+		4895F77E266803D000FA8ED3 /* SetupFifthStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupFifthStepViewController.swift; sourceTree = "<group>"; };
+		4895F77F266803D000FA8ED3 /* ElectricalVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElectricalVideoViewController.swift; sourceTree = "<group>"; };
 		48980EA0261704C6009A0F24 /* RoundBorderedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundBorderedButton.swift; sourceTree = "<group>"; };
 		48980EA426170C14009A0F24 /* LoginEducationViewOneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEducationViewOneController.swift; sourceTree = "<group>"; };
 		48980EA826171E1E009A0F24 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +258,8 @@
 		48C8E4F2265D21490000FDA8 /* KeyEnterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEnterViewController.swift; sourceTree = "<group>"; };
 		48C8E4F5265D6DC50000FDA8 /* FliprActivationSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprActivationSuccessViewController.swift; sourceTree = "<group>"; };
 		48C9468B265AAADC00C018A7 /* AddFliprViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFliprViewController.swift; sourceTree = "<group>"; };
+		48F49ABB2666A44000DFB18B /* AddHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHubViewController.swift; sourceTree = "<group>"; };
+		48F49ABE2666B3D200DFB18B /* HubListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubListViewController.swift; sourceTree = "<group>"; };
 		48FC118C25DFE3B1001E1885 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
 		48FC119025DFE3C1001E1885 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
 		48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddnewDeviceViewController.swift; sourceTree = "<group>"; };
@@ -385,14 +407,42 @@
 		481FF000265D7D50000DC977 /* Calibration */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = Calibration;
+			sourceTree = "<group>";
+		};
+		48210CED2668EBD200AE4507 /* Hub */ = {
+			isa = PBXGroup;
+			children = (
+				4895F7652668002B00FA8ED3 /* HUBDevicePairing.storyboard */,
+				4895F75D2668000D00FA8ED3 /* HUBOnboarding.storyboard */,
+				4895F777266803AF00FA8ED3 /* HUBElectrical.storyboard */,
+			);
+			path = Hub;
+			sourceTree = "<group>";
+		};
+		48210CF02668EC1600AE4507 /* Calibration */ = {
+			isa = PBXGroup;
+			children = (
 				481FF001265D7D6E000DC977 /* Calibration.storyboard */,
 			);
 			path = Calibration;
 			sourceTree = "<group>";
 		};
+		48210CF12668EC2A00AE4507 /* Pool */ = {
+			isa = PBXGroup;
+			children = (
+				4880E1E926558C08006D4472 /* PoolSettings.storyboard */,
+			);
+			path = Pool;
+			sourceTree = "<group>";
+		};
 		4828D36F25C0602300F95683 /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
+				48210CF12668EC2A00AE4507 /* Pool */,
+				48210CF02668EC1600AE4507 /* Calibration */,
+				48210CED2668EBD200AE4507 /* Hub */,
 				48B421842639DC61005D0AB2 /* Flipr */,
 				489BD3D226146A14007E9BEF /* LoginAndSignup */,
 				4828D37025C0604500F95683 /* Notifications.storyboard */,
@@ -410,27 +460,6 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
-		484A1A8D264E93750007E48A /* HUBElectrical */ = {
-			isa = PBXGroup;
-			children = (
-				4880E20126558C63006D4472 /* ElectricalSetupPrepareViewController.swift */,
-				4880E20026558C63006D4472 /* ElectricalSetupViewController.swift */,
-				4880E1FF26558C63006D4472 /* HUBElectrical.storyboard */,
-				484A1A95264E93A50007E48A /* ElectricalSetupViewControllers */,
-			);
-			path = HUBElectrical;
-			sourceTree = "<group>";
-		};
-		484A1A95264E93A50007E48A /* ElectricalSetupViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				4880E1F826558C42006D4472 /* ElectricalCableSelectionViewController.swift */,
-				4880E1F726558C41006D4472 /* ElectricalVideoViewController.swift */,
-				4880E1F926558C42006D4472 /* SetupFifthStepViewController.swift */,
-			);
-			path = ElectricalSetupViewControllers;
-			sourceTree = "<group>";
-		};
 		484A1A9D264E93C00007E48A /* PoolSettings */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,7 +467,6 @@
 				4880E1E726558C08006D4472 /* PairingSuccessViewController.swift */,
 				4880E1EA26558C09006D4472 /* PoolCharacteristicsViewController.swift */,
 				4880E1EB26558C09006D4472 /* PoolLocationViewController.swift */,
-				4880E1E926558C08006D4472 /* PoolSettings.storyboard */,
 				4880E1ED26558C09006D4472 /* PoolSettingsStartViewController.swift */,
 				4880E1EC26558C09006D4472 /* PoolUsageViewController.swift */,
 			);
@@ -466,6 +494,54 @@
 			path = NewController;
 			sourceTree = "<group>";
 		};
+		4895F7562667FCF000FA8ED3 /* DeviceList */ = {
+			isa = PBXGroup;
+			children = (
+				4895F7572667FD4500FA8ED3 /* DeviceListTableViewCell.swift */,
+			);
+			path = DeviceList;
+			sourceTree = "<group>";
+		};
+		4895F75A2667FFF600FA8ED3 /* HUBOnboarding */ = {
+			isa = PBXGroup;
+			children = (
+				4895F75B2668000D00FA8ED3 /* HUBOnboardingViewController.swift */,
+				4895F75C2668000D00FA8ED3 /* OnboardingCollectionViewCell.swift */,
+			);
+			path = HUBOnboarding;
+			sourceTree = "<group>";
+		};
+		4895F7622668001700FA8ED3 /* HUBDevicePairing */ = {
+			isa = PBXGroup;
+			children = (
+				4895F7662668002B00FA8ED3 /* HUBNamingViewController.swift */,
+				4895F7632668002A00FA8ED3 /* HUBPairingSuccessViewController.swift */,
+				4895F7672668002C00FA8ED3 /* WifiListTableViewCell.swift */,
+				4895F7642668002A00FA8ED3 /* WifiListViewController.swift */,
+			);
+			path = HUBDevicePairing;
+			sourceTree = "<group>";
+		};
+		4895F7742668039600FA8ED3 /* HUBElectrical */ = {
+			isa = PBXGroup;
+			children = (
+				4895F77C266803B800FA8ED3 /* ElectricalSetupViewControllers */,
+				4895F775266803AE00FA8ED3 /* ElectricalSetupPrepareViewController.swift */,
+				4895F776266803AF00FA8ED3 /* ElectricalSetupViewController.swift */,
+			);
+			path = HUBElectrical;
+			sourceTree = "<group>";
+		};
+		4895F77C266803B800FA8ED3 /* ElectricalSetupViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4895F77D266803CF00FA8ED3 /* ElectricalCableSelectionViewController.swift */,
+				4895F77F266803D000FA8ED3 /* ElectricalVideoViewController.swift */,
+				4895F77E266803D000FA8ED3 /* SetupFifthStepViewController.swift */,
+			);
+			path = ElectricalSetupViewControllers;
+			sourceTree = "<group>";
+		};
 		48980E9F2617048E009A0F24 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,6 +562,7 @@
 			isa = PBXGroup;
 			children = (
 				489BD3D326146A33007E9BEF /* LoginSignup.storyboard */,
+				4895F7702668024D00FA8ED3 /* Signup.storyboard */,
 			);
 			path = LoginAndSignup;
 			sourceTree = "<group>";
@@ -493,6 +570,13 @@
 		489BD3D72614749D007E9BEF /* NewDesign */ = {
 			isa = PBXGroup;
 			children = (
+				4895F7742668039600FA8ED3 /* HUBElectrical */,
+				4895F7622668001700FA8ED3 /* HUBDevicePairing */,
+				4895F75A2667FFF600FA8ED3 /* HUBOnboarding */,
+				481FF000265D7D50000DC977 /* Calibration */,
+				484A1A9D264E93C00007E48A /* PoolSettings */,
+				48E3F2D62621E833005AF612 /* Signup */,
+				48F49ABA2666A42000DFB18B /* AddHub */,
 				48C9468A265AAA8700C018A7 /* Add Flipr */,
 				489BD3D9261474C1007E9BEF /* Splash */,
 				489BD3D8261474AB007E9BEF /* Login */,
@@ -545,17 +629,25 @@
 		48E3F2D62621E833005AF612 /* Signup */ = {
 			isa = PBXGroup;
 			children = (
-				484D022B26566E37002536AC /* CustomTextField.swift */,
-				484D022326566E36002536AC /* EmailVerifyMessageViewController.swift */,
-				484D022426566E36002536AC /* EmailVerifyViewController.swift */,
-				484D022A26566E37002536AC /* LoadingViewController.swift */,
-				484D022926566E37002536AC /* Signup.storyboard */,
-				484D022726566E37002536AC /* SignUpEmailController.swift */,
-				484D022526566E36002536AC /* SignUpProfileController.swift */,
-				484D022826566E37002536AC /* UIViewController+Helper.swift */,
-				484D022626566E37002536AC /* WelcomeViewController.swift */,
+				4895F7492667F4D200FA8ED3 /* CustomTextField.swift */,
+				4895F7452667F4D200FA8ED3 /* EmailVerifyMessageViewController.swift */,
+				4895F74C2667F4D300FA8ED3 /* EmailVerifyViewController.swift */,
+				4895F7462667F4D200FA8ED3 /* LoadingViewController.swift */,
+				4895F7482667F4D200FA8ED3 /* SignUpEmailController.swift */,
+				4895F74A2667F4D300FA8ED3 /* SignUpProfileController.swift */,
+				4895F74B2667F4D300FA8ED3 /* UIViewController+Helper.swift */,
+				481F362E265FF5CD00BBD858 /* WelcomeViewController.swift */,
 			);
 			path = Signup;
+			sourceTree = "<group>";
+		};
+		48F49ABA2666A42000DFB18B /* AddHub */ = {
+			isa = PBXGroup;
+			children = (
+				48F49ABB2666A44000DFB18B /* AddHubViewController.swift */,
+				48F49ABE2666B3D200DFB18B /* HubListViewController.swift */,
+			);
+			path = AddHub;
 			sourceTree = "<group>";
 		};
 		48FC118B25DFE39B001E1885 /* Devices */ = {
@@ -581,6 +673,7 @@
 		B50009821F0101BC00A84A4F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4895F7562667FCF000FA8ED3 /* DeviceList */,
 				B5FCC3472243A7410064370D /* SimplePageViewController.swift */,
 				B50009831F0101DB00A84A4F /* StockTableViewCell.swift */,
 				B5C8AF60208779C5007EB73D /* WaterLevelTableViewCell.swift */,
@@ -723,10 +816,6 @@
 		B58A37341E79859B00C67F6C /* Flipr */ = {
 			isa = PBXGroup;
 			children = (
-				481FF000265D7D50000DC977 /* Calibration */,
-				484A1A9D264E93C00007E48A /* PoolSettings */,
-				484A1A8D264E93750007E48A /* HUBElectrical */,
-				48E3F2D62621E833005AF612 /* Signup */,
 				4828D36F25C0602300F95683 /* StoryBoard */,
 				B57DE98B1F028FF300594261 /* RemoteControl.swift */,
 				B532455B1EB363770001A46F /* Omnisense.framework */,
@@ -858,7 +947,7 @@
 				TargetAttributes = {
 					B58A37311E79859B00C67F6C = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 6M9RZXR8UH;
+						DevelopmentTeam = Q6MUCXXECZ;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -897,6 +986,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5F457C024C07BF6006C309A /* GUIDE_1.mp4 in Resources */,
+				4895F77A266803AF00FA8ED3 /* HUBElectrical.storyboard in Resources */,
 				B5F457BF24C07BF6006C309A /* GUIDE_2.mp4 in Resources */,
 				B58A37401E79859B00C67F6C /* LaunchScreen.storyboard in Resources */,
 				B57131A122E9AB9300421705 /* PoolLog.storyboard in Resources */,
@@ -908,9 +998,9 @@
 				48B421882639DC8C005D0AB2 /* FliprDevice.storyboard in Resources */,
 				B58A373D1E79859B00C67F6C /* Assets.xcassets in Resources */,
 				48FC119725DFE45D001E1885 /* Devices.storyboard in Resources */,
+				4895F76A2668002D00FA8ED3 /* HUBDevicePairing.storyboard in Resources */,
 				B5CB6FE51E801D58007F82BC /* Lato-Light.ttf in Resources */,
 				B519F84F2450114F00477DD1 /* HUB.xcassets in Resources */,
-				484D023226566E38002536AC /* Signup.storyboard in Resources */,
 				B5F457C124C07BF6006C309A /* GUIDE_3.mp4 in Resources */,
 				B5CB6FE61E801D58007F82BC /* Lato-Regular.ttf in Resources */,
 				B5192FEC1F7D437A0003AD0B /* Localizable.strings in Resources */,
@@ -918,13 +1008,14 @@
 				B5CB6FE01E801A7A007F82BC /* Climacons.ttf in Resources */,
 				B5F457BE24C07BF6006C309A /* GUIDE_5.mp4 in Resources */,
 				B5F457BD24C07BF6006C309A /* GUIDE_6.mp4 in Resources */,
-				4880E20226558C63006D4472 /* HUBElectrical.storyboard in Resources */,
 				B5666B491F8F9B7E006D42EF /* InfoPlist.strings in Resources */,
 				481FF002265D7D6E000DC977 /* Calibration.storyboard in Resources */,
 				4828D37125C0604500F95683 /* Notifications.storyboard in Resources */,
 				4880E1F026558C09006D4472 /* PoolSettings.storyboard in Resources */,
+				4895F7712668024D00FA8ED3 /* Signup.storyboard in Resources */,
 				B58A373B1E79859B00C67F6C /* Main.storyboard in Resources */,
 				B5F457C224C07BF6006C309A /* GUIDE_4.mp4 in Resources */,
+				4895F7602668000E00FA8ED3 /* HUBOnboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1043,14 +1134,13 @@
 				B518F0F31E9FC0840092156C /* UIButton+Activity.swift in Sources */,
 				4880E1EF26558C09006D4472 /* DescribeMyPoolViewController.swift in Sources */,
 				4880E1F126558C09006D4472 /* PoolCharacteristicsViewController.swift in Sources */,
-				4880E1FA26558C42006D4472 /* ElectricalVideoViewController.swift in Sources */,
 				B5FE6BF1241F71E70031853D /* Extensions.swift in Sources */,
-				4880E1FB26558C42006D4472 /* ElectricalCableSelectionViewController.swift in Sources */,
+				4895F7542667F4D300FA8ED3 /* EmailVerifyViewController.swift in Sources */,
+				48F49ABC2666A44000DFB18B /* AddHubViewController.swift in Sources */,
 				B5E1F1F420872EBE008AED25 /* WaterLevelViewController.swift in Sources */,
 				B58A37381E79859B00C67F6C /* ViewController.swift in Sources */,
 				B57131A922E9F36400421705 /* LogType.swift in Sources */,
 				B59BEFAC1EA65EBD00F3AD73 /* ActivationViewController.swift in Sources */,
-				484D022D26566E38002536AC /* EmailVerifyViewController.swift in Sources */,
 				B56F2EBA1F00FD890026A962 /* Stock.swift in Sources */,
 				B5713F18241164A500278166 /* HUBManager.swift in Sources */,
 				B5BF6D6D225CCE5400FA70D5 /* SubscriptionPageViewController.swift in Sources */,
@@ -1060,25 +1150,30 @@
 				B53A7D5C1E8BB95800AC03C0 /* BLEManager.swift in Sources */,
 				4880E1F326558C09006D4472 /* PoolUsageViewController.swift in Sources */,
 				480CF2BD25DCEAA800429906 /* SettingsViewController.swift in Sources */,
-				484D023126566E38002536AC /* UIViewController+Helper.swift in Sources */,
 				4880E1F226558C09006D4472 /* PoolLocationViewController.swift in Sources */,
 				48980EA526170C15009A0F24 /* LoginEducationViewOneController.swift in Sources */,
+				4895F75E2668000E00FA8ED3 /* HUBOnboardingViewController.swift in Sources */,
+				481F3637265FF5D100BBD858 /* WelcomeViewController.swift in Sources */,
 				B5BD60281EF9574600B3A403 /* Product.swift in Sources */,
 				48691A5C265EC23500E977BB /* ChlorineCalibrationViewController.swift in Sources */,
-				4880E20326558C63006D4472 /* ElectricalSetupViewController.swift in Sources */,
+				4895F779266803AF00FA8ED3 /* ElectricalSetupViewController.swift in Sources */,
+				4895F778266803AF00FA8ED3 /* ElectricalSetupPrepareViewController.swift in Sources */,
 				482A08DA26176F6300E8F3D8 /* LoginViewController.swift in Sources */,
 				48980EA1261704C6009A0F24 /* RoundBorderedButton.swift in Sources */,
 				48A51776265E9D6D002E56DC /* CalibrationPh7IntroViewController.swift in Sources */,
+				4895F781266803D000FA8ED3 /* SetupFifthStepViewController.swift in Sources */,
+				4895F7532667F4D300FA8ED3 /* UIViewController+Helper.swift in Sources */,
+				4895F76B2668002D00FA8ED3 /* HUBNamingViewController.swift in Sources */,
 				B5BE18D524485B97006CCB1E /* LandingViewController.swift in Sources */,
 				B581672B1EB0C65B00E2CDC7 /* StartViewController.swift in Sources */,
-				484D023326566E38002536AC /* LoadingViewController.swift in Sources */,
+				4895F782266803D000FA8ED3 /* ElectricalVideoViewController.swift in Sources */,
 				B503971222C50A58005B9D30 /* FunCamViewController.swift in Sources */,
 				4880E1F426558C09006D4472 /* PoolSettingsStartViewController.swift in Sources */,
+				4895F7682668002D00FA8ED3 /* HUBPairingSuccessViewController.swift in Sources */,
 				B5BE18D724485DB8006CCB1E /* ModuleTypeSelectionViewController.swift in Sources */,
 				B5BD60261EF90F0D00B3A403 /* ProductTableViewController.swift in Sources */,
 				B5B7B00520776D0E006DF6E7 /* ActionsTableViewController.swift in Sources */,
 				B54AED031EB8B02200174870 /* ValuePickerController.swift in Sources */,
-				4880E20426558C63006D4472 /* ElectricalSetupPrepareViewController.swift in Sources */,
 				B58E73531F73EDD60066B3E5 /* String+FliprDate.swift in Sources */,
 				B5FE6BED241F71E70031853D /* Decoder.swift in Sources */,
 				481624E325DD7E750085F3C4 /* AccountViewController.swift in Sources */,
@@ -1089,9 +1184,9 @@
 				B555AF611EA959C30053163F /* EmailVerificationViewController.swift in Sources */,
 				B5F457B324C07365006C309A /* CablesSelectionViewController.swift in Sources */,
 				B52B3D2D22EEE4DE00283FD3 /* PoolLogEditViewController.swift in Sources */,
-				484D022C26566E38002536AC /* EmailVerifyMessageViewController.swift in Sources */,
 				B5EE69F71EB1F31300ABF2B7 /* StripViewController.swift in Sources */,
 				B57131A522E9E93A00421705 /* LogTableViewCell.swift in Sources */,
+				4895F74E2667F4D300FA8ED3 /* LoadingViewController.swift in Sources */,
 				B519F847244D6DF700477DD1 /* HUBScanTableViewController.swift in Sources */,
 				B59436E5225652580030F16D /* PaidSubscription.swift in Sources */,
 				B53245621EB376320001A46F /* LightNavigationViewController.swift in Sources */,
@@ -1109,17 +1204,19 @@
 				48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */,
 				B555AF5F1EA8EC720053163F /* UIView+EmptyStateView.swift in Sources */,
 				B54676C82062B8C30052E131 /* ProductAttributesViewController.swift in Sources */,
-				4880E1FC26558C42006D4472 /* SetupFifthStepViewController.swift in Sources */,
 				48B2A7EC25E19B45001CCBCC /* DeviceInfoTableViewCell.swift in Sources */,
 				4828D37525C0705200F95683 /* NotificationsAlertViewController.swift in Sources */,
 				B57DE98C1F028FF300594261 /* RemoteControl.swift in Sources */,
+				4895F780266803D000FA8ED3 /* ElectricalCableSelectionViewController.swift in Sources */,
 				B5C8AF61208779C5007EB73D /* WaterLevelTableViewCell.swift in Sources */,
 				B58A37361E79859B00C67F6C /* AppDelegate.swift in Sources */,
 				48C39C5C2618A0F5006EF569 /* ForgotPasswordViewController.swift in Sources */,
+				4895F7512667F4D300FA8ED3 /* CustomTextField.swift in Sources */,
 				B574F50A1E953D82009294EA /* Router.swift in Sources */,
 				B5E1F1F620874D51008AED25 /* ActionsViewController.swift in Sources */,
 				B574F5081E953783009294EA /* PoolViewController.swift in Sources */,
 				4887549826493B470035A242 /* DeviceSize.swift in Sources */,
+				4895F7692668002D00FA8ED3 /* WifiListViewController.swift in Sources */,
 				B5BE18D924486291006CCB1E /* HubTypeSelectionViewController.swift in Sources */,
 				B5DDDC8A1F0A6A240073E5B8 /* HistoricViewController.swift in Sources */,
 				B59436E2225652580030F16D /* SubscriptionService.swift in Sources */,
@@ -1129,7 +1226,6 @@
 				48C72BC8265C3567002042D5 /* FliperListViewController.swift in Sources */,
 				B5FE6BF0241F71E70031853D /* Encoder.swift in Sources */,
 				B55DC6BB20529F26001D1B08 /* ProductViewController.swift in Sources */,
-				484D023026566E38002536AC /* SignUpEmailController.swift in Sources */,
 				B53A7D5E1E8BFECF00AC03C0 /* Constants.swift in Sources */,
 				B5FBF6A822EB5995003FBF49 /* LogTypeTableViewController.swift in Sources */,
 				B545E0AF1EC2133E004A484E /* Alert.swift in Sources */,
@@ -1137,6 +1233,8 @@
 				B5713F1A2411667C00278166 /* HUBActivationViewController.swift in Sources */,
 				B50009841F0101DB00A84A4F /* StockTableViewCell.swift in Sources */,
 				B52A2DDB229D612900967175 /* AppReview.swift in Sources */,
+				4895F7522667F4D300FA8ED3 /* SignUpProfileController.swift in Sources */,
+				4895F75F2668000E00FA8ED3 /* OnboardingCollectionViewCell.swift in Sources */,
 				483E23C325DEB89E00D2E619 /* PasswordViewController.swift in Sources */,
 				B50BAC361EAEAF72004BE665 /* MenuViewController.swift in Sources */,
 				B519F85324534E3100477DD1 /* HUBViewController.swift in Sources */,
@@ -1146,29 +1244,31 @@
 				B54AED071EB8E17600174870 /* Pool.swift in Sources */,
 				B518F0F61E9FD6BB0092156C /* SignUpViewController.swift in Sources */,
 				B58B2A54224A7C390003BE46 /* SubscriptionTableViewController.swift in Sources */,
+				4895F76C2668002D00FA8ED3 /* WifiListTableViewCell.swift in Sources */,
 				B53C5E871E82CDA400C1C0FC /* TableViewController.swift in Sources */,
-				484D022F26566E38002536AC /* WelcomeViewController.swift in Sources */,
-				484D023426566E38002536AC /* CustomTextField.swift in Sources */,
 				B518F0EC1E9F8DD40092156C /* SignInViewController.swift in Sources */,
+				4895F7582667FD4500FA8ED3 /* DeviceListTableViewCell.swift in Sources */,
 				B518F0F41E9FC0840092156C /* UIViewController+Error.swift in Sources */,
 				484CEBA425E2DAC9005CD208 /* QuickActionViewController.swift in Sources */,
 				B5FE070F1EB9CE2800962AEE /* City.swift in Sources */,
 				48A912A225F8EC2900EF863D /* SideMenuViewController.swift in Sources */,
 				48C8E4F6265D6DC60000FDA8 /* FliprActivationSuccessViewController.swift in Sources */,
 				B57F99F61EC4510300417C0F /* Bundle+version.swift in Sources */,
-				484D022E26566E38002536AC /* SignUpProfileController.swift in Sources */,
 				B57131A322E9AE3700421705 /* PoolLogTableViewController.swift in Sources */,
 				B5FBF6A622EB2CD4003FBF49 /* PoolLogViewController.swift in Sources */,
 				B557864324897E9300B5BDCD /* Planning.swift in Sources */,
 				48C9468C265AAADC00C018A7 /* AddFliprViewController.swift in Sources */,
+				4895F7502667F4D300FA8ED3 /* SignUpEmailController.swift in Sources */,
 				B54A015C226483DA002EEC62 /* SubscriptionView.swift in Sources */,
 				B53086971F598B4600D7EFCF /* Equipment.swift in Sources */,
 				48493D6925F54259008672DD /* AppSharedData.swift in Sources */,
 				481624E625DD91F50085F3C4 /* RoundShadowView.swift in Sources */,
 				B59BEFAE1EA6663800F3AD73 /* Module.swift in Sources */,
+				48F49ABF2666B3D200DFB18B /* HubListViewController.swift in Sources */,
 				48FC118D25DFE3B1001E1885 /* DevicesViewController.swift in Sources */,
 				B53C5E851E82C72F00C1C0FC /* CityPickerViewController.swift in Sources */,
 				B555AF631EA9FE8E0053163F /* CalibrationViewController.swift in Sources */,
+				4895F74D2667F4D300FA8ED3 /* EmailVerifyMessageViewController.swift in Sources */,
 				B518F0EF1E9F90B70092156C /* User.swift in Sources */,
 				B5435AAF1EC3014600C7FF10 /* AlertViewController.swift in Sources */,
 				B5F457B124C05D4E006C309A /* VideoHelpViewController.swift in Sources */,
@@ -1323,8 +1423,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
-				DEVELOPMENT_TEAM = 6M9RZXR8UH;
+				CURRENT_PROJECT_VERSION = 16;
+				DEVELOPMENT_TEAM = Q6MUCXXECZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flipr",
@@ -1332,8 +1432,8 @@
 				INFOPLIST_FILE = Flipr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.6.9;
-				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flipr.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1355,8 +1455,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6M9RZXR8UH;
+				CURRENT_PROJECT_VERSION = 16;
+				DEVELOPMENT_TEAM = Q6MUCXXECZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flipr",
@@ -1364,8 +1464,8 @@
 				INFOPLIST_FILE = Flipr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.6.9;
-				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flipr.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

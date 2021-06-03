@@ -56,9 +56,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func customizeTheme() {
         
         self.window?.tintColor = K.Color.LightBlue
-        
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.tintColor = K.Color.LightBlue
+        navigationBarAppearance.shadowImage = UIImage()
+        navigationBarAppearance.setBackgroundImage(UIImage(), for: .default)
+        navigationBarAppearance.tintColor = K.Color.themeBlack
         navigationBarAppearance.barTintColor =  .white
         navigationBarAppearance.titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue:K.Color.DarkBlue])
         if #available(iOS 11.0, *) {

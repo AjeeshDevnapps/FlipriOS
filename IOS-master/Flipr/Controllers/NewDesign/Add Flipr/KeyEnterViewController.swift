@@ -20,6 +20,8 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
     var serialKey: String!
     var flipType: String!
     var activationKey = ""
+    var isHub = false
+    var equipmentCode:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,9 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
     
     func setupUI(){
         submitButton.isUserInteractionEnabled = false
+        if isHub{
+            submitButton.setTitle("Connecter Flipr Hub".localized(), for: .normal)
+        }
 
         otpTextField1.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
         otpTextField2.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
@@ -158,17 +163,54 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
             UIView.animate(withDuration: 0.25, animations: {
                 self.view.layoutIfNeeded()
             }) { (success) in
-                self.submitButton.showActivityIndicator(type: .ballClipRotatePulse)
-                Module.activate(serial:self.serialKey, activationKey: self.activationKey, completion: { (error) in
-                    self.submitButton.hideActivityIndicator()
-                    if error != nil {
-                        self.showError(title: "Error".localized, message: error?.localizedDescription)
-                    } else {
-                        self.showSuccessScreen()
-                    }
-                })
+                if self.isHub{
+                    self.activateHub()
+                }else{
+                    self.activateFlipr()
+                }
             }
         }
+    }
+    
+    
+    func activateFlipr(){
+        self.submitButton.showActivityIndicator(type: .ballClipRotatePulse)
+        Module.activate(serial:self.serialKey, activationKey: self.activationKey, completion: { (error) in
+            self.submitButton.hideActivityIndicator()
+            if error != nil {
+                self.showError(title: "Error".localized, message: error?.localizedDescription)
+            } else {
+                self.showSuccessScreen()
+            }
+        })
+    }
+    
+    
+    func activateHub(){
+        self.submitButton.showActivityIndicator(type: .ballClipRotatePulse)
+        HUB.activate(serial:self.serialKey, activationKey: activationKey, equipmentCode: self.equipmentCode, completion: { (error) in
+            if error != nil {
+                self.showError(title: "Error".localized, message: error?.localizedDescription)
+            } else {
+                self.showSuccess(title: nil, message: nil)
+                
+                let sb = UIStoryboard(name: "HUBDevicePairing", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "WifiListViewController") as! WifiListViewController
+                vc.serial = self.serialKey
+                self.navigationController?.pushViewController(vc)
+//                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "HUBWifiTableViewControllerID") as? HUBWifiTableViewController {
+//                    viewController.serial = self.serialKey
+//                    self.navigationController?.pushViewController(viewController, animated: true)
+//                }
+            }
+            
+            self.submitButton.hideActivityIndicator()
+            UIView.animate(withDuration: 0.25, animations: {
+                self.view.layoutIfNeeded()
+            })
+            
+        })
+
     }
     
     

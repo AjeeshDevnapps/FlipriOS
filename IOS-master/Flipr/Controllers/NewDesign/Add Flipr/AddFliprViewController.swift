@@ -21,6 +21,7 @@ class AddFliprViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         setupView()
         searchFlipr()
         // Do any additional setup after loading the view.

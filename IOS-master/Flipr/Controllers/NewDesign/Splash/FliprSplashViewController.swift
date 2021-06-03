@@ -36,14 +36,15 @@ class FliprSplashViewController: BaseViewController {
     @IBOutlet weak var logoImageViewYpost: NSLayoutConstraint!
     
     var userStatusChecking = false
+    var isAnimationCompleted = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         userStatusChecking = true
+        self.imageView.isHidden = true
         perform(#selector(showWaveAnimation), with: nil, afterDelay: 0.5)
         perform(#selector(showEducationScreen), with: nil, afterDelay: 2.0)
         addRightImage()
-        checkUserStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,8 +54,8 @@ class FliprSplashViewController: BaseViewController {
     
     @objc func showEducationScreen(){
         if userStatusChecking == false{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginEducationViewOneController") as! LoginEducationOneViewController
-            self.navigationController?.pushViewController(vc)
+//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginEducationViewOneController") as! LoginEducationOneViewController
+//            self.navigationController?.pushViewController(vc)
         }
     }
     
@@ -82,6 +83,9 @@ class FliprSplashViewController: BaseViewController {
         UIView.animate(withDuration: 0.5) {
             self.logoImageView.transform = self.logoImageView.transform.scaledBy(x: 0.8, y: 0.8)
             self.view.layoutIfNeeded()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.checkUserStatus()
+            }
         }
     }
     
@@ -89,6 +93,9 @@ class FliprSplashViewController: BaseViewController {
         
         if User.currentUser == nil {
             userStatusChecking = false
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginEducationViewOneController") as! LoginEducationOneViewController
+            self.navigationController?.pushViewController(vc)
+        
         }
         
         if let user = User.currentUser {
@@ -144,7 +151,14 @@ extension FliprSplashViewController{
     func presentLandingController(animated:Bool) {
         let hubStoryboard = UIStoryboard(name: "HUB", bundle: nil)
         let viewController = hubStoryboard.instantiateViewController(withIdentifier: "LandingViewControllerID")
-        self.navigationController?.pushViewController(viewController, animated: animated)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = false
+        } else {
+            // Fallback on earlier versions
+        }
+        self.navigationController?.setViewControllers([vc,viewController], animated: true)
+//        self.navigationController?.pushViewController(viewController, animated: animated)
     }
     
     func presentActivationController(animated:Bool) {

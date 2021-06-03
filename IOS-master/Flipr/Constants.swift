@@ -15,6 +15,7 @@ struct K {
         static let LightBlue = UIColor(red: 40/255.0, green: 154/255.0, blue: 194/255.0, alpha: 1)
         static let Green = UIColor(red: 19/255.0, green: 200/255.0, blue: 166/255.0, alpha: 1)
         static let Red = UIColor(red: 248/255.0, green: 58/255.0, blue: 89/255.0, alpha: 1)
+        static let themeBlack = UIColor.init(hexString: "111729")
     }
     struct Server {
         // PROD
@@ -42,6 +43,7 @@ struct K {
         static let BluetoothNotAvailble = Notification.Name("fr.isee-u.BluetoothNotAvailble")
         static let BluetoothOff = Notification.Name("fr.isee-u.BluetoothOff")
 
+        static let HUBNotDiscovered = Notification.Name("fr.isee-u.HUBNotDiscovered")
         static let HUBDiscovered = Notification.Name("fr.isee-u.HUBDiscovered")
         static let HUBSerialRead = Notification.Name("fr.isee-u.HUBSerialRead")
         static let HUBConnected = Notification.Name("fr.isee-u.HUBConnected")

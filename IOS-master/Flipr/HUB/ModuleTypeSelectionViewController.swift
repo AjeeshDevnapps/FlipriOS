@@ -8,14 +8,23 @@
 
 import UIKit
 
-class ModuleTypeSelectionViewController: UIViewController {
-    
+class ModuleTypeSelectionViewController: BaseViewController {
+    @IBOutlet weak var fliprView: UIView!
+    @IBOutlet weak var hubView: UIView!
+
     var allowBack = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupUI()
         // Do any additional setup after loading the view.
+    }
+    
+    func setupUI(){
+        fliprView.roundCorner(corner: 12)
+        hubView.roundCorner(corner: 12)
+        fliprView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
+        hubView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
@@ -29,9 +38,12 @@ class ModuleTypeSelectionViewController: UIViewController {
     
     
     @IBAction func hubButtonAction(_ sender: Any) {
-           if let vc = self.storyboard?.instantiateViewController(withIdentifier: "HubTypeSelectionViewControllerID") {
-               self.navigationController?.pushViewController(vc, animated: true)
-           }
+        let fliprStoryboard = UIStoryboard(name: "HUBElectrical", bundle: nil)
+        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController")
+        self.navigationController?.pushViewController(viewController, animated: true)
+//           if let vc = self.storyboard?.instantiateViewController(withIdentifier: "HubTypeSelectionViewControllerID") {
+//               self.navigationController?.pushViewController(vc, animated: true)
+//           }
            
        }
     

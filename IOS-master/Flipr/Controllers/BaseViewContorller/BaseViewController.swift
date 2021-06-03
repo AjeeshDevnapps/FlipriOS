@@ -10,12 +10,16 @@ import UIKit
 
 class BaseViewController: UIViewController {
     var backButtonTitle = ""
-    
+    let imageView = UIImageView(image: UIImage(named: "bkWaves.pdf"))
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor =  UIColor.init(hexString: "#F2F9FE")
         self.setCustomBackButton()
+        imageView.frame = CGRect(x: 0, y: self.view.height - 316, width: self.view.frame.width, height: 316)
+        view.addSubview(imageView)
+
+
         // Do any additional setup after loading the view.
     }
     
