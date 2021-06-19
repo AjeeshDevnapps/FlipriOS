@@ -7,8 +7,7 @@
 //
 
 import UIKit
-
-class SignUpProfileController: BaseViewController, UITextFieldDelegate {
+class SignUpProfileController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var firstNameTF: CustomTextField!
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var lastNameTF: CustomTextField!
@@ -20,7 +19,8 @@ class SignUpProfileController: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
-        self.title = "Complete profile".localized
+        self.title = "Complete your profile".localized
+        submitButton.isEnabled = false
         passwordTF.textType = .password
         passwordTF.addPaddingRightButton(target: self,#imageLiteral(resourceName: "reveal"),
                                          selectedImage: #imageLiteral(resourceName: "hide"),
@@ -39,7 +39,16 @@ class SignUpProfileController: BaseViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.1213650182, green: 0.1445809603, blue: 0.213222146, alpha: 1)
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
+        self.setCustomBackbtn()
         navigationController?.setNavigationBarHidden(false, animated: true)
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = false
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,6 +56,16 @@ class SignUpProfileController: BaseViewController, UITextFieldDelegate {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if firstNameTF.text != "" && lastNameTF.text != "" && passwordTF.text != "" {
+            submitButton.backgroundColor = #colorLiteral(red: 0.06643301994, green: 0.08944996446, blue: 0.162193656, alpha: 1)
+            submitButton.isEnabled = true
+        } else {
+            submitButton.backgroundColor = #colorLiteral(red: 0.4690234661, green: 0.4782367945, blue: 0.5128742456, alpha: 1)
+            submitButton.isEnabled = false
+        }
+        return true
+    }
     
     @objc func clickedOnRightView(sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -56,10 +75,22 @@ class SignUpProfileController: BaseViewController, UITextFieldDelegate {
     //MARK: - IBActions
     
     @IBAction func submitButton(_ sender: UIButton) {
-        
-        
+        guard let firstName = firstNameTF.text,
+              let lastName = lastNameTF.text,
+              let password = passwordTF.text else { return }
+        guard password.isAlphaNumeric else {
+            self.showAlert(title: "Check password", message: "Password should be alphanumeric")
+            return
+        }
+        self.view.showEmptyStateViewLoading(title: nil, message: nil)
+        User.updateUserProfile(lastName: lastName, firstName: firstName, password: password) { error in
+            self.view.hideStateView()
+            if error == nil {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
+                self.navigationController?.pushViewController(vc)
+            } else {
+                self.showError(title: "Error", message: error?.localizedDescription)
+            }
+        }
     }
-    
-    
-    
 }

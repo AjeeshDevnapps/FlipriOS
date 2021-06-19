@@ -20,6 +20,8 @@ let FliprLocationDidChange = Notification.Name("FliprLocationDidChange")
 let FliprDataPosted = Notification.Name("FliprDataDidPosted")
 
 class DashboardViewController: UIViewController {
+    @IBOutlet weak var topButton: UIButton!
+
     
     var motionManager = CMMotionManager()
     
@@ -67,7 +69,8 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var pHLabel: UILabel!
     @IBOutlet weak var pHSateView: UIView!
     @IBOutlet weak var pHStateLabel: UILabel!
-    
+    @IBOutlet weak var pHStatusImageView: UIImageView!
+
     @IBOutlet weak var orpView: UIView!
     @IBOutlet weak var orpLabel: UILabel!
     @IBOutlet weak var orpIndicatorImageView: UIImageView!
@@ -76,6 +79,8 @@ class DashboardViewController: UIViewController {
     
     @IBOutlet weak var bleStatusView: UIView!
     @IBOutlet weak var bleStatusLabel: UILabel!
+    @IBOutlet weak var bleStatusImageView: UIImageView!
+
     var pHValueCircle = CAShapeLayer()
     
     @IBOutlet weak var lastMeasureDateLabel: UILabel!
@@ -88,6 +93,9 @@ class DashboardViewController: UIViewController {
     
     @IBOutlet weak var alertCheckLabel: UILabel!
     @IBOutlet weak var subscriptionLabel: UILabel!
+    
+    @IBOutlet weak var waveView: UIView!
+
     
     
     var bleMeasureHasBeenSent = false
@@ -116,7 +124,13 @@ class DashboardViewController: UIViewController {
             let attributedTitle = NSAttributedString(string: "Alert in progress: act now!".localized, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor) : UIColor.white]))
             alertButton.setAttributedTitle(attributedTitle, for: .normal)
         }
-        
+        topButton.layer.borderColor = UIColor.init(hexString: "111729").cgColor
+        topButton.layer.borderWidth = 2.0
+        topButton.roundCorner(corner: topButton.frame.size.height / 2 )
+        uvView.roundCorner(corner: 6)
+        uvView.layer.borderColor = UIColor.init(hexString: "111729").cgColor
+        uvView.layer.borderWidth = 1.0
+
         shareButton.setTitle("share".localized, for: .normal)
         airLabel.text = "air".localized
         waterLabel.text = "water".localized
@@ -158,11 +172,14 @@ class DashboardViewController: UIViewController {
         }
         
         NotificationCenter.default.addObserver(forName: K.Notifications.UserDidLogout, object: nil, queue: nil) { (notification) in
-            self.dismiss(animated: true, completion: nil)
+            self.showLoginScreen()
+
+            //            self.dismiss(animated: true, completion: nil)
         }
         
         NotificationCenter.default.addObserver(forName: K.Notifications.SessionExpired, object: nil, queue: nil) { (notification) in
-            self.dismiss(animated: true, completion: nil)
+//            self.dismiss(animated: true, completion: nil)
+            self.showLoginScreen()
             User.logout()
         }
         
@@ -274,6 +291,14 @@ class DashboardViewController: UIViewController {
         } else {
             // Fallback on earlier versions
         }
+    }
+    
+    
+    func showLoginScreen(){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let loginSb = UIStoryboard(name: "LoginSignup", bundle: nil)
+        let loginNav = loginSb.instantiateViewController(withIdentifier: "LoginNavigation")
+        appDelegate.window?.rootViewController = loginNav
     }
     
     @objc func callGetStatusApis(){
@@ -391,7 +416,8 @@ class DashboardViewController: UIViewController {
     }
     
     func setupInitialView() {
-        var fluidColor =  UIColor.init(red: 40/255.0, green: 154/255.0, blue: 194/255.0, alpha: 1)
+      //  var fluidColor =  UIColor.init(red: 40/255.0, green: 154/255.0, blue: 194/255.0, alpha: 1)
+        var fluidColor =  UIColor.init(hexString: "FA63BA")
         
         if let module = Module.currentModule {
             if module.isForSpa {
@@ -414,7 +440,11 @@ class DashboardViewController: UIViewController {
         
         pHSateView.layer.cornerRadius = pHSateView.bounds.height/2
         orpStateView.layer.cornerRadius = orpStateView.bounds.height/2
-        
+        pHSateView.layer.borderWidth = 2
+        pHSateView.layer.borderColor = UIColor.white.cgColor
+        orpStateView.layer.borderWidth = 2
+        orpStateView.layer.borderColor = UIColor.white.cgColor
+
         
         if Device.size() == Size.screen3_5Inch || Device.size() == Size.screen4Inch {
             orpViewRightConstraint.constant = 8
@@ -465,10 +495,10 @@ class DashboardViewController: UIViewController {
         
         
         let startElevation = 0.67
-        temperaturesTopConstraint.constant = self.view.frame.height * (1 - CGFloat(startElevation)) + 20
+//        temperaturesTopConstraint.constant = self.view.frame.height * (1 - CGFloat(startElevation)) + 20
         if #available(iOS 11.0, tvOS 11.0, *) {
             if (UIApplication.shared.delegate?.window??.safeAreaInsets.top)! > CGFloat(20) { // hasTopNotch
-                temperaturesTopConstraint.constant = self.view.frame.height * (1 - CGFloat(startElevation))
+//                temperaturesTopConstraint.constant = self.view.frame.height * (1 - CGFloat(startElevation))
             }
         }
         
@@ -477,20 +507,20 @@ class DashboardViewController: UIViewController {
         //        let frame = self.view.frame
         var fluidView1 = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  startElevation))
         fluidView1.strokeColor = .clear
-        fluidView1.fillColor = UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
+        fluidView1.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
         fluidView1.fill(to: NSNumber(floatLiteral: startElevation))
         fluidView1.startAnimation()
-        //            fluidView1.clipsToBounds = true
+        fluidView1.clipsToBounds = true
         
-        self.view.insertSubview(fluidView1, belowSubview: backgroundOverlayImageView)
+        self.waveView.insertSubview(fluidView1, belowSubview: backgroundOverlayImageView)
         
         var fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: startElevation))
         fluidView.strokeColor = .clear
         fluidView.fillColor = fluidColor
         fluidView.fill(to: NSNumber(floatLiteral: startElevation))
         fluidView.startAnimation()
-        //            fluidView.clipsToBounds = true
-        self.view.insertSubview(fluidView, aboveSubview: fluidView1)
+        fluidView.clipsToBounds = true
+        self.waveView.insertSubview(fluidView, aboveSubview: fluidView1)
         
         /*
          let particleEmitter = CAEmitterLayer()
@@ -890,6 +920,7 @@ class DashboardViewController: UIViewController {
             }
             
             var i = 0
+            /*
             for alert in priorityAlerts {
                 if i == 0 {
                     self.alert0Button.alert = alert
@@ -913,6 +944,7 @@ class DashboardViewController: UIViewController {
                 }
                 i = i + 1
             }
+            */
             
         })
         
@@ -1236,7 +1268,7 @@ class DashboardViewController: UIViewController {
                         
                         if let tendency = current["Tendancy"] as? Double {
                             if tendency >= 1 {
-                                self.waterTendencyImageView.image = UIImage(named: "arrow_eau_up")
+                                self.waterTendencyImageView.image = UIImage(named: "arrow-up-right")
                                 self.waterTendencyImageView.isHidden = false
                             } else if  tendency <= -1 {
                                 self.waterTendencyImageView.image = UIImage(named: "arrow_eau_down")
@@ -1290,20 +1322,35 @@ class DashboardViewController: UIViewController {
                                 
                                 
                                 if deviation >= 1 {
-                                    self.pHSateView.backgroundColor = K.Color.Red
+                                    self.pHSateView.backgroundColor = K.Color.white
+                                    self.pHStateLabel.textColor = .black
+                                    self.pHStatusImageView.image = #imageLiteral(resourceName: "Material Icon Font")
                                 } else if deviation <= -1 {
-                                    self.pHSateView.backgroundColor = K.Color.Red
+                                    self.pHSateView.backgroundColor = K.Color.white
+                                    self.pHStatusImageView.image = #imageLiteral(resourceName: "Material Icon Font")
+                                    self.pHStateLabel.textColor = .black
                                 } else {
-                                    self.pHSateView.backgroundColor = K.Color.Green
+                                    self.pHSateView.backgroundColor = K.Color.clear
+                                    self.pHStateLabel.textColor = .white
+                                    self.pHStatusImageView.image = UIImage(named:"thumbs-up")
+
                                 }
                                 
                                 if let sector = pH["DeviationSector"] as? String {
                                     if sector == "TooHigh" || sector == "TooLow" {
-                                        self.pHSateView.backgroundColor = K.Color.Red
+                                        self.pHSateView.backgroundColor = K.Color.white
+                                        self.pHStatusImageView.image = #imageLiteral(resourceName: "Material Icon Font")
+                                        self.pHStateLabel.textColor = .black
+
                                     } else if sector == "MediumHigh" || sector == "MediumLow" {
-                                        self.pHSateView.backgroundColor = K.Color.Green
+                                        self.pHSateView.backgroundColor = K.Color.clear
+                                        self.pHStateLabel.textColor = .white
+                                        self.pHStatusImageView.image = UIImage(named:"thumbs-up")
+
                                     } else if sector == "Medium" {
-                                        self.pHSateView.backgroundColor = K.Color.Green
+                                        self.pHSateView.backgroundColor = K.Color.clear
+                                        self.pHStateLabel.textColor = .white
+                                        self.pHStatusImageView.image = UIImage(named:"thumbs-up")
                                     }
                                 }
                                 
@@ -1314,7 +1361,7 @@ class DashboardViewController: UIViewController {
                                 
                                 self.pHValueCircle.path = UIBezierPath(arcCenter: CGPoint(x: self.pHView.bounds.width/2, y: 84), radius: 66, startAngle: startAngle, endAngle: endAngle, clockwise: true).cgPath
                                 self.pHValueCircle.fillColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
-                                self.pHValueCircle.strokeColor = UIColor(red: 39/255, green: 226/255, blue: 253/255, alpha: 1).cgColor
+                                self.pHValueCircle.strokeColor = UIColor.init(hexString: "111729").cgColor //UIColor(red: 39/255, green: 226/255, blue: 253/255, alpha: 1).cgColor
                                 self.pHValueCircle.lineWidth = 8
                                 self.pHValueCircle.lineCap = CAShapeLayerLineCap.round
                                 self.pHValueCircle.strokeEnd = 0.0
@@ -1331,6 +1378,13 @@ class DashboardViewController: UIViewController {
                                 
                                 self.pHValueCircle.strokeEnd = CGFloat(value) / 14
                                 self.pHValueCircle.add(drawAnimation, forKey: "drawPHValueCircleAnimation")
+                                
+//                               let track = UIBezierPath(arcCenter: CGPoint(x: self.pHView.bounds.width/2, y: 84), radius: 66, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+//                                let bkColr = UIColor.white.withAlphaComponent(0.2)
+//                                bkColr.setStroke()
+//                                track.lineWidth = 8
+//
+//                                track.stroke()
                                 
                                 UIView.animate(withDuration: 0.5, animations: {
                                     self.pHView.alpha = 1
@@ -1382,25 +1436,44 @@ class DashboardViewController: UIViewController {
                                 
                                 let maxAngle = Double.pi/5.7
                                 var gaugeAngle:CGFloat = 0
-                                
+                                   
                                 if deviation >= 1 {
-                                    self.orpStateView.backgroundColor = K.Color.Red
+                                    self.orpStateView.backgroundColor = K.Color.white
+                                    self.orpStateLabel.textColor = .black
+                                    self.bleStatusImageView.image = #imageLiteral(resourceName: "Material Icon Font")
                                     gaugeAngle = -CGFloat(maxAngle)
                                 } else if deviation <= -1 {
-                                    self.orpStateView.backgroundColor = K.Color.Red
+                                    self.orpStateView.backgroundColor = K.Color.white
+                                    self.bleStatusImageView.image = #imageLiteral(resourceName: "Material Icon Font")
+                                    self.orpStateLabel.textColor = .black
+                                    
                                     gaugeAngle = CGFloat(maxAngle)
                                 } else {
                                     gaugeAngle = -CGFloat(deviation*maxAngle)
-                                    self.orpStateView.backgroundColor = K.Color.Green
+                                    self.orpStateView.backgroundColor = K.Color.clear
+                                    self.orpStateLabel.textColor = .white
+                                    self.bleStatusImageView.image = UIImage(named:"thumbs-up")
+
+
                                 }
                                 
                                 if let sector = orp["DeviationSector"] as? String {
                                     if sector == "TooHigh" || sector == "TooLow" {
-                                        self.orpStateView.backgroundColor = K.Color.Red
+                                        self.orpStateView.backgroundColor = K.Color.white
+                                        self.bleStatusImageView.image = #imageLiteral(resourceName: "Material Icon Font")
+                                        self.orpStateLabel.textColor = .black
                                     } else if sector == "MediumHigh" || sector == "MediumLow" {
-                                        self.orpStateView.backgroundColor = K.Color.Green
+                                        self.orpStateView.backgroundColor = K.Color.clear
+                                        self.orpStateLabel.textColor = .white
+                                        self.bleStatusImageView.image = #imageLiteral(resourceName: "Material Icon Font")
+
+
                                     } else if sector == "Medium" {
-                                        self.orpStateView.backgroundColor = K.Color.Green
+                                        self.orpStateView.backgroundColor = K.Color.clear
+                                        self.orpStateLabel.textColor = .white
+                                        self.bleStatusImageView.image = #imageLiteral(resourceName: "Material Icon Font")
+
+
                                     }
                                 }
                                 

@@ -15,10 +15,9 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor =  UIColor.init(hexString: "#F2F9FE")
-        self.setCustomBackButton()
         imageView.frame = CGRect(x: 0, y: self.view.height - 316, width: self.view.frame.width, height: 316)
         view.addSubview(imageView)
-
+        setCustomBackButton()
 
         // Do any additional setup after loading the view.
     }
@@ -29,15 +28,19 @@ class BaseViewController: UIViewController {
 //            navigationItem.backBarButtonItem = UIBarButtonItem(
 //                title: backButtonTitle, style: .plain, target: nil, action: nil)
 //        }
+////
+//        let backImage = UIImage(named: "chevron-left")
 //
-        let backImage = UIImage(named: "chevron-left")
-
-        self.navigationController?.navigationBar.backIndicatorImage = backImage
-
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
-
-        /*** If needed Assign Title Here ***/
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: backButtonTitle, style:.plain, target: self, action:#selector(backButtonTapped))
+//        self.navigationController?.navigationBar.backIndicatorImage = backImage
+//
+//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+//
+//        /*** If needed Assign Title Here ***/
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: backButtonTitle, style:.plain, target: self, action:#selector(backButtonTapped))
+        
+        let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "arrow_back-1"), style: .plain, target: self, action: #selector(backButtonTapped))
+        backButton.tintColor = .black
+        self.navigationItem.setLeftBarButton(backButton, animated: false)
     }
     
     

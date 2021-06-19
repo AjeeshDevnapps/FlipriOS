@@ -140,6 +140,13 @@ class FliprSplashViewController: BaseViewController {
 extension FliprSplashViewController{
     
     func presentDashboard(animated:Bool) {
+//        let mainSB = UIStoryboard.init(name: "Dashboard", bundle: nil)
+//        let dashboard = mainSB.instantiateViewController(withIdentifier: "NewDashboardViewController")
+//        dashboard.modalTransitionStyle = .flipHorizontal
+//        dashboard.modalPresentationStyle = .fullScreen
+//        self.present(dashboard, animated: animated, completion: {
+//        })
+//
         let mainSB = UIStoryboard.init(name: "Main", bundle: nil)
         let dashboard = mainSB.instantiateViewController(withIdentifier: "DashboardViewControllerID")
         dashboard.modalTransitionStyle = .flipHorizontal

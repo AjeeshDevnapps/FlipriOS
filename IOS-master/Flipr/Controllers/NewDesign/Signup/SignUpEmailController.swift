@@ -9,17 +9,28 @@
 import Foundation
 import ActiveLabel
 import SafariServices
+import IQKeyboardManagerSwift
 
-class SignUpEmailController: BaseViewController, UITextFieldDelegate {
+class SignUpEmailController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var descriptionText: ActiveLabel!
     @IBOutlet weak var textField: CustomTextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var titleForTextField: UILabel!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var controllerTitle: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         UISetup()
+        
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.enable = false
+
+        navigationController?.isNavigationBarHidden = true
+        
+        controllerTitle.text = "Create Account".localized
+        backButton.setTitle("Login".localized.localized, for: .normal)
         
         let cguType = ActiveType.custom(pattern: "\\s" + "Terms of Use".localized + "\\b")
         let pudType = ActiveType.custom(pattern: "\\s" + "Data Use Policy".localized + "\\b")
@@ -40,35 +51,20 @@ class SignUpEmailController: BaseViewController, UITextFieldDelegate {
         }
         
         descriptionText.text = "By validating, you agree to the Terms of Use and the Data Use Policy.".localized
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        } else {
-            // Fallback on earlier versions
-        }
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = false
-        } else {
-            // Fallback on earlier versions
-        }
+        
+        IQKeyboardManager.shared.enableAutoToolbar = true
+        IQKeyboardManager.shared.enable = true
     }
-    
     
     //MARK:- Custom Actions
     
     func UISetup() {
         self.title = "Create Account".localized()
-        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.1213650182, green: 0.1445809603, blue: 0.213222146, alpha: 1)
-        self.navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
 
         titleForTextField.text = "Email Address".localized()
@@ -76,18 +72,23 @@ class SignUpEmailController: BaseViewController, UITextFieldDelegate {
         textField.placeholder = "email@address.com".localized()
         
         textField.addTarget(self, action: #selector(updateTextFieldAppearance), for: .editingChanged)
+        textField.addTarget(self, action: #selector(hideKeybaord), for: .editingDidEndOnExit)
+
         textField.layer.cornerRadius = 5
         textField.externalDelegate = self
         
         self.signUpButton.layer.cornerRadius = 12
     }
     
-    
     @objc func updateTextFieldAppearance() {
         signUpButton.backgroundColor = (textField.text != "") ? #colorLiteral(red: 0.06643301994, green: 0.08944996446, blue: 0.162193656, alpha: 1) : #colorLiteral(red: 0.4690234661, green: 0.4782367945, blue: 0.5128742456, alpha: 1)
     }
     
+    @objc func hideKeybaord() {
+        textField.resignFirstResponder()
+    }
     
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool
     //MARK:-  IBActions
     @IBAction func signUp(_ sender: UIButton) {
         let enteredEmail = textField.text ?? ""
@@ -98,5 +99,10 @@ class SignUpEmailController: BaseViewController, UITextFieldDelegate {
         } else {
             showAlert(title: "Email incorrect".localized, message: "Invalid email address format".localized)
         }
+    }
+    
+    @IBAction func backAction(_ sender: UIButton) {
+        
+        goBack()
     }
 }

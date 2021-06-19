@@ -22,6 +22,7 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
     var activationKey = ""
     var isHub = false
     var equipmentCode:String!
+    var fliprAddingError = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +65,14 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
         textField.layer.borderColor =  grayBorder
     }
     
-    
+    @objc override func backButtonTapped() {
+        if fliprAddingError{
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 4], animated: true)
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
     
     func blackborder(textField:UITextField){
         textField.layer.borderColor =  blackBorder
@@ -178,6 +186,7 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
         Module.activate(serial:self.serialKey, activationKey: self.activationKey, completion: { (error) in
             self.submitButton.hideActivityIndicator()
             if error != nil {
+                self.fliprAddingError = true
                 self.showError(title: "Error".localized, message: error?.localizedDescription)
             } else {
                 self.showSuccessScreen()
@@ -190,6 +199,7 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
         self.submitButton.showActivityIndicator(type: .ballClipRotatePulse)
         HUB.activate(serial:self.serialKey, activationKey: activationKey, equipmentCode: self.equipmentCode, completion: { (error) in
             if error != nil {
+                self.fliprAddingError = true
                 self.showError(title: "Error".localized, message: error?.localizedDescription)
             } else {
                 self.showSuccess(title: nil, message: nil)

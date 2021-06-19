@@ -21,6 +21,7 @@ class ModuleTypeSelectionViewController: BaseViewController {
     }
     
     func setupUI(){
+       
         fliprView.roundCorner(corner: 12)
         hubView.roundCorner(corner: 12)
         fliprView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)

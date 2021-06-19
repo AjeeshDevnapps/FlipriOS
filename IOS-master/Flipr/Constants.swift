@@ -16,6 +16,9 @@ struct K {
         static let Green = UIColor(red: 19/255.0, green: 200/255.0, blue: 166/255.0, alpha: 1)
         static let Red = UIColor(red: 248/255.0, green: 58/255.0, blue: 89/255.0, alpha: 1)
         static let themeBlack = UIColor.init(hexString: "111729")
+        static let white = UIColor.white
+        static let clear = UIColor.clear
+
     }
     struct Server {
         // PROD

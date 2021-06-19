@@ -68,7 +68,7 @@ class LandingViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.1213650182, green: 0.1445809603, blue: 0.213222146, alpha: 1)
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
 
-        self.setCustomBackbtn()
+//        self.setCustomBackbtn()
         
         statrVw.roundCorner(corner: 12)
         hubVw.roundCorner(corner: 12)

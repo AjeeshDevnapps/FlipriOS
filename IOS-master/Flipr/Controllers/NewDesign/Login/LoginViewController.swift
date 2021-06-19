@@ -117,36 +117,7 @@ class LoginViewController: BaseViewController {
                         Module.saveCurrentModuleLocally()
                         self.presentDashboard(animated: false)
                         
-                        /*
-                        let alertController = UIAlertController(title: "Calibration".localized, message: "Have you ever done a calibration of your Flipr?".localized, preferredStyle: UIAlertControllerStyle.alert)
-                        
-                        let cancelAction =  UIAlertAction(title: "Yes".localized, style: UIAlertActionStyle.cancel) {(result : UIAlertAction) -> Void in
-                            
-                            Module.currentModule?.pH7CalibrationDone = true
-                            Module.currentModule?.pH4CalibrationDone = true
-                            Module.saveCurrentModuleLocally()
-                            
-                            let alertController = UIAlertController(title: "Test strip calibration".localized, message: "Have you ever done the test strip calibration?".localized, preferredStyle: UIAlertControllerStyle.alert)
-                            
-                            let cancelAction =  UIAlertAction(title: "Yes".localized, style: UIAlertActionStyle.cancel) {(result : UIAlertAction) -> Void in
-                                self.presentDashboard(animated: false)
-                            }
-                            
-                            let okAction = UIAlertAction(title: "No, never".localized, style: UIAlertActionStyle.default) {(result : UIAlertAction) -> Void in
-                                self.presentStripController(animated: true)
-                            }
-                            alertController.addAction(cancelAction)
-                            alertController.addAction(okAction)
-                            self.present(alertController, animated: true, completion: nil)
-                        }
-                        
-                        let okAction = UIAlertAction(title: "No, never".localized, style: UIAlertActionStyle.default) {(result : UIAlertAction) -> Void in
-                            self.presentCalibrationViewController(type: .ph7, animated: true)
-                        }
-                        alertController.addAction(cancelAction)
-                        alertController.addAction(okAction)
-                        self.present(alertController, animated: true, completion: nil)
-                        */
+                       
                     } else if User.currentUser?.isActivated == false {
                         //self.presentEmailVerificationController(animated: false)
                         if let emailVerificationViewController = self.storyboard?.instantiateViewController(withIdentifier: "EmailVerificationViewControllerID") as? EmailVerificationViewController {
@@ -174,15 +145,22 @@ class LoginViewController: BaseViewController {
     
     
     func presentDashboard(animated:Bool) {
+       /*
+        let mainSB = UIStoryboard.init(name: "Dashboard", bundle: nil)
+        let dashboard = mainSB.instantiateViewController(withIdentifier: "NewDashboardViewController")
+        dashboard.modalTransitionStyle = .flipHorizontal
+        dashboard.modalPresentationStyle = .fullScreen
+        self.present(dashboard, animated: animated, completion: {
+        })
+        */
+        
         let mainSB = UIStoryboard.init(name: "Main", bundle: nil)
-         let dashboard = mainSB.instantiateViewController(withIdentifier: "DashboardViewControllerID") 
-            dashboard.modalTransitionStyle = .flipHorizontal
-            dashboard.modalPresentationStyle = .fullScreen
-            self.present(dashboard, animated: animated, completion: {
-//                self.signInStackView.alpha = 1
-            })
-            
-//        }
+        let dashboard = mainSB.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+        dashboard.modalTransitionStyle = .flipHorizontal
+        dashboard.modalPresentationStyle = .fullScreen
+        self.present(dashboard, animated: animated, completion: {
+        })
+    
     }
     
     func presentLandingController(animated:Bool) {
