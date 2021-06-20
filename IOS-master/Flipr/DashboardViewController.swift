@@ -23,7 +23,6 @@ let FliprDataPosted = Notification.Name("FliprDataDidPosted")
 class DashboardViewController: UIViewController {
     @IBOutlet weak var topButton: UIButton!
 
-    
     var motionManager = CMMotionManager()
     
     @IBOutlet weak var backgroundImageView: UIImageView!
@@ -96,6 +95,8 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var subscriptionLabel: UILabel!
     
     @IBOutlet weak var waveView: UIView!
+    @IBOutlet weak var gradiantView: UIView!
+
     @IBOutlet weak var circularSlider: MSCircularSlider!
 
     
@@ -507,22 +508,22 @@ class DashboardViewController: UIViewController {
         let frame = CGRect(x: -(self.view.frame.height - self.view.frame.width)/2 - 50, y: 0, width: sqrt(self.view.frame.height * self.view.frame.height + self.view.frame.width * self.view.frame.width) + 100, height: self.view.frame.height + 100)
         //        let frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: self.view.frame.height + 100)
         //        let frame = self.view.frame
-        var fluidView1 = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  1))
+        var fluidView1 = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  startElevation))
         fluidView1.strokeColor = .clear
         fluidView1.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
-        fluidView1.fill(to: NSNumber(floatLiteral: 1))
+        fluidView1.fill(to: NSNumber(floatLiteral: startElevation))
         fluidView1.startAnimation()
        // fluidView1.clipsToBounds = true
         
-        self.waveView.insertSubview(fluidView1, belowSubview: backgroundOverlayImageView)
+        self.view.insertSubview(fluidView1, belowSubview: backgroundOverlayImageView)
         
-        var fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: 1))
+        var fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: startElevation))
         fluidView.strokeColor = .clear
         fluidView.fillColor = fluidColor
-        fluidView.fill(to: NSNumber(floatLiteral: 1))
+        fluidView.fill(to: NSNumber(floatLiteral: startElevation))
         fluidView.startAnimation()
      //   fluidView.clipsToBounds = true
-        self.waveView.insertSubview(fluidView, aboveSubview: fluidView1)
+        self.view.insertSubview(fluidView, aboveSubview: fluidView1)
         
         /*
          let particleEmitter = CAEmitterLayer()
@@ -540,7 +541,7 @@ class DashboardViewController: UIViewController {
          fluidView.layer.addSublayer(particleEmitter)
          */
         
-        
+       // setGradientBackground()
         motionManager.deviceMotionUpdateInterval = 0.01
         motionManager.startDeviceMotionUpdates(to: .main) {
             [weak self] (data, error) in
@@ -576,6 +577,17 @@ class DashboardViewController: UIViewController {
         pHView.layer.addSublayer(pHCircle)
         */
     }
+    
+    func setGradientBackground(){
+           let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor(hexString: "FFB779").cgColor,UIColor(hexString:"FF62B9").cgColor,UIColor(hexString: "2481D7").cgColor,UIColor(hexString: "1DDCC5").cgColor]
+        gradientLayer.locations = [0,-10.67,1.4,0]
+           gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
+           gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+           gradientLayer.locations = [0, 1]
+            gradientLayer.frame = self.gradiantView.bounds
+        self.gradiantView.layer.insertSublayer(gradientLayer, at: 0)
+   }
     
     @objc func refresh() {
         
