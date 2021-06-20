@@ -67,7 +67,17 @@ class AddHubViewController: BaseViewController {
         HUBManager.shared.scanForHubs(serials: nil) { (hubInfo) in
             print("HUB detected: \(hubInfo.keys.first ?? "???")")
             self.hubs = hubInfo
+            self.showHubList()
         }
+    }
+    
+    func showHubList(){
+        HUBManager.shared.stopScanForHubs()
+        HUBManager.shared.detectedHubs.removeAll()
+        let  hubListVC = self.storyboard?.instantiateViewController(withIdentifier: "HubListViewController") as! HubListViewController
+        hubListVC.hubs = self.hubs
+        self.navigationController?.pushViewController(hubListVC)
+        
     }
     
     @IBAction func scanButtonAction(_ sender: Any) {

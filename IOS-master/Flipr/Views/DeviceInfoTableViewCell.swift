@@ -22,14 +22,21 @@ class DeviceInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var modelTitleLabel: UILabel!
     @IBOutlet weak var serialTitleLabel: UILabel!
     @IBOutlet weak var keyIdTitleLabel: UILabel!
+    @IBOutlet weak var shadowView: UIView!
 
 
     override func awakeFromNib() {
         super.awakeFromNib()
         modelTitleLabel.text = "Model".localized
-        serialTitleLabel.text = "Serial Number".localized
-        keyIdTitleLabel.text = "Key ID".localized
-        titleLabel.text = "Details".localized
+        if serialTitleLabel != nil{
+            serialTitleLabel.text = "Serial Number".localized
+        }
+        if keyIdTitleLabel != nil{
+            keyIdTitleLabel.text = "Key ID".localized
+        }
+        if titleLabel != nil{
+            titleLabel.text = "Details".localized
+        }
 
         // Initialization code
     }

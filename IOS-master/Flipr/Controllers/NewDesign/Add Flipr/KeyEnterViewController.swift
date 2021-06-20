@@ -87,7 +87,7 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
         }
         if otpTextField4 != textField{
             otpTextField4.layer.borderColor =  grayBorder
-            otpTextField4.layer.borderWidth = 1
+//            otpTextField4.layer.borderWidth = 1
         }
         if otpTextField5 != textField{
             otpTextField5.layer.borderColor =  grayBorder
@@ -196,6 +196,7 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
     
     
     func activateHub(){
+        self.equipmentCode = "\(AppSharedData.sharedInstance.selectedEquipmentCode)"
         self.submitButton.showActivityIndicator(type: .ballClipRotatePulse)
         HUB.activate(serial:self.serialKey, activationKey: activationKey, equipmentCode: self.equipmentCode, completion: { (error) in
             if error != nil {

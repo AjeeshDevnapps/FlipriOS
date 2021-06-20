@@ -433,6 +433,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="-" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nss-8j-YWR">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="48"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="A0w-xk-iOT"/>
                                             <constraint firstAttribute="width" constant="44" id="GkH-ag-9gr"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -454,8 +455,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="-" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Li-eo-a9k" customClass="CustomTextField" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="140" y="0.0" width="44" height="48"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="-" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Li-eo-a9k">
+                                        <rect key="frame" x="144" y="0.0" width="44" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="hOe-7E-xFR"/>
                                         </constraints>
@@ -463,7 +464,7 @@
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="-" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="99b-vz-if3">
-                                        <rect key="frame" x="188" y="0.0" width="44" height="48"/>
+                                        <rect key="frame" x="192" y="0.0" width="44" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="viY-W1-bQR"/>
                                         </constraints>
@@ -481,13 +482,15 @@
                                     <constraint firstAttribute="bottom" secondItem="C9v-Xp-eKr" secondAttribute="bottom" id="Moj-fc-G1j"/>
                                     <constraint firstItem="Nss-8j-YWR" firstAttribute="top" secondItem="Aa4-8M-Uih" secondAttribute="top" id="OeU-Xi-njD"/>
                                     <constraint firstItem="Iay-Ja-kWG" firstAttribute="top" secondItem="Aa4-8M-Uih" secondAttribute="top" id="QAj-LB-wMJ"/>
-                                    <constraint firstItem="9Li-eo-a9k" firstAttribute="leading" secondItem="Iay-Ja-kWG" secondAttribute="trailing" id="QRS-BQ-Qvl"/>
+                                    <constraint firstItem="C9v-Xp-eKr" firstAttribute="leading" secondItem="Nss-8j-YWR" secondAttribute="trailing" constant="4" id="RF3-WK-lAN"/>
                                     <constraint firstItem="99b-vz-if3" firstAttribute="top" secondItem="Aa4-8M-Uih" secondAttribute="top" id="W9l-FP-RT1"/>
                                     <constraint firstAttribute="bottom" secondItem="Nss-8j-YWR" secondAttribute="bottom" id="Y8l-RP-648"/>
                                     <constraint firstItem="Nss-8j-YWR" firstAttribute="leading" secondItem="Aa4-8M-Uih" secondAttribute="leading" id="bOL-v9-bjz"/>
                                     <constraint firstItem="C9v-Xp-eKr" firstAttribute="leading" secondItem="Nss-8j-YWR" secondAttribute="trailing" constant="4" id="eiG-GI-MN4"/>
+                                    <constraint firstItem="9Li-eo-a9k" firstAttribute="leading" secondItem="Iay-Ja-kWG" secondAttribute="trailing" constant="4" id="h2h-8m-nAd"/>
                                     <constraint firstItem="99b-vz-if3" firstAttribute="leading" secondItem="9Li-eo-a9k" secondAttribute="trailing" constant="4" id="kR0-tZ-X3d"/>
                                     <constraint firstItem="C9v-Xp-eKr" firstAttribute="top" secondItem="Aa4-8M-Uih" secondAttribute="top" id="ka2-14-xYh"/>
+                                    <constraint firstAttribute="trailing" secondItem="99b-vz-if3" secondAttribute="trailing" id="oji-No-0LH"/>
                                     <constraint firstAttribute="bottom" secondItem="Iay-Ja-kWG" secondAttribute="bottom" id="swK-Io-zNy"/>
                                     <constraint firstAttribute="height" constant="48" id="uka-3f-CtG"/>
                                 </constraints>
@@ -773,7 +776,7 @@
         <!--Hub List View Controller-->
         <scene sceneID="gYG-LZ-DBt">
             <objects>
-                <viewController id="Y0d-iZ-kIx" customClass="HubListViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HubListViewController" id="Y0d-iZ-kIx" customClass="HubListViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VX3-Tu-ers">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -785,11 +788,11 @@
                                     <constraint firstAttribute="height" constant="160" id="gL0-Ye-XQy"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7fe-wg-8zj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7fe-wg-8zj">
                                 <rect key="frame" x="16" y="314.5" width="382" height="581.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Edo-xH-dJj">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DeviceInfoTableViewCell" id="Edo-xH-dJj" customClass="DeviceInfoTableViewCell" customModule="Flipr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="382" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Edo-xH-dJj" id="GQf-jN-cbn">
@@ -830,38 +833,18 @@
                                                                 <constraint firstAttribute="height" constant="24" id="oTB-Gn-Rho"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMD-9d-zLt">
-                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="80"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                            <state key="normal">
-                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </state>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="color" keyPath="titleColorForDisabled">
-                                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                            <connections>
-                                                                <action selector="necxtButtonAction" destination="Zw7-uS-f0N" eventType="touchUpInside" id="1eF-m9-SSV"/>
-                                                            </connections>
-                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="RVE-jb-NBO" firstAttribute="centerY" secondItem="Brx-Ma-FHA" secondAttribute="centerY" id="3FI-BQ-Q2s"/>
-                                                        <constraint firstItem="jMD-9d-zLt" firstAttribute="top" secondItem="Brx-Ma-FHA" secondAttribute="top" id="9dl-sR-B2i"/>
                                                         <constraint firstAttribute="trailing" secondItem="RVE-jb-NBO" secondAttribute="trailing" constant="34" id="ClZ-Kr-XAj"/>
                                                         <constraint firstAttribute="height" constant="80" id="DTt-Qi-XZD"/>
-                                                        <constraint firstAttribute="trailing" secondItem="jMD-9d-zLt" secondAttribute="trailing" id="Esc-zh-cUf"/>
                                                         <constraint firstItem="viB-nf-YAJ" firstAttribute="leading" secondItem="Brx-Ma-FHA" secondAttribute="leading" constant="24" id="EwP-UA-JIO"/>
                                                         <constraint firstItem="viB-nf-YAJ" firstAttribute="top" secondItem="Brx-Ma-FHA" secondAttribute="top" constant="16" id="QA4-hd-2kR"/>
                                                         <constraint firstItem="VhL-rY-ZPp" firstAttribute="leading" secondItem="0xq-lW-lmc" secondAttribute="trailing" constant="30" id="Qwg-6r-s9Z"/>
-                                                        <constraint firstItem="jMD-9d-zLt" firstAttribute="leading" secondItem="Brx-Ma-FHA" secondAttribute="leading" id="TAf-ih-U9G"/>
                                                         <constraint firstItem="fEC-U1-7aX" firstAttribute="top" secondItem="Brx-Ma-FHA" secondAttribute="top" constant="16" id="fDd-uj-w6e"/>
                                                         <constraint firstItem="0xq-lW-lmc" firstAttribute="leading" secondItem="Brx-Ma-FHA" secondAttribute="leading" constant="24" id="lpg-gy-4eA"/>
                                                         <constraint firstAttribute="bottom" secondItem="VhL-rY-ZPp" secondAttribute="bottom" constant="16" id="oGc-q3-HeR"/>
-                                                        <constraint firstAttribute="bottom" secondItem="jMD-9d-zLt" secondAttribute="bottom" id="omT-pI-87r"/>
                                                         <constraint firstAttribute="bottom" secondItem="0xq-lW-lmc" secondAttribute="bottom" constant="16" id="q9X-n7-rUU"/>
                                                         <constraint firstItem="fEC-U1-7aX" firstAttribute="leading" secondItem="VhL-rY-ZPp" secondAttribute="leading" id="tx3-cn-hbD"/>
                                                     </constraints>
@@ -874,6 +857,14 @@
                                                 <constraint firstAttribute="bottom" secondItem="Brx-Ma-FHA" secondAttribute="bottom" id="hDU-nd-6BN"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="keyIdLabel" destination="VhL-rY-ZPp" id="tOx-fF-5Xg"/>
+                                            <outlet property="keyIdTitleLabel" destination="fEC-U1-7aX" id="3gs-FO-yuq"/>
+                                            <outlet property="modelLabel" destination="0xq-lW-lmc" id="2ds-Bz-Qhz"/>
+                                            <outlet property="modelTitleLabel" destination="viB-nf-YAJ" id="PMm-G1-Cy4"/>
+                                            <outlet property="serialTitleLabel" destination="fEC-U1-7aX" id="ooJ-dw-YYs"/>
+                                            <outlet property="shadowView" destination="Brx-Ma-FHA" id="D2W-7c-NTw"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

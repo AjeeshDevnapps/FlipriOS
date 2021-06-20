@@ -31,6 +31,18 @@ class HUBOnboardingViewController: BaseViewController {
         } else {
             // Fallback on earlier versions
         }
+        
+        
+    }
+    
+    @IBAction func startButtonClicked(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+        dashboard.modalTransitionStyle = .flipHorizontal
+        dashboard.modalPresentationStyle = .fullScreen
+        self.present(dashboard, animated: true, completion: {
+            self.navigationController?.popToRootViewController(animated: false)
+        })
     }
 }
 

@@ -30,15 +30,30 @@ class ElectricalSetupViewController: BaseViewController, UITableViewDataSource, 
     
     @IBAction func firstAction(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ElectricalSetupPrepareViewController")
+        AppSharedData.sharedInstance.selectedEquipmentCode = 86
         self.navigationController?.pushViewController(vc!)
     }
     
     @IBAction func secondAction(_ sender: UIButton) {
-        
+        let alert = UIAlertController(title: "ATTENTION".localized(), message:"If your filtration pump is not equipped with a Flipr HUB, make sure that it is always started up when the heat pump is switched on.".localized(), preferredStyle:.alert)
+        alert.addAction(UIAlertAction(title:"I get it".localized(), style: .default, handler: { (action) in
+            AppSharedData.sharedInstance.selectedEquipmentCode = 85
+
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ElectricalSetupPrepareViewController")
+            self.navigationController?.pushViewController(vc!)
+//            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "VideoHelpViewControllerID") as?  VideoHelpViewController {
+//                vc.equipmentCode = "85"
+//                vc.step = 1
+//                self.navigationController?.pushViewController(vc, animated: true)
+//            }
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func thirdAction(_ sender: UIButton) {
-        
+        AppSharedData.sharedInstance.selectedEquipmentCode = 84
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ElectricalSetupPrepareViewController")
+        self.navigationController?.pushViewController(vc!)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

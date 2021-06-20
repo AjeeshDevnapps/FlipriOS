@@ -17,6 +17,7 @@ class AppSharedData: NSObject {
     var deviceName = ""
 
     var isAddingDeviceFromPresentedVCFlow : Bool = false
+    var selectedEquipmentCode  = 0
     
     private override init() {
         
