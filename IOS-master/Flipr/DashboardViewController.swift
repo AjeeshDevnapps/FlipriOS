@@ -15,6 +15,7 @@ import SideMenu
 import SafariServices
 import AdSupport
 import AppTrackingTransparency
+import MSCircularSlider
 
 let FliprLocationDidChange = Notification.Name("FliprLocationDidChange")
 let FliprDataPosted = Notification.Name("FliprDataDidPosted")
@@ -95,6 +96,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var subscriptionLabel: UILabel!
     
     @IBOutlet weak var waveView: UIView!
+    @IBOutlet weak var circularSlider: MSCircularSlider!
 
     
     
@@ -505,21 +507,21 @@ class DashboardViewController: UIViewController {
         let frame = CGRect(x: -(self.view.frame.height - self.view.frame.width)/2 - 50, y: 0, width: sqrt(self.view.frame.height * self.view.frame.height + self.view.frame.width * self.view.frame.width) + 100, height: self.view.frame.height + 100)
         //        let frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: self.view.frame.height + 100)
         //        let frame = self.view.frame
-        var fluidView1 = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  startElevation))
+        var fluidView1 = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  1))
         fluidView1.strokeColor = .clear
         fluidView1.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
-        fluidView1.fill(to: NSNumber(floatLiteral: startElevation))
+        fluidView1.fill(to: NSNumber(floatLiteral: 1))
         fluidView1.startAnimation()
-        fluidView1.clipsToBounds = true
+       // fluidView1.clipsToBounds = true
         
         self.waveView.insertSubview(fluidView1, belowSubview: backgroundOverlayImageView)
         
-        var fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: startElevation))
+        var fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: 1))
         fluidView.strokeColor = .clear
         fluidView.fillColor = fluidColor
-        fluidView.fill(to: NSNumber(floatLiteral: startElevation))
+        fluidView.fill(to: NSNumber(floatLiteral: 1))
         fluidView.startAnimation()
-        fluidView.clipsToBounds = true
+     //   fluidView.clipsToBounds = true
         self.waveView.insertSubview(fluidView, aboveSubview: fluidView1)
         
         /*
@@ -560,7 +562,7 @@ class DashboardViewController: UIViewController {
             }
             
         }
-        
+       /*
         let pHCircle = CAShapeLayer()
         
         let startAngle = CGFloat(150 * Double.pi / 180)
@@ -572,6 +574,7 @@ class DashboardViewController: UIViewController {
         pHCircle.lineWidth = 8
         pHCircle.lineCap = CAShapeLayerLineCap.round
         pHView.layer.addSublayer(pHCircle)
+        */
     }
     
     @objc func refresh() {
@@ -1353,7 +1356,8 @@ class DashboardViewController: UIViewController {
                                         self.pHStatusImageView.image = UIImage(named:"thumbs-up")
                                     }
                                 }
-                                
+                                self.circularSlider.currentValue = value
+                             /*
                                 let startAngle = CGFloat(150 * Double.pi / 180)
                                 let endAngle = CGFloat(30 * Double.pi / 180)
                                 
@@ -1385,12 +1389,14 @@ class DashboardViewController: UIViewController {
 //                                track.lineWidth = 8
 //
 //                                track.stroke()
-                                
+                         */
                                 UIView.animate(withDuration: 0.5, animations: {
                                     self.pHView.alpha = 1
                                 }, completion: { (success) in
                                     
                                 })
+                                
+                               
                                 
                             }
                             
