@@ -23,10 +23,11 @@ class EmailVerifyMessageViewController: BaseViewController {
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
         verifiedMailButton.layer.cornerRadius = 12
 
-//        checkEmailTitleLbl.text = "Check your inbox!".localized
+        checkEmailTitleLbl.text = "Check your inbox!".localized
         reenterButton.setTitle("Reenter email".localized, for: .normal)
         openMailButton.setTitle("Open mail".localized, for: .normal)
-        
+        verifiedMailButton.setTitle("Verified".localized, for: .normal)
+
         let regularAttrs = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
         let boldAttrs = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .bold)]
         let text = NSMutableAttributedString(string: "To confirm your email address, click on the button in the email we sent to".localized, attributes: regularAttrs)

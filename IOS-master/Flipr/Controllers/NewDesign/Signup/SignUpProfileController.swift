@@ -29,7 +29,10 @@ class SignUpProfileController: UIViewController, UITextFieldDelegate {
         passwordTF.rightViewMode = .whileEditing
         passwordTF.externalDelegate = self
         
-        
+        submitButton.setTitle("Submit".localized, for: .normal)
+        firstNameLabel.text = "First name".localized
+        lastNameLbl.text = "Last name".localized
+        passwordLbl.text = "Password".localized
         firstNameTF.placeholder = "First name".localized
         lastNameTF.placeholder = "Last name".localized
         passwordTF.placeholder = ""

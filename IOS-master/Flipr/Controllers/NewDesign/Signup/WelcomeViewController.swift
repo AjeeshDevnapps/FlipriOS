@@ -31,12 +31,15 @@ class WelcomeViewController: BaseViewController {
     }
 
     private func setupUI() {
-        var welcomeMsg = "Bienvenue "
+        var welcomeMsg = "Bienvenue"
         if let name = User.currentUser?.firstName{
+            welcomeMsg.append(" ")
             welcomeMsg.append(name)
         }
         welcomeMsg.append("!")
         welcomeTitleLbl.text  = welcomeMsg
+        welcomeSubtitleLbl.text  = "The Flipr App is ready to welcome your first device.".localized
+        devicesListHdrLbl.text = "Choose a device to associate".localized
         
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.1213650182, green: 0.1445809603, blue: 0.213222146, alpha: 1)

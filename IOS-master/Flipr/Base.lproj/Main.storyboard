@@ -3043,9 +3043,9 @@ Essai gratuit 7 jours</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TjM-nA-vu4">
-                                <rect key="frame" x="64" y="430" width="247" height="173"/>
+                                <rect key="frame" x="64" y="429.5" width="247" height="173.5"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="UTA-cN-PoJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="247" height="173"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="247" height="173.5"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe" translatesAutoresizingMaskIntoConstraints="NO" id="or2-DK-krG">
@@ -7154,6 +7154,7 @@ DE BANDELETTE</string>
                 <navigationController storyboardIdentifier="UISideMenuNavigationControllerID" navigationBarHidden="YES" id="2pG-27-MKT" customClass="SideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="moa-JM-sDm">
+                        <rect key="frame" x="0.0" y="-20" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <userDefinedRuntimeAttributes>
@@ -9242,7 +9243,7 @@ DE BANDELETTE</string>
         <scene sceneID="jYb-TF-cAL">
             <objects>
                 <viewController storyboardIdentifier="Page" id="QeI-t8-qJb" customClass="SimplePage" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jAp-gx-NOF">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="jAp-gx-NOF">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nAg-01-xwZ">
@@ -11419,15 +11420,15 @@ Essai gratuit 7 jours</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="595"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
-                            <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="747" image="gradiantWave" translatesAutoresizingMaskIntoConstraints="NO" id="MV6-Mc-aHI">
-                                <rect key="frame" x="0.0" y="95" width="375" height="500"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="747" image="gradient" translatesAutoresizingMaskIntoConstraints="NO" id="MV6-Mc-aHI">
+                                <rect key="frame" x="0.0" y="145" width="375" height="450"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="500" id="SAV-qf-FUu"/>
+                                    <constraint firstAttribute="height" constant="450" id="SAV-qf-FUu"/>
                                 </constraints>
                             </imageView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mB-86-NyD">
-                                <rect key="frame" x="0.0" y="104" width="375" height="482"/>
+                                <rect key="frame" x="0.0" y="153" width="375" height="434"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="JBk-af-MnI">
@@ -12060,26 +12061,6 @@ Essai gratuit 7 jours</string>
             <point key="canvasLocation" x="-2570.4000000000001" y="736.28185907046486"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="788-Ky-kG9">
-            <size key="intrinsicContentSize" width="-1" height="65"/>
-        </designable>
-        <designable name="Jdp-hc-gW2">
-            <size key="intrinsicContentSize" width="122" height="122"/>
-        </designable>
-        <designable name="MrB-in-r1f">
-            <size key="intrinsicContentSize" width="563" height="16"/>
-        </designable>
-        <designable name="Zvb-BM-lq9">
-            <size key="intrinsicContentSize" width="-1" height="65"/>
-        </designable>
-        <designable name="bHy-fG-Je8">
-            <size key="intrinsicContentSize" width="42" height="21"/>
-        </designable>
-        <designable name="y8m-OU-31f">
-            <size key="intrinsicContentSize" width="40" height="20"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="TUk-cj-rd2"/>
         <segue reference="EAN-hc-pZj"/>
@@ -12139,6 +12120,7 @@ Essai gratuit 7 jours</string>
         <image name="filterWhite" width="25" height="25"/>
         <image name="flipr shape" width="64" height="64"/>
         <image name="gradiantWave" width="375" height="560"/>
+        <image name="gradient" width="375" height="475"/>
         <image name="ic_batterie_white" width="23" height="12"/>
         <image name="ic_register_key" width="125" height="223"/>
         <image name="icon_conductivité" width="20" height="20"/>

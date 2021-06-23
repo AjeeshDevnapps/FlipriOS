@@ -16,6 +16,11 @@ class AddFliprViewController: BaseViewController {
     @IBOutlet weak var helpButtonContainerView: UIView!
     @IBOutlet weak var connectioButton: UIButton!
 
+    @IBOutlet weak var bleSearchingHeaderLbl: UILabel!
+    @IBOutlet weak var bleSearchingSubTitleLbl: UILabel!
+    @IBOutlet weak var bleOffWarningLbl: UILabel!
+    @IBOutlet weak var bleOffMsgLbl: UILabel!
+
     var serialKey:String = ""
     var fromMenu = false
 
@@ -23,7 +28,15 @@ class AddFliprViewController: BaseViewController {
         super.viewDidLoad()
         setupView()
         searchFlipr()
+        localiseText()
         // Do any additional setup after loading the view.
+    }
+    
+    func localiseText(){
+        bleSearchingHeaderLbl.text = "Search for a Flipr Start in progress".localized
+        bleSearchingSubTitleLbl.text = "Stay close to your Flipr. The activation of the bluetooth is necessary".localized
+        bleOffWarningLbl.text = "Bluetooth not activated.".localized
+        bleOffMsgLbl.text = "Bluetooth not activated Activate your smartphone's Bluetooth to associate Flipr Start with your device.".localized
     }
     
     override func viewWillAppear(_ animated: Bool) {

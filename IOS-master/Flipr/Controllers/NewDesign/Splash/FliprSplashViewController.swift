@@ -31,6 +31,8 @@ class FliprSplashViewController: BaseViewController {
     @IBOutlet weak var logoImageView: UIImageView!
 
     @IBOutlet weak var rightAnimationContainerView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+
     
     @IBOutlet weak var waveAnimationImageViewYpost: NSLayoutConstraint!
     @IBOutlet weak var logoImageViewYpost: NSLayoutConstraint!
@@ -45,6 +47,7 @@ class FliprSplashViewController: BaseViewController {
         perform(#selector(showWaveAnimation), with: nil, afterDelay: 0.5)
         perform(#selector(showEducationScreen), with: nil, afterDelay: 2.0)
         addRightImage()
+        self.titleLabel.text = "Goodbye to troubled waters".localized
     }
     
     override func viewWillAppear(_ animated: Bool) {

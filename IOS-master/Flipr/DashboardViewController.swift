@@ -99,7 +99,7 @@ class DashboardViewController: UIViewController {
 
     @IBOutlet weak var circularSlider: MSCircularSlider!
 
-    
+    let maskView = UIImageView()
     
     var bleMeasureHasBeenSent = false
     
@@ -420,7 +420,7 @@ class DashboardViewController: UIViewController {
     
     func setupInitialView() {
       //  var fluidColor =  UIColor.init(red: 40/255.0, green: 154/255.0, blue: 194/255.0, alpha: 1)
-        var fluidColor =  UIColor.init(hexString: "FA63BA")
+        var fluidColor =  UIColor.init(hexString: "fcad71")
         
         if let module = Module.currentModule {
             if module.isForSpa {
@@ -517,11 +517,16 @@ class DashboardViewController: UIViewController {
         
         self.view.insertSubview(fluidView1, belowSubview: backgroundOverlayImageView)
         
-        var fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: startElevation))
+        let fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: startElevation))
         fluidView.strokeColor = .clear
         fluidView.fillColor = fluidColor
         fluidView.fill(to: NSNumber(floatLiteral: startElevation))
         fluidView.startAnimation()
+        /*
+        maskView.image = UIImage(named: "gradient")
+        maskView.frame = fluidView.bounds
+        fluidView.mask = maskView
+        */
      //   fluidView.clipsToBounds = true
         self.view.insertSubview(fluidView, aboveSubview: fluidView1)
         

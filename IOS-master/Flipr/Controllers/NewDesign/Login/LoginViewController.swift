@@ -24,9 +24,22 @@ class LoginViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Connexion"
+        self.title = "Connection".localized
         self.setupViews()
         // Do any additional setup after loading the view.
+    }
+    
+    
+    func setuplocalisation(){
+        emailLbl.text = "E-mail address".localized
+        passwordLbl.text = "Password".localized
+        keyLbl.text = "I forgot my password".localized
+        signupLbl.text = "No account yet? ".localized
+        signupLblBold.text = "Register".localized
+
+//        subHeadingLbl.text = "Don't worry about the quality of your pond water Create an account".localized
+//        nextButton.setTitle("Create an account".localized, for: .normal)
+        signInButton.setTitle("Login".localized, for: .normal)
     }
     
     
@@ -45,6 +58,7 @@ class LoginViewController: BaseViewController {
         self.navigationController?.isNavigationBarHidden = false
         self.emailContainerView.roundCorner(corner: 8)
         self.passwordContainerView.roundCorner(corner: 8)
+        setuplocalisation()
     }
     
     

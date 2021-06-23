@@ -30,7 +30,7 @@ class SignUpEmailController: UIViewController, UITextFieldDelegate {
         navigationController?.isNavigationBarHidden = true
         
         controllerTitle.text = "Create Account".localized
-        backButton.setTitle("Login".localized.localized, for: .normal)
+        backButton.setTitle("Login".localized, for: .normal)
         
         let cguType = ActiveType.custom(pattern: "\\s" + "Terms of Use".localized + "\\b")
         let pudType = ActiveType.custom(pattern: "\\s" + "Data Use Policy".localized + "\\b")
@@ -66,8 +66,7 @@ class SignUpEmailController: UIViewController, UITextFieldDelegate {
     func UISetup() {
         self.title = "Create Account".localized()
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
-
-        titleForTextField.text = "Email Address".localized()
+        titleForTextField.text = "E-mail address".localized
         descriptionText.text = "Description".localized()
         textField.placeholder = "email@address.com".localized()
         

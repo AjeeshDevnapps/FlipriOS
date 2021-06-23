@@ -77,6 +77,7 @@
                         <outlet property="logoImageView" destination="PtQ-WO-Vkb" id="7OR-i8-Wz7"/>
                         <outlet property="logoImageViewYpost" destination="PYv-UC-oGY" id="DEC-Ws-pqN"/>
                         <outlet property="rightAnimationImageView" destination="pTH-ti-4n8" id="iDs-Y6-18G"/>
+                        <outlet property="titleLabel" destination="AEs-0t-8c5" id="FV7-XH-cUU"/>
                         <outlet property="waveAnimationImageView" destination="9Fm-iK-LXj" id="XzQ-0C-NHr"/>
                         <outlet property="waveAnimationImageViewYpost" destination="WH9-cW-Io4" id="44b-pW-lcz"/>
                     </connections>
@@ -139,7 +140,6 @@
                                 <rect key="frame" x="298" y="59" width="107" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ecF-cC-XyC"/>
-                                    <constraint firstAttribute="width" constant="107" id="rTl-bh-jFK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Se connecter">
@@ -175,6 +175,7 @@
                     </view>
                     <connections>
                         <outlet property="headingLbl" destination="kAC-gB-zzM" id="913-S6-vdU"/>
+                        <outlet property="loginButton" destination="8c1-Rr-xXO" id="AUC-rY-DNc"/>
                         <outlet property="nextButton" destination="WSg-WG-aGR" id="LUi-5X-xRp"/>
                         <outlet property="subHeadingLbl" destination="NNC-1K-fg4" id="k5p-aS-Uyk"/>
                     </connections>
@@ -439,15 +440,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bWg-yp-ELQ">
-                                <rect key="frame" x="96" y="357" width="14" height="14"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="14" id="ROO-A1-BgW"/>
-                                    <constraint firstAttribute="width" constant="14" id="fka-gE-Mhb"/>
-                                </constraints>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="beJ-0j-dko">
+                                <rect key="frame" x="109.5" y="356" width="195.5" height="14"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="key" translatesAutoresizingMaskIntoConstraints="NO" id="bWg-yp-ELQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="ROO-A1-BgW"/>
+                                            <constraint firstAttribute="width" constant="14" id="fka-gE-Mhb"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J’ai oublié mon mot de passe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xab-Y5-ewq">
+                                        <rect key="frame" x="21" y="0.0" width="174.5" height="14"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTT-Di-QNb">
-                                <rect key="frame" x="80.5" y="341.5" width="250" height="45"/>
+                                <rect key="frame" x="82" y="340.5" width="250" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="WB5-AR-j2c"/>
                                     <constraint firstAttribute="width" constant="250" id="ncK-g3-cys"/>
@@ -456,14 +468,8 @@
                                     <action selector="forgotButtonAction:" destination="6Cp-0j-Cbd" eventType="touchUpInside" id="fde-hA-fpY"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J’ai oublié mon mot de passe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xab-Y5-ewq">
-                                <rect key="frame" x="118" y="357" width="174.5" height="14.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZP0-Dz-Y25" customClass="RoundBorderedButton" customModule="Flipr" customModuleProvider="target">
-                                <rect key="frame" x="16" y="450.5" width="382" height="50"/>
+                                <rect key="frame" x="16" y="465.5" width="382" height="50"/>
                                 <color key="backgroundColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="XDm-4y-LEm"/>
@@ -478,7 +484,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNn-Dd-6lI">
-                                <rect key="frame" x="0.0" y="386.5" width="414" height="38"/>
+                                <rect key="frame" x="0.0" y="401.5" width="414" height="38"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="BbN-vw-id3">
                                         <rect key="frame" x="80" y="18.5" width="254" height="19.5"/>
@@ -520,28 +526,26 @@
                         <viewLayoutGuide key="safeArea" id="Zda-pL-KPr"/>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.97647058823529409" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="beJ-0j-dko" firstAttribute="top" secondItem="Yno-aI-mVN" secondAttribute="bottom" constant="24" id="1NE-SX-VS3"/>
                             <constraint firstItem="CNn-Dd-6lI" firstAttribute="leading" secondItem="Zda-pL-KPr" secondAttribute="leading" id="4zO-2z-E54"/>
                             <constraint firstItem="eUL-df-4UY" firstAttribute="leading" secondItem="Zda-pL-KPr" secondAttribute="leading" constant="16" id="5Bs-kG-Qt9"/>
                             <constraint firstItem="MCI-0q-BuD" firstAttribute="top" secondItem="lpi-D2-tbb" secondAttribute="bottom" constant="4" id="6K8-zO-pE0"/>
                             <constraint firstItem="Yno-aI-mVN" firstAttribute="leading" secondItem="Zda-pL-KPr" secondAttribute="leading" constant="16" id="8Ck-u9-W99"/>
                             <constraint firstItem="Yno-aI-mVN" firstAttribute="top" secondItem="eUL-df-4UY" secondAttribute="bottom" constant="4" id="AYZ-Fv-BK7"/>
-                            <constraint firstItem="Xab-Y5-ewq" firstAttribute="centerY" secondItem="bWg-yp-ELQ" secondAttribute="centerY" id="AeI-0R-TCE"/>
                             <constraint firstItem="Zda-pL-KPr" firstAttribute="trailing" secondItem="Yno-aI-mVN" secondAttribute="trailing" constant="16" id="DKg-4D-pwP"/>
+                            <constraint firstItem="beJ-0j-dko" firstAttribute="centerX" secondItem="8or-22-db1" secondAttribute="centerX" id="LkH-Mz-xqf"/>
                             <constraint firstItem="Zda-pL-KPr" firstAttribute="trailing" secondItem="ZP0-Dz-Y25" secondAttribute="trailing" constant="16" id="Mte-Bn-rY8"/>
+                            <constraint firstItem="LTT-Di-QNb" firstAttribute="centerX" secondItem="beJ-0j-dko" secondAttribute="centerX" id="N9c-cU-E6F"/>
                             <constraint firstItem="MCI-0q-BuD" firstAttribute="leading" secondItem="Zda-pL-KPr" secondAttribute="leading" constant="16" id="Unf-xR-ThP"/>
-                            <constraint firstItem="LTT-Di-QNb" firstAttribute="centerX" secondItem="Xab-Y5-ewq" secondAttribute="centerX" id="YEL-47-R0l"/>
+                            <constraint firstItem="CNn-Dd-6lI" firstAttribute="top" secondItem="LTT-Di-QNb" secondAttribute="bottom" constant="16" id="Y2T-9r-gKX"/>
+                            <constraint firstItem="LTT-Di-QNb" firstAttribute="centerY" secondItem="beJ-0j-dko" secondAttribute="centerY" id="YAa-8o-udg"/>
                             <constraint firstItem="ZP0-Dz-Y25" firstAttribute="leading" secondItem="Zda-pL-KPr" secondAttribute="leading" constant="16" id="bCu-q0-vxp"/>
-                            <constraint firstItem="LTT-Di-QNb" firstAttribute="centerY" secondItem="Xab-Y5-ewq" secondAttribute="centerY" id="cWk-XZ-LBm"/>
                             <constraint firstItem="CNn-Dd-6lI" firstAttribute="trailing" secondItem="Zda-pL-KPr" secondAttribute="trailing" id="fly-UV-9qz"/>
                             <constraint firstItem="ZP0-Dz-Y25" firstAttribute="top" secondItem="CNn-Dd-6lI" secondAttribute="bottom" constant="26" id="iea-wH-ZMZ"/>
-                            <constraint firstItem="bWg-yp-ELQ" firstAttribute="leading" secondItem="Zda-pL-KPr" secondAttribute="leading" constant="96" id="lWT-XD-bq8"/>
                             <constraint firstItem="lpi-D2-tbb" firstAttribute="leading" secondItem="Zda-pL-KPr" secondAttribute="leading" constant="16" id="nXS-4w-H2G"/>
-                            <constraint firstItem="Xab-Y5-ewq" firstAttribute="leading" secondItem="bWg-yp-ELQ" secondAttribute="trailing" constant="8" id="nXY-FB-Cwf"/>
-                            <constraint firstItem="bWg-yp-ELQ" firstAttribute="top" secondItem="Yno-aI-mVN" secondAttribute="bottom" constant="25" id="pCj-Tj-wok"/>
                             <constraint firstItem="eUL-df-4UY" firstAttribute="top" secondItem="MCI-0q-BuD" secondAttribute="bottom" constant="20" id="ufx-f3-OtJ"/>
                             <constraint firstItem="Zda-pL-KPr" firstAttribute="trailing" secondItem="MCI-0q-BuD" secondAttribute="trailing" constant="16" id="v2d-VF-KLM"/>
                             <constraint firstItem="lpi-D2-tbb" firstAttribute="top" secondItem="Zda-pL-KPr" secondAttribute="top" constant="37" id="v9e-ca-JVy"/>
-                            <constraint firstItem="CNn-Dd-6lI" firstAttribute="top" secondItem="Xab-Y5-ewq" secondAttribute="bottom" constant="15" id="wdA-TH-YlM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lHJ-48-dEi"/>
@@ -684,6 +688,7 @@
         <image name="Logo Flipr" width="166" height="50"/>
         <image name="illustration left" width="93.5" height="256"/>
         <image name="illustration right" width="79.5" height="344.5"/>
+        <image name="key" width="16" height="16"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
