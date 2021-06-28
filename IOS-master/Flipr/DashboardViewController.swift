@@ -98,11 +98,26 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var gradiantView: UIView!
 
     @IBOutlet weak var circularSlider: MSCircularSlider!
+    @IBOutlet weak var addNewProgramView: UIView!
+    @IBOutlet weak var addNewProgramLabel: UILabel!
+    @IBOutlet weak var programListView: UIView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var scrollViewContainerView: UIView!
+    @IBOutlet weak var addNewProgramViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addNewProgramViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var programListViewHeightConstraint: NSLayoutConstraint!
+    var isShowingAddFirstProgramView = false
+    var isShowingHubView = false
 
     let maskView = UIImageView()
     
     var bleMeasureHasBeenSent = false
     
+    var hub:HUB?
+    var hubs:[HUB] = []
+    var fluidViewTopEdge:BAFluidView!
+    var fluidView:BAFluidView!
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -123,6 +138,7 @@ class DashboardViewController: UIViewController {
 //        quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
 //        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius:         self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
 
+        self.handleHubViews()
         if Locale.current.languageCode != "fr" {
             let attributedTitle = NSAttributedString(string: "Alert in progress: act now!".localized, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor) : UIColor.white]))
             alertButton.setAttributedTitle(attributedTitle, for: .normal)
@@ -131,8 +147,11 @@ class DashboardViewController: UIViewController {
         topButton.layer.borderWidth = 2.0
         topButton.roundCorner(corner: topButton.frame.size.height / 2 )
         uvView.roundCorner(corner: 6)
+        addNewProgramLabel.roundCorner(corner: 4.0)
         uvView.layer.borderColor = UIColor.init(hexString: "111729").cgColor
         uvView.layer.borderWidth = 1.0
+        addNewProgramView.roundCorner(corner: 12)
+        addNewProgramView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
 
         shareButton.setTitle("share".localized, for: .normal)
         airLabel.text = "air".localized
@@ -267,6 +286,54 @@ class DashboardViewController: UIViewController {
         AppReview.shared.requestReviewIfNeeded()
     }
     
+    func handleHubViews(){
+        if self.hub != nil {
+            if HUB.currentHUB!.plannings.count == 0 {
+                self.addNewProgramView.isHidden = false
+                self.isShowingAddFirstProgramView = true
+                self.addNewProgramViewHeightConstraint.constant = 68
+                self.addNewProgramViewBottomConstraint.constant = 0
+            }
+            else{
+                self.addNewProgramView.isHidden = false
+                self.addNewProgramViewHeightConstraint.constant = 0
+            }
+            self.addNewProgramViewBottomConstraint.constant = 12
+            
+            self.isShowingHubView = true
+            self.programListView.isHidden = false
+            self.programListViewHeightConstraint.constant = 128
+            self.updateWaterAnimation()
+        }else{
+            self.addNewProgramViewHeightConstraint.constant = 0
+            self.addNewProgramViewBottomConstraint.constant = 0
+            self.programListViewHeightConstraint.constant = 0
+            self.addNewProgramView.isHidden = true
+            self.programListView.isHidden = true
+            self.isShowingAddFirstProgramView = false
+            self.isShowingHubView = false
+        }
+    }
+    
+   /*
+    func updateWaterFlowAnimation(){
+        var startElevation =  0.71
+        if self.isShowingAddFirstProgramView && self.isShowingHubView {
+            startElevation = 0.51
+        }else{
+            if self.isShowingAddFirstProgramView {
+                startElevation =  0.65
+            }
+            if self.isShowingHubView {
+                startElevation =  0.58
+            }
+        }
+//        fluidViewTopEdge
+        fluidViewTopEdge.fill(to: NSNumber(floatLiteral: startElevation))
+        fluidView.fill(to: NSNumber(floatLiteral: startElevation))
+    }
+    */
+    
     func appTrackingRequestPermission() {
         if #available(iOS 14, *) {
             ATTrackingManager.requestTrackingAuthorization { status in
@@ -305,6 +372,7 @@ class DashboardViewController: UIViewController {
     }
     
     @objc func callGetStatusApis(){
+        self.loadHUBs()
         getThresholdValues()
         getNotificationStatus()
     }
@@ -420,7 +488,7 @@ class DashboardViewController: UIViewController {
     
     func setupInitialView() {
       //  var fluidColor =  UIColor.init(red: 40/255.0, green: 154/255.0, blue: 194/255.0, alpha: 1)
-        var fluidColor =  UIColor.init(hexString: "fcad71")
+        let fluidColor =  UIColor.init(hexString: "fcad71")
         
         if let module = Module.currentModule {
             if module.isForSpa {
@@ -497,7 +565,21 @@ class DashboardViewController: UIViewController {
         
         
         
-        let startElevation = 0.67
+        var startElevation =  0.71
+        if self.isShowingAddFirstProgramView && self.isShowingHubView {
+            startElevation = 0.51
+        }else{
+            if self.isShowingAddFirstProgramView {
+                startElevation =  0.65
+            }
+            if self.isShowingHubView {
+                startElevation =  0.58
+            }
+        }
+        
+        
+//        let startElevation = 0.67
+
 //        temperaturesTopConstraint.constant = self.view.frame.height * (1 - CGFloat(startElevation)) + 20
         if #available(iOS 11.0, tvOS 11.0, *) {
             if (UIApplication.shared.delegate?.window??.safeAreaInsets.top)! > CGFloat(20) { // hasTopNotch
@@ -505,30 +587,30 @@ class DashboardViewController: UIViewController {
             }
         }
         
-        let frame = CGRect(x: -(self.view.frame.height - self.view.frame.width)/2 - 50, y: 0, width: sqrt(self.view.frame.height * self.view.frame.height + self.view.frame.width * self.view.frame.width) + 100, height: self.view.frame.height + 100)
-        //        let frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: self.view.frame.height + 100)
-        //        let frame = self.view.frame
-        var fluidView1 = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  startElevation))
-        fluidView1.strokeColor = .clear
-        fluidView1.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
-        fluidView1.fill(to: NSNumber(floatLiteral: startElevation))
-        fluidView1.startAnimation()
-       // fluidView1.clipsToBounds = true
-        
-        self.view.insertSubview(fluidView1, belowSubview: backgroundOverlayImageView)
-        
-        let fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: startElevation))
+//        let frame = CGRect(x: -(self.view.frame.height - self.view.frame.width)/2 - 50, y: 0, width: sqrt(self.view.frame.height * self.view.frame.height + self.view.frame.width * self.view.frame.width) + 100, height: self.view.frame.height + 100)
+                let frame = self.scrollViewContainerView.frame
+        fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  startElevation))
         fluidView.strokeColor = .clear
-        fluidView.fillColor = fluidColor
+        fluidView.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
         fluidView.fill(to: NSNumber(floatLiteral: startElevation))
         fluidView.startAnimation()
+       // fluidView1.clipsToBounds = true
+        
+        self.scrollViewContainerView.insertSubview(fluidView, belowSubview: backgroundOverlayImageView)
+        
+        fluidViewTopEdge = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: startElevation))
+        fluidViewTopEdge.strokeColor = .clear
+        fluidViewTopEdge.fillColor = fluidColor
+        fluidViewTopEdge.fill(to: NSNumber(floatLiteral: startElevation))
+        fluidViewTopEdge.startAnimation()
+        
         /*
         maskView.image = UIImage(named: "gradient")
         maskView.frame = fluidView.bounds
         fluidView.mask = maskView
         */
      //   fluidView.clipsToBounds = true
-        self.view.insertSubview(fluidView, aboveSubview: fluidView1)
+        self.scrollViewContainerView.insertSubview(fluidViewTopEdge, aboveSubview: fluidView)
         
         /*
          let particleEmitter = CAEmitterLayer()
@@ -559,12 +641,12 @@ class DashboardViewController: UIViewController {
             
             //if data.gravity.x > -0.025 && data.gravity.x < 0.025 || data.gravity.y > -0.05 { //&& data.gravity.y < 0.05 {
             if data.gravity.y > -0.05 {
-                fluidView.transform = CGAffineTransform(rotationAngle: 0)
-                fluidView1.transform = CGAffineTransform(rotationAngle: 0)
+                self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: 0)
+                self!.fluidView.transform = CGAffineTransform(rotationAngle: 0)
             } else {
                 let rotation = atan2(data.gravity.x,data.gravity.y) - .pi
-                fluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
-                fluidView1.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+                self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+                self!.fluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
             }
             
         }
@@ -583,16 +665,81 @@ class DashboardViewController: UIViewController {
         */
     }
     
+    
+    func updateWaterAnimation(){
+        fluidView.removeFromSuperview()
+        fluidView = nil
+        fluidViewTopEdge.removeFromSuperview()
+        fluidViewTopEdge = nil
+        let fluidColor =  UIColor.init(hexString: "fcad71")
+        var startElevation =  0.71
+        if self.isShowingAddFirstProgramView && self.isShowingHubView {
+            startElevation = 0.37
+        }else{
+            if self.isShowingAddFirstProgramView {
+                startElevation =  0.65
+            }
+            if self.isShowingHubView {
+                startElevation =  0.58
+            }
+        }
+        
+        let frame = self.scrollViewContainerView.frame
+        fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  startElevation))
+        fluidView.strokeColor = .clear
+        fluidView.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
+        fluidView.fill(to: NSNumber(floatLiteral: startElevation))
+        fluidView.startAnimation()
+        // fluidView1.clipsToBounds = true
+        
+        self.scrollViewContainerView.insertSubview(fluidView, belowSubview: backgroundOverlayImageView)
+        
+        fluidViewTopEdge = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: startElevation))
+        fluidViewTopEdge.strokeColor = .clear
+        fluidViewTopEdge.fillColor = fluidColor
+        fluidViewTopEdge.fill(to: NSNumber(floatLiteral: startElevation))
+        fluidViewTopEdge.startAnimation()
+        
+        
+        //   fluidView.clipsToBounds = true
+        self.scrollViewContainerView.insertSubview(fluidViewTopEdge, aboveSubview: fluidView)
+        
+        
+        // setGradientBackground()
+        motionManager.deviceMotionUpdateInterval = 0.01
+        motionManager.startDeviceMotionUpdates(to: .main) {
+            [weak self] (data, error) in
+            
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            //
+            
+            //if data.gravity.x > -0.025 && data.gravity.x < 0.025 || data.gravity.y > -0.05 { //&& data.gravity.y < 0.05 {
+            if data.gravity.y > -0.05 {
+                self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: 0)
+                self!.fluidView.transform = CGAffineTransform(rotationAngle: 0)
+            } else {
+                let rotation = atan2(data.gravity.x,data.gravity.y) - .pi
+                self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+                self!.fluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+            }
+        }
+    
+    }
+    
+    
     func setGradientBackground(){
-           let gradientLayer = CAGradientLayer()
+        let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor(hexString: "FFB779").cgColor,UIColor(hexString:"FF62B9").cgColor,UIColor(hexString: "2481D7").cgColor,UIColor(hexString: "1DDCC5").cgColor]
         gradientLayer.locations = [0,-10.67,1.4,0]
-           gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-           gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
-           gradientLayer.locations = [0, 1]
-            gradientLayer.frame = self.gradiantView.bounds
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.locations = [0, 1]
+        gradientLayer.frame = self.gradiantView.bounds
         self.gradiantView.layer.insertSublayer(gradientLayer, at: 0)
-   }
+    }
     
     @objc func refresh() {
         
@@ -1373,7 +1520,7 @@ class DashboardViewController: UIViewController {
                                         self.pHStatusImageView.image = UIImage(named:"thumbs-up")
                                     }
                                 }
-                                self.circularSlider.currentValue = value
+                                self.circularSlider.currentValue = (78/14)*value
                              /*
                                 let startAngle = CGFloat(150 * Double.pi / 180)
                                 let endAngle = CGFloat(30 * Double.pi / 180)
@@ -2171,3 +2318,154 @@ extension DashboardViewController: AlertPresentViewDelegate{
         
     }
 }
+
+extension DashboardViewController: UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    
+    private func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 164, height: 128)
+    }
+    
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProgramCollectionViewCell", for: indexPath) as! ProgramCollectionViewCell
+        cell.titleLbl.text = String(indexPath.row + 1)
+        cell.shadowView.roundCorner(corner: 12)
+        cell.contentView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
+
+        return cell
+    }
+}
+
+
+extension DashboardViewController: UICollectionViewDelegate{
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.item + 1)
+    }
+}
+
+extension DashboardViewController{
+    
+    func loadHUBs() {
+//        let theme = EmptyStateViewTheme.shared
+//        theme.activityIndicatorType = .ballPulse
+//        self.view.showEmptyStateViewLoading(title: nil, message: nil, theme: theme)
+        Pool.currentPool?.getHUBS(completion: { (hubs, error) in
+//            self.view.hideStateView()
+            if error != nil {
+                self.showError(title: "Error".localized, message: error!.localizedDescription)
+            } else if hubs != nil {
+                if hubs!.count > 0 {
+                    self.hubs = hubs!
+                    if let currentHub = HUB.currentHUB {
+                        for hub in hubs! {
+                            if currentHub.serial == hub.serial {
+                                self.hub = hub
+                                HUB.currentHUB = hub
+                                HUB.saveCurrentHUBLocally()
+                                self.refreshHUBdisplay()
+                                break
+                            }
+                        }
+                    } else {
+                        self.hub = hubs!.first
+                        HUB.currentHUB = hubs!.first
+                        HUB.saveCurrentHUBLocally()
+                        self.refreshHUBdisplay()
+                    }
+                } else {
+                    self.handleHubViews()
+//                   self.showError(title: "Error".localized, message: "No hubs :/")
+                }
+            } else {
+                self.handleHubViews()
+//                self.showError(title: "Error".localized, message: "No hubs :/")
+            }
+        })
+    }
+    
+    func refreshHUBdisplay() {
+        self.handleHubViews()
+        /*
+        if let hub = hub {
+            hubButton.setTitle(hub.equipementName, for: .normal)
+            if hub.equipementState {
+                stateLabel.text = "Working".localized()
+                stateImageView.image = UIImage(named: "play_circle")
+                manualSwitch.isOn = hub.equipementState
+            } else {
+                stateLabel.text = "Stopped".localized()
+                stateImageView.image = UIImage(named: "stop_circle")
+                manualSwitch.isOn = hub.equipementState
+            }
+            if hub.behavior == "manual" {
+                modeValueLabel.text = "Manual".localized()
+                automSwitch.isOn = false
+                manualButtonAction(self)
+            } else if hub.behavior == "planning" {
+                modeValueLabel.text = "Program".localized()
+                automSwitch.isOn = false
+                progButtonAction(self)
+            } else if hub.behavior == "auto" {
+                modeValueLabel.text = "Smart Control"
+                automSwitch.isOn = true
+                automButtonAction(self)
+                hub.getAutomMessage { (message) in
+                    if message != nil {
+                        self.autoMessageLabel.text = message
+                        self.autoMessageLabel.isHidden = false
+                    }
+                }
+            } else {
+                modeValueLabel.text = "Unkown mode"
+                automSwitch.isOn = false
+                manualButtonAction(self)
+            }
+        }
+        
+        */
+    }
+    
+    
+    func refreshPlannings() {
+//        self.programView.showEmptyStateViewLoading(title: nil, message: nil)
+        HUB.currentHUB?.getPlannings(completion: { (error) in
+            if error != nil {
+                if HUB.currentHUB!.plannings.count > 0 {
+//                    self.programView.showEmptyStateViewLoading(title: "Error".localized, message: error?.localizedDescription)
+                } else {
+                    self.showError(title: "Error".localized, message: error?.localizedDescription)
+                }
+            } else {
+                if HUB.currentHUB!.plannings.count == 0 {
+                    /*
+                    self.programView.showEmptyStateView(image: nil, title: nil, message: "No program".localized(), buttonTitle: "Add a new program".localized()) {
+                        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "HUBProgramViewControllerID") as? HUBProgramViewController {
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                    }
+                    */
+                } else {
+                    /*
+                    self.programView.hideStateView()
+                    self.tableView.reloadData()
+ */
+                }
+                
+            }
+        })
+    }
+
+
+}
+

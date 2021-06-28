@@ -280,6 +280,22 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MEe-MA-KbP">
+                                                    <rect key="frame" x="0.0" y="360" width="414" height="140"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame 143" translatesAutoresizingMaskIntoConstraints="NO" id="weB-Lv-Vnr">
+                                                            <rect key="frame" x="0.0" y="3" width="555" height="140"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="weB-Lv-Vnr" firstAttribute="top" secondItem="MEe-MA-KbP" secondAttribute="top" constant="3" id="2yy-pr-XFv"/>
+                                                        <constraint firstItem="weB-Lv-Vnr" firstAttribute="leading" secondItem="MEe-MA-KbP" secondAttribute="leading" id="Dre-f9-bJA"/>
+                                                        <constraint firstAttribute="trailing" secondItem="weB-Lv-Vnr" secondAttribute="trailing" constant="-141" id="Qwd-Xz-F4Y"/>
+                                                        <constraint firstAttribute="bottom" secondItem="weB-Lv-Vnr" secondAttribute="bottom" constant="-3" id="cgN-jR-ObB"/>
+                                                        <constraint firstAttribute="height" constant="140" id="sxN-wi-Wry"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="a2f-dM-7w7" firstAttribute="centerY" secondItem="MTj-ld-Wtz" secondAttribute="centerY" id="2An-LF-aVD"/>
@@ -293,15 +309,18 @@
                                                 <constraint firstItem="1TY-K4-xPq" firstAttribute="centerX" secondItem="48U-xd-C8c" secondAttribute="centerX" id="UHP-xt-4yO"/>
                                                 <constraint firstItem="1TY-K4-xPq" firstAttribute="top" secondItem="48U-xd-C8c" secondAttribute="bottom" constant="9" id="XEL-oJ-FyD"/>
                                                 <constraint firstItem="GjO-Ke-6FK" firstAttribute="centerX" secondItem="nyP-DT-PCO" secondAttribute="centerX" constant="2" id="YiY-id-QZe"/>
+                                                <constraint firstAttribute="bottom" secondItem="MEe-MA-KbP" secondAttribute="bottom" id="ZBv-Qr-A1B"/>
                                                 <constraint firstItem="nyP-DT-PCO" firstAttribute="leading" secondItem="MTj-ld-Wtz" secondAttribute="trailing" id="aSi-ym-ICe"/>
                                                 <constraint firstItem="kVI-X4-9Lz" firstAttribute="trailing" secondItem="a2f-dM-7w7" secondAttribute="trailing" id="arG-Sc-yqj"/>
                                                 <constraint firstAttribute="trailing" secondItem="48U-xd-C8c" secondAttribute="trailing" constant="32" id="hDb-Rd-39h"/>
+                                                <constraint firstItem="MEe-MA-KbP" firstAttribute="leading" secondItem="2Zt-UE-6lH" secondAttribute="leading" id="kcY-nj-lqV"/>
                                                 <constraint firstItem="MTj-ld-Wtz" firstAttribute="centerX" secondItem="2Zt-UE-6lH" secondAttribute="centerX" id="nhH-g5-ujI"/>
                                                 <constraint firstItem="MTj-ld-Wtz" firstAttribute="top" secondItem="2Zt-UE-6lH" secondAttribute="topMargin" constant="49" id="q2s-7V-5HI"/>
                                                 <constraint firstItem="48U-xd-C8c" firstAttribute="top" secondItem="GjO-Ke-6FK" secondAttribute="bottom" constant="50" id="qPE-Ta-KyD"/>
                                                 <constraint firstAttribute="trailing" secondItem="ky5-HL-uj3" secondAttribute="trailing" id="uPS-f4-ap1"/>
                                                 <constraint firstItem="ky5-HL-uj3" firstAttribute="leading" secondItem="2Zt-UE-6lH" secondAttribute="leading" id="ueI-at-YrP"/>
                                                 <constraint firstAttribute="bottom" secondItem="ky5-HL-uj3" secondAttribute="bottom" id="x2r-Iy-FDG"/>
+                                                <constraint firstAttribute="trailing" secondItem="MEe-MA-KbP" secondAttribute="trailing" id="yGS-6a-v9a"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -388,6 +407,7 @@
         <image name="Arrow" width="16" height="16"/>
         <image name="DashboardHamburger" width="32" height="32"/>
         <image name="Edit Button" width="44" height="44"/>
+        <image name="Frame 143" width="375" height="176"/>
         <image name="Needle" width="120" height="16"/>
         <image name="arrow-down-right" width="24" height="24"/>
         <image name="arrow-up-right" width="13" height="13"/>
