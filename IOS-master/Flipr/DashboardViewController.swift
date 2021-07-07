@@ -594,7 +594,7 @@ class DashboardViewController: UIViewController {
         fluidView.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
         fluidView.fill(to: NSNumber(floatLiteral: startElevation))
         fluidView.startAnimation()
-       // fluidView1.clipsToBounds = true
+        fluidView.clipsToBounds = false
         
         self.scrollViewContainerView.insertSubview(fluidView, belowSubview: backgroundOverlayImageView)
         
@@ -603,7 +603,8 @@ class DashboardViewController: UIViewController {
         fluidViewTopEdge.fillColor = fluidColor
         fluidViewTopEdge.fill(to: NSNumber(floatLiteral: startElevation))
         fluidViewTopEdge.startAnimation()
-        
+        fluidViewTopEdge.clipsToBounds = false
+
         /*
         maskView.image = UIImage(named: "gradient")
         maskView.frame = fluidView.bounds
@@ -690,8 +691,8 @@ class DashboardViewController: UIViewController {
         fluidView.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
         fluidView.fill(to: NSNumber(floatLiteral: startElevation))
         fluidView.startAnimation()
-        // fluidView1.clipsToBounds = true
-        
+        fluidView.clipsToBounds = false
+
         self.scrollViewContainerView.insertSubview(fluidView, belowSubview: backgroundOverlayImageView)
         
         fluidViewTopEdge = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: startElevation))
@@ -699,8 +700,8 @@ class DashboardViewController: UIViewController {
         fluidViewTopEdge.fillColor = fluidColor
         fluidViewTopEdge.fill(to: NSNumber(floatLiteral: startElevation))
         fluidViewTopEdge.startAnimation()
-        
-        
+        fluidViewTopEdge.clipsToBounds = false
+
         //   fluidView.clipsToBounds = true
         self.scrollViewContainerView.insertSubview(fluidViewTopEdge, aboveSubview: fluidView)
         
@@ -1623,8 +1624,6 @@ class DashboardViewController: UIViewController {
                                     self.orpStateView.backgroundColor = K.Color.clear
                                     self.orpStateLabel.textColor = .white
                                     self.bleStatusImageView.image = UIImage(named:"thumbs-up")
-
-
                                 }
                                 
                                 if let sector = orp["DeviationSector"] as? String {
@@ -1635,15 +1634,13 @@ class DashboardViewController: UIViewController {
                                     } else if sector == "MediumHigh" || sector == "MediumLow" {
                                         self.orpStateView.backgroundColor = K.Color.clear
                                         self.orpStateLabel.textColor = .white
-                                        self.bleStatusImageView.image = #imageLiteral(resourceName: "Material Icon Font")
+                                        self.bleStatusImageView.image = UIImage(named:"thumbs-up")
 
 
                                     } else if sector == "Medium" {
                                         self.orpStateView.backgroundColor = K.Color.clear
                                         self.orpStateLabel.textColor = .white
-                                        self.bleStatusImageView.image = #imageLiteral(resourceName: "Material Icon Font")
-
-
+                                        self.bleStatusImageView.image = UIImage(named:"thumbs-up")
                                     }
                                 }
                                 
@@ -2333,14 +2330,79 @@ extension DashboardViewController: UICollectionViewDataSource,UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProgramCollectionViewCell", for: indexPath) as! ProgramCollectionViewCell
-        cell.titleLbl.text = String(indexPath.row + 1)
+        cell.addShadow()
+        cell.titleLbl.text =  self.hub?.equipementName
         cell.shadowView.roundCorner(corner: 12)
         cell.contentView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
+        if let hub = hub {
+            if hub.equipementState {
+                cell.subTitleLbl.text = "Working".localized()
+                cell.buttonShadowView.backgroundColor = UIColor(hexString: "00DA4F")
+                cell.iconImageView.image = UIImage(named: "powerWhite")
+//                    stateImageView.image = UIImage(named: "play_circle")
+//                    manualSwitch.isOn = hub.equipementState
+            } else {
+                cell.subTitleLbl.text = "Stopped".localized()
+                cell.buttonShadowView.backgroundColor = .white
+                cell.iconImageView.image = UIImage(named: "powerGray")
+
+//                    stateImageView.image = UIImage(named: "stop_circle")
+//                    manualSwitch.isOn = hub.equipementState
+            }
+            if hub.behavior == "manual" {
+                cell.subTitleLbl.text = "Manual".localized()
+                cell.buttonShadowView.backgroundColor = UIColor(hexString: "00DA4F")
+                cell.iconImageView.image = UIImage(named: "powerWhite")
+
+//                automSwitch.isOn = false
+//                manualButtonAction(self)
+            } else if hub.behavior == "planning" {
+                cell.subTitleLbl.text  = "Program".localized()
+                cell.buttonShadowView.backgroundColor = UIColor(hexString: "00DA4F")
+                cell.iconImageView.image = UIImage(named: "timerWhite")
+
+//                automSwitch.isOn = false
+//                progButtonAction(self)
+            } else if hub.behavior == "auto" {
+                cell.subTitleLbl.text = "Smart Control"
+                cell.iconImageView.image = #imageLiteral(resourceName: "Flash_select")
+                cell.buttonShadowView.backgroundColor = UIColor(hexString: "00DA4F")
+//                automSwitch.isOn = true
+//                automButtonAction(self)
+                hub.getAutomMessage { (message) in
+                    if message != nil {
+//                        self.autoMessageLabel.text = message
+//                        self.autoMessageLabel.isHidden = false
+                    }
+                }
+            }
+            
+            if indexPath.row == 1{
+                if hub.equipementState {
+                    cell.subTitleLbl.text = "Working".localized()
+                    cell.buttonShadowView.backgroundColor = UIColor(hexString: "00DA4F")
+                    cell.iconImageView.image = UIImage(named: "powerWhite")
+    //                    stateImageView.image = UIImage(named: "play_circle")
+    //                    manualSwitch.isOn = hub.equipementState
+                } else {
+                    cell.subTitleLbl.text = "Stopped".localized()
+                    cell.buttonShadowView.backgroundColor = .white
+                    cell.iconImageView.image = UIImage(named: "powerGray")
+
+    //                    stateImageView.image = UIImage(named: "stop_circle")
+    //                    manualSwitch.isOn = hub.equipementState
+                }
+            }
+            
+         
+        }
+        
+        
 
         return cell
     }
