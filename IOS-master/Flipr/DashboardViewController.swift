@@ -113,6 +113,7 @@ class DashboardViewController: UIViewController {
     
     @IBOutlet weak var fliprTabView: UIView!
     @IBOutlet weak var hubTabView: UIView!
+    @IBOutlet weak var subscriptionButton: UIButton!
 
     
     var isShowingAddFirstProgramView = false
@@ -164,6 +165,8 @@ class DashboardViewController: UIViewController {
         pumbStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
         bulbStatusView.roundCorner(corner: 12)
         bulbStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
+        
+        subscriptionButton.roundCorner(corner: 12)
 
        // shareButton.setTitle("share".localized, for: .normal)
         airLabel.text = "air".localized
@@ -332,7 +335,7 @@ class DashboardViewController: UIViewController {
             self.isShowingHubView = true
             self.programListView.isHidden = false
             self.programListViewHeightConstraint.constant = 128
-            self.updateWaterAnimation()
+//            self.updateWaterAnimation()
         }else{
             self.addNewProgramViewHeightConstraint.constant = 0
             self.addNewProgramViewBottomConstraint.constant = 0
@@ -594,20 +597,20 @@ class DashboardViewController: UIViewController {
         
         
         
-        var startElevation =  0.71
-        if self.isShowingAddFirstProgramView && self.isShowingHubView {
-            startElevation = 0.51
-        }else{
-            if self.isShowingAddFirstProgramView {
-                startElevation =  0.65
-            }
-            if self.isShowingHubView {
-                startElevation =  0.58
-            }
-        }
+//        var startElevation =  0.71
+//        if self.isShowingAddFirstProgramView && self.isShowingHubView {
+//            startElevation = 0.51
+//        }else{
+//            if self.isShowingAddFirstProgramView {
+//                startElevation =  0.65
+//            }
+//            if self.isShowingHubView {
+//                startElevation =  0.58
+//            }
+//        }
         
         
-//        let startElevation = 0.67
+        let startElevation = 0.85
 
 //        temperaturesTopConstraint.constant = self.view.frame.height * (1 - CGFloat(startElevation)) + 20
         if #available(iOS 11.0, tvOS 11.0, *) {
@@ -617,7 +620,7 @@ class DashboardViewController: UIViewController {
         }
         
 //        let frame = CGRect(x: -(self.view.frame.height - self.view.frame.width)/2 - 50, y: 0, width: sqrt(self.view.frame.height * self.view.frame.height + self.view.frame.width * self.view.frame.width) + 100, height: self.view.frame.height + 100)
-                let frame = self.scrollViewContainerView.frame
+                let frame = self.waveView.frame
         fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  startElevation))
         fluidView.strokeColor = .clear
         fluidView.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
@@ -714,7 +717,7 @@ class DashboardViewController: UIViewController {
             }
         }
         
-        let frame = self.scrollViewContainerView.frame
+        let frame = self.waveView.frame
         fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  startElevation))
         fluidView.strokeColor = .clear
         fluidView.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
@@ -1702,8 +1705,10 @@ class DashboardViewController: UIViewController {
                             if let module = Module.currentModule {
                                 if module.isSubscriptionValid == false {
                                     self.subscriptionView.alpha = 1
+                                    self.subscriptionButton.isHidden = false
                                 } else {
                                     self.subscriptionView.alpha = 0
+                                    self.subscriptionButton.isHidden = true
                                 }
                             }
                         }, completion: { (success) in
@@ -1950,6 +1955,7 @@ class DashboardViewController: UIViewController {
         pHView.alpha = 0
         orpView.alpha = 0
         self.subscriptionView.alpha = 0
+        self.subscriptionButton.isHidden = true
         for view in self.view.subviews {
             if view.tag == 2 {
                 view.alpha = 0
