@@ -106,6 +106,15 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var addNewProgramViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var addNewProgramViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var programListViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var pumbStatusView: UIView!
+    @IBOutlet weak var bulbStatusView: UIView!
+
+    
+    @IBOutlet weak var fliprTabView: UIView!
+    @IBOutlet weak var hubTabView: UIView!
+
+    
     var isShowingAddFirstProgramView = false
     var isShowingHubView = false
 
@@ -139,21 +148,24 @@ class DashboardViewController: UIViewController {
 //        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius:         self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
 
         self.handleHubViews()
+        self.setupDashboardUI()
         if Locale.current.languageCode != "fr" {
             let attributedTitle = NSAttributedString(string: "Alert in progress: act now!".localized, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor) : UIColor.white]))
             alertButton.setAttributedTitle(attributedTitle, for: .normal)
         }
-        topButton.layer.borderColor = UIColor.init(hexString: "111729").cgColor
-        topButton.layer.borderWidth = 2.0
-        topButton.roundCorner(corner: topButton.frame.size.height / 2 )
+       // topButton.layer.borderColor = UIColor.init(hexString: "111729").cgColor
+       // topButton.layer.borderWidth = 2.0
+       // topButton.roundCorner(corner: topButton.frame.size.height / 2 )
         uvView.roundCorner(corner: 6)
-        addNewProgramLabel.roundCorner(corner: 4.0)
+//        addNewProgramLabel.roundCorner(corner: 4.0)
         uvView.layer.borderColor = UIColor.init(hexString: "111729").cgColor
         uvView.layer.borderWidth = 1.0
-        addNewProgramView.roundCorner(corner: 12)
-        addNewProgramView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
+        pumbStatusView.roundCorner(corner: 12)
+        pumbStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
+        bulbStatusView.roundCorner(corner: 12)
+        bulbStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
 
-        shareButton.setTitle("share".localized, for: .normal)
+       // shareButton.setTitle("share".localized, for: .normal)
         airLabel.text = "air".localized
         waterLabel.text = "water".localized
         alertCheckLabel.text = "Water correction in progress".localized
@@ -286,7 +298,24 @@ class DashboardViewController: UIViewController {
         AppReview.shared.requestReviewIfNeeded()
     }
     
+    func setupDashboardUI(){
+        fliprTabView.clipsToBounds = true
+        fliprTabView.layer.cornerRadius = 12
+        if #available(iOS 11.0, *) {
+            fliprTabView.layer.maskedCorners = [ .layerMinXMinYCorner, .layerMinXMaxYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
+        hubTabView.layer.cornerRadius = 12
+        if #available(iOS 11.0, *) {
+            hubTabView.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
     func handleHubViews(){
+        return
         if self.hub != nil {
             if HUB.currentHUB!.plannings.count == 0 {
                 self.addNewProgramView.isHidden = false
@@ -1088,7 +1117,7 @@ class DashboardViewController: UIViewController {
             }
             
             var i = 0
-            /*
+            
             for alert in priorityAlerts {
                 if i == 0 {
                     self.alert0Button.alert = alert
@@ -1112,7 +1141,6 @@ class DashboardViewController: UIViewController {
                 }
                 i = i + 1
             }
-            */
             
         })
         
