@@ -393,7 +393,7 @@ class DashboardViewController: UIViewController {
             self.pumbOffOn(isOn: false)
         }
         else if sender.tag == 0{
-            self.pumbOffOn(isOn: false)
+            self.pumbOffOn(isOn: true)
         }
         else{
             showHubSettingView()
@@ -421,7 +421,7 @@ class DashboardViewController: UIViewController {
                     bulbActionButton.tag = 1
                 }
                 else if hubObj.equipementCode == 86{
-                    pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
+                    pumbActionButton.setImage(UIImage(named: "pumbon"), for: .normal)
                     pumbActionButton.tag = 1
                 }
             } else {
