@@ -16,6 +16,7 @@ import SafariServices
 import AdSupport
 import AppTrackingTransparency
 import MSCircularSlider
+import JGProgressHUD
 
 let FliprLocationDidChange = Notification.Name("FliprLocationDidChange")
 let FliprDataPosted = Notification.Name("FliprDataDidPosted")
@@ -114,6 +115,9 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var fliprTabView: UIView!
     @IBOutlet weak var hubTabView: UIView!
     @IBOutlet weak var subscriptionButton: UIButton!
+    @IBOutlet weak var quicActionButton: UIButton!
+    @IBOutlet weak var pumbActionButton: UIButton!
+    @IBOutlet weak var bulbActionButton: UIButton!
 
     
     var isShowingAddFirstProgramView = false
@@ -275,6 +279,8 @@ class DashboardViewController: UIViewController {
         }
         
         self.appTrackingRequestPermission()
+        self.view.bringSubviewToFront(quicActionButton)
+
         
         /*
          readBLEMeasure(completion: { (error) in
@@ -299,6 +305,8 @@ class DashboardViewController: UIViewController {
         super.viewDidAppear(animated)
         
         AppReview.shared.requestReviewIfNeeded()
+        self.view.bringSubviewToFront(quicActionButton)
+
     }
     
     func setupDashboardUI(){
@@ -317,7 +325,118 @@ class DashboardViewController: UIViewController {
         }
     }
     
+    /*
+    func refreshHUBdisplay() {
+     
+        if let hub = hub {
+            hubButton.setTitle(hub.equipementName, for: .normal)
+            if hub.equipementState {
+                stateLabel.text = "Working".localized()
+                stateImageView.image = UIImage(named: "play_circle")
+                manualSwitch.isOn = hub.equipementState
+            } else {
+                stateLabel.text = "Stopped".localized()
+                stateImageView.image = UIImage(named: "stop_circle")
+                manualSwitch.isOn = hub.equipementState
+            }
+            if hub.behavior == "manual" {
+                modeValueLabel.text = "Manual".localized()
+                automSwitch.isOn = false
+                manualButtonAction(self)
+            } else if hub.behavior == "planning" {
+                modeValueLabel.text = "Program".localized()
+                automSwitch.isOn = false
+                progButtonAction(self)
+            } else if hub.behavior == "auto" {
+                modeValueLabel.text = "Smart Control"
+                automSwitch.isOn = true
+                automButtonAction(self)
+                hub.getAutomMessage { (message) in
+                    if message != nil {
+                        self.autoMessageLabel.text = message
+                        self.autoMessageLabel.isHidden = false
+                    }
+                }
+            } else {
+                modeValueLabel.text = "Unkown mode"
+                automSwitch.isOn = false
+                manualButtonAction(self)
+            }
+        }
+       
+    }
+     */
+    
+    func pumbOffOn(isOn:Bool){
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.view)
+        
+        HUB.currentHUB?.updateState(value: isOn, completion: { (error) in
+            if error != nil {
+                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                hud?.textLabel.text = error?.localizedDescription
+                hud?.dismiss(afterDelay: 3)
+            } else {
+                hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                hud?.dismiss(afterDelay: 1)
+            }
+            self.refreshHUBdisplay()
+            self.view.hideStateView()
+        })
+        
+    }
+    
+    
+    
+    @IBAction func pumbSwitchActionFliptrTab(sender:UIButton){
+        if sender.tag == 1{
+            self.pumbOffOn(isOn: false)
+        }
+        else if sender.tag == 0{
+            self.pumbOffOn(isOn: false)
+        }
+        else{
+            showHubSettingView()
+        }
+    }
+    
+    
+    @IBAction func bulbSwitchActionFliptrTab(sender:UIButton){
+        if sender.tag == 1{
+            
+        }else{
+            showHubSettingView()
+        }
+    }
+    
+    func showHubSettingView(){
+        self.hubButtonAction(self)
+    }
+    
     func handleHubViews(){
+        for hubObj in self.hubs{
+            if hubObj.equipementState {
+                if hubObj.equipementCode == 84{
+                    bulbActionButton.setImage(UIImage(named: "ON"), for: .normal)
+                    bulbActionButton.tag = 1
+                }
+                else if hubObj.equipementCode == 86{
+                    pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
+                    pumbActionButton.tag = 1
+                }
+            } else {
+                if hubObj.equipementCode == 84{
+                    bulbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
+                    bulbActionButton.tag = 0
+                }
+                else if hubObj.equipementCode == 86{
+                    pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
+                    pumbActionButton.tag = 0
+                }
+            }
+        }
+        
+        
         return
         if self.hub != nil {
             if HUB.currentHUB!.plannings.count == 0 {
@@ -683,6 +802,7 @@ class DashboardViewController: UIViewController {
             }
             
         }
+        self.view.bringSubviewToFront(quicActionButton)
        /*
         let pHCircle = CAShapeLayer()
         
@@ -698,7 +818,7 @@ class DashboardViewController: UIViewController {
         */
     }
     
-    
+    /*
     func updateWaterAnimation(){
         fluidView.removeFromSuperview()
         fluidView = nil
@@ -761,6 +881,8 @@ class DashboardViewController: UIViewController {
         }
     
     }
+    
+    */
     
     
     func setGradientBackground(){
@@ -1028,6 +1150,13 @@ class DashboardViewController: UIViewController {
             hideWeatherForecast()
         }
         
+    }
+    
+    func handleSubscriptionButton(){
+        self.subscriptionButton.backgroundColor  = UIColor.init(hexString: "FF8F50")
+        self.subscriptionButton.setTitleColor(.white, for: .normal)
+        self.subscriptionButton.setTitle("Alerte en cours : suivez nos conseils".localized, for: .normal)
+        self.subscriptionButton.setImage(UIImage(named: "alertSubscription"), for: .normal)
     }
     
     func hideWeatherForecast() {
@@ -1706,6 +1835,7 @@ class DashboardViewController: UIViewController {
                                 if module.isSubscriptionValid == false {
                                     self.subscriptionView.alpha = 1
                                     self.subscriptionButton.isHidden = false
+                                    self.handleSubscriptionButton()
                                 } else {
                                     self.subscriptionView.alpha = 0
                                     self.subscriptionButton.isHidden = true
@@ -1974,6 +2104,10 @@ class DashboardViewController: UIViewController {
         
         
             
+    }
+    
+    @IBAction func fliprStoreButtonAction(_ sender: Any) {
+    
     }
     
     @IBAction func alertButtonAction(_ sender: Any) {
