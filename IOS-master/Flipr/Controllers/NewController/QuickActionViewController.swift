@@ -64,19 +64,19 @@ class QuickActionViewController: UIViewController {
         measurementLbl.text = "Trigger a Measurement".localized
         expertLbl.text  = "Expert Mode".localized
         callibrationLbl.text  = "New Calibration".localized
-        drainingLbl.text  = "Draining".localized
-        stripTestLbl.text  = "New strip test".localized
-
-        triggerContainerView.layer.cornerRadius = 15.0
-        triggerContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
-        expertContainerView.layer.cornerRadius = 15.0
-        expertContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
-        calibrationContainerView.layer.cornerRadius = 15.0
-        calibrationContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
-        drainingContainerView.layer.cornerRadius = 15.0
-        drainingContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
-        newStripContainerView.layer.cornerRadius = 15.0
-        newStripContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
+        drainingLbl.text  = "Add a Flipr Hub".localized
+//        stripTestLbl.text  = "New strip test".localized
+//
+//        triggerContainerView.layer.cornerRadius = 15.0
+//        triggerContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
+//        expertContainerView.layer.cornerRadius = 15.0
+//        expertContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
+//        calibrationContainerView.layer.cornerRadius = 15.0
+//        calibrationContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
+//        drainingContainerView.layer.cornerRadius = 15.0
+//        drainingContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
+//        newStripContainerView.layer.cornerRadius = 15.0
+//        newStripContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
 
     }
     
@@ -84,6 +84,18 @@ class QuickActionViewController: UIViewController {
         self.tapView.backgroundColor = UIColor.clear
         self.dismiss(animated: true, completion: nil)
         print("Hello World")
+    }
+    
+    @IBAction func closeButtonClicked(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func addHubButtonClicked(){
+    
+        let fliprStoryboard = UIStoryboard(name: "HUBElectrical", bundle: nil)
+        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController")
+        let navigationVC = UINavigationController.init(rootViewController: viewController)
+        self.present(navigationVC, animated: true)
     }
     
     @IBAction func triggerMeasureButtonClicked(){
