@@ -118,6 +118,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var quicActionButton: UIButton!
     @IBOutlet weak var pumbActionButton: UIButton!
     @IBOutlet weak var bulbActionButton: UIButton!
+    @IBOutlet weak var addFirstFliprView: UIView!
 
     
     var isShowingAddFirstProgramView = false
@@ -171,6 +172,7 @@ class DashboardViewController: UIViewController {
         bulbStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
         
         subscriptionButton.roundCorner(corner: 12)
+        addFirstFliprView.roundCorner(corner: 12)
 
        // shareButton.setTitle("share".localized, for: .normal)
         airLabel.text = "air".localized
@@ -281,7 +283,7 @@ class DashboardViewController: UIViewController {
         self.appTrackingRequestPermission()
         self.view.bringSubviewToFront(quicActionButton)
 
-        
+      
         /*
          readBLEMeasure(completion: { (error) in
          if error != nil {
@@ -323,6 +325,28 @@ class DashboardViewController: UIViewController {
         } else {
             // Fallback on earlier versions
         }
+    }
+    
+    
+    func userHasNoFlipr(){
+        self.waveView.isHidden = true
+        self.addFirstFliprView.isHidden = false
+    }
+    
+    
+    @IBAction func addFirstFliprButtonClicked(){
+        let fliprStoryboard = UIStoryboard(name: "FliprDevice", bundle: nil)
+        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddFliprViewController")
+        let nav = UINavigationController.init(rootViewController: viewController)
+        self.present(nav, animated: true)
+    }
+    
+    func addHubEquipments(){
+    
+        let fliprStoryboard = UIStoryboard(name: "HUBElectrical", bundle: nil)
+        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController")
+        let navigationVC = UINavigationController.init(rootViewController: viewController)
+        self.present(navigationVC, animated: true)
     }
     
     /*
@@ -410,10 +434,11 @@ class DashboardViewController: UIViewController {
     }
     
     func showHubSettingView(){
-        self.hubButtonAction(self)
+        addHubEquipments()
     }
     
     func handleHubViews(){
+        
         for hubObj in self.hubs{
             if hubObj.equipementState {
                 if hubObj.equipementCode == 84{
@@ -436,8 +461,8 @@ class DashboardViewController: UIViewController {
             }
         }
         
-        
         return
+        
         if self.hub != nil {
             if HUB.currentHUB!.plannings.count == 0 {
                 self.addNewProgramView.isHidden = false
@@ -1239,7 +1264,7 @@ class DashboardViewController: UIViewController {
                     self.alertCheckView.isHidden = true
                 } else {
                     self.alertButton.isHidden = true
-                    self.alertCheckView.isHidden = false
+//                    self.alertCheckView.isHidden = false
                 }
                 
             } else {
@@ -1833,12 +1858,12 @@ class DashboardViewController: UIViewController {
                             }
                             if let module = Module.currentModule {
                                 if module.isSubscriptionValid == false {
-                                    self.subscriptionView.alpha = 1
-                                    self.subscriptionButton.isHidden = false
+//                                    self.subscriptionView.alpha = 1
+//                                    self.subscriptionButton.isHidden = false
                                     self.handleSubscriptionButton()
                                 } else {
-                                    self.subscriptionView.alpha = 0
-                                    self.subscriptionButton.isHidden = true
+//                                    self.subscriptionView.alpha = 0
+//                                    self.subscriptionButton.isHidden = true
                                 }
                             }
                         }, completion: { (success) in
@@ -2107,7 +2132,15 @@ class DashboardViewController: UIViewController {
     }
     
     @IBAction func fliprStoreButtonAction(_ sender: Any) {
-    
+        if let pool = Pool.currentPool {
+            if let url = URL(string: pool.shopUrl) {
+                let vc = SFSafariViewController(url: url, entersReaderIfAvailable: false)
+                self.present(vc, animated: true)
+            }
+        } else if let url = URL(string: "SHOP_URL".localized.remotable) {
+            let vc = SFSafariViewController(url: url, entersReaderIfAvailable: false)
+            self.present(vc, animated: true)
+        }
     }
     
     @IBAction func alertButtonAction(_ sender: Any) {
