@@ -16,17 +16,20 @@ class FliprActivationSuccessViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    
     @IBAction func nextButtonClicked() {
         
         if AppSharedData.sharedInstance.isAddingDeviceFromPresentedVCFlow{
             let sb = UIStoryboard(name: "Calibration", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
-//            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.pushViewController(vc, animated: true)
+            //            self.dismiss(animated: true, completion: nil)
         }else{
-            
+            let sb = UIStoryboard(name: "Calibration", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
+            self.navigationController?.pushViewController(vc, animated: true)
         }
-       
+        
     }
 
 

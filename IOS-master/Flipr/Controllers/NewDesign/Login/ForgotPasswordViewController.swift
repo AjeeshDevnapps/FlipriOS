@@ -33,7 +33,7 @@ class ForgotPasswordViewController: BaseViewController {
         for navItem in(self.navigationController?.navigationBar.subviews)! {
              for itemSubView in navItem.subviews {
                  if let largeLabel = itemSubView as? UILabel {
-                     largeLabel.text = self.title
+                     largeLabel.text = "Reset my password".localized
                      largeLabel.numberOfLines = 0
                      largeLabel.lineBreakMode = .byWordWrapping
                  }

@@ -34,6 +34,12 @@ class PairingSuccessViewController: BaseViewController {
     */
 
     @IBAction func submit(_ sender: UIButton) {
+        let mainSB = UIStoryboard.init(name: "Main", bundle: nil)
+        let dashboard = mainSB.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+        dashboard.modalTransitionStyle = .flipHorizontal
+        dashboard.modalPresentationStyle = .fullScreen
+        self.present(dashboard, animated: true, completion: {
+        })
     }
     
     @IBAction func backButton(_ sender: UIButton) {
