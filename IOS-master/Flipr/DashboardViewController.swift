@@ -616,6 +616,8 @@ class DashboardViewController: UIViewController {
     }
     
     func manageTemperatureValueChangeButtton(){
+        manageThresholdButton()
+        /*
         let minValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMinValuesKey)
         let maxValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMaxValuesKey)
         if minValue && maxValue{
@@ -632,9 +634,12 @@ class DashboardViewController: UIViewController {
                                 self.waterTmpChangeButton.isHidden = false
                               })
         }
+        */
     }
     
     func managePhValueChangeButtton(){
+        manageThresholdButton()
+        /*
         let minValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMinValuesKey)
         let maxValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMaxValuesKey)
         if minValue && maxValue{
@@ -647,9 +652,33 @@ class DashboardViewController: UIViewController {
             UIView.transition(with:  self.phChangeButton, duration: 0.4,
                               options: .transitionCrossDissolve,
                               animations: {
-                                self.phChangeButton.isHidden = false
+                                self.waterTmpChangeButton.isHidden = false
                               })
         }
+        */
+    }
+    
+    func manageThresholdButton(){
+        let phMinValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMinValuesKey)
+        let phMaxValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMaxValuesKey)
+        
+        let waterMinValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMinValuesKey)
+        let waterMaxValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMaxValuesKey)
+        if phMinValue && phMaxValue && waterMinValue && waterMaxValue{
+            UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                                self.waterTmpChangeButton.isHidden = true
+                              })
+        }else{
+            UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                                self.waterTmpChangeButton.isHidden = false
+                              })
+        }
+
+
     }
     
     func manageNotificationDisabledButtton(){
@@ -2306,13 +2335,22 @@ class DashboardViewController: UIViewController {
     
     
     @IBAction func thresholdSettingsButtonAction(_ sender: Any) {
-        let sb = UIStoryboard.init(name: "Notifications", bundle: nil)
-        if let viewController = sb.instantiateViewController(withIdentifier: "NotificationsAlertViewController") as? NotificationsAlertViewController {
-            viewController.alertType = .Threshold
-            viewController.delegate = self
-            viewController.modalPresentationStyle = .overCurrentContext
-            self.present(viewController, animated: true, completion: nil)
+        let tmpSb = UIStoryboard.init(name: "Main", bundle: nil)
+        if let navigationController = tmpSb.instantiateViewController(withIdentifier: "SettingsNavingation") as? UINavigationController {
+            if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertModeViewController") as? ExpertModeViewController {
+                navigationController.modalPresentationStyle = .fullScreen
+                viewController.isDirectPresenting = true
+                navigationController.setViewControllers([viewController], animated: false)
+                self.present(navigationController, animated: true, completion: nil)
+            }
         }
+//        let sb = UIStoryboard.init(name: "Notifications", bundle: nil)
+//        if let viewController = sb.instantiateViewController(withIdentifier: "NotificationsAlertViewController") as? NotificationsAlertViewController {
+//            viewController.alertType = .Threshold
+//            viewController.delegate = self
+//            viewController.modalPresentationStyle = .overCurrentContext
+//            self.present(viewController, animated: true, completion: nil)
+//        }
     }
     
     
