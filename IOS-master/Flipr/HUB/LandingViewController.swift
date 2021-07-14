@@ -24,8 +24,9 @@ class LandingViewController: UIViewController {
         super.viewDidLoad()
         self.setupUI()
 
-        var welcomeMsg = "Bienvenue "
+        var welcomeMsg = "Bienvenue".localized
         if let name = User.currentUser?.firstName{
+            welcomeMsg.append(" ")
             welcomeMsg.append(name)
         }
         welcomeMsg.append("!")

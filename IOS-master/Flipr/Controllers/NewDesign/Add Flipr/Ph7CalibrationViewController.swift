@@ -84,7 +84,7 @@ class Ph7CalibrationViewController: BaseViewController {
             
         }
         self.perform(#selector(self.checkForDeviceSearchingTimeOut), with: nil, afterDelay: 20)
-        self.perform(#selector(self.checkForDeviceConnectingTimeOut), with: nil, afterDelay: 60)
+//        self.perform(#selector(self.checkForDeviceConnectingTimeOut), with: nil, afterDelay: 60)
         isCalibrationStrucked = true
         self.checkCalibrationStruckTimer = Timer.scheduledTimer(timeInterval: 180,
                                                   target: self,

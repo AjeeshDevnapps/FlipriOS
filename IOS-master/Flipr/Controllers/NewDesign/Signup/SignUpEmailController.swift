@@ -28,8 +28,7 @@ class SignUpEmailController: UIViewController, UITextFieldDelegate {
         IQKeyboardManager.shared.enable = false
 
         navigationController?.isNavigationBarHidden = true
-        
-        controllerTitle.text = "Create Account".localized
+        controllerTitle.text = "Registration".localized
         backButton.setTitle("Login".localized, for: .normal)
         
         let cguType = ActiveType.custom(pattern: "\\s" + "Terms of Use".localized + "\\b")
@@ -64,11 +63,12 @@ class SignUpEmailController: UIViewController, UITextFieldDelegate {
     //MARK:- Custom Actions
     
     func UISetup() {
-        self.title = "Create Account".localized()
+        self.title = "Registration".localized
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
         titleForTextField.text = "E-mail address".localized
         descriptionText.text = "Description".localized()
         textField.placeholder = "email@address.com".localized()
+        signUpButton.setTitle("Create account".localized, for: .normal)
         
         textField.addTarget(self, action: #selector(updateTextFieldAppearance), for: .editingChanged)
         textField.addTarget(self, action: #selector(hideKeybaord), for: .editingDidEndOnExit)

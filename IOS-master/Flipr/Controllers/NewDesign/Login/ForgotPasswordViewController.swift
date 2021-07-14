@@ -14,12 +14,18 @@ class ForgotPasswordViewController: BaseViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var emailContainerView: UIView!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var titleLbl: UILabel!
 
     override func viewDidLoad() {
         self.backButtonTitle = "Login".localized
         emailLbl.text = "E-mail address".localized
         super.viewDidLoad()
-        self.title = "Reset my password".localized
+        if #available(iOS 11.0, *) {
+            self.navigationItem.largeTitleDisplayMode = .never
+        } else {
+            // Fallback on earlier versions
+        }
+        self.titleLbl.text = "Reset my password".localized
         submitButton.setTitle("Reset".localized, for: .normal)
         self.setupViews()
         // Do any additional setup after loading the view.

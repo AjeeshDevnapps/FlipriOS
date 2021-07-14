@@ -10,6 +10,7 @@ import UIKit
 
 
 class StripViewController: UIViewController {
+    let imageView = UIImageView(image: UIImage(named: "bkWaves.pdf"))
 
     var recalibration = false
     
@@ -36,6 +37,7 @@ class StripViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))
         doneButton.roundCorner(corner: 12)
+//        addBackground()
         if recalibration == true {
             useNewStripVersion()
         } else if let moduleVersion = Module.currentModule?.version {
@@ -58,8 +60,16 @@ class StripViewController: UIViewController {
 
     }
     
+    
+    
     @objc func closeButtonTapped(){
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func addBackground(){
+        self.view.backgroundColor =  UIColor.init(hexString: "#F2F9FE")
+        imageView.frame = CGRect(x: 0, y: self.view.height - 316, width: self.view.frame.width, height: 316)
+        view.addSubview(imageView)
     }
     
     func useNewStripVersion() {

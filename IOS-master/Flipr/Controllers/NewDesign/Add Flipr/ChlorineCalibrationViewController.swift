@@ -83,7 +83,7 @@ class ChlorineCalibrationViewController: BaseViewController {
             
         }
         self.perform(#selector(self.checkForDeviceSearchingTimeOut), with: nil, afterDelay: 20)
-        self.perform(#selector(self.checkForDeviceConnectingTimeOut), with: nil, afterDelay: 60)
+//        self.perform(#selector(self.checkForDeviceConnectingTimeOut), with: nil, afterDelay: 60)
         isCalibrationStrucked = true
         self.checkCalibrationStruckTimer = Timer.scheduledTimer(timeInterval: 180,
                                                   target: self,
@@ -197,8 +197,8 @@ class ChlorineCalibrationViewController: BaseViewController {
                             self.dismiss(animated: true, completion: nil)
 //                            self.navigationController?.dismiss(animated: true, completion: nil)
                         } else {
-                            if self.calibrationType == .ph7 {
-                                Module.currentModule?.pH7CalibrationDone = true
+                            if self.calibrationType == .ph4 {
+                                Module.currentModule?.pH4CalibrationDone = true
                                 self.loaderView.hideStateView()
                                 self.invalidateStruckChecktimer()
                                 self.showStripView()

@@ -35,13 +35,20 @@ class CalibrationSuccessViewController: UIViewController {
                 self.view.hideStateView()
             } else {
                 UserDefaults.standard.set(Date(), forKey:"FirstMeasureStartDate")
-                if let dashboard = self.storyboard?.instantiateViewController(withIdentifier: "DashboardViewControllerID") {
-                    dashboard.modalTransitionStyle = .flipHorizontal
-                    dashboard.modalPresentationStyle = .fullScreen
-                    self.present(dashboard, animated: true, completion: {
-                        self.navigationController?.popToRootViewController(animated: false)
-                    })
-                }
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+                dashboard.modalTransitionStyle = .flipHorizontal
+                dashboard.modalPresentationStyle = .fullScreen
+                self.present(dashboard, animated: true, completion: {
+                    self.navigationController?.popToRootViewController(animated: false)
+                })
+//                if let dashboard = self.storyboard?.instantiateViewController(withIdentifier: "DashboardViewControllerID") {
+//                    dashboard.modalTransitionStyle = .flipHorizontal
+//                    dashboard.modalPresentationStyle = .fullScreen
+//                    self.present(dashboard, animated: true, completion: {
+//                        self.navigationController?.popToRootViewController(animated: false)
+//                    })
+//                }
             }
         }
     }

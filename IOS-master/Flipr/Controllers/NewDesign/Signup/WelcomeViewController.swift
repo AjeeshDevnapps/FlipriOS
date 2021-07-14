@@ -15,6 +15,7 @@ class WelcomeViewController: BaseViewController {
     @IBOutlet weak var devicesListHdrLbl: UILabel!
     @IBOutlet weak var statrVw: UIView!
     @IBOutlet weak var hubVw: UIView!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -31,7 +32,7 @@ class WelcomeViewController: BaseViewController {
     }
 
     private func setupUI() {
-        var welcomeMsg = "Bienvenue"
+        var welcomeMsg = "Bienvenue".localized
         if let name = User.currentUser?.firstName{
             welcomeMsg.append(" ")
             welcomeMsg.append(name)
