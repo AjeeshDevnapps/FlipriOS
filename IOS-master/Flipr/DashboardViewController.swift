@@ -119,6 +119,8 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var pumbActionButton: UIButton!
     @IBOutlet weak var bulbActionButton: UIButton!
     @IBOutlet weak var addFirstFliprView: UIView!
+    @IBOutlet weak var signalStrengthLabel: UILabel!
+    @IBOutlet weak var signalStrengthImageView: UIImageView!
 
     
     var isShowingAddFirstProgramView = false
@@ -129,6 +131,9 @@ class DashboardViewController: UIViewController {
     var bleMeasureHasBeenSent = false
     
     var hub:HUB?
+    var hubPumb:HUB?
+    var hubBulb:HUB?
+
     var hubs:[HUB] = []
     var fluidViewTopEdge:BAFluidView!
     var fluidView:BAFluidView!
@@ -136,6 +141,12 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+//        if -300 > -400{
+//            print("true")
+//        }else{
+//            print("false")
+//        }
 //        let tmp = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationControllerID") as? SideMenuNavigationController
 //        tmp?.view.addShadow(offset: CGSize.init(width: 10, height: 10), color: UIColor.black, radius: 100.0, opacity:1.0)
         SideMenuManager.default.leftMenuNavigationController = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationControllerID") as? SideMenuNavigationController
@@ -305,7 +316,7 @@ class DashboardViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.loadHUBs()
         AppReview.shared.requestReviewIfNeeded()
         self.view.bringSubviewToFront(quicActionButton)
 
@@ -333,6 +344,10 @@ class DashboardViewController: UIViewController {
         self.addFirstFliprView.isHidden = false
     }
     
+    func hideUserHasNoFlipr(){
+        self.waveView.isHidden = false
+        self.addFirstFliprView.isHidden = true
+    }
     
     @IBAction func addFirstFliprButtonClicked(){
         let fliprStoryboard = UIStoryboard(name: "FliprDevice", bundle: nil)
@@ -414,10 +429,18 @@ class DashboardViewController: UIViewController {
     
     @IBAction func pumbSwitchActionFliptrTab(sender:UIButton){
         if sender.tag == 1{
-            self.pumbOffOn(isOn: false)
+            if self.hubPumb?.behavior == "manual" {
+                self.pumbOffOn(isOn: false)
+            }else{
+                self.hubButtonAction(self)
+            }
         }
         else if sender.tag == 0{
-            self.pumbOffOn(isOn: true)
+            if self.hubPumb?.behavior == "manual" {
+                self.pumbOffOn(isOn: true)
+            }else{
+                self.hubButtonAction(self)
+            }
         }
         else{
             showHubSettingView()
@@ -440,14 +463,34 @@ class DashboardViewController: UIViewController {
     func handleHubViews(){
         
         for hubObj in self.hubs{
+            if hubObj.equipementCode == 84{
+                self.hubBulb = hubObj
+            }
+            else if hubObj.equipementCode == 86{
+                self.hubPumb = hubObj
+            }
+            else{
+                
+            }
             if hubObj.equipementState {
                 if hubObj.equipementCode == 84{
                     bulbActionButton.setImage(UIImage(named: "ON"), for: .normal)
                     bulbActionButton.tag = 1
                 }
                 else if hubObj.equipementCode == 86{
-                    pumbActionButton.setImage(UIImage(named: "pumbon"), for: .normal)
+                    pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
                     pumbActionButton.tag = 1
+                    if hubObj.behavior == "manual" {
+                        pumbActionButton.setImage(UIImage(named: "ON"), for: .normal)
+                    }
+                    else if hubObj.behavior == "planning" {
+                        pumbActionButton.setImage(UIImage(named: "pumbPgmOn"), for: .normal)
+                    }
+                    else if hubObj.behavior == "auto" {
+                        pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
+                    }else{
+                        
+                    }
                 }
             } else {
                 if hubObj.equipementCode == 84{
@@ -457,6 +500,18 @@ class DashboardViewController: UIViewController {
                 else if hubObj.equipementCode == 86{
                     pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
                     pumbActionButton.tag = 0
+                    if hubObj.behavior == "manual" {
+                        pumbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
+                    }
+                    else if hubObj.behavior == "planning" {
+                        pumbActionButton.setImage(UIImage(named: "pumbPrgmOff"), for: .normal)
+                    }
+                    else if hubObj.behavior == "auto" {
+                        pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
+                    }else{
+                        
+                    }
+                  
                 }
             }
         }
@@ -696,11 +751,14 @@ class DashboardViewController: UIViewController {
         let fluidColor =  UIColor.init(hexString: "fcad71")
         
         if let module = Module.currentModule {
+            self.hideUserHasNoFlipr()
             if module.isForSpa {
                 //backgroundImageView.image = UIImage(named:"Dashboard_BG_SPA")
                 //backgroundOverlayImageView.image = UIImage(named:"Degrade_dashboard_SPA")
                 //fluidColor =  UIColor.init(colorLiteralRed: 64/255.0, green: 125/255.0, blue: 136/255.0, alpha: 1)
             }
+        }else{
+            self.userHasNoFlipr()
         }
         
         alertButton.isHidden = true
@@ -1421,7 +1479,7 @@ class DashboardViewController: UIViewController {
                             let index = String(format: "%.0f", uvIndex)
                             self.uvLabel.text = index
                             self.uvLabel.layer.borderWidth = 1
-                            self.uvLabel.layer.cornerRadius = 10
+                            self.uvLabel.layer.cornerRadius = (self.uvLabel.frame.size.height / 2)
                             if uvIndex <= 2 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 41/255.0, green: 255/255.0, blue: 3/255.0, alpha: 1).cgColor
                             } else if  uvIndex <= 5 {
@@ -1574,7 +1632,7 @@ class DashboardViewController: UIViewController {
                             let index = String(format: "%.0f", uvIndex)
                             self.uvLabel.text = index
                             self.uvLabel.layer.borderWidth = 1
-                            self.uvLabel.layer.cornerRadius = 10
+                            self.uvLabel.layer.cornerRadius = (self.uvLabel.frame.size.height / 2)
                             if uvIndex <= 2 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 41/255.0, green: 255/255.0, blue: 3/255.0, alpha: 1).cgColor
                             } else if  uvIndex <= 5 {
@@ -1626,18 +1684,45 @@ class DashboardViewController: UIViewController {
                                 Module.currentModule?.rawlastMeasure = dateFormatter.string(from: lastDate)
                                 
                                 print("lastDate interval since now:\(lastDate.timeIntervalSinceNow)")
-                                if lastDate.timeIntervalSinceNow < -4500 {
-                                    self.readBLEMeasure(completion: { (error) in
-                                        if error != nil {
-                                            self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
-                                            self.bleStatusView.isHidden = true
-                                        } else {
-                                            self.bleMeasureHasBeenSent = true
-                                        }
-                                    })
+//
+                                //        if -300 > -400{
+                                //            print("true")
+                                //        }else{
+                                //            print("false")
+                                //        }
+                                if lastDate.timeIntervalSinceNow  > -4500 {
+                                    self.signalStrengthLabel.text = "Signal excellent".localized
+                                    self.signalStrengthImageView.image = UIImage(named: "Signalhigh")
                                 }
+                                
+//                                else if lastDate.timeIntervalSinceNow < -4500 {
+//                                    self.readBLEMeasure(completion: { (error) in
+//                                        if error != nil {
+//                                            self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+//                                            self.bleStatusView.isHidden = true
+//                                        } else {
+//                                            self.bleMeasureHasBeenSent = true
+//                                        }
+//                                    })
+//                                }
+                                else if lastDate.timeIntervalSinceNow > -86400 {
+                                    self.signalStrengthLabel.text = "Signal moyen".localized
+                                    self.signalStrengthImageView.image = UIImage(named: "Signalmiddle")
+
+                                }
+                                else if  lastDate.timeIntervalSinceNow > -172800 {
+                                    self.signalStrengthLabel.text = "Signal faible".localized
+                                    self.signalStrengthImageView.image = UIImage(named: "Signallow")
+
+                                }else{
+                                    self.signalStrengthLabel.text = "Signal inexistant".localized
+                                    self.signalStrengthImageView.image = UIImage(named: "SignalNo")
+                                }
+                                
                             }
                         } else {
+                            self.signalStrengthLabel.text = "Signal inexistant".localized
+                            self.signalStrengthImageView.image = UIImage(named: "SignalNo")
                             self.readBLEMeasure(completion: { (error) in
                                 if error != nil {
                                     self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)

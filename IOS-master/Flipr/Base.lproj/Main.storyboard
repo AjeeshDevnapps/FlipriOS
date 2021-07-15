@@ -3043,9 +3043,9 @@ Essai gratuit 7 jours</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TjM-nA-vu4">
-                                <rect key="frame" x="64" y="429.5" width="247" height="173.5"/>
+                                <rect key="frame" x="64" y="430" width="247" height="173"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="UTA-cN-PoJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="247" height="174"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="247" height="173"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe" translatesAutoresizingMaskIntoConstraints="NO" id="or2-DK-krG">
@@ -5336,7 +5336,7 @@ Attention : cette opération est réservée aux utilisateurs expérimentés</str
                                                             <color key="textColor" red="0.1333333333" green="0.2274509804" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="788-Ky-kG9" customClass="RangeSeekSlider" customModule="RangeSeekSlider">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="788-Ky-kG9" customClass="RangeSeekSlider" customModule="RangeSeekSlider">
                                                             <rect key="frame" x="24" y="44" width="327" height="65"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <userDefinedRuntimeAttributes>
@@ -5637,7 +5637,7 @@ Attention : cette opération est réservée aux utilisateurs expérimentés</str
                                                             <color key="textColor" red="0.1333333333" green="0.2274509804" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zvb-BM-lq9" customClass="RangeSeekSlider" customModule="RangeSeekSlider">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zvb-BM-lq9" customClass="RangeSeekSlider" customModule="RangeSeekSlider">
                                                             <rect key="frame" x="24" y="43.5" width="327" height="65"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <userDefinedRuntimeAttributes>
@@ -9244,7 +9244,7 @@ DE BANDELETTE</string>
         <scene sceneID="jYb-TF-cAL">
             <objects>
                 <viewController storyboardIdentifier="Page" id="QeI-t8-qJb" customClass="SimplePage" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jAp-gx-NOF">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="jAp-gx-NOF">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nAg-01-xwZ">
@@ -11255,7 +11255,7 @@ DE BANDELETTE</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2yB-1o-Q4m" userLabel="SubscriptionView">
+                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2yB-1o-Q4m" userLabel="SubscriptionView">
                                 <rect key="frame" x="34" y="565" width="357" height="70.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_infinite copy" translatesAutoresizingMaskIntoConstraints="NO" id="KsV-pQ-dod">
@@ -11744,23 +11744,28 @@ Essai gratuit 7 jours</string>
                                                             <action selector="thresholdSettingsButtonAction:" destination="XEv-OR-QWa" eventType="touchUpInside" id="7M5-6x-Jd0"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cS-gF-uta">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Signalhigh" translatesAutoresizingMaskIntoConstraints="NO" id="sJW-ra-cpj">
                                                         <rect key="frame" x="16" y="43" width="32" height="32"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="32" id="1DN-Ls-yGA"/>
-                                                            <constraint firstAttribute="height" constant="32" id="jeg-Y2-4Ly"/>
+                                                            <constraint firstAttribute="width" constant="32" id="lV6-DC-NM5"/>
+                                                            <constraint firstAttribute="height" constant="32" id="wQp-4D-zuH"/>
                                                         </constraints>
-                                                        <state key="normal" image="WifiSignal"/>
-                                                    </button>
+                                                    </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Signal moyen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9j-UN-PH2">
                                                         <rect key="frame" x="56" y="43" width="86.5" height="17"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="17" id="qrf-6a-ILp"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dernière mesure : Mar. 10:30" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvs-kD-QAR">
-                                                        <rect key="frame" x="56" y="59" width="175" height="16"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <rect key="frame" x="56" y="59" width="163.5" height="16"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="16" id="a6D-9R-kuI"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -12118,27 +12123,27 @@ Essai gratuit 7 jours</string>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="xKu-Ks-oU1" firstAttribute="top" secondItem="5yh-bR-CAn" secondAttribute="top" constant="43" id="29p-NF-Sbi"/>
+                                                    <constraint firstItem="Dvs-kD-QAR" firstAttribute="leading" secondItem="sJW-ra-cpj" secondAttribute="trailing" constant="8" symbolic="YES" id="6jG-tY-ELQ"/>
                                                     <constraint firstItem="J1Y-ao-hEH" firstAttribute="top" secondItem="V15-A8-Aoz" secondAttribute="bottom" id="BEy-Hs-fhp"/>
                                                     <constraint firstItem="V15-A8-Aoz" firstAttribute="centerX" secondItem="5yh-bR-CAn" secondAttribute="centerX" id="Bnq-5e-RdK"/>
                                                     <constraint firstItem="xKu-Ks-oU1" firstAttribute="leading" secondItem="mRF-7F-OVK" secondAttribute="trailing" constant="8" id="ChJ-1g-c7q"/>
+                                                    <constraint firstItem="o9j-UN-PH2" firstAttribute="leading" secondItem="sJW-ra-cpj" secondAttribute="trailing" constant="8" symbolic="YES" id="D7c-q8-KPB"/>
+                                                    <constraint firstItem="o9j-UN-PH2" firstAttribute="top" secondItem="sJW-ra-cpj" secondAttribute="top" id="DLw-VR-CYC"/>
                                                     <constraint firstItem="nmV-B0-XNQ" firstAttribute="leading" secondItem="5yh-bR-CAn" secondAttribute="leading" constant="16" id="DV6-tx-Tvz"/>
+                                                    <constraint firstItem="Dvs-kD-QAR" firstAttribute="bottom" secondItem="sJW-ra-cpj" secondAttribute="bottom" id="DhU-YH-0Gz"/>
                                                     <constraint firstAttribute="trailing" secondItem="J1Y-ao-hEH" secondAttribute="trailing" constant="34" id="FON-a1-f9b"/>
-                                                    <constraint firstItem="Dvs-kD-QAR" firstAttribute="leading" secondItem="1cS-gF-uta" secondAttribute="trailing" constant="8" id="Fyg-Di-Cp6"/>
+                                                    <constraint firstItem="sJW-ra-cpj" firstAttribute="centerY" secondItem="xKu-Ks-oU1" secondAttribute="centerY" id="HWP-ZJ-uTc"/>
                                                     <constraint firstAttribute="bottom" secondItem="nmV-B0-XNQ" secondAttribute="bottom" priority="250" constant="35" id="Ihj-I5-5AX"/>
                                                     <constraint firstItem="Jxc-re-ljc" firstAttribute="top" secondItem="V15-A8-Aoz" secondAttribute="bottom" id="Jqb-9Q-zvy"/>
                                                     <constraint firstItem="V15-A8-Aoz" firstAttribute="top" secondItem="7lk-cG-zxD" secondAttribute="bottom" constant="13" id="Qbs-FF-gaL"/>
-                                                    <constraint firstItem="1cS-gF-uta" firstAttribute="leading" secondItem="5yh-bR-CAn" secondAttribute="leading" constant="16" id="QxP-2v-qhW"/>
                                                     <constraint firstItem="mRF-7F-OVK" firstAttribute="centerY" secondItem="xKu-Ks-oU1" secondAttribute="centerY" id="SEx-Nt-Gzb"/>
                                                     <constraint firstItem="Jxc-re-ljc" firstAttribute="leading" secondItem="5yh-bR-CAn" secondAttribute="leading" constant="34" id="TUc-4Y-ycB"/>
+                                                    <constraint firstItem="sJW-ra-cpj" firstAttribute="leading" secondItem="5yh-bR-CAn" secondAttribute="leading" constant="16" id="Xai-Cu-7gW"/>
                                                     <constraint firstItem="7lk-cG-zxD" firstAttribute="top" secondItem="xKu-Ks-oU1" secondAttribute="bottom" constant="6" id="XfI-6y-8aw"/>
-                                                    <constraint firstItem="Dvs-kD-QAR" firstAttribute="bottom" secondItem="1cS-gF-uta" secondAttribute="bottom" id="Y00-nX-h0u"/>
-                                                    <constraint firstItem="o9j-UN-PH2" firstAttribute="top" secondItem="1cS-gF-uta" secondAttribute="top" id="aGe-Vq-o9j"/>
                                                     <constraint firstAttribute="height" constant="472" id="cxA-mp-0ls"/>
-                                                    <constraint firstItem="1cS-gF-uta" firstAttribute="centerY" secondItem="mRF-7F-OVK" secondAttribute="centerY" id="dxq-Qg-cmX"/>
                                                     <constraint firstItem="7lk-cG-zxD" firstAttribute="centerX" secondItem="5yh-bR-CAn" secondAttribute="centerX" id="n2M-gc-uab"/>
                                                     <constraint firstAttribute="trailing" secondItem="xKu-Ks-oU1" secondAttribute="trailing" constant="16" id="pV9-nR-Iys"/>
                                                     <constraint firstItem="nmV-B0-XNQ" firstAttribute="top" secondItem="J1Y-ao-hEH" secondAttribute="bottom" constant="10" id="pik-3p-xU3"/>
-                                                    <constraint firstItem="o9j-UN-PH2" firstAttribute="leading" secondItem="1cS-gF-uta" secondAttribute="trailing" constant="8" id="s7a-Ia-vfN"/>
                                                     <constraint firstAttribute="trailing" secondItem="nmV-B0-XNQ" secondAttribute="trailing" constant="16" id="wct-yZ-V41"/>
                                                 </constraints>
                                             </view>
@@ -12379,6 +12384,8 @@ Essai gratuit 7 jours</string>
                         <outlet property="redoxChangeButton" destination="gcE-QE-lqc" id="eOd-hd-Vf9"/>
                         <outlet property="scrollViewContainerView" destination="8Pe-o5-B05" id="GlQ-Xq-JbN"/>
                         <outlet property="shareButton" destination="guw-2U-rwe" id="adh-RP-McA"/>
+                        <outlet property="signalStrengthImageView" destination="sJW-ra-cpj" id="vjZ-WJ-wMs"/>
+                        <outlet property="signalStrengthLabel" destination="o9j-UN-PH2" id="1f2-Xf-NFz"/>
                         <outlet property="startWeatherIcon" destination="Cjx-gX-ynR" id="H1G-vi-H4O"/>
                         <outlet property="subscriptionButton" destination="nmV-B0-XNQ" id="IIh-Rq-oka"/>
                         <outlet property="subscriptionLabel" destination="DZq-fd-REA" id="o0f-E4-60a"/>
@@ -12399,14 +12406,8 @@ Essai gratuit 7 jours</string>
         </scene>
     </scenes>
     <designables>
-        <designable name="788-Ky-kG9">
-            <size key="intrinsicContentSize" width="-1" height="65"/>
-        </designable>
         <designable name="MrB-in-r1f">
             <size key="intrinsicContentSize" width="562.5" height="16"/>
-        </designable>
-        <designable name="Zvb-BM-lq9">
-            <size key="intrinsicContentSize" width="-1" height="65"/>
         </designable>
         <designable name="bHy-fG-Je8">
             <size key="intrinsicContentSize" width="41.5" height="20.5"/>
@@ -12445,8 +12446,8 @@ Essai gratuit 7 jours</string>
         <image name="Password" width="22" height="22"/>
         <image name="Picto_Warning" width="40" height="40"/>
         <image name="ShareIcon" width="22" height="22"/>
+        <image name="Signalhigh" width="32" height="32"/>
         <image name="StrokeNew" width="31" height="61"/>
-        <image name="WifiSignal" width="32" height="32"/>
         <image name="add" width="40" height="40"/>
         <image name="addFliprDashbaord" width="15" height="30"/>
         <image name="alert1" width="32" height="32"/>

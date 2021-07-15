@@ -45,6 +45,9 @@ class DeviceViewController: UIViewController {
     
     
     func getHubDetails(){
+        if Pool.currentPool == nil{
+            return
+        }
         let hud = JGProgressHUD(style:.dark)
         hud?.show(in: self.navigationController!.view)
         Pool.currentPool?.getHUBS(completion: { (hubs, error) in
