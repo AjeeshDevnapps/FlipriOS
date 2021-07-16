@@ -11,7 +11,12 @@ import UIKit
 class ElectricalSetupViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var backbutton: UIButton!
+
+    var isPresentView = false
+    
     override func viewDidLoad() {
+        self.isPresentingView = isPresentView
         super.viewDidLoad()
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
         tableView.backgroundColor = .clear
@@ -22,10 +27,17 @@ class ElectricalSetupViewController: BaseViewController, UITableViewDataSource, 
         }
         self.navigationController?.navigationBar.isHidden = true
         tableView.alwaysBounceVertical = false
+        backbutton.setImage(#imageLiteral(resourceName: "Button Close"), for: .normal)
+        
+
     }
     
     @IBAction func backActoin(_ sender: Any) {
-        goBack()
+        if isPresentView {
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            goBack()
+        }
     }
     
     @IBAction func firstAction(_ sender: UIButton) {

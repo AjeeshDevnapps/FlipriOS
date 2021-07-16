@@ -11,6 +11,7 @@ import UIKit
 class BaseViewController: UIViewController {
     var backButtonTitle = ""
     let imageView = UIImageView(image: UIImage(named: "bkWaves.pdf"))
+    var isPresentingView = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +39,23 @@ class BaseViewController: UIViewController {
 //        /*** If needed Assign Title Here ***/
 //        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: backButtonTitle, style:.plain, target: self, action:#selector(backButtonTapped))
         
-        let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "arrow_back-1"), style: .plain, target: self, action: #selector(backButtonTapped))
+        var backButton:UIBarButtonItem!
+        if isPresentingView{
+            backButton = UIBarButtonItem(image: UIImage(named: "Button Close"), style: .plain, target: self, action: #selector(backButtonTapped))
+        }else{
+            backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "arrow_back-1"), style: .plain, target: self, action: #selector(backButtonTapped))
+        }
         backButton.tintColor = .black
         self.navigationItem.setLeftBarButton(backButton, animated: false)
     }
     
     
     @objc func backButtonTapped(){
-        
-        self.navigationController?.popViewController(animated: true)
+        if isPresentingView{
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 
    

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -135,7 +135,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="736" id="4iy-AD-g4u" customClass="ElectricalSetupPrepareCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="736"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="736"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4iy-AD-g4u" id="Q7V-O3-Tsf">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
@@ -405,7 +405,7 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="777" id="ccK-n9-9fB" customClass="ElectricalSetupCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="777"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="777"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ccK-n9-9fB" id="ccY-Mp-mc4">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="777"/>
@@ -587,6 +587,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backbutton" destination="e12-ET-hTb" id="H1w-yA-iy8"/>
                         <outlet property="tableView" destination="Wzj-GZ-flT" id="oUT-xv-gGB"/>
                     </connections>
                 </viewController>
@@ -820,7 +821,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="785" id="iCt-Ay-iL0" customClass="ElectricalCableCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="785"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="785"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iCt-Ay-iL0" id="kzO-OP-oyE">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="785"/>

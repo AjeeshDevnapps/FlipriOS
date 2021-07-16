@@ -256,7 +256,7 @@ class AppReview: NSObject, MFMailComposeViewControllerDelegate {
         }
     }
 }
-
+/*
 public enum Model : String {
     case simulator   = "simulator/sandbox",
     iPod1            = "iPod 1",
@@ -374,3 +374,4 @@ public extension UIDevice {
         return Model.unrecognized
     }
 }
+*/

@@ -12,6 +12,7 @@ import AVKit
 class CalibrationPh7IntroViewController: BaseViewController {
     @IBOutlet weak var submitButton: UIButton!
     var recalibration = false
+    @IBOutlet weak var titlLbl: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,9 @@ class CalibrationPh7IntroViewController: BaseViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.init(hexString: "F2F9FE")
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        var titleString  = "Calibration".localized
+        titleString.append(" Ph7")
+        titlLbl.text  = titleString
 //        self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
 
         // Do any additional setup after loading the view.

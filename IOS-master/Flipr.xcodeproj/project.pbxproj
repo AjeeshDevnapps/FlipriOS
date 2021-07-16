@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C504F2926A1A2340042C2DD /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504F2826A1A2340042C2DD /* DeviceType.swift */; };
+		1C504F2F26A1E3500042C2DD /* HubDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504F2E26A1E3500042C2DD /* HubDeviceTableViewCell.swift */; };
 		480CF2BD25DCEAA800429906 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480CF2BC25DCEAA800429906 /* SettingsViewController.swift */; };
 		480CF2D325DD305800429906 /* NotificationSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480CF2D225DD305800429906 /* NotificationSwitchTableViewCell.swift */; };
 		481624E325DD7E750085F3C4 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481624E225DD7E750085F3C4 /* AccountViewController.swift */; };
@@ -197,6 +199,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C504F2826A1A2340042C2DD /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
+		1C504F2E26A1E3500042C2DD /* HubDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubDeviceTableViewCell.swift; sourceTree = "<group>"; };
 		480CF2BC25DCEAA800429906 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		480CF2D225DD305800429906 /* NotificationSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		481624E225DD7E750085F3C4 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -414,6 +418,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C504F2A26A1E2FC0042C2DD /* HubDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				1C504F2E26A1E3500042C2DD /* HubDeviceTableViewCell.swift */,
+			);
+			path = HubDashboard;
+			sourceTree = "<group>";
+		};
 		481FF000265D7D50000DC977 /* Calibration */ = {
 			isa = PBXGroup;
 			children = (
@@ -516,6 +528,7 @@
 		488FC820267A7C5100D41EB4 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				1C504F2A26A1E2FC0042C2DD /* HubDashboard */,
 				488FC821267A7C7600D41EB4 /* WaveTableViewCell.swift */,
 				48600E662685042600749C28 /* ProgramCollectionViewCell.swift */,
 			);
@@ -574,6 +587,7 @@
 			isa = PBXGroup;
 			children = (
 				48980EA0261704C6009A0F24 /* RoundBorderedButton.swift */,
+				1C504F2826A1A2340042C2DD /* DeviceType.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -993,7 +1007,7 @@
 				TargetAttributes = {
 					B58A37311E79859B00C67F6C = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = Q6MUCXXECZ;
+						DevelopmentTeam = 6M9RZXR8UH;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1301,6 +1315,7 @@
 				B53C5E871E82CDA400C1C0FC /* TableViewController.swift in Sources */,
 				B518F0EC1E9F8DD40092156C /* SignInViewController.swift in Sources */,
 				4895F7582667FD4500FA8ED3 /* DeviceListTableViewCell.swift in Sources */,
+				1C504F2926A1A2340042C2DD /* DeviceType.swift in Sources */,
 				B518F0F41E9FC0840092156C /* UIViewController+Error.swift in Sources */,
 				484CEBA425E2DAC9005CD208 /* QuickActionViewController.swift in Sources */,
 				B5FE070F1EB9CE2800962AEE /* City.swift in Sources */,
@@ -1308,6 +1323,7 @@
 				48C8E4F6265D6DC60000FDA8 /* FliprActivationSuccessViewController.swift in Sources */,
 				B57F99F61EC4510300417C0F /* Bundle+version.swift in Sources */,
 				B57131A322E9AE3700421705 /* PoolLogTableViewController.swift in Sources */,
+				1C504F2F26A1E3500042C2DD /* HubDeviceTableViewCell.swift in Sources */,
 				B5FBF6A622EB2CD4003FBF49 /* PoolLogViewController.swift in Sources */,
 				B557864324897E9300B5BDCD /* Planning.swift in Sources */,
 				48C9468C265AAADC00C018A7 /* AddFliprViewController.swift in Sources */,
@@ -1478,17 +1494,19 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
-				DEVELOPMENT_TEAM = Q6MUCXXECZ;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flipr",
 				);
 				INFOPLIST_FILE = Flipr/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flipr.test;
+				MARKETING_VERSION = 2.7.0;
+				NEW_SETTING = "";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1497,6 +1515,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -1510,17 +1529,19 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
-				DEVELOPMENT_TEAM = Q6MUCXXECZ;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flipr",
 				);
 				INFOPLIST_FILE = Flipr/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flipr.test;
+				MARKETING_VERSION = 2.7.0;
+				NEW_SETTING = "";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1528,6 +1549,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};

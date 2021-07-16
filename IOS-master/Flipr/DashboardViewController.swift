@@ -28,6 +28,8 @@ class DashboardViewController: UIViewController {
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var backgroundOverlayImageView: UIImageView!
+    @IBOutlet weak var backgroundOverlayHubImageView: UIImageView!
+
     
     @IBOutlet weak var alert0Button: AlertButton!
     @IBOutlet weak var alert1Button: AlertButton!
@@ -62,9 +64,21 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var waterLabel: UILabel!
     @IBOutlet weak var waterTendencyImageView: UIImageView!
     
+    @IBOutlet weak var airTemperatureLabelHubTab: UILabel!
+    @IBOutlet weak var airLabelHubTab: UILabel!
+    @IBOutlet weak var airTendendcyImageViewHubTab: UIImageView!
+
+    @IBOutlet weak var currentlyWeatherIconHubTab: UILabel!
+    @IBOutlet weak var weatherChevronImageViewHubTab: UIImageView!
+    @IBOutlet weak var startWeatherIconHubTab: UILabel!
+    @IBOutlet weak var comingWeatherIconHubTab: UILabel!
+
+    
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var uvLabel: UILabel!
     @IBOutlet weak var uvView: UIView!
+    @IBOutlet weak var uvLabelHubTab: UILabel!
+    @IBOutlet weak var uvViewHubTab: UIView!
     
     @IBOutlet weak var pHView: UIView!
     @IBOutlet weak var pHLabel: UILabel!
@@ -121,8 +135,25 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var addFirstFliprView: UIView!
     @IBOutlet weak var signalStrengthLabel: UILabel!
     @IBOutlet weak var signalStrengthImageView: UIImageView!
-
+    @IBOutlet weak var fliprTabScrollView: UIScrollView!
     
+    //Tabs
+    @IBOutlet weak var flipTabButton: UIButton!
+    @IBOutlet weak var hubTabButton: UIButton!
+
+
+    //Hub Tab
+    @IBOutlet weak var hubTabScrollView: UIScrollView!
+    @IBOutlet weak var hubScrollViewContainerView: UIView!
+    @IBOutlet weak var hubDeviceTableView: UITableView!
+    @IBOutlet weak var hubDeviceTableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hubTabWaveTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addEquipmentView: UIView!
+    @IBOutlet weak var addFliprHubTabView: UIView!
+    @IBOutlet weak var hubWaveContainerView: UIView!
+
+    var hubTabWaveTopConstraintPreValue = 0
+
     var isShowingAddFirstProgramView = false
     var isShowingHubView = false
 
@@ -137,6 +168,12 @@ class DashboardViewController: UIViewController {
     var hubs:[HUB] = []
     var fluidViewTopEdge:BAFluidView!
     var fluidView:BAFluidView!
+    
+    var hubTabFluidViewTopEdge:BAFluidView!
+    var hubTabfluidView:BAFluidView!
+    
+    var isHubTabSelected = false
+
 
     override func viewDidLoad() {
         
@@ -163,7 +200,7 @@ class DashboardViewController: UIViewController {
 //        self.quickActionButtonContainer.cornerRadius =  self.quickActionButtonContainer.frame.size.height / 2
 //        quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
 //        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius:         self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
-
+        self.intialTabSetup()
         self.handleHubViews()
         self.setupDashboardUI()
         if Locale.current.languageCode != "fr" {
@@ -174,10 +211,15 @@ class DashboardViewController: UIViewController {
        // topButton.layer.borderWidth = 2.0
        // topButton.roundCorner(corner: topButton.frame.size.height / 2 )
         uvView.roundCorner(corner: 6)
+        uvViewHubTab.roundCorner(corner: 6)
+
 //        addNewProgramLabel.roundCorner(corner: 4.0)
         uvView.layer.borderColor = UIColor.init(hexString: "111729").cgColor
         uvView.layer.borderWidth = 1.0
+        uvViewHubTab.layer.borderColor = UIColor.init(hexString: "111729").cgColor
+        uvViewHubTab.layer.borderWidth = 1.0
         pumbStatusView.roundCorner(corner: 12)
+        addEquipmentView.roundCorner(corner: 12)
         pumbStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
         bulbStatusView.roundCorner(corner: 12)
         bulbStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
@@ -187,6 +229,8 @@ class DashboardViewController: UIViewController {
 
        // shareButton.setTitle("share".localized, for: .normal)
         airLabel.text = "air".localized
+        airLabelHubTab.text = "air".localized
+
         waterLabel.text = "water".localized
         alertCheckLabel.text = "Water correction in progress".localized
         subscriptionLabel.text = "Activate all the features!\n7 days free trial".localized
@@ -322,6 +366,35 @@ class DashboardViewController: UIViewController {
 
     }
     
+    func intialTabSetup(){
+        self.fliprTabScrollView.isHidden = false
+        self.hubTabScrollView.isHidden = true
+        self.flipTabButton.isUserInteractionEnabled = false
+        self.hubTabButton.isUserInteractionEnabled = true
+    }
+    
+    func handlTabSelcection(){
+        self.fliprTabScrollView.isHidden = isHubTabSelected
+        self.hubTabScrollView.isHidden = !isHubTabSelected
+        self.flipTabButton.isUserInteractionEnabled = isHubTabSelected
+        self.hubTabButton.isUserInteractionEnabled = !isHubTabSelected
+    }
+    
+    @IBAction func tappedFliprTab(){
+        self.fliprTabView.backgroundColor = UIColor(hexString: "111729")
+        self.hubTabView.backgroundColor = UIColor(hexString: "97A3B6")
+
+        isHubTabSelected = !isHubTabSelected
+        handlTabSelcection()
+    }
+    
+    @IBAction func tappedHubTab(){
+        self.fliprTabView.backgroundColor = UIColor(hexString: "97A3B6")
+        self.hubTabView.backgroundColor = UIColor(hexString: "111729")
+        isHubTabSelected = !isHubTabSelected
+        handlTabSelcection()
+    }
+    
     func setupDashboardUI(){
         fliprTabView.clipsToBounds = true
         fliprTabView.layer.cornerRadius = 12
@@ -359,7 +432,8 @@ class DashboardViewController: UIViewController {
     func addHubEquipments(){
     
         let fliprStoryboard = UIStoryboard(name: "HUBElectrical", bundle: nil)
-        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController")
+        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController") as! ElectricalSetupViewController
+        viewController.isPresentView = true
         let navigationVC = UINavigationController.init(rootViewController: viewController)
         self.present(navigationVC, animated: true)
     }
@@ -443,6 +517,7 @@ class DashboardViewController: UIViewController {
             }
         }
         else{
+//            self.hubButtonAction(self)
             showHubSettingView()
         }
     }
@@ -450,8 +525,20 @@ class DashboardViewController: UIViewController {
     
     @IBAction func bulbSwitchActionFliptrTab(sender:UIButton){
         if sender.tag == 1{
-            
-        }else{
+            if self.hubBulb?.behavior == "manual" {
+                self.pumbOffOn(isOn: false)
+            }else{
+                self.hubButtonAction(self)
+            }
+        }
+        if sender.tag == 0{
+            if self.hubBulb?.behavior == "manual" {
+                self.pumbOffOn(isOn: true)
+            }else{
+                self.hubButtonAction(self)
+            }
+        }
+        else{
             showHubSettingView()
         }
     }
@@ -462,6 +549,57 @@ class DashboardViewController: UIViewController {
     
     func handleHubViews(){
         
+        for hubObj in self.hubs{
+            if hubObj.equipementCode == 84{
+                self.hubBulb = hubObj
+            }
+            else if hubObj.equipementCode == 86{
+                self.hubPumb = hubObj
+            }
+        }
+        
+        if let hubObj = self.hubBulb{
+            if hubObj.equipementState {
+                bulbActionButton.setImage(UIImage(named: "ON"), for: .normal)
+                bulbActionButton.tag = 1
+            }else{
+                bulbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
+                bulbActionButton.tag = 0
+            }
+        }
+        
+        if let hubObj = self.hubPumb{
+            if hubObj.equipementState {
+                pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
+                pumbActionButton.tag = 1
+                if hubObj.behavior == "manual" {
+                    pumbActionButton.setImage(UIImage(named: "ON"), for: .normal)
+                }
+                else if hubObj.behavior == "planning" {
+                    pumbActionButton.setImage(UIImage(named: "pumbPgmOn"), for: .normal)
+                }
+                else if hubObj.behavior == "auto" {
+                    pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
+                }else{
+                    
+                }
+            }else{
+                pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
+                pumbActionButton.tag = 0
+                if hubObj.behavior == "manual" {
+                    pumbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
+                }
+                else if hubObj.behavior == "planning" {
+                    pumbActionButton.setImage(UIImage(named: "pumbPrgmOff"), for: .normal)
+                }
+                else if hubObj.behavior == "auto" {
+                    pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
+                }else{
+                    
+                }
+            }
+        }
+        /*
         for hubObj in self.hubs{
             if hubObj.equipementCode == 84{
                 self.hubBulb = hubObj
@@ -515,6 +653,8 @@ class DashboardViewController: UIViewController {
                 }
             }
         }
+        
+        */
         
         return
         
@@ -841,8 +981,19 @@ class DashboardViewController: UIViewController {
 //        }
         
         
-        let startElevation = 0.85
+        var startElevation = 0.85
+        
+        let modelName = UIDevice().type
+        if  modelName.rawValue == "iPhone 12 Pro"{
+            startElevation = 0.91
+        }
+        else if modelName.rawValue == "iPhone 12 Pro Max"{
+            startElevation = 0.75
+        }
 
+        else if modelName.rawValue == "iPhone 8 Plus" || modelName.rawValue == "iPhone 7 Plus" {
+            startElevation = 0.95
+        }
 //        temperaturesTopConstraint.constant = self.view.frame.height * (1 - CGFloat(startElevation)) + 20
         if #available(iOS 11.0, tvOS 11.0, *) {
             if (UIApplication.shared.delegate?.window??.safeAreaInsets.top)! > CGFloat(20) { // hasTopNotch
@@ -851,7 +1002,8 @@ class DashboardViewController: UIViewController {
         }
         
 //        let frame = CGRect(x: -(self.view.frame.height - self.view.frame.width)/2 - 50, y: 0, width: sqrt(self.view.frame.height * self.view.frame.height + self.view.frame.width * self.view.frame.width) + 100, height: self.view.frame.height + 100)
-                let frame = self.waveView.frame
+
+        let frame = self.waveView.frame
         fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  startElevation))
         fluidView.strokeColor = .clear
         fluidView.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
@@ -868,30 +1020,33 @@ class DashboardViewController: UIViewController {
         fluidViewTopEdge.startAnimation()
         fluidViewTopEdge.clipsToBounds = false
 
-        /*
-        maskView.image = UIImage(named: "gradient")
-        maskView.frame = fluidView.bounds
-        fluidView.mask = maskView
-        */
+       
      //   fluidView.clipsToBounds = true
         self.scrollViewContainerView.insertSubview(fluidViewTopEdge, aboveSubview: fluidView)
         
-        /*
-         let particleEmitter = CAEmitterLayer()
-         
-         particleEmitter.emitterPosition = CGPoint(x: view.center.x, y: -96)
-         particleEmitter.emitterShape = kCAEmitterLayerLine
-         particleEmitter.emitterSize = CGSize(width: view.frame.size.width, height: 1)
-         
-         let red = makeEmitterCell(color: UIColor.red)
-         let green = makeEmitterCell(color: UIColor.green)
-         let blue = makeEmitterCell(color: UIColor.blue)
-         
-         particleEmitter.emitterCells = [red, green, blue]
-         
-         fluidView.layer.addSublayer(particleEmitter)
-         */
         
+        //Hun wave setup
+        var hubTabStartElevation = 0.85
+
+        let hubWaveframe = self.hubWaveContainerView.frame
+        hubTabfluidView = BAFluidView.init(frame: hubWaveframe, startElevation: NSNumber(floatLiteral:  hubTabStartElevation))
+        hubTabfluidView.strokeColor = .clear
+        hubTabfluidView.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
+        hubTabfluidView.fill(to: NSNumber(floatLiteral: hubTabStartElevation))
+        hubTabfluidView.startAnimation()
+        hubTabfluidView.clipsToBounds = true
+        
+        self.hubScrollViewContainerView.insertSubview(hubTabfluidView, belowSubview: backgroundOverlayHubImageView)
+        
+        hubTabFluidViewTopEdge = BAFluidView.init(frame: hubWaveframe, startElevation: NSNumber(floatLiteral: hubTabStartElevation))
+        hubTabFluidViewTopEdge.strokeColor = .clear
+        hubTabFluidViewTopEdge.fillColor = fluidColor
+        hubTabFluidViewTopEdge.fill(to: NSNumber(floatLiteral: hubTabStartElevation))
+        hubTabFluidViewTopEdge.startAnimation()
+        hubTabFluidViewTopEdge.clipsToBounds = true
+       
+        self.hubScrollViewContainerView.insertSubview(hubTabFluidViewTopEdge, aboveSubview: hubTabfluidView)
+
        // setGradientBackground()
         motionManager.deviceMotionUpdateInterval = 0.01
         motionManager.startDeviceMotionUpdates(to: .main) {
@@ -907,10 +1062,15 @@ class DashboardViewController: UIViewController {
             if data.gravity.y > -0.05 {
                 self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: 0)
                 self!.fluidView.transform = CGAffineTransform(rotationAngle: 0)
+                self!.hubTabFluidViewTopEdge.transform = CGAffineTransform(rotationAngle: 0)
+                self!.hubTabfluidView.transform = CGAffineTransform(rotationAngle: 0)
             } else {
                 let rotation = atan2(data.gravity.x,data.gravity.y) - .pi
                 self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
                 self!.fluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+                self!.hubTabFluidViewTopEdge.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+                self!.hubTabfluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+
             }
             
         }
@@ -1196,6 +1356,8 @@ class DashboardViewController: UIViewController {
                             self.airTemperatureLabel.layer.add(textAnimation, forKey: "changeAirTempratureTransition")
                             
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
+                            self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
+
                         }
                         if let icon = currently["icon"] as? String {
                             print("Icon: \(icon)")
@@ -1208,6 +1370,8 @@ class DashboardViewController: UIViewController {
                             self.currentlyWeatherIcon.layer.add(textAnimation, forKey: "changeCurrentlyWeatherIconTransition")
                             
                             self.currentlyWeatherIcon.text = self.climaconsCharWithIcon(icon: icon)
+                            self.currentlyWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: icon)
+
                         }
                         if let hourly = JSON["hourly"] as? [String:Any] {
                             if let data = hourly["data"] as? [[String:Any]] {
@@ -1224,18 +1388,29 @@ class DashboardViewController: UIViewController {
                                             textAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
                                             self.comingWeatherIcon.layer.add(textAnimation, forKey: "changeComingWeatherIconTransition")
                                             self.comingWeatherIcon.text = self.climaconsCharWithIcon(icon: icon)
+                                            self.comingWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: icon)
+
                                         }
                                         if let forecastTemperature = item["temperature"] as? Double {
                                             print("Forecast Air T°: \(forecastTemperature)")
                                             if forecastTemperature > currentTemperature {
                                                 self.airTendendcyImageView.image = UIImage(named: "arrow_air_up")
                                                 self.airTendendcyImageView.isHidden = false
+                                                
+                                                self.airTendendcyImageViewHubTab.image = UIImage(named: "arrow_air_up")
+                                                self.airTendendcyImageViewHubTab.isHidden = false
                                             } else {
                                                 self.airTendendcyImageView.image = UIImage(named: "arrow_air_down")
                                                 self.airTendendcyImageView.isHidden = false
+                                                self.airTendendcyImageViewHubTab.image = UIImage(named: "arrow_air_down")
+                                                self.airTendendcyImageViewHubTab.isHidden = false
+                                                
+                                                
                                             }
                                         } else {
                                             self.airTendendcyImageView.isHidden = true
+                                            self.airTendendcyImageViewHubTab.isHidden = true
+
                                         }
                                     }
                                     i = i + 1
@@ -1273,11 +1448,19 @@ class DashboardViewController: UIViewController {
     
     func hideWeatherForecast() {
         airTemperatureLabel.text = "  "
+        airTemperatureLabelHubTab.text = "  "
         currentlyWeatherIcon.text = "  "
+        currentlyWeatherIconHubTab.text = "  "
+
         startWeatherIcon.text = "   "
         startWeatherIcon.isHidden = true
+        startWeatherIconHubTab.text = "   "
+        startWeatherIconHubTab.isHidden = true
         weatherChevronImageView.isHidden = true
+        weatherChevronImageViewHubTab.isHidden = true
+
         comingWeatherIcon.text = "  "
+        comingWeatherIconHubTab.text = "  "
         for view in self.view.subviews {
             if view.tag == 1 {
                 view.alpha = 0
@@ -1427,17 +1610,25 @@ class DashboardViewController: UIViewController {
                             self.airTemperatureLabel.layer.add(textAnimation, forKey: "changeAirTempratureTransition")
                             
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
+                            self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
+
                             
                             if let forecastTemperature = weather["NextHourTemperature"] as? Double {
                                 if forecastTemperature > temperature {
                                     self.airTendendcyImageView.image = UIImage(named: "arrow_air_up")
                                     self.airTendendcyImageView.isHidden = false
+                                    self.airTendendcyImageViewHubTab.image = UIImage(named: "arrow_air_up")
+                                    self.airTendendcyImageViewHubTab.isHidden = false
                                 } else {
                                     self.airTendendcyImageView.image = UIImage(named: "arrow_air_down")
                                     self.airTendendcyImageView.isHidden = false
+                                    self.airTendendcyImageViewHubTab.image = UIImage(named: "arrow_air_down")
+                                    self.airTendendcyImageViewHubTab.isHidden = false
                                 }
                             } else {
                                 self.airTendendcyImageView.isHidden = true
+                                self.airTendendcyImageViewHubTab.isHidden = true
+
                             }
                             
                         }
@@ -1454,7 +1645,8 @@ class DashboardViewController: UIViewController {
                             if let nextIcon = weather["NextHourWeatherIcon"] as? String {
                                 self.currentlyWeatherIcon.layer.add(textAnimation, forKey: "changeCurrentlyWeatherIconTransition")
                                 self.currentlyWeatherIcon.text = self.climaconsCharWithIcon(icon: icon)
-                                
+                                self.currentlyWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: icon)
+
                                 let textAnimation = CATransition()
                                 textAnimation.type = CATransitionType.push
                                 textAnimation.subtype = CATransitionSubtype.fromRight
@@ -1462,12 +1654,20 @@ class DashboardViewController: UIViewController {
                                 textAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
                                 self.comingWeatherIcon.layer.add(textAnimation, forKey: "changeComingWeatherIconTransition")
                                 self.comingWeatherIcon.text = self.climaconsCharWithIcon(icon: nextIcon)
+                                self.comingWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: nextIcon)
+
                                 self.weatherChevronImageView.isHidden = false
+                                self.weatherChevronImageViewHubTab.isHidden = false
+
                             } else {
                                 self.startWeatherIcon.isHidden = false
+                                self.startWeatherIconHubTab.isHidden = false
                                 self.weatherChevronImageView.isHidden = true
+                                self.weatherChevronImageViewHubTab.isHidden = true
                                 self.startWeatherIcon.layer.add(textAnimation, forKey: "changeCurrentlyWeatherIconTransition")
                                 self.startWeatherIcon.text = self.climaconsCharWithIcon(icon: icon)
+                                self.startWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: icon)
+
                             }
                             
                         }
@@ -1475,26 +1675,46 @@ class DashboardViewController: UIViewController {
                         
                         if let uvIndex = weather["UvIndex"] as? Double {
                             self.uvLabel.isHidden = false
+                            self.uvLabelHubTab.isHidden = false
+
                             self.uvView.isHidden = false
+                            self.uvViewHubTab.isHidden = false
                             let index = String(format: "%.0f", uvIndex)
                             self.uvLabel.text = index
                             self.uvLabel.layer.borderWidth = 1
                             self.uvLabel.layer.cornerRadius = (self.uvLabel.frame.size.height / 2)
+                            self.uvLabelHubTab.text = index
+                            self.uvLabelHubTab.layer.borderWidth = 1
+                            self.uvLabelHubTab.layer.cornerRadius = (self.uvLabelHubTab.frame.size.height / 2)
                             if uvIndex <= 2 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 41/255.0, green: 255/255.0, blue: 3/255.0, alpha: 1).cgColor
+                                self.uvLabelHubTab.layer.borderColor = UIColor(red: 41/255.0, green: 255/255.0, blue: 3/255.0, alpha: 1).cgColor
+
                             } else if  uvIndex <= 5 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 235/255.0, green: 212/255.0, blue: 15/255.0, alpha: 1).cgColor
+                                self.uvLabelHubTab.layer.borderColor = UIColor(red: 235/255.0, green: 212/255.0, blue: 15/255.0, alpha: 1).cgColor
+
                             } else if  uvIndex <= 7 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 255/255.0, green: 145/255.0, blue: 33/255.0, alpha: 1).cgColor
+                                self.uvLabelHubTab.layer.borderColor = UIColor(red: 255/255.0, green: 145/255.0, blue: 33/255.0, alpha: 1).cgColor
+
                             } else if  uvIndex <= 10 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 255/255.0, green: 91/255.0, blue: 95/255.0, alpha: 1).cgColor
+                                self.uvLabelHubTab.layer.borderColor = UIColor(red: 255/255.0, green: 91/255.0, blue: 95/255.0, alpha: 1).cgColor
+
                             } else {
                                 self.uvLabel.layer.borderColor = UIColor(red: 240/255.0, green: 3/255.0, blue: 0/255.0, alpha: 1).cgColor
+                                self.uvLabelHubTab.layer.borderColor = UIColor(red: 240/255.0, green: 3/255.0, blue: 0/255.0, alpha: 1).cgColor
+
                             }
                         } else {
                             self.uvLabel.text = "NA"
                             self.uvLabel.isHidden = true
+                            self.uvLabelHubTab.text = "NA"
+                            self.uvLabelHubTab.isHidden = true
                             self.uvView.isHidden = true
+                            self.uvViewHubTab.isHidden = true
+
                         }
                         
                         UIView.animate(withDuration: 0.5, animations: {
@@ -1580,17 +1800,25 @@ class DashboardViewController: UIViewController {
                             self.airTemperatureLabel.layer.add(textAnimation, forKey: "changeAirTempratureTransition")
                             
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
+                            self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
+
                             
                             if let forecastTemperature = weather["NextHourTemperature"] as? Double {
                                 if forecastTemperature > temperature {
                                     self.airTendendcyImageView.image = UIImage(named: "arrow_air_up")
                                     self.airTendendcyImageView.isHidden = false
+                                    self.airTendendcyImageViewHubTab.image = UIImage(named: "arrow_air_up")
+                                    self.airTendendcyImageViewHubTab.isHidden = false
                                 } else {
                                     self.airTendendcyImageView.image = UIImage(named: "arrow_air_down")
                                     self.airTendendcyImageView.isHidden = false
+                                    self.airTendendcyImageViewHubTab.image = UIImage(named: "arrow_air_down")
+                                    self.airTendendcyImageViewHubTab.isHidden = false
                                 }
                             } else {
                                 self.airTendendcyImageView.isHidden = true
+                                self.airTendendcyImageViewHubTab.isHidden = true
+
                             }
                             
                         }
@@ -1607,7 +1835,8 @@ class DashboardViewController: UIViewController {
                             if let nextIcon = weather["NextHourWeatherIcon"] as? String {
                                 self.currentlyWeatherIcon.layer.add(textAnimation, forKey: "changeCurrentlyWeatherIconTransition")
                                 self.currentlyWeatherIcon.text = self.climaconsCharWithIcon(icon: icon)
-                                
+                                self.currentlyWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: icon)
+
                                 let textAnimation = CATransition()
                                 textAnimation.type = CATransitionType.push
                                 textAnimation.subtype = CATransitionSubtype.fromRight
@@ -1615,12 +1844,18 @@ class DashboardViewController: UIViewController {
                                 textAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
                                 self.comingWeatherIcon.layer.add(textAnimation, forKey: "changeComingWeatherIconTransition")
                                 self.comingWeatherIcon.text = self.climaconsCharWithIcon(icon: nextIcon)
+                                self.comingWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: nextIcon)
                                 self.weatherChevronImageView.isHidden = false
+                                self.weatherChevronImageViewHubTab.isHidden = false
+
                             } else {
                                 self.startWeatherIcon.isHidden = false
+                                self.startWeatherIconHubTab.isHidden = false
                                 self.weatherChevronImageView.isHidden = true
+                                self.weatherChevronImageViewHubTab.isHidden = true
                                 self.startWeatherIcon.layer.add(textAnimation, forKey: "changeCurrentlyWeatherIconTransition")
                                 self.startWeatherIcon.text = self.climaconsCharWithIcon(icon: icon)
+                                self.startWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: icon)
                             }
                             
                         }
@@ -1628,26 +1863,45 @@ class DashboardViewController: UIViewController {
                         
                         if let uvIndex = weather["UvIndex"] as? Double {
                             self.uvLabel.isHidden = false
+                            self.uvLabelHubTab.isHidden = false
+
                             self.uvView.isHidden = false
+                            self.uvViewHubTab.isHidden = false
+
                             let index = String(format: "%.0f", uvIndex)
                             self.uvLabel.text = index
                             self.uvLabel.layer.borderWidth = 1
                             self.uvLabel.layer.cornerRadius = (self.uvLabel.frame.size.height / 2)
+                            self.uvLabelHubTab.text = index
+                            self.uvLabelHubTab.layer.borderWidth = 1
+                            self.uvLabelHubTab.layer.cornerRadius = (self.uvLabelHubTab.frame.size.height / 2)
                             if uvIndex <= 2 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 41/255.0, green: 255/255.0, blue: 3/255.0, alpha: 1).cgColor
+                                self.uvLabelHubTab.layer.borderColor = UIColor(red: 41/255.0, green: 255/255.0, blue: 3/255.0, alpha: 1).cgColor
                             } else if  uvIndex <= 5 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 235/255.0, green: 212/255.0, blue: 15/255.0, alpha: 1).cgColor
+                                self.uvLabelHubTab.layer.borderColor = UIColor(red: 235/255.0, green: 212/255.0, blue: 15/255.0, alpha: 1).cgColor
+
                             } else if  uvIndex <= 7 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 255/255.0, green: 145/255.0, blue: 33/255.0, alpha: 1).cgColor
+                                self.uvLabelHubTab.layer.borderColor = UIColor(red: 255/255.0, green: 145/255.0, blue: 33/255.0, alpha: 1).cgColor
+
                             } else if  uvIndex <= 10 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 255/255.0, green: 91/255.0, blue: 95/255.0, alpha: 1).cgColor
+                                self.uvLabelHubTab.layer.borderColor = UIColor(red: 255/255.0, green: 91/255.0, blue: 95/255.0, alpha: 1).cgColor
+
                             } else {
                                 self.uvLabel.layer.borderColor = UIColor(red: 240/255.0, green: 3/255.0, blue: 0/255.0, alpha: 1).cgColor
+                                self.uvLabelHubTab.layer.borderColor = UIColor(red: 240/255.0, green: 3/255.0, blue: 0/255.0, alpha: 1).cgColor
                             }
                         } else {
                             self.uvLabel.text = "NA"
                             self.uvLabel.isHidden = true
+                            self.uvLabelHubTab.text = "NA"
+                            self.uvLabelHubTab.isHidden = true
                             self.uvView.isHidden = true
+                            self.uvViewHubTab.isHidden = true
+
                         }
                         
                         UIView.animate(withDuration: 0.5, animations: {
@@ -2781,6 +3035,30 @@ extension DashboardViewController{
     }
     
     func refreshHUBdisplay() {
+        self.hubDeviceTableView.reloadData()
+        self.hubDeviceTableViewHeightConstraint.constant = CGFloat(145 * self.hubs.count)
+        
+        if hubScrollViewContainerView.height < self.hubTabScrollView.height{
+            let diff = self.hubTabScrollView.height - hubScrollViewContainerView.height
+            self.hubTabWaveTopConstraint.constant =  self.hubTabWaveTopConstraint.constant + diff
+        }else{
+            let diff = hubScrollViewContainerView.height - self.hubTabScrollView.height
+            if diff < self.hubTabWaveTopConstraint.constant{
+                self.hubTabWaveTopConstraint.constant = self.hubTabWaveTopConstraint.constant - diff
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: { _ in
+                    let hubWaveframe = self.hubWaveContainerView.frame
+                    self.hubTabfluidView.frame = hubWaveframe
+                    self.hubTabFluidViewTopEdge.frame = hubWaveframe
+                })
+//                self.hubScrollViewContainerView.updateConstraints()
+            }
+        }
+
+        let hubWaveframe = self.hubWaveContainerView.frame
+        self.hubTabfluidView.frame = hubWaveframe
+        self.hubTabFluidViewTopEdge.frame = hubWaveframe
         self.handleHubViews()
         /*
         if let hub = hub {
@@ -2855,3 +3133,51 @@ extension DashboardViewController{
 
 }
 
+extension DashboardViewController{
+    
+    @IBAction func addHubDeviceButtonTapped(){
+        
+    }
+    
+    @IBAction func addFliprButtonTapped(){
+        
+    }
+}
+
+extension DashboardViewController: UITableViewDelegate,UITableViewDataSource,HubDeviceDelegate {
+ 
+    func didSelectSettingsButton(){
+        self.hubButtonAction(self)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.hubs.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 145
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"HubDeviceTableViewCell",
+                                                 for: indexPath) as! HubDeviceTableViewCell
+        if indexPath.row >  self.hubs.count{
+            return cell
+        }
+        cell.delegate = self
+        let hub = self.hubs[indexPath.row]
+        if hub.equipementCode == 84{
+            cell.iconImageView.image = #imageLiteral(resourceName: "lightEnabled")
+        }
+        else if hub.equipementCode == 86{
+            cell.iconImageView.image = #imageLiteral(resourceName: "pumbactive")
+        }
+        cell.modeNameLbl.text = hub.behavior
+        cell.deviceNameLbl.text = hub.equipementName
+        return cell
+
+    }
+    
+    
+
+}

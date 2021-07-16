@@ -11,10 +11,15 @@ import AVKit
 
 class CalibrationChlorineIntroViewController: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var titlLbl: UILabel!
+
     var recalibration = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        var titleString  = "Calibration".localized
+        titleString.append(" Ph4")
+        titlLbl.text  = titleString
         submitButton.roundCorner(corner: 12)
 
         // Do any additional setup after loading the view.
