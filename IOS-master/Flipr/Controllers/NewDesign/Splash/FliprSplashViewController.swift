@@ -96,7 +96,7 @@ class FliprSplashViewController: BaseViewController {
         
         if User.currentUser == nil {
             userStatusChecking = false
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginEducationViewOneController") as! LoginEducationOneViewController
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "EducationScreenContainerViewController") as! EducationScreenContainerViewController
             self.navigationController?.pushViewController(vc)
         
         }

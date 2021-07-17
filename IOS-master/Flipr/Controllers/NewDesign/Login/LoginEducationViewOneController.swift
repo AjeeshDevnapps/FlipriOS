@@ -14,6 +14,7 @@ class LoginEducationOneViewController: BaseViewController {
     @IBOutlet weak var statusLbl: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var contentImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +25,8 @@ class LoginEducationOneViewController: BaseViewController {
     func setupUI(){
         headingLbl.text = "Forget about water analysis".localized
         subHeadingLbl.text = "Don't worry about the quality of your pond water Create an account".localized
-        nextButton.setTitle("Create an account".localized, for: .normal)
-        loginButton.setTitle("Login".localized, for: .normal)
+//        nextButton.setTitle("Create an account".localized, for: .normal)
+//        loginButton.setTitle("Login".localized, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
