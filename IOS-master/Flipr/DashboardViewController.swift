@@ -210,14 +210,14 @@ class DashboardViewController: UIViewController {
        // topButton.layer.borderColor = UIColor.init(hexString: "111729").cgColor
        // topButton.layer.borderWidth = 2.0
        // topButton.roundCorner(corner: topButton.frame.size.height / 2 )
-        uvView.roundCorner(corner: 6)
-        uvViewHubTab.roundCorner(corner: 6)
+//        uvView.roundCorner(corner: 6)
+//        uvViewHubTab.roundCorner(corner: 6)
 
 //        addNewProgramLabel.roundCorner(corner: 4.0)
         uvView.layer.borderColor = UIColor.init(hexString: "111729").cgColor
-        uvView.layer.borderWidth = 1.0
+        uvView.layer.borderWidth = 0.0
         uvViewHubTab.layer.borderColor = UIColor.init(hexString: "111729").cgColor
-        uvViewHubTab.layer.borderWidth = 1.0
+        uvViewHubTab.layer.borderWidth = 0.0
         pumbStatusView.roundCorner(corner: 12)
         addEquipmentView.roundCorner(corner: 12)
         pumbStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
@@ -423,8 +423,14 @@ class DashboardViewController: UIViewController {
     }
     
     @IBAction func addFirstFliprButtonClicked(){
+        addFlipr()
+    }
+    
+    func addFlipr(){
         let fliprStoryboard = UIStoryboard(name: "FliprDevice", bundle: nil)
-        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddFliprViewController")
+        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddFliprViewController") as! AddFliprViewController
+        viewController.fromMenu = true
+        viewController.isPresent = true
         let nav = UINavigationController.init(rootViewController: viewController)
         self.present(nav, animated: true)
     }
@@ -1062,14 +1068,14 @@ class DashboardViewController: UIViewController {
             if data.gravity.y > -0.05 {
                 self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: 0)
                 self!.fluidView.transform = CGAffineTransform(rotationAngle: 0)
-                self!.hubTabFluidViewTopEdge.transform = CGAffineTransform(rotationAngle: 0)
-                self!.hubTabfluidView.transform = CGAffineTransform(rotationAngle: 0)
+//                self!.hubTabFluidViewTopEdge.transform = CGAffineTransform(rotationAngle: 0)
+//                self!.hubTabfluidView.transform = CGAffineTransform(rotationAngle: 0)
             } else {
                 let rotation = atan2(data.gravity.x,data.gravity.y) - .pi
                 self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
                 self!.fluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
-                self!.hubTabFluidViewTopEdge.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
-                self!.hubTabfluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+//                self!.hubTabFluidViewTopEdge.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+//                self!.hubTabfluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
 
             }
             
@@ -1681,10 +1687,10 @@ class DashboardViewController: UIViewController {
                             self.uvViewHubTab.isHidden = false
                             let index = String(format: "%.0f", uvIndex)
                             self.uvLabel.text = index
-                            self.uvLabel.layer.borderWidth = 1
-                            self.uvLabel.layer.cornerRadius = (self.uvLabel.frame.size.height / 2)
+                            self.uvLabel.layer.borderWidth = 0
+//                            self.uvLabel.layer.cornerRadius = (self.uvLabel.frame.size.height / 2)
                             self.uvLabelHubTab.text = index
-                            self.uvLabelHubTab.layer.borderWidth = 1
+                            self.uvLabelHubTab.layer.borderWidth = 0
                             self.uvLabelHubTab.layer.cornerRadius = (self.uvLabelHubTab.frame.size.height / 2)
                             if uvIndex <= 2 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 41/255.0, green: 255/255.0, blue: 3/255.0, alpha: 1).cgColor
@@ -1870,10 +1876,10 @@ class DashboardViewController: UIViewController {
 
                             let index = String(format: "%.0f", uvIndex)
                             self.uvLabel.text = index
-                            self.uvLabel.layer.borderWidth = 1
+                            self.uvLabel.layer.borderWidth = 0
                             self.uvLabel.layer.cornerRadius = (self.uvLabel.frame.size.height / 2)
                             self.uvLabelHubTab.text = index
-                            self.uvLabelHubTab.layer.borderWidth = 1
+                            self.uvLabelHubTab.layer.borderWidth = 0
                             self.uvLabelHubTab.layer.cornerRadius = (self.uvLabelHubTab.frame.size.height / 2)
                             if uvIndex <= 2 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 41/255.0, green: 255/255.0, blue: 3/255.0, alpha: 1).cgColor
@@ -3136,11 +3142,11 @@ extension DashboardViewController{
 extension DashboardViewController{
     
     @IBAction func addHubDeviceButtonTapped(){
-        
+        self.addHubEquipments()
     }
     
     @IBAction func addFliprButtonTapped(){
-        
+        self.addFlipr()
     }
 }
 
@@ -3172,8 +3178,8 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource,Hub
         else if hub.equipementCode == 86{
             cell.iconImageView.image = #imageLiteral(resourceName: "pumbactive")
         }
-        cell.modeNameLbl.text = hub.behavior
-        cell.deviceNameLbl.text = hub.equipementName
+        cell.modeNameLbl.text = hub.behavior.capitalizingFirstLetter()
+        cell.deviceNameLbl.text = hub.equipementName.capitalizingFirstLetter()
         return cell
 
     }

@@ -23,8 +23,11 @@ class AddFliprViewController: BaseViewController {
 
     var serialKey:String = ""
     var fromMenu = false
+    var isPresent = false
+
 
     override func viewDidLoad() {
+        self.isPresentingView = isPresent
         super.viewDidLoad()
         setupView()
         searchFlipr()
@@ -46,6 +49,9 @@ class AddFliprViewController: BaseViewController {
 
     func setupView(){
         connectioButton.roundCorner(corner: 12)
+        if isPresent{
+            
+        }
     }
     
     func searchFlipr(){

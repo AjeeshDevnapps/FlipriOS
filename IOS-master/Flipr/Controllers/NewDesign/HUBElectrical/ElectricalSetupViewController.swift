@@ -16,7 +16,7 @@ class ElectricalSetupViewController: BaseViewController, UITableViewDataSource, 
     var isPresentView = false
     
     override func viewDidLoad() {
-        self.isPresentingView = isPresentView
+//        self.isPresentingView = isPresentView
         super.viewDidLoad()
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
         tableView.backgroundColor = .clear
@@ -27,7 +27,9 @@ class ElectricalSetupViewController: BaseViewController, UITableViewDataSource, 
         }
         self.navigationController?.navigationBar.isHidden = true
         tableView.alwaysBounceVertical = false
-        backbutton.setImage(#imageLiteral(resourceName: "Button Close"), for: .normal)
+        if isPresentView{
+            backbutton.setImage(#imageLiteral(resourceName: "Button Close"), for: .normal)
+        }
         
 
     }
