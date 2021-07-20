@@ -87,7 +87,7 @@ extension UIView {
             messageLabel.text = message
             messageLabel.font = theme.messageFont
             messageLabel.numberOfLines = 0
-            messageLabel.textColor = theme.messageColor
+            messageLabel.textColor = theme.titleColor
             messageLabel.widthAnchor.constraint(equalToConstant: self.bounds.width - (2 * margin)).isActive = true
             stackView.addArrangedSubview(messageLabel)
         }
@@ -115,10 +115,13 @@ extension UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false;
         
         self.addSubview(stackView)
-        
         //Constraints
         stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+    
+//        let val =  stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+//        val.isActive = true
+//        stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 200).isActive  = true
+        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -150).isActive = true
     }
     
     func hideStateView() {

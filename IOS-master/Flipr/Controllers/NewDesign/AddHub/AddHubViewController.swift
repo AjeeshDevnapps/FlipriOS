@@ -16,6 +16,7 @@ class AddHubViewController: BaseViewController {
     @IBOutlet weak var fliprNotDiscoverContainerView: UIView!
     @IBOutlet weak var helpButtonContainerView: UIView!
     @IBOutlet weak var connectioButton: UIButton!
+    @IBOutlet weak var researchButton: UIButton!
 
     var fromMenu = false
     
@@ -81,8 +82,17 @@ class AddHubViewController: BaseViewController {
     }
     
     @IBAction func scanButtonAction(_ sender: Any) {
+        connectioButton.isHidden = true        
+        self.helpButtonContainerView.isHidden = true
+        self.fliprNotDiscoverContainerView.isHidden = true
         self.bluetoothAlertContainerView.isHidden = true
         self.scanningAlertContainerView.isHidden = false
+        let theme = EmptyStateViewTheme.shared
+        theme.activityIndicatorType = .ballSpinFadeLoader
+        theme.activityIndicatorColor = .black
+        self.loaderView.showEmptyStateViewLoading(title: nil,
+                                            message: nil,
+                                            theme: theme)
         self.scanHub()
     }
     
@@ -91,7 +101,25 @@ class AddHubViewController: BaseViewController {
     
     }
     
+    @IBAction func reserchButtonAction(_ sender: Any) {
+    
+        self.helpButtonContainerView.isHidden = true
+        self.fliprNotDiscoverContainerView.isHidden = true
+        self.bluetoothAlertContainerView.isHidden = true
+        self.scanningAlertContainerView.isHidden = false
+        let theme = EmptyStateViewTheme.shared
+        theme.activityIndicatorType = .ballSpinFadeLoader
+        theme.activityIndicatorColor = .black
+        self.loaderView.showEmptyStateViewLoading(title: nil,
+                                            message: nil,
+                                            theme: theme)
+        self.scanHub()
+
+        
+    }
+    
     func showHubNotDiscoveredBanner(){
+        connectioButton.isHidden = false
         HUBManager.shared.stopScanForHubs()
         HUBManager.shared.detectedHubs.removeAll()
         self.helpButtonContainerView.isHidden = false

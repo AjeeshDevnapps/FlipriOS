@@ -136,7 +136,10 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var signalStrengthLabel: UILabel!
     @IBOutlet weak var signalStrengthImageView: UIImageView!
     @IBOutlet weak var fliprTabScrollView: UIScrollView!
-    
+    @IBOutlet weak var bulbStatuImageView: UIImageView!
+    @IBOutlet weak var pumbStatuImageView: UIImageView!
+
+
     //Tabs
     @IBOutlet weak var flipTabButton: UIButton!
     @IBOutlet weak var hubTabButton: UIButton!
@@ -151,6 +154,16 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var addEquipmentView: UIView!
     @IBOutlet weak var addFliprHubTabView: UIView!
     @IBOutlet weak var hubWaveContainerView: UIView!
+    @IBOutlet weak var hubTabMeasureInfoView: UIView!
+    @IBOutlet weak var hubTabAirInfoView: UIView!
+    @IBOutlet weak var hubTabAirInfoBoxWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hubTabAirLabel: UILabel!
+    @IBOutlet weak var hubTabAirValLabel: UILabel!
+    @IBOutlet weak var hubTabPhLabel: UILabel!
+    @IBOutlet weak var hubTabPhValLabel: UILabel!
+    @IBOutlet weak var hubTabClorineLabel: UILabel!
+    @IBOutlet weak var hubTabClorineValLabel: UILabel!
+
 
     var hubTabWaveTopConstraintPreValue = 0
 
@@ -210,14 +223,13 @@ class DashboardViewController: UIViewController {
        // topButton.layer.borderColor = UIColor.init(hexString: "111729").cgColor
        // topButton.layer.borderWidth = 2.0
        // topButton.roundCorner(corner: topButton.frame.size.height / 2 )
-//        uvView.roundCorner(corner: 6)
-//        uvViewHubTab.roundCorner(corner: 6)
-
+        uvView.roundCorner(corner: 6)
+        uvViewHubTab.roundCorner(corner: 6)
 //        addNewProgramLabel.roundCorner(corner: 4.0)
         uvView.layer.borderColor = UIColor.init(hexString: "111729").cgColor
-        uvView.layer.borderWidth = 0.0
+        uvView.layer.borderWidth = 1.0
         uvViewHubTab.layer.borderColor = UIColor.init(hexString: "111729").cgColor
-        uvViewHubTab.layer.borderWidth = 0.0
+        uvViewHubTab.layer.borderWidth = 1.0
         pumbStatusView.roundCorner(corner: 12)
         addEquipmentView.roundCorner(corner: 12)
         pumbStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
@@ -230,6 +242,7 @@ class DashboardViewController: UIViewController {
        // shareButton.setTitle("share".localized, for: .normal)
         airLabel.text = "air".localized
         airLabelHubTab.text = "air".localized
+        hubTabAirLabel.text = "air".localized
 
         waterLabel.text = "water".localized
         alertCheckLabel.text = "Water correction in progress".localized
@@ -336,7 +349,9 @@ class DashboardViewController: UIViewController {
         }
         
         self.appTrackingRequestPermission()
+        self.view.bringSubviewToFront(addEquipmentView)
         self.view.bringSubviewToFront(quicActionButton)
+
 
       
         /*
@@ -363,7 +378,7 @@ class DashboardViewController: UIViewController {
         self.loadHUBs()
         AppReview.shared.requestReviewIfNeeded()
         self.view.bringSubviewToFront(quicActionButton)
-
+     
     }
     
     func intialTabSetup(){
@@ -371,6 +386,7 @@ class DashboardViewController: UIViewController {
         self.hubTabScrollView.isHidden = true
         self.flipTabButton.isUserInteractionEnabled = false
         self.hubTabButton.isUserInteractionEnabled = true
+        
     }
     
     func handlTabSelcection(){
@@ -389,10 +405,23 @@ class DashboardViewController: UIViewController {
     }
     
     @IBAction func tappedHubTab(){
+      
+        hubTabAirInfoBoxWidthConstraint.constant = (self.view.frame.width - 32) / 3
+//        hubTabAirInfoBoxWidthConstraint.constant = 10
+
+        hubTabAirInfoView.setNeedsUpdateConstraints()
+        self.view.setNeedsUpdateConstraints()
+        hubTabAirInfoView.layoutIfNeeded()
+        view.layoutIfNeeded()
+
         self.fliprTabView.backgroundColor = UIColor(hexString: "97A3B6")
         self.hubTabView.backgroundColor = UIColor(hexString: "111729")
         isHubTabSelected = !isHubTabSelected
         handlTabSelcection()
+    }
+    
+    func showHubTabInfoView(hide:Bool){
+        self.hubTabMeasureInfoView.isHidden = hide
     }
     
     func setupDashboardUI(){
@@ -443,6 +472,8 @@ class DashboardViewController: UIViewController {
         let navigationVC = UINavigationController.init(rootViewController: viewController)
         self.present(navigationVC, animated: true)
     }
+    
+    
     
     /*
     func refreshHUBdisplay() {
@@ -504,10 +535,15 @@ class DashboardViewController: UIViewController {
         })
         
     }
-    
-    
+//
+//    HUB.currentHUB = hub
+//    HUB.saveCurrentHUBLocally()
+//    self.refreshHUBdisplay()
+
     
     @IBAction func pumbSwitchActionFliptrTab(sender:UIButton){
+        HUB.currentHUB =  self.hubPumb
+        HUB.saveCurrentHUBLocally()
         if sender.tag == 1{
             if self.hubPumb?.behavior == "manual" {
                 self.pumbOffOn(isOn: false)
@@ -530,6 +566,8 @@ class DashboardViewController: UIViewController {
     
     
     @IBAction func bulbSwitchActionFliptrTab(sender:UIButton){
+        HUB.currentHUB =  self.hubBulb
+        HUB.saveCurrentHUBLocally()
         if sender.tag == 1{
             if self.hubBulb?.behavior == "manual" {
                 self.pumbOffOn(isOn: false)
@@ -537,7 +575,7 @@ class DashboardViewController: UIViewController {
                 self.hubButtonAction(self)
             }
         }
-        if sender.tag == 0{
+        else if sender.tag == 0{
             if self.hubBulb?.behavior == "manual" {
                 self.pumbOffOn(isOn: true)
             }else{
@@ -554,7 +592,10 @@ class DashboardViewController: UIViewController {
     }
     
     func handleHubViews(){
-        
+        if self.hubs.count < 1{
+            self.updateHubWaveForNoHubs()
+            return
+        }
         for hubObj in self.hubs{
             if hubObj.equipementCode == 84{
                 self.hubBulb = hubObj
@@ -568,15 +609,40 @@ class DashboardViewController: UIViewController {
             if hubObj.equipementState {
                 bulbActionButton.setImage(UIImage(named: "ON"), for: .normal)
                 bulbActionButton.tag = 1
+                bulbStatuImageView.image =  UIImage(named: "lightOn")
+                if hubObj.behavior == "manual" {
+                    bulbActionButton.setImage(UIImage(named: "ON"), for: .normal)
+                }
+                else if hubObj.behavior == "planning" {
+                    bulbActionButton.setImage(UIImage(named: "pumbPgmOn"), for: .normal)
+                }
+                else if hubObj.behavior == "auto" {
+                    bulbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
+                }else{
+                    
+                }
             }else{
+                bulbStatuImageView.image =  UIImage(named: "lightDisabled")
                 bulbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
                 bulbActionButton.tag = 0
+                if hubObj.behavior == "manual" {
+                    bulbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
+                }
+                else if hubObj.behavior == "planning" {
+                    bulbActionButton.setImage(UIImage(named: "pumbPrgmOff"), for: .normal)
+                }
+                else if hubObj.behavior == "auto" {
+                    bulbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
+                }else{
+                    
+                }
             }
         }
         
         if let hubObj = self.hubPumb{
             if hubObj.equipementState {
                 pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
+                pumbStatuImageView.image = UIImage(named: "pumbactive")
                 pumbActionButton.tag = 1
                 if hubObj.behavior == "manual" {
                     pumbActionButton.setImage(UIImage(named: "ON"), for: .normal)
@@ -590,6 +656,7 @@ class DashboardViewController: UIViewController {
                     
                 }
             }else{
+                pumbStatuImageView.image = UIImage(named: "pumbdisabled")
                 pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
                 pumbActionButton.tag = 0
                 if hubObj.behavior == "manual" {
@@ -1032,7 +1099,7 @@ class DashboardViewController: UIViewController {
         
         
         //Hun wave setup
-        var hubTabStartElevation = 0.85
+        let hubTabStartElevation = 0.85
 
         let hubWaveframe = self.hubWaveContainerView.frame
         hubTabfluidView = BAFluidView.init(frame: hubWaveframe, startElevation: NSNumber(floatLiteral:  hubTabStartElevation))
@@ -1363,6 +1430,7 @@ class DashboardViewController: UIViewController {
                             
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
                             self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
+                            self.hubTabAirValLabel.text = String(format: "%.0f", temperature) + "°"
 
                         }
                         if let icon = currently["icon"] as? String {
@@ -1446,6 +1514,7 @@ class DashboardViewController: UIViewController {
     }
     
     func handleSubscriptionButton(){
+        self.subscriptionButton.isHidden = false
         self.subscriptionButton.backgroundColor  = UIColor.init(hexString: "FF8F50")
         self.subscriptionButton.setTitleColor(.white, for: .normal)
         self.subscriptionButton.setTitle("Alerte en cours : suivez nos conseils".localized, for: .normal)
@@ -1455,6 +1524,8 @@ class DashboardViewController: UIViewController {
     func hideWeatherForecast() {
         airTemperatureLabel.text = "  "
         airTemperatureLabelHubTab.text = "  "
+        self.hubTabAirValLabel.text = "  "
+
         currentlyWeatherIcon.text = "  "
         currentlyWeatherIconHubTab.text = "  "
 
@@ -1528,7 +1599,10 @@ class DashboardViewController: UIViewController {
         
         if let module = Module.currentModule {
             if !module.isSubscriptionValid {
+                self.handleSubscriptionButton()
                 return
+            }else{
+                self.subscriptionButton.isHidden = true
             }
         }
         
@@ -1617,6 +1691,7 @@ class DashboardViewController: UIViewController {
                             
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
                             self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
+                            self.hubTabAirValLabel.text = String(format: "%.0f", temperature) + "°"
 
                             
                             if let forecastTemperature = weather["NextHourTemperature"] as? Double {
@@ -1760,6 +1835,7 @@ class DashboardViewController: UIViewController {
                 }
                 
                 if let error = response.result.error {
+//                    self.showHubTabInfoView(hide: true)
                     print("Update Flipr data did fail with error: \(error)")
                     
                     self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "Refresh error".localized, message: error.localizedDescription, buttonTitle: "Retry".localized, buttonAction: {
@@ -1768,7 +1844,7 @@ class DashboardViewController: UIViewController {
                     })
                     
                 } else if let JSON = response.result.value as? [String:Any] {
-                    
+                    self.showHubTabInfoView(hide: false)
                     print("JSON: \(JSON)")
                     
                     if let forecast = JSON["HourlyForecast"] as? [[String:Any]] {
@@ -1807,6 +1883,7 @@ class DashboardViewController: UIViewController {
                             
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
                             self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
+                            self.hubTabAirValLabel.text = String(format: "%.0f", temperature) + "°"
 
                             
                             if let forecastTemperature = weather["NextHourTemperature"] as? Double {
@@ -2036,8 +2113,11 @@ class DashboardViewController: UIViewController {
                                 Module.currentModule?.rawPH = String(format: "%.2f", value)
                                 
                                 self.pHLabel.text = String(format: "%.1f", value)
+                                self.hubTabPhValLabel.text = String(format: "%.1f", value)
+
                                 if value < 0 {
                                     self.pHLabel.text = "0"
+                                    self.hubTabPhValLabel.text = "0"
                                 }
                                 if let message = pH["Message"] as? String {
                                     self.pHStateLabel.text = message
@@ -2154,12 +2234,15 @@ class DashboardViewController: UIViewController {
                             
                             if let label = orp["Label"] as? String, let deviation = orp["Deviation"] as? Double {
                                 self.orpLabel.text = label
-                                
+                                self.hubTabClorineLabel.text = label
+
                                 if let message = orp["Message"] as? String {
                                     self.orpStateLabel.text = message
+                                    self.hubTabClorineValLabel.text = message
                                     self.orpStateView.isHidden = false
                                 } else {
                                     self.orpStateLabel.text = ""
+                                    self.hubTabClorineValLabel.text = ""
                                     self.orpStateView.isHidden = true
                                 }
                                 
@@ -3006,6 +3089,10 @@ extension DashboardViewController{
 //        let theme = EmptyStateViewTheme.shared
 //        theme.activityIndicatorType = .ballPulse
 //        self.view.showEmptyStateViewLoading(title: nil, message: nil, theme: theme)
+        if  Pool.currentPool ==  nil{
+            updateHubWaveForNoHubs()
+            return
+        }
         Pool.currentPool?.getHUBS(completion: { (hubs, error) in
 //            self.view.hideStateView()
             if error != nil {
@@ -3029,7 +3116,8 @@ extension DashboardViewController{
                         HUB.saveCurrentHUBLocally()
                         self.refreshHUBdisplay()
                     }
-                } else {
+                }
+                else {
                     self.handleHubViews()
 //                   self.showError(title: "Error".localized, message: "No hubs :/")
                 }
@@ -3147,6 +3235,20 @@ extension DashboardViewController{
     
     @IBAction func addFliprButtonTapped(){
         self.addFlipr()
+    }
+    
+    func updateHubWaveForNoHubs(){
+        if hubScrollViewContainerView.height < self.hubTabScrollView.height{
+            let diff = self.hubTabScrollView.height - hubScrollViewContainerView.height
+            self.hubTabWaveTopConstraint.constant =  self.hubTabWaveTopConstraint.constant + diff
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { _ in
+                let hubWaveframe = self.hubWaveContainerView.frame
+                self.hubTabfluidView.frame = hubWaveframe
+                self.hubTabFluidViewTopEdge.frame = hubWaveframe
+            })
+        }
     }
 }
 

@@ -11,7 +11,6 @@ import JGProgressHUD
 
 class DevicesViewController: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
-    
     var pageController: UIPageViewController!
     var controllers = [UIViewController]()
     var contentViewController : UIViewController?
@@ -38,7 +37,6 @@ class DevicesViewController: UIViewController {
     func getFlprInfo(){
         //        hud?.show(in: self.navigationController!.view)
         hud?.show(in: self.navigationController!.view)
-        
         User.currentUser?.getModuleList(completion: { (devices,error) in
             if (error != nil) {
                 self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
@@ -57,8 +55,8 @@ class DevicesViewController: UIViewController {
     func getHubDetails(){
         Pool.currentPool?.getHUBS(completion: { (hubs, error) in
             if error != nil {
-                //                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-                //                hud?.textLabel.text = error?.localizedDescription
+                //hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                //hud?.textLabel.text = error?.localizedDescription
                 self.hud?.dismiss(afterDelay: 3)
                 self.setupDevicesList()
             } else if hubs != nil {
@@ -76,10 +74,12 @@ class DevicesViewController: UIViewController {
         })
     }
     
+    
     func setupDevicesList(){
         self.setupPages()
         self.view.bringSubviewToFront(self.pageControl)
     }
+    
     
     func setupPages(){
         self.devicesCount =  self.devicesDetails?.count ?? 1
@@ -89,6 +89,7 @@ class DevicesViewController: UIViewController {
         pageControl.numberOfPages = devicesCount
         pageControl.currentPage = 0
     }
+    
     
     func configurePageViewController(state : Int) {
         let pageCntrl = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -140,17 +141,9 @@ class DevicesViewController: UIViewController {
             }else{
                 viewController = nil
             }
-            
             return viewController
-            
         }
-        
-        
-        
     }
-    
-    
-    
     
 }
 
