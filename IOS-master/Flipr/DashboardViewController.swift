@@ -1514,11 +1514,21 @@ class DashboardViewController: UIViewController {
     }
     
     func handleSubscriptionButton(){
+        self.subscriptionButton.isUserInteractionEnabled = true
         self.subscriptionButton.isHidden = false
         self.subscriptionButton.backgroundColor  = UIColor.init(hexString: "FF8F50")
         self.subscriptionButton.setTitleColor(.white, for: .normal)
         self.subscriptionButton.setTitle("Alerte en cours : suivez nos conseils".localized, for: .normal)
         self.subscriptionButton.setImage(UIImage(named: "alertSubscription"), for: .normal)
+    }
+    
+    func handleGoodMeasureValueButton(){
+        self.subscriptionButton.isUserInteractionEnabled = false
+        self.subscriptionButton.isHidden = false
+        self.subscriptionButton.backgroundColor  = .white
+        self.subscriptionButton.setTitleColor(UIColor.init(hexString: "111729"), for: .normal)
+        self.subscriptionButton.setTitle("Tout est parfait, bravo !".localized, for: .normal)
+        self.subscriptionButton.setImage(UIImage(named: "heartBlack"), for: .normal)
     }
     
     func hideWeatherForecast() {
@@ -1621,6 +1631,7 @@ class DashboardViewController: UIViewController {
                 self.alert = nil
                 self.alertButton.isHidden = true
                 self.alertCheckView.isHidden = true
+                self.handleGoodMeasureValueButton()
             }
             
             var i = 0
@@ -2022,14 +2033,74 @@ class DashboardViewController: UIViewController {
                                 
                                 print("lastDate interval since now:\(lastDate.timeIntervalSinceNow)")
 //
+                        /*
+                          
+                                 
+                                 if let dateString = current["DateTime"] as? String {
+                                     if let lastDate = dateString.fliprDate {
+                                         let dateFormatter = DateFormatter()
+                                         dateFormatter.dateFormat = "EEE HH:mm"
+                                         self.lastMeasureDateLabel.text = "Last measure".localized +  " : \(dateFormatter.string(from: lastDate))"
+                                         self.lastMeasureDateLabel.isHidden = false
+                                         
+                                         Module.currentModule?.rawlastMeasure = dateFormatter.string(from: lastDate)
+                                         
+                                         print("lastDate interval since now:\(lastDate.timeIntervalSinceNow)")
+                                         if lastDate.timeIntervalSinceNow < -4500 {
+                                             self.readBLEMeasure(completion: { (error) in
+                                                 if error != nil {
+                                                     self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+                                                     self.bleStatusView.isHidden = true
+                                                 } else {
+                                                     self.bleMeasureHasBeenSent = true
+                                                 }
+                                             })
+                                         }
+                                     }
+                                 } else {
+                                     self.readBLEMeasure(completion: { (error) in
+                                         if error != nil {
+                                             self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+                                             self.bleStatusView.isHidden = true
+                                         } else {
+                                             self.bleMeasureHasBeenSent = true
+                                         }
+                                     })
+                                 }
+                                 
+                                 
+                                 */
+                                
                                 //        if -300 > -400{
                                 //            print("true")
                                 //        }else{
                                 //            print("false")
                                 //        }
-                                if lastDate.timeIntervalSinceNow  > -4500 {
+                                // Greater than 75 minute ex: -4600
+                                if lastDate.timeIntervalSinceNow < -4500 {
+                                    self.readBLEMeasure(completion: { (error) in
+                                        if error != nil {
+                                            self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+                                            self.bleStatusView.isHidden = true
+                                        } else {
+                                            self.bleMeasureHasBeenSent = true
+                                        }
+                                    })
+                                }
+
+                                // less than 75 / < 75 ex: -4400
+                               else if lastDate.timeIntervalSinceNow  > -4500 {
                                     self.signalStrengthLabel.text = "Signal excellent".localized
                                     self.signalStrengthImageView.image = UIImage(named: "Signalhigh")
+//                                    self.readBLEMeasure(completion: { (error) in
+//                                        if error != nil {
+//                                            self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+//                                            self.bleStatusView.isHidden = true
+//                                        } else {
+//                                            self.bleMeasureHasBeenSent = true
+//                                        }
+//                                    })
+
                                 }
                                 
 //                                else if lastDate.timeIntervalSinceNow < -4500 {
@@ -2042,6 +2113,8 @@ class DashboardViewController: UIViewController {
 //                                        }
 //                                    })
 //                                }
+                               // less than 75 / < 75 ex: -85000
+
                                 else if lastDate.timeIntervalSinceNow > -86400 {
                                     self.signalStrengthLabel.text = "Signal moyen".localized
                                     self.signalStrengthImageView.image = UIImage(named: "Signalmiddle")
@@ -2301,6 +2374,11 @@ class DashboardViewController: UIViewController {
                         
                         if let subscription = JSON["Subscription"] as? [String:Any] {
                             if let isValid = subscription["IsValid"] as? Bool {
+                                if isValid{
+                                    self.subscriptionButton.isHidden = true
+                                }else{
+                                    self.handleSubscriptionButton()
+                                }
                                 Module.currentModule?.isSubscriptionValid = isValid
                                 Module.saveCurrentModuleLocally()
                             }
@@ -2316,7 +2394,6 @@ class DashboardViewController: UIViewController {
                             if let module = Module.currentModule {
                                 if module.isSubscriptionValid == false {
 //                                    self.subscriptionView.alpha = 1
-//                                    self.subscriptionButton.isHidden = false
                                     self.handleSubscriptionButton()
                                 } else {
 //                                    self.subscriptionView.alpha = 0

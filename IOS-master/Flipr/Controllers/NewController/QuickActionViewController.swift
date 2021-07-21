@@ -65,6 +65,12 @@ class QuickActionViewController: UIViewController {
         expertLbl.text  = "Expert Mode".localized
         callibrationLbl.text  = "New Calibration".localized
         drainingLbl.text  = "Add a Flipr Hub".localized
+        if Module.currentModule == nil{
+            triggerContainerView.alpha = 0.3
+        }else{
+            triggerContainerView.alpha = 1.0
+        }
+        
 //        stripTestLbl.text  = "New strip test".localized
 //
 //        triggerContainerView.layer.cornerRadius = 15.0
@@ -99,7 +105,11 @@ class QuickActionViewController: UIViewController {
     }
     
     @IBAction func triggerMeasureButtonClicked(){
-    
+        if  Module.currentModule == nil{
+            return
+        }
+        
+    /*
         if let module = Module.currentModule {
             if !module.isSubscriptionValid {
                 if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
@@ -107,7 +117,7 @@ class QuickActionViewController: UIViewController {
                     self.present(vc, animated: true, completion: nil)
                 }
             } else {
-                
+       */
                 
                 let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
                 if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
@@ -115,8 +125,8 @@ class QuickActionViewController: UIViewController {
                     viewController.modalPresentationStyle = .fullScreen
                     self.present(viewController, animated: true, completion: nil)
                 }
-            }
-        }
+//            }
+//        }
     }
 
     @IBAction func expertModeButtonClicked(){

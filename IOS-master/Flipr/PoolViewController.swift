@@ -44,7 +44,8 @@ class PoolViewController: UITableViewController {
     
     @IBOutlet weak var saltLevelTitleLabel: UILabel!
     @IBOutlet weak var saltLevelDescriptionLabel: UILabel!
-    
+    var isInitialPoolSetup = false
+
     
     
     var pool = Pool()
@@ -89,6 +90,10 @@ class PoolViewController: UITableViewController {
         
         saltLevelTitleLabel.text = "Salt level (g/L)".localized
         saltLevelDescriptionLabel.text = "Recommended for the operation of your device".localized
+        
+//        if isInitialPoolSetup{
+//            navigationController?.navigationBar.backIndicatorImage = UIImage(named: "backArrowBlack")
+//        }
         
         if let currentPool = Pool.currentPool {
             if let draftPool = Pool.init(withJSON: currentPool.serialized) {
@@ -164,6 +169,33 @@ class PoolViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    func showDashboard(){
+        let theme = EmptyStateViewTheme.shared
+        theme.activityIndicatorType = .ballZigZag
+        self.view.showEmptyStateViewLoading(title: "Launch of the 1st measure".localized, message: "Connecting to flipr...".localized, theme: theme)
+        
+        BLEManager.shared.startMeasure { (error) in
+            
+            BLEManager.shared.doAcq = false
+            
+            if error != nil {
+                self.showError(title: "Error".localized, message: error?.localizedDescription)
+                self.view.hideStateView()
+            }
+            else {
+                UserDefaults.standard.set(Date(), forKey:"FirstMeasureStartDate")
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+                dashboard.modalTransitionStyle = .flipHorizontal
+                dashboard.modalPresentationStyle = .fullScreen
+                self.present(dashboard, animated: true, completion: {
+                    self.navigationController?.popToRootViewController(animated: false)
+                })
+            }
+        }
+    }
+    
     @IBAction func cancelButtonAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -213,6 +245,12 @@ class PoolViewController: UITableViewController {
                     NotificationCenter.default.post(name: FliprLocationDidChange, object: nil)
                     hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
                     hud?.dismiss(afterDelay: 1)
+                    if self.isInitialPoolSetup {
+                        self.showDashboard()
+                    }else{
+                        self.dismiss(animated: true, completion:nil)
+                    }
+                    
                 }
             })
         } else {

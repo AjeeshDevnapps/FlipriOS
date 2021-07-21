@@ -19,9 +19,11 @@ class CalibrationSuccessViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
 
     @IBAction func nextButton(_ sender: UIButton) {
-        
+        showPoolSettings()
+        return
         let theme = EmptyStateViewTheme.shared
         theme.activityIndicatorType = .ballZigZag
         self.view.showEmptyStateViewLoading(title: "Launch of the 1st measure".localized, message: "Connecting to flipr...".localized, theme: theme)
@@ -33,7 +35,8 @@ class CalibrationSuccessViewController: UIViewController {
             if error != nil {
                 self.showError(title: "Error".localized, message: error?.localizedDescription)
                 self.view.hideStateView()
-            } else {
+            }
+            else {
                 UserDefaults.standard.set(Date(), forKey:"FirstMeasureStartDate")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
@@ -51,6 +54,17 @@ class CalibrationSuccessViewController: UIViewController {
 //                }
             }
         }
+    }
+    
+    func showPoolSettings(){
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = sb.instantiateViewController(withIdentifier: "PoolViewSettingsControllerID") as! PoolViewController
+        viewController.isInitialPoolSetup = true
+//        viewController.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(viewController, animated: true)
+        //        let sb = UIStoryboard(name: "PoolSettings", bundle: nil)
+        //        let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewController") as! PoolSettingsStartViewController
+        //        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }
