@@ -16,7 +16,7 @@ class FliprListViewController: BaseViewController {
 
     var serialKey: String!
     var flipType: String!
-
+    var isSignupFlow = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,39 @@ class FliprListViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func backButtonTapped() {
+        if isSignupFlow{
+            var isPoped = false
+//            for controller in self.navigationController!.viewControllers as Array {
+//                if controller.isKind(of: EducationScreenContainerViewController.self) {
+//                    isPoped = true
+//                    self.navigationController!.popToViewController(controller, animated: true)
+//                    break
+//                }
+//            }
+//            if isPoped { return }
+            
+            for controller in self.navigationController!.viewControllers as Array {
+                if controller.isKind(of: WelcomeViewController.self) {
+                    isPoped = true
+                    self.navigationController!.popToViewController(controller, animated: true)
+                    break
+                }
+            }
+            if isPoped { return }
+            for controller in self.navigationController!.viewControllers as Array {
+                if controller.isKind(of: LandingViewController.self) {
+                    isPoped = true
+                    self.navigationController!.popToViewController(controller, animated: true)
+                    break
+                }
+            }
+            if isPoped { return }
+            self.navigationController?.popToRootViewController(animated: true)
+        }else{
+            self.navigationController?.popViewController()
+        }
+    }
 
     @objc func fliprSelectButtonAction() {
     

@@ -14,7 +14,8 @@ class ElectricalSetupViewController: BaseViewController, UITableViewDataSource, 
     @IBOutlet weak var backbutton: UIButton!
 
     var isPresentView = false
-    
+    var isSignupFlow = false
+
     override func viewDidLoad() {
 //        self.isPresentingView = isPresentView
         super.viewDidLoad()
@@ -33,6 +34,21 @@ class ElectricalSetupViewController: BaseViewController, UITableViewDataSource, 
         
 
     }
+   /*
+    override func backButtonTapped() {
+        if isSignupFlow {
+            for controller in self.navigationController!.viewControllers as Array {
+                if controller.isKind(of: EducationScreenContainerViewController.self) {
+                    self.navigationController!.popToViewController(controller, animated: true)
+                    break
+                }
+            }
+            self.navigationController?.popToRootViewController(animated: true)
+        }else{
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    */
     
     @IBAction func backActoin(_ sender: Any) {
         if isPresentView {

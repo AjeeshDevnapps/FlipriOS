@@ -186,6 +186,7 @@ class DashboardViewController: UIViewController {
     var hubTabfluidView:BAFluidView!
     
     var isHubTabSelected = false
+    var lastMeasureDate: Date?
 
 
     override func viewDidLoad() {
@@ -1513,16 +1514,28 @@ class DashboardViewController: UIViewController {
         
     }
     
-    func handleSubscriptionButton(){
+    func showSubscriptionButton(){
+        self.subscriptionButton.tag = 3
+        self.subscriptionButton.isUserInteractionEnabled = true
+        self.subscriptionButton.isHidden = false
+        self.subscriptionButton.backgroundColor  = UIColor.init(hexString: "111729")
+        self.subscriptionButton.setTitleColor(.white, for: .normal)
+        self.subscriptionButton.setTitle("Activer la connexion à distance".localized, for: .normal)
+        self.subscriptionButton.setImage(UIImage(named: "subscriptionIcon"), for: .normal)
+    }
+    
+    func showAlertButton(){
+        self.subscriptionButton.tag = 2
         self.subscriptionButton.isUserInteractionEnabled = true
         self.subscriptionButton.isHidden = false
         self.subscriptionButton.backgroundColor  = UIColor.init(hexString: "FF8F50")
         self.subscriptionButton.setTitleColor(.white, for: .normal)
         self.subscriptionButton.setTitle("Alerte en cours : suivez nos conseils".localized, for: .normal)
-        self.subscriptionButton.setImage(UIImage(named: "alertSubscription"), for: .normal)
+        self.subscriptionButton.setImage(UIImage(named: "alertProcessing"), for: .normal)
     }
     
-    func handleGoodMeasureValueButton(){
+    func showGoodMeasureButton(){
+        self.subscriptionButton.tag = 1
         self.subscriptionButton.isUserInteractionEnabled = false
         self.subscriptionButton.isHidden = false
         self.subscriptionButton.backgroundColor  = .white
@@ -1606,18 +1619,20 @@ class DashboardViewController: UIViewController {
         self.alert2Button.isHidden = true
         self.alert3Button.isHidden = true
         self.alert4Button.isHidden = true
-        
+        /*
         if let module = Module.currentModule {
             if !module.isSubscriptionValid {
-                self.handleSubscriptionButton()
+               // self.handleSubscriptionButton()
                 return
             }else{
-                self.subscriptionButton.isHidden = true
+//                self.subscriptionButton.isHidden = true
             }
         }
-        
+        */
         Module.currentModule?.getAlerts(completion: { (alert, priorityAlerts, error) in
+            var noMainAlert = true
             if alert != nil {
+                noMainAlert = false
                 self.alert = alert
                 if self.alert?.status == 0 {
                     self.alertButton.isHidden = false
@@ -1626,12 +1641,30 @@ class DashboardViewController: UIViewController {
                     self.alertButton.isHidden = true
 //                    self.alertCheckView.isHidden = false
                 }
-                
-            } else {
+//                if let module = Module.currentModule {
+//                    if module.isSubscriptionValid {
+//                        self.showAlertButton()
+//                    }else{
+//                        if self.lastMeasureDate != nil{
+//                            if self.lastMeasureDate!.timeIntervalSinceNow > -21600 {
+//                                self.showAlertButton()
+//                            }
+//                        }
+//                    }
+//                }
+            }
+            
+            else {
+                noMainAlert = true
                 self.alert = nil
                 self.alertButton.isHidden = true
                 self.alertCheckView.isHidden = true
-                self.handleGoodMeasureValueButton()
+//                if let module = Module.currentModule {
+//                    if module.isSubscriptionValid {
+//                        self.showGoodMeasureButton()
+//                    }else{
+//                    }
+//                }
             }
             
             var i = 0
@@ -1660,9 +1693,32 @@ class DashboardViewController: UIViewController {
                 i = i + 1
             }
             
+            if noMainAlert && i == 0 {
+                if let module = Module.currentModule {
+                    if module.isSubscriptionValid {
+                        self.showGoodMeasureButton()
+                    }else{
+                        
+                    }
+                }
+            }
+            else{
+                if let module = Module.currentModule {
+                    if module.isSubscriptionValid {
+                        self.showAlertButton()
+                    }else{
+                        if self.lastMeasureDate != nil{
+                            if self.lastMeasureDate!.timeIntervalSinceNow > -21600 {
+                                self.showAlertButton()
+                            }
+                        }
+                    }
+                }
+            }
         })
-        
     }
+    
+    
     
     func updateHUBData() {
         hideFliprData()
@@ -2028,7 +2084,7 @@ class DashboardViewController: UIViewController {
                                 dateFormatter.dateFormat = "EEE HH:mm"
                                 self.lastMeasureDateLabel.text = "Last measure".localized +  " : \(dateFormatter.string(from: lastDate))"
                                 self.lastMeasureDateLabel.isHidden = false
-                                
+                                self.lastMeasureDate = lastDate
                                 Module.currentModule?.rawlastMeasure = dateFormatter.string(from: lastDate)
                                 
                                 print("lastDate interval since now:\(lastDate.timeIntervalSinceNow)")
@@ -2375,9 +2431,9 @@ class DashboardViewController: UIViewController {
                         if let subscription = JSON["Subscription"] as? [String:Any] {
                             if let isValid = subscription["IsValid"] as? Bool {
                                 if isValid{
-                                    self.subscriptionButton.isHidden = true
+                                    //self.subscriptionButton.isHidden = true
                                 }else{
-                                    self.handleSubscriptionButton()
+                                   // self.handleSubscriptionButton()
                                 }
                                 Module.currentModule?.isSubscriptionValid = isValid
                                 Module.saveCurrentModuleLocally()
@@ -2394,7 +2450,7 @@ class DashboardViewController: UIViewController {
                             if let module = Module.currentModule {
                                 if module.isSubscriptionValid == false {
 //                                    self.subscriptionView.alpha = 1
-                                    self.handleSubscriptionButton()
+                                    self.showSubscriptionButton()
                                 } else {
 //                                    self.subscriptionView.alpha = 0
 //                                    self.subscriptionButton.isHidden = true
@@ -2644,7 +2700,7 @@ class DashboardViewController: UIViewController {
         pHView.alpha = 0
         orpView.alpha = 0
         self.subscriptionView.alpha = 0
-        self.subscriptionButton.isHidden = true
+        self.hideBottomAlertButton()
         for view in self.view.subviews {
             if view.tag == 2 {
                 view.alpha = 0
@@ -2663,6 +2719,10 @@ class DashboardViewController: UIViewController {
         
         
             
+    }
+    
+    func hideBottomAlertButton(){
+        self.subscriptionButton.isHidden = true
     }
     
     @IBAction func fliprStoreButtonAction(_ sender: Any) {
@@ -2693,7 +2753,8 @@ class DashboardViewController: UIViewController {
                  self.present(viewController, animated: true, completion: nil)
                  }*/
             }
-        } else if let alert = alert {
+        }
+        else if let alert = alert {
             if let navController = self.storyboard?.instantiateViewController(withIdentifier: "AlertNavigationControllerID") as? UINavigationController {
                 if let viewController = navController.viewControllers[0] as? AlertTableViewController {
                     viewController.alert = alert
@@ -2860,10 +2921,31 @@ class DashboardViewController: UIViewController {
     
     
     
-    @IBAction func subscriptionButtonAction(_ sender: Any) {
-        if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
+    @IBAction func subscriptionButtonAction(_ sender: UIButton) {
+        let tag =  sender.tag
+        if tag == 1{
+            
+        }
+        else if tag == 2{
+            if let alert = alert {
+                if let navController = self.storyboard?.instantiateViewController(withIdentifier: "AlertNavigationControllerID") as? UINavigationController {
+                    if let viewController = navController.viewControllers[0] as? AlertTableViewController {
+                        viewController.alert = alert
+                        navController.modalPresentationStyle = .fullScreen
+                        self.present(navController, animated: true, completion: nil)
+                    }
+                }
+                
+            }
+        }
+        else if tag == 3{
+            if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
+                //            vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
+        else{
+            
         }
     }
     

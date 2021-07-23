@@ -19,7 +19,8 @@ class LandingViewController: UIViewController {
     @IBOutlet weak var devicesListHdrLbl: UILabel!
     @IBOutlet weak var statrVw: UIView!
     @IBOutlet weak var hubVw: UIView!
-    
+    var isSignupFlow = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -79,14 +80,16 @@ class LandingViewController: UIViewController {
     
     @IBAction func clickedOnStr(_ sender: UIButton) {
         let fliprStoryboard = UIStoryboard(name: "FliprDevice", bundle: nil)
-        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddFliprViewController")
+        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddFliprViewController") as! AddFliprViewController
+        viewController.isSignupFlow = self.isSignupFlow
         self.navigationController?.pushViewController(viewController, animated: true)
         
     }
     
     @IBAction func clickedOnHub(_ sender: UIButton) {
         let fliprStoryboard = UIStoryboard(name: "HUBElectrical", bundle: nil)
-        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController")
+        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController") as! ElectricalSetupViewController
+        viewController.isSignupFlow = self.isSignupFlow
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }

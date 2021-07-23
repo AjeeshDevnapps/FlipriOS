@@ -160,7 +160,8 @@ extension FliprSplashViewController{
     
     func presentLandingController(animated:Bool) {
         let hubStoryboard = UIStoryboard(name: "HUB", bundle: nil)
-        let viewController = hubStoryboard.instantiateViewController(withIdentifier: "LandingViewControllerID")
+        let viewController = hubStoryboard.instantiateViewController(withIdentifier: "LandingViewControllerID") as! LandingViewController
+        viewController.isSignupFlow = true
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false

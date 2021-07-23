@@ -24,6 +24,7 @@ class AddFliprViewController: BaseViewController {
     var serialKey:String = ""
     var fromMenu = false
     var isPresent = false
+    var isSignupFlow = false
 
 
     override func viewDidLoad() {
@@ -91,18 +92,42 @@ class AddFliprViewController: BaseViewController {
         if let fliprListVC = self.storyboard?.instantiateViewController(withIdentifier: "FliprListViewController") as? FliprListViewController{
             fliprListVC.serialKey = serialKey
             fliprListVC.flipType = "Flipr"
+            fliprListVC.isSignupFlow = isSignupFlow
             self.navigationController?.pushViewController(fliprListVC)
         }
     }
     
     override func backButtonTapped() {
-        if fromMenu {
-            BLEManager.shared.centralManager.stopScan()
-            dismiss(animated: true, completion: nil)
+        BLEManager.shared.centralManager.stopScan()
+        if isSignupFlow {
+            var isPoped = false
+            for controller in self.navigationController!.viewControllers as Array {
+                if controller.isKind(of: WelcomeViewController.self) {
+                    isPoped = true
+                    self.navigationController!.popToViewController(controller, animated: true)
+                    break
+                }
+            }
+//            for controller in self.navigationController!.viewControllers as Array {
+//                if controller.isKind(of: EducationScreenContainerViewController.self) {
+//                    isPoped = true
+//                    self.navigationController!.popToViewController(controller, animated: true)
+//                    break
+//                }
+//            }
+            if isPoped { return }
+            
+            for controller in self.navigationController!.viewControllers as Array {
+                if controller.isKind(of: LandingViewController.self) {
+                    isPoped = true
+                    self.navigationController!.popToViewController(controller, animated: true)
+                    break
+                }
+            }
+            if isPoped { return }
+            self.navigationController?.popViewController(animated: true)
         } else {
-            User.logout()
-            BLEManager.shared.centralManager.stopScan()
-            self.navigationController?.popToRootViewController(animated: true)
+            dismiss(animated: true, completion: nil)
         }
     }
     

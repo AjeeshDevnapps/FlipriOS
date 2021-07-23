@@ -15,7 +15,7 @@ class SignUpProfileController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTF: CustomTextField!
     @IBOutlet weak var passwordLbl: UILabel!
     @IBOutlet weak var submitButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
@@ -90,6 +90,7 @@ class SignUpProfileController: UIViewController, UITextFieldDelegate {
             self.view.hideStateView()
             if error == nil {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
+                vc.isSignupFlow = true
                 self.navigationController?.pushViewController(vc)
             } else {
                 self.showError(title: "Error", message: error?.localizedDescription)
