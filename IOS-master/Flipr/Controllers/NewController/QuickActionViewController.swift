@@ -130,6 +130,8 @@ class QuickActionViewController: UIViewController {
     }
 
     @IBAction func expertModeButtonClicked(){
+        self.newStripTestButtonClicked()
+        return
         let tmpSb = UIStoryboard.init(name: "Main", bundle: nil)
         if let navigationController = tmpSb.instantiateViewController(withIdentifier: "SettingsNavingation") as? UINavigationController {
             if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertModeViewController") as? ExpertModeViewController {

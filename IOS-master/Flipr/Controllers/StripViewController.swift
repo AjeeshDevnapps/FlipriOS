@@ -33,6 +33,9 @@ class StripViewController: UIViewController {
     
     let version2Colors = ["255eae","305dad","3b5cad","465aac","5259ab","5d58aa","6856a9","7455a8","7f53a6","8a51a5","fbf3c2","e8efc3","d5eac4","c4e5c5","b1e1c6","9fdcc7","8dd8c8","7bd4ca","69d0ca","57cccb","eaeebe","dedcbd","d2cbbb","c7b9b8","bca7b6","b096b3","a684b0","9c73ac","9362a9","8a51a5","e1b33a","e3a73f","e69c43","e99049","eb844c","ee7650","f26954","f45c57","f84e59","f83e5b","c5d56c","b8c665","abb85d","9eab56","7da65f","5ba067","3d9b70","2b7c6a","1d6163","114858","dbc251","e6a054","f07955","f85055","f84d6a","f84b7e","f64893","cd4092","a53891","7d3190"]
     
+    let version2Colors2 = ["255eae","255eae","255eae","255eae","255eae","255eae","255eae","255eae","255eae","255eae","fbf3c2","e8efc3","d5eac4","c4e5c5","b1e1c6","9fdcc7","8dd8c8","7bd4ca","69d0ca","57cccb","eaeebe","dedcbd","d2cbbb","c7b9b8","bca7b6","b096b3","a684b0","9c73ac","9362a9","8a51a5","e1b33a","e3a73f","e69c43","e99049","eb844c","ee7650","f26954","f45c57","f84e59","f83e5b","c5d56c","b8c665","abb85d","9eab56","7da65f","5ba067","3d9b70","2b7c6a","1d6163","114858","dbc251","e6a054","f07955","f85055","f84d6a","f84b7e","f64893","cd4092","a53891","7d3190"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))

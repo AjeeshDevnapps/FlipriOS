@@ -243,7 +243,7 @@ class DashboardViewController: UIViewController {
        // shareButton.setTitle("share".localized, for: .normal)
         airLabel.text = "air".localized
         airLabelHubTab.text = "air".localized
-        hubTabAirLabel.text = "air".localized
+        hubTabAirLabel.text = "water".localized
 
         waterLabel.text = "water".localized
         alertCheckLabel.text = "Water correction in progress".localized
@@ -1431,7 +1431,6 @@ class DashboardViewController: UIViewController {
                             
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
                             self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
-                            self.hubTabAirValLabel.text = String(format: "%.0f", temperature) + "°"
 
                         }
                         if let icon = currently["icon"] as? String {
@@ -1619,6 +1618,10 @@ class DashboardViewController: UIViewController {
         self.alert2Button.isHidden = true
         self.alert3Button.isHidden = true
         self.alert4Button.isHidden = true
+        
+        if subscriptionButton.tag == 2 {
+            self.hideBottomAlertButton()
+        }
         /*
         if let module = Module.currentModule {
             if !module.isSubscriptionValid {
@@ -1758,7 +1761,6 @@ class DashboardViewController: UIViewController {
                             
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
                             self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
-                            self.hubTabAirValLabel.text = String(format: "%.0f", temperature) + "°"
 
                             
                             if let forecastTemperature = weather["NextHourTemperature"] as? Double {
@@ -1950,7 +1952,6 @@ class DashboardViewController: UIViewController {
                             
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
                             self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
-                            self.hubTabAirValLabel.text = String(format: "%.0f", temperature) + "°"
 
                             
                             if let forecastTemperature = weather["NextHourTemperature"] as? Double {
@@ -2223,7 +2224,7 @@ class DashboardViewController: UIViewController {
                             self.waterTemperatureLabel.layer.add(textAnimation, forKey: "changeWaterTempratureTransition")
                             
                             self.waterTemperatureLabel.text = String(format: "%.0f", temp) + "°"
-                            
+                            self.hubTabAirValLabel.text = String(format: "%.0f", temp) + "°"
                             Module.currentModule?.rawWaterTemperature = String(format: "%.2f", temp) + "°"
                             
                         }
@@ -2696,6 +2697,8 @@ class DashboardViewController: UIViewController {
     
     func hideFliprData() {
         waterTemperatureLabel.text = "  "
+        self.hubTabAirValLabel.text = "  "
+
         pHValueCircle.removeFromSuperlayer()
         pHView.alpha = 0
         orpView.alpha = 0

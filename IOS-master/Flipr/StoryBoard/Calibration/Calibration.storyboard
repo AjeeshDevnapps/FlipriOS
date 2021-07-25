@@ -45,7 +45,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Unordered List" translatesAutoresizingMaskIntoConstraints="NO" id="1ue-Dd-cPU">
-                                <rect key="frame" x="0.0" y="488" width="414" height="192"/>
+                                <rect key="frame" x="0.0" y="488" width="414" height="240"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Alert Neutral" translatesAutoresizingMaskIntoConstraints="NO" id="sR4-pW-5dp">
                                 <rect key="frame" x="0.0" y="408" width="414" height="56"/>
@@ -105,24 +105,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J29-ks-Vuj">
-                                <rect key="frame" x="0.0" y="318" width="414" height="260"/>
+                                <rect key="frame" x="0.0" y="298" width="414" height="300"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calibration en cours" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDc-7i-bAt">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calibrage en cours" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDc-7i-bAt">
                                         <rect key="frame" x="20" y="20" width="374" height="38.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                         <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91N-pJ-RXr">
-                                        <rect key="frame" x="20" y="74.5" width="374" height="64.5"/>
-                                        <string key="text">Veuillez patienter à proximité de votre Flipr.
-La calibration prend généralement quelques secondes.</string>
+                                        <rect key="frame" x="20" y="74.5" width="374" height="86"/>
+                                        <string key="text">Cette opération prend environs 2 minutes. Veuillez rester à proximité immédiate de votre téléphone et de l’appareil Flipr. Maintenez l’application ouverte et active</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ql-jt-17a">
-                                        <rect key="frame" x="167" y="164" width="80" height="80"/>
+                                        <rect key="frame" x="167" y="200.5" width="80" height="80"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="APe-Qp-oOK"/>
@@ -132,12 +131,12 @@ La calibration prend généralement quelques secondes.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="5Ql-jt-17a" firstAttribute="top" secondItem="91N-pJ-RXr" secondAttribute="bottom" constant="25" id="5gB-7Y-Qm0"/>
+                                    <constraint firstItem="5Ql-jt-17a" firstAttribute="top" secondItem="91N-pJ-RXr" secondAttribute="bottom" constant="40" id="5gB-7Y-Qm0"/>
                                     <constraint firstItem="91N-pJ-RXr" firstAttribute="centerX" secondItem="J29-ks-Vuj" secondAttribute="centerX" id="6X6-cf-ybe"/>
                                     <constraint firstAttribute="trailing" secondItem="91N-pJ-RXr" secondAttribute="trailing" constant="20" id="907-8Z-TvE"/>
                                     <constraint firstAttribute="trailing" secondItem="xDc-7i-bAt" secondAttribute="trailing" constant="20" id="MAZ-oU-bKF"/>
                                     <constraint firstItem="xDc-7i-bAt" firstAttribute="centerX" secondItem="J29-ks-Vuj" secondAttribute="centerX" id="MZb-iA-UaR"/>
-                                    <constraint firstAttribute="height" constant="260" id="Phh-vb-nm8"/>
+                                    <constraint firstAttribute="height" constant="300" id="Phh-vb-nm8"/>
                                     <constraint firstItem="5Ql-jt-17a" firstAttribute="centerX" secondItem="J29-ks-Vuj" secondAttribute="centerX" id="RMG-Mk-myt"/>
                                     <constraint firstItem="xDc-7i-bAt" firstAttribute="leading" secondItem="J29-ks-Vuj" secondAttribute="leading" constant="20" id="caC-uI-QKQ"/>
                                     <constraint firstItem="xDc-7i-bAt" firstAttribute="top" secondItem="J29-ks-Vuj" secondAttribute="top" constant="20" symbolic="YES" id="kBh-4f-gcB"/>
@@ -572,7 +571,7 @@ La calibration prend généralement quelques secondes.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="afn-xQ-fmI">
-                                        <rect key="frame" x="16" y="368" width="382" height="160.5"/>
+                                        <rect key="frame" x="16" y="387" width="382" height="122.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check-circle" translatesAutoresizingMaskIntoConstraints="NO" id="p4e-7V-RF7">
                                                 <rect key="frame" x="167.5" y="0.0" width="47" height="47"/>
@@ -581,8 +580,8 @@ La calibration prend généralement quelques secondes.</string>
                                                     <constraint firstAttribute="width" constant="47" id="sKY-64-LYa"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calibration Chlore réussie" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYj-FA-GMp">
-                                                <rect key="frame" x="84" y="84" width="214.5" height="76.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calibration pH4 réussie !" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYj-FA-GMp">
+                                                <rect key="frame" x="7.5" y="84" width="367.5" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                 <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -637,20 +636,20 @@ La calibration prend généralement quelques secondes.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="mQJ-A8-k8b">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="832.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="887.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vhj-nN-QhJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="230"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="285"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votre dernière bandelette" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dz-9H-697">
-                                                        <rect key="frame" x="16" y="48" width="382" height="48"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contrôle bandelette" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dz-9H-697">
+                                                        <rect key="frame" x="16" y="48" width="382" height="38.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                         <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gi4-a7-igg">
-                                                        <rect key="frame" x="16" y="112" width="382" height="86"/>
-                                                        <string key="text">Plongez la bandelette de test fournie dans votre piscine (mi-bras, 2 sec). Ensuite, appuyer sur les cases ci-dessous pour reportez les bonnes couleurs</string>
+                                                        <rect key="frame" x="16" y="102.5" width="382" height="150.5"/>
+                                                        <string key="text">Ce test permet de vérifier que les premières mesures de Flipr sont en adéquation avec la qualité de votre eau. Saisissez la languette fournie sans toucher les carrés colorés, puis plongez-la dans l’eau de votre bassin à mi-bras pendant 2 secondes. Reportez ensuite les couleurs obtenues, ligne par ligne.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -681,7 +680,7 @@ La calibration prend généralement quelques secondes.</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NhK-bj-SbC">
-                                                <rect key="frame" x="0.0" y="230" width="414" height="58"/>
+                                                <rect key="frame" x="0.0" y="285" width="414" height="58"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="QD3-D2-dxi">
                                                         <rect key="frame" x="16" y="17" width="24" height="24"/>
@@ -708,7 +707,7 @@ La calibration prend généralement quelques secondes.</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTV-48-Obd">
-                                                <rect key="frame" x="0.0" y="288" width="414" height="398.5"/>
+                                                <rect key="frame" x="0.0" y="343" width="414" height="398.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ji4-G1-dr9" userLabel="Ligne 1">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="78"/>
@@ -1846,7 +1845,7 @@ La calibration prend généralement quelques secondes.</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XrV-wP-XYG">
-                                                <rect key="frame" x="0.0" y="686.5" width="414" height="146"/>
+                                                <rect key="frame" x="0.0" y="741.5" width="414" height="146"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ka-QJ-nOF">
                                                         <rect key="frame" x="16" y="32" width="382" height="50"/>
@@ -1963,14 +1962,16 @@ La calibration prend généralement quelques secondes.</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5fP-5u-24G">
                                                 <rect key="frame" x="0.0" y="414.5" width="414" height="309.5"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Unordered List-3" translatesAutoresizingMaskIntoConstraints="NO" id="0lG-FX-xMf">
-                                                        <rect key="frame" x="0.0" y="104" width="265.5" height="205.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Unordered List-3" translatesAutoresizingMaskIntoConstraints="NO" id="0lG-FX-xMf">
+                                                        <rect key="frame" x="-30" y="104" width="444" height="205.5"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstItem="0lG-FX-xMf" firstAttribute="leading" secondItem="5fP-5u-24G" secondAttribute="leading" constant="-30" id="Cvc-rv-N71"/>
                                                     <constraint firstAttribute="bottom" secondItem="0lG-FX-xMf" secondAttribute="bottom" id="S9H-Jy-tyC"/>
                                                     <constraint firstItem="0lG-FX-xMf" firstAttribute="top" secondItem="5fP-5u-24G" secondAttribute="top" constant="104" id="Uu9-EW-wgv"/>
+                                                    <constraint firstAttribute="trailing" secondItem="0lG-FX-xMf" secondAttribute="trailing" id="VUu-mj-0H8"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gLh-i4-Gag">
@@ -2038,9 +2039,9 @@ La calibration prend généralement quelques secondes.</string>
     <resources>
         <image name="Alert Neutral" width="374" height="56"/>
         <image name="Group 127" width="165" height="266"/>
-        <image name="Unordered List" width="374" height="192"/>
+        <image name="Unordered List" width="374" height="240"/>
         <image name="Unordered List-2" width="374" height="192"/>
-        <image name="Unordered List-3" width="375" height="112"/>
+        <image name="Unordered List-3" width="375" height="199"/>
         <image name="Video" width="360" height="224"/>
         <image name="Video-2" width="360" height="224"/>
         <image name="arrow_back-1" width="25" height="25"/>
