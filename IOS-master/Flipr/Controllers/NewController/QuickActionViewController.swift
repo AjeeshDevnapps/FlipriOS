@@ -71,7 +71,7 @@ class QuickActionViewController: UIViewController {
             triggerContainerView.alpha = 1.0
         }
         
-//        stripTestLbl.text  = "New strip test".localized
+        stripTestLbl.text  = "New strip test".localized
 //
 //        triggerContainerView.layer.cornerRadius = 15.0
 //        triggerContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
@@ -99,7 +99,8 @@ class QuickActionViewController: UIViewController {
     @IBAction func addHubButtonClicked(){
     
         let fliprStoryboard = UIStoryboard(name: "HUBElectrical", bundle: nil)
-        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController")
+        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController") as! ElectricalSetupViewController
+        viewController.isPresentView = true
         let navigationVC = UINavigationController.init(rootViewController: viewController)
         self.present(navigationVC, animated: true)
     }
@@ -130,8 +131,8 @@ class QuickActionViewController: UIViewController {
     }
 
     @IBAction func expertModeButtonClicked(){
-        self.newStripTestButtonClicked()
-        return
+//        self.newStripTestButtonClicked()
+//        return
         let tmpSb = UIStoryboard.init(name: "Main", bundle: nil)
         if let navigationController = tmpSb.instantiateViewController(withIdentifier: "SettingsNavingation") as? UINavigationController {
             if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertModeViewController") as? ExpertModeViewController {
@@ -185,8 +186,10 @@ class QuickActionViewController: UIViewController {
         let alert = UIAlertController(title: "Strip test".localized, message:"Are you sure you want to do a new strip test?".localized, preferredStyle:.alert)
         alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
-            if let viewController = mainSb.instantiateViewController(withIdentifier: "StripViewControllerID") as? StripViewController {
+            let sb:UIStoryboard = UIStoryboard.init(name: "Calibration", bundle: nil)
+            if let viewController = sb.instantiateViewController(withIdentifier: "StripViewControllerID") as? StripViewController {
                 viewController.recalibration = true
+                viewController.isPresentView = true
 //                viewController.modalPresentationStyle = .fullScreen
 //                self.present(viewController, animated: true, completion: nil)
 //                let navigationController = LightNavigationViewController.init(rootViewController: viewController)
@@ -215,8 +218,9 @@ class QuickActionViewController: UIViewController {
 
    
     func showCalibrationView(){
+        
         let sb = UIStoryboard(name: "Calibration", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
+        let vc = sb.instantiateViewController(withIdentifier: "CalibrationPh7IntroViewController") as! CalibrationPh7IntroViewController
         vc.isPresentedFlow = true
         vc.recalibration = true
         let navigationController = UINavigationController.init(rootViewController: vc)

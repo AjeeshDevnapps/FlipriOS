@@ -23,6 +23,8 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
     var isHub = false
     var equipmentCode:String!
     var fliprAddingError = false
+    var isSignupFlow = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

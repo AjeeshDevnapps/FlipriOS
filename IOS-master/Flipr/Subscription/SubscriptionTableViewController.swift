@@ -175,7 +175,7 @@ class SubscriptionTableViewController: UITableViewController {
         
         monthLabel.text = "/" + "month".localized
         
-        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.tintColor = .white
@@ -217,6 +217,31 @@ class SubscriptionTableViewController: UITableViewController {
                                                selector: #selector(handleRestoreFailed(notification:)),
                                                name: SubscriptionService.restoreFAiledNotification,
                                                object: nil)
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController!.view.backgroundColor = UIColor.clear
+        }
+
+
+
+    override func viewDidDisappear(_ animated: Bool) {
+        self.navigationController!.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+
+        }
+    
+    func customNavigationBar(){
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
     }
 
     @IBAction func cancelButonAction(_ sender: Any) {

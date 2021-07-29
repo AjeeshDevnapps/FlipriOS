@@ -60,7 +60,8 @@ class FliprListViewController: BaseViewController {
             if isPoped { return }
             self.navigationController?.popToRootViewController(animated: true)
         }else{
-            self.navigationController?.popViewController()
+            self.dismiss(animated: true, completion: nil)
+//            self.navigationController?.popViewController()
         }
     }
 
@@ -69,6 +70,7 @@ class FliprListViewController: BaseViewController {
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "KeyEnterViewController") as? KeyEnterViewController{
             vc.serialKey = serialKey
             vc.flipType = flipType
+            vc.isSignupFlow =  self.isSignupFlow
             self.navigationController?.pushViewController(vc)
         }
     }
@@ -79,6 +81,7 @@ class FliprListViewController: BaseViewController {
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "KeyEnterViewController") as? KeyEnterViewController{
             vc.serialKey = serialKey
             vc.flipType = flipType
+            vc.isSignupFlow =  self.isSignupFlow
             self.navigationController?.pushViewController(vc)
         }
     }

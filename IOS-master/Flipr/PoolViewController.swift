@@ -182,22 +182,32 @@ class PoolViewController: UITableViewController {
             if error != nil {
                 self.showError(title: "Error".localized, message: error?.localizedDescription)
                 self.view.hideStateView()
+                self.showIntialDashBoard()
             }
             else {
-                UserDefaults.standard.set(Date(), forKey:"FirstMeasureStartDate")
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
-                dashboard.modalTransitionStyle = .flipHorizontal
-                dashboard.modalPresentationStyle = .fullScreen
-                self.present(dashboard, animated: true, completion: {
-                    self.navigationController?.popToRootViewController(animated: false)
-                })
+                self.showIntialDashBoard()
             }
         }
     }
     
+    
+    func showIntialDashBoard(){
+        UserDefaults.standard.set(Date(), forKey:"FirstMeasureStartDate")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+        dashboard.modalTransitionStyle = .flipHorizontal
+        dashboard.modalPresentationStyle = .fullScreen
+        self.present(dashboard, animated: true, completion: {
+            self.navigationController?.popToRootViewController(animated: false)
+        })
+    }
+    
     @IBAction func cancelButtonAction(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        if self.isInitialPoolSetup {
+            self.showDashboard()
+        }else{
+            dismiss(animated: true, completion: nil)
+        }
     }
 
     @IBAction func saveButtonAction(_ sender: Any) {
@@ -241,6 +251,9 @@ class PoolViewController: UITableViewController {
                     hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                     hud?.textLabel.text = error?.localizedDescription
                     hud?.dismiss(afterDelay: 3)
+                    if self.isInitialPoolSetup {
+                        self.showDashboard()
+                    }
                 } else {
                     NotificationCenter.default.post(name: FliprLocationDidChange, object: nil)
                     hud?.indicatorView = JGProgressHUDSuccessIndicatorView()

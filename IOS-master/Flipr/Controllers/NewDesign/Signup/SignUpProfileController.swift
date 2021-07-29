@@ -81,12 +81,18 @@ class SignUpProfileController: UIViewController, UITextFieldDelegate {
         guard let firstName = firstNameTF.text,
               let lastName = lastNameTF.text,
               let password = passwordTF.text else { return }
-        guard password.isAlphaNumeric else {
-            self.showAlert(title: "Check password", message: "Password should be alphanumeric")
+//        guard password.isAlphaNumeric else {
+//            self.showAlert(title: "Check password", message: "Password should be alphanumeric")
+//            return
+//        }
+        let trimmed = password.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.count < 6 {
+            self.showError(title: "Error".localized, message: "The password must be at least 6 characters long".localized)
             return
         }
-        self.view.showEmptyStateViewLoading(title: nil, message: nil)
-        User.updateUserProfile(lastName: lastName, firstName: firstName, password: password) { error in
+        
+                self.view.showEmptyStateViewLoading(title: nil, message: nil)
+        User.updateUserProfile(lastName: lastName, firstName: firstName, password: trimmed) { error in
             self.view.hideStateView()
             if error == nil {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController

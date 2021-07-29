@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jCW-c6-59D">
-                                <rect key="frame" x="0.0" y="44" width="414" height="133"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="160"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Étape 6" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijh-Qf-2NB">
                                         <rect key="frame" x="12" y="60" width="390" height="42"/>
@@ -30,7 +30,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rétablissez le courant." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqt-ug-BKb">
-                                        <rect key="frame" x="12" y="111" width="390" height="22"/>
+                                        <rect key="frame" x="12" y="111" width="390" height="49"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" red="0.2901960784" green="0.33333333329999998" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -54,7 +54,7 @@
                                     <constraint firstItem="pqt-ug-BKb" firstAttribute="trailing" secondItem="ijh-Qf-2NB" secondAttribute="trailing" id="7ak-D1-mFg"/>
                                     <constraint firstItem="ZiG-SN-2DX" firstAttribute="leading" secondItem="ijh-Qf-2NB" secondAttribute="leading" id="9eg-qu-9Ar"/>
                                     <constraint firstItem="pqt-ug-BKb" firstAttribute="top" secondItem="ijh-Qf-2NB" secondAttribute="bottom" constant="9" id="G5Q-hv-J08"/>
-                                    <constraint firstAttribute="height" constant="133" id="Hm7-oz-QDt"/>
+                                    <constraint firstAttribute="height" constant="160" id="Hm7-oz-QDt"/>
                                     <constraint firstItem="ijh-Qf-2NB" firstAttribute="leading" secondItem="jCW-c6-59D" secondAttribute="leading" constant="12" id="Mba-QQ-LiG"/>
                                     <constraint firstAttribute="bottom" secondItem="pqt-ug-BKb" secondAttribute="bottom" id="eSi-Cj-fhi"/>
                                     <constraint firstItem="ZiG-SN-2DX" firstAttribute="top" secondItem="jCW-c6-59D" secondAttribute="top" id="fKK-Cp-FNn"/>
@@ -64,7 +64,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ilustration-Animation-3" translatesAutoresizingMaskIntoConstraints="NO" id="Mqx-gl-z2g">
-                                <rect key="frame" x="12" y="200" width="390" height="590"/>
+                                <rect key="frame" x="12" y="227" width="390" height="563"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ya-e0-6Hj">
@@ -77,7 +77,6 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Courant rétabli !"/>
                                 <connections>
-                                    <action selector="nextButtonAction:" destination="zgN-53-tgo" eventType="touchUpInside" id="CcY-vD-e2S"/>
                                     <action selector="submitAction:" destination="k7W-bz-CcP" eventType="touchUpInside" id="q5V-Ha-hvg"/>
                                 </connections>
                             </button>
@@ -604,7 +603,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nud-cK-ZRO">
-                                <rect key="frame" x="0.0" y="44" width="414" height="253"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="234"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Étape 1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fD-wj-cBf">
                                         <rect key="frame" x="16" y="60" width="382" height="38.5"/>
@@ -612,8 +611,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coupez le courant de l'équipement de votre {Equipment_Name}." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TY9-xD-nbC">
-                                        <rect key="frame" x="16" y="107.5" width="382" height="38.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coupez le courant de votre installation électrique" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TY9-xD-nbC">
+                                        <rect key="frame" x="16" y="107.5" width="382" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -631,7 +630,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KiQ-Hz-VAJ">
-                                        <rect key="frame" x="16" y="170" width="382" height="56"/>
+                                        <rect key="frame" x="16" y="151" width="382" height="56"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="aWK-GX-RfF">
                                                 <rect key="frame" x="9" y="13.5" width="30" height="29"/>
@@ -683,7 +682,7 @@
                                 </constraints>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Courant &lt;90V" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7e-ik-8WD">
-                                <rect key="frame" x="299" y="200" width="99" height="0.0"/>
+                                <rect key="frame" x="299" y="181" width="99" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="mvb-Xv-N1N"/>
                                 </constraints>
@@ -692,7 +691,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAt-Yd-3bp">
-                                <rect key="frame" x="16" y="297" width="382" height="479"/>
+                                <rect key="frame" x="16" y="278" width="382" height="498"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QE9-Wo-DEb">
@@ -1004,7 +1003,7 @@
                                                                         <constraint firstAttribute="width" constant="25" id="aBT-vy-egu"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tout sauf blue, jaune et vert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5g7-dm-fFq">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tout sauf bleu, jaune et vert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5g7-dm-fFq">
                                                                     <rect key="frame" x="57" y="8.5" width="158.5" height="13"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <nil key="textColor"/>

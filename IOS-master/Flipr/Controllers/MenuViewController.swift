@@ -111,7 +111,7 @@ class MenuViewController: UITableViewController {
                 subscriptionImageView2.isHidden = true
             } else {
                 subscriptionImageView.isHidden = true
-                subscriptionImageView2.isHidden = false
+                subscriptionImageView2.isHidden = true
             }
         }
         myEquipmentsLabel.text = "My equipments".localized
@@ -471,13 +471,18 @@ class MenuViewController: UITableViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "predict" {
             if let module = Module.currentModule {
-                if !module.isSubscriptionValid {
-                    if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
-                        vc.modalPresentationStyle = .fullScreen
-                        self.present(vc, animated: true, completion: nil)
+//                if !module.isSubscriptionValid {
+                    if let  nav = self.storyboard?.instantiateViewController(withIdentifier: "FilprPredictNav") {
+                        nav.modalPresentationStyle = .fullScreen
+                        self.present(nav, animated: true, completion: nil)
                     }
+                    
+//                    if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
+//                        vc.modalPresentationStyle = .fullScreen
+//                        self.present(vc, animated: true, completion: nil)
+//                    }
                     return false
-                }
+//                }
             }
         }
         return true

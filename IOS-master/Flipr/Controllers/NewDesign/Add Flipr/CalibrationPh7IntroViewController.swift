@@ -13,6 +13,7 @@ class CalibrationPh7IntroViewController: BaseViewController {
     @IBOutlet weak var submitButton: UIButton!
     var recalibration = false
     @IBOutlet weak var titlLbl: UILabel!
+    var isPresentedFlow = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,14 @@ class CalibrationPh7IntroViewController: BaseViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Ph7CalibrationViewController") as! Ph7CalibrationViewController
         vc.recalibration = self.recalibration
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func backButtonTapped() {
+        if self.isPresentedFlow{
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func playVideoButtonAction(_ sender: Any) {

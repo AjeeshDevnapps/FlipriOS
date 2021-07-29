@@ -22,6 +22,8 @@ class ChlorineCalibrationViewController: BaseViewController {
     var checkCalibrationStruckTimer : Timer?
     var isCalibrationStrucked = false
     
+    var isShowingStripView = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.calibrate()
@@ -250,9 +252,13 @@ class ChlorineCalibrationViewController: BaseViewController {
     
     
     func showStripView(){
+        if isShowingStripView{
+            return
+        }
+        isShowingStripView = true
         self.successView.isHidden = false
         self.view.bringSubviewToFront( self.successView)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "StripViewControllerID") as! StripViewController
             vc.recalibration = self.recalibration
             self.navigationController?.pushViewController(vc, animated: true)

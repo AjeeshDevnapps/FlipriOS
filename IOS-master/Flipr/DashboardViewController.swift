@@ -243,8 +243,8 @@ class DashboardViewController: UIViewController {
        // shareButton.setTitle("share".localized, for: .normal)
         airLabel.text = "air".localized
         airLabelHubTab.text = "air".localized
+        
         hubTabAirLabel.text = "water".localized
-
         waterLabel.text = "water".localized
         alertCheckLabel.text = "Water correction in progress".localized
         subscriptionLabel.text = "Activate all the features!\n7 days free trial".localized
@@ -1256,7 +1256,7 @@ class DashboardViewController: UIViewController {
             
             if let mode = Pool.currentPool?.mode {
                 if mode.id == 2 {
-                    self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "Passive Wintering".localized, message: "You have placed your pool in passive wintering : Flipr does not display datas. To view the datas, please change the status of your pool and follow the advices of impoundment".localized)
+                    self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "Passive Wintering".localized, message: "You have placed your pool in passive wintering : Flipr does not display datas. To view the datas, please change the status of your pool and follow the advices of impoundment".localized, bottomAlignment:0)
                     return
                 } else {
                     self.view.hideStateView()
@@ -1298,7 +1298,7 @@ class DashboardViewController: UIViewController {
                     
                     
                 } else {
-                    self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "The first analysis is in progress!".localized, message: "Still a little patience, you can leave the application and come back in a few minutes...".localized)
+                    self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "The first analysis is in progress!".localized, message: "Still a little patience, you can leave the application and come back in a few minutes...".localized, bottomAlignment: 0)
                     self.perform(#selector(self.refresh), with: nil, afterDelay: 160)
                 }
             }
@@ -1316,7 +1316,7 @@ class DashboardViewController: UIViewController {
                     }
                 }
                 self.perform(#selector(self.refresh), with: nil, afterDelay: 160)
-                self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "Configuration du HUB en cours !".localized, message: message, buttonTitle: buttonTitle, buttonAction: {
+                self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "Configuration du HUB en cours !".localized, message: message, buttonTitle: buttonTitle,bottomAlignment:0, buttonAction: {
                     if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "PoolViewControllerID") {
                         viewController.modalPresentationStyle = .fullScreen
                         self.present(viewController, animated: true, completion: nil)
@@ -1332,7 +1332,7 @@ class DashboardViewController: UIViewController {
                     }
                 }
                 self.perform(#selector(self.refresh), with: nil, afterDelay: 160)
-                self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "The first analysis is in progress!".localized, message: message, buttonTitle: buttonTitle, buttonAction: {
+                self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "The first analysis is in progress!".localized, message: message, buttonTitle: buttonTitle, bottomAlignment:0,buttonAction: {
                     if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "PoolViewControllerID") {
                         viewController.modalPresentationStyle = .fullScreen
                         self.present(viewController, animated: true, completion: nil)
@@ -1642,6 +1642,7 @@ class DashboardViewController: UIViewController {
                     self.alertCheckView.isHidden = true
                 } else {
                     self.alertButton.isHidden = true
+                    self.showAlertButton()
 //                    self.alertCheckView.isHidden = false
                 }
 //                if let module = Module.currentModule {
@@ -1699,7 +1700,7 @@ class DashboardViewController: UIViewController {
             if noMainAlert && i == 0 {
                 if let module = Module.currentModule {
                     if module.isSubscriptionValid {
-                        self.showGoodMeasureButton()
+//                        self.showGoodMeasureButton()
                     }else{
                         
                     }
@@ -1708,7 +1709,7 @@ class DashboardViewController: UIViewController {
             else{
                 if let module = Module.currentModule {
                     if module.isSubscriptionValid {
-                        self.showAlertButton()
+//                        self.showAlertButton()
                     }else{
                         if self.lastMeasureDate != nil{
                             if self.lastMeasureDate!.timeIntervalSinceNow > -21600 {
@@ -1737,7 +1738,7 @@ class DashboardViewController: UIViewController {
                 if let error = response.result.error {
                     print("Update Flipr data did fail with error: \(error)")
                     
-                    self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "Refresh error".localized, message: error.localizedDescription, buttonTitle: "Retry".localized, buttonAction: {
+                    self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "Refresh error".localized, message: error.localizedDescription, buttonTitle: "Retry".localized,bottomAlignment:0, buttonAction: {
                         self.view.hideStateView()
                         self.updateFliprData()
                     })
@@ -1907,7 +1908,7 @@ class DashboardViewController: UIViewController {
 //                    self.showHubTabInfoView(hide: true)
                     print("Update Flipr data did fail with error: \(error)")
                     
-                    self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "Refresh error".localized, message: error.localizedDescription, buttonTitle: "Retry".localized, buttonAction: {
+                    self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "Refresh error".localized, message: error.localizedDescription, buttonTitle: "Retry".localized,bottomAlignment:0, buttonAction: {
                         self.view.hideStateView()
                         self.updateFliprData()
                     })
@@ -1915,6 +1916,14 @@ class DashboardViewController: UIViewController {
                 } else if let JSON = response.result.value as? [String:Any] {
                     self.showHubTabInfoView(hide: false)
                     print("JSON: \(JSON)")
+                    
+                    if let msg = JSON["Message"] as? String {
+                        if msg == "you don't have the privileges to perform this action"{
+                            self.userHasNoFlipr()
+                            self.showHubTabInfoView(hide: true)
+                            return
+                        }
+                    }
                     
                     if let forecast = JSON["HourlyForecast"] as? [[String:Any]] {
                         Pool.currentPool?.hourlyForecast = forecast.reversed()
@@ -2451,8 +2460,13 @@ class DashboardViewController: UIViewController {
                             if let module = Module.currentModule {
                                 if module.isSubscriptionValid == false {
 //                                    self.subscriptionView.alpha = 1
+                                    self.signalStrengthImageView.isHidden = false
+                                    self.signalStrengthImageView.image = UIImage(named: "Bluetooth icon")
+                                    self.signalStrengthLabel.isHidden = true
                                     self.showSubscriptionButton()
                                 } else {
+                                    self.signalStrengthLabel.isHidden = false
+                                    self.signalStrengthImageView.isHidden = false
 //                                    self.subscriptionView.alpha = 0
 //                                    self.subscriptionButton.isHidden = true
                                 }
@@ -2463,7 +2477,7 @@ class DashboardViewController: UIViewController {
                     } else {
                         
                         print("response.result.value: \(response.result.value)")
-                        self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "The first analysis is in progress!".localized, message: "Waiting for the first measure...".localized)
+                        self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "The first analysis is in progress!".localized, message: "Waiting for the first measure...".localized, bottomAlignment: 0)
                         
                         self.readBLEMeasure(completion: { (error) in
                             if error != nil {
@@ -2479,7 +2493,7 @@ class DashboardViewController: UIViewController {
                     
                 } else {
                     print("response.result.value: \(response.result.value)")
-                    self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "The first analysis is in progress!".localized, message: "Waiting for the first measure...".localized)
+                    self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "The first analysis is in progress!".localized, message: "Waiting for the first measure...".localized, bottomAlignment: 0)
                     
                     self.readBLEMeasure(completion: { (error) in
                         if error != nil {
@@ -2943,7 +2957,7 @@ class DashboardViewController: UIViewController {
         }
         else if tag == 3{
             if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
-                //            vc.modalPresentationStyle = .fullScreen
+                vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true, completion: nil)
             }
         }
@@ -3258,6 +3272,7 @@ extension DashboardViewController{
         Pool.currentPool?.getHUBS(completion: { (hubs, error) in
 //            self.view.hideStateView()
             if error != nil {
+                self.updateHubWaveForNoHubs()
                 self.showError(title: "Error".localized, message: error!.localizedDescription)
             } else if hubs != nil {
                 if hubs!.count > 0 {

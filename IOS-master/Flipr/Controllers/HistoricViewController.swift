@@ -824,6 +824,18 @@ class HistoricViewController: UIViewController, ChartViewDelegate, IAxisValueFor
         
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
+        if value < 0{
+            if days.count > 0{
+                if let date = formatter.date(from: days[0]) {
+                    formatter.dateFormat = "dd/MM"
+                    return formatter.string(from: date)
+                }
+                return days[Int(value)]
+            }else{
+                return ""
+            }
+          
+        }
         if let date = formatter.date(from: days[Int(value)]) {
             formatter.dateFormat = "dd/MM"
             return formatter.string(from: date)

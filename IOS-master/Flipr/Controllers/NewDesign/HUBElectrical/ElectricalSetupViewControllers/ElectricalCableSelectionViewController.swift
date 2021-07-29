@@ -163,7 +163,7 @@ class ElectricalCableCell: UITableViewCell {
         let boldAttrs = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: .bold)]
         let text = NSMutableAttributedString(string: "Tout sauf".localized, attributes: regularAttrs)
         text.append(NSAttributedString(string: " "))
-        text.append(NSAttributedString(string: "blue".localized, attributes: boldAttrs))
+        text.append(NSAttributedString(string: "bleu".localized, attributes: boldAttrs))
         text.append(NSAttributedString(string: ", "))
         text.append(NSAttributedString(string: "jaune".localized, attributes: boldAttrs))
         text.append(NSAttributedString(string: " "))

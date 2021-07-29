@@ -90,11 +90,11 @@ class ElectricalVideoViewController: BaseViewController {
             }
             if step == 3 {
                 urlString = "https://videoapp.goflipr.com/couper_cable.mp4"
-                titleLabel.text = "Step 3".localized()
+                titleLabel.text = "Étape 3".localized()
             }
             if step == 4 {
                 urlString = "https://videoapp.goflipr.com/denuder.mp4"
-                titleLabel.text = "Step 4".localized()
+                titleLabel.text = "Étape 4".localized()
 
             }
             if let url = URL(string: urlString) {
@@ -114,28 +114,29 @@ class ElectricalVideoViewController: BaseViewController {
     func setupText() {
         titleLabel.text = "Instructions"
         if step == 1 {
-            titleLabel.text = "Step 1".localized()
-            subtitleLabel.text = "Make sure the power to the selected equipment is turned off.".localized()
+            titleLabel.text = "Étape 1".localized()
+            subtitleLabel.text = "Coupez le courant de votre installation électrique".localized()
         }
         if step == 2 {
-            titleLabel.text = "Step 2".localized()
+            nextButton.setTitle("Suivant".localized, for: .normal)
+            titleLabel.text = "Étape 2".localized()
             subtitleLabel.text = "Locate the power supply to your equipment and follow it to the cabinet.".localized()
         }
         if step == 3 {
-            titleLabel.text = "Step 3".localized()
-            subtitleLabel.text = "Cut and strip the cable. Leave about 1cm of copper and 4cm of sheath.".localized()
+            titleLabel.text = "Étape 3".localized()
+            subtitleLabel.text = "Sectionnez le câble et dénudez la gaine extérieure (environ 5 cm).".localized()
         }
         if step == 4 {
-            titleLabel.text = "Step 4".localized()
-            subtitleLabel.text = "Locate the different colors.".localized()
+            titleLabel.text = "Étape 4".localized()
+            subtitleLabel.text = "Dénudez à présent les câbles intérieurs et laissez dépasser environ 1 cm de cuivre. Ensuite, repérez les différentes couleurs.".localized()
         }
         if step == 5 {
-            titleLabel.text = "Step 5".localized()
+            titleLabel.text = "Étape 5".localized()
             nextButton.setTitle("C’est fait !".localized, for: .normal)
             if cable4 {
                 subtitleLabel.text = "Connect the cables in the order shown, remember to connect the neutral (BLUE)".localized()
             } else {
-                subtitleLabel.text = "Connect the cables in the order shown".localized()
+                subtitleLabel.text = "Branchez les câbles dans l'ordre indiqué.".localized()
             }
             
         }

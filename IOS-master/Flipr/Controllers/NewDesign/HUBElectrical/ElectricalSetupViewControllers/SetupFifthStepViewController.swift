@@ -36,7 +36,9 @@ class SetupFifthStepViewController: BaseViewController {
         } else if step == 2 {
             titleTextLabel.text = "Étape 2".localized
             subtitleTextLabel.text = "Situez l'alimentation électrique de votre équipement et suivez-le jusqu'au coffret.".localized
-            submitButton.setTitle("Courant rétabli !".localized, for: .normal)
+//            submitButton.setTitle("Courant rétabli !".localized, for: .normal)
+            submitButton.setTitle("Suivant".localized, for: .normal)
+
             let image1 = UIImage(named: "animation1")!
             let image2 = UIImage(named: "animation2")!
             animationImageView.animationDuration = 1.0

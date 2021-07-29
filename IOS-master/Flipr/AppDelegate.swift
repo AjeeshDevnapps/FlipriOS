@@ -17,6 +17,7 @@ import StoreKit
 import SafariServices
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
@@ -53,12 +54,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
     
+    
     func customizeTheme() {
         
         self.window?.tintColor = K.Color.LightBlue
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.shadowImage = UIImage()
-        navigationBarAppearance.setBackgroundImage(UIImage(), for: .default)
+//        navigationBarAppearance.setBackgroundImage(UIImage(), for: .default)
         navigationBarAppearance.tintColor = K.Color.themeBlack
         navigationBarAppearance.barTintColor =  .white
         navigationBarAppearance.titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue:K.Color.DarkBlue])

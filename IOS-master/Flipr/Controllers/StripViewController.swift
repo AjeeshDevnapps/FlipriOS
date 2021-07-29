@@ -13,7 +13,8 @@ class StripViewController: UIViewController {
     let imageView = UIImageView(image: UIImage(named: "bkWaves.pdf"))
 
     var recalibration = false
-    
+    var isPresentView = false
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var warningLabel: UILabel!
@@ -28,12 +29,13 @@ class StripViewController: UIViewController {
     
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var doneButtonWidthConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var closeButton: UIButton!
+
     var strip = Strip()
     
-    let version2Colors = ["255eae","305dad","3b5cad","465aac","5259ab","5d58aa","6856a9","7455a8","7f53a6","8a51a5","fbf3c2","e8efc3","d5eac4","c4e5c5","b1e1c6","9fdcc7","8dd8c8","7bd4ca","69d0ca","57cccb","eaeebe","dedcbd","d2cbbb","c7b9b8","bca7b6","b096b3","a684b0","9c73ac","9362a9","8a51a5","e1b33a","e3a73f","e69c43","e99049","eb844c","ee7650","f26954","f45c57","f84e59","f83e5b","c5d56c","b8c665","abb85d","9eab56","7da65f","5ba067","3d9b70","2b7c6a","1d6163","114858","dbc251","e6a054","f07955","f85055","f84d6a","f84b7e","f64893","cd4092","a53891","7d3190"]
+    let version2Colors2 = ["255eae","305dad","3b5cad","465aac","5259ab","5d58aa","6856a9","7455a8","7f53a6","8a51a5","fbf3c2","e8efc3","d5eac4","c4e5c5","b1e1c6","9fdcc7","8dd8c8","7bd4ca","69d0ca","57cccb","eaeebe","dedcbd","d2cbbb","c7b9b8","bca7b6","b096b3","a684b0","9c73ac","9362a9","8a51a5","e1b33a","e3a73f","e69c43","e99049","eb844c","ee7650","f26954","f45c57","f84e59","f83e5b","c5d56c","b8c665","abb85d","9eab56","7da65f","5ba067","3d9b70","2b7c6a","1d6163","114858","dbc251","e6a054","f07955","f85055","f84d6a","f84b7e","f64893","cd4092","a53891","7d3190"]
     
-    let version2Colors2 = ["255eae","255eae","255eae","255eae","255eae","255eae","255eae","255eae","255eae","255eae","fbf3c2","e8efc3","d5eac4","c4e5c5","b1e1c6","9fdcc7","8dd8c8","7bd4ca","69d0ca","57cccb","eaeebe","dedcbd","d2cbbb","c7b9b8","bca7b6","b096b3","a684b0","9c73ac","9362a9","8a51a5","e1b33a","e3a73f","e69c43","e99049","eb844c","ee7650","f26954","f45c57","f84e59","f83e5b","c5d56c","b8c665","abb85d","9eab56","7da65f","5ba067","3d9b70","2b7c6a","1d6163","114858","dbc251","e6a054","f07955","f85055","f84d6a","f84b7e","f64893","cd4092","a53891","7d3190"]
+    let version2Colors = ["305DAA","3F5EA6","465DA4","5159A4","5B5AA5","5A59A4","6658A2","6E59A4","7955A6","8155A0","F9F1C6","E9ECC6","D8E7C7","C9E2C5","B8DDC8","AAD8C8","9CD4C9","8DD0C8","81CDC8","72C9C7","E8EBC0","E8EBC0","CECBC0","C4B8B7","B7A7B3","AA96B0","A184AC","9178A6","8D62A6","83559D","DBB154","DBA855","DA9E4F","E09253","DE8854","E17C5A","E4705C","DE685D","E85960","E54F5F","C6D376","BBC372","ADB569","9FA961","85A365","6A9D6B","55986F","407A69","2F605F","204655","D8C160","DCA05E","E07E5C","E75C5A","E75A6B","E6597E","E5578F","BD4D8F","99408D","73378B"]
     
     
     override func viewDidLoad() {
@@ -41,6 +43,7 @@ class StripViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))
         doneButton.roundCorner(corner: 12)
 //        addBackground()
+        /*
         if recalibration == true {
             useNewStripVersion()
         } else if let moduleVersion = Module.currentModule?.version {
@@ -48,9 +51,16 @@ class StripViewController: UIViewController {
                 useNewStripVersion()
             }
         }
+        */
+        useNewStripVersion()
+
+        if isPresentView {
+            self.closeButton.isHidden = false
+        }
         
         
-        titleLabel.text = "Your last strip".localized
+        
+        titleLabel.text = "Contrôle bandelette".localized
         messageLabel.text = "Grab the strip provided in the package, then dip it in mid-arm in your pool for 2 seconds. Then report the colors obtained below.".localized
         warningLabel.text = "The colorimetry varies according to the smartphone screens. For more precision, refer to the instructions supplied with the strip to determine the colors and refer to them above.".localized
         doneButton.setTitle("Validate!".localized, for: .normal)

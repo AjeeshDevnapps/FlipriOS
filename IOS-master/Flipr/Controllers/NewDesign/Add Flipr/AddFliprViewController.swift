@@ -144,6 +144,7 @@ class AddFliprViewController: BaseViewController {
     
     
     @IBAction func scanButtonAction(_ sender: Any) {
+        self.connectioButton.isHidden = true
         self.bluetoothAlertContainerView.isHidden = true
         self.scanningAlertContainerView.isHidden = false
         self.searchFlipr()
