@@ -154,10 +154,11 @@ class ElectricalCableCell: UITableViewCell {
         webViewButton.setTitle("I have a doubt".localized(), for: .normal)
         titleTextLabel.text = "Bravo !".localized
         subtitleTextLabel.text = "À présent, choisissez le schéma qui correspond à votre installation.".localized
-        cables2Button.setTitle("2 câbles".localized, for: .normal)
-        cables3Button.setTitle("3 câbles".localized, for: .normal)
-        cables4Button.setTitle("4 câbles".localized, for: .normal)
-        cables5Button.setTitle("5 câbles".localized, for: .normal)
+        let cableStr = "câbles".localized
+        cables2Button.setTitle("2 \(cableStr)", for: .normal)
+        cables3Button.setTitle("3 \(cableStr)", for: .normal)
+        cables4Button.setTitle("4 \(cableStr)", for: .normal)
+        cables5Button.setTitle("5 \(cableStr)", for: .normal)
         
         let regularAttrs = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]
         let boldAttrs = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: .bold)]

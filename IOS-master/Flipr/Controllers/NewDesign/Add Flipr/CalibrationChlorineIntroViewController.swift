@@ -11,7 +11,16 @@ import AVKit
 
 class CalibrationChlorineIntroViewController: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
+   
     @IBOutlet weak var titlLbl: UILabel!
+    
+    @IBOutlet weak var subTitleLbl: UILabel!
+    @IBOutlet weak var subTitleContainerView: UIView!
+
+    @IBOutlet weak var contentLine1Lbl: UILabel!
+    @IBOutlet weak var contentLine2Lbl: UILabel!
+    @IBOutlet weak var contentLine3Lbl: UILabel!
+    @IBOutlet weak var contentLine4Lbl: UILabel!
 
     var recalibration = false
 
@@ -21,7 +30,12 @@ class CalibrationChlorineIntroViewController: UIViewController {
         titleString.append(" Ph4")
         titlLbl.text  = titleString
         submitButton.roundCorner(corner: 12)
-
+        subTitleLbl.text = "La partie basse contient du liquide. Gardez Flipr à la verticale lors du dévissage.".localized
+        
+        contentLine1Lbl.text  = "Dévissez la partie basse du Flipr.Versez le liquide précédemment utilisé dans un récipient.".localized
+        contentLine2Lbl.text  = "Versez le contenu du flacon rouge dans le capuchon.".localized
+        contentLine3Lbl.text  = "Vissez le capuchon sur l’appareil.".localized
+        contentLine4Lbl.text  = "Cliquez sur le bouton \"Initialiser\".".localized
         // Do any additional setup after loading the view.
     }
     

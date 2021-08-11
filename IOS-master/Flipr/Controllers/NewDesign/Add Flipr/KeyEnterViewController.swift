@@ -15,6 +15,13 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
     @IBOutlet weak var otpTextField4: UITextField!
     @IBOutlet weak var otpTextField5: UITextField!
     @IBOutlet weak var submitButton: UIButton!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
+    @IBOutlet weak var serialTitleLabel: UILabel!
+
+    
+    
     let grayBorder = UIColor.init(hexString: "#E3E8EF").cgColor
     let blackBorder = UIColor.init(hexString: "#111729").cgColor
     var serialKey: String!
@@ -34,9 +41,17 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
     
     
     func setupUI(){
+        
+        titleLabel.text = "Renseignez la clé de sécurité de votre Flipr Start".localized
+        subTitleLabel.text = "La clé de sécurité à 5 chiffres (Key) se trouve à l'intérieur de la boîte de votre Flipr Start.".localized
+        serialTitleLabel.text = "Clé de sécurité (Key)".localized
+
+        
         submitButton.isUserInteractionEnabled = false
         if isHub{
             submitButton.setTitle("Connecter Flipr Hub".localized(), for: .normal)
+        }else{
+            submitButton.setTitle("Connecter Flipr Start".localized(), for: .normal)
         }
 
         otpTextField1.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)

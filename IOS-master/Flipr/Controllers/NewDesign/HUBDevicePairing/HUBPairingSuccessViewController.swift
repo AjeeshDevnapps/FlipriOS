@@ -20,7 +20,11 @@ class HUBPairingSuccessViewController: BaseViewController {
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
         addAnotherButton.layer.cornerRadius = 12
         configurationButton.layer.cornerRadius = 12
-        
+        titleLabel.text = "Flipr Hub Connecté".localized
+        subtitleLabel.text = "Pompe à filtration".localized
+        configurationButton.setTitle("Configuration".localized, for: .normal)
+        addAnotherButton.setTitle("Ajouter un autre appareil".localized, for: .normal)
+
         if scrollView.contentSize.height < scrollView.frame.height {
            scrollView.isScrollEnabled = false;
         } else {

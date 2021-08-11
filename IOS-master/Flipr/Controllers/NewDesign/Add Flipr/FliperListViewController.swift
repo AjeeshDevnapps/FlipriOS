@@ -12,6 +12,8 @@ class FliprListViewController: BaseViewController {
     @IBOutlet weak var fliprDetailsContainerView: UIView!
     @IBOutlet weak var serialKeyLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var serialTitleLabel: UILabel!
     @IBOutlet weak var selectButton: UIButton!
 
     var serialKey: String!
@@ -25,8 +27,9 @@ class FliprListViewController: BaseViewController {
         fliprDetailsContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
         self.serialKeyLabel.text = serialKey
         self.typeLabel.text = flipType
+        titleLabel.text = "Choisissez le Flipr Start à associer".localized
+        serialTitleLabel.text = "Serial".localized
 //        selectButton.addTarget(self, action: #selector(fliprSelectButtonAction), for: .touchUpInside)
-
         // Do any additional setup after loading the view.
     }
     

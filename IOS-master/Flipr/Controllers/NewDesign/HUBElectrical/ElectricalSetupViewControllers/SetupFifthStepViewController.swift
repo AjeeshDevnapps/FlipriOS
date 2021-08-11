@@ -23,9 +23,10 @@ class SetupFifthStepViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
+        let stepStr = "Étape".localized
 
         if step == 6 {
-            titleTextLabel.text = "Étape 6".localized
+            titleTextLabel.text = "\(stepStr) 6"
             subtitleTextLabel.text = "Rétablissez le courant.".localized
             submitButton.setTitle("Courant rétabli !".localized, for: .normal)
             let image1 = UIImage(named: "Ilustration-Animation-3")!
@@ -34,7 +35,7 @@ class SetupFifthStepViewController: BaseViewController {
             animationImageView.animationDuration = 1.0
             animationImageView.startAnimating()
         } else if step == 2 {
-            titleTextLabel.text = "Étape 2".localized
+            titleTextLabel.text =  "\(stepStr) 2"
             subtitleTextLabel.text = "Situez l'alimentation électrique de votre équipement et suivez-le jusqu'au coffret.".localized
 //            submitButton.setTitle("Courant rétabli !".localized, for: .normal)
             submitButton.setTitle("Suivant".localized, for: .normal)

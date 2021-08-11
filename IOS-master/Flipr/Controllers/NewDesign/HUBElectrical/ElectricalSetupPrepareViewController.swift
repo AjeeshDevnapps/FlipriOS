@@ -93,5 +93,11 @@ class ElectricalSetupPrepareCell: UITableViewCell {
         view2SubTitle.text = "Pour dénuder le câble d'alimentation".localized
         view3SubTitle.text = "Pour dévisser les caches de Flipr Hub".localized
         view4SubTitle.text = "Pour découper les œillets de protection".localized
+        
+        
+        view1Title.text = "Pince coupante".localized
+        view2Title.text = "Pince a denuder".localized
+        view3Title.text = "Tournevis cruciforme".localized
+        view4Title.text = "Paire de ciseaux".localized
    }
 }

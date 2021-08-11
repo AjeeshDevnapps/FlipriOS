@@ -20,6 +20,11 @@ class AddFliprViewController: BaseViewController {
     @IBOutlet weak var bleSearchingSubTitleLbl: UILabel!
     @IBOutlet weak var bleOffWarningLbl: UILabel!
     @IBOutlet weak var bleOffMsgLbl: UILabel!
+    
+    @IBOutlet weak var notFindTitleLbl: UILabel!
+    @IBOutlet weak var notFindSubTitleLbl: UILabel!
+    @IBOutlet weak var helpTitleLbl: UILabel!
+
 
     var serialKey:String = ""
     var fromMenu = false
@@ -41,6 +46,11 @@ class AddFliprViewController: BaseViewController {
         bleSearchingSubTitleLbl.text = "Stay close to your Flipr. The activation of the bluetooth is necessary".localized
         bleOffWarningLbl.text = "Bluetooth not activated.".localized
         bleOffMsgLbl.text = "Bluetooth not activated Activate your smartphone's Bluetooth to associate Flipr Start with your device.".localized
+        notFindTitleLbl.text  = "Aucun appareil n’a été trouvé".localized
+        notFindSubTitleLbl.text  = "Vérifiez que vous êtes bien à proximité de votre appareil et que le bluetooth est bien activé.".localized
+        helpTitleLbl.text  = "Obtenir de l’aide".localized
+        self.connectioButton.setTitle("Relaunch a search".localized, for: .normal)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

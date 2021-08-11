@@ -83,6 +83,10 @@
                             <constraint firstItem="GK2-sx-W7z" firstAttribute="bottom" secondItem="DBI-8v-lRb" secondAttribute="bottom" id="wEH-7J-Lvx"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="submitButton" destination="DBI-8v-lRb" id="dnI-84-tcg"/>
+                        <outlet property="titleLabel" destination="8jZ-II-cuX" id="vD6-Na-4aH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o7u-Vg-Vod" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -303,7 +307,10 @@
                         <outlet property="connectioButton" destination="Qc5-BP-UkT" id="Fgh-NU-bot"/>
                         <outlet property="fliprNotDiscoverContainerView" destination="adL-ED-Kt5" id="OD2-Fr-VsV"/>
                         <outlet property="helpButtonContainerView" destination="rdN-vc-hGu" id="hTa-53-TLZ"/>
+                        <outlet property="helpTitleLbl" destination="nA1-Fb-CAq" id="fcy-9I-sTN"/>
                         <outlet property="loaderView" destination="Upy-gs-Hnl" id="hpO-ar-hdE"/>
+                        <outlet property="notFindSubTitleLbl" destination="W15-sD-bDc" id="ETr-pv-QlH"/>
+                        <outlet property="notFindTitleLbl" destination="uCY-h4-2Kc" id="GDS-9g-bO6"/>
                         <outlet property="scanningAlertContainerView" destination="2PG-0d-1bY" id="PFW-Bb-ADq"/>
                     </connections>
                 </viewController>
@@ -417,6 +424,8 @@
                     <connections>
                         <outlet property="fliprDetailsContainerView" destination="M2a-E8-14R" id="Euy-D9-bFK"/>
                         <outlet property="serialKeyLabel" destination="bVH-A8-nrP" id="bNs-Hn-Sq4"/>
+                        <outlet property="serialTitleLabel" destination="Qyb-Sg-XnL" id="EU9-9l-mAr"/>
+                        <outlet property="titleLabel" destination="r7q-Pl-sUf" id="b2Y-kI-6o1"/>
                         <outlet property="typeLabel" destination="vki-AZ-vpF" id="gVs-wC-x1P"/>
                     </connections>
                 </viewController>
@@ -592,7 +601,10 @@
                         <outlet property="otpTextField3" destination="Iay-Ja-kWG" id="sv5-Fl-lp1"/>
                         <outlet property="otpTextField4" destination="9Li-eo-a9k" id="DYb-HY-IkP"/>
                         <outlet property="otpTextField5" destination="99b-vz-if3" id="GNs-dG-8as"/>
+                        <outlet property="serialTitleLabel" destination="Gc7-em-xw9" id="SMN-z6-l4e"/>
+                        <outlet property="subTitleLabel" destination="zxe-EU-K3g" id="uiZ-cB-b2Z"/>
                         <outlet property="submitButton" destination="Ja3-Hr-9Sk" id="2VP-7V-H4E"/>
+                        <outlet property="titleLabel" destination="wwY-Zt-kz2" id="wXe-jy-sNp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9lE-DH-sqK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -806,11 +818,18 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bleOffMsgLbl" destination="Ebj-ae-Vg7" id="hkt-5R-LUn"/>
+                        <outlet property="bleOffWarningLbl" destination="98K-KC-g3L" id="gBM-yK-ZOn"/>
+                        <outlet property="bleSearchingHeaderLbl" destination="nHc-AL-e1v" id="AyO-Wb-5Yn"/>
+                        <outlet property="bleSearchingSubTitleLbl" destination="lly-yQ-qLD" id="M34-eg-qtB"/>
                         <outlet property="bluetoothAlertContainerView" destination="kA1-y8-VfR" id="rub-X5-4hD"/>
                         <outlet property="connectioButton" destination="HFY-Cg-oGS" id="7gj-xo-Amj"/>
                         <outlet property="fliprNotDiscoverContainerView" destination="fgL-Wr-TQV" id="fVc-BQ-uVx"/>
                         <outlet property="helpButtonContainerView" destination="5jh-Oq-PX6" id="9nj-62-voc"/>
+                        <outlet property="helpTitleLbl" destination="SpQ-o8-hFz" id="V8t-7B-Utm"/>
                         <outlet property="loaderView" destination="PXa-3v-Lgx" id="0Hx-e8-QaD"/>
+                        <outlet property="notFindSubTitleLbl" destination="NCY-mx-Z6L" id="JCM-iF-cay"/>
+                        <outlet property="notFindTitleLbl" destination="BsI-hN-9xG" id="mAA-FE-BNa"/>
                         <outlet property="scanningAlertContainerView" destination="Grz-Bw-eII" id="HxL-f3-FP1"/>
                     </connections>
                 </viewController>
@@ -939,6 +958,7 @@
                     </view>
                     <connections>
                         <outlet property="hubListTableView" destination="7fe-wg-8zj" id="WaQ-2L-uSh"/>
+                        <outlet property="titleLbl" destination="efS-Dp-pgI" id="cCe-Bt-EMp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAe-bn-qHP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

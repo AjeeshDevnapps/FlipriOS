@@ -80,17 +80,23 @@ class AccountViewController: UIViewController {
             self.subsriptionImgView.image = #imageLiteral(resourceName: "check-1")
             self.subscriptionLabel.text = "Active (Premier)".localized
             subscriptionInfoLabel.isHidden = false
+            self.subscriptionInfoLabel.text = "You can unsubscribe anytime from App Store settings".localized
         }
         else{
             subsriptionButton.isUserInteractionEnabled = true
             self.subsriptionImgView.image = #imageLiteral(resourceName: "cross")
             self.subscriptionLabel.text = "Inactive - Subscribe here !".localized
+//            self.subscriptionInfoLabel.text = "You can unsubscribe anytime from App Store settings".localized
+            self.subscriptionInfoLabel.text = ""
         }
+        
+        /*
         if (Module.currentModule?.moduleType == 1) || (Module.currentModule?.moduleType == 2){
             self.subsriptionImgView.image = #imageLiteral(resourceName: "check - blue")
             self.subscriptionLabel.text = "No subscription needed".localized
             subsriptionButton.isUserInteractionEnabled = false
         }
+        */
 
     }
     

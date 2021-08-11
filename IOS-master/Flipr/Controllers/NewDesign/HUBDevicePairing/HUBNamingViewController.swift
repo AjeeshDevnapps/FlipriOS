@@ -21,7 +21,12 @@ class HUBNamingViewController: BaseViewController {
         
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
         submitButton.layer.cornerRadius = 12
-        nameTextField.text = "Pompe à filtration"
+        nameTextField.text = "Pompe à filtration".localized
+        titleLabel.text  = "Donnez un nom à votre Flipr Hub".localized
+        subtitleLabel.text  = "Ce nom sera utilisé sur votre tableau de bord. Optez de préférence pour un nom court associé à l'équipement connecté.".localized
+        textFieldTitle.text = "Nom de votre Flipr Hub".localized
+        submitButton.setTitle("Suivant".localized, for: .normal)
+
         nameTextField.becomeFirstResponder()
         
         nameTextField.addPaddingRightButton(target: self, #imageLiteral(resourceName: "delete-icon"), padding: 10, action: #selector(deleteText))
@@ -35,14 +40,7 @@ class HUBNamingViewController: BaseViewController {
         let vc = storyboard?.instantiateViewController(withIdentifier: "HUBPairingSuccessViewController") as! HUBPairingSuccessViewController
         navigationController?.pushViewController(vc)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+   
 
 }

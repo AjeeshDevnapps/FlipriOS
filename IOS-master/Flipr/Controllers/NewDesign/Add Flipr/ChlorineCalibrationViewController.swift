@@ -11,7 +11,11 @@ import UIKit
 class ChlorineCalibrationViewController: BaseViewController {
     @IBOutlet weak var loaderView: UIView!
     @IBOutlet weak var successView: UIView!
-
+    @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var msgLbl: UILabel!
+    @IBOutlet weak var successLbl: UILabel!
+    
+    
     let measuresInterval:Double = 150
     var recalibration = false
     var calibrationType:CalibrationType = .ph4
@@ -26,6 +30,9 @@ class ChlorineCalibrationViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLbl.text  = "Calibrage en cours".localized
+        msgLbl.text  = "Cette opération prend environs 2 minutes. Veuillez rester à proximité immédiate de votre téléphone et de l’appareil Flipr. Maintenez l’application ouverte et active.".localized
+        successLbl.text  = "Calibration pH4 réussie !".localized
         self.calibrate()
         // Do any additional setup after loading the view.
     }

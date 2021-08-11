@@ -33,7 +33,8 @@ class WifiListViewController: BaseViewController {
             theme.activityIndicatorType = .orbit
             theme.titleColor = K.Color.DarkBlue
             theme.messageColor = .lightGray
-            self.view.showEmptyStateViewLoading(title: "Searching for HUB with serial: \(serial)".localized, message: "Be sure to be close to your HUB and your Bluetooth is turned on.".localized, theme: theme)
+            let msg = "Searching for HUB with serial:".localized
+            self.view.showEmptyStateViewLoading(title: "\(msg) \(serial)", message: "Be sure to be close to your HUB and your Bluetooth is turned on.".localized, theme: theme)
             HUBManager.shared.detectedHubs.removeAll()
             HUBManager.shared.scanForHubs(serials: [serial]) { (info) in
                 self.view.hideStateView()
@@ -172,7 +173,8 @@ extension WifiListViewController: UITableViewDataSource, UITableViewDelegate {
             passwordTextField = textField
             //passwordTextField?.isSecureTextEntry = true
             //passwordTextField?.text = "NMQ0QHFFTA0"
-            passwordTextField?.placeholder = "Password...".localized
+            let pwStr = "Password".localized
+            passwordTextField?.placeholder = "\(pwStr)..."
         }
         alertController.view.tintColor = #colorLiteral(red: 0.08259455115, green: 0.1223137602, blue: 0.2131385803, alpha: 1)
         present(alertController, animated: true, completion: nil)

@@ -17,6 +17,16 @@ class AddHubViewController: BaseViewController {
     @IBOutlet weak var helpButtonContainerView: UIView!
     @IBOutlet weak var connectioButton: UIButton!
     @IBOutlet weak var researchButton: UIButton!
+    
+    @IBOutlet weak var bleSearchingHeaderLbl: UILabel!
+    @IBOutlet weak var bleSearchingSubTitleLbl: UILabel!
+    @IBOutlet weak var bleOffWarningLbl: UILabel!
+    @IBOutlet weak var bleOffMsgLbl: UILabel!
+    
+    @IBOutlet weak var notFindTitleLbl: UILabel!
+    @IBOutlet weak var notFindSubTitleLbl: UILabel!
+    @IBOutlet weak var helpTitleLbl: UILabel!
+
 
     var fromMenu = false
     
@@ -26,10 +36,24 @@ class AddHubViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        localiseText()
         connectioButton.roundCorner(corner: 12.0)
         searchHub()
         // Do any additional setup after loading the view.
     }
+    
+    func localiseText(){
+        bleSearchingHeaderLbl.text = "Recherche d’un Flipr Hub en cours".localized
+        bleSearchingSubTitleLbl.text = "Restez à proximité de votre Flipr. L'activation du bluetooth est nécessaire.".localized
+        bleOffWarningLbl.text = "Bluetooth not activated.".localized
+        bleOffMsgLbl.text = "Bluetooth not activated Activate your smartphone's Bluetooth to associate Flipr Start with your device.".localized
+        notFindTitleLbl.text  = "Aucun appareil n’a été trouvé".localized
+        notFindSubTitleLbl.text  = "Vérifiez que vous êtes bien à proximité de votre appareil et que le bluetooth est bien activé.".localized
+        helpTitleLbl.text  = "Obtenir de l’aide".localized
+        self.connectioButton.setTitle("Relaunch a search".localized, for: .normal)
+
+    }
+    
     
     func searchHub(){
         

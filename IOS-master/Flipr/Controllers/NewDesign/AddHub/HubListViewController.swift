@@ -11,11 +11,15 @@ import CoreBluetooth
 
 
 class HubListViewController: UIViewController {
+    
     @IBOutlet weak var hubListTableView: UITableView!
+    @IBOutlet weak var titleLbl: UILabel!
+
     var hubs:[String:CBPeripheral] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
         hubListTableView.tableFooterView = UIView()
+        self.titleLbl.text = "Choisissez le Flipr Start à associer".localized
         // Do any additional setup after loading the view.
     }
 }

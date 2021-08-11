@@ -32,6 +32,9 @@ class LandingViewController: UIViewController {
         }
         welcomeMsg.append("!")
         welcomeTitleLbl.text  = welcomeMsg
+        welcomeSubtitleLbl.text  = "The Flipr App is ready to welcome your first device.".localized
+        devicesListHdrLbl.text = "Choose a device to associate".localized
+        
 //        titleLabel.text = "Welcome to the Flipr family!".localized()
 //        subtitleLabel.text = "Let's setup your first device!".localized()
 //

@@ -10,12 +10,23 @@ import UIKit
 
 class CalibrationSuccessViewController: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var titlLbl: UILabel!
+    
+    @IBOutlet weak var contentLine1Lbl: UILabel!
+    @IBOutlet weak var contentLine2Lbl: UILabel!
+    @IBOutlet weak var contentLine3Lbl: UILabel!
+    @IBOutlet weak var contentLine4Lbl: UILabel!
     var recalibration = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         submitButton.roundCorner(corner: 12)
-
+        submitButton.setTitle("Suivant".localized, for: .normal)
+        titlLbl.text  = "Étalonnage réussi".localized
+        contentLine1Lbl.text  = "Dévissez le capuchon.".localized
+        contentLine2Lbl.text  = "Jetez le liquide qui se trouve dedans, ainsi que le liquide précédemment conservé dans un récipient.".localized
+        contentLine3Lbl.text  = "Vissez la grille (cache ajouré).".localized
+        contentLine4Lbl.text  = "Placez Flipr dans votre bassin, directement dans l'eau.".localized
         // Do any additional setup after loading the view.
     }
     

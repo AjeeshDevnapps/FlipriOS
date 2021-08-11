@@ -646,6 +646,9 @@ extension HUBViewController:UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.isEditing {
+            if HUB.currentHUB == nil{
+                return
+            }
             let planning = HUB.currentHUB!.plannings[indexPath.row]
             if let vc = self.storyboard?.instantiateViewController(withIdentifier: "HUBProgramViewControllerID") as? HUBProgramViewController {
                 vc.planning = planning

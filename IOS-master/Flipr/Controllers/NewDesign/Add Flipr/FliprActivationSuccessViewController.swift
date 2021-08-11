@@ -9,9 +9,13 @@
 import UIKit
 
 class FliprActivationSuccessViewController: BaseViewController {
+    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        submitButton.setTitle("Poursuivre".localized(), for: .normal)
+        titleLabel.text = "Flipr Start Connecté".localized
 
         // Do any additional setup after loading the view.
     }

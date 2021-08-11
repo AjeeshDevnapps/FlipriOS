@@ -29,6 +29,9 @@ class EducationScreenContainerViewController: UIViewController {
         super.viewDidLoad()
         nextButton.roundCorner(corner: 12)
         configurePageViewController(state: 0)
+        loginButton.setTitle("Login".localized, for: .normal)
+        nextButton.setTitle("Create an account".localized, for: .normal)
+
         self.view.bringSubviewToFront(self.pageControl)
         pageControl.currentPage = 0
 
@@ -76,19 +79,19 @@ class EducationScreenContainerViewController: UIViewController {
             introVC.view.tag = index
             if index == 0{
                 introVC.contentImageView.image = #imageLiteral(resourceName: "intro1")
-                introVC.headingLbl.text = "Profitez enfin de votre piscine"
-                introVC.subHeadingLbl.text = "Avec Flipr, l'entretien de la piscine devient un jeu d'enfant. Analysez l'eau à distance, réglez votre filtration, et oubliez la contrainte de l'entretien."
+                introVC.headingLbl.text = "Profitez enfin de votre piscine".localized
+                introVC.subHeadingLbl.text = "Avec Flipr, l'entretien de la piscine devient un jeu d'enfant. Analysez l'eau à distance, réglez votre filtration, et oubliez la contrainte de l'entretien.".localized
 
             }
             else if index == 1{
                 introVC.contentImageView.image = #imageLiteral(resourceName: "intro2")
-                introVC.headingLbl.text = "Economisez sur l'entretien"
-                introVC.subHeadingLbl.text = "Grâce à sa technologie FliprPredict, Flipr vous donne des conseils précis et hautement personnalisés pour éviter le gaspillage des traitements et de l'eau."
+                introVC.headingLbl.text = "Economisez sur l'entretien".localized
+                introVC.subHeadingLbl.text = "Grâce à sa technologie FliprPredict, Flipr vous donne des conseils précis et hautement personnalisés pour éviter le gaspillage des traitements et de l'eau.".localized
             }
             else{
                 introVC.contentImageView.image = #imageLiteral(resourceName: "intro3")
-                introVC.headingLbl.text = "Prenez soin de votre santé"
-                introVC.subHeadingLbl.text = "Les conseils de Flipr vous permettent de profiter d'une eau saine, sans sur-dosages de traitements et en évitant la prolifération de bactéries."
+                introVC.headingLbl.text = "Prenez soin de votre santé".localized
+                introVC.subHeadingLbl.text = "Les conseils de Flipr vous permettent de profiter d'une eau saine, sans sur-dosages de traitements et en évitant la prolifération de bactéries.".localized
             }
             viewController = introVC
 
