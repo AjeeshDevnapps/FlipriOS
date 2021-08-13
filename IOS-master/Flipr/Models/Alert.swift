@@ -108,7 +108,7 @@ class AlertButton: UIButton {
 //                self.backgroundColor = K.Color.Green
             }
             if let url = alert?.iconUrl {
-//                self.af_setImage(for: .normal, url: URL(string: url)!)
+                self.af_setImage(for: .normal, url: URL(string: url)!)
             }
             
         }

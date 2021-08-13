@@ -163,6 +163,12 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var hubTabPhValLabel: UILabel!
     @IBOutlet weak var hubTabClorineLabel: UILabel!
     @IBOutlet weak var hubTabClorineValLabel: UILabel!
+    
+    //Alert
+    @IBOutlet weak var measureAlertButton: UIButton!
+    @IBOutlet weak var measureAlertLbl: UILabel!
+    @IBOutlet weak var measureAlertView: UIView!
+
 
 
     var hubTabWaveTopConstraintPreValue = 0
@@ -215,6 +221,7 @@ class DashboardViewController: UIViewController {
 //        quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
 //        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius:         self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
         self.intialTabSetup()
+        hideMeasureAlert()
         self.handleHubViews()
         self.setupDashboardUI()
         if Locale.current.languageCode != "fr" {
@@ -226,6 +233,7 @@ class DashboardViewController: UIViewController {
        // topButton.roundCorner(corner: topButton.frame.size.height / 2 )
         uvView.roundCorner(corner: 6)
         uvViewHubTab.roundCorner(corner: 6)
+        measureAlertView.roundCorner(corner: 12)
 //        addNewProgramLabel.roundCorner(corner: 4.0)
         uvView.layer.borderColor = UIColor.init(hexString: "111729").cgColor
         uvView.layer.borderWidth = 1.0
@@ -241,6 +249,10 @@ class DashboardViewController: UIViewController {
         addFirstFliprView.roundCorner(corner: 12)
 
        // shareButton.setTitle("share".localized, for: .normal)
+        self.measureAlertButton.setTitle("En savoir plus".localized, for: .normal)
+        measureAlertButton.underline()
+        measureAlertLbl.text = "Mesure ancienne".localized
+
         airLabel.text = "air".localized
         airLabelHubTab.text = "air".localized
         
@@ -397,6 +409,19 @@ class DashboardViewController: UIViewController {
         self.hubTabButton.isUserInteractionEnabled = !isHubTabSelected
     }
     
+    @IBAction func measureAlertButtonTab(){
+        
+        let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "MeasureAlertViewController") as? MeasureAlertViewController {
+            viewController.modalPresentationStyle = .overCurrentContext
+            self.present(viewController, animated: true) {
+                viewController.showBackgroundView()
+            }
+        }
+    }
+    
+  
+    
     @IBAction func tappedFliprTab(){
         self.fliprTabView.backgroundColor = UIColor(hexString: "111729")
         self.hubTabView.backgroundColor = UIColor(hexString: "97A3B6")
@@ -521,7 +546,6 @@ class DashboardViewController: UIViewController {
     func pumbOffOn(isOn:Bool){
         let hud = JGProgressHUD(style:.dark)
         hud?.show(in: self.view)
-        
         HUB.currentHUB?.updateState(value: isOn, completion: { (error) in
             if error != nil {
                 hud?.indicatorView = JGProgressHUDErrorIndicatorView()
@@ -995,10 +1019,12 @@ class DashboardViewController: UIViewController {
 
         
         if Device.size() == Size.screen3_5Inch || Device.size() == Size.screen4Inch {
-            orpViewRightConstraint.constant = 8
-            phViewLeftConstraint.constant = 0
+            if orpViewRightConstraint != nil{
+                orpViewRightConstraint.constant = 8
+                phViewLeftConstraint.constant = 0
+            }
         }
-        
+    
         /*
          // iPhone 6,7
          var startElevation = 0.67
@@ -1514,6 +1540,7 @@ class DashboardViewController: UIViewController {
     }
     
     func showSubscriptionButton(){
+        self.measureAlertView.isHidden = true
         self.subscriptionButton.tag = 3
         self.subscriptionButton.isUserInteractionEnabled = true
         self.subscriptionButton.isHidden = false
@@ -1524,6 +1551,7 @@ class DashboardViewController: UIViewController {
     }
     
     func showAlertButton(){
+        self.measureAlertView.isHidden = true
         self.subscriptionButton.tag = 2
         self.subscriptionButton.isUserInteractionEnabled = true
         self.subscriptionButton.isHidden = false
@@ -1533,7 +1561,19 @@ class DashboardViewController: UIViewController {
         self.subscriptionButton.setImage(UIImage(named: "alertProcessing"), for: .normal)
     }
     
+    func showGreenAlertButton(){
+        self.measureAlertView.isHidden = true
+        self.subscriptionButton.tag = 4
+        self.subscriptionButton.isUserInteractionEnabled = true
+        self.subscriptionButton.isHidden = false
+        self.subscriptionButton.backgroundColor  = UIColor.init(hexString: "00CFCF")
+        self.subscriptionButton.setTitleColor(.white, for: .normal)
+        self.subscriptionButton.setTitle("Correction de l'eau en cours".localized, for: .normal)
+        self.subscriptionButton.setImage(UIImage(named: "thumbs-up"), for: .normal)
+    }
+    
     func showGoodMeasureButton(){
+        self.measureAlertView.isHidden = true
         self.subscriptionButton.tag = 1
         self.subscriptionButton.isUserInteractionEnabled = false
         self.subscriptionButton.isHidden = false
@@ -1609,6 +1649,31 @@ class DashboardViewController: UIViewController {
     
     func updateAlerts() {
         
+        if self.lastMeasureDate == nil{
+            return
+        }
+        else{
+            if self.lastMeasureDate!.timeIntervalSinceNow > -86400 {
+                self.getAlertFromServer()
+            }else{
+                self.showMeasureAlert()
+            }
+        }
+    }
+    
+    
+    func showMeasureAlert(){
+        self.subscriptionButton.isHidden = true
+        self.measureAlertView.isHidden = false
+    }
+    
+    func hideMeasureAlert(){
+        self.measureAlertView.isHidden = true
+    }
+    
+    
+    func getAlertFromServer(){
+        
         self.alert = nil
         self.alertButton.isHidden = true
         self.alertCheckView.isHidden = true
@@ -1639,10 +1704,11 @@ class DashboardViewController: UIViewController {
                 self.alert = alert
                 if self.alert?.status == 0 {
                     self.alertButton.isHidden = false
+                    self.showAlertButton()
                     self.alertCheckView.isHidden = true
                 } else {
                     self.alertButton.isHidden = true
-                    self.showAlertButton()
+                    self.showGreenAlertButton()
 //                    self.alertCheckView.isHidden = false
                 }
 //                if let module = Module.currentModule {
@@ -1700,16 +1766,19 @@ class DashboardViewController: UIViewController {
             if noMainAlert && i == 0 {
                 if let module = Module.currentModule {
                     if module.isSubscriptionValid {
-//                        self.showGoodMeasureButton()
+                        self.showGoodMeasureButton()
                     }else{
-                        
+                        self.showSubscriptionButton()
                     }
+                }else{
+                    self.showSubscriptionButton()
                 }
             }
             else{
+                /*
                 if let module = Module.currentModule {
                     if module.isSubscriptionValid {
-//                        self.showAlertButton()
+                        self.showAlertButton()
                     }else{
                         if self.lastMeasureDate != nil{
                             if self.lastMeasureDate!.timeIntervalSinceNow > -21600 {
@@ -1718,9 +1787,11 @@ class DashboardViewController: UIViewController {
                         }
                     }
                 }
+                */
             }
         })
     }
+    
     
     
     
@@ -2082,7 +2153,6 @@ class DashboardViewController: UIViewController {
                     
                     
                     if let current = JSON["Current"] as? [String:Any] {
-                        self.updateAlerts()
                         
                         print("JSON Current: \(current)")
                         
@@ -2209,6 +2279,8 @@ class DashboardViewController: UIViewController {
                             })
                         }
                         
+                        self.updateAlerts()
+
                         if let tendency = current["Tendancy"] as? Double {
                             if tendency >= 1 {
                                 self.waterTendencyImageView.image = UIImage(named: "arrow-up-right")

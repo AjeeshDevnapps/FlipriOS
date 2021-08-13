@@ -506,6 +506,179 @@
             </objects>
             <point key="canvasLocation" x="1047.2" y="223.53823088455775"/>
         </scene>
+        <!--Measure Alert View Controller-->
+        <scene sceneID="ziB-a3-G8D">
+            <objects>
+                <viewController storyboardIdentifier="MeasureAlertViewController" id="OSB-yI-SSc" customClass="MeasureAlertViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="04a-xy-m3x">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tqh-7Q-1fG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7vS-Mo-loU">
+                                <rect key="frame" x="0.0" y="112" width="375" height="555"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PeI-LG-Zdm">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="319"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mesure ancienne" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAP-oG-IOJ">
+                                                <rect key="frame" x="114.5" y="32" width="146.5" height="21.5"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Que signifie mesure ancienne ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88Z-yC-lm2">
+                                                <rect key="frame" x="16" y="85.5" width="235.5" height="19.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="La dernière mesure date de plus de 24h. Nous vous invitons à actualiser la mesure avant d'agir sur votre bassin. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MnC-1v-kke">
+                                                <rect key="frame" x="16" y="109" width="343" height="57.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.29019607843137252" green="0.33333333333333331" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNl-JS-76B">
+                                                <rect key="frame" x="16" y="208" width="343" height="57.5"/>
+                                                <string key="text">Activez le bluetooth de votre smartphone, approchez-vous de votre Flipr, ouvrez le menu rapide et déclenchez une mesure manuelle.</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.2901960784" green="0.33333333329999998" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment effectuer une nouvelle mesure ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9I-27-6vX">
+                                                <rect key="frame" x="16" y="184.5" width="343" height="19.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mcm-4r-wRI">
+                                                <rect key="frame" x="327" y="16" width="32" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="32" id="8Dt-Wf-iip"/>
+                                                    <constraint firstAttribute="height" constant="32" id="ibg-Hc-7r2"/>
+                                                </constraints>
+                                                <state key="normal" image="Button Close"/>
+                                                <connections>
+                                                    <action selector="closeButtonClicked" destination="OSB-yI-SSc" eventType="touchUpInside" id="KlP-pj-PJ0"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="CAP-oG-IOJ" firstAttribute="centerX" secondItem="PeI-LG-Zdm" secondAttribute="centerX" id="23C-Ep-zjd"/>
+                                            <constraint firstAttribute="trailing" secondItem="d9I-27-6vX" secondAttribute="trailing" constant="16" id="4Pe-wh-Y3P"/>
+                                            <constraint firstItem="88Z-yC-lm2" firstAttribute="leading" secondItem="PeI-LG-Zdm" secondAttribute="leading" constant="16" id="96E-ir-ima"/>
+                                            <constraint firstAttribute="height" constant="319" id="9qq-Mo-jj7"/>
+                                            <constraint firstItem="TNl-JS-76B" firstAttribute="top" secondItem="d9I-27-6vX" secondAttribute="bottom" constant="4" id="EHe-CD-SPT"/>
+                                            <constraint firstItem="CAP-oG-IOJ" firstAttribute="top" secondItem="PeI-LG-Zdm" secondAttribute="top" constant="32" id="EYC-e3-PSQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="Mcm-4r-wRI" secondAttribute="trailing" constant="16" id="ICj-cz-k4K"/>
+                                            <constraint firstAttribute="trailing" secondItem="MnC-1v-kke" secondAttribute="trailing" constant="16" id="MDc-OU-jCF"/>
+                                            <constraint firstAttribute="trailing" secondItem="TNl-JS-76B" secondAttribute="trailing" constant="16" id="PVU-wZ-GX8"/>
+                                            <constraint firstItem="Mcm-4r-wRI" firstAttribute="top" secondItem="PeI-LG-Zdm" secondAttribute="top" constant="16" id="Vzn-n0-FdI"/>
+                                            <constraint firstItem="d9I-27-6vX" firstAttribute="leading" secondItem="PeI-LG-Zdm" secondAttribute="leading" constant="16" id="chR-9G-t5f"/>
+                                            <constraint firstItem="MnC-1v-kke" firstAttribute="leading" secondItem="PeI-LG-Zdm" secondAttribute="leading" constant="16" id="r4B-ar-Uyj"/>
+                                            <constraint firstItem="88Z-yC-lm2" firstAttribute="top" secondItem="CAP-oG-IOJ" secondAttribute="bottom" constant="32" id="tB9-bO-6dd"/>
+                                            <constraint firstItem="MnC-1v-kke" firstAttribute="top" secondItem="88Z-yC-lm2" secondAttribute="bottom" constant="4" id="tFa-eV-Y34"/>
+                                            <constraint firstItem="d9I-27-6vX" firstAttribute="top" secondItem="MnC-1v-kke" secondAttribute="bottom" constant="18" id="w7i-yn-hEj"/>
+                                            <constraint firstItem="TNl-JS-76B" firstAttribute="leading" secondItem="PeI-LG-Zdm" secondAttribute="leading" constant="16" id="ytJ-6b-kqJ"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RDz-0O-0Yl">
+                                        <rect key="frame" x="0.0" y="319" width="375" height="236"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t39-S2-jqt">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                <color key="backgroundColor" red="0.59215686274509804" green="0.63921568627450975" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="2xb-g7-Afz"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activez la connexion automatique avec Flipr Infinite !" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUX-WW-60p">
+                                                <rect key="frame" x="16" y="32" width="293" height="43"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconMeasureQuicActrion" translatesAutoresizingMaskIntoConstraints="NO" id="08b-kF-UV2">
+                                                <rect key="frame" x="331" y="32" width="28" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="28" id="1Ye-Z7-Xd4"/>
+                                                    <constraint firstAttribute="height" constant="28" id="Esk-Xz-mvx"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-P8-CQs">
+                                                <rect key="frame" x="16" y="79" width="343" height="76.5"/>
+                                                <string key="text">Flipr Infinite vous permet d'activer la connexion à distance et automatique via le réseau Sigfox (ou en Wifi si vous avez l'accessoire WifiConnect).</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.2901960784" green="0.33333333329999998" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clg-Bq-nT6">
+                                                <rect key="frame" x="16" y="163.5" width="107" height="32"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <state key="normal" title="En savoir plus">
+                                                    <color key="titleColor" red="0.23921568630000001" green="0.56078431370000004" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="subscribitionAlertButtonTab" destination="OSB-yI-SSc" eventType="touchUpInside" id="EVB-pd-fqF"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.97254901959999995" green="0.98039215690000003" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="08b-kF-UV2" secondAttribute="trailing" constant="16" id="4cJ-X5-n5Q"/>
+                                            <constraint firstItem="08b-kF-UV2" firstAttribute="leading" secondItem="lUX-WW-60p" secondAttribute="trailing" constant="22" id="54l-Cu-lQC"/>
+                                            <constraint firstItem="clg-Bq-nT6" firstAttribute="leading" secondItem="RDz-0O-0Yl" secondAttribute="leading" constant="16" id="8Sl-ip-Nn4"/>
+                                            <constraint firstItem="08b-kF-UV2" firstAttribute="top" secondItem="RDz-0O-0Yl" secondAttribute="top" constant="32" id="BSx-Mw-mYa"/>
+                                            <constraint firstItem="t39-S2-jqt" firstAttribute="leading" secondItem="RDz-0O-0Yl" secondAttribute="leading" id="OO0-GK-aOn"/>
+                                            <constraint firstAttribute="trailing" secondItem="t39-S2-jqt" secondAttribute="trailing" id="QEy-42-tVk"/>
+                                            <constraint firstItem="Wz5-P8-CQs" firstAttribute="top" secondItem="lUX-WW-60p" secondAttribute="bottom" constant="4" id="Udz-8I-jfg"/>
+                                            <constraint firstItem="t39-S2-jqt" firstAttribute="top" secondItem="RDz-0O-0Yl" secondAttribute="top" id="UwS-jP-VOv"/>
+                                            <constraint firstItem="Wz5-P8-CQs" firstAttribute="leading" secondItem="RDz-0O-0Yl" secondAttribute="leading" constant="16" id="ZG3-1x-xxT"/>
+                                            <constraint firstItem="lUX-WW-60p" firstAttribute="top" secondItem="RDz-0O-0Yl" secondAttribute="top" constant="32" id="f6w-ol-112"/>
+                                            <constraint firstItem="lUX-WW-60p" firstAttribute="leading" secondItem="RDz-0O-0Yl" secondAttribute="leading" constant="16" id="tO0-WB-rZY"/>
+                                            <constraint firstItem="clg-Bq-nT6" firstAttribute="top" secondItem="Wz5-P8-CQs" secondAttribute="bottom" constant="8" id="tXF-1I-8B0"/>
+                                            <constraint firstAttribute="height" constant="236" id="tvq-yT-kW1"/>
+                                            <constraint firstAttribute="trailing" secondItem="Wz5-P8-CQs" secondAttribute="trailing" constant="16" id="zY4-mM-U6g"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Nu5-SS-qT4"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="7vS-Mo-loU" firstAttribute="leading" secondItem="04a-xy-m3x" secondAttribute="leading" id="QDP-mW-I4f"/>
+                            <constraint firstItem="7vS-Mo-loU" firstAttribute="bottom" secondItem="04a-xy-m3x" secondAttribute="bottom" id="YSH-Mq-e9I"/>
+                            <constraint firstItem="7vS-Mo-loU" firstAttribute="top" secondItem="Tqh-7Q-1fG" secondAttribute="bottom" constant="-20" id="aNk-Og-vwP"/>
+                            <constraint firstAttribute="trailing" secondItem="7vS-Mo-loU" secondAttribute="trailing" id="j0D-Um-3XQ"/>
+                            <constraint firstItem="Tqh-7Q-1fG" firstAttribute="leading" secondItem="Nu5-SS-qT4" secondAttribute="leading" id="lXR-8T-guV"/>
+                            <constraint firstItem="Tqh-7Q-1fG" firstAttribute="top" secondItem="Nu5-SS-qT4" secondAttribute="top" id="nTb-12-rht"/>
+                            <constraint firstItem="Tqh-7Q-1fG" firstAttribute="trailing" secondItem="Nu5-SS-qT4" secondAttribute="trailing" id="pM4-pe-YCP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomContainerView" destination="RDz-0O-0Yl" id="KMG-1B-1m0"/>
+                        <outlet property="line1Lbl" destination="88Z-yC-lm2" id="wNe-Ta-s22"/>
+                        <outlet property="line2Lbl" destination="MnC-1v-kke" id="TuL-f5-9y4"/>
+                        <outlet property="line3Lbl" destination="d9I-27-6vX" id="PYC-QV-aSr"/>
+                        <outlet property="line4Lbl" destination="TNl-JS-76B" id="CYg-uw-I9N"/>
+                        <outlet property="line5Lbl" destination="lUX-WW-60p" id="aXq-N4-glJ"/>
+                        <outlet property="line6Lbl" destination="Wz5-P8-CQs" id="g3f-Uc-Vji"/>
+                        <outlet property="savoirPlusBtn" destination="clg-Bq-nT6" id="gZW-1b-0Wp"/>
+                        <outlet property="tapView" destination="Tqh-7Q-1fG" id="gG1-7p-9xV"/>
+                        <outlet property="titleLbl" destination="CAP-oG-IOJ" id="9Yh-03-hxc"/>
+                        <outlet property="topContainerView" destination="PeI-LG-Zdm" id="5tR-Cr-kUk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OLu-bw-PsS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1756" y="215.44227886056973"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="nI3-Vh-7eA">
             <objects>

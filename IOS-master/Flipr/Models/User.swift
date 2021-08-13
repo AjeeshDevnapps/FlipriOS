@@ -621,6 +621,10 @@ class User {
         Module.currentModule = nil
         Pool.currentPool = nil
         HUB.currentHUB = nil
+        AppSharedData.sharedInstance.isNeedtoCallModulesApiForSideMenu = true
+        AppSharedData.sharedInstance.serialKey = ""
+        AppSharedData.sharedInstance.deviceName = ""
+        UserDefaults.standard.synchronize()
     }
     
     func sync(completion: ((_ success:Bool) -> Void)?) throws {
