@@ -169,6 +169,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var measureAlertLbl: UILabel!
     @IBOutlet weak var measureAlertView: UIView!
 
+    @IBOutlet weak var connectNewDeviceLbl: UILabel!
 
 
     var hubTabWaveTopConstraintPreValue = 0
@@ -220,6 +221,8 @@ class DashboardViewController: UIViewController {
 //        self.quickActionButtonContainer.cornerRadius =  self.quickActionButtonContainer.frame.size.height / 2
 //        quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
 //        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius:         self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
+        self.signalStrengthLabel.text = "Signal moyen".localized
+        self.signalStrengthImageView.image = UIImage(named: "Signalmiddle")
         self.intialTabSetup()
         hideMeasureAlert()
         self.handleHubViews()
@@ -247,7 +250,7 @@ class DashboardViewController: UIViewController {
         
         subscriptionButton.roundCorner(corner: 12)
         addFirstFliprView.roundCorner(corner: 12)
-
+        connectNewDeviceLbl.text = "Connect new equipment".localized
        // shareButton.setTitle("share".localized, for: .normal)
         self.measureAlertButton.setTitle("En savoir plus".localized, for: .normal)
         measureAlertButton.underline()

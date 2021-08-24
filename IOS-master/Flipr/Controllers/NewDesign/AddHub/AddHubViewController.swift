@@ -44,7 +44,7 @@ class AddHubViewController: BaseViewController {
     
     func localiseText(){
         bleSearchingHeaderLbl.text = "Recherche d’un Flipr Hub en cours".localized
-        bleSearchingSubTitleLbl.text = "Restez à proximité de votre Flipr. L'activation du bluetooth est nécessaire.".localized
+        bleSearchingSubTitleLbl.text = "Stay close to your Flipr. The activation of the bluetooth is necessary".localized
         bleOffWarningLbl.text = "Bluetooth not activated.".localized
         bleOffMsgLbl.text = "Bluetooth not activated Activate your smartphone's Bluetooth to associate Flipr Start with your device.".localized
         notFindTitleLbl.text  = "Aucun appareil n’a été trouvé".localized

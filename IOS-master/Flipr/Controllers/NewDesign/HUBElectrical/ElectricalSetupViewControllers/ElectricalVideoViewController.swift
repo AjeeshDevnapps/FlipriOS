@@ -36,7 +36,8 @@ class ElectricalVideoViewController: BaseViewController {
     @IBOutlet weak var infoImgView: UIImageView!
     @IBOutlet weak var alertTitleLabel: UILabel!
     @IBOutlet weak var confirmationTitle: UILabel!
-    
+    @IBOutlet weak var infoLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
@@ -132,6 +133,7 @@ class ElectricalVideoViewController: BaseViewController {
         }
         if step == 5 {
             titleLabel.text = "Étape 5".localized()
+            infoLabel.text = "N'oubliez pas de passer les câbles dans les caches, à travers les œillets de protection.".localized
             nextButton.setTitle("C’est fait !".localized, for: .normal)
             if cable4 {
                 subtitleLabel.text = "Connect the cables in the order shown, remember to connect the neutral (BLUE)".localized()
