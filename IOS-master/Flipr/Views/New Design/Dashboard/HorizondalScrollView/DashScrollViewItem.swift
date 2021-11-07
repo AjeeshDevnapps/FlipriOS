@@ -20,7 +20,8 @@ class DashScrollViewItem: UIView {
     @IBOutlet var contenView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    var valueStrings = [Double?]()
+    var dates = [String?]()
     var statusType: StatusType = .weather {
         didSet {
             updateTitle()
@@ -78,6 +79,8 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DashCollectionViewCell", for: indexPath) as! DashCollectionViewCell
+        cell.value.text = ""
+        cell.date.text = ""
         switch statusType {
         case .pH:
             cell.textWrappingView.layer.cornerRadius = 4
@@ -85,22 +88,39 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
             cell.textWrappingView.layer.borderColor = UIColor.gray.cgColor
             cell.value.font = UIFont.systemFont(ofSize: 10, weight: .regular)
             cell.value.textColor = UIColor.gray
-            cell.value.text = "7.2"
+            if !valueStrings.isEmpty {
+                cell.value.text = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 1).toString
+            }
         case .temperature:
-            cell.textWrappingView.layer.cornerRadius = 0
-            cell.textWrappingView.layer.borderWidth = 0
-            cell.textWrappingView.layer.borderColor = UIColor.gray.cgColor
+            cell.textWrappingView.layer.cornerRadius = 4
+            cell.textWrappingView.layer.borderWidth = 1
+            cell.textWrappingView.layer.borderColor = UIColor.cyan.cgColor
             cell.value.font = UIFont.systemFont(ofSize: 12, weight: .bold)
             cell.value.textColor = UIColor.cyan
-            cell.value.text = "25°"
+            if !valueStrings.isEmpty {
+                cell.value.text = "\((valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 0).toString)°"
+            }
         case .redox:
             cell.textWrappingView.layer.cornerRadius = 4
             cell.textWrappingView.layer.borderWidth = 1
             cell.textWrappingView.layer.borderColor = UIColor.gray.cgColor
             cell.value.font = UIFont.systemFont(ofSize: 10, weight: .regular)
             cell.value.textColor = UIColor.gray
-            cell.value.text = "2.1"
+            if !valueStrings.isEmpty {
+                cell.value.text = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 1).toString
+            }
         default: return UICollectionViewCell()
+        }
+        if !dates.isEmpty {
+            if let date = dates[indexPath.section] {
+                let formatter = DateFormatter()
+                formatter.locale = Locale(identifier: "en_US_POSIX")
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                if let givenDate = formatter.date(from: date) {
+                    formatter.dateFormat = "dd/MM"
+                    cell.date.text = formatter.string(from: givenDate)
+                }
+            }
         }
         return cell
     }
@@ -109,13 +129,27 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderCell", for: indexPath)
-            let imageView = UIImageView(image: UIImage(named: "arrow-up-right"))
-            var headerFrame = header.bounds
-            headerFrame.size.height = collectionView.frame.height / 2
-            imageView.frame = headerFrame
-            imageView.contentMode = .center
-            
-            header.addSubview(imageView)
+            if !valueStrings.isEmpty {
+                let value = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 1)
+                var image: UIImage? = UIImage()
+                if (indexPath.section - 1 >= 0) {
+                    let previous = (valueStrings[indexPath.section - 1] ?? 0).fixedFraction(digits: 1)
+                    if value > previous {
+                        image = UIImage(named: "arrow-up-right (1)")
+                    } else if value < previous {
+                        image = UIImage(named: "arrow-up-right")
+                    } else {
+                        image = UIImage(named: "arrow-up-right (2)")
+                    }
+                }
+                let imageView = UIImageView(image: image)
+                var headerFrame = header.bounds
+                headerFrame.size.height = collectionView.frame.height / 2
+                imageView.frame = headerFrame
+                imageView.contentMode = .center
+                
+                header.addSubview(imageView)
+            }
             return header
         default:  fatalError("Unexpected element kind")
         }
@@ -124,12 +158,18 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
 
 extension DashScrollViewItem: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if statusType == .temperature {
+            return CGSize(width: (self.width - 98) / 7, height: collectionView.frame.height)
+        }
         return CGSize(width: (self.width - 110) / 7, height: collectionView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0 {
             return CGSize.zero
+        }
+        if statusType == .temperature {
+            return CGSize(width: 13, height: collectionView.bounds.height)
         }
         return CGSize(width: 15, height: collectionView.bounds.height)
     }
