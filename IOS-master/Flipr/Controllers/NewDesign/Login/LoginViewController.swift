@@ -21,11 +21,16 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var signupLbl: UILabel!
     @IBOutlet weak var signupLblBold: UILabel!
     @IBOutlet weak var signInButton: UIButton!
+    var isNeedToHideBackButton = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Connection".localized
         self.setupViews()
+        if isNeedToHideBackButton{
+            self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.hidesBackButton = true
+        }
         // Do any additional setup after loading the view.
     }
     

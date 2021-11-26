@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import CoreBluetooth
 
 class FliprListViewController: BaseViewController {
+    @IBOutlet weak var fliprListTableView: UITableView!
     @IBOutlet weak var fliprDetailsContainerView: UIView!
     @IBOutlet weak var serialKeyLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var serialTitleLabel: UILabel!
     @IBOutlet weak var selectButton: UIButton!
+    var fliprList = [String]()
 
     var serialKey: String!
     var flipType: String!
@@ -23,6 +26,7 @@ class FliprListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
+        self.fliprListTableView.tableFooterView = UIView()
         fliprDetailsContainerView.roundCorner(corner: 12)
         fliprDetailsContainerView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
         self.serialKeyLabel.text = serialKey
@@ -89,4 +93,38 @@ class FliprListViewController: BaseViewController {
         }
     }
 
+}
+
+extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fliprList.count
+    }
+   
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"DeviceInfoTableViewCell",
+                                                     for: indexPath) as! DeviceInfoTableViewCell
+        cell.keyIdLabel.text = fliprList[indexPath.row]
+        cell.modelLabel.text = "Flipr"
+        cell.shadowView.addShadow(offset: CGSize.init(width: 0, height: 24), color: UIColor(red: 0, green: 0.071, blue: 0.278, alpha: 0.14), radius: 40.0, opacity: 0.14)
+        return cell
+
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "KeyEnterViewController") as? KeyEnterViewController{
+            vc.serialKey = fliprList[indexPath.row]
+            vc.flipType = flipType
+            vc.isSignupFlow =  self.isSignupFlow
+            self.navigationController?.pushViewController(vc)
+        }
+        
+    }
+    
+    @IBAction func alertsActivationSwitchValueChanged(_ sender: UISwitch) {
+        
+    }
+    
+    
 }

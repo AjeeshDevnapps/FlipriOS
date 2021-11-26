@@ -10,21 +10,60 @@ import UIKit
 
 class HubMenuViewController: UIViewController {
 
+    @IBOutlet weak var settingTable: UITableView!
+    @IBOutlet weak var titleLbl: UILabel!
+
+    var cellTitleList = ["Carnet d’entretien","Pool House","Flipr Store","Conseils et astuces","Paramètres","Aide","Déconnexion"]
+    
+    var imageNames = ["menu1","menu4","menu5","menu6","menu7","menu8","menu9"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        settingTable.tableFooterView = UIView()
         // Do any additional setup after loading the view.
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func closeButtonAction(){
+        self.dismiss(animated: true, completion: nil)
     }
-    */
+    
 
+}
+
+extension HubMenuViewController: UITableViewDelegate,UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
+        return cellTitleList.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 64
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        let cell =  tableView.dequeueReusableCell(withIdentifier:"MenuTableViewCell",
+                                             for: indexPath) as! MenuTableViewCell
+        
+        cell.menuTitleLbl.text = cellTitleList[indexPath.row]
+        cell.menuIcon.image =  UIImage(named: imageNames[indexPath.row])
+        return cell
+    }
+        
+   
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == 2{
+            
+//            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ExpertMenuViewController") as? ExpertMenuViewController {
+//               // viewController.modalPresentationStyle = .overCurrentContext
+//                self.present(viewController, animated: true)
+//            }
+        }
+    }
+    
+  
 }

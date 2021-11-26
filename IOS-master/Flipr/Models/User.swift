@@ -617,6 +617,12 @@ class User {
         UserDefaults.standard.removeObject(forKey: "CurrentModule")
         UserDefaults.standard.removeObject(forKey: "CurrentPool")
         UserDefaults.standard.removeObject(forKey: "CurrentHUB")
+        UserDefaults.standard.set("orange", forKey: "CurrentTheme")
+        UserDefaults.standard.removeObject(forKey: "FirstHubSerialKey")
+        UserDefaults.standard.removeObject(forKey: "SecondHubSerialKey")
+
+        
+
         User.currentUser = nil
         Module.currentModule = nil
         Pool.currentPool = nil

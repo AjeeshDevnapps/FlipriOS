@@ -62,7 +62,8 @@ class SetupFifthStepViewController: BaseViewController {
         }
         else if step == 6 {
             let fliprStoryboard = UIStoryboard(name: "FliprDevice", bundle: nil)
-            let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddHubViewController")
+            let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddHubViewController") as! AddHubViewController
+            viewController.equipmentCode = equipmentCode
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }

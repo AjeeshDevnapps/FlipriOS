@@ -76,7 +76,7 @@ class BLEManager: NSObject {
 
     func startUpCentralManager(connectAutomatically connect:Bool, sendMeasure send:Bool) {
         self.stopScanning = false
-        perform(#selector(setTimeLimit), with: nil, afterDelay: 60)
+        perform(#selector(setTimeLimit), with: nil, afterDelay: 20)
         sendMeasureAfterConnection = send
         connectAfterDiscovery = connect
         
@@ -264,14 +264,23 @@ extension BLEManager: CBCentralManagerDelegate {
         }
         if let name = peripheral.name {
             
-            if !name.hasPrefix("Flipr 00") && !name.hasPrefix("FliprHUB") {
+            print(name)
+            if !name.hasPrefix("Flipr 0") && !name.hasPrefix("FliprHUB") {
                 return
             }
             
             
             print("Flipr device discovered with name:\(peripheral.name) , identifier: \(peripheral.identifier)")
+            var occuranceString = "Flipr 00"
+
+            if name.hasPrefix("Flipr 00") {
+                occuranceString = "Flipr 00"
+            }
+            else if name.hasPrefix("Flipr 0"){
+                occuranceString = "Flipr 0"
+            }
             
-            var serial = name.replacingOccurrences(of: "Flipr 00", with: "").trimmed
+            var serial = name.replacingOccurrences(of: occuranceString, with: "").trimmed
             
             if name.hasPrefix("FliprHUB") {
                 serial = name.replacingOccurrences(of: "FliprHUB", with: "").trimmed
@@ -288,7 +297,7 @@ extension BLEManager: CBCentralManagerDelegate {
             flipr = peripheral
             peripheral.delegate = self
             
-            central.stopScan()
+//            central.stopScan()
             print("CBCentralManager stop scanning for Flipr devices")
             
             let userInfo = ["serial": serial]

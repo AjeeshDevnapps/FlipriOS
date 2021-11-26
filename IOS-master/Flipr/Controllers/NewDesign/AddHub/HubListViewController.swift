@@ -14,6 +14,7 @@ class HubListViewController: UIViewController {
     
     @IBOutlet weak var hubListTableView: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
+    var equipmentCode : String = ""
 
     var hubs:[String:CBPeripheral] = [:]
     override func viewDidLoad() {
@@ -52,6 +53,7 @@ extension HubListViewController: UITableViewDelegate,UITableViewDataSource {
             let key = "\(Array(hubs)[indexPath.row].key)"
             vc.serialKey = key
             vc.isHub = true
+            vc.equipmentCode = self.equipmentCode
             self.navigationController?.pushViewController(vc)
         }
     }

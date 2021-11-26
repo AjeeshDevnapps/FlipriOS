@@ -41,13 +41,24 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectionChartView.transparentCircleColor = UIColor.init(hexString: "111729")
+        selectionChartView.holeColor = .black
         
-        cancelButton.setTitle("Cancel".localized(), for: .normal)
-        saveButton.setTitle("Save".localized(), for: .normal)
-        
+        if (planning != nil) {
+            cancelButton.setTitle("Delete".localized(), for: .normal)
+            saveButton.setTitle("Save".localized(), for: .normal)
+        }else{
+            cancelButton.setTitle("Cancel".localized(), for: .normal)
+            saveButton.setTitle("Save".localized(), for: .normal)
+        }
+        cancelButton.roundCorner(corner: 12)
+        saveButton.roundCorner(corner: 12)
+        cancelButton.layer.borderWidth = 1.0
+        cancelButton.layer.borderColor = UIColor(hexString: "97A3B6").cgColor
+
         slotsLabel.text = "Selected time slots".localized()
             textField.attributedPlaceholder = NSAttributedString(string: "Program's name".localized(),
-        attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightText])
+                                                                 attributes: [NSAttributedString.Key.foregroundColor: UIColor(hexString: "97A3B6")])
         
         repeatLabel.text = "Repeat".localized()
         
@@ -88,6 +99,7 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
         selectionChartView.legend.enabled = false
         selectionChartView.rotationEnabled = false
         
+        
         let sset = PieChartDataSet(entries: selectionEntries, label: "")
         sset.drawIconsEnabled = false
         sset.sliceSpace = 6
@@ -102,20 +114,32 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
         
         var entries:[PieChartDataEntry] = []
         var colors:[NSUIColor] = []
-        
+        var valColors:[NSUIColor] = []
+
+//        for index in 0...(timeSlots.count - 1) {
+//            entries.append(PieChartDataEntry(value: 1, data: index))
+//            if timeSlots[index] == 0 {
+//                colors.append(UIColor(white: 1, alpha: 0.20))
+//            } else {
+//                colors.append(.white)
+//            }
+//        }
         for index in 0...(timeSlots.count - 1) {
             entries.append(PieChartDataEntry(value: 1, data: index))
+            valColors.append(.black)
             if timeSlots[index] == 0 {
-                colors.append(UIColor(white: 1, alpha: 0.20))
+                colors.append(UIColor(hexString: "D0D1D4"))
+//                colors.append(UIColor(white: .black, alpha: 0.20))
             } else {
-                colors.append(.white)
+                colors.append(.black)
             }
         }
-        
         chartView.holeRadiusPercent = 0.90
         chartView.holeColor = .clear
         chartView.legend.enabled = false
         chartView.rotationEnabled = false
+        chartView.entryLabelColor = .black
+        chartView.transparentCircleColor = .black
         
         let set = PieChartDataSet(entries: entries, label: "")
         set.drawIconsEnabled = false
@@ -123,6 +147,7 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
         set.drawValuesEnabled = false
         
         set.colors = colors
+        set.valueColors = valColors
         
         let data = PieChartData(dataSet: set)
         
@@ -130,6 +155,11 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
         
         updateSlotsLabelValue()
     }
+    
+    @IBAction func closeButtonClicked(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     func updateSlotsLabelValue() {
         var index = 0
@@ -217,20 +247,25 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
     func refreshChartView() {
         var entries:[PieChartDataEntry] = []
         var colors:[NSUIColor] = []
-        
+        var valColors:[NSUIColor] = []
+
         for index in 0...(timeSlots.count - 1) {
             entries.append(PieChartDataEntry(value: 1, data: index))
             if timeSlots[index] == 0 {
-                colors.append(UIColor(white: 1, alpha: 0.20))
+//                colors.append(UIColor(white: 1, alpha: 0.20))
+                colors.append(UIColor(hexString: "D0D1D4"))
+
             } else {
-                colors.append(.white)
+                colors.append(.black)
             }
+            valColors.append(UIColor(hexString: "D0D1D4"))
+
         }
         let set = PieChartDataSet(entries: entries, label: "")
         set.drawIconsEnabled = false
         set.sliceSpace = 6
         set.drawValuesEnabled = false
-        
+        set.valueColors = valColors
         set.colors = colors
         
         let data = PieChartData(dataSet: set)
@@ -254,17 +289,43 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
     
     func refresh(planning:Planning,button:UIButton, atIndex:Int) {
         if planning.days[atIndex] == "1" {
-            button.backgroundColor = .white
-            button.setTitleColor(K.Color.DarkBlue, for: .normal)
-        } else {
-            button.backgroundColor = .clear
+            button.backgroundColor = .black
             button.setTitleColor(.white, for: .normal)
+        } else {
+            button.backgroundColor = .white
+            button.setTitleColor(.black, for: .normal)
         }
     }
     
     
     @IBAction func cancelButtonAction(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        if self.planning != nil{
+            let hud = JGProgressHUD(style:.dark)
+            hud?.show(in: self.view)
+            let planning = self.planning
+            HUB.currentHUB!.deletePlanning(planningId: planning?.id ?? 0) { (error) in
+                if error == nil {
+//                    HUB.currentHUB!.plannings.remove(at: indexPath.row)
+                    hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    hud?.dismiss(afterDelay: 1)
+                    NotificationCenter.default.post(name: K.Notifications.ReloadProgrameList, object: nil, userInfo: nil)
+                    self.dismiss(animated: true, completion: nil)
+//                    if HUB.currentHUB!.plannings.count == 0 {
+//                        self.programView.showEmptyStateView(image: nil, title: nil, message: "No program".localized(), buttonTitle: "Add a new program".localized()) {
+//                            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "HUBProgramViewControllerID") as? HUBProgramViewController {
+//                                self.present(vc, animated: true, completion: nil)
+//                            }
+//                        }
+//                    }
+                } else {
+                    hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                    hud?.textLabel.text = error?.localizedDescription
+                    hud?.dismiss(afterDelay: 3)
+                }
+            }
+        }else{
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func saveButtonAction(_ sender: Any) {
@@ -290,37 +351,37 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
         }
         
         dayString = ""
-        if monday.backgroundColor == .white {
+        if monday.backgroundColor == .black {
             dayString = "1"
         } else {
             dayString = "0"
         }
-        if tuesday.backgroundColor == .white {
+        if tuesday.backgroundColor == .black {
             dayString = dayString + "1"
         } else {
             dayString = dayString + "0"
         }
-        if weenesday.backgroundColor == .white {
+        if weenesday.backgroundColor == .black {
             dayString = dayString + "1"
         } else {
             dayString = dayString + "0"
         }
-        if thursday.backgroundColor == .white {
+        if thursday.backgroundColor == .black {
             dayString = dayString + "1"
         } else {
             dayString = dayString + "0"
         }
-        if friday.backgroundColor == .white {
+        if friday.backgroundColor == .black {
             dayString = dayString + "1"
         } else {
             dayString = dayString + "0"
         }
-        if saturday.backgroundColor == .white {
+        if saturday.backgroundColor == .black {
             dayString = dayString + "1"
         } else {
             dayString = dayString + "0"
         }
-        if sunday.backgroundColor == .white {
+        if sunday.backgroundColor == .black {
             dayString = dayString + "1"
         } else {
             dayString = dayString + "0"
@@ -348,6 +409,7 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
                                NotificationCenter.default.post(name: FliprHUBPlanningsDidChange, object: nil)
                                hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
                                hud?.dismiss(afterDelay: 1)
+                NotificationCenter.default.post(name: K.Notifications.ReloadProgrameList, object: nil, userInfo: nil)
                 self.dismiss(animated: true, completion: nil)
             }
         })
@@ -356,12 +418,12 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
     
     @IBAction func dayButtonAction(_ sender: Any) {
         if let button = sender as? UIButton {
-            if button.backgroundColor == .white {
+            if button.backgroundColor == .black {
                 button.backgroundColor = .clear
-                button.setTitleColor(.white, for: .normal)
+                button.setTitleColor(.black, for: .normal)
             } else {
-                button.backgroundColor = .white
-                button.setTitleColor(K.Color.DarkBlue, for: .normal)
+                button.backgroundColor = .black
+                button.setTitleColor(.white, for: .normal)
             }
         }
     }

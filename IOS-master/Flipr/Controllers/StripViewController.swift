@@ -19,7 +19,7 @@ class StripViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var sunInfoLabel: UILabel!
-
+        
     
     @IBOutlet weak var chloreBromeButton: UIButton!
     @IBOutlet weak var totalChloreButton: UIButton!
@@ -60,12 +60,12 @@ class StripViewController: UIViewController {
         }
         
         
-        
         titleLabel.text = "Contrôle bandelette".localized
 //        messageLabel.text = "Grab the strip provided in the package, then dip it in mid-arm in your pool for 2 seconds. Then report the colors obtained below.".localized
         messageLabel.text = "Ce test permet de vérifier que les premières mesures de Flipr sont en adéquation avec la qualité de votre eau. Saisissez la languette fournie sans toucher les carrés colorés, puis plongez-la dans l’eau de votre bassin à mi-bras pendant 2 secondes. Reportez ensuite les couleurs obtenues, ligne par ligne.".localized
-        sunInfoLabel.text  = "Nous vous conseillons de régler la luminosité de votre écran au maximum.".localized
-        
+        if sunInfoLabel != nil{
+            sunInfoLabel.text  = "Nous vous conseillons de régler la luminosité de votre écran au maximum.".localized
+        }
         warningLabel.text = "The colorimetry varies according to the smartphone screens. For more precision, refer to the instructions supplied with the strip to determine the colors and refer to them above.".localized
         doneButton.setTitle("Validate!".localized, for: .normal)
         

@@ -20,11 +20,11 @@ class ForgotPasswordViewController: BaseViewController {
         self.backButtonTitle = "Login".localized
         emailLbl.text = "E-mail address".localized
         super.viewDidLoad()
-        if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = .never
-        } else {
+//        if #available(iOS 11.0, *) {
+//            self.navigationItem.largeTitleDisplayMode = .never
+//        } else {
             // Fallback on earlier versions
-        }
+        //}
         self.titleLbl.text = "Reset my password".localized
         submitButton.setTitle("Reset".localized, for: .normal)
         self.setupViews()
@@ -36,15 +36,15 @@ class ForgotPasswordViewController: BaseViewController {
     func setupViews(){
         self.emailContainerView.roundCorner(corner: 8)
         self.submitButton.roundCorner(corner: 12)
-        for navItem in(self.navigationController?.navigationBar.subviews)! {
-             for itemSubView in navItem.subviews {
-                 if let largeLabel = itemSubView as? UILabel {
-                     largeLabel.text = "Reset my password".localized
-                     largeLabel.numberOfLines = 0
-                     largeLabel.lineBreakMode = .byWordWrapping
-                 }
-             }
-        }
+//        for navItem in(self.navigationController?.navigationBar.subviews)! {
+//             for itemSubView in navItem.subviews {
+//                 if let largeLabel = itemSubView as? UILabel {
+//                     largeLabel.text = "Reset my password".localized
+//                     largeLabel.numberOfLines = 0
+//                     largeLabel.lineBreakMode = .byWordWrapping
+//                 }
+//             }
+//        }
     }
     
     
@@ -54,10 +54,11 @@ class ForgotPasswordViewController: BaseViewController {
     
     
     
+    
     @IBAction func signInButtonAction(_ sender: Any) {
         
-        guard let email = emailTextField.text else {
-            self.showError(title: "Error".localized, message: "Your email address".localized)
+        guard let email = emailTextField.text, email.isValidString else {
+            self.showError(title: "Error".localized, message: "Enter your email address".localized)
             return
         }
         

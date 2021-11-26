@@ -53,6 +53,23 @@ class FliprSplashViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if AppSharedData.sharedInstance.logout{
+            AppSharedData.sharedInstance.logout = false
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            vc.isNeedToHideBackButton = true
+            if #available(iOS 11.0, *) {
+                navigationController?.navigationBar.prefersLargeTitles = false
+            } else {
+                // Fallback on earlier versions
+            }
+            self.navigationController?.setViewControllers([vc], animated: true)
+        }
     }
     
     @objc func showEducationScreen(){

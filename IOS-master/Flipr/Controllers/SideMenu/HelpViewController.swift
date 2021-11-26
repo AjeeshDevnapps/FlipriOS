@@ -53,7 +53,7 @@ class HelpViewController: UIViewController {
     }
     
     @IBAction func faqButtonClicked(){
-        if let url = URL(string: "HELP_DESK_URL".localized.remotable) {
+        if let url = URL(string: "FAQ_URL".localized.remotable) {
             let vc = SFSafariViewController(url: url, entersReaderIfAvailable: false)
             self.present(vc, animated: true)
         }
@@ -70,7 +70,7 @@ class HelpViewController: UIViewController {
     
     @IBAction func privacyButtonClicked(){
         if let url = URL(string: "CGU_URL".localized.remotable) {
-            let vc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+            let vc = SFSafariViewController(url: url, entersReaderIfAvailable: false)
             self.present(vc, animated: true)
         }
     }

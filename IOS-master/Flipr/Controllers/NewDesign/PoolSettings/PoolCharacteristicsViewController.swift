@@ -25,7 +25,10 @@ class PoolCharacteristicsViewController: BaseViewController, UITableViewDataSour
     @IBOutlet weak var constructionYearTitleLbl: UILabel!
     @IBOutlet weak var constructYearTF: UITextField!
     @IBOutlet weak var volumeTitleLbl: UILabel!
+    @IBOutlet weak var charTitleLbl: UILabel!
     @IBOutlet weak var volumeTF: UITextField!
+    @IBOutlet weak var poolBtn: UIButton!
+
     var characteristics = [""]
     var pool = Pool()
     
@@ -34,6 +37,12 @@ class PoolCharacteristicsViewController: BaseViewController, UITableViewDataSour
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
         setCustomBackbtn()
         submitBtn.roundCorner(corner: 12)
+        charTitleLbl.text = "Characteristics".localized
+        constructionYearTitleLbl.text = "Year of construction".localized
+        volumeTitleLbl.text = "Volume (m3)".localized
+
+        poolBtn.setTitle("My pool".localized, for: .normal)
+        submitBtn.setTitle("Suivant".localized, for: .normal)
         constructYearTF.text = "\(PoolSettings.shared.builtYear ?? Calendar.current.component(.year, from: Date()))"
         volumeTF.text = "\(PoolSettings.shared.volume ?? 0)"
     }
@@ -67,11 +76,19 @@ class PoolCharacteristicsViewController: BaseViewController, UITableViewDataSour
                 hud?.textLabel.text = error?.localizedDescription
                 hud?.dismiss(afterDelay: 3)
             } else {
+                self.showSuccesScreen()
                 NotificationCenter.default.post(name: FliprLocationDidChange, object: nil)
                 hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
                 hud?.dismiss(afterDelay: 1)
+                
             }
         })
+    }
+    
+    func showSuccesScreen(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PairingSuccessViewController") as! PairingSuccessViewController
+        self.navigationController?.pushViewController(vc)
+        
     }
     
     @IBAction func backButton(_ sender: UIButton) {

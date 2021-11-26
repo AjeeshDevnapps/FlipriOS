@@ -62,10 +62,10 @@ class PoolViewController: UITableViewController {
                 self.title = "My spa".localized
                 bakcgroundFileName = "BG_spa"
             }
-            if !module.isSubscriptionValid {
-                tableView.contentInset =  UIEdgeInsets.init(top: -44, left: 0, bottom: 0, right: 0)
-                tableView.scrollIndicatorInsets = UIEdgeInsets.init(top:-44, left: 0, bottom: 0, right: 0)
-            }
+//            if !module.isSubscriptionValid {
+//                tableView.contentInset =  UIEdgeInsets.init(top: -44, left: 0, bottom: 0, right: 0)
+//                tableView.scrollIndicatorInsets = UIEdgeInsets.init(top:-44, left: 0, bottom: 0, right: 0)
+//            }
         }
         
         let imvTableBackground = UIImageView.init(image: UIImage(named: bakcgroundFileName))
@@ -301,9 +301,9 @@ class PoolViewController: UITableViewController {
                 if module.isForSpa {
                     return "Spa's status".localized
                 }
-                if !module.isSubscriptionValid {
-                    return nil
-                }
+//                if !module.isSubscriptionValid {
+//                    return nil
+//                }
             } else {
                 return nil
             }
@@ -340,9 +340,9 @@ class PoolViewController: UITableViewController {
                 if indexPath.section == 3 && indexPath.row == 0 { return 0 }
                 if indexPath.section == 2 && indexPath.row == 1 { return 0 }
             }
-            if !module.isSubscriptionValid {
-                if indexPath.section == 0 { return 0 }
-            }
+//            if !module.isSubscriptionValid {
+//                if indexPath.section == 0 { return 0 }
+//            }
         } else {
             if indexPath.section == 0 { return 0 }
             if indexPath.section == 3 && indexPath.row == 0 { return 0 }

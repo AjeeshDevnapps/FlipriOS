@@ -52,6 +52,12 @@ class PoolLocationViewController: BaseViewController, UITableViewDataSource, UIT
         searchTF.becomeFirstResponder()
         searchTF.placeholder = "Search a city...".localized
         searchTF.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        myPoolBtn.setTitle("My pool".localized, for: .normal)
+        useCurrentBtn.setTitle("Utiliser ma position actuelle".localized, for: .normal)
+        submitBtn.setTitle("Valider la localisation".localized, for: .normal)
+
+        poolSelectionSgmntCtrl.setTitle("En extérieur".localized, forSegmentAt: 0)
+        poolSelectionSgmntCtrl.setTitle("En intérieur".localized, forSegmentAt: 1)
         useCurrentBtn.roundCorner(corner: 5)
         if let location = Location.flipr() {
             searchTF.text = location.locality

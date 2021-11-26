@@ -18,6 +18,8 @@ class AppSharedData: NSObject {
 
     var isAddingDeviceFromPresentedVCFlow : Bool = false
     var selectedEquipmentCode  = 0
+    var logout : Bool = false
+
     
     private override init() {
         

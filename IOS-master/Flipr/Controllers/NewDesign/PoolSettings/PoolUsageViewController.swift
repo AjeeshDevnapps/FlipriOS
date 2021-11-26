@@ -27,6 +27,8 @@ class PoolUsageViewController: BaseViewController {
     @IBOutlet weak var numberOfUserLbl: UILabel!
     @IBOutlet weak var totalNumberLbl: UILabel!
     @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var poolBtn: UIButton!
+
     var selectedPoolType: PoolUsageType = .privatePool
     var totalUsers: Int = PoolSettings.shared.numberOfUsers ?? 0 {
         didSet {
@@ -37,6 +39,19 @@ class PoolUsageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
+        viewTitleLbl.text  = "Usage".localized
+        poolBtn.setTitle("My pool".localized, for: .normal)
+        submitBtn.setTitle("Suivant".localized, for: .normal)
+
+        let privateTxt  = "My pool".localized  + "\n rivée".localized
+        let publicText  = "My pool".localized  + "\n collective".localized
+        privateTitleLbl.text  = privateTxt
+        publicTitleLbl.text  = publicText
+        viewSubTitleLbl.text  = "Vous utilisez Flipr chez vous dans votre piscine privée".localized
+        numberOfUserLbl.text  = "Nombre d’utilisateurs habituels".localized
+        viewTitleLbl.text  = "Usage".localized
+
+        
         setCustomBackbtn()
         submitBtn.roundCorner(corner: 12)
         publicVw.roundCorner(corner: 12)
@@ -97,8 +112,14 @@ class PoolUsageViewController: BaseViewController {
     }
     
     @IBAction func submit(_ sender: UIButton) {
-        PoolSettings.shared.numberOfUsers = totalUsers
-        PoolSettings.shared.isPublic = selectedPoolType == .publicPool
+//        if totalUsers > 0{
+            PoolSettings.shared.numberOfUsers = totalUsers
+            PoolSettings.shared.isPublic = selectedPoolType == .publicPool
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PoolCharacteristicsViewController") as! PoolCharacteristicsViewController
+        self.navigationController?.pushViewController(vc)
+//        }else{
+//            self.showError(title: "Error".localized, message: "Please add number of users")
+//        }
     }
     
     @IBAction func backButton(_ sender: UIButton) {

@@ -10,23 +10,145 @@ import UIKit
 import Alamofire
 import JGProgressHUD
 
+enum ThemeSelector {
+    case orange
+    case blue
+    case camera
+}
+
 class SettingsViewController: UIViewController {
     @IBOutlet weak var settingTable: UITableView!
+    @IBOutlet weak var orangeThemeView: UIView!
+    @IBOutlet weak var orangeThemeSelectorView: UIView!
+    @IBOutlet weak var blueThemeView: UIView!
+    @IBOutlet weak var blueThemeSelectorView: UIView!
+    @IBOutlet weak var cameraPicThemeView: UIView!
+    @IBOutlet weak var cameraPicThemeSelectorView: UIView!
+    var currentSelection = ThemeSelector.orange
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Settings".localized
-
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))
-        self.settingTable.tableFooterView = UIView()
+      //  self.settingTable.tableFooterView = UIView()
         self.settingTable.isScrollEnabled = false
         self.settingTable.showsVerticalScrollIndicator = false
+        setupTheme()
         // Do any additional setup after loading the view.
+    }
+    
+    
+    func setupTheme(){
+        orangeThemeView.fullyRoundCorner()
+        orangeThemeSelectorView.fullyRoundCorner()
+        blueThemeView.fullyRoundCorner()
+        blueThemeSelectorView.fullyRoundCorner()
+        cameraPicThemeView.fullyRoundCorner()
+        cameraPicThemeSelectorView.fullyRoundCorner()
+        var isOrangeTheme = true
+        if let currentThemColour = UserDefaults.standard.object(forKey: "CurrentTheme") as? String{
+            if currentThemColour == "blue"{
+                isOrangeTheme = false
+            }else{
+                isOrangeTheme = true
+            }
+        }
+        if isOrangeTheme{
+            currentSelection = .orange
+            orangeThemeSelectorView.backgroundColor = .black
+            orangeThemeView.layer.borderColor = UIColor.init(hexString: "4A5567").cgColor
+            orangeThemeView.layer.borderWidth = 2
+            
+            blueThemeSelectorView.backgroundColor = .clear
+            blueThemeView.layer.borderColor = UIColor.init(hexString: "97A3B6").cgColor
+            blueThemeView.layer.borderWidth = 1
+            
+            UserDefaults.standard.set("orange", forKey: "CurrentTheme")
+            
+        }else{
+            currentSelection = .blue
+            blueThemeSelectorView.backgroundColor = .black
+            blueThemeView.layer.borderColor = UIColor.init(hexString: "4A5567").cgColor
+            blueThemeView.layer.borderWidth = 2
+            
+            orangeThemeSelectorView.backgroundColor = .clear
+            orangeThemeView.layer.borderColor = UIColor.init(hexString: "97A3B6").cgColor
+            orangeThemeView.layer.borderWidth = 1
+            
+            UserDefaults.standard.set("blue", forKey: "CurrentTheme")
+        }
     }
     
     @objc func closeButtonTapped(){
         self.dismiss(animated: true, completion: nil)
     }
+   
+    
+    func selectOrangeTheme(){
+        currentSelection = .orange
+        orangeThemeSelectorView.backgroundColor = .black
+        orangeThemeView.layer.borderColor = UIColor.init(hexString: "4A5567").cgColor
+        orangeThemeView.layer.borderWidth = 2
+        UserDefaults.standard.set("orange", forKey: "CurrentTheme")
+        NotificationCenter.default.post(name: K.Notifications.WavethemeSettingsChanged, object: nil)
+
+    }
+    
+    func deSelectOrangeTheme(){
+        orangeThemeSelectorView.backgroundColor = .clear
+        orangeThemeView.layer.borderColor = UIColor.init(hexString: "97A3B6").cgColor
+        orangeThemeView.layer.borderWidth = 1
+    }
+    
+    func selectBlueTheme(){
+        currentSelection = .blue
+        blueThemeSelectorView.backgroundColor = .black
+        blueThemeView.layer.borderColor = UIColor.init(hexString: "4A5567").cgColor
+        blueThemeView.layer.borderWidth = 2
+        
+        UserDefaults.standard.set("blue", forKey: "CurrentTheme")
+        NotificationCenter.default.post(name: K.Notifications.WavethemeSettingsChanged, object: nil)
+
+    }
+    
+    func deSelectBlueTheme(){
+        blueThemeSelectorView.backgroundColor = .clear
+        blueThemeView.layer.borderColor = UIColor.init(hexString: "97A3B6").cgColor
+        blueThemeView.layer.borderWidth = 1
+    }
+    
+    func selectCameraTheme(){
+        currentSelection = .camera
+        cameraPicThemeSelectorView.backgroundColor = .black
+        cameraPicThemeView.layer.borderColor = UIColor.init(hexString: "4A5567").cgColor
+        cameraPicThemeView.layer.borderWidth = 2
+    }
+    
+    func deSelectCameraTheme(){
+        cameraPicThemeSelectorView.backgroundColor = .clear
+        cameraPicThemeView.layer.borderColor = UIColor.init(hexString: "97A3B6").cgColor
+        cameraPicThemeView.layer.borderWidth = 1
+    }
+    
+    
+    @IBAction func orangeThemeButtonTapped(){
+        selectOrangeTheme()
+        deSelectBlueTheme()
+//        deSelectCameraTheme()
+    }
+    
+    @IBAction func blueThemeButtonTapped(){
+        selectBlueTheme()
+//        deSelectCameraTheme()
+        deSelectOrangeTheme()
+    }
+    
+    @IBAction func cameraThemeButtonTapped(){
+        selectCameraTheme()
+        deSelectOrangeTheme()
+        deSelectBlueTheme()
+    }
+    
     
     @IBAction func accountButtonTapped(){
         if let accountVC = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as? AccountViewController{
@@ -53,17 +175,15 @@ class SettingsViewController: UIViewController {
         let alertController = UIAlertController(title: "LOGOUT_TITLE".localized, message: "Are you sure you want to log out?".localized, preferredStyle: UIAlertController.Style.actionSheet)
         
         let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.cancel)
-        
         let okAction = UIAlertAction(title: "Log out".localized, style: UIAlertAction.Style.destructive)
         {
             (result : UIAlertAction) -> Void in
             print("You pressed OK")
-            
+            User.logout()
             self.dismiss(animated: true, completion: {
                 NotificationCenter.default.post(name: K.Notifications.UserDidLogout, object: nil)
             })
             
-            User.logout()
             
         }
         alertController.addAction(cancelAction)

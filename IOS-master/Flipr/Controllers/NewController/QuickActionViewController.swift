@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import JGProgressHUD
+import SafariServices
 
 class QuickActionViewController: UIViewController {
+    @IBOutlet weak var menuTable: UITableView!
+
     @IBOutlet weak var triggerContainerView: UIView!
     @IBOutlet weak var expertContainerView: UIView!
     @IBOutlet weak var calibrationContainerView: UIView!
@@ -23,15 +27,33 @@ class QuickActionViewController: UIViewController {
     @IBOutlet weak var callibrationLbl: UILabel!
     @IBOutlet weak var drainingLbl: UILabel!
     @IBOutlet weak var stripTestLbl: UILabel!
-
+    @IBOutlet weak var subScriptionView: UIView!
     @IBOutlet  var bottonContainerContraint: NSLayoutConstraint!
+    @IBOutlet weak var subScriptionViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var subScriptiontitleLbl: UILabel!
+    @IBOutlet  var tableBottonContainerContraint: NSLayoutConstraint!
 
+
+    var isShowSubscription = false
+    var haveFlipr = false
+    var haveHub = false
+    let hud = JGProgressHUD(style:.dark)
+
+
+    var cellTitleList = [String]()
+    var imageNames = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+//        setupViews()
+        titleLbl.text = "Quick Actions".localized
+        menuTable.tableFooterView = UIView(frame: CGRect(x: 0, y: -1, width: menuTable.frame.size.width, height: 1))
         containerView.layer.cornerRadius = 15
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.tapView.addGestureRecognizer(tap)
+        getDeviceDetails()
         // Do any additional setup after loading the view.
     }
     
@@ -56,10 +78,101 @@ class QuickActionViewController: UIViewController {
 //        self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
     }
     
+    func getDeviceDetails(){
+        hud?.show(in: self.view)
+        User.currentUser?.getModuleList(completion: { [self] (devices,error) in
+            self.hud?.dismiss()
+            if let modules = devices as? [[String:Any]] {
+                var hubId = ""
+                for mod in modules {
+                    if let type = mod["ModuleType_Id"] as? Int {
+                        if type == 1 {
+                            self.haveFlipr = true
+                            if let name = mod["Serial"] as? String  {
+                                AppSharedData.sharedInstance.serialKey = name
+                            }
+                        }else{
+                            self.haveHub = true
+                           
+                            if let name = mod["Serial"] as? String  {
+                                hubId = name
+                                AppSharedData.sharedInstance.serialKey = name
+                            }
+                        }
+                    }
+                }
+                if self.haveFlipr{
+                  
+                    if let module = Module.currentModule {
+                        if module.isSubscriptionValid {
+                            self.subScriptionViewHeight.constant = 0
+                            self.subScriptionView.isHidden = true
+                        }else{
+                            self.subScriptionView.isHidden = false
+                            self.subScriptiontitleLbl.text  = "Activer la connexion à distance".localized
+                            self.subScriptionViewHeight.constant = 64
+                        }
+                    }
+                    if self.haveHub {
+                        self.cellTitleList = ["Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Gestion des plannings".localized]
+                        self.imageNames = ["icon-mesure","icon-calibration","Group 241","icon-smart-scan","quickMenuTime"]
+                    }else{
+                        self.cellTitleList = ["Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Add a Flipr Hub".localized]
+                        self.imageNames = ["icon-mesure","icon-calibration","Group 241","icon-smart-scan"]
+                    }
+                    
+                }else{
+                    if self.haveHub {
+                        self.cellTitleList = ["Gestion des plannings".localized,"Buy cleaning products".localized,"Add a Flipr Hub".localized]
+                        self.imageNames = ["quickMenuTime","Group 241","icon-smart-scan"]
+                    }
+                   
+                }
+                if self.haveHub && self.haveFlipr {
+                    if let module = Module.currentModule {
+                        if module.isSubscriptionValid {
+                            containerViewHeight.constant = 360
+                            subScriptionViewHeight.constant = 0
+                        }else{
+                            containerViewHeight.constant = 404
+                            subScriptionViewHeight.constant = 64
+                        }
+                    }else{
+                        containerViewHeight.constant = 360
+                    }
+                }
+                else{
+                    if self.haveHub{
+                        containerViewHeight.constant = 296
+                        tableBottonContainerContraint.constant = 10
+                        containerView.setNeedsDisplay()
+                    }else{
+                        if let module = Module.currentModule {
+                            if module.isSubscriptionValid {
+                                containerViewHeight.constant = 360
+                                subScriptionViewHeight.constant = 0
+                            }else{
+                                containerViewHeight.constant = 404
+                                subScriptionViewHeight.constant = 64
+                            }
+                        }else{
+                            containerViewHeight.constant = 360
+                        }
+                    }
+                }
+                self.menuTable.reloadData()
+
+            }
+           
+        })
+        
+    }
+
+    
     func setupViews(){
-        if UIScreen.main.nativeBounds.height < 1334{
-            bottonContainerContraint.constant = 576 - 70
-        }
+//        if UIScreen.main.nativeBounds.height < 1334{
+//            bottonContainerContraint.constant = 576 - 70
+//        }
         titleLbl.text = "Quick Actions".localized
         measurementLbl.text = "Trigger a Measurement".localized
         expertLbl.text  = "Expert Mode".localized
@@ -110,24 +223,14 @@ class QuickActionViewController: UIViewController {
             return
         }
         
-    /*
-        if let module = Module.currentModule {
-            if !module.isSubscriptionValid {
-                if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
-                }
-            } else {
-       */
-                
-                let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
-                if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
-                    viewController.calibrationType = .simpleMeasure
-                    viewController.modalPresentationStyle = .fullScreen
-                    self.present(viewController, animated: true, completion: nil)
-                }
-//            }
-//        }
+        
+        
+        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+        if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
+            viewController.calibrationType = .simpleMeasure
+            viewController.modalPresentationStyle = .fullScreen
+            self.present(viewController, animated: true, completion: nil)
+        }
     }
 
     @IBAction func expertModeButtonClicked(){
@@ -150,14 +253,6 @@ class QuickActionViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
             self.showCalibrationView()
-//            if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
-//                viewController.recalibration = true
-//                viewController.calibrationType = .ph7
-//                viewController.modalPresentationStyle = .fullScreen
-//                let nav = UINavigationController.init(rootViewController: viewController)
-//                nav.modalPresentationStyle = .fullScreen
-//                self.present(nav, animated: true, completion: nil)
-//            }
         }))
         alert.addAction(UIAlertAction(title: "Order a calibration kit".localized, style: .default, handler: { (action) in
             if let url = URL(string:"https://www.goflipr.com/produit/kit-de-calibration/".remotable) {
@@ -190,12 +285,6 @@ class QuickActionViewController: UIViewController {
             if let viewController = sb.instantiateViewController(withIdentifier: "StripViewControllerID") as? StripViewController {
                 viewController.recalibration = true
                 viewController.isPresentView = true
-//                viewController.modalPresentationStyle = .fullScreen
-//                self.present(viewController, animated: true, completion: nil)
-//                let navigationController = LightNavigationViewController.init(rootViewController: viewController)
-//                navigationController.modalPresentationStyle = .fullScreen
-//                self.present(navigationController, animated: true, completion:nil)
-//                
                 viewController.modalPresentationStyle = .fullScreen
                 self.present(viewController, animated: true, completion: nil)
 
@@ -226,5 +315,223 @@ class QuickActionViewController: UIViewController {
         let navigationController = UINavigationController.init(rootViewController: vc)
         navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)
+    }
+}
+
+extension QuickActionViewController: UITableViewDelegate,UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
+        return cellTitleList.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 64
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        let cell =  tableView.dequeueReusableCell(withIdentifier:"MenuTableViewCell",
+                                             for: indexPath) as! MenuTableViewCell
+        
+        cell.menuTitleLbl.text = cellTitleList[indexPath.row]
+        cell.menuIcon.image =  UIImage(named: imageNames[indexPath.row])
+        return cell
+    }
+     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        if self.haveHub && self.haveFlipr {
+            handleFliprNhubMenu(indexPath:indexPath)
+        }
+        else {
+            if self.haveHub{
+                handleHubMenu(indexPath:indexPath)
+            }else{
+                handleFliprMenu(indexPath:indexPath)
+            }
+        }
+    }
+    
+    func handleFliprNhubMenu(indexPath: IndexPath){
+        if indexPath.row == 0 {
+            triggerMesurment()
+        }
+        else if indexPath.row == 1 {
+            expertMode()
+        }
+        else if indexPath.row == 2 {
+            buyProduct()
+        }
+        else if indexPath.row == 3 {
+            hubButtonAction()
+        }
+        else{
+            
+        }
+    }
+    
+    func handleHubMenu(indexPath: IndexPath){
+        if indexPath.row == 0 {
+            hubButtonAction()
+        }
+        else if indexPath.row == 1 {
+            buyProduct()
+        }
+        else if indexPath.row == 2 {
+            addHubEquipments()
+        }
+        else{
+            
+        }
+    }
+    
+    func handleFliprMenu(indexPath: IndexPath){
+        if indexPath.row == 0 {
+            triggerMesurment()
+        }
+        else if indexPath.row == 1 {
+            expertMode()
+        }
+        else if indexPath.row == 2 {
+            buyProduct()
+        }
+        else if indexPath.row == 3 {
+            addHubEquipments()
+        }
+        else{
+            
+        }
+    }
+    
+    func triggerMesurment(){
+        if  Module.currentModule == nil{
+            return
+        }
+        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+        if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
+            viewController.calibrationType = .simpleMeasure
+            viewController.modalPresentationStyle = .fullScreen
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    func expertMode(){
+        let tmpSb = UIStoryboard.init(name: "Main", bundle: nil)
+        if let navigationController = tmpSb.instantiateViewController(withIdentifier: "SettingsNavingation") as? UINavigationController {
+            if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertModeViewController") as? ExpertModeViewController {
+                navigationController.modalPresentationStyle = .fullScreen
+                viewController.isDirectPresenting = true
+                navigationController.setViewControllers([viewController], animated: false)
+                self.present(navigationController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func newCalibration(){
+        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+        let alert = UIAlertController(title: "Calibration".localized, message:"Are you sure you want to calibrate the probes again?".localized, preferredStyle:.alert)
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
+            self.showCalibrationView()
+        }))
+        alert.addAction(UIAlertAction(title: "Order a calibration kit".localized, style: .default, handler: { (action) in
+            if let url = URL(string:"https://www.goflipr.com/produit/kit-de-calibration/".remotable) {
+                UIApplication.shared.open(url, options: self.convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func addHubEquipments(){
+    
+        let fliprStoryboard = UIStoryboard(name: "HUBElectrical", bundle: nil)
+        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController") as! ElectricalSetupViewController
+        viewController.isPresentView = true
+        let navigationVC = UINavigationController.init(rootViewController: viewController)
+        self.present(navigationVC, animated: true)
+    }
+    
+    func hubButtonAction() {
+        if HUB.currentHUB == nil {
+            
+            let alertController = UIAlertController(title: "Flipr HUB", message: "Vous n'avez pas de HUB associé à votre compte.".localized, preferredStyle: UIAlertController.Style.alert)
+            
+            let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.cancel)
+            
+            let okAction = UIAlertAction(title: "Découvrir Flipr HUB".localized, style: UIAlertAction.Style.default)
+            {
+                (result : UIAlertAction) -> Void in
+                
+                if let url = URL(string: "https://www.goflipr.com/flipr-hub/") {
+                    let vc = SFSafariViewController(url: url, entersReaderIfAvailable: false)
+                    self.present(vc, animated: true)
+                }
+                
+            }
+            let addAction = UIAlertAction(title: "Connecter votre Flipr HUB".localized, style: UIAlertAction.Style.default)
+            {
+                (result : UIAlertAction) -> Void in
+                
+                
+                let storyboard = UIStoryboard(name: "HUB", bundle: nil)
+                
+                let viewController = storyboard.instantiateViewController(withIdentifier: "HubTypeSelectionViewControllerID") as! HubTypeSelectionViewController
+                viewController.dismissOnBack = true
+                let navC = UINavigationController(rootViewController: viewController)
+                navC.setNavigationBarHidden(true, animated: false)
+                navC.modalPresentationStyle = .fullScreen
+                self.present(navC, animated: true, completion: nil)
+                
+            }
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+            
+            if Pool.currentPool?.city != nil {
+                alertController.addAction(addAction)
+            }
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        } else if Pool.currentPool?.city == nil {
+            let alertController = UIAlertController(title: "Flipr HUB".localized, message: "Pour terminer la configuration du HUB, veuillez d'abord configurer votre piscine.".localized, preferredStyle: UIAlertController.Style.alert)
+            
+            let okAction = UIAlertAction(title: "OK".localized, style: UIAlertAction.Style.default)
+            {
+                (result : UIAlertAction) -> Void in
+                
+                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "PoolViewControllerID") {
+                    viewController.modalPresentationStyle = .fullScreen
+                    self.present(viewController, animated: true, completion: nil)
+                }
+                
+            }
+            
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            
+            let storyboard = UIStoryboard(name: "HUB", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "HUBNavigationControllerID")
+            viewController.modalPresentationStyle = .fullScreen
+            self.present(viewController, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
+    @IBAction func subscriptionButtonAction(){
+        if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
+//            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    func buyProduct(){
+        if let url = URL(string: "https://goflipr.com/le-shop/#traitement-piscine") {
+            let vc = SFSafariViewController(url: url, entersReaderIfAvailable: false)
+            self.present(vc, animated: true)
+        }
     }
 }

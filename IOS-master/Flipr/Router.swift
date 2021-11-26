@@ -96,6 +96,10 @@ enum Router: URLRequestConvertible {
     case getHUBPlannings(serial: String)
     case deleteHUBPlanning(serial: String, id:Int)
     case updateHUBPlannings(serial: String, attributes:[String:Any])
+    case reactivateAlert(serial: String)
+
+    
+    
     
     //Legacy
     //static let baseURLString = K.Server.BaseUrl + K.Server.ApiPath
@@ -107,6 +111,9 @@ enum Router: URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
+            
+        case .reactivateAlert:
+            return .put
         case .authentifyUser:
             return .post
         case .createUser:
@@ -136,7 +143,7 @@ enum Router: URLRequestConvertible {
         case .addModuleEquipment:
             return .post
         case .forgetModuleEquipment:
-            return .put
+            return .delete
         case .getModules:
             return .get
         case .addStripTest:
@@ -271,6 +278,9 @@ enum Router: URLRequestConvertible {
             return "accounts"
         case .sendSubscriptionReceipt:
             return "accounts/subscription/iTunes"
+            
+        case .reactivateAlert(_):
+            return "accounts/"
         case .addMobileDevice:
             return "mobiles"
             
@@ -279,7 +289,7 @@ enum Router: URLRequestConvertible {
         case .addModuleEquipment(let serial, let code):
             return "hub/\(serial)/Equipment/Add/\(code)"
         case .forgetModuleEquipment(let serial, let code):
-            return "modules/\(serial)/Status"
+            return "modules/\(serial)"
             
         case .getModules:
             return "modules"
@@ -294,7 +304,7 @@ enum Router: URLRequestConvertible {
         case .readModuleLastSurvey(let serialId):
             return "modules/\(serialId)/survey/last"
         case .readModuleResume(let serialId):
-            return "modules/\(serialId)/Resume"
+            return "modules/\(serialId)/NewResume"
         case .removeModule(let serialId):
             return "modules/\(serialId)"
             
@@ -532,6 +542,7 @@ enum Router: URLRequestConvertible {
                 "Delete": delete,
                 "NickName": "Flipr " + serial
             ]
+            print(parameters)
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         
         //case .addStripTest(_,let params):
@@ -711,7 +722,12 @@ enum Router: URLRequestConvertible {
             ]
             print("Add productAttributes with params: \(parameters)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-       
+            
+        case .reactivateAlert(let serial):
+            if let url = urlRequest.url?.absoluteString {
+                urlRequest.url = URL(string: url + "\(serial)/ReactivationNotification?notification=true")
+            }
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: nil)
         default:
             break
         }

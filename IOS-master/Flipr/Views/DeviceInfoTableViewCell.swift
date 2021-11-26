@@ -17,6 +17,10 @@ class DeviceInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var modelLabel: UILabel!
     @IBOutlet weak var serialLabel: UILabel!
     @IBOutlet weak var keyIdLabel: UILabel!
+    
+    @IBOutlet weak var batteryLabel: UILabel!
+    @IBOutlet weak var batteryLevelLabel: UILabel!
+
     @IBOutlet weak var editButton: UIButton!
     
     @IBOutlet weak var modelTitleLabel: UILabel!
@@ -27,6 +31,9 @@ class DeviceInfoTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        if self.shadowView != nil{
+            self.shadowView.roundCorner(corner: 12.0)
+        }
         modelTitleLabel.text = "Model".localized
         if serialTitleLabel != nil{
             serialTitleLabel.text = "Serial Number".localized
@@ -36,6 +43,9 @@ class DeviceInfoTableViewCell: UITableViewCell {
         }
         if titleLabel != nil{
             titleLabel.text = "Details".localized
+        }
+        if batteryLabel != nil{
+            batteryLabel.text = "Battery".localized
         }
 
         // Initialization code

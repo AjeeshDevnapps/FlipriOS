@@ -94,9 +94,9 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
         case .temperature:
             cell.textWrappingView.layer.cornerRadius = 4
             cell.textWrappingView.layer.borderWidth = 1
-            cell.textWrappingView.layer.borderColor = UIColor.cyan.cgColor
+            cell.textWrappingView.layer.borderColor = UIColor.gray.cgColor
             cell.value.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-            cell.value.textColor = UIColor.cyan
+            cell.value.textColor = UIColor.gray
             if !valueStrings.isEmpty {
                 cell.value.text = "\((valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 0).toString)°"
             }
@@ -129,6 +129,7 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderCell", for: indexPath)
+            header.removeSubviews()
             if !valueStrings.isEmpty {
                 let value = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 1)
                 var image: UIImage? = UIImage()
@@ -147,8 +148,9 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
                 headerFrame.size.height = collectionView.frame.height / 2
                 imageView.frame = headerFrame
                 imageView.contentMode = .center
-                
                 header.addSubview(imageView)
+            }else{
+                
             }
             return header
         default:  fatalError("Unexpected element kind")

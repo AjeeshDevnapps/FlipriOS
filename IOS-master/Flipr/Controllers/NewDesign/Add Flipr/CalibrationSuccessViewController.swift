@@ -68,14 +68,16 @@ class CalibrationSuccessViewController: UIViewController {
     }
     
     func showPoolSettings(){
+        /*
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let viewController = sb.instantiateViewController(withIdentifier: "PoolViewSettingsControllerID") as! PoolViewController
         viewController.isInitialPoolSetup = true
 //        viewController.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(viewController, animated: true)
-        //        let sb = UIStoryboard(name: "PoolSettings", bundle: nil)
-        //        let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewController") as! PoolSettingsStartViewController
-        //        self.navigationController?.pushViewController(vc, animated: true)
+        */
+                let sb = UIStoryboard(name: "PoolSettings", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewController") as! PoolSettingsStartViewController
+                self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

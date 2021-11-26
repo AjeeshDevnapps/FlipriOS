@@ -37,9 +37,9 @@ class DeviceViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if self.devicewifiTypeCell == .Hub{
-            if AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi{
+//            if AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi{
                 self.getHubDetails()
-            }
+//            }
         }
     }
     
@@ -239,7 +239,7 @@ class DeviceViewController: UIViewController {
             switch response.result {
                 
             case .success(let value):
-                
+                NotificationCenter.default.post(name: K.Notifications.RemovedHub, object: nil)
                 print("Delete HUB response.result.value: \(value)")
                 self.navigationController?.popViewController()
 
@@ -289,7 +289,11 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
         }
         
         if indexPath.row == 1 {
-            return 275
+            if devicewifiTypeCell == DeviceWifiCellType.Flipr{
+                return 352
+            }else{
+                return 275
+            }
         }
         else if indexPath.row == 2 {
             return 66
@@ -309,12 +313,44 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             
         }
         else if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"DeviceInfoTableViewCell",
-                                                     for: indexPath) as! DeviceInfoTableViewCell
+            var cell: DeviceInfoTableViewCell!
+           
+            
+            if devicewifiTypeCell == DeviceWifiCellType.Flipr{
+                cell = tableView.dequeueReusableCell(withIdentifier:"FliprDeviceInfoTableViewCell",
+                                                         for: indexPath) as! DeviceInfoTableViewCell
+                cell.titleLabel.text = "Details".localized
+                cell.editButton.isHidden = true
+                cell.nameLabel.isHidden = true
+                
+                   if let level = UserDefaults.standard.object(forKey: "BatteryLevel") as? String, Module.currentModule != nil {
+                    cell.batteryLevelLabel.text = level + "%"
+                   } else {
+                    
+                   }
+                   
+            }else{
+                cell = tableView.dequeueReusableCell(withIdentifier:"HubDeviceInfoTableViewCell",
+                                                         for: indexPath) as! DeviceInfoTableViewCell
+                cell.titleLabel.text = "Name"
+                cell.nameLabel.text = self.hubName.capitalizingFirstLetter()
+                //                UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseIn, animations: {
+                cell.editButton.isHidden = false
+                cell.nameLabel.isHidden = false
+            }
+            /*
             if devicewifiTypeCell == DeviceWifiCellType.Flipr{
                 cell.titleLabel.text = "Details".localized
                 cell.editButton.isHidden = true
                 cell.nameLabel.isHidden = true
+                /*
+                   if let level = UserDefaults.standard.object(forKey: "BatteryLevel") as? String, Module.currentModule != nil {
+                       self.batteryLevelLabel.text = level + "%"
+                       self.batteryLevelLabel.isHidden = false
+                   } else {
+                       self.batteryLevelLabel.isHidden = true
+                   }
+                   */
             }
             else{
                 cell.titleLabel.text = "Name"
@@ -327,7 +363,7 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             //            if let name = devicesDetails?["NickName"] as? String  {
             //                cell.nameLabel.text = name
             //            }
-            
+            */
             if let serial = devicesDetails?["Serial"] as? String  {
                 cell.serialLabel.text = serial
             }

@@ -101,6 +101,7 @@ class AddHubViewController: BaseViewController {
         HUBManager.shared.detectedHubs.removeAll()
         let  hubListVC = self.storyboard?.instantiateViewController(withIdentifier: "HubListViewController") as! HubListViewController
         hubListVC.hubs = self.hubs
+        hubListVC.equipmentCode = self.equipmentCode
         self.navigationController?.pushViewController(hubListVC)
         
     }

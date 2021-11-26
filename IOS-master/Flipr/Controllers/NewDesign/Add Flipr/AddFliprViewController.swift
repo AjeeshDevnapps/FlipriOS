@@ -30,6 +30,7 @@ class AddFliprViewController: BaseViewController {
     var fromMenu = false
     var isPresent = false
     var isSignupFlow = false
+    var fliprArray = [String]()
 
 
     override func viewDidLoad() {
@@ -86,10 +87,15 @@ class AddFliprViewController: BaseViewController {
         }
         
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprDiscovered, object: nil, queue: nil) { (notification) in
-            self.scanningAlertContainerView.isHidden = true
-            self.loaderView.hideStateView()
+//            self.scanningAlertContainerView.isHidden = true
+//            self.loaderView.hideStateView()
             if let serial = notification.userInfo?["serial"] as? String {
-                self.showFliprList(serialKey: serial)
+                if let index = self.fliprArray.firstIndex(of: serial) {
+                    print(index) // Output: 4
+                }else{
+                    self.fliprArray.append(serial)
+                }
+//                self.showFliprList(serialKey: serial)
             }else{
                 
             }
@@ -103,7 +109,7 @@ class AddFliprViewController: BaseViewController {
             fliprListVC.serialKey = serialKey
             fliprListVC.flipType = "Flipr"
             fliprListVC.isSignupFlow = isSignupFlow
-            self.navigationController?.pushViewController(fliprListVC)
+//            self.navigationController?.pushViewController(fliprListVC)
         }
     }
     
@@ -166,12 +172,30 @@ class AddFliprViewController: BaseViewController {
     }
     
     func showFliprNotDiscoveredBanner(){
-        self.helpButtonContainerView.isHidden = false
-        self.fliprNotDiscoverContainerView.isHidden = false
-        self.bluetoothAlertContainerView.isHidden = true
-        self.scanningAlertContainerView.isHidden = true
+        
+        if fliprArray.count > 0 {
+            self.scanningAlertContainerView.isHidden = true
+            self.loaderView.hideStateView()
+            showFliprList()
+        }else{
+            self.helpButtonContainerView.isHidden = false
+            self.fliprNotDiscoverContainerView.isHidden = false
+            self.bluetoothAlertContainerView.isHidden = true
+            self.scanningAlertContainerView.isHidden = true
+        }
+       
         
     }
 
+    func showFliprList(){
+        if let fliprListVC = self.storyboard?.instantiateViewController(withIdentifier: "FliprListViewController") as? FliprListViewController{
+            fliprListVC.fliprList = self.fliprArray
+//            fliprListVC.serialKey = serialKey
+//            fliprListVC.flipType = "Flipr"
+            fliprListVC.isSignupFlow = isSignupFlow
+            self.navigationController?.pushViewController(fliprListVC)
+        }
+    }
+    
 
 }

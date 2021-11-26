@@ -90,7 +90,7 @@ class ProductsAndEquipmentsViewController: UIViewController {
         if segmentControl.selectedSegmentIndex == 0 {
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(rightBarButtonTapped))
         }else{
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(rightBarButtonTapped))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save".localized, style: .plain, target: self, action: #selector(rightBarButtonTapped))
         }
     }
     
