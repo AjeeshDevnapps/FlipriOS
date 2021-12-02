@@ -197,6 +197,12 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var day3IconLabel: UILabel!
     @IBOutlet weak var day4IconLabel: UILabel!
     
+    @IBOutlet weak var probableWeatherIcon: UILabel!
+    
+    
+    @IBOutlet weak var windSpeedLabel: UILabel!
+    @IBOutlet weak var tempPrecipitationLabel: UILabel!
+
 
 
     var hubTabWaveTopConstraintPreValue = 0
@@ -396,7 +402,7 @@ class DashboardViewController: UIViewController {
             self.callGetStatusApis()
         }
         
-        NotificationCenter.default.addObserver(forName: K.Notifications.RemovedHub, object: nil, queue: nil) { (notification) in
+        NotificationCenter.default.addObserver(forName: K.Notifications.UpdateHubViews, object: nil, queue: nil) { (notification) in
             self.loadHUBs()
         }
         
@@ -2343,6 +2349,17 @@ class DashboardViewController: UIViewController {
         }
     }
     
+    
+    func dayOfTheWeek(dateString: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        if let date = dateFormatter.date(from: dateString) {
+            dateFormatter.dateFormat = "EEE"
+            return dateFormatter.string(from: date)
+        }
+        return nil
+    }
+    
     func updateFliprData() {
         
         hideFliprData()
@@ -2378,6 +2395,53 @@ class DashboardViewController: UIViewController {
                         }
                     }
                     
+                    if let nextFiveHoursData = JSON["WeatherNext5Hours"] as? [[String:Any]] {
+                        do {
+                            let data = try JSONSerialization.data(withJSONObject: nextFiveHoursData, options: .prettyPrinted)
+                            let decoder = JSONDecoder()
+                            let decodedValues = try decoder.decode([WeatherForHour].self, from: data)
+                            let weatherForFifthHour = decodedValues.last
+                            let formatter = DateFormatter()
+                            formatter.locale = Locale(identifier: "en_US_POSIX")
+                            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                            if let givenDate = formatter.date(from: weatherForFifthHour?.hourTemperature ?? "") {
+                                formatter.dateFormat = "dd/MM"
+                            }
+                            self.probableWeatherIcon.text = self.climaconsCharWithIcon(icon: weatherForFifthHour?.weatherIcon ?? "")
+                            self.tempPrecipitationLabel.text =  "\(weatherForFifthHour?.precipitationProbability ?? 0 )" + "%"
+                            self.windSpeedLabel.text = (weatherForFifthHour?.windSpeed?.fixedFraction(digits: 1).toString ?? "") + "km/h"
+
+                            
+                        } catch let error {
+                            
+                        }
+                    }
+                    
+                    if let nextDaysWeather = JSON["WeatherNext3Days"] as? [[String: Any]] {
+                        do {
+                            let data = try JSONSerialization.data(withJSONObject: nextDaysWeather, options: .prettyPrinted)
+                            let decoder = JSONDecoder()
+                            let decodedValues = try decoder.decode([NextDaysWeatherData].self, from: data)
+                            self.day1IconLabel.text = self.climaconsCharWithIcon(icon: decodedValues[0].weatherIcon ?? "")
+                            self.day1TitleLabel.text = self.dayOfTheWeek(dateString: decodedValues[0].tempMaxTime ?? "")
+                            self.day1ValueLabel.text = (decodedValues[0].tempMin?.fixedFraction(digits: 0).toString ?? "") + " | " + (decodedValues[0].tempMax?.fixedFraction(digits: 0).toString ?? "") + "°"
+                            
+                            self.day2IconLabel.text = self.climaconsCharWithIcon(icon: decodedValues[1].weatherIcon ?? "")
+                            self.day2TitleLabel.text = self.dayOfTheWeek(dateString: decodedValues[1].tempMaxTime ?? "")
+                            self.day2ValueLabel.text = (decodedValues[1].tempMin?.fixedFraction(digits: 0).toString ?? "") +  " | " + (decodedValues[1].tempMax?.fixedFraction(digits: 0).toString ?? "")  + "°"
+
+                            self.day3IconLabel.text = self.climaconsCharWithIcon(icon: decodedValues[2].weatherIcon ?? "")
+                            self.day3TitleLabel.text = self.dayOfTheWeek(dateString: decodedValues[2].tempMaxTime ?? "")
+                            self.day3ValueLabel.text = (decodedValues[2].tempMin?.fixedFraction(digits: 0).toString ?? "") + " | " + (decodedValues[2].tempMax?.fixedFraction(digits: 0).toString ?? "") + "°"
+
+                            self.day4IconLabel.text = self.climaconsCharWithIcon(icon: decodedValues[3].weatherIcon ?? "")
+                            self.day4TitleLabel.text = self.dayOfTheWeek(dateString: decodedValues[3].tempMaxTime ?? "")
+                            self.day4ValueLabel.text = (decodedValues[2].tempMin?.fixedFraction(digits: 0).toString ?? "") + " | " + (decodedValues[2].tempMax?.fixedFraction(digits: 0).toString ?? "") + "°"
+                        } catch let error {
+                            
+                        }
+                    }
+                    
                     if let lastWeekWeather = JSON["WeatherLastWeek"] as? [String: Any] {
                         if let individualData = lastWeekWeather["ListWeatherOneDayUnit"] as? [[String: Any]] {
                             do {
@@ -2386,7 +2450,7 @@ class DashboardViewController: UIViewController {
                                 let decodedValues = try decoder.decode([WeatherForDay].self, from: data)
                                 let phValues = decodedValues.map { $0.moyPH }
                                 let rxValues = decodedValues.map { $0.moyRX }
-                                let highestTemp = decodedValues.map { $0.maxTemp }
+                                let highestTemp = decodedValues.map { $0.waterTemp }
                                 let dates = decodedValues.map { $0.date }
                                 self.phStatusView.valueStrings = phValues
                                 self.phStatusView.dates = dates
@@ -2396,36 +2460,27 @@ class DashboardViewController: UIViewController {
                                 self.tempStatusView.dates = dates
                                 self.reloadWeatherStatus()
                                 
+                                /*
                                 let lastFourDaysData = Array(decodedValues.suffix(4))
                                 if lastFourDaysData.count == 4 {
                                     self.day1IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[0].weatherIcon ?? "")
                                     self.day1TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[0].date)
-                                    self.day1ValueLabel.text = (lastFourDaysData[0].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
+                                    self.day1ValueLabel.text = (lastFourDaysData[0].minTemp?.fixedFraction(digits: 0).toString ?? "") + " - " + (lastFourDaysData[0].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
                                     
                                     self.day2IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[1].weatherIcon ?? "")
                                     self.day2TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[1].date)
-                                    self.day2ValueLabel.text = (lastFourDaysData[1].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
+                                    self.day2ValueLabel.text = (lastFourDaysData[1].minTemp?.fixedFraction(digits: 0).toString ?? "") +  " - " + (lastFourDaysData[1].maxTemp?.fixedFraction(digits: 0).toString ?? "")  + "°"
 
                                     self.day3IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[2].weatherIcon ?? "")
                                     self.day3TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[2].date)
-                                    self.day3ValueLabel.text = (lastFourDaysData[2].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
+                                    self.day3ValueLabel.text = (lastFourDaysData[2].minTemp?.fixedFraction(digits: 0).toString ?? "") + " - " + (lastFourDaysData[2].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
 
                                     self.day4IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[3].weatherIcon ?? "")
                                     self.day4TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[3].date)
-                                    self.day4ValueLabel.text = (lastFourDaysData[3].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
+                                    self.day4ValueLabel.text = (lastFourDaysData[3].minTemp?.fixedFraction(digits: 0).toString ?? "") + " - " + (lastFourDaysData[3].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
 
                                 }
-                                
-                                func dayOfTheWeek(dateString: String) -> String? {
-                                    let dateFormatter = DateFormatter()
-                                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-                                    if let date = dateFormatter.date(from: dateString) {
-                                        dateFormatter.dateFormat = "EEE"
-                                        return dateFormatter.string(from: date)
-                                    }
-                                    return nil
-                                }
-                                
+                                 */
                                 
                             } catch let error {
                                 print(error.localizedDescription)
@@ -3229,6 +3284,7 @@ class DashboardViewController: UIViewController {
         
     }
     
+
     func hideFliprData() {
         waterTemperatureLabel.text = "  "
         self.hubTabAirValLabel.text = "  "
@@ -4119,29 +4175,60 @@ extension DashboardViewController: UIScrollViewDelegate{
 extension DashboardViewController: HubDeviceDelegate{
    
     func didSelectSmartControllButton(hub: HUB) {
-        if hub.equipementCode == 84 {
-            self.showError(title: "Smart Control unavailable".localized(), message: "La fonction Smart Control n'est pas disponible pour les HUB liés à l'éclairage")
-            return
-        }
-        if hub.equipementCode == 86 && Module.currentModule == nil {
-            self.showError(title: "Smart Control unavailable".localized(), message: "The Smart Control function requires a Flipr Start.".localized())
-            return
-        }
-        if hub.equipementCode == 85 {
-            var hasFiltrationHub = false
-            for hub in hubs {
-                if hub.equipementCode == 86 {
-                    hasFiltrationHub = true
+        HUB.currentHUB =  hub
+        HUB.saveCurrentHUBLocally()
+
+//        self.automView.showEmptyStateViewLoading(title: nil, message: nil)
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.view)
+        if hub.behavior == "auto" {
+            if !hub.equipementState {
+                HUB.currentHUB?.updateBehavior(value: "auto", completion: { (message, error) in
+                    if error != nil {
+                        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                        hud?.textLabel.text = error?.localizedDescription
+                        hud?.dismiss(afterDelay: 3)
+
+                    } else {
+                        HUB.currentHUB?.behavior = "auto"
+                        hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                        hud?.dismiss(afterDelay: 3)
+                    }
+                    self.loadHUBs()
+                })
+            } else {
+                HUB.currentHUB?.updateBehavior(value: "manual", completion: { (message, error) in
+                    if error != nil {
+    //                    self.showError(title: "Error", message: error?.localizedDescription)
+                        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                        hud?.textLabel.text = error?.localizedDescription
+                        hud?.dismiss(afterDelay: 3)
+
+                    } else {
+                        HUB.currentHUB?.behavior = "auto"
+                        hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                        hud?.dismiss(afterDelay: 3)
+                    }
+                    self.loadHUBs()
+                })
+            }
+        }else{
+            HUB.currentHUB?.updateBehavior(value: "auto", completion: { (message, error) in
+                if error != nil {
+                    hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                    hud?.textLabel.text = error?.localizedDescription
+                    hud?.dismiss(afterDelay: 3)
+
+                } else {
+                    HUB.currentHUB?.behavior = "auto"
+                    hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    hud?.dismiss(afterDelay: 3)
                 }
-            }
-            if !hasFiltrationHub {
-                self.showError(title: "Smart Control unavailable".localized(), message: "The Smart Control function for heat pumps requires a Flipr HUB associated with a filtration pump".localized())
-                return
-            } else if Module.currentModule == nil {
-                self.showError(title: "Smart Control unavailable".localized(), message: "The Smart Control function requires a Flipr Start.".localized())
-            }
-            return
+                self.loadHUBs()
+            })
         }
+      
+        
     }
     
 
@@ -4164,7 +4251,11 @@ extension DashboardViewController: HubDeviceDelegate{
         HUB.saveCurrentHUBLocally()
         let hud = JGProgressHUD(style:.dark)
         hud?.show(in: self.view)
-        HUB.currentHUB?.updateState(value: !hub.equipementState, completion: { (error) in
+        var state = true
+        if hub.behavior == "manual" {
+            state = !hub.equipementState
+        }
+        HUB.currentHUB?.updateState(value: state, completion: { (error) in
             if error != nil {
                 hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                 hud?.textLabel.text = error?.localizedDescription
@@ -4173,8 +4264,11 @@ extension DashboardViewController: HubDeviceDelegate{
                 hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
                 hud?.dismiss(afterDelay: 3)
             }
-            self.refreshHUBdisplay()
+//            self.refreshHUBdisplay()
             self.view.hideStateView()
+            self.loadHUBs()
+
+            
             /*
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.loadHUBs()

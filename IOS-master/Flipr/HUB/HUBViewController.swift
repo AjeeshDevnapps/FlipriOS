@@ -462,6 +462,7 @@ class HUBViewController: UIViewController {
     
     @IBAction func addProgramButtonAction(_ sender: Any) {
     }
+    
     @IBAction func editProgramButtonAction(_ sender: Any) {
         if self.tableView.isEditing {
             self.tableView.setEditing(false, animated: true)
@@ -505,7 +506,8 @@ class HUBViewController: UIViewController {
                 
                 self.present(alert, animated: true, completion: nil)
                 */
-            } else {
+            }
+            else {
                 print("pSwitch.planning.name: \(pSwitch.planning.name)")
                 for planning in HUB.currentHUB!.plannings {
                     if planning.id == pSwitch.planning.id {

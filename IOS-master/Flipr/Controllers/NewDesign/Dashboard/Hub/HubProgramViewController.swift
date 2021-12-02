@@ -67,6 +67,88 @@ class HubProgramViewController: UIViewController {
         })
     }
     
+    @IBAction func planningSwitchValueDidChanged(_ sender: Any) {
+        if let pSwitch = sender as? PlanningSwitch {
+            
+            if !pSwitch.isOn {
+                HUB.currentHUB?.updateBehavior(value: "manual", completion: { (message, error) in
+                    if error != nil {
+                        self.showError(title: "Error".localized(), message: error?.localizedDescription)
+                        pSwitch.setOn(true, animated: true)
+//                        self.refreshHUBdisplay()
+                    } else {
+                        pSwitch.planning.isActivated = false
+//                        self.refreshHUBdisplay()
+                        HUB.currentHUB!.behavior = "manual"
+                    }
+                    self.reloadList()
+                    NotificationCenter.default.post(name: K.Notifications.UpdateHubViews, object: nil)
+                })
+                /*
+                let alert = UIAlertController(title: "Désactivation du mode Programme", message:"Tous les programmes ", preferredStyle:.actionSheet)
+                alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "Continuer".localized, style: .default, handler: { (action) in
+                    self.renameButtonAction(self)
+                }))
+                alert.addAction(UIAlertAction(title: "Réglages WIFI".localized, style: .default, handler: { (action) in
+                    if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "HUBWifiTableViewControllerID") as? HUBWifiTableViewController {
+                        viewController.serial = hub.serial
+                        viewController.fromSetting = true
+                        self.navigationController?.pushViewController(viewController, animated: true)
+                        self.navigationController?.setNavigationBarHidden(false, animated: true)
+                    }
+                }))
+                alert.addAction(UIAlertAction(title: "Delete".localized, style: .destructive, handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
+                */
+            }
+            else {
+                print("pSwitch.planning.name: \(pSwitch.planning.name)")
+                for planning in HUB.currentHUB!.plannings {
+                    if planning.id == pSwitch.planning.id {
+                        planning.isActivated = true
+                    } else {
+                        planning.isActivated = false
+                    }
+                }
+                HUB.currentHUB!.behavior = "planning"
+                tableView.reloadData()
+                
+                let hud = JGProgressHUD(style:.dark)
+                hud?.show(in: self.containerView)
+                
+                HUB.currentHUB!.syncPlannings { (error) in
+                    print("Sync Planning error : \(error?.localizedDescription)")
+                    if (error != nil) {
+                        hud?.textLabel.text = error?.localizedDescription
+                        hud?.dismiss(afterDelay: 3)
+                    } else {
+                        hud?.dismiss(afterDelay: 1)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) ) {
+                            self.hub?.getState { (state, pError) in
+                                
+                                if error != nil {
+                                    self.showError(title: "Error".localized, message: pError!.localizedDescription)
+                                }
+                                
+                                if state != nil {
+                                    HUB.currentHUB!.equipementState = state!
+                                    self.hub?.equipementState = state!
+                                    self.reloadList()
+                                }
+                            }
+                        }
+                    }
+                    self.reloadList()
+                    NotificationCenter.default.post(name: K.Notifications.UpdateHubViews, object: nil)
+                }
+            }
+            
+            
+        }
+    }
+    
 
 }
 

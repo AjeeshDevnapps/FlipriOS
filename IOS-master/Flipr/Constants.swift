@@ -59,7 +59,7 @@ struct K {
 
         static let PoolSettingsUpdated = Notification.Name("fr.isee-u.PoolSettingsUpdated")
         static let WavethemeSettingsChanged = Notification.Name("fr.isee-u.WavethemeSettingsChanged")
-        static let RemovedHub = Notification.Name("fr.isee-u.RemovedHub")
+        static let UpdateHubViews = Notification.Name("fr.isee-u.UpdateHubViews")
         static let ReloadProgrameList = Notification.Name("fr.isee-u.ReloadProgrameList")
 
 

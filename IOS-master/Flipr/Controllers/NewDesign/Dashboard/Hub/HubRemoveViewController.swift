@@ -60,7 +60,7 @@ class HubRemoveViewController: UIViewController {
             } else {
                 hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
                 hud?.dismiss(afterDelay: 1)
-                NotificationCenter.default.post(name: K.Notifications.RemovedHub, object: nil)
+                NotificationCenter.default.post(name: K.Notifications.UpdateHubViews, object: nil)
                 self.dismiss(animated: true)
 //                if self.hubs.count > 1 {
 //                    HUB.currentHUB = nil

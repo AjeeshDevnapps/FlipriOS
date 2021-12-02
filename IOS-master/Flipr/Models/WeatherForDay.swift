@@ -9,7 +9,7 @@
 import Foundation
 struct WeatherForDay: Codable {
     let date: String
-    let moyRX, moyPH, minTemp, maxTemp: Double?
+    let moyRX, moyPH, minTemp, maxTemp, waterTemp : Double?
     let weatherIcon: String?
     let uvIndex: Double?
 
@@ -18,5 +18,6 @@ struct WeatherForDay: Codable {
         case moyRX, moyPH, minTemp, maxTemp
         case weatherIcon = "WeatherIcon"
         case uvIndex = "UvIndex"
+        case waterTemp =  "WaterTemperature"
     }
 }

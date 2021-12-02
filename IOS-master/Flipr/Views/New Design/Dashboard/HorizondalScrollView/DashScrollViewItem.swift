@@ -76,38 +76,39 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DashCollectionViewCell", for: indexPath) as! DashCollectionViewCell
         cell.value.text = ""
         cell.date.text = ""
+        cell.date.textColor = UIColor.init(hexString: "97A3B6")
+
         switch statusType {
         case .pH:
             cell.textWrappingView.layer.cornerRadius = 4
             cell.textWrappingView.layer.borderWidth = 1
-            cell.textWrappingView.layer.borderColor = UIColor.gray.cgColor
+            cell.textWrappingView.layer.borderColor = UIColor.init(hexString: "97A3B6").cgColor
             cell.value.font = UIFont.systemFont(ofSize: 10, weight: .regular)
-            cell.value.textColor = UIColor.gray
+            cell.value.textColor = UIColor.init(hexString: "97A3B6")
             if !valueStrings.isEmpty {
-                cell.value.text = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 1).toString
+                cell.value.text = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 2).toString
             }
         case .temperature:
             cell.textWrappingView.layer.cornerRadius = 4
             cell.textWrappingView.layer.borderWidth = 1
-            cell.textWrappingView.layer.borderColor = UIColor.gray.cgColor
+            cell.textWrappingView.layer.borderColor = UIColor.init(hexString: "97A3B6").cgColor
             cell.value.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-            cell.value.textColor = UIColor.gray
+            cell.value.textColor = UIColor.init(hexString: "28A8F5")
             if !valueStrings.isEmpty {
                 cell.value.text = "\((valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 0).toString)°"
             }
         case .redox:
             cell.textWrappingView.layer.cornerRadius = 4
             cell.textWrappingView.layer.borderWidth = 1
-            cell.textWrappingView.layer.borderColor = UIColor.gray.cgColor
+            cell.textWrappingView.layer.borderColor = UIColor.init(hexString: "97A3B6").cgColor
             cell.value.font = UIFont.systemFont(ofSize: 10, weight: .regular)
-            cell.value.textColor = UIColor.gray
+            cell.value.textColor = UIColor.init(hexString: "97A3B6")
             if !valueStrings.isEmpty {
-                cell.value.text = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 1).toString
+                cell.value.text = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 0).toString
             }
         default: return UICollectionViewCell()
         }
@@ -124,6 +125,7 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
         }
         return cell
     }
+
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {

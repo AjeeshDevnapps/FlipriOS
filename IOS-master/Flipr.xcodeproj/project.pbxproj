@@ -12,6 +12,8 @@
 		1C5AE4222751194A008F6643 /* HubSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE4212751194A008F6643 /* HubSettingsViewController.swift */; };
 		1C5AE42427512233008F6643 /* HubRemoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE42327512233008F6643 /* HubRemoveViewController.swift */; };
 		1C5AE42627512240008F6643 /* HubRenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE42527512240008F6643 /* HubRenameViewController.swift */; };
+		1C5AE428275135DE008F6643 /* NextDaysWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE427275135DE008F6643 /* NextDaysWeatherData.swift */; };
+		1C5AE42A2751363B008F6643 /* WeatherForHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE4292751363B008F6643 /* WeatherForHour.swift */; };
 		1C9A756D27354E0800D4FEE6 /* HubProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9A756C27354E0800D4FEE6 /* HubProgramViewController.swift */; };
 		1CA0B1EB27330E9500751684 /* VigilanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA0B1EA27330E9500751684 /* VigilanceViewController.swift */; };
 		1CC9930B26C515AB00E85B47 /* MeasureAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9930A26C515AB00E85B47 /* MeasureAlertViewController.swift */; };
@@ -222,6 +224,8 @@
 		1C5AE4212751194A008F6643 /* HubSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubSettingsViewController.swift; sourceTree = "<group>"; };
 		1C5AE42327512233008F6643 /* HubRemoveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubRemoveViewController.swift; sourceTree = "<group>"; };
 		1C5AE42527512240008F6643 /* HubRenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubRenameViewController.swift; sourceTree = "<group>"; };
+		1C5AE427275135DE008F6643 /* NextDaysWeatherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextDaysWeatherData.swift; sourceTree = "<group>"; };
+		1C5AE4292751363B008F6643 /* WeatherForHour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherForHour.swift; sourceTree = "<group>"; };
 		1C9A756C27354E0800D4FEE6 /* HubProgramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubProgramViewController.swift; sourceTree = "<group>"; };
 		1CA0B1EA27330E9500751684 /* VigilanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VigilanceViewController.swift; sourceTree = "<group>"; };
 		1CC9930A26C515AB00E85B47 /* MeasureAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureAlertViewController.swift; sourceTree = "<group>"; };
@@ -870,6 +874,8 @@
 		B518F0ED1E9F90AC0092156C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1C5AE4292751363B008F6643 /* WeatherForHour.swift */,
+				1C5AE427275135DE008F6643 /* NextDaysWeatherData.swift */,
 				B518F0EE1E9F90B70092156C /* User.swift */,
 				48493D6825F54259008672DD /* AppSharedData.swift */,
 				B59BEFAD1EA6663800F3AD73 /* Module.swift */,
@@ -1419,6 +1425,7 @@
 				4895F7582667FD4500FA8ED3 /* DeviceListTableViewCell.swift in Sources */,
 				1C504F2926A1A2340042C2DD /* DeviceType.swift in Sources */,
 				B518F0F41E9FC0840092156C /* UIViewController+Error.swift in Sources */,
+				1C5AE428275135DE008F6643 /* NextDaysWeatherData.swift in Sources */,
 				1CD6992A26E5F6AF00563CBE /* MenuTableViewCell.swift in Sources */,
 				484CEBA425E2DAC9005CD208 /* QuickActionViewController.swift in Sources */,
 				B5FE070F1EB9CE2800962AEE /* City.swift in Sources */,
@@ -1430,6 +1437,7 @@
 				B5FBF6A622EB2CD4003FBF49 /* PoolLogViewController.swift in Sources */,
 				B557864324897E9300B5BDCD /* Planning.swift in Sources */,
 				48C9468C265AAADC00C018A7 /* AddFliprViewController.swift in Sources */,
+				1C5AE42A2751363B008F6643 /* WeatherForHour.swift in Sources */,
 				4895F7502667F4D300FA8ED3 /* SignUpEmailController.swift in Sources */,
 				B54A015C226483DA002EEC62 /* SubscriptionView.swift in Sources */,
 				B53086971F598B4600D7EFCF /* Equipment.swift in Sources */,
@@ -1598,7 +1606,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1607,7 +1615,7 @@
 				INFOPLIST_FILE = Flipr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.0.4;
+				MARKETING_VERSION = 3.0.5;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
@@ -1633,7 +1641,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1642,7 +1650,7 @@
 				INFOPLIST_FILE = Flipr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.0.4;
+				MARKETING_VERSION = 3.0.5;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;

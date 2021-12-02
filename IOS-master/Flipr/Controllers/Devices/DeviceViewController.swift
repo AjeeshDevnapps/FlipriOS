@@ -239,7 +239,7 @@ class DeviceViewController: UIViewController {
             switch response.result {
                 
             case .success(let value):
-                NotificationCenter.default.post(name: K.Notifications.RemovedHub, object: nil)
+                NotificationCenter.default.post(name: K.Notifications.UpdateHubViews, object: nil)
                 print("Delete HUB response.result.value: \(value)")
                 self.navigationController?.popViewController()
 

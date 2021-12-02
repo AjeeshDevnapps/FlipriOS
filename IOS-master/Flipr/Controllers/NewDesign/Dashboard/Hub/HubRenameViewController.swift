@@ -66,6 +66,7 @@ class HubRenameViewController: UIViewController {
                     HUB.currentHUB!.equipementName = name
                     hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
                     hud?.dismiss(afterDelay: 1)
+                    NotificationCenter.default.post(name: K.Notifications.UpdateHubViews, object: nil)
                     self.dismiss(animated: true)
                 }
             })

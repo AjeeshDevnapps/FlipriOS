@@ -73,22 +73,23 @@ class HubDeviceTableViewCell: UITableViewCell {
             if hub.behavior == "auto" {
                 let imageName = hubState ? "smartContrlOn" : "smartContrlActivated"
                 smartContrlBtn.setImage(UIImage(named: imageName), for: .normal)
-
             }else{
                 smartContrlBtn.setImage(UIImage(named: "smartContrlOff"), for: .normal)
             }
             
             if hub.equipementCode == 84{
+                self.smartContrlBtn.isHidden = true
                 let icon  = hubState ? "lightOn" : "lightEnabled"
                 self.iconImageView.image =  UIImage(named: icon)
             }
             else if hub.equipementCode == 86{
+                self.smartContrlBtn.isHidden = false
                 let icon  = hubState ? "pumbactive" : "pumbactive"
                 self.iconImageView.image =  UIImage(named: icon)
             }
             else{
+                self.smartContrlBtn.isHidden = true
                 let icon  = hubState ? "heatpump" : "heatpump"
-
                 self.iconImageView.image =  UIImage(named: icon)
             }
          
