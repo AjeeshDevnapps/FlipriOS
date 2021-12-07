@@ -20,6 +20,10 @@ class HubSettingsViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var tapView: UIView!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var renameTitleLbl: UILabel!
+    @IBOutlet weak var wifeSettingTitleLbl: UILabel!
+    @IBOutlet weak var removeHubTitleLbl: UILabel!
+
     var hub: HUB?
     var delegate:HubSettingViewDelegate?
 
@@ -32,10 +36,16 @@ class HubSettingsViewController: UIViewController {
         containerView.layer.cornerRadius = 15
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.tapView.addGestureRecognizer(tap)
-
+        setUI()
         // Do any additional setup after loading the view.
     }
     
+    func setUI(){
+        titleLbl.text = "Settings".localized
+        renameTitleLbl.text = "Rename".localized
+        wifeSettingTitleLbl.text = "WIFI settings".localized
+        removeHubTitleLbl.text = "Delete the Hub".localized
+    }
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

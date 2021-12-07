@@ -14,7 +14,7 @@ class NotificationSwitchTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         let value = UserDefaults.standard.bool(forKey: notificationOnOffValuesKey)
-        alertActivationSwitch.isOn = !value
+        alertActivationSwitch.isOn = value
         // Initialization code
     }
 
@@ -44,7 +44,7 @@ class SettingsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         let value = UserDefaults.standard.bool(forKey: notificationOnOffValuesKey)
-        alertActivationSwitch.isOn = !value
+        alertActivationSwitch.isOn = value
         self.setupViews()
         // Initialization code
     }

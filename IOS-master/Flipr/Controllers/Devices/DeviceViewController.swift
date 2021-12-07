@@ -21,6 +21,8 @@ class DeviceViewController: UIViewController {
     
     var devicewifiTypeCell = DeviceWifiCellType.Flipr
     var devicesDetails:  [String:Any]?
+    var hubDetails:  [String:Any]?
+
     var centralManager:CBCentralManager!
     var flipr:CBPeripheral?
     var hubName = ""
@@ -37,8 +39,9 @@ class DeviceViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if self.devicewifiTypeCell == .Hub{
+            self.hubDetails(data: hubDetails!)
 //            if AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi{
-                self.getHubDetails()
+//                self.getHubDetails()
 //            }
         }
     }
@@ -60,8 +63,14 @@ class DeviceViewController: UIViewController {
                 if hubs!.count > 0 {
                     //                    self.hubs = hubs!
                     for hubObj in hubs! {
-                        if let hubDetails = hubObj.response{
-                            self.hubDetails(data: hubDetails)
+                        var serialNo =  ""
+                        if let hubSerial = self.devicesDetails?["Serial"] as? String {
+                            serialNo = hubSerial
+                        }
+                        if serialNo == hubObj.serial{
+                            if let hubDetails = hubObj.response{
+                                self.hubDetails(data: hubDetails)
+                            }
                         }
                     }
                 }
@@ -71,6 +80,9 @@ class DeviceViewController: UIViewController {
     }
     
     func hubDetails(data:[String:Any]){
+        
+        
+        
         if let value = data["NameEquipment"] as? String  {
             self.hubName = value
         }

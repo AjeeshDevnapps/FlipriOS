@@ -44,9 +44,9 @@ class DevicesViewController: UIViewController {
                 self.hud?.dismiss(afterDelay: 0)
             } else {
                 self.devicesDetails = devices
-                self.hud?.dismiss(afterDelay: 0)
-                self.setupDevicesList()
-                //                self.getHubDetails()
+//                self.hud?.dismiss(afterDelay: 0)
+//                self.setupDevicesList()
+                                self.getHubDetails()
             }
         })
     }
@@ -57,18 +57,18 @@ class DevicesViewController: UIViewController {
             if error != nil {
                 //hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                 //hud?.textLabel.text = error?.localizedDescription
-                self.hud?.dismiss(afterDelay: 3)
+                self.hud?.dismiss(afterDelay: 0)
                 self.setupDevicesList()
             } else if hubs != nil {
                 if hubs!.count > 0 {
                     self.hubs = hubs!
-                    for hubObj in self.hubs {
-                        if let hubDetails = hubObj.response{
-                            self.devicesDetails?.append(hubDetails)
-                        }
-                    }
+//                    for hubObj in self.hubs {
+//                        if let hubDetails = hubObj.response{
+//                            self.devicesDetails?.append(hubDetails)
+//                        }
+//                    }
                 }
-                self.hud?.dismiss(afterDelay: 3)
+                self.hud?.dismiss(afterDelay: 0)
                 self.setupDevicesList()
             }
         })
@@ -133,7 +133,23 @@ class DevicesViewController: UIViewController {
                         if vers == 1{
                             Vc.devicewifiTypeCell = DeviceWifiCellType.Flipr
                         }else{
+                            
                             Vc.devicewifiTypeCell = DeviceWifiCellType.Hub
+                            
+                            if hubs.count > 0 {
+                                //                    self.hubs = hubs!
+                                for hubObj in hubs {
+                                    var serialNo =  ""
+                                    if let hubSerial = info["Serial"] as? String {
+                                        serialNo = hubSerial
+                                    }
+                                    if serialNo == hubObj.serial{
+                                        if let hubDetails = hubObj.response{
+                                            Vc.hubDetails = hubDetails
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

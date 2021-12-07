@@ -124,7 +124,7 @@ class HubProgramViewController: UIViewController {
                         hud?.textLabel.text = error?.localizedDescription
                         hud?.dismiss(afterDelay: 3)
                     } else {
-                        hud?.dismiss(afterDelay: 1)
+                        hud?.dismiss(afterDelay: 0)
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) ) {
                             self.hub?.getState { (state, pError) in
                                 

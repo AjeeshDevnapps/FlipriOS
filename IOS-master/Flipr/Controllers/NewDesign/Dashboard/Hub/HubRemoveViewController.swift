@@ -13,6 +13,7 @@ class HubRemoveViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var tapView: UIView!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var subTitleLbl: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var hubNameLbl: UILabel!
@@ -29,9 +30,16 @@ class HubRemoveViewController: UIViewController {
         cancelButton.layer.borderWidth = 1.0
         cancelButton.layer.borderColor = UIColor(hexString: "97A3B6").cgColor
         self.hubNameLbl.text = hub?.equipementName.capitalizingFirstLetter()
-
+        setUI()
 
         // Do any additional setup after loading the view.
+    }
+    
+    func setUI(){
+        titleLbl.text = "Settings".localized
+        subTitleLbl.text = "Are you sure you want to delete the Hub?".localized
+        cancelButton.setTitle("Cancel".localized(), for: .normal)
+        saveButton.setTitle("Save".localized(), for: .normal)
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {

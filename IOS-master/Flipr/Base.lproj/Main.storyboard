@@ -15295,18 +15295,29 @@ Essai gratuit 7 jours</string>
                                                                                 <state key="normal" title="En savoir plus">
                                                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 </state>
-                                                                                <connections>
-                                                                                    <action selector="measureAlertButtonTab" destination="eOT-xh-xJh" eventType="touchUpInside" id="iGN-aA-QQZ"/>
-                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
                                                             </stackView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iif-OL-ffJ">
+                                                                <rect key="frame" x="215" y="0.0" width="160" height="38"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="160" id="Yw7-xV-OLe"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                                <connections>
+                                                                    <action selector="measureAlertButtonTab" destination="eOT-xh-xJh" eventType="touchUpInside" id="Uce-vi-cMn"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="iif-OL-ffJ" secondAttribute="bottom" id="00l-ny-VLx"/>
+                                                            <constraint firstAttribute="trailing" secondItem="iif-OL-ffJ" secondAttribute="trailing" id="DRv-Cm-8sW"/>
                                                             <constraint firstItem="NvS-Tu-BMd" firstAttribute="centerX" secondItem="Wzv-Mp-Eh7" secondAttribute="centerX" id="Eud-jZ-dhA"/>
+                                                            <constraint firstItem="iif-OL-ffJ" firstAttribute="top" secondItem="Wzv-Mp-Eh7" secondAttribute="top" id="LIW-YC-FbH"/>
                                                             <constraint firstItem="NvS-Tu-BMd" firstAttribute="centerY" secondItem="Wzv-Mp-Eh7" secondAttribute="centerY" id="Lqr-GK-00a"/>
                                                         </constraints>
                                                     </view>
@@ -15605,7 +15616,9 @@ Essai gratuit 7 jours</string>
                         <outlet property="lastMeasureDateLabel" destination="e6B-At-d0r" id="Beo-S8-eZN"/>
                         <outlet property="measureAlertButton" destination="Ejc-bP-HFu" id="Nzi-bz-YqL"/>
                         <outlet property="measureAlertLbl" destination="rkd-D7-T5k" id="zfW-1S-tBa"/>
+                        <outlet property="measureAlertTouchAreaButton" destination="iif-OL-ffJ" id="NDg-H9-dV7"/>
                         <outlet property="measureAlertView" destination="Wzv-Mp-Eh7" id="iOw-Vh-P3L"/>
+                        <outlet property="next5hourTitleLabel" destination="wU4-yk-K6b" id="KVs-GS-e0g"/>
                         <outlet property="notificationDisabledButton" destination="IUD-fP-fbG" id="O6J-GT-V0B"/>
                         <outlet property="orpIndicatorImageView" destination="QcL-FY-vnv" id="WmC-Jl-SIx"/>
                         <outlet property="orpLabel" destination="n7C-Us-7En" id="vSX-kg-3Mr"/>
@@ -15790,7 +15803,7 @@ Essai gratuit 7 jours</string>
         <image name="pumbdisabled" width="45" height="45"/>
         <image name="readinglevel" width="39" height="107"/>
         <image name="smartContrlOff" width="40" height="40"/>
-        <image name="sun" width="22" height="22"/>
+        <image name="sun" width="24" height="24"/>
         <image name="support" width="21" height="21"/>
         <image name="swipe" width="54" height="68"/>
         <image name="tresholdChange" width="32" height="32"/>

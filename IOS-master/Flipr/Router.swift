@@ -96,7 +96,7 @@ enum Router: URLRequestConvertible {
     case getHUBPlannings(serial: String)
     case deleteHUBPlanning(serial: String, id:Int)
     case updateHUBPlannings(serial: String, attributes:[String:Any])
-    case reactivateAlert(serial: String)
+    case reactivateAlert(serial: String,status:Bool)
 
     
     
@@ -723,9 +723,9 @@ enum Router: URLRequestConvertible {
             print("Add productAttributes with params: \(parameters)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
             
-        case .reactivateAlert(let serial):
+        case .reactivateAlert(let serial, let status):
             if let url = urlRequest.url?.absoluteString {
-                urlRequest.url = URL(string: url + "\(serial)/ReactivationNotification?notification=true")
+                urlRequest.url = URL(string: url + "\(serial)/ReactivationNotification?notification=\(status)")
             }
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: nil)
         default:

@@ -46,10 +46,13 @@ class KeyEnterViewController: BaseViewController,UITextFieldDelegate {
         subTitleLabel.text = "La clé de sécurité à 5 chiffres (Key) se trouve à l'intérieur de la boîte de votre Flipr Start.".localized
         serialTitleLabel.text = "Clé de sécurité (Key)".localized
 
+    
         
         submitButton.isUserInteractionEnabled = false
         if isHub{
             submitButton.setTitle("Connecter Flipr Hub".localized(), for: .normal)
+            titleLabel.text = "Renseignez la clé de sécurité de votre Flipr Hub".localized
+            subTitleLabel.text = "La clé de sécurité à 5 chiffres (Key) se trouve à l'intérieur de la boîte de votre Flipr Hub.".localized
         }else{
             submitButton.setTitle("Connecter Flipr Start".localized(), for: .normal)
         }

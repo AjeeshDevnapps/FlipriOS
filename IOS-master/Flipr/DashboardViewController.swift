@@ -168,6 +168,8 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var measureAlertButton: UIButton!
     @IBOutlet weak var measureAlertLbl: UILabel!
     @IBOutlet weak var measureAlertView: UIView!
+    @IBOutlet weak var measureAlertTouchAreaButton: UIButton!
+
 
     @IBOutlet weak var connectNewDeviceLbl: UILabel!
 
@@ -203,6 +205,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var windSpeedLabel: UILabel!
     @IBOutlet weak var tempPrecipitationLabel: UILabel!
 
+    @IBOutlet weak var next5hourTitleLabel: UILabel!
 
 
     var hubTabWaveTopConstraintPreValue = 0
@@ -234,6 +237,9 @@ class DashboardViewController: UIViewController {
 
     var isThemeChanged = false
     var waveFrame:CGRect?
+    var notificationReportTime:String?
+    var notificationReportDate:Date?
+
 
     override func viewDidLoad() {
         
@@ -263,6 +269,7 @@ class DashboardViewController: UIViewController {
         hubDeviceTableView.dragDelegate = self
         hubDeviceTableView.dragInteractionEnabled = true
         self.signalStrengthLabel.text = "Signal moyen".localized
+        self.next5hourTitleLabel.text = "Probability within 5 hours".localized
         self.signalStrengthImageView.image = UIImage(named: "Signalmiddle")
         self.intialTabSetup()
         hideMeasureAlert()
@@ -375,7 +382,8 @@ class DashboardViewController: UIViewController {
         }
         
         NotificationCenter.default.addObserver(forName: K.Notifications.AlertDidClose, object: nil, queue: nil) { (notification) in
-            self.updateAlerts()
+            self.updateFliprData()
+//            self.updateAlerts()
         }
         
         
@@ -519,7 +527,7 @@ class DashboardViewController: UIViewController {
     
     @IBAction func measureAlertButtonTab(){
         if isShowingActivateAlert{
-            self.callReactivateAlertApi()
+            self.callReactivateAlertApi(alertStatus: true)
         }else{
             let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
             if let viewController = sb.instantiateViewController(withIdentifier: "MeasureAlertViewController") as? MeasureAlertViewController {
@@ -1094,7 +1102,7 @@ class DashboardViewController: UIViewController {
     @objc func callGetStatusApis(){
         self.loadHUBs()
         getThresholdValues()
-        getNotificationStatus()
+//        getNotificationStatus()
     }
     
     func getThresholdValues(){
@@ -1227,12 +1235,27 @@ class DashboardViewController: UIViewController {
     
     func manageNotificationDisabledButtton(){
         let value = UserDefaults.standard.bool(forKey: notificationOnOffValuesKey)
+        if value {
+            UIView.transition(with:  self.notificationDisabledButton, duration: 0.4,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                                self.notificationDisabledButton.isHidden = value
+                              })
+        }else{
+            if self.notificationReportDate != nil{
+                if self.notificationReportDate!.timeIntervalSinceNow < 0 {
+                    self.notificationDisabledButton.isHidden = false
+//                    UserDefaults.standard.set(false, forKey: notificationOnOffValuesKey)
+//                    self.manageNotificationDisabledButtton()
+                }else{
+                    self.notificationDisabledButton.isHidden = true
+//                    self.manageNotificationDisabledButtton()
+                }
+            }
+        }
+       
+        
         //        self.notificationDisabledButton.isHidden = value
-        UIView.transition(with:  self.notificationDisabledButton, duration: 0.4,
-                          options: .transitionCrossDissolve,
-                          animations: {
-                            self.notificationDisabledButton.isHidden = !value
-                          })
     }
     
     func waveThemathanged(){
@@ -1849,6 +1872,7 @@ class DashboardViewController: UIViewController {
     
     func showSubscriptionButton(){
         self.measureAlertView.isHidden = true
+        self.measureAlertTouchAreaButton.isHidden = true
         self.subscriptionButton.tag = 3
         self.subscriptionButton.isUserInteractionEnabled = true
         self.subscriptionButton.isHidden = false
@@ -1860,6 +1884,7 @@ class DashboardViewController: UIViewController {
     
     func showAlertButton(){
         self.measureAlertView.isHidden = true
+        self.measureAlertTouchAreaButton.isHidden = true
         self.subscriptionButton.tag = 2
         self.subscriptionButton.isUserInteractionEnabled = true
         self.subscriptionButton.isHidden = false
@@ -1871,6 +1896,7 @@ class DashboardViewController: UIViewController {
     
     func showGreenAlertButton(){
         self.measureAlertView.isHidden = true
+        self.measureAlertTouchAreaButton.isHidden = true
         self.subscriptionButton.tag = 4
         self.subscriptionButton.isUserInteractionEnabled = true
         self.subscriptionButton.isHidden = false
@@ -1882,6 +1908,7 @@ class DashboardViewController: UIViewController {
     
     func showGoodMeasureButton(){
         self.measureAlertView.isHidden = true
+        self.measureAlertTouchAreaButton.isHidden = true
         self.subscriptionButton.tag = 1
         self.subscriptionButton.isUserInteractionEnabled = false
         self.subscriptionButton.isHidden = false
@@ -1894,6 +1921,7 @@ class DashboardViewController: UIViewController {
     
     func showVigilanceButton(){
         self.measureAlertView.isHidden = true
+        self.measureAlertTouchAreaButton.isHidden = true
         self.subscriptionButton.tag = 5
         self.subscriptionButton.isUserInteractionEnabled = true
         self.subscriptionButton.isHidden = false
@@ -1983,9 +2011,31 @@ class DashboardViewController: UIViewController {
                 if isRedoxOutOfRangeAlert ||  isPhOutOfRangeAlert{
                     let value = UserDefaults.standard.bool(forKey: notificationOnOffValuesKey)
                     if value{
-                        self.showActivateMeasureAlert()
-                    }else{
                         self.getAlertFromServer()
+//                        self.showActivateMeasureAlert()
+                    }else{
+                        if self.notificationReportDate != nil{
+                            if self.notificationReportDate!.timeIntervalSinceNow < 0 {
+                                if let module = Module.currentModule {
+                                    if module.isSubscriptionValid {
+                                        // nothing to do
+                                    }else{
+                                        self.showSubscriptionButton()
+                                    }
+                                }else{
+                                    self.showSubscriptionButton()
+                                }
+                            }else{
+                                self.showActivateMeasureAlert()
+                            }
+                        }else{
+                            self.showActivateMeasureAlert()
+                        }
+                        
+                        
+                        
+//                        self.showActivateMeasureAlert()
+//                        self.getAlertFromServer()
                     }
                     
                 }else{
@@ -2006,14 +2056,16 @@ class DashboardViewController: UIViewController {
     }
     
     
-    func callReactivateAlertApi(){
+    func callReactivateAlertApi(alertStatus:Bool){
+        
+        
         if let serialNo = Module.currentModule?.serial {
-            Alamofire.request(Router.reactivateAlert(serial: serialNo)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            Alamofire.request(Router.reactivateAlert(serial: serialNo, status: alertStatus)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
                 
                 switch response.result {
                     
                 case .success(let value):
-                    UserDefaults.standard.set(false, forKey: notificationOnOffValuesKey)
+                    UserDefaults.standard.set(alertStatus, forKey: notificationOnOffValuesKey)
                     self.manageNotificationDisabledButtton()
                     self.getAlertFromServer()
                 case .failure(let error):
@@ -2036,6 +2088,7 @@ class DashboardViewController: UIViewController {
         measureAlertLbl.text = "Mesure ancienne".localized
         self.subscriptionButton.isHidden = true
         self.measureAlertView.isHidden = false
+        self.measureAlertTouchAreaButton.isHidden = false
         self.isShowingActivateAlert = false
     }
     
@@ -2049,12 +2102,15 @@ class DashboardViewController: UIViewController {
         measureAlertLbl.text = "vous avez reporte vos alerts".localized
         self.subscriptionButton.isHidden = true
         self.measureAlertView.isHidden = false
+        self.measureAlertTouchAreaButton.isHidden = false
         self.isShowingActivateAlert = true
     }
     
     
     func hideMeasureAlert(){
         self.measureAlertView.isHidden = true
+        self.measureAlertTouchAreaButton.isHidden = true
+
     }
     
     
@@ -2393,6 +2449,22 @@ class DashboardViewController: UIViewController {
                             self.showHubTabInfoView(hide: true)
                             return
                         }
+                    }
+                    
+                    if let notificationData = JSON["userSection"] as? [String:Any] {
+                        if let time = notificationData["NotificationReportDate"] as? String{
+                             self.notificationReportTime = time
+                            if let lastDate = time.fliprDate {
+                                self.notificationReportDate = lastDate
+                            }
+
+                        }
+                        if let notificationStatus = notificationData["NotificationStatut"] as? Int{
+                            UserDefaults.standard.set(notificationStatus == 1 ? true : false, forKey: notificationOnOffValuesKey)
+
+                            
+                        }
+                        
                     }
                     
                     if let nextFiveHoursData = JSON["WeatherNext5Hours"] as? [[String:Any]] {

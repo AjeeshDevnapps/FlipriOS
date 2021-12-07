@@ -13,6 +13,7 @@ class HubRenameViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var tapView: UIView!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var subTitleLbl: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var textField: UITextField!
@@ -29,7 +30,16 @@ class HubRenameViewController: UIViewController {
         cancelButton.layer.borderWidth = 1.0
         cancelButton.layer.borderColor = UIColor(hexString: "97A3B6").cgColor
         textField.text  = hub?.equipementName.capitalizingFirstLetter()
-
+        setUI()
+    }
+    
+    
+    func setUI(){
+        titleLbl.text = "Settings".localized
+        subTitleLbl.text = "How do you want to rename your Hub?".localized
+        cancelButton.setTitle("Cancel".localized(), for: .normal)
+        saveButton.setTitle("Save".localized(), for: .normal)
+        textField.placeholder = "Program's name".localized
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {

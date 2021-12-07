@@ -59,9 +59,9 @@ class DashScrollViewItem: UIView {
     func updateTitle() {
         var title = ""
         switch statusType {
-        case .pH: title = "Taux de pH sur les 7 derniers jours"
-        case .temperature: title = "Température de l'eau sur les 7 derniers jours"
-        case .redox: title = "Taux de Redox sur les 7 derniers jours"
+        case .pH: title = "Taux de pH sur les 7 derniers jours".localized
+        case .temperature: title = "Température de l'eau sur les 7 derniers jours".localized
+        case .redox: title = "Taux de Redox sur les 7 derniers jours".localized
         default: title = ""
         }
         titleLabel.text = title
