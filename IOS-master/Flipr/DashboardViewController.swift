@@ -219,6 +219,8 @@ class DashboardViewController: UIViewController {
     var isShowingActivateAlert = false
     var isPhOutOfRangeAlert = false
     var isRedoxOutOfRangeAlert = false
+    var isShowingLoadingForAlertApi = false
+
 
 
     var hub:HUB?
@@ -2031,11 +2033,6 @@ class DashboardViewController: UIViewController {
                         }else{
                             self.showActivateMeasureAlert()
                         }
-                        
-                        
-                        
-//                        self.showActivateMeasureAlert()
-//                        self.getAlertFromServer()
                     }
                     
                 }else{
@@ -2057,9 +2054,11 @@ class DashboardViewController: UIViewController {
     
     
     func callReactivateAlertApi(alertStatus:Bool){
-        
+    
         
         if let serialNo = Module.currentModule?.serial {
+            let hud = JGProgressHUD(style:.dark)
+            hud?.show(in: self.view)
             Alamofire.request(Router.reactivateAlert(serial: serialNo, status: alertStatus)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
                 
                 switch response.result {
@@ -2067,9 +2066,13 @@ class DashboardViewController: UIViewController {
                 case .success(let value):
                     UserDefaults.standard.set(alertStatus, forKey: notificationOnOffValuesKey)
                     self.manageNotificationDisabledButtton()
+                    hud?.dismiss(afterDelay: 3)
+                    self.isShowingLoadingForAlertApi = true
                     self.getAlertFromServer()
                 case .failure(let error):
-                    
+                    hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                    hud?.textLabel.text = error.localizedDescription
+                    hud?.dismiss(afterDelay: 3)
                     print("Reactivated Notification did fail with error: \(error)")
                     
                 }
@@ -2139,7 +2142,17 @@ class DashboardViewController: UIViewController {
             }
         }
         */
+        
+        let hud = JGProgressHUD(style:.dark)
+        if self.isShowingLoadingForAlertApi{
+            hud?.show(in: self.view)
+        }
+        
         Module.currentModule?.getAlerts(completion: { (alert, priorityAlerts, error) in
+            if self.isShowingLoadingForAlertApi{
+                self.isShowingLoadingForAlertApi = false
+                hud?.dismiss(afterDelay: 0)
+            }
             var noMainAlert = true
             if alert != nil {
                 noMainAlert = false
@@ -2408,7 +2421,9 @@ class DashboardViewController: UIViewController {
     
     func dayOfTheWeek(dateString: String) -> String? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+
         if let date = dateFormatter.date(from: dateString) {
             dateFormatter.dateFormat = "EEE"
             return dateFormatter.string(from: date)
@@ -2461,8 +2476,6 @@ class DashboardViewController: UIViewController {
                         }
                         if let notificationStatus = notificationData["NotificationStatut"] as? Int{
                             UserDefaults.standard.set(notificationStatus == 1 ? true : false, forKey: notificationOnOffValuesKey)
-
-                            
                         }
                         
                     }
@@ -2480,9 +2493,12 @@ class DashboardViewController: UIViewController {
                                 formatter.dateFormat = "dd/MM"
                             }
                             self.probableWeatherIcon.text = self.climaconsCharWithIcon(icon: weatherForFifthHour?.weatherIcon ?? "")
-                            self.tempPrecipitationLabel.text =  "\(weatherForFifthHour?.precipitationProbability ?? 0 )" + "%"
+//                            self.tempPrecipitationLabel.text =  "\(weatherForFifthHour?.precipitationProbability ?? 0 )" + "%"
+                            if let precipitation = weatherForFifthHour?.precipitationProbability{
+                                let val = precipitation * 100
+                                self.tempPrecipitationLabel.text = (val.fixedFraction(digits: 0).toString) + "%"
+                            }
                             self.windSpeedLabel.text = (weatherForFifthHour?.windSpeed?.fixedFraction(digits: 1).toString ?? "") + "km/h"
-
                             
                         } catch let error {
                             
@@ -3120,7 +3136,13 @@ class DashboardViewController: UIViewController {
                         }, completion: { (success) in
                             
                         })
-                        self.updateAlerts()
+                        
+                        let value = UserDefaults.standard.bool(forKey: notificationOnOffValuesKey)
+                        if value{
+                            self.updateAlerts()
+                        }else{
+                            self.manageNotificationDisabledButtton()
+                        }
                     } else {
                         
                         print("response.result.value: \(response.result.value)")
@@ -4370,12 +4392,14 @@ extension DashboardViewController: HubDeviceDelegate{
             if error != nil {
                 let sb = UIStoryboard.init(name: "HUB", bundle: nil)
                 if let vc = sb.instantiateViewController(withIdentifier: "HUBProgramViewControllerID") as? HUBProgramViewController {
+                    vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
                     self.present(vc, animated: true, completion: nil)
                 }
             } else {
                 if HUB.currentHUB!.plannings.count == 0 {
                     let sb = UIStoryboard.init(name: "HUB", bundle: nil)
                     if let vc = sb.instantiateViewController(withIdentifier: "HUBProgramViewControllerID") as? HUBProgramViewController {
+                        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
                         self.present(vc, animated: true, completion: nil)
                     }
 
@@ -4399,6 +4423,7 @@ extension DashboardViewController: HubDeviceDelegate{
             if count == 0{
                 let sb = UIStoryboard.init(name: "HUB", bundle: nil)
                 if let vc = sb.instantiateViewController(withIdentifier: "HUBProgramViewControllerID") as? HUBProgramViewController {
+                    vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
                     self.present(vc, animated: true, completion: nil)
                 }
             }else{
@@ -4416,6 +4441,7 @@ extension DashboardViewController: HubDeviceDelegate{
         } else {
             let sb = UIStoryboard.init(name: "HUB", bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "HUBProgramViewControllerID") as? HUBProgramViewController {
+                vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
                 self.present(vc, animated: true, completion: nil)
             }
         }
@@ -4457,4 +4483,5 @@ extension DashboardViewController: HubSettingViewDelegate{
         
     }
 }
+
 

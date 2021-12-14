@@ -114,8 +114,8 @@ class QuickActionViewController: UIViewController {
                         }
                     }
                     if self.haveHub {
-                        self.cellTitleList = ["Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Gestion des plannings".localized]
-                        self.imageNames = ["icon-mesure","icon-calibration","Group 241","icon-smart-scan","quickMenuTime"]
+                        self.cellTitleList = ["Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Settings".localized]
+                        self.imageNames = ["icon-mesure","icon-calibration","Group 241","settingsIconQuickAction"]
                     }else{
                         self.cellTitleList = ["Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Add a Flipr Hub".localized]
                         self.imageNames = ["icon-mesure","icon-calibration","Group 241","icon-smart-scan"]
@@ -365,7 +365,8 @@ extension QuickActionViewController: UITableViewDelegate,UITableViewDataSource {
             buyProduct()
         }
         else if indexPath.row == 3 {
-            hubButtonAction()
+            self.settingsScreen()
+//            hubButtonAction()
         }
         else{
             
@@ -403,6 +404,13 @@ extension QuickActionViewController: UITableViewDelegate,UITableViewDataSource {
         else{
             
         }
+    }
+    
+    func settingsScreen(){
+        let navigationController = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsNavigation") as! UINavigationController
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+
     }
     
     func triggerMesurment(){

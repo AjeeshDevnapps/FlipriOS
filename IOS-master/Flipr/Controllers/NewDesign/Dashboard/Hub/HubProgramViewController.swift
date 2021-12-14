@@ -42,6 +42,7 @@ class HubProgramViewController: UIViewController {
     @IBAction func addButtonClicked(){
         let sb = UIStoryboard.init(name: "HUB", bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "HUBProgramViewControllerID") as? HUBProgramViewController {
+            vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
             self.present(vc, animated: true, completion: nil)
         }
     }
@@ -250,12 +251,17 @@ extension HubProgramViewController:UITableViewDataSource, UITableViewDelegate {
                 return
             }
         
-            let planning = HUB.currentHUB!.plannings[indexPath.row]
-            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "HUBProgramViewControllerID") as? HUBProgramViewController {
-                vc.planning = planning
-                self.present(vc, animated: true, completion: nil)
-            }
-//        }
+       if let plans =  HUB.currentHUB?.plannings{
+           if plans.count >  0{
+               if let planning = HUB.currentHUB?.plannings[indexPath.row]{
+                   if let vc = self.storyboard?.instantiateViewController(withIdentifier: "HUBProgramViewControllerID") as? HUBProgramViewController {
+                       vc.planning = planning
+                       vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+                       self.present(vc, animated: true, completion: nil)
+                   }
+               }
+           }
+        }
     }
     
 }

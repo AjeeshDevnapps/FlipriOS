@@ -53,6 +53,7 @@ class CalibrationPh7IntroViewController: BaseViewController {
     @IBAction func nextButton(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Ph7CalibrationViewController") as! Ph7CalibrationViewController
         vc.recalibration = self.recalibration
+        vc.dismissEnabled = self.isPresentedFlow
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -14514,8 +14514,8 @@ Essai gratuit 7 jours</string>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oDt-Hm-q6h">
                                                                         <rect key="frame" x="15" y="20" width="150" height="65"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Probabilité dans les 5h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wU4-yk-K6b">
-                                                                                <rect key="frame" x="5" y="10" width="140" height="21"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Probabilité dans les 5h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wU4-yk-K6b">
+                                                                                <rect key="frame" x="1" y="10" width="148" height="21"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
                                                                                 <color key="textColor" red="0.40000000000000002" green="0.4549019608" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -14591,9 +14591,9 @@ Essai gratuit 7 jours</string>
                                                                             <constraint firstItem="wU4-yk-K6b" firstAttribute="top" secondItem="oDt-Hm-q6h" secondAttribute="top" constant="10" id="YmH-XS-05B"/>
                                                                             <constraint firstItem="osf-FE-G1m" firstAttribute="centerY" secondItem="wk3-d6-qAu" secondAttribute="centerY" id="a0q-lD-cDU"/>
                                                                             <constraint firstItem="a6Z-D9-zbg" firstAttribute="width" secondItem="wk3-d6-qAu" secondAttribute="width" id="crJ-Tl-7jt"/>
-                                                                            <constraint firstItem="wU4-yk-K6b" firstAttribute="leading" secondItem="oDt-Hm-q6h" secondAttribute="leading" constant="5" id="j3L-Fa-gf1"/>
+                                                                            <constraint firstItem="wU4-yk-K6b" firstAttribute="leading" secondItem="oDt-Hm-q6h" secondAttribute="leading" constant="1" id="j3L-Fa-gf1"/>
                                                                             <constraint firstItem="a6Z-D9-zbg" firstAttribute="height" secondItem="wk3-d6-qAu" secondAttribute="height" id="lLe-DO-I0e"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="wU4-yk-K6b" secondAttribute="trailing" constant="5" id="loB-Sv-VIW"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="wU4-yk-K6b" secondAttribute="trailing" constant="1" id="loB-Sv-VIW"/>
                                                                             <constraint firstItem="wk3-d6-qAu" firstAttribute="top" secondItem="wU4-yk-K6b" secondAttribute="bottom" constant="2" id="pO9-K4-YoK"/>
                                                                             <constraint firstItem="8re-UU-YBn" firstAttribute="top" secondItem="osf-FE-G1m" secondAttribute="bottom" constant="1" id="peA-29-Mh2"/>
                                                                             <constraint firstItem="a6Z-D9-zbg" firstAttribute="centerY" secondItem="wk3-d6-qAu" secondAttribute="centerY" id="qbG-jz-uKv"/>
@@ -15301,12 +15301,12 @@ Essai gratuit 7 jours</string>
                                                                 </subviews>
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iif-OL-ffJ">
-                                                                <rect key="frame" x="215" y="0.0" width="160" height="38"/>
+                                                                <rect key="frame" x="235" y="0.0" width="140" height="38"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="160" id="Yw7-xV-OLe"/>
+                                                                    <constraint firstAttribute="width" constant="140" id="Yw7-xV-OLe"/>
                                                                 </constraints>
                                                                 <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title=" "/>
                                                                 <connections>
                                                                     <action selector="measureAlertButtonTab" destination="eOT-xh-xJh" eventType="touchUpInside" id="Uce-vi-cMn"/>
                                                                 </connections>
@@ -15803,7 +15803,7 @@ Essai gratuit 7 jours</string>
         <image name="pumbdisabled" width="45" height="45"/>
         <image name="readinglevel" width="39" height="107"/>
         <image name="smartContrlOff" width="40" height="40"/>
-        <image name="sun" width="24" height="24"/>
+        <image name="sun" width="22" height="22"/>
         <image name="support" width="21" height="21"/>
         <image name="swipe" width="54" height="68"/>
         <image name="tresholdChange" width="32" height="32"/>

@@ -2,7 +2,7 @@
 //  DashScrollViewItem.swift
 //  Flipr
 //
-//  Created by Vishnu T Vijay on 22/10/21.
+//  Created by Ajeesh T S on 22/10/21.
 //  Copyright © 2021 I See U. All rights reserved.
 //
 
@@ -116,7 +116,7 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
             if let date = dates[indexPath.section] {
                 let formatter = DateFormatter()
                 formatter.locale = Locale(identifier: "en_US_POSIX")
-                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 if let givenDate = formatter.date(from: date) {
                     formatter.dateFormat = "dd/MM"
                     cell.date.text = formatter.string(from: givenDate)

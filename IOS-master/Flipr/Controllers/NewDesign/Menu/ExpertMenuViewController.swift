@@ -13,7 +13,7 @@ class ExpertMenuViewController: UIViewController {
     @IBOutlet weak var titleLbl: UILabel!
 
 
-    var cellTitleList = ["Mode Expert","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vidange de la piscine"]
+    var cellTitleList = ["Mode Expert","Trigger a measurement","Nouveau calibrage","Nouveau test bandelette","Vidange de la piscine"]
     var imageNames = ["expertMenu1","expertMenu2","expertMenu3","expertMenu4","expertMenu5"]
 
     override func viewDidLoad() {
@@ -46,7 +46,7 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
         let cell =  tableView.dequeueReusableCell(withIdentifier:"MenuTableViewCell",
                                              for: indexPath) as! MenuTableViewCell
         
-        cell.menuTitleLbl.text = cellTitleList[indexPath.row]
+        cell.menuTitleLbl.text = cellTitleList[indexPath.row].localized
         cell.menuIcon.image =  UIImage(named: imageNames[indexPath.row])
         return cell
     }

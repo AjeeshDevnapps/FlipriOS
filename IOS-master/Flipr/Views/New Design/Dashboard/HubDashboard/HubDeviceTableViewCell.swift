@@ -83,7 +83,15 @@ class HubDeviceTableViewCell: UITableViewCell {
                 self.iconImageView.image =  UIImage(named: icon)
             }
             else if hub.equipementCode == 86{
-                self.smartContrlBtn.isHidden = false
+                if let module = Module.currentModule {
+                    if module.isSubscriptionValid {
+                        self.smartContrlBtn.isHidden = false
+                    }else{
+                        self.smartContrlBtn.isHidden = true
+                    }
+                }else{
+                    self.smartContrlBtn.isHidden = true
+                }
                 let icon  = hubState ? "pumbactive" : "pumbactive"
                 self.iconImageView.image =  UIImage(named: icon)
             }

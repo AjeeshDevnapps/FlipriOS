@@ -37,10 +37,28 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var friday: UIButton!
     @IBOutlet weak var saturday: UIButton!
     @IBOutlet weak var sunday: UIButton!
-    
+    @IBOutlet weak var space1HeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var space2HeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textFieldTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var timeSloteTopConstraint: NSLayoutConstraint!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let screenHeight = UIScreen.main.bounds.size.height
+        if screenHeight < 737{
+            space1HeightConstraint.constant = 30
+            space2HeightConstraint.constant = 30
+        }
+        
+        if screenHeight < 668 {
+            self.textFieldTopConstraint.constant = 60
+            space1HeightConstraint.constant = 20
+            space2HeightConstraint.constant = 20
+            timeSloteTopConstraint.constant = 10
+        }
+        
         selectionChartView.transparentCircleColor = UIColor.init(hexString: "111729")
         selectionChartView.holeColor = .black
         
@@ -439,4 +457,22 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
     }
     */
 
+}
+
+
+extension UIScreen {
+
+    enum SizeType: CGFloat {
+        case Unknown = 0.0
+        case iPhone4 = 960.0
+        case iPhone5 = 1136.0
+        case iPhone6 = 1334.0
+        case iPhone6Plus = 1920.0
+    }
+
+    var sizeType: SizeType {
+        let height = nativeBounds.height
+        guard let sizeType = SizeType(rawValue: height) else { return .Unknown }
+        return sizeType
+    }
 }
