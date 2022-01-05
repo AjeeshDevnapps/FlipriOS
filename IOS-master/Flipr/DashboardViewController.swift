@@ -754,6 +754,62 @@ class DashboardViewController: UIViewController {
     }
     
  
+    func handleSmartControll(hub:HUB){
+        HUB.currentHUB =  hub
+        HUB.saveCurrentHUBLocally()
+
+//        self.automView.showEmptyStateViewLoading(title: nil, message: nil)
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.view)
+        if hub.behavior == "auto" {
+            if !hub.equipementState {
+                HUB.currentHUB?.updateBehavior(value: "auto", completion: { (message, error) in
+                    if error != nil {
+                        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                        hud?.textLabel.text = error?.localizedDescription
+                        hud?.dismiss(afterDelay: 3)
+
+                    } else {
+                        HUB.currentHUB?.behavior = "auto"
+                        hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                        hud?.dismiss(afterDelay: 3)
+                    }
+                    self.loadHUBs()
+                })
+            } else {
+                HUB.currentHUB?.updateBehavior(value: "manual", completion: { (message, error) in
+                    if error != nil {
+    //                    self.showError(title: "Error", message: error?.localizedDescription)
+                        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                        hud?.textLabel.text = error?.localizedDescription
+                        hud?.dismiss(afterDelay: 3)
+
+                    } else {
+                        HUB.currentHUB?.behavior = "auto"
+                        hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                        hud?.dismiss(afterDelay: 3)
+                    }
+                    self.loadHUBs()
+                })
+            }
+        }else{
+            HUB.currentHUB?.updateBehavior(value: "auto", completion: { (message, error) in
+                if error != nil {
+                    hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                    hud?.textLabel.text = error?.localizedDescription
+                    hud?.dismiss(afterDelay: 3)
+
+                } else {
+                    HUB.currentHUB?.behavior = "auto"
+                    hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    hud?.dismiss(afterDelay: 3)
+                }
+                self.loadHUBs()
+            })
+        }
+
+    }
+    
     
     func keepUserOrderHubViews(){
         /*
@@ -804,6 +860,46 @@ class DashboardViewController: UIViewController {
         self.handleHubViews()
 
        
+    }
+    
+    
+    func manageFirstHubStatusIcon(hub:HUB){
+        let hubState = hub.equipementState
+        if hub.behavior == "auto" {
+            let imageName = hubState ? "smartContrlOn" : "smartContrlActivated"
+            bulbActionButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+        else if hub.behavior == "planning" {
+            let imageName = hubState ? "pumbPgmOn" : "pumbPgmInactive"
+            bulbActionButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+        else if hub.behavior == "manual" {
+            let imageName = hubState ? "ON" : "OFF-pause"
+            bulbActionButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+        else{
+            
+        }
+    }
+    
+    
+    func manageSecondHubStatusIcon(hub:HUB){
+        let hubState = hub.equipementState
+        if hub.behavior == "auto" {
+            let imageName = hubState ? "smartContrlOn" : "smartContrlActivated"
+            pumbActionButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+        else if hub.behavior == "planning" {
+            let imageName = hubState ? "pumbPgmOn" : "pumbPgmInactive"
+            pumbActionButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+        else if hub.behavior == "manual" {
+            let imageName = hubState ? "ON" : "OFF-pause"
+            pumbActionButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+        else{
+            
+        }
     }
     
     // hub state handling
@@ -905,6 +1001,7 @@ class DashboardViewController: UIViewController {
                     
                 }
             }
+            self.manageFirstHubStatusIcon(hub: hubObj)
         }
         
         if let hubObj = self.hubPumb{
@@ -957,6 +1054,8 @@ class DashboardViewController: UIViewController {
                     
                 }
             }
+            
+            self.manageSecondHubStatusIcon(hub: hubObj)
         }
         /*
         for hubObj in self.hubs{
@@ -1247,11 +1346,19 @@ class DashboardViewController: UIViewController {
             if self.notificationReportDate != nil{
                 if self.notificationReportDate!.timeIntervalSinceNow < 0 {
                     self.notificationDisabledButton.isHidden = false
+                    if let module = Module.currentModule {
+                        if module.isSubscriptionValid {
+                            // nothing to do
+                        }else{
+                            self.showSubscriptionButton()
+                        }
+                    }else{
+                        self.showSubscriptionButton()
+                    }
 //                    UserDefaults.standard.set(false, forKey: notificationOnOffValuesKey)
-//                    self.manageNotificationDisabledButtton()
                 }else{
                     self.notificationDisabledButton.isHidden = true
-//                    self.manageNotificationDisabledButtton()
+                    self.showActivateMeasureAlert()
                 }
             }
         }
@@ -2100,7 +2207,7 @@ class DashboardViewController: UIViewController {
         self.measureAlertButton.setTitle(" ".localized, for: .normal)
         self.measureAlertButton.titleLabel?.text = "Annuler".localized
         measureAlertButton.underline()
-        self.measureAlertButton.setTitle("Test dsad", for: .normal)
+//        self.measureAlertButton.setTitle("Test dsad", for: .normal)
 
         measureAlertLbl.text = "vous avez reporte vos alerts".localized
         self.subscriptionButton.isHidden = true
@@ -2115,6 +2222,52 @@ class DashboardViewController: UIViewController {
         self.measureAlertTouchAreaButton.isHidden = true
 
     }
+    
+    
+    func getProrityAlert(){
+        
+        self.alert = nil
+        self.alertButton.isHidden = true
+        self.alertCheckView.isHidden = true
+        
+        self.alert0Button.isHidden = true
+        self.alert1Button.isHidden = true
+        self.alert2Button.isHidden = true
+        self.alert3Button.isHidden = true
+        self.alert4Button.isHidden = true
+        
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.view)
+        Module.currentModule?.getAlerts(completion: { (alert, priorityAlerts, error) in
+            hud?.dismiss(afterDelay: 0)
+            var i = 0
+            for alert in priorityAlerts {
+                if i == 0 {
+                    self.alert0Button.alert = alert
+                    self.alert0Button.isHidden = false
+                }
+                if i == 1 {
+                    self.alert1Button.alert = alert
+                    self.alert1Button.isHidden = false
+                }
+                if i == 2 {
+                    self.alert2Button.alert = alert
+                    self.alert2Button.isHidden = false
+                }
+                if i == 3 {
+                    self.alert3Button.alert = alert
+                    self.alert3Button.isHidden = false
+                }
+                if i == 4 {
+                    self.alert4Button.alert = alert
+                    self.alert4Button.isHidden = false
+                }
+                i = i + 1
+            }
+            
+        })
+    }
+
     
     
     func getAlertFromServer(){
@@ -2492,7 +2645,7 @@ class DashboardViewController: UIViewController {
                             if let givenDate = formatter.date(from: weatherForFifthHour?.hourTemperature ?? "") {
                                 formatter.dateFormat = "dd/MM"
                             }
-                            self.probableWeatherIcon.text = self.climaconsCharWithIcon(icon: weatherForFifthHour?.weatherIcon ?? "")
+//                            self.probableWeatherIcon.text = self.climaconsCharWithIcon(icon: weatherForFifthHour?.weatherIcon ?? "")
 //                            self.tempPrecipitationLabel.text =  "\(weatherForFifthHour?.precipitationProbability ?? 0 )" + "%"
                             if let precipitation = weatherForFifthHour?.precipitationProbability{
                                 let val = precipitation * 100
@@ -2524,7 +2677,7 @@ class DashboardViewController: UIViewController {
 
                             self.day4IconLabel.text = self.climaconsCharWithIcon(icon: decodedValues[3].weatherIcon ?? "")
                             self.day4TitleLabel.text = self.dayOfTheWeek(dateString: decodedValues[3].tempMaxTime ?? "")
-                            self.day4ValueLabel.text = (decodedValues[2].tempMin?.fixedFraction(digits: 0).toString ?? "") + " | " + (decodedValues[2].tempMax?.fixedFraction(digits: 0).toString ?? "") + "°"
+                            self.day4ValueLabel.text = (decodedValues[3].tempMin?.fixedFraction(digits: 0).toString ?? "") + " | " + (decodedValues[3].tempMax?.fixedFraction(digits: 0).toString ?? "") + "°"
                         } catch let error {
                             
                         }
@@ -3140,6 +3293,7 @@ class DashboardViewController: UIViewController {
                         let value = UserDefaults.standard.bool(forKey: notificationOnOffValuesKey)
                         if value{
                             self.updateAlerts()
+                            self.getProrityAlert()
                         }else{
                             self.manageNotificationDisabledButtton()
                         }
@@ -3718,11 +3872,18 @@ class DashboardViewController: UIViewController {
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
         } else {
+            if let hub = HUB.currentHUB{
+                if hub.behavior == "auto"{
+                    self.handleSmartControll(hub: hub)
+                }else{
+                    self.getSelectedHubDetails(selectedHub:  hub)
+                }
+            }
             
-            let storyboard = UIStoryboard(name: "HUB", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "HUBNavigationControllerID")
-            viewController.modalPresentationStyle = .fullScreen
-            self.present(viewController, animated: true, completion: nil)
+//            let storyboard = UIStoryboard(name: "HUB", bundle: nil)
+//            let viewController = storyboard.instantiateViewController(withIdentifier: "HUBNavigationControllerID")
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.present(viewController, animated: true, completion: nil)
             
         }
         
@@ -4269,60 +4430,7 @@ extension DashboardViewController: UIScrollViewDelegate{
 extension DashboardViewController: HubDeviceDelegate{
    
     func didSelectSmartControllButton(hub: HUB) {
-        HUB.currentHUB =  hub
-        HUB.saveCurrentHUBLocally()
-
-//        self.automView.showEmptyStateViewLoading(title: nil, message: nil)
-        let hud = JGProgressHUD(style:.dark)
-        hud?.show(in: self.view)
-        if hub.behavior == "auto" {
-            if !hub.equipementState {
-                HUB.currentHUB?.updateBehavior(value: "auto", completion: { (message, error) in
-                    if error != nil {
-                        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-                        hud?.textLabel.text = error?.localizedDescription
-                        hud?.dismiss(afterDelay: 3)
-
-                    } else {
-                        HUB.currentHUB?.behavior = "auto"
-                        hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
-                        hud?.dismiss(afterDelay: 3)
-                    }
-                    self.loadHUBs()
-                })
-            } else {
-                HUB.currentHUB?.updateBehavior(value: "manual", completion: { (message, error) in
-                    if error != nil {
-    //                    self.showError(title: "Error", message: error?.localizedDescription)
-                        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-                        hud?.textLabel.text = error?.localizedDescription
-                        hud?.dismiss(afterDelay: 3)
-
-                    } else {
-                        HUB.currentHUB?.behavior = "auto"
-                        hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
-                        hud?.dismiss(afterDelay: 3)
-                    }
-                    self.loadHUBs()
-                })
-            }
-        }else{
-            HUB.currentHUB?.updateBehavior(value: "auto", completion: { (message, error) in
-                if error != nil {
-                    hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-                    hud?.textLabel.text = error?.localizedDescription
-                    hud?.dismiss(afterDelay: 3)
-
-                } else {
-                    HUB.currentHUB?.behavior = "auto"
-                    hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
-                    hud?.dismiss(afterDelay: 3)
-                }
-                self.loadHUBs()
-            })
-        }
-      
-        
+        self.handleSmartControll(hub: hub)
     }
     
 
@@ -4384,7 +4492,7 @@ extension DashboardViewController: HubDeviceDelegate{
     func didSelectProgramEditButton(hub:HUB){
         self.getSelectedHubDetails(selectedHub: hub)
     }
-    
+//    HUBProgramViewControllerID
     func getSelectedHubDetails(selectedHub:HUB) {
         HUB.currentHUB = selectedHub
         HUB.saveCurrentHUBLocally()
@@ -4435,7 +4543,6 @@ extension DashboardViewController: HubDeviceDelegate{
                         viewController.showBackgroundView()
                     }
                 }
-                
             }
             
         } else {
@@ -4446,7 +4553,6 @@ extension DashboardViewController: HubDeviceDelegate{
             }
         }
     }
-
 }
 
 

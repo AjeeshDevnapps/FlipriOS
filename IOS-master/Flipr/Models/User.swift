@@ -620,6 +620,7 @@ class User {
         UserDefaults.standard.set("orange", forKey: "CurrentTheme")
         UserDefaults.standard.removeObject(forKey: "FirstHubSerialKey")
         UserDefaults.standard.removeObject(forKey: "SecondHubSerialKey")
+        UserDefaults.standard.removeObject(forKey: "userDefaultThresholdValuesKey")
 
         
 

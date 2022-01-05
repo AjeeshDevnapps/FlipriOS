@@ -90,7 +90,14 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
             cell.value.font = UIFont.systemFont(ofSize: 10, weight: .regular)
             cell.value.textColor = UIColor.init(hexString: "97A3B6")
             if !valueStrings.isEmpty {
-                cell.value.text = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 2).toString
+                if let val = valueStrings[indexPath.section]{
+                    cell.value.text = val.fixedFraction(digits: 2).toString
+                }else{
+                    cell.value.text = "N/A"
+                }
+//                cell.value.text = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 2).toString
+            }else{
+                cell.value.text = "N/A"
             }
         case .temperature:
             cell.textWrappingView.layer.cornerRadius = 4
@@ -99,7 +106,14 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
             cell.value.font = UIFont.systemFont(ofSize: 12, weight: .bold)
             cell.value.textColor = UIColor.init(hexString: "28A8F5")
             if !valueStrings.isEmpty {
-                cell.value.text = "\((valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 0).toString)°"
+                if let val = valueStrings[indexPath.section]{
+                    cell.value.text = val.fixedFraction(digits: 0).toString
+                }else{
+                    cell.value.text = "N/A"
+                }
+//                cell.value.text = "\((valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 0).toString)°"
+            }else{
+                cell.value.text = "N/A"
             }
         case .redox:
             cell.textWrappingView.layer.cornerRadius = 4
@@ -108,7 +122,15 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
             cell.value.font = UIFont.systemFont(ofSize: 10, weight: .regular)
             cell.value.textColor = UIColor.init(hexString: "97A3B6")
             if !valueStrings.isEmpty {
-                cell.value.text = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 0).toString
+                if let val = valueStrings[indexPath.section]{
+                    cell.value.text = val.fixedFraction(digits: 0).toString
+                }else{
+                    cell.value.text = "N/A"
+                }
+                //                cell.value.text = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 0).toString
+            }
+            else{
+                cell.value.text = "N/A"
             }
         default: return UICollectionViewCell()
         }
@@ -133,10 +155,14 @@ extension DashScrollViewItem: UICollectionViewDataSource, UICollectionViewDelega
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderCell", for: indexPath)
             header.removeSubviews()
             if !valueStrings.isEmpty {
-                let value = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 1)
+//                let value = (valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 1)
+                let value = Double((valueStrings[indexPath.section] ?? 0).fixedFraction(digits: 1))!
+
                 var image: UIImage? = UIImage()
                 if (indexPath.section - 1 >= 0) {
-                    let previous = (valueStrings[indexPath.section - 1] ?? 0).fixedFraction(digits: 1)
+//                    let previous = (valueStrings[indexPath.section - 1] ?? 0).fixedFraction(digits: 1)
+//                    let previous = Double((valueStrings[indexPath.section - 1] ?? 0).fixedFraction(digits: 1))!
+                    let previous = Double((valueStrings[indexPath.section - 1] ?? 0).fixedFraction(digits: 1))!
                     if value > previous {
                         image = UIImage(named: "arrow-up-right (1)")
                     } else if value < previous {
