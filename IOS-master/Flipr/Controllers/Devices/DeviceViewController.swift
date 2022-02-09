@@ -389,7 +389,7 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
                     if let info = devicesDetails?["CommercialType"] as? [String: AnyObject] {
                         if let type = info["Value"] as? String  {
                             cell.modelLabel.text?.append(" ")
-                            cell.modelLabel.text?.append(type)
+//                            cell.modelLabel.text?.append(type)
                             if type == "Pro" {
                                 cell.modelLabel.text = "Start MAX"
                             }else{

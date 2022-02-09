@@ -2296,15 +2296,15 @@ class DashboardViewController: UIViewController {
         }
         */
         
-        let hud = JGProgressHUD(style:.dark)
+      //  let hud = JGProgressHUD(style:.dark)
         if self.isShowingLoadingForAlertApi{
-            hud?.show(in: self.view)
+           // hud?.show(in: self.view)
         }
         
         Module.currentModule?.getAlerts(completion: { (alert, priorityAlerts, error) in
             if self.isShowingLoadingForAlertApi{
                 self.isShowingLoadingForAlertApi = false
-                hud?.dismiss(afterDelay: 0)
+              //  hud?.dismiss(afterDelay: 0)
             }
             var noMainAlert = true
             if alert != nil {
@@ -2893,12 +2893,11 @@ class DashboardViewController: UIViewController {
                         if let dateString = current["DateTime"] as? String {
                             if let lastDate = dateString.fliprDate {
                                 let dateFormatter = DateFormatter()
-                                dateFormatter.dateFormat = "EEE HH:mm"
+                                dateFormatter.dateFormat = "EEE dd/MM HH:mm"
                                 self.lastMeasureDateLabel.text = "Last measure".localized +  " : \(dateFormatter.string(from: lastDate))"
                                 self.lastMeasureDateLabel.isHidden = false
                                 self.lastMeasureDate = lastDate
                                 Module.currentModule?.rawlastMeasure = dateFormatter.string(from: lastDate)
-                                
                                 print("lastDate interval since now:\(lastDate.timeIntervalSinceNow)")
 //
                         /*

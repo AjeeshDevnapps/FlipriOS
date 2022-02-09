@@ -62,6 +62,7 @@ class FliprHubMenuViewController: UIViewController {
             self.haveHub = true
         }
         if let identifier = Module.currentModule?.serial {
+            self.titleLbl.text = identifier
             self.haveFlipr = true
 
             if let module = Module.currentModule {
