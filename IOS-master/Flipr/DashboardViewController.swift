@@ -768,7 +768,6 @@ class DashboardViewController: UIViewController {
                         hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                         hud?.textLabel.text = error?.localizedDescription
                         hud?.dismiss(afterDelay: 3)
-
                     } else {
                         HUB.currentHUB?.behavior = "auto"
                         hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
@@ -777,6 +776,7 @@ class DashboardViewController: UIViewController {
                     self.loadHUBs()
                 })
             } else {
+                /*
                 HUB.currentHUB?.updateBehavior(value: "manual", completion: { (message, error) in
                     if error != nil {
     //                    self.showError(title: "Error", message: error?.localizedDescription)
@@ -791,6 +791,8 @@ class DashboardViewController: UIViewController {
                     }
                     self.loadHUBs()
                 })
+                
+                */
             }
         }else{
             HUB.currentHUB?.updateBehavior(value: "auto", completion: { (message, error) in
@@ -924,30 +926,52 @@ class DashboardViewController: UIViewController {
         }
         if isNotSavedHubPosition{
             for hubObj in self.hubs{
-                
+            
                 if hubObj.serial == firstHubKey{
                     self.hubPumb = hubObj
                 }
                 else if hubObj.serial == secondHubKey{
                     self.hubBulb = hubObj
                 }
+            
+                /*
+                if hubObj.serial == firstHubKey{
+                    self.hubBulb = hubObj
+                }
+                else if hubObj.serial == secondHubKey{
+                    self.hubPumb = hubObj
+                }
+               */
                
             }
            
         }else{
             self.hubBulb = nil
             self.hubPumb = nil
-            for hubObj in self.hubs{
-                if hubObj.equipementCode == 84{
-                    self.hubBulb = hubObj
-                }
-                else if hubObj.equipementCode == 86{
-                    self.hubPumb = hubObj
-                }
-                else{
-                    self.hubBulb = hubObj
+            if self.hubs.count > 0 {
+                for (ordeVal,hubObj) in self.hubs.enumerated(){
+                    if ordeVal == 0{
+                        self.hubPumb = hubObj
+                    }
+                    else if ordeVal == 1{
+                        self.hubBulb = hubObj
+                    }else{
+                        
+                    }
+/*
+                    if hubObj.equipementCode == 84{
+                        self.hubBulb = hubObj
+                    }
+                    else if hubObj.equipementCode == 86{
+                        self.hubPumb = hubObj
+                    }
+                    else{
+                        self.hubBulb = hubObj
+                    }
+                    */
                 }
             }
+          
         }
        
         
@@ -1009,7 +1033,7 @@ class DashboardViewController: UIViewController {
                 pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
                 pumbStatuImageView.image = UIImage(named: "pumbactive")
                 if hubObj.equipementCode == 84{
-                    self.pumbStatuImageView.image =  UIImage(named: "lightEnabled")
+                    self.pumbStatuImageView.image =  UIImage(named: "lightOn")
                 }
                 else if hubObj.equipementCode == 86{
                     self.pumbStatuImageView.image =  UIImage(named: "pumbactive")
@@ -1396,7 +1420,6 @@ class DashboardViewController: UIViewController {
             backgroundOverlayHubImageView.image = UIImage(named: "blue gradient")
 //            fluidColor =  UIColor.init(red: 40/255.0, green: 154/255.0, blue: 194/255.0, alpha: 1)
             fluidColor =  UIColor.init(hexString: "2cd3c1")
-
         }else{
             fluidColor =  UIColor.init(hexString: "fcad71")
             backgroundOverlayImageView.image = UIImage(named: "gradient")
@@ -2207,8 +2230,8 @@ class DashboardViewController: UIViewController {
         self.measureAlertButton.setTitle(" ".localized, for: .normal)
         self.measureAlertButton.titleLabel?.text = "Annuler".localized
         measureAlertButton.underline()
-//        self.measureAlertButton.setTitle("Test dsad", for: .normal)
-
+        //        self.measureAlertButton.setTitle("Test dsad", for: .normal)
+        
         measureAlertLbl.text = "vous avez reporte vos alerts".localized
         self.subscriptionButton.isHidden = true
         self.measureAlertView.isHidden = false
@@ -2220,13 +2243,12 @@ class DashboardViewController: UIViewController {
     func hideMeasureAlert(){
         self.measureAlertView.isHidden = true
         self.measureAlertTouchAreaButton.isHidden = true
-
+        
     }
     
     
+    
     func getProrityAlert(){
-        
-        self.alert = nil
         self.alertButton.isHidden = true
         self.alertCheckView.isHidden = true
         
@@ -2235,42 +2257,66 @@ class DashboardViewController: UIViewController {
         self.alert2Button.isHidden = true
         self.alert3Button.isHidden = true
         self.alert4Button.isHidden = true
+        DispatchQueue.global().async {
+            self.callAlertAPi()
+        }
+    }
+    
+    
+    func callAlertAPi(){
+        self.alert = nil
+//        self.alertButton.isHidden = true
+//        self.alertCheckView.isHidden = true
+//
+//        self.alert0Button.isHidden = true
+//        self.alert1Button.isHidden = true
+//        self.alert2Button.isHidden = true
+//        self.alert3Button.isHidden = true
+//        self.alert4Button.isHidden = true
         
-        let hud = JGProgressHUD(style:.dark)
-        hud?.show(in: self.view)
+        //        let hud = JGProgressHUD(style:.dark)
+        //        hud?.show(in: self.view)
         Module.currentModule?.getAlerts(completion: { (alert, priorityAlerts, error) in
-            hud?.dismiss(afterDelay: 0)
-            var i = 0
-            for alert in priorityAlerts {
-                if i == 0 {
-                    self.alert0Button.alert = alert
-                    self.alert0Button.isHidden = false
+            //            hud?.dismiss(afterDelay: 0)
+            
+            DispatchQueue.main.async {
+                var i = 0
+                for alert in priorityAlerts {
+                    if i == 0 {
+                        self.alert0Button.alert = alert
+                        self.alert0Button.isHidden = false
+                    }
+                    if i == 1 {
+                        self.alert1Button.alert = alert
+                        self.alert1Button.isHidden = false
+                    }
+                    if i == 2 {
+                        self.alert2Button.alert = alert
+                        self.alert2Button.isHidden = false
+                    }
+                    if i == 3 {
+                        self.alert3Button.alert = alert
+                        self.alert3Button.isHidden = false
+                    }
+                    if i == 4 {
+                        self.alert4Button.alert = alert
+                        self.alert4Button.isHidden = false
+                    }
+                    i = i + 1
                 }
-                if i == 1 {
-                    self.alert1Button.alert = alert
-                    self.alert1Button.isHidden = false
-                }
-                if i == 2 {
-                    self.alert2Button.alert = alert
-                    self.alert2Button.isHidden = false
-                }
-                if i == 3 {
-                    self.alert3Button.alert = alert
-                    self.alert3Button.isHidden = false
-                }
-                if i == 4 {
-                    self.alert4Button.alert = alert
-                    self.alert4Button.isHidden = false
-                }
-                i = i + 1
             }
+            
+            
             
         })
     }
-
-    
     
     func getAlertFromServer(){
+        self.getMainAlertsFromServer()
+    }
+    
+    func  getMainAlertsFromServer(){
+        
         
         self.alert = nil
         self.alertButton.isHidden = true
@@ -2286,120 +2332,127 @@ class DashboardViewController: UIViewController {
             self.hideBottomAlertButton()
         }
         /*
-        if let module = Module.currentModule {
-            if !module.isSubscriptionValid {
-               // self.handleSubscriptionButton()
-                return
-            }else{
-//                self.subscriptionButton.isHidden = true
-            }
-        }
-        */
+         if let module = Module.currentModule {
+         if !module.isSubscriptionValid {
+         // self.handleSubscriptionButton()
+         return
+         }else{
+         //                self.subscriptionButton.isHidden = true
+         }
+         }
+         */
         
-      //  let hud = JGProgressHUD(style:.dark)
+        //  let hud = JGProgressHUD(style:.dark)
         if self.isShowingLoadingForAlertApi{
-           // hud?.show(in: self.view)
+            // hud?.show(in: self.view)
         }
-        
-        Module.currentModule?.getAlerts(completion: { (alert, priorityAlerts, error) in
-            if self.isShowingLoadingForAlertApi{
-                self.isShowingLoadingForAlertApi = false
-              //  hud?.dismiss(afterDelay: 0)
-            }
-            var noMainAlert = true
-            if alert != nil {
-                noMainAlert = false
-                self.alert = alert
-                if self.alert?.status == 0 {
-                    self.alertButton.isHidden = false
-                    self.showAlertButton()
-                    self.alertCheckView.isHidden = true
-                } else {
-                    self.alertButton.isHidden = true
-                    self.showGreenAlertButton()
-//                    self.alertCheckView.isHidden = false
-                }
-//                if let module = Module.currentModule {
-//                    if module.isSubscriptionValid {
-//                        self.showAlertButton()
-//                    }else{
-//                        if self.lastMeasureDate != nil{
-//                            if self.lastMeasureDate!.timeIntervalSinceNow > -21600 {
-//                                self.showAlertButton()
-//                            }
-//                        }
-//                    }
-//                }FF
-            }
+        DispatchQueue.global().async {
             
-            else {
-                noMainAlert = true
-                self.alert = nil
-                self.alertButton.isHidden = true
-                self.alertCheckView.isHidden = true
-//                if let module = Module.currentModule {
-//                    if module.isSubscriptionValid {
-//                        self.showGoodMeasureButton()
-//                    }else{
-//                    }
-//                }
-            }
-            
-            var i = 0
-            
-            for alert in priorityAlerts {
-                if i == 0 {
-                    self.alert0Button.alert = alert
-                    self.alert0Button.isHidden = false
-                }
-                if i == 1 {
-                    self.alert1Button.alert = alert
-                    self.alert1Button.isHidden = false
-                }
-                if i == 2 {
-                    self.alert2Button.alert = alert
-                    self.alert2Button.isHidden = false
-                }
-                if i == 3 {
-                    self.alert3Button.alert = alert
-                    self.alert3Button.isHidden = false
-                }
-                if i == 4 {
-                    self.alert4Button.alert = alert
-                    self.alert4Button.isHidden = false
-                }
-                i = i + 1
-            }
-            
-            if noMainAlert && i == 0 {
-                if let module = Module.currentModule {
-                    if module.isSubscriptionValid {
-                        self.showVigilanceButton()
-                    }else{
-                        self.showSubscriptionButton()
+            Module.currentModule?.getAlerts(completion: { (alert, priorityAlerts, error) in
+                
+                DispatchQueue.main.async {
+                    
+                    
+                    if self.isShowingLoadingForAlertApi{
+                        self.isShowingLoadingForAlertApi = false
+                        //  hud?.dismiss(afterDelay: 0)
                     }
-                }else{
-                    self.showSubscriptionButton()
-                }
-            }
-            else{
-                /*
-                if let module = Module.currentModule {
-                    if module.isSubscriptionValid {
-                        self.showAlertButton()
-                    }else{
-                        if self.lastMeasureDate != nil{
-                            if self.lastMeasureDate!.timeIntervalSinceNow > -21600 {
-                                self.showAlertButton()
+                    var noMainAlert = true
+                    if alert != nil {
+                        noMainAlert = false
+                        self.alert = alert
+                        if self.alert?.status == 0 {
+                            self.alertButton.isHidden = false
+                            self.showAlertButton()
+                            self.alertCheckView.isHidden = true
+                        } else {
+                            self.alertButton.isHidden = true
+                            self.showGreenAlertButton()
+                            //                    self.alertCheckView.isHidden = false
+                        }
+                        //                if let module = Module.currentModule {
+                        //                    if module.isSubscriptionValid {
+                        //                        self.showAlertButton()
+                        //                    }else{
+                        //                        if self.lastMeasureDate != nil{
+                        //                            if self.lastMeasureDate!.timeIntervalSinceNow > -21600 {
+                        //                                self.showAlertButton()
+                        //                            }
+                        //                        }
+                        //                    }
+                        //                }FF
+                    }
+                    
+                    else {
+                        noMainAlert = true
+                        self.alert = nil
+                        self.alertButton.isHidden = true
+                        self.alertCheckView.isHidden = true
+                        //                if let module = Module.currentModule {
+                        //                    if module.isSubscriptionValid {
+                        //                        self.showGoodMeasureButton()
+                        //                    }else{
+                        //                    }
+                        //                }
+                    }
+                    
+                    var i = 0
+                    
+                    for alert in priorityAlerts {
+                        if i == 0 {
+                            self.alert0Button.alert = alert
+                            self.alert0Button.isHidden = false
+                        }
+                        if i == 1 {
+                            self.alert1Button.alert = alert
+                            self.alert1Button.isHidden = false
+                        }
+                        if i == 2 {
+                            self.alert2Button.alert = alert
+                            self.alert2Button.isHidden = false
+                        }
+                        if i == 3 {
+                            self.alert3Button.alert = alert
+                            self.alert3Button.isHidden = false
+                        }
+                        if i == 4 {
+                            self.alert4Button.alert = alert
+                            self.alert4Button.isHidden = false
+                        }
+                        i = i + 1
+                    }
+                    
+                    if noMainAlert && i == 0 {
+                        if let module = Module.currentModule {
+                            if module.isSubscriptionValid {
+                                self.showVigilanceButton()
+                            }else{
+                                self.showSubscriptionButton()
                             }
+                        }else{
+                            self.showSubscriptionButton()
                         }
                     }
+                    else{
+                        /*
+                         if let module = Module.currentModule {
+                         if module.isSubscriptionValid {
+                         self.showAlertButton()
+                         }else{
+                         if self.lastMeasureDate != nil{
+                         if self.lastMeasureDate!.timeIntervalSinceNow > -21600 {
+                         self.showAlertButton()
+                         }
+                         }
+                         }
+                         }
+                         */
+                    }
                 }
-                */
-            }
-        })
+            })
+        }
     }
-    
+
     
     
     
@@ -2442,7 +2495,7 @@ class DashboardViewController: UIViewController {
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
                             self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
 
-                            
+
                             if let forecastTemperature = weather["NextHourTemperature"] as? Double {
                                 if forecastTemperature > temperature {
                                     self.airTendendcyImageView.image = UIImage(named: "arrow_air_up")
@@ -2764,6 +2817,7 @@ class DashboardViewController: UIViewController {
                             
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
                             self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
+                            Module.currentModule?.airTemperature = String(format: "%.2f", temperature) + "°"
 
                             
                             if let forecastTemperature = weather["NextHourTemperature"] as? Double {
@@ -3292,6 +3346,9 @@ class DashboardViewController: UIViewController {
                         let value = UserDefaults.standard.bool(forKey: notificationOnOffValuesKey)
                         if value{
                             self.updateAlerts()
+                            
+                            
+                            
                             self.getProrityAlert()
                         }else{
                             self.manageNotificationDisabledButtton()
@@ -4378,6 +4435,7 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource, UI
         return 145
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"HubDeviceTableViewCell",
                                                  for: indexPath) as! HubDeviceTableViewCell
@@ -4400,7 +4458,6 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource, UI
         cell.deviceNameLbl.text = hub.equipementName.capitalizingFirstLetter()
         cell.manageIcons()
         return cell
-
     }
     
 

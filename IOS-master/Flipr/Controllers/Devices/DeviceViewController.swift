@@ -39,7 +39,8 @@ class DeviceViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if self.devicewifiTypeCell == .Hub{
-            self.hubDetails(data: hubDetails!)
+            if hubDetails != nil{
+                self.hubDetails(data: hubDetails!)}
 //            if AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi{
 //                self.getHubDetails()
 //            }

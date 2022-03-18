@@ -116,7 +116,7 @@ class LoginViewController: BaseViewController {
             self.signInButton.showActivityIndicator(type: .ballClipRotatePulse)
             User.signin(email: self.emailTextField.text!, password: self.passwordTextField.text!) { (error) in
                 if error == nil {
-                    
+                    /*
                     let omnisenseUser = OSUser();
                     omnisenseUser.email = User.currentUser?.email
                     omnisenseUser.firstName = User.currentUser?.firstName
@@ -124,7 +124,7 @@ class LoginViewController: BaseViewController {
                     omnisenseUser.phone = User.currentUser?.phone
                     omnisenseUser.registered = true
                     Omnisense.setCurrentUser(omnisenseUser)
-                    
+                    */
                     if Module.currentModule != nil {
                         
                         UserDefaults.standard.set(Date()?.addingTimeInterval(-200), forKey:"FirstMeasureStartDate")

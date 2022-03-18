@@ -180,7 +180,6 @@ class HUB {
                            
                        case .success(let value):
                         
-                        
                         if let JSON = value as? [String:Any] {
                             print("HUB get State: \(JSON)")
                             if let value = JSON["stateEquipment"] as? Bool {

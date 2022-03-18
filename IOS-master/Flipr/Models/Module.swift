@@ -23,6 +23,8 @@ class Module {
     var rawRedox:String?
     var rawConductivity:String?
     var rawWaterTemperature:String?
+    var airTemperature:String?
+
     
     var version:Int?
     var moduleType:Int?
@@ -274,9 +276,16 @@ class Module {
                         if let alert = Alert.init(withJSON: JSON) {
                             if alert.iconUrl != nil {
                                 priorityAlerts.append(alert)
+                                if mainAlert == nil {
+                                    if alert.status == 0 {
+                                        mainAlert = alert
+                                    }
+                                }
                             } else {
                                 if mainAlert == nil {
-                                    mainAlert = alert
+                                    if alert.status == 0 {
+                                        mainAlert = alert
+                                    }
                                 }
                             }
                             

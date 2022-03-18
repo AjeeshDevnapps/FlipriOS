@@ -39,8 +39,8 @@ class OnboardingViewController: UIViewController {
         }
         
         if let user = User.currentUser {
-            Omnisense.currentUser().registered = true
-            Omnisense.saveCurrentUser()
+//            Omnisense.currentUser().registered = true
+//            Omnisense.saveCurrentUser()
             
             Alamofire.request(Router.updateLanguage).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
                 switch response.result {

@@ -22,6 +22,8 @@ enum Router: URLRequestConvertible {
     case changePassword(oldPassword: String, newPassword: String)
     case readUser
     case readUserNotifications
+    case updateDeviceToken(token:String)
+
     case updateUserNotifications(activate: Bool)
     case updateLanguage
     case updateUserInfo(lastName: String, firstName: String)
@@ -128,6 +130,8 @@ enum Router: URLRequestConvertible {
             return .get
         case .readUserNotifications:
             return .get
+        case .updateDeviceToken:
+            return .put
         case .updateUserNotifications:
             return .put
         case .updateLanguage:
@@ -272,6 +276,8 @@ enum Router: URLRequestConvertible {
             return "accounts/notifications"
         case .updateUserNotifications:
             return "accounts/notifications"
+        case .updateDeviceToken(_):
+            return "accounts/UpdateTokenDevice"
         case .updateLanguage:
             return "accounts"
         case .updateUserInfo:
@@ -526,6 +532,19 @@ enum Router: URLRequestConvertible {
             ]
             print("updateUserNotifications: \(parameters)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        
+        case .updateDeviceToken(let token):
+            let parm: [String : Any] = [
+                "Token": token
+            ]
+            print("update Device fcm token: \(parm)")
+            
+            if let url = urlRequest.url?.absoluteString {
+                urlRequest.url = URL(string: url + "?Token=\(token)")
+            }
+//            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+            
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parm)
             
         case .addMobileDevice(let token):
             let parameters: [String : Any] = [

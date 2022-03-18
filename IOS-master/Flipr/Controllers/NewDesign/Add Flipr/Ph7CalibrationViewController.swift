@@ -137,6 +137,7 @@ class Ph7CalibrationViewController: BaseViewController {
     @objc func checkForAppStrucked() {
     
         if self.isCalibrationStrucked{
+            self.invalidateStruckChecktimer()
             self.showChlorineFlow()
         }
     }

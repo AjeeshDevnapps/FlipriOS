@@ -15,22 +15,52 @@ import IQKeyboardManagerSwift
 import SideMenu
 import StoreKit
 import SafariServices
+import FirebaseMessaging
+import FirebaseCore
 
 @UIApplicationMain
 
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let gcmMessageIDKey = "gcm.message_id"
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+//        FirebaseApp.configure()
+//
+//        // [START set_messaging_delegate]
+//        Messaging.messaging().delegate = self
+        // [END set_messaging_delegate]
+        // Register for remote notifications. This shows a permission dialog on first run, to
+        // show the dialog at a more appropriate time move this registration accordingly.
+        // [START register_for_notifications]
+      /*
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: { _, _ in }
+            )
+        } else {
+            let settings: UIUserNotificationSettings =
+            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        */
+        
         SKPaymentQueue.default().add(self)
         
         Fabric.with([Crashlytics.self])
         
-        Omnisense.setAppIdentifier("flipr", apiKey: "f09e9a70f8c7580003c05ae11c19e079")
+//        Omnisense.setAppIdentifier("flipr", apiKey: "f09e9a70f8c7580003c05ae11c19e079")
 
         //registerSettingsBundle()
         
@@ -50,6 +80,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             debugPrint("Open from remote notification: \(remoteNotification)")
             handleRemoteNotification(info: remoteNotification)
         }
+        
+//        Messaging.messaging().delegate = self
+//        FirebaseApp.configure()
         
         return true
     }
@@ -116,7 +149,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func registerForRemoteNotifications(application: UIApplication){
+        if FirebaseApp.app() == nil {
+            FirebaseApp.configure()
+        }
         
+        // [START set_messaging_delegate]
+        Messaging.messaging().delegate = self
+
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
@@ -175,12 +214,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     
     //Remote notifcation delegate
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         print("Remote notification device: \(deviceTokenString)")
+//        Messaging.messaging().apnsToken = deviceToken
         
-        Omnisense.registerAppForRemoteNotifications(withDeviceToken: deviceToken)
+//        Omnisense.registerAppForRemoteNotifications(withDeviceToken: deviceToken)
+        
+        
         
         /*
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
@@ -206,9 +249,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
     }
     
+    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        // Print message ID.
+          if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+          }
+
+          // Print full message.
+          print(userInfo)
         handleRemoteNotification(info: userInfo)
     }
+    
+    func application(_ application: UIApplication,
+                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult)
+                        -> Void) {
+       // If you are receiving a notification message while your app is in the background,
+       // this callback will not be fired till the user taps on the notification launching the application.
+       // TODO: Handle data of notification
+       // With swizzling disabled you must let Messaging know about the message, for Analytics
+       // Messaging.messaging().appDidReceiveMessage(userInfo)
+       // Print message ID.
+       if let messageID = userInfo[gcmMessageIDKey] {
+         print("Message ID: \(messageID)")
+       }
+
+       // Print full message.
+       print(userInfo)
+
+       completionHandler(UIBackgroundFetchResult.newData)
+     }
+    
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
 
@@ -218,7 +290,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func handleRemoteNotification(info:[AnyHashable : Any]) {
         
-        Omnisense.handleRemoteNotification(info)
+//        Omnisense.handleRemoteNotification(info)
         
         if let extra = info["extra"] as? [String : Any] {
             if let urlString = extra["u"] as? String {
@@ -315,5 +387,79 @@ extension AppDelegate: SKPaymentTransactionObserver {
         print("Purchase deferred for product id: \(transaction.payment.productIdentifier)")
     }
 
+}
+
+extension AppDelegate: MessagingDelegate {
+  // [START refresh_token]
+  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+    print("Firebase registration token: \(String(describing: fcmToken))")
+
+    let dataDict: [String: String] = ["token": fcmToken ?? ""]
+    NotificationCenter.default.post(
+      name: Notification.Name("FCMToken"),
+      object: nil,
+      userInfo: dataDict
+    )
+      
+      User.updateFcmToken(tokenValue: fcmToken ?? "", completion: { (error) in
+          if (error != nil) {
+              print("Error")
+
+          } else {
+              print("Success")
+
+          }
+      })
+      
+    // TODO: If necessary send token to application server.
+    // Note: This callback is fired at each app startup and whenever a new token is generated.
+  }
+
+  // [END refresh_token]
+}
+
+
+@available(iOS 10, *)
+extension AppDelegate: UNUserNotificationCenterDelegate {
+  // Receive displayed notifications for iOS 10 devices.
+  func userNotificationCenter(_ center: UNUserNotificationCenter,
+                              willPresent notification: UNNotification,
+                              withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
+                                -> Void) {
+    let userInfo = notification.request.content.userInfo
+
+    // With swizzling disabled you must let Messaging know about the message, for Analytics
+    // Messaging.messaging().appDidReceiveMessage(userInfo)
+    // [START_EXCLUDE]
+    // Print message ID.
+    if let messageID = userInfo[gcmMessageIDKey] {
+      print("Message ID: \(messageID)")
+    }
+    // [END_EXCLUDE]
+    // Print full message.
+    print(userInfo)
+
+    // Change this to your preferred presentation option
+    completionHandler([[.alert, .sound]])
+  }
+
+  func userNotificationCenter(_ center: UNUserNotificationCenter,
+                              didReceive response: UNNotificationResponse,
+                              withCompletionHandler completionHandler: @escaping () -> Void) {
+    let userInfo = response.notification.request.content.userInfo
+
+    // [START_EXCLUDE]
+    // Print message ID.
+    if let messageID = userInfo[gcmMessageIDKey] {
+      print("Message ID: \(messageID)")
+    }
+    // [END_EXCLUDE]
+    // With swizzling disabled you must let Messaging know about the message, for Analytics
+    // Messaging.messaging().appDidReceiveMessage(userInfo)
+    // Print full message.
+    print(userInfo)
+
+    completionHandler()
+  }
 }
 

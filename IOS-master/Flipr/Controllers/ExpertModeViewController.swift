@@ -95,7 +95,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
         
         pHValueLabel.text = Module.currentModule?.rawPH
         redoxValueLabel.text = Module.currentModule?.rawRedox
-        conductivityValueLabel.text = Module.currentModule?.rawConductivity
+        conductivityValueLabel.text = Module.currentModule?.airTemperature
         waterTemperatureValueLabel.text = Module.currentModule?.rawWaterTemperature
         
         pHTresholdLabel.text = "pH alert threshold".localized
@@ -104,7 +104,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
         
         pHLabel.text = "pH".localized
         redoxLabel.text = "Redox".localized
-        conductivityLabel.text = "Conductivity".localized
+        conductivityLabel.text = "Air".localized
         waterTemperatureLabel.text = "Water".localized
         
         tresholdLabel.text = "Custom alert thresholds".localized

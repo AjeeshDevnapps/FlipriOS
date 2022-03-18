@@ -147,13 +147,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             User.signin(email: self.emailTextField.text!, password: self.passwordTextField.text!) { (error) in
                 if error == nil {
                     
-                    let omnisenseUser = OSUser();
-                    omnisenseUser.email = User.currentUser?.email
-                    omnisenseUser.firstName = User.currentUser?.firstName
-                    omnisenseUser.lastName = User.currentUser?.lastName
-                    omnisenseUser.phone = User.currentUser?.phone
-                    omnisenseUser.registered = true
-                    Omnisense.setCurrentUser(omnisenseUser)
+//                    let omnisenseUser = OSUser();
+//                    omnisenseUser.email = User.currentUser?.email
+//                    omnisenseUser.firstName = User.currentUser?.firstName
+//                    omnisenseUser.lastName = User.currentUser?.lastName
+//                    omnisenseUser.phone = User.currentUser?.phone
+//                    omnisenseUser.registered = true
+//                    Omnisense.setCurrentUser(omnisenseUser)
                     
                     if Module.currentModule != nil {
                         

@@ -681,6 +681,29 @@ class User {
         })
     }
     
+    static func updateFcmToken(tokenValue:String, completion: ((_ error:Error?) -> Void)?) {
+        print(Router.updateDeviceToken(token: tokenValue))
+        Alamofire.request(Router.updateDeviceToken(token: tokenValue)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                print("Updated device token: \(value)")
+                
+                completion?(nil)
+                
+            case .failure(let error):
+                
+                print(" did fail to update device token error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(serverError)
+                } else {
+                    completion?(error)
+                }
+            }
+        })
+    }
 }
 
 
