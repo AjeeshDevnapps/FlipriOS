@@ -89,6 +89,13 @@ class LandingViewController: UIViewController {
         
     }
     
+    @IBAction func fliprAnalysrButtonAction(_ sender: Any) {
+        let fliprStoryboard = UIStoryboard(name: "FliprDevice", bundle: nil)
+        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddFliprViewController") as! AddFliprViewController
+        viewController.isSignupFlow = self.isSignupFlow
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     @IBAction func clickedOnHub(_ sender: UIButton) {
         let fliprStoryboard = UIStoryboard(name: "HUBElectrical", bundle: nil)
         let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController") as! ElectricalSetupViewController

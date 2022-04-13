@@ -206,6 +206,10 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var tempPrecipitationLabel: UILabel!
 
     @IBOutlet weak var next5hourTitleLabel: UILabel!
+    @IBOutlet weak var fliprTabTitleLbl: UILabel!
+    @IBOutlet weak var firstHubNameLbl: UILabel!
+    @IBOutlet weak var secondHubNameLbl: UILabel!
+
 
 
     var hubTabWaveTopConstraintPreValue = 0
@@ -246,6 +250,7 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        manageFlipTabTitle()
         setUpStatusScroll()
 //        if -300 > -400{
 //            print("true")
@@ -767,7 +772,7 @@ class DashboardViewController: UIViewController {
                     if error != nil {
                         hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                         hud?.textLabel.text = error?.localizedDescription
-                        hud?.dismiss(afterDelay: 3)
+                        hud?.dismiss(afterDelay: 0)
                     } else {
                         HUB.currentHUB?.behavior = "auto"
                         hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
@@ -799,7 +804,7 @@ class DashboardViewController: UIViewController {
                 if error != nil {
                     hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                     hud?.textLabel.text = error?.localizedDescription
-                    hud?.dismiss(afterDelay: 3)
+                    hud?.dismiss(afterDelay: 0)
 
                 } else {
                     HUB.currentHUB?.behavior = "auto"
@@ -1080,6 +1085,11 @@ class DashboardViewController: UIViewController {
             }
             
             self.manageSecondHubStatusIcon(hub: hubObj)
+            
+            firstHubNameLbl.text = self.hubPumb?.equipementName.capitalized
+            secondHubNameLbl.text = self.hubBulb?.equipementName.capitalized
+
+            
         }
         /*
         for hubObj in self.hubs{
@@ -1281,6 +1291,8 @@ class DashboardViewController: UIViewController {
     }
     
     func manageRedoxValueChangeButtton(){
+        manageAllThreshhhold()
+        /*
         let value = UserDefaults.standard.bool(forKey: userDefaultThresholdValuesKey)
         //        self.redoxChangeButton.isHidden = value
         
@@ -1289,6 +1301,7 @@ class DashboardViewController: UIViewController {
                           animations: {
                             self.redoxChangeButton.isHidden = value
                           })
+        */
         
     }
     
@@ -1336,12 +1349,17 @@ class DashboardViewController: UIViewController {
     }
     
     func manageThresholdButton(){
+        manageAllThreshhhold()
+        /*
         let phMinValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMinValuesKey)
         let phMaxValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMaxValuesKey)
         
         let waterMinValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMinValuesKey)
         let waterMaxValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMaxValuesKey)
-        if phMinValue && phMaxValue && waterMinValue && waterMaxValue{
+        let redoxValue = UserDefaults.standard.bool(forKey: userDefaultThresholdValuesKey)
+
+        
+        if phMinValue && phMaxValue && waterMinValue && waterMaxValue && redoxValue{
             UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
                               options: .transitionCrossDissolve,
                               animations: {
@@ -1355,7 +1373,32 @@ class DashboardViewController: UIViewController {
                               })
         }
 
+*/
+    }
+    
+    
+    func manageAllThreshhhold(){
+        let phMinValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMinValuesKey)
+        let phMaxValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMaxValuesKey)
+        
+        let waterMinValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMinValuesKey)
+        let waterMaxValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMaxValuesKey)
+        let redoxValue = UserDefaults.standard.bool(forKey: userDefaultThresholdValuesKey)
 
+        
+        if phMinValue && phMaxValue && waterMinValue && waterMaxValue && redoxValue{
+            UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                                self.waterTmpChangeButton.isHidden = true
+                              })
+        }else{
+            UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                                self.waterTmpChangeButton.isHidden = false
+                              })
+        }
     }
     
     func manageNotificationDisabledButtton(){
@@ -1889,6 +1932,26 @@ class DashboardViewController: UIViewController {
     
     @objc func hideSatusLabel() {
         self.bleStatusView.isHidden = true
+    }
+    
+    
+    func manageFlipTabTitle(){
+        var fliprTabName = "Flipr Start"
+        if let module = Module.currentModule {
+            if let nameStr = module.deviceTypename{
+                fliprTabName = nameStr
+            }else{
+                if let fliprName = UserDefaults.standard.object(forKey: "FliprName") as? String{
+                    fliprTabName = fliprName
+                }
+            }
+        }else{
+            if let fliprName = UserDefaults.standard.object(forKey: "FliprName") as? String{
+                fliprTabName = fliprName
+            }
+        }
+        self.fliprTabTitleLbl.text = fliprTabName
+
     }
     
     func updateWeatherForecast() {
@@ -2658,11 +2721,28 @@ class DashboardViewController: UIViewController {
                         self.updateFliprData()
                     })
                     
-                } else if let JSON = response.result.value as? [String:Any]
+                }
+                else if let JSON = response.result.value as? [String:Any]
                 {
                     self.scrollView.isHidden = false
                     self.showHubTabInfoView(hide: false)
                     print("JSON: \(JSON)")
+                    
+                   
+                    
+                    if let fliprData = JSON["fliprSection"] as? [String:Any] {
+                        if let deviceName = fliprData["CommercialType"] as? String {
+                            if deviceName == "Flipr Analyzer"
+                            {
+                                Module.currentModule?.deviceTypename = deviceName
+                                UserDefaults.standard.set(deviceName, forKey: "FliprName")
+                            }else{
+                                Module.currentModule?.deviceTypename = "Flipr Start"
+                                UserDefaults.standard.set(deviceName, forKey: "Flipr Start")
+                            }
+                            self.manageFlipTabTitle()
+                        }
+                    }
                     
                     if let msg = JSON["Message"] as? String {
                         if msg == "you don't have the privileges to perform this action"{
@@ -3980,73 +4060,74 @@ extension DashboardViewController: AlertPresentViewDelegate{
     
     func checkDefaultValueChanged(JSON: [String:Any]){
         
-        if let phMax = JSON["PhMax"] as? [String:Any] {
-            if let _ = phMax["Value"] as? Double, let isDefaultValue = phMax["IsDefaultValue"] as? Bool {
+        if let phMax = JSON["PhMax"] as? [String:Any?] {
+            if let isDefaultValue = phMax["IsDefaultValue"] as? Bool {
                 if !isDefaultValue {
                     UserDefaults.standard.set(false, forKey: userDefaultPhvalueMaxValuesKey)
-                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
+//                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
                     
                 } else {
                     UserDefaults.standard.set(true, forKey: userDefaultPhvalueMaxValuesKey)
-                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
+//                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
                 }
             }
         }
         
-        if let phMax = JSON["PhMin"] as? [String:Any] {
-            if let _ = phMax["Value"] as? Double, let isDefaultValue = phMax["IsDefaultValue"] as? Bool {
+        if let phMax = JSON["PhMin"] as? [String:Any?] {
+            if let isDefaultValue = phMax["IsDefaultValue"] as? Bool {
                 if !isDefaultValue {
                     UserDefaults.standard.set(false, forKey: userDefaultPhvalueMinValuesKey)
-                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
+//                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
                     
                 } else {
                     UserDefaults.standard.set(true, forKey: userDefaultPhvalueMinValuesKey)
-                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
+//                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
                 }
             }
         }
         
-        if let redox = JSON["Redox"] as? [String:Any] {
-            if let _ = redox["Value"] as? Double, let isDefaultValue = redox["IsDefaultValue"] as? Bool {
+        if let redox = JSON["Redox"] as? [String:Any?] {
+            if let isDefaultValue = redox["IsDefaultValue"] as? Bool {
                 if !isDefaultValue {
                     UserDefaults.standard.set(false, forKey: userDefaultThresholdValuesKey)
-                    NotificationCenter.default.post(name: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil)
+//                    NotificationCenter.default.post(name: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil)
                 } else {
                     
                     UserDefaults.standard.set(true, forKey: userDefaultThresholdValuesKey)
-                    NotificationCenter.default.post(name: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil)
+//                    NotificationCenter.default.post(name: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil)
                 }
             }
         }
         
-        if let temp = JSON["Temperature"] as? [String:Any] {
+        if let temp = JSON["Temperature"] as? [String:Any?] {
             
-            if let _ = temp["Value"] as? Double, let isDefaultValue = temp["IsDefaultValue"] as? Bool {
+            if let isDefaultValue = temp["IsDefaultValue"] as? Bool {
                 if !isDefaultValue {
                     UserDefaults.standard.set(false, forKey: userDefaultTemperatureMinValuesKey)
-                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
+//                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
                 } else {
                     UserDefaults.standard.set(true, forKey: userDefaultTemperatureMinValuesKey)
-                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
+//                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
                 }
             }
             
         }
         
-        if let temp = JSON["TemperatureMax"] as? [String:Any] {
+        if let temp = JSON["TemperatureMax"] as? [String:Any?] {
             
-            if let _ = temp["Value"] as? Double, let isDefaultValue = temp["IsDefaultValue"] as? Bool {
+            if let isDefaultValue = temp["IsDefaultValue"] as? Bool {
                 if !isDefaultValue {
                     UserDefaults.standard.set(false, forKey: userDefaultTemperatureMaxValuesKey)
-                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
+//                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
                 } else {
                     UserDefaults.standard.set(true, forKey: userDefaultTemperatureMaxValuesKey)
-                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
+//                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
                 }
             }
             
         }
         
+        self.manageAllThreshhhold()
         
     }
 }
@@ -4517,7 +4598,7 @@ extension DashboardViewController: HubDeviceDelegate{
             if error != nil {
                 hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                 hud?.textLabel.text = error?.localizedDescription
-                hud?.dismiss(afterDelay: 3)
+                hud?.dismiss(afterDelay: 0)
             } else {
                 hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
                 hud?.dismiss(afterDelay: 3)

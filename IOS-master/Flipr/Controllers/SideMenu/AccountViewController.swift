@@ -40,7 +40,7 @@ class AccountViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Account".localized
         
-        self.loginLabel.text = "Login".localized
+        self.loginLabel.text = "Connection".localized
         self.passwordLabel.text = "Password".localized
         self.fNameLabel.text = "First name".localized
         self.lNameLabel.text = "Last name".localized
@@ -77,10 +77,27 @@ class AccountViewController: UIViewController {
         self.lastNameTxtFld.text = User.currentUser?.lastName
         let isSubscriptionValid = Module.currentModule?.isSubscriptionValid ?? false
         if isSubscriptionValid{
-            self.subsriptionImgView.image = #imageLiteral(resourceName: "check-1")
-            self.subscriptionLabel.text = "Active (Premier)".localized
-            subscriptionInfoLabel.isHidden = false
-            self.subscriptionInfoLabel.text = "You can unsubscribe anytime from App Store settings".localized
+            
+            if let deiviceType = Module.currentModule?.deviceTypename {
+                if deiviceType == "Flipr Analyzer"{
+                    self.subsriptionButton.isHidden = true
+                    self.subscriptionLabel.isHidden = true
+                    self.subscriptionTitleLabel.isHidden = true
+                    self.subscriptionInfoLabel.isHidden = true
+                    self.subscriptionContainerView.isHidden = true
+
+                }else{
+                    self.subsriptionImgView.image = #imageLiteral(resourceName: "check-1")
+                    self.subscriptionLabel.text = "Active (Premier)".localized
+                    subscriptionInfoLabel.isHidden = false
+                    self.subscriptionInfoLabel.text = "You can unsubscribe anytime from App Store settings".localized
+                }
+            }else{
+                self.subsriptionImgView.image = #imageLiteral(resourceName: "check-1")
+                self.subscriptionLabel.text = "Active (Premier)".localized
+                subscriptionInfoLabel.isHidden = false
+                self.subscriptionInfoLabel.text = "You can unsubscribe anytime from App Store settings".localized
+            }
         }
         else{
             subsriptionButton.isUserInteractionEnabled = true

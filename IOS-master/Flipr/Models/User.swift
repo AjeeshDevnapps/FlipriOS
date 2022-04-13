@@ -621,6 +621,8 @@ class User {
         UserDefaults.standard.removeObject(forKey: "FirstHubSerialKey")
         UserDefaults.standard.removeObject(forKey: "SecondHubSerialKey")
         UserDefaults.standard.removeObject(forKey: "userDefaultThresholdValuesKey")
+        UserDefaults.standard.removeObject(forKey: "FliprName")
+
 
         
 

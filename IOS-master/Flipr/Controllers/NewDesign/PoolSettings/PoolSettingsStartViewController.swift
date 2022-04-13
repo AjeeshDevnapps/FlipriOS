@@ -58,6 +58,7 @@ class PoolSettingsStartViewController: BaseViewController {
         accessory1Btn.setTitle("Effectué".localized, for: .normal)
         
         accessory1Btn.isHidden = !isPoolConnected
+        accesory2Btn.setTitle("Effectué".localized, for: .normal)
         accesory2Btn.isHidden = !isCaliberated
         accesory3Btn.isHidden = false
     }
