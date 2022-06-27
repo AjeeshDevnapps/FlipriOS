@@ -45,6 +45,7 @@ struct K {
         
         static let BluetoothNotAvailble = Notification.Name("fr.isee-u.BluetoothNotAvailble")
         static let BluetoothOff = Notification.Name("fr.isee-u.BluetoothOff")
+        static let BluetoothOn = Notification.Name("fr.isee-u.BluetoothOn")
 
         static let HUBNotDiscovered = Notification.Name("fr.isee-u.HUBNotDiscovered")
         static let HUBDiscovered = Notification.Name("fr.isee-u.HUBDiscovered")
@@ -61,6 +62,11 @@ struct K {
         static let WavethemeSettingsChanged = Notification.Name("fr.isee-u.WavethemeSettingsChanged")
         static let UpdateHubViews = Notification.Name("fr.isee-u.UpdateHubViews")
         static let ReloadProgrameList = Notification.Name("fr.isee-u.ReloadProgrameList")
+        static let CompletedFirmwereUpgrade = Notification.Name("CompletedUpgrade")
+        static let showFirmwereUpgradeScreen = Notification.Name("fr.isee-u.ShowFirmwereUpgradeScreen")
+        static let FirmwereUpgradeError = Notification.Name("fr.isee-u.FirmwereUpgradeError")
+        static let FirmwereUpgradeStarted = Notification.Name("fr.isee-u.FirmwereUpgradeStarted")
+
 
 
 

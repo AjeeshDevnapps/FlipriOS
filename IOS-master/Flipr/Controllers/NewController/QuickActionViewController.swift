@@ -39,6 +39,8 @@ class QuickActionViewController: UIViewController {
     var isShowSubscription = false
     var haveFlipr = false
     var haveHub = false
+    var haveFirmwereUpgrade = true
+
     let hud = JGProgressHUD(style:.dark)
 
 
@@ -48,6 +50,8 @@ class QuickActionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        setupViews()
+        haveFirmwereUpgrade = AppSharedData.sharedInstance.haveNewFirmwereUpdate
+//        haveFirmwereUpgrade = true
         titleLbl.text = "Quick Actions".localized
         menuTable.tableFooterView = UIView(frame: CGRect(x: 0, y: -1, width: menuTable.frame.size.width, height: 1))
         containerView.layer.cornerRadius = 15
@@ -116,9 +120,20 @@ class QuickActionViewController: UIViewController {
                     if self.haveHub {
                         self.cellTitleList = ["Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Settings".localized]
                         self.imageNames = ["icon-mesure","icon-calibration","Group 241","settingsIconQuickAction"]
+                      //  let value = UserDefaults.standard.bool(forKey:ScannedPeripheralTableViewCell disAllowFirmwereUpdateKey)
+                        if haveFirmwereUpgrade{
+                            self.cellTitleList = ["Flipr Firmware Update".localized,"Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Settings".localized]
+                            self.imageNames = ["firmwere","icon-mesure","icon-calibration","Group 241","settingsIconQuickAction"]
+                        }
                     }else{
+                        
                         self.cellTitleList = ["Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Add a Flipr Hub".localized]
                         self.imageNames = ["icon-mesure","icon-calibration","Group 241","icon-smart-scan"]
+//                        let value = UserDefaults.standard.bool(forKey: disAllowFirmwereUpdateKey)
+                        if haveFirmwereUpgrade{
+                            self.cellTitleList = ["Flipr Firmware Update".localized,"Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Add a Flipr Hub".localized]
+                            self.imageNames = ["firmwere","icon-mesure","icon-calibration","Group 241","icon-smart-scan"]
+                        }
                     }
                     
                 }else{
@@ -126,33 +141,57 @@ class QuickActionViewController: UIViewController {
                         self.cellTitleList = ["Gestion des plannings".localized,"Buy cleaning products".localized,"Add a Flipr Hub".localized]
                         self.imageNames = ["quickMenuTime","Group 241","icon-smart-scan"]
                     }
+//                    let value = UserDefaults.standard.bool(forKey: disAllowFirmwereUpdateKey)
+                    if haveFirmwereUpgrade{
+                        self.cellTitleList = ["Flipr Firmware Update".localized,"Gestion des plannings".localized,"Buy cleaning products".localized,"Add a Flipr Hub".localized]
+                        self.imageNames = ["firmwere","quickMenuTime","Group 241","icon-smart-scan"]
+                    }
                    
                 }
                 if self.haveHub && self.haveFlipr {
                     if let module = Module.currentModule {
                         if module.isSubscriptionValid {
                             containerViewHeight.constant = 360
+                            if haveFirmwereUpgrade{
+                                containerViewHeight.constant = 424
+                            }
                             subScriptionViewHeight.constant = 0
                         }else{
                             containerViewHeight.constant = 404
                             subScriptionViewHeight.constant = 64
+                            if haveFirmwereUpgrade{
+                                containerViewHeight.constant = 468
+                            }
+
                         }
                     }else{
                         containerViewHeight.constant = 360
+                        if haveFirmwereUpgrade{
+                            containerViewHeight.constant = 424
+                        }
                     }
                 }
                 else{
                     if self.haveHub{
                         containerViewHeight.constant = 296
+                        if haveFirmwereUpgrade{
+                            containerViewHeight.constant = 360
+                        }
                         tableBottonContainerContraint.constant = 10
                         containerView.setNeedsDisplay()
                     }else{
                         if let module = Module.currentModule {
                             if module.isSubscriptionValid {
                                 containerViewHeight.constant = 360
+                                if haveFirmwereUpgrade{
+                                    containerViewHeight.constant = 424
+                                }
                                 subScriptionViewHeight.constant = 0
                             }else{
                                 containerViewHeight.constant = 404
+                                if haveFirmwereUpgrade{
+                                    containerViewHeight.constant = 468
+                                }
                                 subScriptionViewHeight.constant = 64
                             }
                         }else{
@@ -336,6 +375,16 @@ extension QuickActionViewController: UITableViewDelegate,UITableViewDataSource {
         
         cell.menuTitleLbl.text = cellTitleList[indexPath.row]
         cell.menuIcon.image =  UIImage(named: imageNames[indexPath.row])
+        if haveFirmwereUpgrade{
+            if indexPath.row == 0{
+                cell.menuTitleLbl.textColor =  .white
+                cell.backgroundColor =  UIColor.init(hexString: "#F83A59")
+            }
+            else{
+                cell.backgroundColor = .white
+                cell.menuTitleLbl.textColor =   UIColor.init(hexString: "#111729")
+            }
+        }
         return cell
     }
      
@@ -354,19 +403,42 @@ extension QuickActionViewController: UITableViewDelegate,UITableViewDataSource {
         }
     }
     
+    
+    
     func handleFliprNhubMenu(indexPath: IndexPath){
         if indexPath.row == 0 {
-            triggerMesurment()
+            if haveFirmwereUpgrade{
+                showFliprFirmwereUpgradeScreen()
+            }else{
+                triggerMesurment()
+            }
         }
         else if indexPath.row == 1 {
-            expertMode()
+            if haveFirmwereUpgrade{
+                triggerMesurment()
+            }else{
+                expertMode()
+            }
         }
         else if indexPath.row == 2 {
-            buyProduct()
+            if haveFirmwereUpgrade{
+                expertMode()
+            }
+            else{
+                buyProduct()
+            }
         }
         else if indexPath.row == 3 {
-            self.settingsScreen()
+            if haveFirmwereUpgrade{
+                buyProduct()
+            }
+            else{
+                self.settingsScreen()
+            }
 //            hubButtonAction()
+        }
+        else if indexPath.row == 4 {
+            self.settingsScreen()
         }
         else{
             
@@ -375,12 +447,27 @@ extension QuickActionViewController: UITableViewDelegate,UITableViewDataSource {
     
     func handleHubMenu(indexPath: IndexPath){
         if indexPath.row == 0 {
-            hubButtonAction()
+            if haveFirmwereUpgrade{
+                showFliprFirmwereUpgradeScreen()
+            }else{
+                hubButtonAction()
+            }
         }
         else if indexPath.row == 1 {
-            buyProduct()
+            if haveFirmwereUpgrade{
+                hubButtonAction()
+            }else{
+                buyProduct()
+            }
         }
         else if indexPath.row == 2 {
+            if haveFirmwereUpgrade{
+                buyProduct()
+            }else{
+                addHubEquipments()
+            }
+        }
+        else if indexPath.row == 3 {
             addHubEquipments()
         }
         else{
@@ -390,20 +477,52 @@ extension QuickActionViewController: UITableViewDelegate,UITableViewDataSource {
     
     func handleFliprMenu(indexPath: IndexPath){
         if indexPath.row == 0 {
-            triggerMesurment()
+            if haveFirmwereUpgrade{
+                showFliprFirmwereUpgradeScreen()
+            }else{
+                triggerMesurment()
+            }
         }
         else if indexPath.row == 1 {
-            expertMode()
+            if haveFirmwereUpgrade{
+                triggerMesurment()
+            }
+            else{
+                expertMode()
+            }
         }
         else if indexPath.row == 2 {
-            buyProduct()
+            if haveFirmwereUpgrade{
+                expertMode()
+            }else{
+                buyProduct()
+            }
         }
         else if indexPath.row == 3 {
+            if haveFirmwereUpgrade{
+                buyProduct()
+            }else{
+                addHubEquipments()
+            }
+        }
+        else if indexPath.row == 4 {
             addHubEquipments()
         }
         else{
             
         }
+    }
+    
+    
+    func showFliprFirmwereUpgradeScreen(){
+        self.dismiss(animated: false, completion: nil)
+        NotificationCenter.default.post(name: K.Notifications.showFirmwereUpgradeScreen, object: nil)
+
+//        AppSharedData.sharedInstance.isShowingFirmwereUpdateScreen = true
+//        let navigationController = UIStoryboard(name:"Firmware", bundle: nil).instantiateViewController(withIdentifier: "FirmwareNav") as! UINavigationController
+//        navigationController.modalPresentationStyle = .fullScreen
+//        self.present(navigationController, animated: true)
+       
     }
     
     func settingsScreen(){

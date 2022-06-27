@@ -20,6 +20,9 @@ let userDefaultTemperatureMinValuesKey = "DefaultTemperatureMinValuesKey"
 let userDefaultTemperatureMaxValuesKey = "DefaultTemperatureMaxValuesKey"
 
 let userDefaultThresholdValuesKey = "userDefaultThresholdValuesKey"
+let disAllowFirmwereUpdateKey = "disAllowFirmwereUpdate"
+
+let disAllowFirmwereUpdatePromptKey = "disAllowFirmwereUpdatePrompt"
 
 //let userDefaultThresholdeMinValuesKey = "DefaultThresholdeMinValuesKey"
 //let userDefaultThresholdeMaxValuesKey = "DefaultThresholdeMaxValuesKey"

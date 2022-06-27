@@ -233,9 +233,20 @@ class PoolViewController: UITableViewController {
         if let value = self.numberOfUsersTextField.text?.int {
             pool.numberOfUsers = value
         }
-        if let value = Double(self.volumeTextField.text!) {
-            pool.volume = value
+//        if let value = Double(self.volumeTextField.text!) {
+//            pool.volume = value
+//        }
+        
+        if let str = self.volumeTextField.text {
+            let formatter = NumberFormatter()
+            let maybeNumber = formatter.number(from: str)
+            if let number = maybeNumber {
+                pool.volume = Double(number)
+            }else{
+                
+            }
         }
+        
         if let value = Double(self.tresholdTextField.text!) {
             pool.electrolyzerThreshold = value
         }

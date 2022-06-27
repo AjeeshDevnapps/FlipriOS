@@ -245,11 +245,14 @@ class DashboardViewController: UIViewController {
     var waveFrame:CGRect?
     var notificationReportTime:String?
     var notificationReportDate:Date?
+    var haveFirmwereUpdate = false
+    var firmwereLatestVersion = "0"
 
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
+
         manageFlipTabTitle()
         setUpStatusScroll()
 //        if -300 > -400{
@@ -337,6 +340,18 @@ class DashboardViewController: UIViewController {
         appDelegate.registerForRemoteNotifications(application:  UIApplication.shared)
         
         setupInitialView()
+        NotificationCenter.default.addObserver(forName: K.Notifications.CompletedFirmwereUpgrade, object: nil, queue: nil) { (notification) in
+            self.callUpdatedFirmwereApi()
+        }
+        
+        NotificationCenter.default.addObserver(forName: K.Notifications.FirmwereUpgradeError, object: nil, queue: nil) { (notification) in
+            self.handleUpdatedFirmwereError()
+        }
+        
+        NotificationCenter.default.addObserver(forName: K.Notifications.FirmwereUpgradeStarted, object: nil, queue: nil) { (notification) in
+            self.callStartFirmwereUpdateApi()
+        }
+        
         
         refresh()
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (notification) in
@@ -349,12 +364,17 @@ class DashboardViewController: UIViewController {
             self.perform(#selector(self.callGetStatusApis), with: nil, afterDelay: 3)
         }
         
-        
+        NotificationCenter.default.addObserver(forName: K.Notifications.showFirmwereUpgradeScreen, object: nil, queue: nil) { (notification) in
+            self.showFirmwereUdpateScreen()
+        }
         
         NotificationCenter.default.addObserver(forName: K.Notifications.WavethemeSettingsChanged, object: nil, queue: nil) { (notification) in
             self.isThemeChanged = true
             self.waveThemathanged()
         }
+        
+        
+        
         
         NotificationCenter.default.addObserver(forName: FliprLocationDidChange, object: nil, queue: nil) { (notification) in
             self.view.hideStateView()
@@ -994,6 +1014,7 @@ class DashboardViewController: UIViewController {
                 else{
                     self.bulbStatuImageView.image =  UIImage(named: "heatpump")
                 }
+                bulbActionButton.isUserInteractionEnabled = true
                 if hubObj.behavior == "manual" {
                     bulbActionButton.setImage(UIImage(named: "ON"), for: .normal)
                 }
@@ -1001,6 +1022,7 @@ class DashboardViewController: UIViewController {
                     bulbActionButton.setImage(UIImage(named: "pumbPgmOn"), for: .normal)
                 }
                 else if hubObj.behavior == "auto" {
+                    bulbActionButton.isUserInteractionEnabled = false
                     bulbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
                 }else{
                     
@@ -1017,6 +1039,7 @@ class DashboardViewController: UIViewController {
                 else{
                     self.bulbStatuImageView.image =  UIImage(named: "heatpump")
                 }
+                bulbActionButton.isUserInteractionEnabled = true
                 bulbActionButton.tag = 0
                 if hubObj.behavior == "manual" {
                     bulbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
@@ -1025,6 +1048,7 @@ class DashboardViewController: UIViewController {
                     bulbActionButton.setImage(UIImage(named: "pumbPrgmOff"), for: .normal)
                 }
                 else if hubObj.behavior == "auto" {
+                    bulbActionButton.isUserInteractionEnabled = false
                     bulbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
                 }else{
                     
@@ -1046,6 +1070,7 @@ class DashboardViewController: UIViewController {
                 else{
                     self.pumbStatuImageView.image =  UIImage(named: "heatpump")
                 }
+                pumbActionButton.isUserInteractionEnabled = true
                 pumbActionButton.tag = 1
                 if hubObj.behavior == "manual" {
                     pumbActionButton.setImage(UIImage(named: "ON"), for: .normal)
@@ -1054,6 +1079,7 @@ class DashboardViewController: UIViewController {
                     pumbActionButton.setImage(UIImage(named: "pumbPgmOn"), for: .normal)
                 }
                 else if hubObj.behavior == "auto" {
+                    pumbActionButton.isUserInteractionEnabled = false
                     pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
                 }else{
                     
@@ -1071,6 +1097,7 @@ class DashboardViewController: UIViewController {
                 }
                 pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
                 pumbActionButton.tag = 0
+                pumbActionButton.isUserInteractionEnabled = true
                 if hubObj.behavior == "manual" {
                     pumbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
                 }
@@ -1078,6 +1105,7 @@ class DashboardViewController: UIViewController {
                     pumbActionButton.setImage(UIImage(named: "pumbPrgmOff"), for: .normal)
                 }
                 else if hubObj.behavior == "auto" {
+                    pumbActionButton.isUserInteractionEnabled = false
                     pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
                 }else{
                     
@@ -2248,7 +2276,6 @@ class DashboardViewController: UIViewController {
     
     func callReactivateAlertApi(alertStatus:Bool){
     
-        
         if let serialNo = Module.currentModule?.serial {
             let hud = JGProgressHUD(style:.dark)
             hud?.show(in: self.view)
@@ -2274,7 +2301,6 @@ class DashboardViewController: UIViewController {
         }else{
             print("No serial number")
         }
-       
     }
     
     func showMeasureAlert(){
@@ -2742,6 +2768,37 @@ class DashboardViewController: UIViewController {
                             }
                             self.manageFlipTabTitle()
                         }
+                        var firmwereCurrentVersion = "0"
+                        var isNeedtoShowUpgrade = 0
+                        
+                        if let upgradeStatus = fliprData["EnableFliprFirmwareUpgrade"] as? Int {
+                            isNeedtoShowUpgrade = upgradeStatus
+                        }
+                        if let latestVersion = fliprData["FleetCurrentSoftwareVersion"] as? String {
+                            self.firmwereLatestVersion = latestVersion
+                        }
+                        if let currentVersion = fliprData["ModuleSoftwareVersion"] as? String {
+                            firmwereCurrentVersion = currentVersion
+                        }
+                        
+                        if isNeedtoShowUpgrade == 0{
+                            
+                        }else{
+                            if self.firmwereLatestVersion == firmwereCurrentVersion{
+                                self.haveFirmwereUpdate = false
+                                AppSharedData.sharedInstance.haveNewFirmwereUpdate = false
+                                
+//                                self.haveFirmwereUpdate = true
+//                                AppSharedData.sharedInstance.haveNewFirmwereUpdate = true
+//                                self.showFirmwereUpdatePrompt()
+
+                            }else{
+                                self.haveFirmwereUpdate = true
+                                AppSharedData.sharedInstance.haveNewFirmwereUpdate = true
+                                self.showFirmwereUpdatePrompt()
+                            }
+                        }
+                      
                     }
                     
                     if let msg = JSON["Message"] as? String {
@@ -3131,7 +3188,8 @@ class DashboardViewController: UIViewController {
                                 }
                                 
                             }
-                        } else {
+                        }
+                        else {
                             self.signalStrengthLabel.text = "Signal inexistant".localized
                             self.signalStrengthImageView.image = UIImage(named: "SignalNo")
                             self.readBLEMeasure(completion: { (error) in
@@ -3147,17 +3205,17 @@ class DashboardViewController: UIViewController {
 
                         if let tendency = current["Tendancy"] as? Double {
                             if tendency >= 1 {
-                                self.waterTendencyImageView.image = UIImage(named: "arrow-up-right")
+                                self.waterTendencyImageView.image = UIImage(named: "watertmpUp")
                                 self.waterTendencyImageView.isHidden = false
                             } else if  tendency <= -1 {
-                                self.waterTendencyImageView.image = UIImage(named: "arrow_eau_down")
+                                self.waterTendencyImageView.image = UIImage(named: "watertmpDown")
                                 self.waterTendencyImageView.isHidden = false
                             } else {
                                 self.waterTendencyImageView.isHidden = true
                             }
                         } else {
                             self.waterTendencyImageView.isHidden = true
-                        }
+                        } 
                         
                         
                         if let temp = current["Temperature"] as? Double {
@@ -4698,7 +4756,7 @@ extension DashboardViewController: HubSettingViewDelegate{
     func didSelectRenameButton(hub:HUB){
         let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "HubRenameViewController") as? HubRenameViewController {
-            viewController.hub = self.hub
+            viewController.hub = hub
             self.present(viewController, animated: true, completion: nil)
         }
     }
@@ -4720,11 +4778,82 @@ extension DashboardViewController: HubSettingViewDelegate{
     func didSelectRemoveButton(hub:HUB){
         let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "HubRemoveViewController") as? HubRemoveViewController {
-            viewController.hub = self.hub
+            viewController.hub = hub
             self.present(viewController, animated: true, completion: nil)
         }
         
     }
+    
+    func showFirmwereUdpateScreen(){
+        let navigationController = UIStoryboard(name:"Firmware", bundle: nil).instantiateViewController(withIdentifier: "FirmwareNav") as! UINavigationController
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    
+    func showFirmwereUpdatePrompt(){
+        let value = UserDefaults.standard.bool(forKey: disAllowFirmwereUpdatePromptKey)
+        if value{
+            
+        }else{
+            AppSharedData.sharedInstance.isShowingFirmwereUpdateScreen = true
+            let viewController = UIStoryboard(name:"Firmware", bundle: nil).instantiateViewController(withIdentifier: "FirmwereUpdateAlertViewController") as! FirmwereUpdateAlertViewController
+            viewController.modalPresentationStyle = .overCurrentContext
+            self.present(viewController, animated: true) {
+                viewController.showBackgroundView()
+            }
+        }
+    }
+    
+    func callUpdatedFirmwereApi(){
+        if let serialNo = Module.currentModule?.serial {
+            let hud = JGProgressHUD(style:.dark)
+            hud?.show(in: self.view)
+            Alamofire.request(Router.updatedFirmwere(serial: serialNo, version: self.firmwereLatestVersion)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                
+                switch response.result {
+                    
+                case .success(let value):
+                    hud?.dismiss(afterDelay: 0)
+                case .failure(let error):
+                    hud?.dismiss(afterDelay: 0)
+                    print("Reactivated Notification did fail with error: \(error)")
+                    
+                }
+            })
+        }else{
+            print("No serial number")
+        }
+    }
+    
+    
+    func callStartFirmwereUpdateApi(){
+        if let serialNo = Module.currentModule?.serial {
+//            let hud = JGProgressHUD(style:.dark)
+//            hud?.show(in: self.view)
+            Alamofire.request(Router.startedUpdatedFirmwere(serial: serialNo)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                
+                switch response.result {
+                case .success(let value):
+                    print("Started firmware upgrade api")
+//                    hud?.dismiss(afterDelay: 0)
+                case .failure(let error):
+//                    hud?.dismiss(afterDelay: 0)
+                    print("Started firmware upgrade  did fail with error: \(error)")
+                    
+                }
+            })
+        }else{
+            print("No serial number")
+        }
+    }
+    
+    
+    func handleUpdatedFirmwereError(){
+        self.showFirmwereUdpateScreen()
+    }
+    
+    
 }
 
 

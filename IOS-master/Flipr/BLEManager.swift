@@ -73,13 +73,15 @@ class BLEManager: NSObject {
     
     var isConnecting = false
     var stopScanning = false
+    
+    var fliprReadingVerification = false
+
 
     func startUpCentralManager(connectAutomatically connect:Bool, sendMeasure send:Bool) {
         self.stopScanning = false
         perform(#selector(setTimeLimit), with: nil, afterDelay: 20)
         sendMeasureAfterConnection = send
         connectAfterDiscovery = connect
-        
         if !centralManagerHasBeenInitialized {
             centralManager = CBCentralManager(delegate: self, queue: nil)
             centralManagerHasBeenInitialized = true
@@ -87,6 +89,7 @@ class BLEManager: NSObject {
             let services = [FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID]
             centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
             print("CBCentralManager start scanning for Flipr devices (already initialized)")
+           
         }
         
     }
@@ -166,10 +169,34 @@ class BLEManager: NSObject {
     
     func post(measures:String, type:String) {
         
+//        var measureBackup = "0"
+//        var isZerioValue = false
+//        if let intVal = Int(measures){
+//            if intVal == 0{
+//                isZerioValue = true
+//            }
+//        }
+//        if isZerioValue {
+//            if let backupData = UserDefaults.standard.object(forKey: "LastMeasureBackupData") as? String{
+//                measureBackup = backupData
+//            }
+//        }else{
+//            measureBackup = measures
+//            UserDefaults.standard.set(measures, forKey: "LastMeasureBackupData")
+//        }
+//
         if let identifier = Module.currentModule?.serial {
-                
-                NotificationCenter.default.post(name: K.Notifications.FliprDidRead, object: nil)
-            
+            NotificationCenter.default.post(name: K.Notifications.FliprDidRead, object: nil)
+            if fliprReadingVerification{
+                fliprReadingVerification = false
+                return
+//                UserDefaults.standard.set(measures, forKey: "LastMeasureBackupData")
+//                fliprReadingVerification = false
+//                self.centralManager.cancelPeripheralConnection(self.flipr!)
+//                return
+                //self.centralManager.cancelPeripheralConnection(self.flipr!)
+            }
+            else{
                 Alamofire.request(Router.sendModuleMetrics(serialId: identifier, data: measures, type:type))
                     .validate(statusCode: 200..<300)
                     .responseJSON { response in
@@ -204,6 +231,9 @@ class BLEManager: NSObject {
                         self.sendMeasuresCompletionBlock?(response.result.error)
                         self.sendMeasuresCompletionBlock = nil
                 }
+
+            }
+            
             
         } else {
             let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Numéro de série du Flipr introuvable :/"])
@@ -223,6 +253,8 @@ extension BLEManager: CBCentralManagerDelegate {
             if central.state == CBManagerState.poweredOn {
                 print("Bluetooth powered on.")
                 
+                NotificationCenter.default.post(name: K.Notifications.BluetoothOn, object: nil, userInfo: nil)
+
                 /*
                 let services = [FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID]
                 
@@ -450,6 +482,12 @@ extension BLEManager: CBPeripheralDelegate {
                     post(measures: value.hexEncodedString(), type: "0")
                     sendMeasureAfterConnection = false
                 }
+                
+                else if fliprReadingVerification {
+                    post(measures: value.hexEncodedString(), type: "0")
+//                    sendMeasureAfterConnection = false
+                }
+                
                 break
             case FliprBLEParameters.infoCharactersticUUID:
                 print("Info charateristic value: \(value.hexEncodedString())")

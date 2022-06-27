@@ -8,8 +8,8 @@
 
 import Foundation
 
-class AppSharedData: NSObject {
-    static let sharedInstance = AppSharedData()
+@objc public class AppSharedData: NSObject {
+    @objc static let sharedInstance = AppSharedData()
     
     var isNeedtoCallHubDetailsApi : Bool = false
     var isNeedtoCallModulesApiForSideMenu : Bool = false
@@ -19,9 +19,29 @@ class AppSharedData: NSObject {
     var isAddingDeviceFromPresentedVCFlow : Bool = false
     var selectedEquipmentCode  = 0
     var logout : Bool = false
+    @objc var isShowingFirmwereUpdateScreen : Bool = false
+    var haveNewFirmwereUpdate : Bool = false
+
+    @objc var diagnosticErrorCount : Int = 0
 
     
     private override init() {
         
+    }
+    
+    @objc func getCurrentFliprSerial() -> String{
+        let serial = Module.currentModule?.serial ?? ""
+//        serial = "197BF2"
+        var serialNumber  = ""
+        if serial.count == 7{
+            serialNumber = "Flipr 0\(serial)"
+        }
+        else if serial.count == 6{
+            serialNumber = "Flipr 00\(serial)"
+        }
+        else{
+            serialNumber = "Flipr \(serial)"
+        }
+        return serialNumber
     }
 }

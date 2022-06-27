@@ -8,6 +8,7 @@
 
 import UIKit
 import JGProgressHUD
+import Alamofire
 
 class HubRenameViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
@@ -67,6 +68,43 @@ class HubRenameViewController: UIViewController {
             textField.resignFirstResponder()
             let hud = JGProgressHUD(style:.dark)
             hud?.show(in: self.containerView)
+            
+            
+            Alamofire.request(Router.updateHUBName(serial: self.hub?.serial ?? "", value: name)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                          
+                          switch response.result {
+                              
+                          case .success(_):
+                              hud?.dismiss(afterDelay: 0)
+
+                              NotificationCenter.default.post(name: K.Notifications.UpdateHubViews, object: nil)
+                              self.dismiss(animated: true)
+/*
+                           if let JSON = value as? [String:Any] {
+
+                              if let errorCode = JSON["ErrorCode"] as? String {
+                                  if errorCode == "200" {
+                                      //self.showSuccessView()
+                                  } else if let message = JSON["Message"] as? String {
+//                                      completion?(NSError(domain: "flipr", code: (response.response?.statusCode)!, userInfo: [NSLocalizedDescriptionKey:message]))
+                                  } else {
+//                                      completion?(NSError(domain: "flipr", code: (response.response?.statusCode)!, userInfo: [NSLocalizedDescriptionKey:"Oups, we're sorry but something went wrong."]))
+                                  }
+                              }
+                           }
+                              
+                              */
+                           
+                          case .failure(let error):
+                              hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                              hud?.textLabel.text = error.localizedDescription
+                              hud?.dismiss(afterDelay: 3)
+                          }
+                          
+               })
+
+            
+            /*
             HUB.currentHUB!.updateEquipmentName(value:name, completion: { (error) in
                 if (error != nil) {
                     hud?.indicatorView = JGProgressHUDErrorIndicatorView()
@@ -80,10 +118,12 @@ class HubRenameViewController: UIViewController {
                     self.dismiss(animated: true)
                 }
             })
+            
+            */
         }
     }
     
-
+  
   
 
 }

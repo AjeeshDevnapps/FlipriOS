@@ -13,12 +13,15 @@ class ExpertMenuViewController: UIViewController {
     @IBOutlet weak var titleLbl: UILabel!
 
 
-    var cellTitleList = ["Mode Expert","Trigger a measurement","Nouveau calibrage","Nouveau test bandelette","Vidange de la piscine"]
-    var imageNames = ["expertMenu1","expertMenu2","expertMenu3","expertMenu4","expertMenu5"]
+    var cellTitleList = ["Mode Expert","Trigger a measurement","Nouveau calibrage","Nouveau test bandelette","Vidange de la piscine","Diagnostic","Flipr Firmware Update"]
+    var imageNames = ["expertMenu1","expertMenu2","expertMenu3","expertMenu4","expertMenu5","diagnostic","upgradebtn"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         settingTable.tableFooterView = UIView()
+        NotificationCenter.default.addObserver(forName: K.Notifications.showFirmwereUpgradeScreen, object: nil, queue: nil) { (notification) in
+            self.showFirmwereUdpateScreen()
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -131,8 +134,30 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
 
             }
         }
+        else if indexPath.row == 5{
+            self.showFirmwereDiagnosticScreen()
+        }
+        else if indexPath.row == 6{
+            self.showFirmwereUdpateScreen()
+        }
+        else{
+        }
         
     }
+    
+    func showFirmwereUdpateScreen(){
+        let navigationController = UIStoryboard(name:"Firmware", bundle: nil).instantiateViewController(withIdentifier: "FirmwareNav") as! UINavigationController
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    
+    func showFirmwereDiagnosticScreen(){
+        let navigationController = UIStoryboard(name:"Firmware", bundle: nil).instantiateViewController(withIdentifier: "DiganosticNav") as! UINavigationController
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
     
   
     func showCalibrationView(){

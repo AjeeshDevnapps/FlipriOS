@@ -43,7 +43,7 @@ class PoolUsageViewController: BaseViewController {
         poolBtn.setTitle("My pool".localized, for: .normal)
         submitBtn.setTitle("Suivant".localized, for: .normal)
 
-        let privateTxt  = "My pool".localized  + "\n rivée".localized
+        let privateTxt  = "My pool".localized  + "\n privée".localized
         let publicText  = "My pool".localized  + "\n collective".localized
         privateTitleLbl.text  = privateTxt
         publicTitleLbl.text  = publicText

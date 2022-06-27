@@ -1,4 +1,4 @@
-platform :ios , '10.0'
+#platform :ios , '10.0'
 use_frameworks!
 
 target "Flipr" do
@@ -20,4 +20,13 @@ target "Flipr" do
     pod 'SwiftVideoBackground', '~> 3.0'
     pod 'RangeSeekSlider'
     pod 'MSCircularSlider'
+    
+     pod 'Firebase/Messaging'
+end
+ 
+
+post_install do |installer|
+      installer.pods_project.build_configurations.each do |config|
+        config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+      end
 end

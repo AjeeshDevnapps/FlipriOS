@@ -49,11 +49,11 @@ class HubSettingsViewController: UIViewController {
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.hubNameLbl.text = HUB.currentHUB!.equipementName
+        self.hubNameLbl.text = hub?.equipementName
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.hubNameLbl.text = HUB.currentHUB!.equipementName
+        self.hubNameLbl.text = hub?.equipementName
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {

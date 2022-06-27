@@ -99,10 +99,10 @@ enum Router: URLRequestConvertible {
     case deleteHUBPlanning(serial: String, id:Int)
     case updateHUBPlannings(serial: String, attributes:[String:Any])
     case reactivateAlert(serial: String,status:Bool)
+    case updatedFirmwere(serial: String,version:String)
 
-    
-    
-    
+    case startedUpdatedFirmwere(serial: String)
+
     //Legacy
     //static let baseURLString = K.Server.BaseUrl + K.Server.ApiPath
     
@@ -254,6 +254,11 @@ enum Router: URLRequestConvertible {
             return .post
         case .updateUserProfile:
             return .put
+        case .updatedFirmwere:
+            return .put
+        case .startedUpdatedFirmwere:
+            return .put
+            
         }
     }
     
@@ -414,7 +419,15 @@ enum Router: URLRequestConvertible {
             return "accounts/new"
         case .updateUserProfile(_ ,_ ,_):
             return "accounts/all"
+        case .updatedFirmwere(let serial,let version):
+            return "modules/"
+        case .startedUpdatedFirmwere(let serial):
+            return "modules/"
+
+            
+            
         }
+
     }
     
     // MARK: URLRequestConvertible
@@ -747,10 +760,23 @@ enum Router: URLRequestConvertible {
                 urlRequest.url = URL(string: url + "\(serial)/ReactivationNotification?notification=\(status)")
             }
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: nil)
+            
+        case .updatedFirmwere(let serial, let version):
+            if let url = urlRequest.url?.absoluteString {
+                urlRequest.url = URL(string: url + "\(serial)/UpdateSoftwareVersion?Version=\(version)")
+            }
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: nil)
+            
+        case .startedUpdatedFirmwere(let serial):
+            if let url = urlRequest.url?.absoluteString {
+                urlRequest.url = URL(string: url + "\(serial)/UpdateStartFirmwareUpgrade")
+            }
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: nil)
+            
         default:
             break
         }
-        
+
         print("Request URL: \(urlRequest.url?.absoluteString)")
         print("Body: \(urlRequest.httpBodyStream)")
         

@@ -287,7 +287,12 @@ class Module {
                     for JSON in alerts {
                         if let alert = Alert.init(withJSON: JSON) {
                             if alert.iconUrl != nil {
-                                priorityAlerts.append(alert)
+                                
+                                if priorityAlerts.contains(where: {$0.iconUrl == alert.iconUrl }){
+                                    print("Same iconurl")
+                                }else{
+                                    priorityAlerts.append(alert)
+                                }
                                 if mainAlert == nil {
                                     if alert.status == 0 {
                                         mainAlert = alert

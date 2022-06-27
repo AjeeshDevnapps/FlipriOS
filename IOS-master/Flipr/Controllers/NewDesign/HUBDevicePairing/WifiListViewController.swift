@@ -97,6 +97,7 @@ extension WifiListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard networks.count > 0 else {
             let vc = storyboard?.instantiateViewController(withIdentifier: "HUBNamingViewController") as! HUBNamingViewController
+            vc.serial = self.serial
             navigationController?.pushViewController(vc)
             return
         }
@@ -153,6 +154,7 @@ extension WifiListViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 if !self.isFromSetting {
                     if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "HUBNamingViewController") as? HUBNamingViewController {
+                        viewController.serial = self.serial
                         self.navigationController?.pushViewController(viewController, animated: true)
                     }
                 }
