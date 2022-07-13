@@ -75,6 +75,8 @@ class BLEManager: NSObject {
     var stopScanning = false
     
     var fliprReadingVerification = false
+    var isHandling409 = false
+
 
 
     func startUpCentralManager(connectAutomatically connect:Bool, sendMeasure send:Bool) {
@@ -87,7 +89,9 @@ class BLEManager: NSObject {
             centralManagerHasBeenInitialized = true
         } else {
             let services = [FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID]
+//            centralManager.scanForPeripherals(withServices: services, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
             centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
+
             print("CBCentralManager start scanning for Flipr devices (already initialized)")
            
         }
@@ -215,7 +219,13 @@ class BLEManager: NSObject {
                         }
                         else {
                             debugPrint("HTTP Request failed: \(response.result.error)")
-                            
+                            if response.response?.statusCode == 409 {
+                                if self.isHandling409{
+                                    self.isHandling409 = false
+                                    NotificationCenter.default.post(name: K.Notifications.FliprMeasures409Error, object: nil)
+                                }
+                                debugPrint("same data")
+                            }
                         }
                         
                         if type == "0" {

@@ -207,6 +207,7 @@ class DashboardViewController: UIViewController {
 
     @IBOutlet weak var next5hourTitleLabel: UILabel!
     @IBOutlet weak var fliprTabTitleLbl: UILabel!
+    @IBOutlet weak var hubTabTitleLbl: UILabel!
     @IBOutlet weak var firstHubNameLbl: UILabel!
     @IBOutlet weak var secondHubNameLbl: UILabel!
 
@@ -276,6 +277,9 @@ class DashboardViewController: UIViewController {
 //        self.quickActionButtonContainer.cornerRadius =  self.quickActionButtonContainer.frame.size.height / 2
 //        quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
 //        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius:         self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
+        self.fliprTabTitleLbl.text = "Analysis".localized
+        self.hubTabTitleLbl.text = "Control".localized
+
         hubDeviceTableView.dragDelegate = self
         hubDeviceTableView.dragInteractionEnabled = true
         self.signalStrengthLabel.text = "Signal moyen".localized
@@ -352,6 +356,11 @@ class DashboardViewController: UIViewController {
             self.callStartFirmwereUpdateApi()
         }
         
+        NotificationCenter.default.addObserver(forName: K.Notifications.showLastMeasurementScreen, object: nil, queue: nil) { (notification) in
+            self.showLastMeasurement()
+        }
+        
+        
         
         refresh()
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (notification) in
@@ -381,6 +390,11 @@ class DashboardViewController: UIViewController {
             self.refresh()
         }
         
+        NotificationCenter.default.addObserver(forName: K.Notifications.ServerChanged, object: nil, queue: nil) { (notification) in
+            self.refresh()
+        }
+        
+        
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprDiscovered, object: nil, queue: nil) { (notification) in
             self.bleStatusLabel.text = "flipr detected, connection in progress...".localized
         }
@@ -392,6 +406,10 @@ class DashboardViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprMeasuresPosted, object: nil, queue: nil) { (notification) in
             self.bleStatusView.isHidden = true
             self.updateFliprData()
+        }
+        
+        NotificationCenter.default.addObserver(forName: K.Notifications.FliprMeasures409Error, object: nil, queue: nil) { (notification) in
+            self.perform(#selector(self.show409Error), with: nil, afterDelay: 0)
         }
         
         NotificationCenter.default.addObserver(forName: K.Notifications.UserDidLogout, object: nil, queue: nil) { (notification) in
@@ -524,6 +542,14 @@ class DashboardViewController: UIViewController {
         }
     }
     
+    @objc func show409Error(){
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.view)
+        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+        hud?.textLabel.text = "There is no change in measurement"
+        hud?.dismiss(afterDelay: 5)
+    }
+    
     func intialTabSetup(){
         self.scrollView.isHidden = true
         
@@ -533,6 +559,16 @@ class DashboardViewController: UIViewController {
         self.hubTabButton.isUserInteractionEnabled = true
         
     }
+    
+    func showLastMeasurement(){
+        let tmpSb = UIStoryboard.init(name: "Firmware", bundle: nil)
+        if let navigationController = tmpSb.instantiateViewController(withIdentifier: "LastMeasurementNavigation") as? UINavigationController {
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
+            
+        }
+    }
+    
     
     func handlTabSelcection(){
         self.fliprTabScrollView.isHidden = isHubTabSelected
@@ -1964,6 +2000,7 @@ class DashboardViewController: UIViewController {
     
     
     func manageFlipTabTitle(){
+        /*
         var fliprTabName = "Flipr Start"
         if let module = Module.currentModule {
             if let nameStr = module.deviceTypename{
@@ -1978,7 +2015,8 @@ class DashboardViewController: UIViewController {
                 fliprTabName = fliprName
             }
         }
-        self.fliprTabTitleLbl.text = fliprTabName
+        */
+//        self.fliprTabTitleLbl.text = "Analysis".localized
 
     }
     

@@ -14,6 +14,7 @@
 		1C504F2926A1A2340042C2DD /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504F2826A1A2340042C2DD /* DeviceType.swift */; };
 		1C504F2F26A1E3500042C2DD /* HubDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504F2E26A1E3500042C2DD /* HubDeviceTableViewCell.swift */; };
 		1C532615283AA9F1003A4847 /* FlipValueReadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C532614283AA9F1003A4847 /* FlipValueReadingViewController.swift */; };
+		1C57B38B286D8A5A006F1342 /* LastMeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C57B38A286D8A5A006F1342 /* LastMeasurementViewController.swift */; };
 		1C5AE4222751194A008F6643 /* HubSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE4212751194A008F6643 /* HubSettingsViewController.swift */; };
 		1C5AE42427512233008F6643 /* HubRemoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE42327512233008F6643 /* HubRemoveViewController.swift */; };
 		1C5AE42627512240008F6643 /* HubRenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE42527512240008F6643 /* HubRenameViewController.swift */; };
@@ -275,6 +276,7 @@
 		1C504F2826A1A2340042C2DD /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		1C504F2E26A1E3500042C2DD /* HubDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubDeviceTableViewCell.swift; sourceTree = "<group>"; };
 		1C532614283AA9F1003A4847 /* FlipValueReadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipValueReadingViewController.swift; sourceTree = "<group>"; };
+		1C57B38A286D8A5A006F1342 /* LastMeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastMeasurementViewController.swift; sourceTree = "<group>"; };
 		1C5AE4212751194A008F6643 /* HubSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubSettingsViewController.swift; sourceTree = "<group>"; };
 		1C5AE42327512233008F6643 /* HubRemoveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubRemoveViewController.swift; sourceTree = "<group>"; };
 		1C5AE42527512240008F6643 /* HubRenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubRenameViewController.swift; sourceTree = "<group>"; };
@@ -604,6 +606,14 @@
 				1CFBFC9727317FA100AB5771 /* ImageHeader.xib */,
 			);
 			path = HorizondalScrollView;
+			sourceTree = "<group>";
+		};
+		1C57B389286D8A32006F1342 /* Last measurement */ = {
+			isa = PBXGroup;
+			children = (
+				1C57B38A286D8A5A006F1342 /* LastMeasurementViewController.swift */,
+			);
+			path = "Last measurement";
 			sourceTree = "<group>";
 		};
 		1C9A756B27354DE400D4FEE6 /* Hub */ = {
@@ -954,6 +964,7 @@
 		489BD3D72614749D007E9BEF /* NewDesign */ = {
 			isa = PBXGroup;
 			children = (
+				1C57B389286D8A32006F1342 /* Last measurement */,
 				1CD6992526E5EEB700563CBE /* Menu */,
 				48F91FBA2677ACF500FFD44B /* Dashboard */,
 				4895F7742668039600FA8ED3 /* HUBElectrical */,
@@ -1741,6 +1752,7 @@
 				48A912A225F8EC2900EF863D /* SideMenuViewController.swift in Sources */,
 				48C8E4F6265D6DC60000FDA8 /* FliprActivationSuccessViewController.swift in Sources */,
 				1CD8DF0F2807634C004412D9 /* FindMeModel.m in Sources */,
+				1C57B38B286D8A5A006F1342 /* LastMeasurementViewController.swift in Sources */,
 				B57F99F61EC4510300417C0F /* Bundle+version.swift in Sources */,
 				1CD8DEE528076327004412D9 /* CBPeripheralExt.m in Sources */,
 				B57131A322E9AE3700421705 /* PoolLogTableViewController.swift in Sources */,
@@ -1935,7 +1947,7 @@
 				INFOPLIST_FILE = Flipr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.1.3;
+				MARKETING_VERSION = 3.1.4;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
@@ -1970,7 +1982,7 @@
 				INFOPLIST_FILE = Flipr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.1.3;
+				MARKETING_VERSION = 3.1.4;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;

@@ -419,14 +419,14 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
             HUB.currentHUB?.plannings.append(planning!)
         }
         HUB.currentHUB?.syncPlannings(completion: { (error) in
-             if (error != nil) {
-                               hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-                               hud?.textLabel.text = error?.localizedDescription
-                               hud?.dismiss(afterDelay: 3)
-                           } else {
-                               NotificationCenter.default.post(name: FliprHUBPlanningsDidChange, object: nil)
-                               hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
-                               hud?.dismiss(afterDelay: 1)
+            if (error != nil) {
+                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                hud?.textLabel.text = error?.localizedDescription
+                hud?.dismiss(afterDelay: 3)
+            } else {
+                NotificationCenter.default.post(name: FliprHUBPlanningsDidChange, object: nil)
+                hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                hud?.dismiss(afterDelay: 1)
                 NotificationCenter.default.post(name: K.Notifications.ReloadProgrameList, object: nil, userInfo: nil)
                 self.dismiss(animated: true, completion: nil)
             }

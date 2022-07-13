@@ -162,6 +162,9 @@ extension HubProgramViewController:UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if HUB.currentHUB == nil{
+            return 0
+        }
         return HUB.currentHUB!.plannings.count
     }
     
@@ -169,35 +172,40 @@ extension HubProgramViewController:UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlanningCell", for: indexPath)
         
-        let planning = HUB.currentHUB!.plannings[indexPath.row]
         
-        if let label = cell.viewWithTag(1) as? UILabel {
-            label.text = planning.name
-        }
-        if let activatedSwitch = cell.viewWithTag(2) as? PlanningSwitch {
-            activatedSwitch.planning = planning
+        
+        if HUB.currentHUB!.plannings.count > indexPath.row{
+            let planning = HUB.currentHUB!.plannings[indexPath.row]
             
+            if let label = cell.viewWithTag(1) as? UILabel {
+                label.text = planning.name
+            }
+            if let activatedSwitch = cell.viewWithTag(2) as? PlanningSwitch {
+                activatedSwitch.planning = planning
+                
+            }
+            
+            if let monday = cell.viewWithTag(10) as? UILabel, let tuesday = cell.viewWithTag(11) as? UILabel, let weenesday = cell.viewWithTag(12) as? UILabel, let thursday = cell.viewWithTag(13) as? UILabel, let friday = cell.viewWithTag(14) as? UILabel, let saturday = cell.viewWithTag(15) as? UILabel, let sunday = cell.viewWithTag(16) as? UILabel {
+                
+                monday.text = "DAY_1".localized()
+                tuesday.text = "DAY_2".localized()
+                weenesday.text = "DAY_3".localized()
+                thursday.text = "DAY_4".localized()
+                friday.text = "DAY_5".localized()
+                saturday.text = "DAY_6".localized()
+                sunday.text = "DAY_7".localized()
+        
+                
+                refresh(planning: planning, label: monday, atIndex: 0)
+                refresh(planning: planning, label: tuesday, atIndex: 1)
+                refresh(planning: planning, label: weenesday, atIndex: 2)
+                refresh(planning: planning, label: thursday, atIndex: 3)
+                refresh(planning: planning, label: friday, atIndex: 4)
+                refresh(planning: planning, label: saturday, atIndex: 5)
+                refresh(planning: planning, label: sunday, atIndex: 6)
+            }
         }
         
-        if let monday = cell.viewWithTag(10) as? UILabel, let tuesday = cell.viewWithTag(11) as? UILabel, let weenesday = cell.viewWithTag(12) as? UILabel, let thursday = cell.viewWithTag(13) as? UILabel, let friday = cell.viewWithTag(14) as? UILabel, let saturday = cell.viewWithTag(15) as? UILabel, let sunday = cell.viewWithTag(16) as? UILabel {
-            
-            monday.text = "DAY_1".localized()
-            tuesday.text = "DAY_2".localized()
-            weenesday.text = "DAY_3".localized()
-            thursday.text = "DAY_4".localized()
-            friday.text = "DAY_5".localized()
-            saturday.text = "DAY_6".localized()
-            sunday.text = "DAY_7".localized()
-    
-            
-            refresh(planning: planning, label: monday, atIndex: 0)
-            refresh(planning: planning, label: tuesday, atIndex: 1)
-            refresh(planning: planning, label: weenesday, atIndex: 2)
-            refresh(planning: planning, label: thursday, atIndex: 3)
-            refresh(planning: planning, label: friday, atIndex: 4)
-            refresh(planning: planning, label: saturday, atIndex: 5)
-            refresh(planning: planning, label: sunday, atIndex: 6)
-        }
         
 
         return cell

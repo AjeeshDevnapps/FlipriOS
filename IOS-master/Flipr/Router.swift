@@ -106,10 +106,14 @@ enum Router: URLRequestConvertible {
     //Legacy
     //static let baseURLString = K.Server.BaseUrl + K.Server.ApiPath
     
+
+    
     //Prod
     static let baseURLString = "https://apis.goflipr.com/"
+    
+    
     //Recette
-    //static let baseURLString = "https://flipr-api-prod-recette.azurewebsites.net/"
+    static let baseDevURLString = "https://flipr-api-prod-recette.azurewebsites.net/"
     
     var method: HTTPMethod {
         switch self {
@@ -433,8 +437,11 @@ enum Router: URLRequestConvertible {
     // MARK: URLRequestConvertible
     
     func asURLRequest() throws -> URLRequest {
-        let url = try Router.baseURLString.asURL()
-        
+        var url = try Router.baseURLString.asURL()
+        let severType = UserDefaults.standard.bool(forKey: K.AppConstant.CurrentServerIsDev)
+        if severType == true {
+            url = try Router.baseDevURLString.asURL()
+        }
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
         if let userToken = User.currentUser?.token {

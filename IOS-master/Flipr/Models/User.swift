@@ -622,8 +622,9 @@ class User {
         UserDefaults.standard.removeObject(forKey: "SecondHubSerialKey")
         UserDefaults.standard.removeObject(forKey: "userDefaultThresholdValuesKey")
         UserDefaults.standard.removeObject(forKey: "FliprName")
+        UserDefaults.standard.removeObject(forKey: K.AppConstant.CurrentServerIsDev)
 
-
+       
         
 
         User.currentUser = nil

@@ -40,6 +40,9 @@ class QuickActionViewController: UIViewController {
     var haveFlipr = false
     var haveHub = false
     var haveFirmwereUpgrade = true
+    
+    var haveServerChangeOption = false
+
 
     let hud = JGProgressHUD(style:.dark)
 
@@ -105,6 +108,7 @@ class QuickActionViewController: UIViewController {
                         }
                     }
                 }
+                self.haveServerChangeOption = false
                 if self.haveFlipr{
                   
                     if let module = Module.currentModule {
@@ -118,23 +122,25 @@ class QuickActionViewController: UIViewController {
                         }
                     }
                     if self.haveHub {
-                        self.cellTitleList = ["Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Settings".localized]
+                        self.cellTitleList = ["Retrieve the last measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Settings".localized]
                         self.imageNames = ["icon-mesure","icon-calibration","Group 241","settingsIconQuickAction"]
+                        
                       //  let value = UserDefaults.standard.bool(forKey:ScannedPeripheralTableViewCell disAllowFirmwereUpdateKey)
                         if haveFirmwereUpgrade{
-                            self.cellTitleList = ["Flipr Firmware Update".localized,"Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Settings".localized]
+                            self.cellTitleList = ["Flipr Firmware Update".localized,"Retrieve the last measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Settings".localized]
                             self.imageNames = ["firmwere","icon-mesure","icon-calibration","Group 241","settingsIconQuickAction"]
                         }
                     }else{
                         
-                        self.cellTitleList = ["Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Add a Flipr Hub".localized]
+                        self.cellTitleList = ["Retrieve the last measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Add a Flipr Hub".localized]
                         self.imageNames = ["icon-mesure","icon-calibration","Group 241","icon-smart-scan"]
 //                        let value = UserDefaults.standard.bool(forKey: disAllowFirmwereUpdateKey)
                         if haveFirmwereUpgrade{
-                            self.cellTitleList = ["Flipr Firmware Update".localized,"Trigger a Measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Add a Flipr Hub".localized]
+                            self.cellTitleList = ["Flipr Firmware Update".localized,"Retrieve the last measurement".localized,"Expert Mode".localized,"Buy cleaning products".localized,"Add a Flipr Hub".localized]
                             self.imageNames = ["firmwere","icon-mesure","icon-calibration","Group 241","icon-smart-scan"]
                         }
                     }
+                    self.addServerChangeOption()
                     
                 }else{
                     if self.haveHub {
@@ -146,7 +152,8 @@ class QuickActionViewController: UIViewController {
                         self.cellTitleList = ["Flipr Firmware Update".localized,"Gestion des plannings".localized,"Buy cleaning products".localized,"Add a Flipr Hub".localized]
                         self.imageNames = ["firmwere","quickMenuTime","Group 241","icon-smart-scan"]
                     }
-                   
+                    self.addServerChangeOption()
+
                 }
                 if self.haveHub && self.haveFlipr {
                     if let module = Module.currentModule {
@@ -169,6 +176,11 @@ class QuickActionViewController: UIViewController {
                         if haveFirmwereUpgrade{
                             containerViewHeight.constant = 424
                         }
+                    }
+                    if self.haveServerChangeOption == true{
+                        var tmpVal = containerViewHeight.constant
+                        tmpVal = tmpVal + 60
+                        containerViewHeight.constant = tmpVal
                     }
                 }
                 else{
@@ -198,6 +210,11 @@ class QuickActionViewController: UIViewController {
                             containerViewHeight.constant = 360
                         }
                     }
+                    if self.haveServerChangeOption == true{
+                        var tmpVal = containerViewHeight.constant
+                        tmpVal = tmpVal + 60
+                        containerViewHeight.constant = tmpVal
+                    }
                 }
                 self.menuTable.reloadData()
 
@@ -208,12 +225,24 @@ class QuickActionViewController: UIViewController {
     }
 
     
+    func addServerChangeOption(){
+        if User.currentUser?.email != nil{
+            if let email = User.currentUser?.email{
+                if (email.hasSuffix("@flipr.fr")){
+                    self.haveServerChangeOption = true
+                    self.cellTitleList.append("Change Server".localized)
+                    self.imageNames.append("firmwereBig".localized)
+                }
+            }
+        }
+    }
+    
     func setupViews(){
 //        if UIScreen.main.nativeBounds.height < 1334{
 //            bottonContainerContraint.constant = 576 - 70
 //        }
         titleLbl.text = "Quick Actions".localized
-        measurementLbl.text = "Trigger a Measurement".localized
+        measurementLbl.text = "Retrieve the last measurement".localized
         expertLbl.text  = "Expert Mode".localized
         callibrationLbl.text  = "New Calibration".localized
         drainingLbl.text  = "Add a Flipr Hub".localized
@@ -438,11 +467,42 @@ extension QuickActionViewController: UITableViewDelegate,UITableViewDataSource {
 //            hubButtonAction()
         }
         else if indexPath.row == 4 {
-            self.settingsScreen()
+            let title = cellTitleList[indexPath.row]
+            if title == "Change Server".localized{
+                self.showServerChangeOption()
+            }else{
+                self.settingsScreen()
+            }
         }
         else{
-            
+            let title = cellTitleList[indexPath.row]
+            if title == "Change Server".localized{
+                self.showServerChangeOption()
+            }
         }
+    }
+    
+    
+    func showServerChangeOption(){
+
+        let alert = UIAlertController(title: "Change Server".localized, message: "", preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Live Server".localized, style: .default , handler:{ (UIAlertAction)in
+                UserDefaults.standard.set(false, forKey: K.AppConstant.CurrentServerIsDev)
+                NotificationCenter.default.post(name: K.Notifications.ServerChanged, object: nil)
+           }))
+           
+        alert.addAction(UIAlertAction(title: "Dev Server".localized, style: .default , handler:{ (UIAlertAction)in
+               UserDefaults.standard.set(true, forKey: K.AppConstant.CurrentServerIsDev)
+               NotificationCenter.default.post(name: K.Notifications.ServerChanged, object: nil)
+           }))
+
+            alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel , handler:{ (UIAlertAction)in
+               print("User click Delete button")
+           }))
+           
+           self.present(alert, animated: true, completion: {
+               print("completion block")
+           })
     }
     
     func handleHubMenu(indexPath: IndexPath){
@@ -468,10 +528,18 @@ extension QuickActionViewController: UITableViewDelegate,UITableViewDataSource {
             }
         }
         else if indexPath.row == 3 {
-            addHubEquipments()
+            let title = cellTitleList[indexPath.row]
+            if title == "Change Server".localized{
+                self.showServerChangeOption()
+            }else{
+                addHubEquipments()
+            }
         }
         else{
-            
+            let title = cellTitleList[indexPath.row]
+            if title == "Change Server".localized{
+                self.showServerChangeOption()
+            }
         }
     }
     
@@ -506,10 +574,18 @@ extension QuickActionViewController: UITableViewDelegate,UITableViewDataSource {
             }
         }
         else if indexPath.row == 4 {
-            addHubEquipments()
+            let title = cellTitleList[indexPath.row]
+            if title == "Change Server".localized{
+                self.showServerChangeOption()
+            }else{
+                addHubEquipments()
+            }
         }
         else{
-            
+            let title = cellTitleList[indexPath.row]
+            if title == "Change Server".localized{
+                self.showServerChangeOption()
+            }
         }
     }
     
@@ -533,14 +609,28 @@ extension QuickActionViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func triggerMesurment(){
-        if  Module.currentModule == nil{
-            return
-        }
-        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
-        if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
-            viewController.calibrationType = .simpleMeasure
-            viewController.modalPresentationStyle = .fullScreen
-            self.present(viewController, animated: true, completion: nil)
+        self.dismiss(animated: false, completion: nil)
+        NotificationCenter.default.post(name: K.Notifications.showLastMeasurementScreen, object: nil)
+
+        
+//        showLastMeasurement()
+//        if  Module.currentModule == nil{
+//            return
+//        }
+//        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+//        if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
+//            viewController.calibrationType = .simpleMeasure
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.present(viewController, animated: true, completion: nil)
+//        }
+    }
+    
+    
+    func showLastMeasurement(){
+        let tmpSb = UIStoryboard.init(name: "Firmware", bundle: nil)
+        if let navigationController = tmpSb.instantiateViewController(withIdentifier: "LastMeasurementNavigation") as? UINavigationController {
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
     

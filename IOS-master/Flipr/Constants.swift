@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 
 struct K {
+    
+    struct AppConstant{
+        static let CurrentServerIsDev = "IsCurrentServerDev"
+    }
+    
     struct Color {
         static let DarkBlue = UIColor(red: 34/255.0, green: 58/255.0, blue: 77/255.0, alpha: 1)
         static let LightBlue = UIColor(red: 40/255.0, green: 154/255.0, blue: 194/255.0, alpha: 1)
@@ -42,7 +47,8 @@ struct K {
         static let UserDidLogout = Notification.Name("fr.isee-u.UserDidLogout")
         static let AlertDidClose = Notification.Name("fr.isee-u.AlertDidClose")
         static let BackFromWintering = Notification.Name("fr.isee-u.BackFromWintering")
-        
+        static let FliprMeasures409Error = Notification.Name("fr.isee-u.FliprMeasures409Error")
+
         static let BluetoothNotAvailble = Notification.Name("fr.isee-u.BluetoothNotAvailble")
         static let BluetoothOff = Notification.Name("fr.isee-u.BluetoothOff")
         static let BluetoothOn = Notification.Name("fr.isee-u.BluetoothOn")
@@ -67,6 +73,8 @@ struct K {
         static let FirmwereUpgradeError = Notification.Name("fr.isee-u.FirmwereUpgradeError")
         static let FirmwereUpgradeStarted = Notification.Name("fr.isee-u.FirmwereUpgradeStarted")
 
+        static let showLastMeasurementScreen = Notification.Name("fr.isee-u.showLastMeasurementScreen")
+        static let ServerChanged = Notification.Name("fr.isee-u.serverChanged")
 
 
 
