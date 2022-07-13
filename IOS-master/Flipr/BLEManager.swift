@@ -88,7 +88,7 @@ class BLEManager: NSObject {
             centralManager = CBCentralManager(delegate: self, queue: nil)
             centralManagerHasBeenInitialized = true
         } else {
-            let services = [FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID]
+//            let services = [FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID]
 //            centralManager.scanForPeripherals(withServices: services, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
             centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
 
