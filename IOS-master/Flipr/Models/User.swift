@@ -707,6 +707,44 @@ class User {
             }
         })
     }
+    
+       
+    func deleteUser(completion: ((_ error: Error?) -> Void)?) {
+        
+        Alamofire.request(Router.deleteUser).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                print("Delete user - response.result.value: \(value)")
+                completion?(nil)
+
+//                if let pools = value as? [[String:Any]] {
+//                    if let JSON = pools.first {
+//                        let pool = Pool.init(withJSON: JSON)
+//                        Pool.currentPool = pool
+//                        Pool.saveCurrentPoolLocally()
+//                    }
+//                    completion?(nil)
+//                } else {
+//                    let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+//                    completion?(error)
+//                }
+                
+            case .failure(let error):
+                
+                print("Delete user did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(serverError)
+                } else {
+                    completion?(error)
+                }
+            }
+        })
+    }
+    
+
 }
 
 

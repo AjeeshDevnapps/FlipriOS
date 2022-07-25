@@ -15,6 +15,8 @@ enum Router: URLRequestConvertible {
     
     case updateUserProfile(firstName: String, lastName: String, password: String)
     case createNewUser(email: String)
+    case deleteUser
+
     case authentifyUser(email: String, password: String)
     case createUser(email: String, password: String, lastName: String, firstName: String, phone: String)
     case readAccountActivation(email: String)
@@ -124,6 +126,8 @@ enum Router: URLRequestConvertible {
             return .post
         case .createUser:
             return .post
+        case .deleteUser:
+            return .delete
         case .readAccountActivation:
             return .get
         case .resetPassword:
@@ -263,6 +267,8 @@ enum Router: URLRequestConvertible {
         case .startedUpdatedFirmwere:
             return .put
             
+            
+            
         }
     }
     
@@ -273,6 +279,8 @@ enum Router: URLRequestConvertible {
             return "oauth2/token"
         case .createUser:
             return "accounts"
+        case .deleteUser:
+            return "Account"
         case .readAccountActivation:
             return "accounts/isActivated"
         case .resetPassword:
@@ -464,6 +472,9 @@ enum Router: URLRequestConvertible {
                 "lang": lang
             ]
             urlRequest = try URLEncoding.queryString.encode(urlRequest, with: parameters)
+            
+            
+            
         case .updateUserProfile(let firstName, let lastName, let password):
             let parameters: [String: Any] = [
                 "firstname": firstName,

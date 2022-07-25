@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 
 private var shadowLayer: CAShapeLayer!
@@ -33,6 +34,7 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var subscriptionTitleLabel: UILabel!
     @IBOutlet weak var tapToChangeLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var deleteAccountButton: UIButton!
 
     
 
@@ -50,6 +52,7 @@ class AccountViewController: UIViewController {
         self.subscriptionInfoLabel.text = "You can unsubscribe anytime from App Store settings".localized
         self.tapToChangeLabel.text = "Tap to change".localized
         self.titleLabel.text  = "My info".localized
+        self.deleteAccountButton.setTitle("Delete Account", for: .normal)
 
         firstNameTxtFld.delegate = self
         lastNameTxtFld.delegate = self
@@ -143,8 +146,45 @@ class AccountViewController: UIViewController {
             
         }
     }
-   
+    
+    @IBAction func deleteAccountButtonClicked(){
+    
+        let alertController = UIAlertController(title: "Delete Account".localized, message: "Delete Account info".localized, preferredStyle: UIAlertController.Style.actionSheet)
+        
+        let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.cancel)
+        let okAction = UIAlertAction(title: "Delete Account".localized, style: UIAlertAction.Style.destructive)
+        {
+            (result : UIAlertAction) -> Void in
+            print("You pressed OK")
+            self.callDeleteUserApi()
+//            User.logout()
+//            self.dismiss(animated: true, completion: {
+//                NotificationCenter.default.post(name: K.Notifications.UserDidLogout, object: nil)
+//            })
+            
+            
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
 
+    func callDeleteUserApi(){
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.view)
+        User.currentUser?.deleteUser(completion: { (error) in
+            if error != nil {
+                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                hud?.textLabel.text = error?.localizedDescription
+                hud?.dismiss(afterDelay: 3)
+            } else {
+                hud?.dismiss(afterDelay: 0)
+                User.logout()
+                NotificationCenter.default.post(name: K.Notifications.UserDidLogout, object: nil)
+            }
+        })
+    }
+    
 }
 
 extension AccountViewController: UITextFieldDelegate{

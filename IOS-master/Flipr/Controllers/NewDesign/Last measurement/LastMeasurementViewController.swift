@@ -133,7 +133,7 @@ class LastMeasurementViewController:BaseViewController {
         BLEManager.shared.isHandling409 = true
 
         BLEManager.shared.startMeasure { (error) in
-            
+             
             BLEManager.shared.doAcq = false
             
             if error != nil {

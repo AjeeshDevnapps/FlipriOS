@@ -3043,9 +3043,9 @@ Essai gratuit 7 jours</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TjM-nA-vu4">
-                                <rect key="frame" x="64" y="430" width="247" height="173"/>
+                                <rect key="frame" x="64" y="429.5" width="247" height="173.5"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="UTA-cN-PoJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="247" height="173"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="247" height="174"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe" translatesAutoresizingMaskIntoConstraints="NO" id="or2-DK-krG">
@@ -10893,6 +10893,18 @@ DE BANDELETTE</string>
                                 <color key="textColor" red="0.67450980390000004" green="0.70196078429999997" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8L8-Ag-ZX2">
+                                <rect key="frame" x="25" y="489" width="325" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="LGn-7g-RW3"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Delete Account"/>
+                                <connections>
+                                    <action selector="deleteAccountButtonClicked" destination="wcp-IE-B8g" eventType="touchUpInside" id="10Z-Nc-uGO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
@@ -10905,6 +10917,9 @@ DE BANDELETTE</string>
                             <constraint firstItem="eVk-g7-zSe" firstAttribute="leading" secondItem="ZUk-fV-jiW" secondAttribute="leading" constant="22" id="AYN-yF-K6X"/>
                             <constraint firstItem="nKn-lw-uJI" firstAttribute="leading" secondItem="ZUk-fV-jiW" secondAttribute="leading" constant="20" id="Frs-x0-01F"/>
                             <constraint firstItem="MBU-ZE-o0y" firstAttribute="leading" secondItem="ZUk-fV-jiW" secondAttribute="leadingMargin" constant="4" id="Khn-bg-hdF"/>
+                            <constraint firstAttribute="trailing" secondItem="8L8-Ag-ZX2" secondAttribute="trailing" constant="25" id="XPp-7S-GJA"/>
+                            <constraint firstItem="8L8-Ag-ZX2" firstAttribute="leading" secondItem="ZUk-fV-jiW" secondAttribute="leading" constant="25" id="aB6-aP-2xF"/>
+                            <constraint firstItem="8L8-Ag-ZX2" firstAttribute="top" secondItem="nKn-lw-uJI" secondAttribute="bottom" constant="4" id="ceK-Dk-FXc"/>
                             <constraint firstAttribute="trailing" secondItem="Odh-Zq-4IC" secondAttribute="trailing" constant="22" id="nSe-J1-XF9"/>
                             <constraint firstItem="Odh-Zq-4IC" firstAttribute="leading" secondItem="ZUk-fV-jiW" secondAttribute="leading" constant="22" id="pOZ-zx-qPw"/>
                             <constraint firstItem="r2V-QP-u1Z" firstAttribute="top" secondItem="eVk-g7-zSe" secondAttribute="bottom" constant="53" id="vC4-MF-CGj"/>
@@ -10912,6 +10927,7 @@ DE BANDELETTE</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="deleteAccountButton" destination="8L8-Ag-ZX2" id="fbS-B8-it6"/>
                         <outlet property="detailsContainerView" destination="eVk-g7-zSe" id="Vgv-tr-9R4"/>
                         <outlet property="emailLabel" destination="PoD-NI-D5l" id="Wqn-3Z-Sfo"/>
                         <outlet property="fNameLabel" destination="lVS-M8-L8w" id="xB3-sV-8MD"/>
@@ -15842,7 +15858,7 @@ Essai gratuit 7 jours</string>
         <image name="pumbdisabled" width="45" height="45"/>
         <image name="readinglevel" width="39" height="107"/>
         <image name="smartContrlOff" width="40" height="40"/>
-        <image name="sun" width="22" height="22"/>
+        <image name="sun" width="24" height="24"/>
         <image name="support" width="21" height="21"/>
         <image name="swipe" width="54" height="68"/>
         <image name="tresholdChange" width="32" height="32"/>
@@ -15862,6 +15878,9 @@ Essai gratuit 7 jours</string>
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.1215686274509804" green="0.12941176470588239" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
