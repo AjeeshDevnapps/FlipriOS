@@ -30,7 +30,8 @@ class SubscriptionPageViewController: UIPageViewController {
     
     fileprivate lazy var pages: [UIViewController] = {
         return [
-            self.getViewController(withTitle: "Enjoy Flipr Start Infinite".localized, message: "More than 15 additional features to enjoy and save on your pool!".localized, imageName: "slider1"),
+            self.getViewController(withTitle: "Activez la connexion à distance".localized, message: "Accédez à la connexion automatique et à distance, même loin de chez vous !".localized, imageName: "slider1"),
+            /*
             self.getViewController(withTitle: "Reduce your costs by almost 30%!".localized, message: "Flipr gives you the right product dosages and tells you how long the filtration works. No more waste: reduce your maintenance costs!".localized, imageName: "slider2"),
             self.getViewController(withTitle: "Receive alerts and act serenely!".localized, message:
                 "Flipr Start infinite alerts you as soon as an event occurs: low pH, risk of a storm, frost alert: you are informed and you know what to do".localized, imageName: "slider3"),
@@ -38,6 +39,7 @@ class SubscriptionPageViewController: UIPageViewController {
             self.getViewController(withTitle: "Up to 20 updates per day".localized, message: "Get updated data up to 20 times a day!".localized, imageName: "slider5"),
             self.getViewController(withTitle:
             "and many others !".localized, message:"Expert mode, customization of thresholds, inventory management ... And all the new features to come during the 2019 season!".localized, imageName: "slider6")
+            */
         ]
     }()
     
@@ -64,6 +66,7 @@ class SubscriptionPageViewController: UIPageViewController {
         let horizontalConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
         let verticalConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: -6)
         view.addConstraints([horizontalConstraint, verticalConstraint])
+        pageControl.isHidden = true
         
     }
     

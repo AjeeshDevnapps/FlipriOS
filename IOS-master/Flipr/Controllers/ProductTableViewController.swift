@@ -246,7 +246,7 @@ class ProductTableViewController: UITableViewController, ProductTypeTableViewCon
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if section == 0 { return 1}
+        if section == 0 { return 0}
         return stocks.count
     }
 

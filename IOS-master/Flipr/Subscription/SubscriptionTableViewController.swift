@@ -14,7 +14,7 @@ class SubscriptionTableViewController: UITableViewController {
     
     let forLifePeriodAllowed:Double = 3600 * 24 * 30 * 6 //6 mois (in sec)
     
-    @IBOutlet weak var selectLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var month1Label: UILabel!
     @IBOutlet weak var month3Label: UILabel!
@@ -43,6 +43,9 @@ class SubscriptionTableViewController: UITableViewController {
     @IBOutlet weak var checkImageView2: UIImageView!
     @IBOutlet weak var fliprIconImageView: UIImageView!
     
+    @IBOutlet weak var descriptionContainerView: UIView!
+
+    
     
     let purchaseHud = JGProgressHUD(style:.dark)
     
@@ -64,9 +67,9 @@ class SubscriptionTableViewController: UITableViewController {
             }
             fliprInfiniteFromPrice.text = selectedOption?.formattedMonthPrice
             selectedOptionLabel.text = "Pour \(selectedOption?.label ?? "NaN")"
-            selectedOptionPriceLabel.text = "(soit \(selectedOption?.formattedPrice ?? "NaN"))"
+         //   selectedOptionPriceLabel.text = "(soit \(selectedOption?.formattedPrice ?? "NaN"))"
             
-            selectedPriceLabel.text = selectedOption?.labelPrice
+          //  selectedPriceLabel.text = selectedOption?.labelPrice
             
             
             if #available(iOS 11.2, *) {
@@ -154,9 +157,19 @@ class SubscriptionTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
+        descriptionContainerView.clipsToBounds = true
+        descriptionContainerView.layer.cornerRadius = ((descriptionContainerView.frame.height / 2) + 0 )
+        descriptionContainerView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         
-        titleLabel.text = "Get Flipr Infinite".localized
-        selectLabel.text = "Select your subscription".localized
+        descriptionContainerView.layer.masksToBounds = false
+        descriptionContainerView.layer.shadowRadius = 22
+        descriptionContainerView.layer.shadowOpacity = 1
+        descriptionContainerView.layer.shadowColor = UIColor(red: 0, green: 0.071, blue: 0.278, alpha: 0.17).cgColor
+        descriptionContainerView.layer.shadowOffset = CGSize(width: 0 , height:2)
+
+        titleLabel.text = "Activez la connexion à distance".localized
+        descriptionLabel.text = "Oubliez la connexion bluetooth ! Avec Flipr Infinite,  accédez à la connexion automatique et à distance, même loin de chez vous, ainsi qu'à l'envoi de notifications.".localized
         month1Label.text = "month".localized
         month3Label.text = "months".localized
         month12Label.text = "months".localized
@@ -175,7 +188,7 @@ class SubscriptionTableViewController: UITableViewController {
         
         monthLabel.text = "/" + "month".localized
         
-        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.tintColor = .white
@@ -218,7 +231,33 @@ class SubscriptionTableViewController: UITableViewController {
                                                name: SubscriptionService.restoreFAiledNotification,
                                                object: nil)
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController!.view.backgroundColor = UIColor.clear
+        }
 
+
+
+    override func viewDidDisappear(_ animated: Bool) {
+        self.navigationController!.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+
+        }
+    
+    func customNavigationBar(){
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+    }
+
+    
     @IBAction func cancelButonAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         

@@ -15,30 +15,34 @@ let kStackViewTag = 4321
 extension UIView {
     
     func showEmptyStateViewLoading(title: String?, message:String?) {
-        showEmptyStateView(activityIndicatorType:EmptyStateViewTheme.shared.activityIndicatorType, image: nil, title: title, message: message, buttonTitle: nil, buttonAction: nil, theme:EmptyStateViewTheme.shared)
+        showEmptyStateView(activityIndicatorType:EmptyStateViewTheme.shared.activityIndicatorType, image: nil, title: title, message: message, buttonTitle: nil, buttonAction: nil, theme:EmptyStateViewTheme.shared, bottomConstraint: nil)
     }
     
     func showEmptyStateViewLoading(title: String?, message:String?, theme:EmptyStateViewTheme) {
-        showEmptyStateView(activityIndicatorType:EmptyStateViewTheme.shared.activityIndicatorType, image: nil, title: title, message: message, buttonTitle: nil, buttonAction: nil, theme:theme)
+        showEmptyStateView(activityIndicatorType:EmptyStateViewTheme.shared.activityIndicatorType, image: nil, title: title, message: message, buttonTitle: nil, buttonAction: nil, theme:theme, bottomConstraint: nil)
     }
 
-    func showEmptyStateView(image:UIImage?, title: String?, message:String?) {
-        showEmptyStateView(activityIndicatorType:nil, image: image, title: title, message: message, buttonTitle: nil, buttonAction: nil, theme:EmptyStateViewTheme.shared)
+    func showEmptyStateView(image:UIImage?, title: String?, message:String?, bottomAlignment: Float?) {
+        showEmptyStateView(activityIndicatorType:nil, image: image, title: title, message: message, buttonTitle: nil, buttonAction: nil, theme:EmptyStateViewTheme.shared, bottomConstraint: bottomAlignment)
     }
     
     func showEmptyStateView(image:UIImage?, title: String?, message:String?, theme:EmptyStateViewTheme) {
-        showEmptyStateView(activityIndicatorType:nil, image: image, title: title, message: message, buttonTitle: nil, buttonAction: nil, theme:theme)
+        showEmptyStateView(activityIndicatorType:nil, image: image, title: title, message: message, buttonTitle: nil, buttonAction: nil, theme:theme, bottomConstraint: nil)
     }
     
-    func showEmptyStateView(image: UIImage?, title: String?, message:String?, buttonTitle:String?, buttonAction:(_: () -> Void)?) {
-        showEmptyStateView(activityIndicatorType:nil, image: image, title: title, message: message, buttonTitle: buttonTitle, buttonAction: buttonAction, theme:EmptyStateViewTheme.shared)
+    func showEmptyStateView(image: UIImage?, title: String?, message:String?, buttonTitle:String?,  buttonAction:(_: () -> Void)?) {
+        showEmptyStateView(activityIndicatorType:nil, image: image, title: title, message: message, buttonTitle: buttonTitle, buttonAction: buttonAction, theme:EmptyStateViewTheme.shared, bottomConstraint: nil)
+    }
+    
+    func showEmptyStateView(image: UIImage?, title: String?, message:String?, buttonTitle:String?, bottomAlignment: Float?, buttonAction:(_: () -> Void)?) {
+        showEmptyStateView(activityIndicatorType:nil, image: image, title: title, message: message, buttonTitle: buttonTitle, buttonAction: buttonAction, theme:EmptyStateViewTheme.shared, bottomConstraint: 0)
     }
     
     func showEmptyStateView(image: UIImage?, title: String?, message:String?, buttonTitle:String?, buttonAction:(_: () -> Void)?, theme:EmptyStateViewTheme) {
-        showEmptyStateView(activityIndicatorType:nil, image: image, title: title, message: message, buttonTitle: buttonTitle, buttonAction: buttonAction, theme:EmptyStateViewTheme.shared)
+        showEmptyStateView(activityIndicatorType:nil, image: image, title: title, message: message, buttonTitle: buttonTitle, buttonAction: buttonAction, theme:EmptyStateViewTheme.shared, bottomConstraint: nil)
     }
     
-    private func showEmptyStateView(activityIndicatorType:NVActivityIndicatorType?, image: UIImage?, title: String?, message:String?, buttonTitle:String?, buttonAction:(_: () -> Void)?, theme:EmptyStateViewTheme) {
+    private func showEmptyStateView(activityIndicatorType:NVActivityIndicatorType?, image: UIImage?, title: String?, message:String?, buttonTitle:String?, buttonAction:(_: () -> Void)?, theme:EmptyStateViewTheme, bottomConstraint: Float?) {
         
         hideStateView()
         
@@ -87,7 +91,7 @@ extension UIView {
             messageLabel.text = message
             messageLabel.font = theme.messageFont
             messageLabel.numberOfLines = 0
-            messageLabel.textColor = theme.messageColor
+            messageLabel.textColor = theme.titleColor
             messageLabel.widthAnchor.constraint(equalToConstant: self.bounds.width - (2 * margin)).isActive = true
             stackView.addArrangedSubview(messageLabel)
         }
@@ -115,10 +119,16 @@ extension UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false;
         
         self.addSubview(stackView)
-        
         //Constraints
         stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+    
+//        let val =  stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+//        val.isActive = true
+        if bottomConstraint != nil{
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -150).isActive = true
+        }else{
+            stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        }
     }
     
     func hideStateView() {

@@ -13,6 +13,10 @@ import Alamofire
 
 enum Router: URLRequestConvertible {
     
+    case updateUserProfile(firstName: String, lastName: String, password: String)
+    case createNewUser(email: String)
+    case deleteUser
+
     case authentifyUser(email: String, password: String)
     case createUser(email: String, password: String, lastName: String, firstName: String, phone: String)
     case readAccountActivation(email: String)
@@ -20,6 +24,8 @@ enum Router: URLRequestConvertible {
     case changePassword(oldPassword: String, newPassword: String)
     case readUser
     case readUserNotifications
+    case updateDeviceToken(token:String)
+
     case updateUserNotifications(activate: Bool)
     case updateLanguage
     case updateUserInfo(lastName: String, firstName: String)
@@ -94,21 +100,34 @@ enum Router: URLRequestConvertible {
     case getHUBPlannings(serial: String)
     case deleteHUBPlanning(serial: String, id:Int)
     case updateHUBPlannings(serial: String, attributes:[String:Any])
-    
+    case reactivateAlert(serial: String,status:Bool)
+    case updatedFirmwere(serial: String,version:String)
+
+    case startedUpdatedFirmwere(serial: String)
+
     //Legacy
     //static let baseURLString = K.Server.BaseUrl + K.Server.ApiPath
     
+
+    
     //Prod
     static let baseURLString = "https://apis.goflipr.com/"
+    
+    
     //Recette
-    //static let baseURLString = "https://flipr-api-prod-recette.azurewebsites.net/"
+    static let baseDevURLString = "https://flipr-api-prod-recette.azurewebsites.net/"
     
     var method: HTTPMethod {
         switch self {
+            
+        case .reactivateAlert:
+            return .put
         case .authentifyUser:
             return .post
         case .createUser:
             return .post
+        case .deleteUser:
+            return .delete
         case .readAccountActivation:
             return .get
         case .resetPassword:
@@ -119,6 +138,8 @@ enum Router: URLRequestConvertible {
             return .get
         case .readUserNotifications:
             return .get
+        case .updateDeviceToken:
+            return .put
         case .updateUserNotifications:
             return .put
         case .updateLanguage:
@@ -134,7 +155,7 @@ enum Router: URLRequestConvertible {
         case .addModuleEquipment:
             return .post
         case .forgetModuleEquipment:
-            return .put
+            return .delete
         case .getModules:
             return .get
         case .addStripTest:
@@ -237,6 +258,17 @@ enum Router: URLRequestConvertible {
             return .post
         case .deleteHUBPlanning:
             return .delete
+        case .createNewUser:
+            return .post
+        case .updateUserProfile:
+            return .put
+        case .updatedFirmwere:
+            return .put
+        case .startedUpdatedFirmwere:
+            return .put
+            
+            
+            
         }
     }
     
@@ -247,6 +279,8 @@ enum Router: URLRequestConvertible {
             return "oauth2/token"
         case .createUser:
             return "accounts"
+        case .deleteUser:
+            return "Account"
         case .readAccountActivation:
             return "accounts/isActivated"
         case .resetPassword:
@@ -259,12 +293,17 @@ enum Router: URLRequestConvertible {
             return "accounts/notifications"
         case .updateUserNotifications:
             return "accounts/notifications"
+        case .updateDeviceToken(_):
+            return "accounts/UpdateTokenDevice"
         case .updateLanguage:
             return "accounts"
         case .updateUserInfo:
             return "accounts"
         case .sendSubscriptionReceipt:
             return "accounts/subscription/iTunes"
+            
+        case .reactivateAlert(_):
+            return "accounts/"
         case .addMobileDevice:
             return "mobiles"
             
@@ -273,7 +312,7 @@ enum Router: URLRequestConvertible {
         case .addModuleEquipment(let serial, let code):
             return "hub/\(serial)/Equipment/Add/\(code)"
         case .forgetModuleEquipment(let serial, let code):
-            return "modules/\(serial)/Status"
+            return "modules/\(serial)"
             
         case .getModules:
             return "modules"
@@ -288,7 +327,7 @@ enum Router: URLRequestConvertible {
         case .readModuleLastSurvey(let serialId):
             return "modules/\(serialId)/survey/last"
         case .readModuleResume(let serialId):
-            return "modules/\(serialId)/Resume"
+            return "modules/\(serialId)/NewResume"
         case .removeModule(let serialId):
             return "modules/\(serialId)"
             
@@ -388,14 +427,29 @@ enum Router: URLRequestConvertible {
             return "hub/\(serial)/DeleteSinglePlanning"
         case .updateHUBPlannings(let serial, _):
             return "hub/\(serial)/AddPlannings"
+        case .createNewUser:
+            return "accounts/new"
+        case .updateUserProfile(_ ,_ ,_):
+            return "accounts/all"
+        case .updatedFirmwere(let serial,let version):
+            return "modules/"
+        case .startedUpdatedFirmwere(let serial):
+            return "modules/"
+
+            
+            
         }
+
     }
     
     // MARK: URLRequestConvertible
     
     func asURLRequest() throws -> URLRequest {
-        let url = try Router.baseURLString.asURL()
-        
+        var url = try Router.baseURLString.asURL()
+        let severType = UserDefaults.standard.bool(forKey: K.AppConstant.CurrentServerIsDev)
+        if severType == true {
+            url = try Router.baseDevURLString.asURL()
+        }
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
         if let userToken = User.currentUser?.token {
@@ -408,7 +462,28 @@ enum Router: URLRequestConvertible {
         urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         
         switch self {
-        
+        case .createNewUser(let email):
+            var lang = "en"
+            if let preferredLanguage = Locale.current.languageCode {
+                lang = preferredLanguage
+            }
+            let parameters: [String : Any] = [
+                "email": email,
+                "lang": lang
+            ]
+            urlRequest = try URLEncoding.queryString.encode(urlRequest, with: parameters)
+            
+            
+            
+        case .updateUserProfile(let firstName, let lastName, let password):
+            let parameters: [String: Any] = [
+                "firstname": firstName,
+                "lastname": lastName
+            ]
+            if let url = urlRequest.url?.absoluteString {
+                urlRequest.url = URL(string: url + "?NewPass=\(password)")
+            }
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         case .authentifyUser(let email, let password):
             let parameters: [String : Any] = [
                 "username": email,
@@ -443,7 +518,7 @@ enum Router: URLRequestConvertible {
                 "Firstname": firstName,
             ]
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-        
+            
         case .readAccountActivation(let email):
             let parameters: [String : Any] = [
                 "email": email,
@@ -488,6 +563,19 @@ enum Router: URLRequestConvertible {
             ]
             print("updateUserNotifications: \(parameters)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        
+        case .updateDeviceToken(let token):
+            let parm: [String : Any] = [
+                "Token": token
+            ]
+            print("update Device fcm token: \(parm)")
+            
+            if let url = urlRequest.url?.absoluteString {
+                urlRequest.url = URL(string: url + "?Token=\(token)")
+            }
+//            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+            
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parm)
             
         case .addMobileDevice(let token):
             let parameters: [String : Any] = [
@@ -504,6 +592,7 @@ enum Router: URLRequestConvertible {
                 "Delete": delete,
                 "NickName": "Flipr " + serial
             ]
+            print(parameters)
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         
         //case .addStripTest(_,let params):
@@ -683,14 +772,33 @@ enum Router: URLRequestConvertible {
             ]
             print("Add productAttributes with params: \(parameters)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-       
+            
+        case .reactivateAlert(let serial, let status):
+            if let url = urlRequest.url?.absoluteString {
+                urlRequest.url = URL(string: url + "\(serial)/ReactivationNotification?notification=\(status)")
+            }
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: nil)
+            
+        case .updatedFirmwere(let serial, let version):
+            if let url = urlRequest.url?.absoluteString {
+                urlRequest.url = URL(string: url + "\(serial)/UpdateSoftwareVersion?Version=\(version)")
+            }
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: nil)
+            
+        case .startedUpdatedFirmwere(let serial):
+            if let url = urlRequest.url?.absoluteString {
+                urlRequest.url = URL(string: url + "\(serial)/UpdateStartFirmwareUpgrade")
+            }
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: nil)
+            
         default:
             break
         }
-        
+
         print("Request URL: \(urlRequest.url?.absoluteString)")
         print("Body: \(urlRequest.httpBodyStream)")
         
         return urlRequest
     }
 }
+

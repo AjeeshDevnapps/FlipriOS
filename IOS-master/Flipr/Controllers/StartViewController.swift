@@ -51,7 +51,7 @@ class StartViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     @IBAction func doneButtonAction(_ sender: Any) {
         
         stackView.isHidden = true

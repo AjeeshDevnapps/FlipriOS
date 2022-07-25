@@ -20,6 +20,9 @@ let userDefaultTemperatureMinValuesKey = "DefaultTemperatureMinValuesKey"
 let userDefaultTemperatureMaxValuesKey = "DefaultTemperatureMaxValuesKey"
 
 let userDefaultThresholdValuesKey = "userDefaultThresholdValuesKey"
+let disAllowFirmwereUpdateKey = "disAllowFirmwereUpdate"
+
+let disAllowFirmwereUpdatePromptKey = "disAllowFirmwereUpdatePrompt"
 
 //let userDefaultThresholdeMinValuesKey = "DefaultThresholdeMinValuesKey"
 //let userDefaultThresholdeMaxValuesKey = "DefaultThresholdeMaxValuesKey"
@@ -95,7 +98,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
         
         pHValueLabel.text = Module.currentModule?.rawPH
         redoxValueLabel.text = Module.currentModule?.rawRedox
-        conductivityValueLabel.text = Module.currentModule?.rawConductivity
+        conductivityValueLabel.text = Module.currentModule?.airTemperature
         waterTemperatureValueLabel.text = Module.currentModule?.rawWaterTemperature
         
         pHTresholdLabel.text = "pH alert threshold".localized
@@ -104,7 +107,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
         
         pHLabel.text = "pH".localized
         redoxLabel.text = "Redox".localized
-        conductivityLabel.text = "Conductivity".localized
+        conductivityLabel.text = "Air".localized
         waterTemperatureLabel.text = "Water".localized
         
         tresholdLabel.text = "Custom alert thresholds".localized
@@ -318,8 +321,55 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func alertsActivationSwitchValueChanged(_ sender: Any) {
+    
+    func callReactivateAlertApi(alertStatus:Bool){
         
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.navigationController!.view)
+        
+        
+        if let serialNo = Module.currentModule?.serial {
+            Alamofire.request(Router.reactivateAlert(serial: serialNo, status: alertStatus)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                
+                switch response.result {
+                    
+                case .success(let value):
+//                    UserDefaults.standard.set(false, forKey: notificationOnOffValuesKey)
+                    UserDefaults.standard.set(alertStatus, forKey: notificationOnOffValuesKey)
+                    NotificationCenter.default.post(name: K.Notifications.NotificationSetttingsChanged, object: nil)
+                    print("update notification with success: \(value)")
+                    hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    hud?.dismiss(afterDelay: 1)
+
+                case .failure(let error):
+                    
+                    print("Reactivated Notification did fail with error: \(error)")
+//                    print("update notification error: \(error)")
+                    
+                    if let serverError = User.serverError(response: response) {
+                        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                        hud?.textLabel.text = serverError.localizedDescription
+                        hud?.dismiss(afterDelay: 3)
+                    } else {
+                        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                        hud?.textLabel.text = error.localizedDescription
+                        hud?.dismiss(afterDelay: 3)
+                    }
+                }
+                
+            })
+        }else{
+            print("No serial number")
+        }
+       
+    }
+
+    
+    
+    @IBAction func alertsActivationSwitchValueChanged(_ sender: Any) {
+        self.callReactivateAlertApi(alertStatus: self.alertActivationSwitch.isOn)
+        
+        /*
         let hud = JGProgressHUD(style:.dark)
         hud?.show(in: self.navigationController!.view)
         
@@ -328,7 +378,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
             switch response.result {
                 
             case .success(let value):
-                UserDefaults.standard.set(!self.alertActivationSwitch.isOn, forKey: notificationOnOffValuesKey)
+                UserDefaults.standard.set(self.alertActivationSwitch.isOn, forKey: notificationOnOffValuesKey)
                 NotificationCenter.default.post(name: K.Notifications.NotificationSetttingsChanged, object: nil)
                 print("update notification with success: \(value)")
                 hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
@@ -350,6 +400,8 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
             }
             
         })
+        
+        */
         
     }
     

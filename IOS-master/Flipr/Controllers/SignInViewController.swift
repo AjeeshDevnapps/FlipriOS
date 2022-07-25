@@ -147,13 +147,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             User.signin(email: self.emailTextField.text!, password: self.passwordTextField.text!) { (error) in
                 if error == nil {
                     
-                    let omnisenseUser = OSUser();
-                    omnisenseUser.email = User.currentUser?.email
-                    omnisenseUser.firstName = User.currentUser?.firstName
-                    omnisenseUser.lastName = User.currentUser?.lastName
-                    omnisenseUser.phone = User.currentUser?.phone
-                    omnisenseUser.registered = true
-                    Omnisense.setCurrentUser(omnisenseUser)
+//                    let omnisenseUser = OSUser();
+//                    omnisenseUser.email = User.currentUser?.email
+//                    omnisenseUser.firstName = User.currentUser?.firstName
+//                    omnisenseUser.lastName = User.currentUser?.lastName
+//                    omnisenseUser.phone = User.currentUser?.phone
+//                    omnisenseUser.registered = true
+//                    Omnisense.setCurrentUser(omnisenseUser)
                     
                     if Module.currentModule != nil {
                         
@@ -276,15 +276,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         self.signInButton.hideActivityIndicator()
         return true
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     
     @IBAction func useDemoAccount(_ sender: Any) {
         emailTextField.text = "demo@goflipr.com"

@@ -335,8 +335,15 @@ class AlertTableViewController: UITableViewController {
     @IBAction func shopButtonAction(_ sender: Any) {
         if let urlString = alert.shop?["SpecificLink"] as? String {
             if let url = URL(string: urlString) {
-                let vc = SFSafariViewController(url: url, entersReaderIfAvailable: false)
-                self.present(vc, animated: true)
+                if #available(iOS 11.0, *) {
+                    let vc = SFSafariViewController(url: url)
+                    self.present(vc, animated: true)
+
+                } else {
+                    let vc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+                    self.present(vc, animated: true)
+
+                }
             }
         }
     }

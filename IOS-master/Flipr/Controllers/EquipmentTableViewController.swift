@@ -161,7 +161,7 @@ class EquipmentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
-            return 1
+            return 0
         }
         return categories[section - 1].equipments.count
     }

@@ -24,7 +24,7 @@ class Strip {
     func send(completion: ((_ error:Error?) -> Void)?) {
         
         if (chloreBrome == nil) || (totalChlore == nil) || (alcalinity == nil) || (pH == nil) || (hydrotimetricTitle == nil) || (cyanudricAcid == nil) {
-            completion?(NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Toutes les valeurs sont obligatoires"]))
+            completion?(NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Toutes les valeurs sont obligatoires".localized]))
             return
         }
         

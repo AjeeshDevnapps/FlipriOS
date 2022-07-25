@@ -72,20 +72,34 @@ class BLEManager: NSObject {
     var module:Module?
     
     var isConnecting = false
+    var stopScanning = false
     
+    var fliprReadingVerification = false
+    var isHandling409 = false
+
+
+
     func startUpCentralManager(connectAutomatically connect:Bool, sendMeasure send:Bool) {
+        self.stopScanning = false
+        perform(#selector(setTimeLimit), with: nil, afterDelay: 20)
         sendMeasureAfterConnection = send
         connectAfterDiscovery = connect
-        
         if !centralManagerHasBeenInitialized {
             centralManager = CBCentralManager(delegate: self, queue: nil)
             centralManagerHasBeenInitialized = true
         } else {
-            let services = [FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID]
+//            let services = [FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID]
+//            centralManager.scanForPeripherals(withServices: services, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
             centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
+
             print("CBCentralManager start scanning for Flipr devices (already initialized)")
+           
         }
         
+    }
+    
+    @objc func setTimeLimit(){
+        self.stopScanning = true
     }
     
     func activateFlipr(activate: Bool, completion: ((_ error: Error?) -> Void)?) {
@@ -159,10 +173,34 @@ class BLEManager: NSObject {
     
     func post(measures:String, type:String) {
         
+//        var measureBackup = "0"
+//        var isZerioValue = false
+//        if let intVal = Int(measures){
+//            if intVal == 0{
+//                isZerioValue = true
+//            }
+//        }
+//        if isZerioValue {
+//            if let backupData = UserDefaults.standard.object(forKey: "LastMeasureBackupData") as? String{
+//                measureBackup = backupData
+//            }
+//        }else{
+//            measureBackup = measures
+//            UserDefaults.standard.set(measures, forKey: "LastMeasureBackupData")
+//        }
+//
         if let identifier = Module.currentModule?.serial {
-                
-                NotificationCenter.default.post(name: K.Notifications.FliprDidRead, object: nil)
-            
+            NotificationCenter.default.post(name: K.Notifications.FliprDidRead, object: nil)
+            if fliprReadingVerification{
+                fliprReadingVerification = false
+                return
+//                UserDefaults.standard.set(measures, forKey: "LastMeasureBackupData")
+//                fliprReadingVerification = false
+//                self.centralManager.cancelPeripheralConnection(self.flipr!)
+//                return
+                //self.centralManager.cancelPeripheralConnection(self.flipr!)
+            }
+            else{
                 Alamofire.request(Router.sendModuleMetrics(serialId: identifier, data: measures, type:type))
                     .validate(statusCode: 200..<300)
                     .responseJSON { response in
@@ -181,7 +219,13 @@ class BLEManager: NSObject {
                         }
                         else {
                             debugPrint("HTTP Request failed: \(response.result.error)")
-                            
+                            if response.response?.statusCode == 409 {
+                                if self.isHandling409{
+                                    self.isHandling409 = false
+                                    NotificationCenter.default.post(name: K.Notifications.FliprMeasures409Error, object: nil)
+                                }
+                                debugPrint("same data")
+                            }
                         }
                         
                         if type == "0" {
@@ -197,6 +241,9 @@ class BLEManager: NSObject {
                         self.sendMeasuresCompletionBlock?(response.result.error)
                         self.sendMeasuresCompletionBlock = nil
                 }
+
+            }
+            
             
         } else {
             let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Numéro de série du Flipr introuvable :/"])
@@ -216,6 +263,8 @@ extension BLEManager: CBCentralManagerDelegate {
             if central.state == CBManagerState.poweredOn {
                 print("Bluetooth powered on.")
                 
+                NotificationCenter.default.post(name: K.Notifications.BluetoothOn, object: nil, userInfo: nil)
+
                 /*
                 let services = [FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID]
                 
@@ -234,7 +283,13 @@ extension BLEManager: CBCentralManagerDelegate {
                 
                 //self.centralManager.scanForPeripherals(withServices:[FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey:false])
                 //self.centralManager.scanForPeripherals(withServices:nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey:true])
-            } else {
+            }
+//            else if central.state == CBManagerState.poweredOff {
+//                NotificationCenter.default.post(name: K.Notifications.BluetoothOff, object: nil, userInfo: nil)
+//            }
+            
+            else {
+                NotificationCenter.default.post(name: K.Notifications.BluetoothNotAvailble, object: nil, userInfo: nil)
                 print("Bluetooth not available.")
             }
         } else {
@@ -244,16 +299,30 @@ extension BLEManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         
+        if self.stopScanning{
+            central.stopScan()
+            NotificationCenter.default.post(name: K.Notifications.FliprNotDiscovered, object: nil)
+            return
+        }
         if let name = peripheral.name {
             
-            if !name.hasPrefix("Flipr 00") && !name.hasPrefix("FliprHUB") {
+            print(name)
+            if !name.hasPrefix("Flipr 0") && !name.hasPrefix("FliprHUB") {
                 return
             }
             
             
             print("Flipr device discovered with name:\(peripheral.name) , identifier: \(peripheral.identifier)")
+            var occuranceString = "Flipr 00"
+
+            if name.hasPrefix("Flipr 00") {
+                occuranceString = "Flipr 00"
+            }
+            else if name.hasPrefix("Flipr 0"){
+                occuranceString = "Flipr 0"
+            }
             
-            var serial = name.replacingOccurrences(of: "Flipr 00", with: "").trimmed
+            var serial = name.replacingOccurrences(of: occuranceString, with: "").trimmed
             
             if name.hasPrefix("FliprHUB") {
                 serial = name.replacingOccurrences(of: "FliprHUB", with: "").trimmed
@@ -266,11 +335,11 @@ extension BLEManager: CBCentralManagerDelegate {
                     return
                 }
             }
-            
+            self.stopScanning = false
             flipr = peripheral
             peripheral.delegate = self
             
-            central.stopScan()
+//            central.stopScan()
             print("CBCentralManager stop scanning for Flipr devices")
             
             let userInfo = ["serial": serial]
@@ -283,6 +352,8 @@ extension BLEManager: CBCentralManagerDelegate {
             }
             
         }
+        
+       
 
     }
     
@@ -421,6 +492,12 @@ extension BLEManager: CBPeripheralDelegate {
                     post(measures: value.hexEncodedString(), type: "0")
                     sendMeasureAfterConnection = false
                 }
+                
+                else if fliprReadingVerification {
+                    post(measures: value.hexEncodedString(), type: "0")
+//                    sendMeasureAfterConnection = false
+                }
+                
                 break
             case FliprBLEParameters.infoCharactersticUUID:
                 print("Info charateristic value: \(value.hexEncodedString())")

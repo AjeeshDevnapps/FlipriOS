@@ -21,6 +21,8 @@ class DeviceViewController: UIViewController {
     
     var devicewifiTypeCell = DeviceWifiCellType.Flipr
     var devicesDetails:  [String:Any]?
+    var hubDetails:  [String:Any]?
+
     var centralManager:CBCentralManager!
     var flipr:CBPeripheral?
     var hubName = ""
@@ -37,14 +39,19 @@ class DeviceViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if self.devicewifiTypeCell == .Hub{
-            if AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi{
-                self.getHubDetails()
-            }
+            if hubDetails != nil{
+                self.hubDetails(data: hubDetails!)}
+//            if AppSharedData.sharedInstance.isNeedtoCallHubDetailsApi{
+//                self.getHubDetails()
+//            }
         }
     }
     
     
     func getHubDetails(){
+        if Pool.currentPool == nil{
+            return
+        }
         let hud = JGProgressHUD(style:.dark)
         hud?.show(in: self.navigationController!.view)
         Pool.currentPool?.getHUBS(completion: { (hubs, error) in
@@ -57,8 +64,14 @@ class DeviceViewController: UIViewController {
                 if hubs!.count > 0 {
                     //                    self.hubs = hubs!
                     for hubObj in hubs! {
-                        if let hubDetails = hubObj.response{
-                            self.hubDetails(data: hubDetails)
+                        var serialNo =  ""
+                        if let hubSerial = self.devicesDetails?["Serial"] as? String {
+                            serialNo = hubSerial
+                        }
+                        if serialNo == hubObj.serial{
+                            if let hubDetails = hubObj.response{
+                                self.hubDetails(data: hubDetails)
+                            }
                         }
                     }
                 }
@@ -68,6 +81,9 @@ class DeviceViewController: UIViewController {
     }
     
     func hubDetails(data:[String:Any]){
+        
+        
+        
         if let value = data["NameEquipment"] as? String  {
             self.hubName = value
         }
@@ -101,7 +117,6 @@ class DeviceViewController: UIViewController {
         }else{
             //            self.showWifiSettings()
             self.checkBluetoothConnection()
-            
         }
         
     }
@@ -237,7 +252,7 @@ class DeviceViewController: UIViewController {
             switch response.result {
                 
             case .success(let value):
-                
+                NotificationCenter.default.post(name: K.Notifications.UpdateHubViews, object: nil)
                 print("Delete HUB response.result.value: \(value)")
                 self.navigationController?.popViewController()
 
@@ -287,7 +302,11 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
         }
         
         if indexPath.row == 1 {
-            return 275
+            if devicewifiTypeCell == DeviceWifiCellType.Flipr{
+                return 352
+            }else{
+                return 275
+            }
         }
         else if indexPath.row == 2 {
             return 66
@@ -307,12 +326,44 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             
         }
         else if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"DeviceInfoTableViewCell",
-                                                     for: indexPath) as! DeviceInfoTableViewCell
+            var cell: DeviceInfoTableViewCell!
+           
+            
+            if devicewifiTypeCell == DeviceWifiCellType.Flipr{
+                cell = tableView.dequeueReusableCell(withIdentifier:"FliprDeviceInfoTableViewCell",
+                                                         for: indexPath) as! DeviceInfoTableViewCell
+                cell.titleLabel.text = "Details".localized
+                cell.editButton.isHidden = true
+                cell.nameLabel.isHidden = true
+                
+                   if let level = UserDefaults.standard.object(forKey: "BatteryLevel") as? String, Module.currentModule != nil {
+                    cell.batteryLevelLabel.text = level + "%"
+                   } else {
+                    
+                   }
+                   
+            }else{
+                cell = tableView.dequeueReusableCell(withIdentifier:"HubDeviceInfoTableViewCell",
+                                                         for: indexPath) as! DeviceInfoTableViewCell
+                cell.titleLabel.text = "Name"
+                cell.nameLabel.text = self.hubName.capitalizingFirstLetter()
+                //                UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseIn, animations: {
+                cell.editButton.isHidden = false
+                cell.nameLabel.isHidden = false
+            }
+            /*
             if devicewifiTypeCell == DeviceWifiCellType.Flipr{
                 cell.titleLabel.text = "Details".localized
                 cell.editButton.isHidden = true
                 cell.nameLabel.isHidden = true
+                /*
+                   if let level = UserDefaults.standard.object(forKey: "BatteryLevel") as? String, Module.currentModule != nil {
+                       self.batteryLevelLabel.text = level + "%"
+                       self.batteryLevelLabel.isHidden = false
+                   } else {
+                       self.batteryLevelLabel.isHidden = true
+                   }
+                   */
             }
             else{
                 cell.titleLabel.text = "Name"
@@ -325,7 +376,7 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
             //            if let name = devicesDetails?["NickName"] as? String  {
             //                cell.nameLabel.text = name
             //            }
-            
+            */
             if let serial = devicesDetails?["Serial"] as? String  {
                 cell.serialLabel.text = serial
             }
@@ -339,7 +390,7 @@ extension DeviceViewController: UITableViewDelegate,UITableViewDataSource {
                     if let info = devicesDetails?["CommercialType"] as? [String: AnyObject] {
                         if let type = info["Value"] as? String  {
                             cell.modelLabel.text?.append(" ")
-                            cell.modelLabel.text?.append(type)
+//                            cell.modelLabel.text?.append(type)
                             if type == "Pro" {
                                 cell.modelLabel.text = "Start MAX"
                             }else{

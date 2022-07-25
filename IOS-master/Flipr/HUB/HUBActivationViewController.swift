@@ -40,7 +40,9 @@ class HUBActivationViewController: UIViewController {
         
         if activationKey.characters.count == 0 {
             showError(title: "Error".localized, message: "Invalid security key format".localized)
-        } else {
+        }
+        
+        else {
             
             self.activationKeyTextField.resignFirstResponder()
             

@@ -8,6 +8,28 @@
 
 import Foundation
 
+private var __maxLengths = [UITextField: Int]()
+extension UITextField {
+    @IBInspectable var maxLength: Int {
+        get {
+            guard let l = __maxLengths[self] else {
+               return 150 // (global default-limit. or just, Int.max)
+            }
+            return l
+        }
+        set {
+            __maxLengths[self] = newValue
+            addTarget(self, action: #selector(fix), for: .editingChanged)
+        }
+    }
+    
+    @objc func fix(textField: UITextField) {
+        if let t: String = textField.text {
+            textField.text = String(t.prefix(maxLength))
+        }
+    }
+}
+
 extension Data {
     public var bytes: [UInt8] {
         return [UInt8](self)
@@ -147,6 +169,8 @@ extension NSString {
     }
 }
 
+
+
 extension Array where Element == UInt8 {
     public var hex_decimal: Int {
         var str = ""
@@ -205,7 +229,7 @@ extension UITextField {
             NSAttributedString.Key.foregroundColor: color.withAlphaComponent(0.6),
             NSAttributedString.Key.font: self.font!
         ] as [NSAttributedString.Key : Any]
-        self.attributedPlaceholder = NSAttributedString(string: self.placeholder!, attributes: attributeString)
+        self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: attributeString)
     }
 }
 
@@ -223,6 +247,16 @@ extension UIView {
         backgroundColor = nil
         layer.backgroundColor =  backgroundCGColor
     }
+    
+    func roundCorner(corner:CGFloat){
+        layer.cornerRadius = corner
+        clipsToBounds = true
+    }
+    
+    func fullyRoundCorner(){
+        layer.cornerRadius = self.frame.size.height /  2
+        clipsToBounds = true
+    }
 }
 
 
@@ -233,5 +267,35 @@ extension String {
 
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
+    }
+}
+
+extension UIViewController {
+
+func setupNavigationMultilineTitle() {
+    guard let navigationBar = self.navigationController?.navigationBar else { return }
+    for sview in navigationBar.subviews {
+        for ssview in sview.subviews {
+            guard let label = ssview as? UILabel else { break }
+            if label.text == self.title {
+                label.numberOfLines = 0
+                label.lineBreakMode = .byWordWrapping
+                label.sizeToFit()
+                UIView.animate(withDuration: 0.3, animations: {
+                    navigationBar.frame.size.height = 57 + label.frame.height
+                })
+            }
+        }
+    }
+}
+}
+
+extension LosslessStringConvertible {
+    var toString: String { .init(self) }
+}
+
+extension FloatingPoint where Self: CVarArg {
+    func fixedFraction(digits: Int) -> String {
+        .init(format: "%.*f", digits, self)
     }
 }

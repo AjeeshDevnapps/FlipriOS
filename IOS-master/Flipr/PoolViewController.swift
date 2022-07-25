@@ -44,7 +44,8 @@ class PoolViewController: UITableViewController {
     
     @IBOutlet weak var saltLevelTitleLabel: UILabel!
     @IBOutlet weak var saltLevelDescriptionLabel: UILabel!
-    
+    var isInitialPoolSetup = false
+
     
     
     var pool = Pool()
@@ -61,10 +62,10 @@ class PoolViewController: UITableViewController {
                 self.title = "My spa".localized
                 bakcgroundFileName = "BG_spa"
             }
-            if !module.isSubscriptionValid {
-                tableView.contentInset =  UIEdgeInsets.init(top: -44, left: 0, bottom: 0, right: 0)
-                tableView.scrollIndicatorInsets = UIEdgeInsets.init(top:-44, left: 0, bottom: 0, right: 0)
-            }
+//            if !module.isSubscriptionValid {
+//                tableView.contentInset =  UIEdgeInsets.init(top: -44, left: 0, bottom: 0, right: 0)
+//                tableView.scrollIndicatorInsets = UIEdgeInsets.init(top:-44, left: 0, bottom: 0, right: 0)
+//            }
         }
         
         let imvTableBackground = UIImageView.init(image: UIImage(named: bakcgroundFileName))
@@ -89,6 +90,10 @@ class PoolViewController: UITableViewController {
         
         saltLevelTitleLabel.text = "Salt level (g/L)".localized
         saltLevelDescriptionLabel.text = "Recommended for the operation of your device".localized
+        
+//        if isInitialPoolSetup{
+//            navigationController?.navigationBar.backIndicatorImage = UIImage(named: "backArrowBlack")
+//        }
         
         if let currentPool = Pool.currentPool {
             if let draftPool = Pool.init(withJSON: currentPool.serialized) {
@@ -164,8 +169,45 @@ class PoolViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    func showDashboard(){
+        let theme = EmptyStateViewTheme.shared
+        theme.activityIndicatorType = .ballZigZag
+        self.view.showEmptyStateViewLoading(title: "Launch of the 1st measure".localized, message: "Connecting to flipr...".localized, theme: theme)
+        
+        BLEManager.shared.startMeasure { (error) in
+            
+            BLEManager.shared.doAcq = false
+            
+            if error != nil {
+                self.showError(title: "Error".localized, message: error?.localizedDescription)
+                self.view.hideStateView()
+                self.showIntialDashBoard()
+            }
+            else {
+                self.showIntialDashBoard()
+            }
+        }
+    }
+    
+    
+    func showIntialDashBoard(){
+        UserDefaults.standard.set(Date(), forKey:"FirstMeasureStartDate")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+        dashboard.modalTransitionStyle = .flipHorizontal
+        dashboard.modalPresentationStyle = .fullScreen
+        self.present(dashboard, animated: true, completion: {
+            self.navigationController?.popToRootViewController(animated: false)
+        })
+    }
+    
     @IBAction func cancelButtonAction(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        if self.isInitialPoolSetup {
+            self.showDashboard()
+        }else{
+            dismiss(animated: true, completion: nil)
+        }
     }
 
     @IBAction func saveButtonAction(_ sender: Any) {
@@ -191,9 +233,20 @@ class PoolViewController: UITableViewController {
         if let value = self.numberOfUsersTextField.text?.int {
             pool.numberOfUsers = value
         }
-        if let value = Double(self.volumeTextField.text!) {
-            pool.volume = value
+//        if let value = Double(self.volumeTextField.text!) {
+//            pool.volume = value
+//        }
+        
+        if let str = self.volumeTextField.text {
+            let formatter = NumberFormatter()
+            let maybeNumber = formatter.number(from: str)
+            if let number = maybeNumber {
+                pool.volume = Double(number)
+            }else{
+                
+            }
         }
+        
         if let value = Double(self.tresholdTextField.text!) {
             pool.electrolyzerThreshold = value
         }
@@ -209,10 +262,19 @@ class PoolViewController: UITableViewController {
                     hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                     hud?.textLabel.text = error?.localizedDescription
                     hud?.dismiss(afterDelay: 3)
+                    if self.isInitialPoolSetup {
+                        self.showDashboard()
+                    }
                 } else {
                     NotificationCenter.default.post(name: FliprLocationDidChange, object: nil)
                     hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
                     hud?.dismiss(afterDelay: 1)
+                    if self.isInitialPoolSetup {
+                        self.showDashboard()
+                    }else{
+                        self.dismiss(animated: true, completion:nil)
+                    }
+                    
                 }
             })
         } else {
@@ -250,9 +312,9 @@ class PoolViewController: UITableViewController {
                 if module.isForSpa {
                     return "Spa's status".localized
                 }
-                if !module.isSubscriptionValid {
-                    return nil
-                }
+//                if !module.isSubscriptionValid {
+//                    return nil
+//                }
             } else {
                 return nil
             }
@@ -289,9 +351,9 @@ class PoolViewController: UITableViewController {
                 if indexPath.section == 3 && indexPath.row == 0 { return 0 }
                 if indexPath.section == 2 && indexPath.row == 1 { return 0 }
             }
-            if !module.isSubscriptionValid {
-                if indexPath.section == 0 { return 0 }
-            }
+//            if !module.isSubscriptionValid {
+//                if indexPath.section == 0 { return 0 }
+//            }
         } else {
             if indexPath.section == 0 { return 0 }
             if indexPath.section == 3 && indexPath.row == 0 { return 0 }

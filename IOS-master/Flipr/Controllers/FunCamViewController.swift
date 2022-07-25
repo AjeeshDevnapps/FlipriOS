@@ -12,7 +12,8 @@ import AVFoundation
 class FunCamViewController: UIViewController {
     
     var temperature = ""
-    
+    @IBOutlet weak var closeBtn: UIButton!
+
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var blurView: UIVisualEffectView!
@@ -58,7 +59,7 @@ class FunCamViewController: UIViewController {
         
         temperatureLabel.attributedText = NSAttributedString(string: temperature, attributes: strokeTextAttributes)
         
-        
+        closeBtn.setTitle("Annuler".localized, for: .normal)
         loadFilters()
         
         checkAuthorization()

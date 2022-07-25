@@ -3,3 +3,7 @@
 //
 
 #import <Omnisense/Omnisense.h>
+#import "FirmwareUpgradeHomeViewController.h"
+#import "FirmwareBaseViewController.h"
+#import "DiaganosticHomeViewController.h"
+#import "HomeViewController.h"

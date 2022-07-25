@@ -10,11 +10,20 @@ import Foundation
 import UIKit
 
 struct K {
+    
+    struct AppConstant{
+        static let CurrentServerIsDev = "IsCurrentServerDev"
+    }
+    
     struct Color {
         static let DarkBlue = UIColor(red: 34/255.0, green: 58/255.0, blue: 77/255.0, alpha: 1)
         static let LightBlue = UIColor(red: 40/255.0, green: 154/255.0, blue: 194/255.0, alpha: 1)
         static let Green = UIColor(red: 19/255.0, green: 200/255.0, blue: 166/255.0, alpha: 1)
         static let Red = UIColor(red: 248/255.0, green: 58/255.0, blue: 89/255.0, alpha: 1)
+        static let themeBlack = UIColor.init(hexString: "111729")
+        static let white = UIColor.white
+        static let clear = UIColor.clear
+
     }
     struct Server {
         // PROD
@@ -29,6 +38,7 @@ struct K {
     struct Notifications {
         static let SessionExpired = Notification.Name("fr.isee-u.SessionExpired")
         static let FliprDiscovered = Notification.Name("fr.isee-u.FliprDiscovered")
+        static let FliprNotDiscovered = Notification.Name("fr.isee-u.FliprNotDiscovered")
         static let FliprSerialRead = Notification.Name("fr.isee-u.FliprSerialRead")
         static let FliprConnected = Notification.Name("fr.isee-u.FliprConnected")
         static let FliprDidRead = Notification.Name("fr.isee-u.FliprDidRead")
@@ -37,7 +47,13 @@ struct K {
         static let UserDidLogout = Notification.Name("fr.isee-u.UserDidLogout")
         static let AlertDidClose = Notification.Name("fr.isee-u.AlertDidClose")
         static let BackFromWintering = Notification.Name("fr.isee-u.BackFromWintering")
-        
+        static let FliprMeasures409Error = Notification.Name("fr.isee-u.FliprMeasures409Error")
+
+        static let BluetoothNotAvailble = Notification.Name("fr.isee-u.BluetoothNotAvailble")
+        static let BluetoothOff = Notification.Name("fr.isee-u.BluetoothOff")
+        static let BluetoothOn = Notification.Name("fr.isee-u.BluetoothOn")
+
+        static let HUBNotDiscovered = Notification.Name("fr.isee-u.HUBNotDiscovered")
         static let HUBDiscovered = Notification.Name("fr.isee-u.HUBDiscovered")
         static let HUBSerialRead = Notification.Name("fr.isee-u.HUBSerialRead")
         static let HUBConnected = Notification.Name("fr.isee-u.HUBConnected")
@@ -49,6 +65,17 @@ struct K {
         static let NotificationThresholdDefalutValueChangedChanged = Notification.Name("fr.isee-u.NotificationThresholdDefalutValueChangedChanged")
 
         static let PoolSettingsUpdated = Notification.Name("fr.isee-u.PoolSettingsUpdated")
+        static let WavethemeSettingsChanged = Notification.Name("fr.isee-u.WavethemeSettingsChanged")
+        static let UpdateHubViews = Notification.Name("fr.isee-u.UpdateHubViews")
+        static let ReloadProgrameList = Notification.Name("fr.isee-u.ReloadProgrameList")
+        static let CompletedFirmwereUpgrade = Notification.Name("CompletedUpgrade")
+        static let showFirmwereUpgradeScreen = Notification.Name("fr.isee-u.ShowFirmwereUpgradeScreen")
+        static let FirmwereUpgradeError = Notification.Name("fr.isee-u.FirmwereUpgradeError")
+        static let FirmwereUpgradeStarted = Notification.Name("fr.isee-u.FirmwereUpgradeStarted")
+
+        static let showLastMeasurementScreen = Notification.Name("fr.isee-u.showLastMeasurementScreen")
+        static let ServerChanged = Notification.Name("fr.isee-u.serverChanged")
+
 
 
     }

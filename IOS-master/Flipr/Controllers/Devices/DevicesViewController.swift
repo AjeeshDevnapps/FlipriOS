@@ -11,7 +11,6 @@ import JGProgressHUD
 
 class DevicesViewController: UIViewController {
     @IBOutlet weak var pageControl: UIPageControl!
-    
     var pageController: UIPageViewController!
     var controllers = [UIViewController]()
     var contentViewController : UIViewController?
@@ -34,10 +33,10 @@ class DevicesViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
     func getFlprInfo(){
         //        hud?.show(in: self.navigationController!.view)
         hud?.show(in: self.navigationController!.view)
-        
         User.currentUser?.getModuleList(completion: { (devices,error) in
             if (error != nil) {
                 self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
@@ -45,39 +44,42 @@ class DevicesViewController: UIViewController {
                 self.hud?.dismiss(afterDelay: 0)
             } else {
                 self.devicesDetails = devices
-                self.hud?.dismiss(afterDelay: 0)
-                self.setupDevicesList()
-                //                self.getHubDetails()
+//                self.hud?.dismiss(afterDelay: 0)
+//                self.setupDevicesList()
+                                self.getHubDetails()
             }
         })
     }
     
+    
     func getHubDetails(){
         Pool.currentPool?.getHUBS(completion: { (hubs, error) in
             if error != nil {
-                //                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-                //                hud?.textLabel.text = error?.localizedDescription
-                self.hud?.dismiss(afterDelay: 3)
+                //hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                //hud?.textLabel.text = error?.localizedDescription
+                self.hud?.dismiss(afterDelay: 0)
                 self.setupDevicesList()
             } else if hubs != nil {
                 if hubs!.count > 0 {
                     self.hubs = hubs!
-                    for hubObj in self.hubs {
-                        if let hubDetails = hubObj.response{
-                            self.devicesDetails?.append(hubDetails)
-                        }
-                    }
+//                    for hubObj in self.hubs {
+//                        if let hubDetails = hubObj.response{
+//                            self.devicesDetails?.append(hubDetails)
+//                        }
+//                    }
                 }
-                self.hud?.dismiss(afterDelay: 3)
+                self.hud?.dismiss(afterDelay: 0)
                 self.setupDevicesList()
             }
         })
     }
+    
     
     func setupDevicesList(){
         self.setupPages()
         self.view.bringSubviewToFront(self.pageControl)
     }
+    
     
     func setupPages(){
         self.devicesCount =  self.devicesDetails?.count ?? 1
@@ -87,6 +89,7 @@ class DevicesViewController: UIViewController {
         pageControl.numberOfPages = devicesCount
         pageControl.currentPage = 0
     }
+    
     
     func configurePageViewController(state : Int) {
         let pageCntrl = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -130,7 +133,23 @@ class DevicesViewController: UIViewController {
                         if vers == 1{
                             Vc.devicewifiTypeCell = DeviceWifiCellType.Flipr
                         }else{
+                            
                             Vc.devicewifiTypeCell = DeviceWifiCellType.Hub
+                            
+                            if hubs.count > 0 {
+                                //                    self.hubs = hubs!
+                                for hubObj in hubs {
+                                    var serialNo =  ""
+                                    if let hubSerial = info["Serial"] as? String {
+                                        serialNo = hubSerial
+                                    }
+                                    if serialNo == hubObj.serial{
+                                        if let hubDetails = hubObj.response{
+                                            Vc.hubDetails = hubDetails
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -138,17 +157,9 @@ class DevicesViewController: UIViewController {
             }else{
                 viewController = nil
             }
-            
             return viewController
-            
         }
-        
-        
-        
     }
-    
-    
-    
     
 }
 

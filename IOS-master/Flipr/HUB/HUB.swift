@@ -17,10 +17,10 @@ class HUB {
     var isSubscriptionValid = false
     var version:Int?
     
-    var equipementName = ""
+    var equipementName:String = ""
     var equipementCode = 84
     var equipementState = false
-    var behavior = "manual"
+    var behavior:String = "manual"
     
     var plannings:[Planning] = []
     
@@ -179,7 +179,6 @@ class HUB {
                        switch response.result {
                            
                        case .success(let value):
-                        
                         
                         if let JSON = value as? [String:Any] {
                             print("HUB get State: \(JSON)")

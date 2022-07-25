@@ -23,9 +23,13 @@ class Module {
     var rawRedox:String?
     var rawConductivity:String?
     var rawWaterTemperature:String?
+    var airTemperature:String?
+
     
     var version:Int?
     var moduleType:Int?
+    var commercialType:Int?
+    var deviceTypename:String?
     
     var isStart = false
     var isSubscriptionValid = false
@@ -76,6 +80,16 @@ class Module {
         if let vers = JSON["ModuleType_Id"] as? Int {
             moduleType = vers
         }
+        if let commercialTypeData = JSON["CommercialType"] as? [String:Any] {
+            if let type = commercialTypeData["Id"] as? Int {
+                commercialType = type
+            }
+            if let type = commercialTypeData["Value"] as? String {
+                deviceTypename = type
+            }
+        }
+        
+        
         if let status = JSON["Status"] as? [String:Any] {
             if let dateTime = status["DateTime"] as? String {
                 if let date = dateTime.fliprDate {
@@ -273,13 +287,24 @@ class Module {
                     for JSON in alerts {
                         if let alert = Alert.init(withJSON: JSON) {
                             if alert.iconUrl != nil {
-                                priorityAlerts.append(alert)
+                                
+                                if priorityAlerts.contains(where: {$0.iconUrl == alert.iconUrl }){
+                                    print("Same iconurl")
+                                }else{
+                                    priorityAlerts.append(alert)
+                                }
+                                if mainAlert == nil {
+                                    if alert.status == 0 {
+                                        mainAlert = alert
+                                    }
+                                }
                             } else {
                                 if mainAlert == nil {
-                                    mainAlert = alert
+                                    if alert.status == 0 {
+                                        mainAlert = alert
+                                    }
                                 }
                             }
-                            
                         }
                     }
                     completion?(mainAlert,priorityAlerts,nil)

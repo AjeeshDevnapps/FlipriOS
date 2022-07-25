@@ -34,7 +34,7 @@ class EmailVerificationViewController: UIViewController {
         //verifyUserActivation()
 
         
-        self.view.showEmptyStateView(image: UIImage(named:"Email"), title: "Welcome ;-)".localized, message: "To validate your account, please click on the activation link that has just been sent to you at: ".localized + email)
+        self.view.showEmptyStateView(image: UIImage(named:"Email"), title: "Welcome ;-)".localized, message: "To validate your account, please click on the activation link that has just been sent to you at: ".localized + email, bottomAlignment: nil)
         
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (notification) in
             

@@ -61,6 +61,9 @@ class HUBManager: NSObject {
     
     var isConnecting = false
     
+    var stopScanning = false
+
+    
     func scanForHubs(serials: [String]?, completion: ((_ hubsInfo:[String:CBPeripheral]) -> Void)?) {
         scanForHubsWithSerials = serials
         scanForHubsCompletionBlock = completion
@@ -68,11 +71,18 @@ class HUBManager: NSObject {
             centralManager = CBCentralManager(delegate: self, queue: nil)
             centralManagerHasBeenInitialized = true
         } else {
+            self.stopScanning = false
+            perform(#selector(setTimeLimit), with: nil, afterDelay: 60)
             //let services = [FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID]
             centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
             print("CBCentralManager start scanning for Hub devices (already initialized)")
         }
     }
+    
+    @objc func setTimeLimit(){
+        self.stopScanning = true
+    }
+    
     
     func stopScanForHubs() {
         centralManager.stopScan()
@@ -215,6 +225,7 @@ extension HUBManager: CBCentralManagerDelegate {
                 //self.centralManager.scanForPeripherals(withServices:[FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey:false])
                 //self.centralManager.scanForPeripherals(withServices:nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey:true])
             } else {
+                NotificationCenter.default.post(name: K.Notifications.BluetoothNotAvailble, object: nil, userInfo: nil)
                 print("Bluetooth not available.")
             }
         } else {
@@ -223,6 +234,12 @@ extension HUBManager: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+       
+        if self.stopScanning{
+//            central.stopScan()
+            NotificationCenter.default.post(name: K.Notifications.HUBNotDiscovered, object: nil)
+            return
+        }
         
         if let name = peripheral.name {
             

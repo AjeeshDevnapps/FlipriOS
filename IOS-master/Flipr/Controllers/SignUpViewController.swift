@@ -143,15 +143,15 @@ class SignUpViewController: UIViewController {
             self.signUpButton.showActivityIndicator(type: .ballClipRotatePulse)
             User.signup(email: email, password: password, lastName: lastName, firstName: firstName, phone: phone, completion: { (error) in
                 if error == nil {
-                    
-                    let omnisenseUser = OSUser();
-                    omnisenseUser.email = email
-                    omnisenseUser.firstName = firstName
-                    omnisenseUser.lastName = lastName
-                    omnisenseUser.phone = phone
-                    omnisenseUser.registered = true
-                    omnisenseUser.optin = true
-                    Omnisense.setCurrentUser(omnisenseUser)
+//                    
+//                    let omnisenseUser = OSUser();
+//                    omnisenseUser.email = email
+//                    omnisenseUser.firstName = firstName
+//                    omnisenseUser.lastName = lastName
+//                    omnisenseUser.phone = phone
+//                    omnisenseUser.registered = true
+//                    omnisenseUser.optin = true
+//                    Omnisense.setCurrentUser(omnisenseUser)
                     
                     if let emailVerificationViewController = self.storyboard?.instantiateViewController(withIdentifier: "EmailVerificationViewControllerID") as? EmailVerificationViewController {
                         emailVerificationViewController.email = email
