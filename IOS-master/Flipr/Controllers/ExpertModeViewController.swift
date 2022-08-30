@@ -68,7 +68,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
     
     var isDirectPresenting:Bool = false
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
