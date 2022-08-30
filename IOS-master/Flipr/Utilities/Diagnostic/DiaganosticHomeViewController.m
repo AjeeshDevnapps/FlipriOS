@@ -99,6 +99,9 @@
     hud = [[JGProgressHUD alloc] init];
     hud.textLabel.text = LOCALIZEDSTRING(@"Connecting");
     [self.dataRecoveryButton setTitle:LOCALIZEDSTRING(@"Next") forState:UIControlStateNormal];
+    [self.closeButton setTitle:LOCALIZEDSTRING(@"Annuler") forState:UIControlStateNormal];
+
+    
 //    self.descLabel.text = LOCALIZEDSTRING(@"The update instructions.");
     self.descLabel.text = @"";
 
@@ -221,6 +224,9 @@
 - (IBAction)recoveryBtnTouched:(UIButton *)sender{
     [self showDataRecoverScreen];
 }
+
+
+
 
 -(void)showDataRecoverScreen{
     FlipValueReadingViewController *successVC = [self.storyboard instantiateViewControllerWithIdentifier:@"FlipValueReadingViewController"];

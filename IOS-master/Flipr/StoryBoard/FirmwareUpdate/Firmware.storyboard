@@ -1460,7 +1460,7 @@ de la mise à jour</string>
                                     <constraint firstAttribute="height" constant="50" id="KYw-qk-wGu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="Poursuivre">
+                                <state key="normal" title="Annuler">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1469,7 +1469,7 @@ de la mise à jour</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="recoveryBtnTouched:" destination="2ct-Gc-yLM" eventType="touchUpInside" id="6O6-Iz-FVz"/>
+                                    <action selector="closeBtnTouched:" destination="2ct-Gc-yLM" eventType="touchUpInside" id="coq-t6-oXN"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w9H-yT-AcP">
@@ -1489,7 +1489,6 @@ de la mise à jour</string>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="closeBtnTouched:" destination="bLC-XS-L7L" eventType="touchUpInside" id="RFe-NH-htR"/>
-                                    <action selector="closeBtnTouched:" destination="2ct-Gc-yLM" eventType="touchUpInside" id="og2-dm-k0U"/>
                                     <action selector="relaunchButtonClicked" destination="SFb-17-7Xj" eventType="touchUpInside" id="9jC-lg-W5W"/>
                                     <action selector="remindButtonClicked" destination="jq2-Cd-vgS" eventType="touchUpInside" id="dXV-Vp-dKi"/>
                                 </connections>
@@ -1641,11 +1640,32 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                     <outlet property="delegate" destination="2ct-Gc-yLM" id="bY8-kI-Ehr"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rin-kL-mwp">
+                                <rect key="frame" x="16" y="727" width="382" height="50"/>
+                                <color key="backgroundColor" red="0.80392156859999997" green="0.83529411760000005" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="s5Y-nW-jud"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Suivant">
+                                    <color key="titleColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColorForDisabled">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="recoveryBtnTouched:" destination="2ct-Gc-yLM" eventType="touchUpInside" id="k0c-5m-UxC"/>
+                                    <action selector="relaunchButtonClicked" destination="SFb-17-7Xj" eventType="touchUpInside" id="23V-df-ndB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="E9T-Tb-0JV"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="K00-f0-oOT" firstAttribute="top" secondItem="E9T-Tb-0JV" secondAttribute="top" id="2rV-pL-HNc"/>
+                            <constraint firstItem="LhN-nX-Fn8" firstAttribute="top" secondItem="Rin-kL-mwp" secondAttribute="bottom" constant="15" id="3Rr-oh-fbY"/>
                             <constraint firstItem="c1W-u8-s19" firstAttribute="leading" secondItem="E9T-Tb-0JV" secondAttribute="leading" constant="16" id="4qO-Im-2Gw"/>
                             <constraint firstItem="SAc-jW-aeP" firstAttribute="centerX" secondItem="VlA-ba-6dx" secondAttribute="centerX" id="5gq-AN-7yF"/>
                             <constraint firstItem="gRo-Ff-B4M" firstAttribute="top" secondItem="c1W-u8-s19" secondAttribute="bottom" constant="20" id="5y2-5B-fcR"/>
@@ -1658,8 +1678,10 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                             <constraint firstItem="Rhn-37-QU0" firstAttribute="top" secondItem="hjV-y1-PLk" secondAttribute="bottom" constant="200" id="Gxx-re-q1h"/>
                             <constraint firstItem="E9T-Tb-0JV" firstAttribute="trailing" secondItem="K00-f0-oOT" secondAttribute="trailing" id="OgD-BA-w35"/>
                             <constraint firstItem="kIp-Ec-tns" firstAttribute="leading" secondItem="E9T-Tb-0JV" secondAttribute="leading" constant="25" id="SZ7-0P-AaM"/>
+                            <constraint firstItem="E9T-Tb-0JV" firstAttribute="trailing" secondItem="Rin-kL-mwp" secondAttribute="trailing" constant="16" id="USM-TI-CaC"/>
                             <constraint firstItem="SAc-jW-aeP" firstAttribute="top" secondItem="K00-f0-oOT" secondAttribute="bottom" constant="43" id="VCd-bS-c6R"/>
                             <constraint firstItem="w9H-yT-AcP" firstAttribute="leading" secondItem="E9T-Tb-0JV" secondAttribute="leading" constant="16" id="W71-wN-2vH"/>
+                            <constraint firstItem="Rin-kL-mwp" firstAttribute="leading" secondItem="E9T-Tb-0JV" secondAttribute="leading" constant="16" id="fDC-0K-yoL"/>
                             <constraint firstItem="gRo-Ff-B4M" firstAttribute="centerX" secondItem="VlA-ba-6dx" secondAttribute="centerX" id="i4y-Nu-o7M"/>
                             <constraint firstItem="hjV-y1-PLk" firstAttribute="leading" secondItem="E9T-Tb-0JV" secondAttribute="leading" id="iVL-rv-Uxs"/>
                             <constraint firstItem="E9T-Tb-0JV" firstAttribute="trailing" secondItem="hjV-y1-PLk" secondAttribute="trailing" id="iyK-DH-gDP"/>
@@ -1680,7 +1702,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                     <connections>
                         <outlet property="bleStackView" destination="kIp-Ec-tns" id="TJY-Yr-4ge"/>
                         <outlet property="closeButton" destination="LhN-nX-Fn8" id="RsJ-1H-Ilo"/>
-                        <outlet property="dataRecoveryButton" destination="LhN-nX-Fn8" id="7r9-tq-6Z1"/>
+                        <outlet property="dataRecoveryButton" destination="Rin-kL-mwp" id="Eok-TA-s9e"/>
                         <outlet property="descLabel" destination="c1W-u8-s19" id="3jd-4B-wfU"/>
                         <outlet property="errorLabel" destination="Rhn-37-QU0" id="UdZ-zH-lqC"/>
                         <outlet property="iconImageView" destination="SAc-jW-aeP" id="Kod-r2-VFF"/>
@@ -1831,14 +1853,14 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8V9-9j-TGx">
-                                <rect key="frame" x="30" y="204" width="354" height="210.5"/>
+                                <rect key="frame" x="30" y="229" width="354" height="210.5"/>
                                 <string key="text">Impossible de voir votre Flipr
 
 Positionnez votre téléphone au plus prés de votre Flipr, idéalement à une distance inférieure à 50 cm.
 
 Relancez le test ou rafraichissez la mesure en tirant vers le bas.
 
-En cas d’échecs répétés, veuillez contacter le support</string>
+Il est probable que la batterie soit déchargée. Contactez le support.</string>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1881,18 +1903,18 @@ En cas d’échecs répétés, veuillez contacter le support</string>
                                     <action selector="relaunchButtonClicked" destination="JBa-QS-IJG" eventType="touchUpInside" id="NDK-eI-fzd"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="measure" translatesAutoresizingMaskIntoConstraints="NO" id="QGB-da-EbK">
-                                <rect key="frame" x="161" y="615" width="92" height="92"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="batteryGreen" translatesAutoresizingMaskIntoConstraints="NO" id="QGB-da-EbK">
+                                <rect key="frame" x="164.5" y="622" width="85" height="85"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="92" id="8nf-Qi-bof"/>
-                                    <constraint firstAttribute="width" constant="92" id="Nmv-jr-owu"/>
+                                    <constraint firstAttribute="height" constant="85" id="8nf-Qi-bof"/>
+                                    <constraint firstAttribute="width" constant="85" id="Nmv-jr-owu"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="firmwareBLEError" translatesAutoresizingMaskIntoConstraints="NO" id="9Ai-MI-Caz">
-                                <rect key="frame" x="164" y="94" width="86" height="60"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="measure" translatesAutoresizingMaskIntoConstraints="NO" id="9Ai-MI-Caz">
+                                <rect key="frame" x="161" y="94" width="92" height="85"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="X3f-98-gvq"/>
-                                    <constraint firstAttribute="width" constant="86" id="ubZ-dj-DVI"/>
+                                    <constraint firstAttribute="height" constant="85" id="X3f-98-gvq"/>
+                                    <constraint firstAttribute="width" constant="92" id="ubZ-dj-DVI"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -2076,7 +2098,6 @@ En cas d’échecs répétés, veuillez contacter le support</string>
                                         <buttonConfiguration key="configuration" style="plain" title=" "/>
                                         <connections>
                                             <action selector="helpButtonClicked" destination="SVM-Ng-Xq6" eventType="touchUpInside" id="6OA-Em-Esp"/>
-                                            <action selector="upgradeButtonClicked" destination="SVM-Ng-Xq6" eventType="touchUpInside" id="les-yB-vA1"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2094,6 +2115,13 @@ En cas d’échecs répétés, veuillez contacter le support</string>
                                     <constraint firstItem="EgP-96-bCP" firstAttribute="leading" secondItem="lI0-a3-GMu" secondAttribute="leading" constant="16" id="lBq-Uk-0Ya"/>
                                 </constraints>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="batteryGreen" translatesAutoresizingMaskIntoConstraints="NO" id="c8s-d4-a0W">
+                                <rect key="frame" x="164.5" y="552" width="85" height="85"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="Jge-h9-MwF"/>
+                                    <constraint firstAttribute="height" constant="85" id="fSO-cP-2Qk"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="k91-Sr-ogP"/>
                         <color key="backgroundColor" red="0.97254908080000002" green="0.98039215800000001" blue="0.98823523520000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2102,6 +2130,7 @@ En cas d’échecs répétés, veuillez contacter le support</string>
                             <constraint firstItem="k91-Sr-ogP" firstAttribute="trailing" secondItem="ITM-ac-Vny" secondAttribute="trailing" constant="30" id="5IM-Qp-xJa"/>
                             <constraint firstItem="50O-vi-b5K" firstAttribute="top" secondItem="sts-bB-pbh" secondAttribute="bottom" constant="30" id="6wn-FR-RgB"/>
                             <constraint firstItem="lI0-a3-GMu" firstAttribute="leading" secondItem="k91-Sr-ogP" secondAttribute="leading" id="75Y-RN-eIj"/>
+                            <constraint firstItem="C1m-mD-hZ8" firstAttribute="top" secondItem="c8s-d4-a0W" secondAttribute="bottom" constant="90" id="8Pm-nx-l6c"/>
                             <constraint firstItem="cFm-Ht-p4v" firstAttribute="leading" secondItem="k91-Sr-ogP" secondAttribute="leading" constant="16" id="CXb-H3-lRj"/>
                             <constraint firstItem="cFm-Ht-p4v" firstAttribute="top" secondItem="C1m-mD-hZ8" secondAttribute="bottom" constant="15" id="EZs-1c-O1s"/>
                             <constraint firstItem="1zP-rc-9Ap" firstAttribute="top" secondItem="ITM-ac-Vny" secondAttribute="bottom" constant="44" id="I0B-E9-G1a"/>
@@ -2119,6 +2148,7 @@ En cas d’échecs répétés, veuillez contacter le support</string>
                             <constraint firstItem="k91-Sr-ogP" firstAttribute="trailing" secondItem="C1m-mD-hZ8" secondAttribute="trailing" constant="16" id="dgn-VE-j8a"/>
                             <constraint firstItem="1zP-rc-9Ap" firstAttribute="leading" secondItem="k91-Sr-ogP" secondAttribute="leading" id="dpX-bJ-vaR"/>
                             <constraint firstItem="k91-Sr-ogP" firstAttribute="trailing" secondItem="1zP-rc-9Ap" secondAttribute="trailing" id="mx5-IF-8tH"/>
+                            <constraint firstItem="c8s-d4-a0W" firstAttribute="centerX" secondItem="vdH-px-QGa" secondAttribute="centerX" id="pWZ-fr-Ztk"/>
                             <constraint firstItem="lI0-a3-GMu" firstAttribute="trailing" secondItem="k91-Sr-ogP" secondAttribute="trailing" id="rEC-3D-ypb"/>
                         </constraints>
                     </view>
@@ -2219,10 +2249,10 @@ En cas d’échecs répétés, veuillez contacter le support</string>
     </scenes>
     <resources>
         <image name="batteryBlack" width="21" height="21"/>
+        <image name="batteryGreen" width="85" height="85"/>
         <image name="diagnostic" width="35" height="35"/>
         <image name="diagnosticError" width="23" height="23"/>
         <image name="diagnosticIcon" width="97" height="97"/>
-        <image name="firmwareBLEError" width="86" height="60"/>
         <image name="firmwareFailure" width="86" height="60"/>
         <image name="firmwarePrompt" width="95" height="95"/>
         <image name="hourglassprogress" width="90" height="90"/>

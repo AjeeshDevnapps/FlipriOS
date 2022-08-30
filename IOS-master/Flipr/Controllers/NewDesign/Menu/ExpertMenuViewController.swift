@@ -11,6 +11,7 @@ import UIKit
 class ExpertMenuViewController: UIViewController {
     @IBOutlet weak var settingTable: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
+    var haveFirmwereUpgrade = true
 
 
     var cellTitleList = ["Mode Expert","Trigger a measurement","Nouveau calibrage","Nouveau test bandelette","Vidange de la piscine","Diagnostic","Flipr Firmware Update"]
@@ -19,6 +20,8 @@ class ExpertMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         settingTable.tableFooterView = UIView()
+        haveFirmwereUpgrade = AppSharedData.sharedInstance.haveNewFirmwereUpdate
+        self.manageMenuList()
         NotificationCenter.default.addObserver(forName: K.Notifications.showFirmwereUpgradeScreen, object: nil, queue: nil) { (notification) in
             self.showFirmwereUdpateScreen()
         }
@@ -28,6 +31,18 @@ class ExpertMenuViewController: UIViewController {
 
     @IBAction func closeButtonAction(){
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func manageMenuList(){
+        if haveFirmwereUpgrade{
+            cellTitleList = ["Mode Expert","Trigger a measurement","Nouveau calibrage","Nouveau test bandelette","Vidange de la piscine","Diagnostic","Flipr Firmware Update"]
+            imageNames = ["expertMenu1","expertMenu2","expertMenu3","expertMenu4","expertMenu5","diagnostic","upgradebtn"]
+
+        }else{
+            cellTitleList = ["Mode Expert","Trigger a measurement","Nouveau calibrage","Nouveau test bandelette","Vidange de la piscine","Diagnostic",]
+            imageNames = ["expertMenu1","expertMenu2","expertMenu3","expertMenu4","expertMenu5","diagnostic"]
+        }
+
     }
    
 
