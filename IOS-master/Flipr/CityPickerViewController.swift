@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import GooglePlaces
 
 class Location {
     var locality = ""
@@ -38,9 +39,12 @@ class CityPickerViewController: UITableViewController, UISearchBarDelegate, CLLo
     let locationManager = CLLocationManager()
     
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var userCurrentLocationBtn: UIButton!
     var matchingItems:[MKMapItem] = []
     var locations:[Location] = []
     
+    private var tableDataSource: GMSAutocompleteTableDataSource!
+
     var completionBlock:(_: (_ value:City,_ latitude:Double?,_ longitude: Double?) -> Void)?
     
     func completion(block: @escaping (_ value:City,_ latitude:Double?,_ longitude: Double?) -> Void) {
@@ -53,16 +57,40 @@ class CityPickerViewController: UITableViewController, UISearchBarDelegate, CLLo
         
         searchBar.becomeFirstResponder()
         searchBar.placeholder = "Search a city...".localized
-        
+        userCurrentLocationBtn.setTitle("Use current location", for: .normal)
         if let location = Location.flipr() {
             searchBar.text = location.locality
         }
-        
+        setAutocompleteFeatures()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setAutocompleteFeatures() {
+        tableDataSource = GMSAutocompleteTableDataSource()
+        
+        let autoCompleteFilter = GMSAutocompleteFilter()
+        autoCompleteFilter.type = .city
+        
+        tableDataSource.autocompleteFilter = autoCompleteFilter
+        tableDataSource.delegate = self
+        
+        tableView.delegate = tableDataSource
+        tableView.dataSource = tableDataSource
+        
+        searchBar.textField?.addTarget(self,
+                                      action: #selector(textFieldChangedForAutocomplete),
+                                      for: .editingChanged)
+
+    }
+
+    @IBAction func choseCurrentLocation(_ sender: UIButton) {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        useCurrentLocation()
     }
     
     @IBAction func closeButtonAction(_ sender: Any) {
@@ -223,6 +251,7 @@ class CityPickerViewController: UITableViewController, UISearchBarDelegate, CLLo
                     
                     print("Ahahahah => item.placemark.postalCode: \(item.placemark.postalCode)")
                     
+                    self.locations.append(location)
                     var notIn = true
                     for inLocation in self.locations {
                         if inLocation.locality == locality && inLocation.administrativeArea == administrativeArea {
@@ -240,4 +269,90 @@ class CityPickerViewController: UITableViewController, UISearchBarDelegate, CLLo
             })
         }
     }
+    
+    func searchAndDisplayAddress() {
+        
+    }
 }
+
+extension CityPickerViewController: GMSAutocompleteTableDataSourceDelegate {
+    func didUpdateAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
+        // Turn the network activity indicator off.
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        // Reload table data.
+        tableView.reloadData()
+    }
+    
+    func didRequestAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
+        // Turn the network activity indicator on.
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        // Reload table data.
+        tableView.reloadData()
+    }
+    
+    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didAutocompleteWith place: GMSPlace) {
+        
+        searchBar.text = place.name
+        
+        let city = City(name: place.name ?? "",
+                        latitude: place.coordinate.latitude,
+                        longitude: place.coordinate.longitude)
+                
+        let location = CLLocation(latitude: place.coordinate.latitude,
+                                  longitude: place.coordinate.longitude)
+        self.getPostalCodeByReverseGeocoding(for: location) { placemark in
+            city.zipCode = placemark?.postalCode ?? ""
+            
+            let location = Location()
+            location.locality = placemark?.locality ?? ""
+            location.administrativeArea = placemark?.administrativeArea ?? ""
+            location.latitude = place.coordinate.latitude
+            location.longitude = place.coordinate.longitude
+            location.placeMark = placemark
+
+            location.saveAsFlipr()
+            self.searchBar.resignFirstResponder()
+            self.navigationController?.popViewController(animated: true)
+
+            self.completionBlock?(city, place.coordinate.latitude, place.coordinate.longitude)
+        }
+    }
+    
+    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {
+        // Handle the error.
+        print("Error: \(error.localizedDescription)")
+    }
+    
+    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didSelect prediction: GMSAutocompletePrediction) -> Bool {
+        
+        return true
+    }
+    
+    @objc func textFieldChangedForAutocomplete() {
+        tableDataSource.sourceTextHasChanged(searchBar.text)
+    }
+    
+    typealias LocCompletionHandler = (_ placemark: CLPlacemark?) -> Void
+    
+    func getPostalCodeByReverseGeocoding(for location: CLLocation,
+                                         completion: @escaping LocCompletionHandler) {
+        
+        CLGeocoder().reverseGeocodeLocation(location,
+                                            completionHandler: {
+            (placemarks, error) -> Void in
+            
+            if error != nil {
+                print("Reverse geocoder failed with error" + error!.localizedDescription)
+                return
+            }
+            
+            if placemarks!.count > 0 {
+                let pm = placemarks![0]
+                completion(pm)
+            } else {
+                print("Problem with the data received from geocoder")
+            }
+        })
+    }
+}
+

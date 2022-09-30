@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="moG-cP-oAf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="moG-cP-oAf">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -3079,7 +3079,7 @@ Essai gratuit 7 jours</string>
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qsw-UT-lAi">
-                                <rect key="frame" x="339" y="631" width="20" height="20"/>
+                                <rect key="frame" x="338" y="630" width="21" height="21"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="orpInfoButtonAction:" destination="cpb-CL-7sM" eventType="touchUpInside" id="UYX-bP-lWd"/>
@@ -4213,53 +4213,45 @@ Essai gratuit 7 jours</string>
         </scene>
         <!--Localisation-->
         <scene sceneID="QmR-T3-3uU">
-            <objects>
+        <objects>
                 <tableViewController id="2Ig-ag-5ya" customClass="CityPickerViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fCz-YW-7rJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Rechercher une ville..." id="e6b-cP-Ggv">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="2Ig-ag-5ya" id="Qu2-G9-oZm"/>
-                            </connections>
-                        </searchBar>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="hfw-T0-RFG">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="107"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <searchBar contentMode="redraw" placeholder="Rechercher une ville..." id="e6b-cP-Ggv">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="2Ig-ag-5ya" id="Qu2-G9-oZm"/>
+                                    </connections>
+                                </searchBar>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoz-sj-jW6">
+                                    <rect key="frame" x="0.0" y="52" width="361" height="38"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="location_mark" imagePlacement="leading" title="Utiliser la position actuelle" titleAlignment="leading">
+                                        <color key="baseForegroundColor" red="0.1333333333" green="0.2274509804" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="choseCurrentLocation:" destination="2Ig-ag-5ya" eventType="touchUpInside" id="9yT-BP-SrL"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="eoz-sj-jW6" firstAttribute="leading" secondItem="hfw-T0-RFG" secondAttribute="leading" id="LbU-0a-dYV"/>
+                                <constraint firstAttribute="trailing" secondItem="eoz-sj-jW6" secondAttribute="trailing" constant="14" id="Pbm-Iw-0Pd"/>
+                                <constraint firstItem="eoz-sj-jW6" firstAttribute="top" secondItem="e6b-cP-Ggv" secondAttribute="bottom" constant="8" id="plh-r3-zx1"/>
+                            </constraints>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="UserLocationCell" id="VcG-BZ-mNh">
-                                <rect key="frame" x="0.0" y="88.5" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VcG-BZ-mNh" id="cLU-Hd-w7W">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Utiliser la position actuelle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D3I-Dv-dgq">
-                                            <rect key="frame" x="40" y="11.5" width="319" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.1333333333" green="0.2274509804" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="3IM-V3-51k">
-                                            <rect key="frame" x="16" y="14" width="16" height="16"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="16" id="BL9-Sb-JLp"/>
-                                                <constraint firstAttribute="width" constant="16" id="ME2-3E-Xcc"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="3IM-V3-51k" firstAttribute="centerY" secondItem="cLU-Hd-w7W" secondAttribute="centerY" id="5II-py-eXO"/>
-                                        <constraint firstItem="3IM-V3-51k" firstAttribute="leading" secondItem="cLU-Hd-w7W" secondAttribute="leading" constant="16" id="Dlq-0r-jwP"/>
-                                        <constraint firstAttribute="trailing" secondItem="D3I-Dv-dgq" secondAttribute="trailing" constant="16" id="V03-ES-CH2"/>
-                                        <constraint firstItem="D3I-Dv-dgq" firstAttribute="leading" secondItem="3IM-V3-51k" secondAttribute="trailing" constant="8" id="gbU-fw-aOa"/>
-                                        <constraint firstItem="D3I-Dv-dgq" firstAttribute="centerY" secondItem="cLU-Hd-w7W" secondAttribute="centerY" id="zeZ-YU-5Vv"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LocationCell" textLabel="hHF-4E-G1H" style="IBUITableViewCellStyleDefault" id="hHO-lr-Czo">
-                                <rect key="frame" x="0.0" y="132.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="151.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hHO-lr-Czo" id="qfd-0m-wEQ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -4276,7 +4268,7 @@ Essai gratuit 7 jours</string>
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NoLocationResultCell" id="aLb-pv-AvJ" userLabel="NoLocationResultCell">
-                                <rect key="frame" x="0.0" y="176.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="195.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aLb-pv-AvJ" id="Way-Ce-SPF">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -4305,6 +4297,7 @@ Essai gratuit 7 jours</string>
                     <navigationItem key="navigationItem" title="Localisation" id="iRd-Mq-IZF"/>
                     <connections>
                         <outlet property="searchBar" destination="e6b-cP-Ggv" id="eVe-en-iMs"/>
+                        <outlet property="userCurrentLocationBtn" destination="eoz-sj-jW6" id="Rcg-D5-TT4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NwH-v3-ZU0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5807,8 +5800,8 @@ Attention : cette opération est réservée aux utilisateurs expérimentés</str
                     </tableView>
                     <navigationItem key="navigationItem" title="Mode Expert" id="Csk-35-lVA">
                         <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="jlH-q2-B67">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Wve-GO-QtX">
-                                <rect key="frame" x="334" y="10" width="25" height="24"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Wve-GO-QtX">
+                                <rect key="frame" x="333" y="9" width="26" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="infoButtonAction:" destination="AVh-V7-QKL" eventType="touchUpInside" id="k7k-IS-QCo"/>
@@ -13070,7 +13063,7 @@ Essai gratuit 7 jours</string>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Flipr Start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qjd-fU-Ipf">
-                                                        <rect key="frame" x="50" y="20.5" width="113" height="19.5"/>
+                                                        <rect key="frame" x="50" y="20.5" width="112.5" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -15423,7 +15416,7 @@ Essai gratuit 7 jours</string>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Flipr Start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUr-PB-nwf">
-                                                        <rect key="frame" x="50" y="20.5" width="113" height="19.5"/>
+                                                        <rect key="frame" x="50" y="20.5" width="112.5" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>

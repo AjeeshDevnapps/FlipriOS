@@ -17,6 +17,8 @@ import StoreKit
 import SafariServices
 import FirebaseMessaging
 import FirebaseCore
+import GoogleMaps
+import GooglePlaces
 
 @UIApplicationMain
 
@@ -57,6 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         */
         
         SKPaymentQueue.default().add(self)
+        GMSServices.provideAPIKey("AIzaSyArjEZJCOynnikc5LuzFs6Ky5IWm7S_SBw")
+        GMSPlacesClient.provideAPIKey("AIzaSyArjEZJCOynnikc5LuzFs6Ky5IWm7S_SBw")
         
         Fabric.with([Crashlytics.self])
         

@@ -10,8 +10,9 @@ import UIKit
 import MapKit
 import Alamofire
 import JGProgressHUD
+import GooglePlaces
 
-class PoolLocationViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate {
+class PoolLocationViewController: BaseViewController, CLLocationManagerDelegate, UITextFieldDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var placeListTblVw: UITableView!
     @IBOutlet weak var useCurrentBtn: UIButton!
@@ -29,6 +30,8 @@ class PoolLocationViewController: BaseViewController, UITableViewDataSource, UIT
     var completionBlock:(_: (_ value:City,_ latitude:Double?,_ longitude: Double?) -> Void)?
     var poolLocationValues = [FormValue]()
 
+    private var tableDataSource: GMSAutocompleteTableDataSource!
+
     func completion(block: @escaping (_ value:City,_ latitude:Double?,_ longitude: Double?) -> Void) {
         completionBlock = block
     }
@@ -37,6 +40,7 @@ class PoolLocationViewController: BaseViewController, UITableViewDataSource, UIT
         super.viewDidLoad()
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
         setCustomBackbtn()
+        setAutocompleteFeatures()
         mapView.bringSubviewToFront(poolSelectionSgmntCtrl)
         mapView.bringSubviewToFront(searchTF)
         mapView.bringSubviewToFront(placeListTblVw)
@@ -51,7 +55,10 @@ class PoolLocationViewController: BaseViewController, UITableViewDataSource, UIT
 //        searchTF.editRectLeftPadding = 40
         searchTF.becomeFirstResponder()
         searchTF.placeholder = "Search a city...".localized
-        searchTF.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+//        searchTF.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+//        searchTF.addTarget(self, action: #selector(autocompleteClicked), for: .editingDidBegin)
+        searchTF.addTarget(self, action: #selector(textFieldChangedForAutocomplete), for: .editingChanged)
+
         myPoolBtn.setTitle("My pool".localized, for: .normal)
         useCurrentBtn.setTitle("Utiliser ma position actuelle".localized, for: .normal)
         submitBtn.setTitle("Valider la localisation".localized, for: .normal)
@@ -85,6 +92,15 @@ class PoolLocationViewController: BaseViewController, UITableViewDataSource, UIT
         }
     }
     
+    func setAutocompleteFeatures() {
+        tableDataSource = GMSAutocompleteTableDataSource()
+        tableDataSource.delegate = self
+        
+        placeListTblVw.delegate = tableDataSource
+        placeListTblVw.dataSource = tableDataSource
+        placeListTblVw.isHidden = true
+    }
+    
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         guard touch.view != self.searchTF && touch.view != poolSelectionSgmntCtrl && touch.view != submitBtn && touch.view != useCurrentBtn && placeListTblVw.isHidden else { return false }
         return true
@@ -99,8 +115,35 @@ class PoolLocationViewController: BaseViewController, UITableViewDataSource, UIT
         let locationDetails = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         geocoder.reverseGeocodeLocation(locationDetails) { (placemarks, error) in
             if let places = placemarks {
-                if let locality = places.first?.locality {
-                    self.searchTF.text = locality
+                if let locality = places.first?.name {
+                    var text = locality
+                    if let subLoc = places.first?.subLocality {
+                       text += ", \(subLoc)"
+                    }
+                    if let adminArea = places.first?.administrativeArea {
+                       text += ", \(adminArea)"
+                    }
+                    self.searchTF.text = text
+                    
+                    let city = City(name: places.first?.name ?? "",
+                                    latitude: coordinate.latitude,
+                                    longitude: coordinate.longitude)
+                    /*
+                     if let code = location.placeMark?.isoCountryCode {
+                     city.countryCode = code
+                     }
+                     if let code = location.placeMark?.postalCode {
+                     city.zipCode = code
+                     }
+                     */
+                    let location = CLLocation(latitude: coordinate.latitude,
+                                              longitude: coordinate.longitude)
+
+                    self.getPostalCodeByReverseGeocoding(for: location) { postalCode in
+                        city.zipCode = postalCode ?? ""
+                        self.selectedCity = city
+                        self.completionBlock?(city,nil,nil)
+                    }
                 }
             }
         }
@@ -148,6 +191,7 @@ class PoolLocationViewController: BaseViewController, UITableViewDataSource, UIT
         return annotationView
     }
     
+    /*
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -198,6 +242,7 @@ class PoolLocationViewController: BaseViewController, UITableViewDataSource, UIT
             self.completionBlock?(city,nil,nil)
         }
     }
+     */
     
     func annotateInLoc(location: CLLocationCoordinate2D) {
         let annotation = MKPointAnnotation()
@@ -277,6 +322,7 @@ class PoolLocationViewController: BaseViewController, UITableViewDataSource, UIT
         
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = searchText
+        request.region = MKCoordinateRegion(.world)
         let search = MKLocalSearch(request: request)
         search.start { response, _ in
             guard let response = response else {
@@ -386,3 +432,97 @@ class PoolLocationViewController: BaseViewController, UITableViewDataSource, UIT
         })
     }
 }
+
+extension PoolLocationViewController: GMSAutocompleteTableDataSourceDelegate {
+    func didUpdateAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
+        // Turn the network activity indicator off.
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        // Reload table data.
+        placeListTblVw.reloadData()
+    }
+    
+    func didRequestAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
+        // Turn the network activity indicator on.
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        // Reload table data.
+        placeListTblVw.reloadData()
+    }
+    
+    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didAutocompleteWith place: GMSPlace) {
+        // Do something with the selected place.
+        print("Place name: \(place.name)")
+        print("Place address: \(place.formattedAddress)")
+        print("Place attributions: \(place.coordinate)")
+        placeListTblVw.isHidden = true
+        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        let region = MKCoordinateRegion(center: place.coordinate, span: span)
+        mapView.setRegion(region, animated: true)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = place.coordinate
+        mapView.addAnnotation(annotation)
+        searchTF.text = place.name
+        
+        let city = City(name: place.name ?? "",
+                        latitude: place.coordinate.latitude,
+                        longitude: place.coordinate.longitude)
+        
+        /*
+         if let code = location.placeMark?.isoCountryCode {
+         city.countryCode = code
+         }
+         if let code = location.placeMark?.postalCode {
+         city.zipCode = code
+         }
+         */
+        
+        let location = CLLocation(latitude: place.coordinate.latitude,
+                                  longitude: place.coordinate.longitude)
+        self.getPostalCodeByReverseGeocoding(for: location) { postalCode in
+            city.zipCode = postalCode ?? ""
+            self.selectedCity = city
+            self.completionBlock?(city,nil,nil)
+        }
+    }
+    
+    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {
+        // Handle the error.
+        print("Error: \(error.localizedDescription)")
+    }
+    
+    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didSelect prediction: GMSAutocompletePrediction) -> Bool {
+        
+        return true
+    }
+    
+    @objc func textFieldChangedForAutocomplete() {
+        placeListTblVw.isHidden = ((searchTF.text?.count ?? 0) == 0)
+        tableDataSource.sourceTextHasChanged(searchTF.text)
+    }
+    
+    typealias LocCompletionHandler = (_ postalCode: String?) -> Void
+    
+    func getPostalCodeByReverseGeocoding(for location: CLLocation,
+                                         completion: @escaping LocCompletionHandler) {
+        
+        CLGeocoder().reverseGeocodeLocation(location,
+                                            completionHandler: {
+            (placemarks, error) -> Void in
+            
+            if error != nil {
+                print("Reverse geocoder failed with error" + error!.localizedDescription)
+                return
+            }
+            
+            if placemarks!.count > 0 {
+                let pm = placemarks![0]
+                print("Postal code ------- \(pm.postalCode)")//prints zip code
+                completion(pm.postalCode)
+            } else {
+                print("Problem with the data received from geocoder")
+            }
+        })
+    }
+}
+
+
