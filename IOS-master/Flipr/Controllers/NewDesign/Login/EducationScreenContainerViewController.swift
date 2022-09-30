@@ -39,6 +39,8 @@ class EducationScreenContainerViewController: UIViewController {
     }
     
     @IBAction func loginButtonClicked(){
+//        let vc = UIStoryboard.init(name: "PoolSettings", bundle: nil).instantiateViewController(withIdentifier: "PoolLocationViewController") as! PoolLocationViewController
+//        self.navigationController?.pushViewController(vc, animated: true)
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         self.navigationController?.pushViewController(vc, animated: true)
