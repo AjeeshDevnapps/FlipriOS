@@ -20,6 +20,7 @@
 		1C5AE42627512240008F6643 /* HubRenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE42527512240008F6643 /* HubRenameViewController.swift */; };
 		1C5AE428275135DE008F6643 /* NextDaysWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE427275135DE008F6643 /* NextDaysWeatherData.swift */; };
 		1C5AE42A2751363B008F6643 /* WeatherForHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE4292751363B008F6643 /* WeatherForHour.swift */; };
+		1C6ACCED28BE00DE00696CAF /* Mump.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C6ACCEC28BE00DE00696CAF /* Mump.storyboard */; };
 		1C8697C427B6749800CBC6D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C8697C327B6749800CBC6D7 /* GoogleService-Info.plist */; };
 		1C8AD93928167BAD006AA386 /* FirmwereUpdateAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8AD93828167BAD006AA386 /* FirmwereUpdateAlertViewController.swift */; };
 		1C8D5DAA283D2CD100FA50BA /* DiagnosticErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D5DA9283D2CD100FA50BA /* DiagnosticErrorViewController.swift */; };
@@ -282,6 +283,7 @@
 		1C5AE42527512240008F6643 /* HubRenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubRenameViewController.swift; sourceTree = "<group>"; };
 		1C5AE427275135DE008F6643 /* NextDaysWeatherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextDaysWeatherData.swift; sourceTree = "<group>"; };
 		1C5AE4292751363B008F6643 /* WeatherForHour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherForHour.swift; sourceTree = "<group>"; };
+		1C6ACCEC28BE00DE00696CAF /* Mump.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mump.storyboard; sourceTree = "<group>"; };
 		1C8697C327B6749800CBC6D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1C8AD93828167BAD006AA386 /* FirmwereUpdateAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwereUpdateAlertViewController.swift; sourceTree = "<group>"; };
 		1C8D5DA9283D2CD100FA50BA /* DiagnosticErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticErrorViewController.swift; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 		1C71F27328BCE94C0034FF99 /* MUMP */ = {
 			isa = PBXGroup;
 			children = (
+				1C6ACCEC28BE00DE00696CAF /* Mump.storyboard */,
 			);
 			path = MUMP;
 			sourceTree = "<group>";
@@ -1440,6 +1443,7 @@
 				48F91FB82677A45300FFD44B /* Dashboard.storyboard in Resources */,
 				B58B2A51224A7B4B0003BE46 /* Subscription.storyboard in Resources */,
 				B5CB6FE01E801A7A007F82BC /* Climacons.ttf in Resources */,
+				1C6ACCED28BE00DE00696CAF /* Mump.storyboard in Resources */,
 				B5F457BE24C07BF6006C309A /* GUIDE_5.mp4 in Resources */,
 				B5F457BD24C07BF6006C309A /* GUIDE_6.mp4 in Resources */,
 				B5666B491F8F9B7E006D42EF /* InfoPlist.strings in Resources */,
@@ -1466,10 +1470,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Flipr/Pods-Flipr-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1955,7 +1963,7 @@
 				INFOPLIST_FILE = Flipr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.1.5;
+				MARKETING_VERSION = 3.1.6;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
@@ -1990,7 +1998,7 @@
 				INFOPLIST_FILE = Flipr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.1.5;
+				MARKETING_VERSION = 3.1.6;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
