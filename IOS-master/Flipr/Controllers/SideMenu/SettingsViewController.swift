@@ -317,41 +317,7 @@ extension SettingsViewController: UITableViewDelegate,UITableViewDataSource {
     
     @IBAction func alertsActivationSwitchValueChanged(_ sender: UISwitch) {
         self.callReactivateAlertApi(alertStatus: sender.isOn)
-        /*
-        let hud = JGProgressHUD(style:.dark)
-        hud?.show(in: self.navigationController!.view)
-        
-        
-        
-        Alamofire.request(Router.updateUserNotifications(activate: sender.isOn)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
-            
-            switch response.result {
-                
-            case .success(let value):
-                UserDefaults.standard.set(!sender.isOn, forKey: notificationOnOffValuesKey)
-                NotificationCenter.default.post(name: K.Notifications.NotificationSetttingsChanged, object: nil)
-                print("update notification with success: \(value)")
-                hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
-                hud?.dismiss(afterDelay: 1)
-                
-            case .failure(let error):
-                
-                print("update notification error: \(error)")
-                
-                if let serverError = User.serverError(response: response) {
-                    hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-                    hud?.textLabel.text = serverError.localizedDescription
-                    hud?.dismiss(afterDelay: 3)
-                } else {
-                    hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-                    hud?.textLabel.text = error.localizedDescription
-                    hud?.dismiss(afterDelay: 3)
-                }
-            }
-            
-        })
-        
-        */
+      
         
     }
     

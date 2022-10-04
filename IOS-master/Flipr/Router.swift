@@ -40,6 +40,10 @@ enum Router: URLRequestConvertible {
 
     case getModules
     
+    case getPlaces
+    case getPlaceModules(placeId: String)
+
+    
     //case addStripTest(poolId:Int,params:[String:Any])
     case addStripTest(params:[String:Any])
     
@@ -105,6 +109,14 @@ enum Router: URLRequestConvertible {
 
     case startedUpdatedFirmwere(serial: String)
 
+    
+    //Shares
+    case viewShares(poolId: String)
+    case addShare(poolId: String, email: String, permissionLevel: FliprRole)
+    case updateShare(poolId: String, email: String, permissionLevel: FliprRole)
+    case deleteShare(poolId: String, email: String)
+
+    
     //Legacy
     //static let baseURLString = K.Server.BaseUrl + K.Server.ApiPath
     
@@ -158,6 +170,9 @@ enum Router: URLRequestConvertible {
             return .delete
         case .getModules:
             return .get
+        case .getPlaces:
+            return .get
+
         case .addStripTest:
             return .post
         case .readModuleLastMetrics:
@@ -184,6 +199,9 @@ enum Router: URLRequestConvertible {
             return .delete
         case .getFormValues:
             return .get
+        case .getPlaceModules:
+            return .get
+
         case .createPool:
             return .post
         case .updatePool:
@@ -267,6 +285,14 @@ enum Router: URLRequestConvertible {
         case .startedUpdatedFirmwere:
             return .put
             
+        case .viewShares:
+            return .get
+        case .addShare:
+            return .post
+        case .updateShare:
+            return .put
+        case .deleteShare:
+            return .delete
             
             
         }
@@ -316,6 +342,12 @@ enum Router: URLRequestConvertible {
             
         case .getModules:
             return "modules"
+            
+        case .getPlaces:
+            return "place"
+        
+        case .getPlaceModules(_):
+            return "modules/ListPlaceModules"
         
         //case .addStripTest(let poolId,_):
         //    return "pools/\(poolId)/strip"
@@ -435,7 +467,14 @@ enum Router: URLRequestConvertible {
             return "modules/"
         case .startedUpdatedFirmwere(let serial):
             return "modules/"
-
+        case .viewShares(let poolId):
+            return "place/\(poolId)/shares"
+        case .addShare(poolId: let poolId, email: let email, permissionLevel: let permissionLevel):
+            return "place/\(poolId)/shares"
+        case .updateShare(poolId: let poolId, email: let email, permissionLevel: let permissionLevel):
+            return "place/\(poolId)/shares"
+        case .deleteShare(poolId: let poolId, email: let email):
+            return "place/\(poolId)/shares"
             
             
         }
@@ -484,6 +523,14 @@ enum Router: URLRequestConvertible {
                 urlRequest.url = URL(string: url + "?NewPass=\(password)")
             }
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+          
+        case .getPlaceModules(let placeId):
+            if let url = urlRequest.url?.absoluteString {
+                urlRequest.url = URL(string: url + "?idPlace=\(placeId)")
+            }
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: nil)
+
+            
         case .authentifyUser(let email, let password):
             let parameters: [String : Any] = [
                 "username": email,
@@ -791,6 +838,49 @@ enum Router: URLRequestConvertible {
             }
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: nil)
             
+        case .viewShares(poolId: let poolId):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: [:])
+            
+        case .addShare(poolId: let poolId, email: let email, permissionLevel: let permissionLevel):
+            var permission: String = ""
+            switch permissionLevel {
+            case .guest:
+                permission = "View"
+            case .boy:
+                permission = "Manage"
+            case .man:
+                permission = "Admin"
+            }
+            let parameters: [String : Any] = [
+                "GuestUser": email,
+                "PermissionLevel": permission
+            ]
+            print("Posting measures with params: \(parameters)")
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+            
+        case .updateShare(poolId: let poolId, email: let email, permissionLevel: let permissionLevel):
+            var permission: String = ""
+            switch permissionLevel {
+            case .guest:
+                permission = "View"
+            case .boy:
+                permission = "Manage"
+            case .man:
+                permission = "Admin"
+            }
+            let parameters: [String : Any] = [
+                "GuestUser": email,
+                "PermissionLevel": permission
+            ]
+            print("Posting measures with params: \(parameters)")
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+            
+        case .deleteShare(poolId: let poolId, email: let email):
+            let parameters: [String : Any] = [
+                "email": email,
+            ]
+            print("Posting measures with params: \(parameters)")
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         default:
             break
         }

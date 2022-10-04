@@ -210,6 +210,12 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var hubTabTitleLbl: UILabel!
     @IBOutlet weak var firstHubNameLbl: UILabel!
     @IBOutlet weak var secondHubNameLbl: UILabel!
+    
+    
+    //MUMP
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var settingsButtonContainer: UIView!
+    @IBOutlet weak var selectedPlaceDetailsLbl: UILabel!
 
 
 
@@ -248,6 +254,7 @@ class DashboardViewController: UIViewController {
     var notificationReportDate:Date?
     var haveFirmwereUpdate = false
     var firmwereLatestVersion = "0"
+    var selectedPlace: PlaceDropdown?
 
 
     override func viewDidLoad() {
@@ -360,7 +367,7 @@ class DashboardViewController: UIViewController {
             self.showLastMeasurement()
         }
         
-        
+        callPlacesApi()
         
         refresh()
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (notification) in
@@ -368,6 +375,7 @@ class DashboardViewController: UIViewController {
             self.waterTmpChangeButton.isHidden = true
             self.phChangeButton.isHidden = true
             self.redoxChangeButton.isHidden = true
+            self.settingsButton.isHidden = true
             self.bleMeasureHasBeenSent = false
             self.refresh()
             self.perform(#selector(self.callGetStatusApis), with: nil, afterDelay: 3)
@@ -665,6 +673,7 @@ class DashboardViewController: UIViewController {
     
     func hideUserHasNoFlipr(){
         self.waveView.isHidden = false
+        self.settingsButtonContainer.isHidden = false
         self.addFirstFliprView.isHidden = true
     }
     
@@ -4892,6 +4901,92 @@ extension DashboardViewController: HubSettingViewDelegate{
     }
     
     
+    //MUMP
+    
+    @IBAction func settingsButtonClicked(){
+    
+        let sb = UIStoryboard(name: "NewPool", bundle: nil)
+                if let viewController = sb.instantiateViewController(withIdentifier: "NewPoolViewControllerID") as? UINavigationController {
+                    viewController.modalPresentationStyle = .fullScreen
+                    self.present(viewController, animated: true, completion: nil)
+                }
+    }
+    
+    @IBAction func placeDropDownButtonClicked(){
+        let sb = UIStoryboard.init(name: "Watr", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "PlaceDropdownViewController") as? PlaceDropdownViewController {
+            viewController.delegate = self
+            viewController.modalPresentationStyle = .overCurrentContext
+            self.present(viewController, animated: true) {
+            }
+        }
+    }
+    
 }
 
+extension DashboardViewController{
+    func callPlacesApi(){
+        var places = [PlaceDropdown]()
 
+//        hud?.show(in: self.view)
+        User.currentUser?.getPlaces(completion: { (placesResult,error) in
+            if (error != nil) {
+//                self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+//                self.hud?.textLabel.text = error?.localizedDescription
+//                self.hud?.dismiss(afterDelay: 0)
+            } else {
+                if placesResult != nil{
+                    places = placesResult!
+                    if places.count > 0{
+                        self.selectedPlace = places[0]
+                        self.showPlaceInfo()
+                    }
+//                    self.hud?.dismiss(afterDelay: 0)
+//                    self.placesTableView.reloadData()
+                }
+            }
+                    
+        })
+       
+    }
+    
+    func showPlaceInfo(){
+        var placeDetails =  (self.selectedPlace?.name ?? "")
+        placeDetails.append(" - ")
+        placeDetails.append(self.selectedPlace?.placeOwnerFirstName ?? "")
+        placeDetails.append(" ")
+        placeDetails.append(self.selectedPlace?.placeOwnerLastName ?? "")
+        placeDetails.append(" - ")
+        placeDetails.append(self.selectedPlace?.placeCity ?? "")
+
+
+        self.selectedPlaceDetailsLbl.text = placeDetails
+    }
+}
+
+extension DashboardViewController:PlaceDropdownDelegate{
+    
+    
+    
+    func didSelectPlaceModules(placeModules:[PlaceModule]){
+
+        var isFliprModule = false
+        var fliprModule:PlaceModule?
+        for module in placeModules {
+            if module.isFlipr{
+                isFliprModule = true
+                fliprModule = module
+                break
+            }
+        }
+        
+        if isFliprModule{
+//            Module.currentModule = module
+            Module.currentModule?.serial = fliprModule?.serial ?? ""
+            Module.currentModule?.activationKey = fliprModule?.activationKey ?? ""
+            Module.saveCurrentModuleLocally()
+        }
+        
+    }
+
+}

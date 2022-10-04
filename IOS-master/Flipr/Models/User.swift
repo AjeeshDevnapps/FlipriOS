@@ -744,6 +744,81 @@ class User {
         })
     }
     
+    
+    func getPlaces(completion: ((_ places: [PlaceDropdown]?, _ error: Error?) -> Void)?) {
+        
+        Alamofire.request(Router.getPlaces).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                print("Get user modules - response.result.value: \(value)")
+
+                if let placesDic = value as? [[String:Any]] {
+                    
+                    //On filtre sur ModuleType_Id = 1 pour retirer les HUB
+                    var places:[PlaceDropdown] = []
+                    for placeObj in placesDic {
+                        let placeTmp = PlaceDropdown.init(dictionary: placeObj)
+                        places.append(placeTmp)
+                        
+                    }
+                    completion?(places,nil)
+                } else {
+                    let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                    completion?(nil, error)
+                }
+                
+            case .failure(let error):
+                
+                print("Get user places did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(nil,serverError)
+                } else {
+                    completion?(nil,error)
+                }
+            }
+        })
+    }
+    
+    
+    func getPlaceModules(placeId:String, completion: ((_ places: [PlaceModule]?, _ error: Error?) -> Void)?) {
+        
+        Alamofire.request(Router.getPlaceModules(placeId: placeId)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+
+            switch response.result {
+                
+            case .success(let value):
+                print("Get user modules - response.result.value: \(value)")
+
+                if let placesDic = value as? [[String:Any]] {
+                    
+                    //On filtre sur ModuleType_Id = 1 pour retirer les HUB
+                    var places:[PlaceModule] = []
+                    for placeObj in placesDic {
+                        let placeTmp = PlaceModule.init(dictionary: placeObj)
+                        places.append(placeTmp)
+                        
+                    }
+                    completion?(places,nil)
+                } else {
+                    let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                    completion?(nil, error)
+                }
+                
+            case .failure(let error):
+                
+                print("Get user places did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(nil,serverError)
+                } else {
+                    completion?(nil,error)
+                }
+            }
+        })
+    }
 
 }
 

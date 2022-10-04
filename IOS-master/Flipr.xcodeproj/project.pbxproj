@@ -7,10 +7,267 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C044EB428EA30BE00807F01 /* MyNSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6BE8241F71E70031853D /* MyNSObject.swift */; };
+		1C044EB528EA30BE00807F01 /* WaterLevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55364952086420A00E0727F /* WaterLevelTableViewController.swift */; };
+		1C044EB628EA30BE00807F01 /* SimplePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC3472243A7410064370D /* SimplePageViewController.swift */; };
+		1C044EB728EA30BE00807F01 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57131A622E9E98C00421705 /* Log.swift */; };
+		1C044EB828EA30BE00807F01 /* EquipmentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B506F2FE1F5859DA006246A2 /* EquipmentTableViewController.swift */; };
+		1C044EB928EA30BE00807F01 /* FliprSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489BD3DA261474D9007E9BEF /* FliprSplashViewController.swift */; };
+		1C044EBA28EA30BE00807F01 /* OTAFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DED7280762CF004412D9 /* OTAFileParser.m */; };
+		1C044EBB28EA30BE00807F01 /* ProductsAndEquipmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484BEE3A25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift */; };
+		1C044EBC28EA30BE00807F01 /* KeyEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C8E4F2265D21490000FDA8 /* KeyEnterViewController.swift */; };
+		1C044EBD28EA30BE00807F01 /* SubscriptionOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59436DC225652570030F16D /* SubscriptionOptionTableViewCell.swift */; };
+		1C044EBE28EA30BE00807F01 /* CyCBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD60DA28117F1800879A45 /* CyCBManager.m */; };
+		1C044EBF28EA30BE00807F01 /* UIButton+Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518F0F11E9FC0840092156C /* UIButton+Activity.swift */; };
+		1C044EC028EA30BE00807F01 /* DescribeMyPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E1E826558C08006D4472 /* DescribeMyPoolViewController.swift */; };
+		1C044EC128EA30BE00807F01 /* PoolCharacteristicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E1EA26558C09006D4472 /* PoolCharacteristicsViewController.swift */; };
+		1C044EC228EA30BE00807F01 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6BEB241F71E70031853D /* Extensions.swift */; };
+		1C044EC328EA30BE00807F01 /* EmailVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F74C2667F4D300FA8ED3 /* EmailVerifyViewController.swift */; };
+		1C044EC428EA30BE00807F01 /* AddHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F49ABB2666A44000DFB18B /* AddHubViewController.swift */; };
+		1C044EC528EA30BE00807F01 /* NSString+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DF2628076E89004412D9 /* NSString+hex.m */; };
+		1C044EC628EA30BE00807F01 /* WaterLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E1F1F320872EBE008AED25 /* WaterLevelViewController.swift */; };
+		1C044EC728EA30BE00807F01 /* WaveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488FC821267A7C7600D41EB4 /* WaveTableViewCell.swift */; };
+		1C044EC828EA30BE00807F01 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58A37371E79859B00C67F6C /* ViewController.swift */; };
+		1C044EC928EA30BE00807F01 /* DashCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFBFC9A27317FA900AB5771 /* DashCollectionViewCell.swift */; };
+		1C044ECA28EA30BE00807F01 /* LogType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57131A822E9F36400421705 /* LogType.swift */; };
+		1C044ECB28EA30BE00807F01 /* FirmwareUpgradeHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1186D82812977E001DC5BB /* FirmwareUpgradeHomeViewController.m */; };
+		1C044ECC28EA30BE00807F01 /* ActivationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BEFAB1EA65EBD00F3AD73 /* ActivationViewController.swift */; };
+		1C044ECD28EA30BE00807F01 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F2EB91F00FD890026A962 /* Stock.swift */; };
+		1C044ECE28EA30BE00807F01 /* HUBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5713F17241164A500278166 /* HUBManager.swift */; };
+		1C044ECF28EA30BE00807F01 /* SubscriptionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF6D6C225CCE5400FA70D5 /* SubscriptionPageViewController.swift */; };
+		1C044ED028EA30BE00807F01 /* HUBProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CB380D247F9FF000D2F61D /* HUBProgramViewController.swift */; };
+		1C044ED128EA30BE00807F01 /* HUB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519F848244D801600477DD1 /* HUB.swift */; };
+		1C044ED228EA30BE00807F01 /* Error+Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53245591EB34B500001A46F /* Error+Code.swift */; };
+		1C044ED328EA30BE00807F01 /* UIAlertController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DF2028076E88004412D9 /* UIAlertController+Additions.m */; };
+		1C044ED428EA30BE00807F01 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A7D5B1E8BB95800AC03C0 /* BLEManager.swift */; };
+		1C044ED528EA30BE00807F01 /* PoolUsageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E1EC26558C09006D4472 /* PoolUsageViewController.swift */; };
+		1C044ED628EA30BE00807F01 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480CF2BC25DCEAA800429906 /* SettingsViewController.swift */; };
+		1C044ED728EA30BE00807F01 /* PoolLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E1EB26558C09006D4472 /* PoolLocationViewController.swift */; };
+		1C044ED828EA30BE00807F01 /* LoginEducationViewOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48980EA426170C14009A0F24 /* LoginEducationViewOneController.swift */; };
+		1C044ED928EA30BE00807F01 /* MeasureAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9930A26C515AB00E85B47 /* MeasureAlertViewController.swift */; };
+		1C044EDA28EA30BE00807F01 /* FliprHubNonSubscriptionMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6992F26E61BE900563CBE /* FliprHubNonSubscriptionMenuViewController.swift */; };
+		1C044EDB28EA30BE00807F01 /* HUBOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F75B2668000D00FA8ED3 /* HUBOnboardingViewController.swift */; };
+		1C044EDC28EA30BE00807F01 /* capsenseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEEA28076345004412D9 /* capsenseModel.m */; };
+		1C044EDD28EA30BE00807F01 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481F362E265FF5CD00BBD858 /* WelcomeViewController.swift */; };
+		1C044EDE28EA30BE00807F01 /* FlipValueReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D5DAD283D7C9500FA50BA /* FlipValueReaderViewController.swift */; };
+		1C044EDF28EA30BE00807F01 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BD60271EF9574600B3A403 /* Product.swift */; };
+		1C044EE028EA30BE00807F01 /* ChlorineCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48691A5B265EC23500E977BB /* ChlorineCalibrationViewController.swift */; };
+		1C044EE128EA30BE00807F01 /* ElectricalSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F776266803AF00FA8ED3 /* ElectricalSetupViewController.swift */; };
+		1C044EE228EA30BE00807F01 /* ExpertMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6992B26E6039F00563CBE /* ExpertMenuViewController.swift */; };
+		1C044EE328EA30BE00807F01 /* ElectricalSetupPrepareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F775266803AE00FA8ED3 /* ElectricalSetupPrepareViewController.swift */; };
+		1C044EE428EA30BE00807F01 /* VigilanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA0B1EA27330E9500751684 /* VigilanceViewController.swift */; };
+		1C044EE528EA30BE00807F01 /* WeatherForDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFBFCA12731814D00AB5771 /* WeatherForDay.swift */; };
+		1C044EE628EA30BE00807F01 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482A08D926176F6300E8F3D8 /* LoginViewController.swift */; };
+		1C044EE728EA30BE00807F01 /* RoundBorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48980EA0261704C6009A0F24 /* RoundBorderedButton.swift */; };
+		1C044EE828EA30BE00807F01 /* ResourceHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DF2228076E88004412D9 /* ResourceHandler.m */; };
+		1C044EE928EA30BE00807F01 /* CalibrationPh7IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A51775265E9D6D002E56DC /* CalibrationPh7IntroViewController.swift */; };
+		1C044EEA28EA30BE00807F01 /* SetupFifthStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F77E266803D000FA8ED3 /* SetupFifthStepViewController.swift */; };
+		1C044EEB28EA30BE00807F01 /* UIViewController+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F74B2667F4D300FA8ED3 /* UIViewController+Helper.swift */; };
+		1C044EEC28EA30BE00807F01 /* HUBNamingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7662668002B00FA8ED3 /* HUBNamingViewController.swift */; };
+		1C044EED28EA30BE00807F01 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BE18D424485B97006CCB1E /* LandingViewController.swift */; };
+		1C044EEE28EA30BE00807F01 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B581672A1EB0C65B00E2CDC7 /* StartViewController.swift */; };
+		1C044EEF28EA30BE00807F01 /* ElectricalVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F77F266803D000FA8ED3 /* ElectricalVideoViewController.swift */; };
+		1C044EF028EA30BE00807F01 /* FunCamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503971122C50A58005B9D30 /* FunCamViewController.swift */; };
+		1C044EF128EA30BE00807F01 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD60CE281177CE00879A45 /* HomeViewController.m */; };
+		1C044EF228EA30BE00807F01 /* PoolSettingsStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E1ED26558C09006D4472 /* PoolSettingsStartViewController.swift */; };
+		1C044EF328EA30BE00807F01 /* HUBPairingSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7632668002A00FA8ED3 /* HUBPairingSuccessViewController.swift */; };
+		1C044EF428EA30BE00807F01 /* ModuleTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BE18D624485DB8006CCB1E /* ModuleTypeSelectionViewController.swift */; };
+		1C044EF528EA30BE00807F01 /* FirmwareBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD60C6281143E800879A45 /* FirmwareBaseViewController.m */; };
+		1C044EF628EA30BE00807F01 /* ProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BD60251EF90F0D00B3A403 /* ProductTableViewController.swift */; };
+		1C044EF728EA30BE00807F01 /* ActionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7B00420776D0E006DF6E7 /* ActionsTableViewController.swift */; };
+		1C044EF828EA30BE00807F01 /* ValuePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AED021EB8B02200174870 /* ValuePickerController.swift */; };
+		1C044EF928EA30BE00807F01 /* String+FliprDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58E73521F73EDD60066B3E5 /* String+FliprDate.swift */; };
+		1C044EFA28EA30BE00807F01 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6BE7241F71E70031853D /* Decoder.swift */; };
+		1C044EFB28EA30BE00807F01 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481624E225DD7E750085F3C4 /* AccountViewController.swift */; };
+		1C044EFC28EA30BE00807F01 /* CalibrationSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48691A5E265ECA1100E977BB /* CalibrationSuccessViewController.swift */; };
+		1C044EFD28EA30BE00807F01 /* CSCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEE828076345004412D9 /* CSCModel.m */; };
+		1C044EFE28EA30BE00807F01 /* CalibrationChlorineIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48691A40265EB11E00E977BB /* CalibrationChlorineIntroViewController.swift */; };
+		1C044EFF28EA30BE00807F01 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48980EA826171E1E009A0F24 /* BaseViewController.swift */; };
+		1C044F0028EA30BE00807F01 /* DashScrollViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFBFC9927317FA600AB5771 /* DashScrollViewItem.swift */; };
+		1C044F0128EA30BE00807F01 /* ProductTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52A68B61EFAA4DF006585F5 /* ProductTypeTableViewController.swift */; };
+		1C044F0228EA30BE00807F01 /* NewDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F91FBB2677AD1200FFD44B /* NewDashboardViewController.swift */; };
+		1C044F0328EA30BE00807F01 /* AccelerometerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DF012807634A004412D9 /* AccelerometerModel.m */; };
+		1C044F0428EA30BE00807F01 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B555AF601EA959C30053163F /* EmailVerificationViewController.swift */; };
+		1C044F0528EA30BE00807F01 /* CablesSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F457B224C07365006C309A /* CablesSelectionViewController.swift */; };
+		1C044F0628EA30BE00807F01 /* PoolLogEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52B3D2C22EEE4DE00283FD3 /* PoolLogEditViewController.swift */; };
+		1C044F0728EA30BE00807F01 /* StripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE69F61EB1F31300ABF2B7 /* StripViewController.swift */; };
+		1C044F0828EA30BE00807F01 /* FliprHubMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6992626E5F1C400563CBE /* FliprHubMenuViewController.swift */; };
+		1C044F0928EA30BE00807F01 /* BPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEFE2807634A004412D9 /* BPModel.m */; };
+		1C044F0A28EA30BE00807F01 /* HubSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE4212751194A008F6643 /* HubSettingsViewController.swift */; };
+		1C044F0B28EA30BE00807F01 /* LogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57131A422E9E93A00421705 /* LogTableViewCell.swift */; };
+		1C044F0C28EA30BE00807F01 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7462667F4D200FA8ED3 /* LoadingViewController.swift */; };
+		1C044F0D28EA30BE00807F01 /* HUBScanTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519F846244D6DF700477DD1 /* HUBScanTableViewController.swift */; };
+		1C044F0E28EA30BE00807F01 /* PaidSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59436E0225652580030F16D /* PaidSubscription.swift */; };
+		1C044F0F28EA30BE00807F01 /* LightNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53245611EB376320001A46F /* LightNavigationViewController.swift */; };
+		1C044F1028EA30BE00807F01 /* NotificationSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480CF2D225DD305800429906 /* NotificationSwitchTableViewCell.swift */; };
+		1C044F1128EA30BE00807F01 /* Strip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53245571EB33F980001A46F /* Strip.swift */; };
+		1C044F1228EA30BE00807F01 /* HUBWifiNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B551E9CF242503CF00C1788F /* HUBWifiNetwork.swift */; };
+		1C044F1328EA30BE00807F01 /* BatteryServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEEC28076346004412D9 /* BatteryServiceModel.m */; };
+		1C044F1428EA30BE00807F01 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119025DFE3C1001E1885 /* DeviceViewController.swift */; };
+		1C044F1528EA30BE00807F01 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CB6FDC1E80105E007F82BC /* DashboardViewController.swift */; };
+		1C044F1628EA30BE00807F01 /* CBOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6BE9241F71E70031853D /* CBOR.swift */; };
+		1C044F1728EA30BE00807F01 /* MajorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6BEC241F71E70031853D /* MajorTypes.swift */; };
+		1C044F1828EA30BE00807F01 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DF1F28076E88004412D9 /* Reachability.m */; };
+		1C044F1928EA30BE00807F01 /* EducationScreenContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCB4F0326A34B6E00FDED47 /* EducationScreenContainerViewController.swift */; };
+		1C044F1A28EA30BE00807F01 /* PairingSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4880E1E726558C08006D4472 /* PairingSuccessViewController.swift */; };
+		1C044F1B28EA30BE00807F01 /* BootLoaderServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DF022807634B004412D9 /* BootLoaderServiceModel.m */; };
+		1C044F1C28EA30BE00807F01 /* HubRemoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE42327512233008F6643 /* HubRemoveViewController.swift */; };
+		1C044F1D28EA30BE00807F01 /* LoggerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DF1A28076D8B004412D9 /* LoggerHandler.m */; };
+		1C044F1E28EA30BE00807F01 /* ExpertModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7B0062077C39D006DF6E7 /* ExpertModeViewController.swift */; };
+		1C044F1F28EA30BE00807F01 /* GATTDBDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1186DA2812977F001DC5BB /* GATTDBDetailsViewController.m */; };
+		1C044F2028EA30BE00807F01 /* WaterLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553649720864EFD00E0727F /* WaterLevel.swift */; };
+		1C044F2128EA30BE00807F01 /* BluetoothAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488FB98125E41B1F006C2887 /* BluetoothAlertViewController.swift */; };
+		1C044F2228EA30BE00807F01 /* AddnewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */; };
+		1C044F2328EA30BE00807F01 /* FlipValueReadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C532614283AA9F1003A4847 /* FlipValueReadingViewController.swift */; };
+		1C044F2428EA30BE00807F01 /* UIView+EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B555AF5E1EA8EC720053163F /* UIView+EmptyStateView.swift */; };
+		1C044F2528EA30BE00807F01 /* ProductAttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54676C72062B8C30052E131 /* ProductAttributesViewController.swift */; };
+		1C044F2628EA30BE00807F01 /* DeviceInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B2A7EB25E19B45001CCBCC /* DeviceInfoTableViewCell.swift */; };
+		1C044F2728EA30BE00807F01 /* NotificationsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828D37425C0705200F95683 /* NotificationsAlertViewController.swift */; };
+		1C044F2828EA30BE00807F01 /* RemoteControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57DE98B1F028FF300594261 /* RemoteControl.swift */; };
+		1C044F2928EA30BE00807F01 /* ElectricalCableSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F77D266803CF00FA8ED3 /* ElectricalCableSelectionViewController.swift */; };
+		1C044F2A28EA30BE00807F01 /* WaterLevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8AF60208779C5007EB73D /* WaterLevelTableViewCell.swift */; };
+		1C044F2B28EA30BE00807F01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58A37351E79859B00C67F6C /* AppDelegate.swift */; };
+		1C044F2C28EA30BE00807F01 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD60BB281128DC00879A45 /* Utilities.m */; };
+		1C044F2D28EA30BE00807F01 /* RSCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEEF28076346004412D9 /* RSCModel.m */; };
+		1C044F2E28EA30BE00807F01 /* ProgramCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48600E662685042600749C28 /* ProgramCollectionViewCell.swift */; };
+		1C044F2F28EA30BE00807F01 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C39C5B2618A0F5006EF569 /* ForgotPasswordViewController.swift */; };
+		1C044F3028EA30BE00807F01 /* HubMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6992D26E6144700563CBE /* HubMenuViewController.swift */; };
+		1C044F3128EA30BE00807F01 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7492667F4D200FA8ED3 /* CustomTextField.swift */; };
+		1C044F3228EA30BE00807F01 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B574F5091E953D82009294EA /* Router.swift */; };
+		1C044F3328EA30BE00807F01 /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E1F1F520874D51008AED25 /* ActionsViewController.swift */; };
+		1C044F3428EA30BE00807F01 /* PoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B574F5071E953783009294EA /* PoolViewController.swift */; };
+		1C044F3528EA30BE00807F01 /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4887549726493B470035A242 /* DeviceSize.swift */; };
+		1C044F3628EA30BE00807F01 /* ScannedPeripheralTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD60D12811781B00879A45 /* ScannedPeripheralTableViewCell.m */; };
+		1C044F3728EA30BE00807F01 /* WifiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7642668002A00FA8ED3 /* WifiListViewController.swift */; };
+		1C044F3828EA30BE00807F01 /* HubTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BE18D824486291006CCB1E /* HubTypeSelectionViewController.swift */; };
+		1C044F3928EA30BE00807F01 /* HistoricViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DDDC891F0A6A240073E5B8 /* HistoricViewController.swift */; };
+		1C044F3A28EA30BE00807F01 /* FirmwareFileSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1186E028129C8A001DC5BB /* FirmwareFileSelectionViewController.m */; };
+		1C044F3B28EA30BE00807F01 /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59436DD225652570030F16D /* SubscriptionService.swift */; };
+		1C044F3C28EA30BE00807F01 /* Ph7CalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A51778265E9DE5002E56DC /* Ph7CalibrationViewController.swift */; };
+		1C044F3D28EA30BE00807F01 /* AlertTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B560B12230E9D800E00696 /* AlertTableViewController.swift */; };
+		1C044F3E28EA30BE00807F01 /* CongratsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519F8502452B00B00477DD1 /* CongratsViewController.swift */; };
+		1C044F3F28EA30BE00807F01 /* FliperListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C72BC7265C3567002042D5 /* FliperListViewController.swift */; };
+		1C044F4028EA30BE00807F01 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6BEA241F71E70031853D /* Encoder.swift */; };
+		1C044F4128EA30BE00807F01 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55DC6BA20529F26001D1B08 /* ProductViewController.swift */; };
+		1C044F4228EA30BE00807F01 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53A7D5D1E8BFECF00AC03C0 /* Constants.swift */; };
+		1C044F4328EA30BE00807F01 /* LogTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBF6A722EB5995003FBF49 /* LogTypeTableViewController.swift */; };
+		1C044F4428EA30BE00807F01 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B545E0AE1EC2133E004A484E /* Alert.swift */; };
+		1C044F4528EA30BE00807F01 /* FirmwereUpdateAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8AD93828167BAD006AA386 /* FirmwereUpdateAlertViewController.swift */; };
+		1C044F4628EA30BE00807F01 /* HUBWifiTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B551E9CD2425020A00C1788F /* HUBWifiTableViewController.swift */; };
+		1C044F4728EA30BE00807F01 /* HUBActivationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5713F192411667C00278166 /* HUBActivationViewController.swift */; };
+		1C044F4828EA30BE00807F01 /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50009831F0101DB00A84A4F /* StockTableViewCell.swift */; };
+		1C044F4928EA30BE00807F01 /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DF2B28076E8A004412D9 /* DropDownView.m */; };
+		1C044F4A28EA30BE00807F01 /* AppReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52A2DDA229D612900967175 /* AppReview.swift */; };
+		1C044F4B28EA30BE00807F01 /* SignUpProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F74A2667F4D300FA8ED3 /* SignUpProfileController.swift */; };
+		1C044F4C28EA30BE00807F01 /* DevieInformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEF428076347004412D9 /* DevieInformationModel.m */; };
+		1C044F4D28EA30BE00807F01 /* BackupFliprReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDE0B2D285A482300FB44B5 /* BackupFliprReaderViewController.swift */; };
+		1C044F4E28EA30BE00807F01 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F75C2668000D00FA8ED3 /* OnboardingCollectionViewCell.swift */; };
+		1C044F4F28EA30BE00807F01 /* GlucoseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEFD2807634A004412D9 /* GlucoseModel.m */; };
+		1C044F5028EA30BE00807F01 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483E23C225DEB89E00D2E619 /* PasswordViewController.swift */; };
+		1C044F5128EA30BE00807F01 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50BAC351EAEAF72004BE665 /* MenuViewController.swift */; };
+		1C044F5228EA30BE00807F01 /* HUBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519F85224534E3100477DD1 /* HUBViewController.swift */; };
+		1C044F5328EA30BE00807F01 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519693422300959000383E2 /* OnboardingViewController.swift */; };
+		1C044F5428EA30BE00807F01 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484CEB9F25E2B06E005CD208 /* HelpViewController.swift */; };
+		1C044F5528EA30BE00807F01 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59436DE225652570030F16D /* Subscription.swift */; };
+		1C044F5628EA30BE00807F01 /* Pool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AED061EB8E17600174870 /* Pool.swift */; };
+		1C044F5728EA30BE00807F01 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518F0F51E9FD6BB0092156C /* SignUpViewController.swift */; };
+		1C044F5828EA30BE00807F01 /* DiagnosticHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D5DAB283D43CF00FA50BA /* DiagnosticHelpViewController.swift */; };
+		1C044F5928EA30BE00807F01 /* SubscriptionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58B2A53224A7C390003BE46 /* SubscriptionTableViewController.swift */; };
+		1C044F5A28EA30BE00807F01 /* WifiListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7672668002C00FA8ED3 /* WifiListTableViewCell.swift */; };
+		1C044F5B28EA30BE00807F01 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C5E861E82CDA400C1C0FC /* TableViewController.swift */; };
+		1C044F5C28EA30BE00807F01 /* HubProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9A756C27354E0800D4FEE6 /* HubProgramViewController.swift */; };
+		1C044F5D28EA30BE00807F01 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518F0EB1E9F8DD40092156C /* SignInViewController.swift */; };
+		1C044F5E28EA30BE00807F01 /* DeviceListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7572667FD4500FA8ED3 /* DeviceListTableViewCell.swift */; };
+		1C044F5F28EA30BE00807F01 /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504F2826A1A2340042C2DD /* DeviceType.swift */; };
+		1C044F6028EA30BE00807F01 /* UIViewController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518F0F21E9FC0840092156C /* UIViewController+Error.swift */; };
+		1C044F6128EA30BE00807F01 /* NextDaysWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE427275135DE008F6643 /* NextDaysWeatherData.swift */; };
+		1C044F6228EA30BE00807F01 /* RGBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEE928076345004412D9 /* RGBModel.m */; };
+		1C044F6328EA30BE00807F01 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6992926E5F6AF00563CBE /* MenuTableViewCell.swift */; };
+		1C044F6428EA30BE00807F01 /* DiaganosticHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6AF972837F07500572108 /* DiaganosticHomeViewController.m */; };
+		1C044F6528EA30BE00807F01 /* UNUserNotificationCenter+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DF2528076E89004412D9 /* UNUserNotificationCenter+Additions.m */; };
+		1C044F6628EA30BE00807F01 /* QuickActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484CEBA325E2DAC9005CD208 /* QuickActionViewController.swift */; };
+		1C044F6728EA30BE00807F01 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE070E1EB9CE2800962AEE /* City.swift */; };
+		1C044F6828EA30BE00807F01 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A912A125F8EC2900EF863D /* SideMenuViewController.swift */; };
+		1C044F6928EA30BE00807F01 /* FliprActivationSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C8E4F5265D6DC50000FDA8 /* FliprActivationSuccessViewController.swift */; };
+		1C044F6A28EA30BE00807F01 /* FindMeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEFA28076349004412D9 /* FindMeModel.m */; };
+		1C044F6B28EA30BE00807F01 /* LastMeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C57B38A286D8A5A006F1342 /* LastMeasurementViewController.swift */; };
+		1C044F6C28EA30BE00807F01 /* Bundle+version.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57F99F51EC4510300417C0F /* Bundle+version.swift */; };
+		1C044F6D28EA30BE00807F01 /* CBPeripheralExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEE228076326004412D9 /* CBPeripheralExt.m */; };
+		1C044F6E28EA30BE00807F01 /* PoolLogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57131A222E9AE3700421705 /* PoolLogTableViewController.swift */; };
+		1C044F6F28EA30BE00807F01 /* TemperatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DF062807634C004412D9 /* TemperatureModel.m */; };
+		1C044F7028EA30BE00807F01 /* SensorHubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEF628076348004412D9 /* SensorHubModel.m */; };
+		1C044F7128EA30BE00807F01 /* HRMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEEE28076346004412D9 /* HRMModel.m */; };
+		1C044F7228EA30BE00807F01 /* HubDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504F2E26A1E3500042C2DD /* HubDeviceTableViewCell.swift */; };
+		1C044F7328EA30BE00807F01 /* PoolLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBF6A522EB2CD4003FBF49 /* PoolLogViewController.swift */; };
+		1C044F7428EA30BE00807F01 /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557864224897E9300B5BDCD /* Planning.swift */; };
+		1C044F7528EA30BE00807F01 /* AddFliprViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C9468B265AAADC00C018A7 /* AddFliprViewController.swift */; };
+		1C044F7628EA30BE00807F01 /* WeatherForHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE4292751363B008F6643 /* WeatherForHour.swift */; };
+		1C044F7728EA30BE00807F01 /* SignUpEmailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7482667F4D200FA8ED3 /* SignUpEmailController.swift */; };
+		1C044F7828EA30BE00807F01 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A015B226483DA002EEC62 /* SubscriptionView.swift */; };
+		1C044F7928EA30BE00807F01 /* BarometerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DF002807634A004412D9 /* BarometerModel.m */; };
+		1C044F7A28EA30BE00807F01 /* Equipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53086961F598B4600D7EFCF /* Equipment.swift */; };
+		1C044F7B28EA30BE00807F01 /* AppSharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48493D6825F54259008672DD /* AppSharedData.swift */; };
+		1C044F7C28EA30BE00807F01 /* FirmwareUpgradeSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1359082819C20800ED3C56 /* FirmwareUpgradeSuccessViewController.swift */; };
+		1C044F7D28EA30BE00807F01 /* RoundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481624E525DD91F50085F3C4 /* RoundShadowView.swift */; };
+		1C044F7E28EA30BE00807F01 /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59BEFAD1EA6663800F3AD73 /* Module.swift */; };
+		1C044F7F28EA30BE00807F01 /* HubListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F49ABE2666B3D200DFB18B /* HubListViewController.swift */; };
+		1C044F8028EA30BE00807F01 /* FirmwareUpgradeFailureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF0B13281AFC7600C699E4 /* FirmwareUpgradeFailureViewController.swift */; };
+		1C044F8128EA30BE00807F01 /* HubRenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE42527512240008F6643 /* HubRenameViewController.swift */; };
+		1C044F8228EA30BE00807F01 /* ThermometerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DEFC28076349004412D9 /* ThermometerModel.m */; };
+		1C044F8328EA30BE00807F01 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC118C25DFE3B1001E1885 /* DevicesViewController.swift */; };
+		1C044F8428EA30BE00807F01 /* CityPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53C5E841E82C72F00C1C0FC /* CityPickerViewController.swift */; };
+		1C044F8528EA30BE00807F01 /* CalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B555AF621EA9FE8E0053163F /* CalibrationViewController.swift */; };
+		1C044F8628EA30BE00807F01 /* EmailVerifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4895F7452667F4D200FA8ED3 /* EmailVerifyMessageViewController.swift */; };
+		1C044F8728EA30BE00807F01 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518F0EE1E9F90B70092156C /* User.swift */; };
+		1C044F8828EA30BE00807F01 /* DiagnosticErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D5DA9283D2CD100FA50BA /* DiagnosticErrorViewController.swift */; };
+		1C044F8928EA30BE00807F01 /* NSData+hexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8DF1D28076E87004412D9 /* NSData+hexString.m */; };
+		1C044F8A28EA30BE00807F01 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435AAE1EC3014600C7FF10 /* AlertViewController.swift */; };
+		1C044F8B28EA30BE00807F01 /* VideoHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F457B024C05D4E006C309A /* VideoHelpViewController.swift */; };
+		1C044F8D28EA30BE00807F01 /* Omnisense.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B532455B1EB363770001A46F /* Omnisense.framework */; };
+		1C044F8E28EA30BE00807F01 /* Pods_Flipr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF985AD49F2A364BD916185 /* Pods_Flipr.framework */; };
+		1C044F9028EA30BE00807F01 /* GUIDE_1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B5F457BA24C07BF5006C309A /* GUIDE_1.mp4 */; };
+		1C044F9128EA30BE00807F01 /* HUBElectrical.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4895F777266803AF00FA8ED3 /* HUBElectrical.storyboard */; };
+		1C044F9228EA30BE00807F01 /* GUIDE_2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B5F457B924C07BF5006C309A /* GUIDE_2.mp4 */; };
+		1C044F9328EA30BE00807F01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B58A373E1E79859B00C67F6C /* LaunchScreen.storyboard */; };
+		1C044F9428EA30BE00807F01 /* Firmware.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CAD60BE281142B200879A45 /* Firmware.storyboard */; };
+		1C044F9528EA30BE00807F01 /* ImageHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CFBFC9727317FA100AB5771 /* ImageHeader.xib */; };
+		1C044F9628EA30BE00807F01 /* PoolLog.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B57131A022E9AB9300421705 /* PoolLog.storyboard */; };
+		1C044F9728EA30BE00807F01 /* LoginSignup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 489BD3D326146A33007E9BEF /* LoginSignup.storyboard */; };
+		1C044F9828EA30BE00807F01 /* SideMenuViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 484CEB9C25E2AAE2005CD208 /* SideMenuViews.storyboard */; };
+		1C044F9928EA30BE00807F01 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5CB6FE11E801D58007F82BC /* Lato-Bold.ttf */; };
+		1C044F9A28EA30BE00807F01 /* Flipr-eau2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B503970F22C4AD56005B9D30 /* Flipr-eau2.mp4 */; };
+		1C044F9B28EA30BE00807F01 /* HUB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5713F15241163F800278166 /* HUB.storyboard */; };
+		1C044F9C28EA30BE00807F01 /* FliprDevice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48B421872639DC8C005D0AB2 /* FliprDevice.storyboard */; };
+		1C044F9D28EA30BE00807F01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B58A373C1E79859B00C67F6C /* Assets.xcassets */; };
+		1C044F9E28EA30BE00807F01 /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48FC119625DFE45D001E1885 /* Devices.storyboard */; };
+		1C044F9F28EA30BE00807F01 /* HUBDevicePairing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4895F7652668002B00FA8ED3 /* HUBDevicePairing.storyboard */; };
+		1C044FA028EA30BE00807F01 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5CB6FE21E801D58007F82BC /* Lato-Light.ttf */; };
+		1C044FA128EA30BE00807F01 /* HUB.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B519F84E2450114F00477DD1 /* HUB.xcassets */; };
+		1C044FA228EA30BE00807F01 /* GUIDE_3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B5F457BB24C07BF6006C309A /* GUIDE_3.mp4 */; };
+		1C044FA328EA30BE00807F01 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5CB6FE31E801D58007F82BC /* Lato-Regular.ttf */; };
+		1C044FA428EA30BE00807F01 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5192FEE1F7D437A0003AD0B /* Localizable.strings */; };
+		1C044FA528EA30BE00807F01 /* DashCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CFBFC9B27317FAB00AB5771 /* DashCollectionViewCell.xib */; };
+		1C044FA628EA30BE00807F01 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48F91FB72677A45300FFD44B /* Dashboard.storyboard */; };
+		1C044FA728EA30BE00807F01 /* Subscription.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B58B2A50224A7B4B0003BE46 /* Subscription.storyboard */; };
+		1C044FA828EA30BE00807F01 /* Climacons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5CB6FDF1E801A7A007F82BC /* Climacons.ttf */; };
+		1C044FA928EA30BE00807F01 /* GUIDE_5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B5F457B824C07BF5006C309A /* GUIDE_5.mp4 */; };
+		1C044FAA28EA30BE00807F01 /* GUIDE_6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B5F457B724C07BF4006C309A /* GUIDE_6.mp4 */; };
+		1C044FAB28EA30BE00807F01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5666B4B1F8F9B7E006D42EF /* InfoPlist.strings */; };
+		1C044FAC28EA30BE00807F01 /* Calibration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 481FF001265D7D6E000DC977 /* Calibration.storyboard */; };
+		1C044FAD28EA30BE00807F01 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4828D37025C0604500F95683 /* Notifications.storyboard */; };
+		1C044FAE28EA30BE00807F01 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C8697C327B6749800CBC6D7 /* GoogleService-Info.plist */; };
+		1C044FAF28EA30BE00807F01 /* PoolSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4880E1E926558C08006D4472 /* PoolSettings.storyboard */; };
+		1C044FB028EA30BE00807F01 /* Flipr.cyacd in Resources */ = {isa = PBXBuildFile; fileRef = 1CAD60DC28117FDC00879A45 /* Flipr.cyacd */; };
+		1C044FB128EA30BE00807F01 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4895F7702668024D00FA8ED3 /* Signup.storyboard */; };
+		1C044FB228EA30BE00807F01 /* DashScrollViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CFBFC9827317FA400AB5771 /* DashScrollViewItem.xib */; };
+		1C044FB328EA30BE00807F01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B58A37391E79859B00C67F6C /* Main.storyboard */; };
+		1C044FB428EA30BE00807F01 /* GUIDE_4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B5F457BC24C07BF6006C309A /* GUIDE_4.mp4 */; };
+		1C044FB528EA30BE00807F01 /* HUBOnboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4895F75D2668000D00FA8ED3 /* HUBOnboarding.storyboard */; };
 		1C1186DC2812977F001DC5BB /* FirmwareUpgradeHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1186D82812977E001DC5BB /* FirmwareUpgradeHomeViewController.m */; };
 		1C1186DD2812977F001DC5BB /* GATTDBDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1186DA2812977F001DC5BB /* GATTDBDetailsViewController.m */; };
 		1C1186E128129C8A001DC5BB /* FirmwareFileSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1186E028129C8A001DC5BB /* FirmwareFileSelectionViewController.m */; };
 		1C1359092819C20800ED3C56 /* FirmwareUpgradeSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1359082819C20800ED3C56 /* FirmwareUpgradeSuccessViewController.swift */; };
+		1C37AC2128EC4EB500B234E0 /* WatrThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C37AC2028EC4EB500B234E0 /* WatrThemeViewController.swift */; };
 		1C504F2926A1A2340042C2DD /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504F2826A1A2340042C2DD /* DeviceType.swift */; };
 		1C504F2F26A1E3500042C2DD /* HubDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504F2E26A1E3500042C2DD /* HubDeviceTableViewCell.swift */; };
 		1C532615283AA9F1003A4847 /* FlipValueReadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C532614283AA9F1003A4847 /* FlipValueReadingViewController.swift */; };
@@ -20,7 +277,6 @@
 		1C5AE42627512240008F6643 /* HubRenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE42527512240008F6643 /* HubRenameViewController.swift */; };
 		1C5AE428275135DE008F6643 /* NextDaysWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE427275135DE008F6643 /* NextDaysWeatherData.swift */; };
 		1C5AE42A2751363B008F6643 /* WeatherForHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE4292751363B008F6643 /* WeatherForHour.swift */; };
-		1C6ACCED28BE00DE00696CAF /* Mump.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C6ACCEC28BE00DE00696CAF /* Mump.storyboard */; };
 		1C8697C427B6749800CBC6D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C8697C327B6749800CBC6D7 /* GoogleService-Info.plist */; };
 		1C8AD93928167BAD006AA386 /* FirmwereUpdateAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8AD93828167BAD006AA386 /* FirmwereUpdateAlertViewController.swift */; };
 		1C8D5DAA283D2CD100FA50BA /* DiagnosticErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D5DA9283D2CD100FA50BA /* DiagnosticErrorViewController.swift */; };
@@ -36,8 +292,41 @@
 		1CAD60D22811781B00879A45 /* ScannedPeripheralTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD60D12811781B00879A45 /* ScannedPeripheralTableViewCell.m */; };
 		1CAD60DB28117F1800879A45 /* CyCBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD60DA28117F1800879A45 /* CyCBManager.m */; };
 		1CAD60DD28117FDC00879A45 /* Flipr.cyacd in Resources */ = {isa = PBXBuildFile; fileRef = 1CAD60DC28117FDC00879A45 /* Flipr.cyacd */; };
+		1CC696A228EB36F00076DAD1 /* PlaceModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC696A128EB36F00076DAD1 /* PlaceModule.swift */; };
 		1CC9930B26C515AB00E85B47 /* MeasureAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9930A26C515AB00E85B47 /* MeasureAlertViewController.swift */; };
 		1CCB4F0426A34B6E00FDED47 /* EducationScreenContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCB4F0326A34B6E00FDED47 /* EducationScreenContainerViewController.swift */; };
+		1CCD7FBF28EACB6800AF1635 /* Watr.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CCD7FBE28EACB6800AF1635 /* Watr.storyboard */; };
+		1CCD7FC028EACB6800AF1635 /* Watr.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CCD7FBE28EACB6800AF1635 /* Watr.storyboard */; };
+		1CCD7FC328EAD6A600AF1635 /* PlaceDropdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCD7FC228EAD6A600AF1635 /* PlaceDropdownViewController.swift */; };
+		1CCD7FC428EAD6A600AF1635 /* PlaceDropdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCD7FC228EAD6A600AF1635 /* PlaceDropdownViewController.swift */; };
+		1CCD7FC728EADC0700AF1635 /* PlaceDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCD7FC628EADC0700AF1635 /* PlaceDropdown.swift */; };
+		1CCD7FC828EADC0700AF1635 /* PlaceDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCD7FC628EADC0700AF1635 /* PlaceDropdown.swift */; };
+		1CCD7FCB28EAE44900AF1635 /* PlaceDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCD7FCA28EAE44900AF1635 /* PlaceDropdownTableViewCell.swift */; };
+		1CCD7FCC28EAE44900AF1635 /* PlaceDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCD7FCA28EAE44900AF1635 /* PlaceDropdownTableViewCell.swift */; };
+		1CD2B3B928EC15540013BD98 /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3B828EC15540013BD98 /* ShareModel.swift */; };
+		1CD2B3BA28EC15540013BD98 /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3B828EC15540013BD98 /* ShareModel.swift */; };
+		1CD2B3BC28EC15720013BD98 /* FliprShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3BB28EC15720013BD98 /* FliprShare.swift */; };
+		1CD2B3BD28EC15720013BD98 /* FliprShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3BB28EC15720013BD98 /* FliprShare.swift */; };
+		1CD2B3BF28EC18630013BD98 /* NewPool.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD2B3BE28EC18630013BD98 /* NewPool.storyboard */; };
+		1CD2B3C028EC18630013BD98 /* NewPool.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD2B3BE28EC18630013BD98 /* NewPool.storyboard */; };
+		1CD2B3C528EC18820013BD98 /* NewPoolSimpleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3C128EC18810013BD98 /* NewPoolSimpleListViewController.swift */; };
+		1CD2B3C628EC18820013BD98 /* NewPoolSimpleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3C128EC18810013BD98 /* NewPoolSimpleListViewController.swift */; };
+		1CD2B3C728EC18820013BD98 /* NewPoolLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3C228EC18810013BD98 /* NewPoolLocationViewController.swift */; };
+		1CD2B3C828EC18820013BD98 /* NewPoolLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3C228EC18810013BD98 /* NewPoolLocationViewController.swift */; };
+		1CD2B3C928EC18820013BD98 /* NewPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3C328EC18810013BD98 /* NewPoolViewController.swift */; };
+		1CD2B3CA28EC18820013BD98 /* NewPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3C328EC18810013BD98 /* NewPoolViewController.swift */; };
+		1CD2B3CB28EC18820013BD98 /* PoolShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3C428EC18820013BD98 /* PoolShareViewController.swift */; };
+		1CD2B3CC28EC18820013BD98 /* PoolShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3C428EC18820013BD98 /* PoolShareViewController.swift */; };
+		1CD2B3CF28EC18980013BD98 /* NewPoolSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3CD28EC18970013BD98 /* NewPoolSettingsTableViewCell.swift */; };
+		1CD2B3D028EC18980013BD98 /* NewPoolSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3CD28EC18970013BD98 /* NewPoolSettingsTableViewCell.swift */; };
+		1CD2B3D128EC18980013BD98 /* NewPoolTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3CE28EC18980013BD98 /* NewPoolTextFieldTableViewCell.swift */; };
+		1CD2B3D228EC18980013BD98 /* NewPoolTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3CE28EC18980013BD98 /* NewPoolTextFieldTableViewCell.swift */; };
+		1CD2B3D428EC18AA0013BD98 /* NewPoolTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3D328EC18AA0013BD98 /* NewPoolTitles.swift */; };
+		1CD2B3D528EC18AA0013BD98 /* NewPoolTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3D328EC18AA0013BD98 /* NewPoolTitles.swift */; };
+		1CD2B3D728EC2AB00013BD98 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD2B3D628EC2AB00013BD98 /* Settings.storyboard */; };
+		1CD2B3D828EC2AB00013BD98 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD2B3D628EC2AB00013BD98 /* Settings.storyboard */; };
+		1CD2B3DA28EC35250013BD98 /* WatrSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3D928EC35250013BD98 /* WatrSettingsViewController.swift */; };
+		1CD2B3DB28EC35250013BD98 /* WatrSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3D928EC35250013BD98 /* WatrSettingsViewController.swift */; };
 		1CD6992726E5F1C400563CBE /* FliprHubMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6992626E5F1C400563CBE /* FliprHubMenuViewController.swift */; };
 		1CD6992A26E5F6AF00563CBE /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6992926E5F6AF00563CBE /* MenuTableViewCell.swift */; };
 		1CD6992C26E6039F00563CBE /* ExpertMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6992B26E6039F00563CBE /* ExpertMenuViewController.swift */; };
@@ -267,6 +556,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C044FBC28EA30BE00807F01 /* Watr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C044FBD28EA30BF00807F01 /* Watr-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Watr-Info.plist"; path = "/Users/ajeesh/Documents/Flipr - Watr/IOS-master/Watr-Info.plist"; sourceTree = "<absolute>"; };
 		1C1186D72812977E001DC5BB /* FirmwareUpgradeHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirmwareUpgradeHomeViewController.h; sourceTree = "<group>"; };
 		1C1186D82812977E001DC5BB /* FirmwareUpgradeHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirmwareUpgradeHomeViewController.m; sourceTree = "<group>"; };
 		1C1186D92812977E001DC5BB /* GATTDBDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GATTDBDetailsViewController.h; sourceTree = "<group>"; };
@@ -274,6 +565,7 @@
 		1C1186DF28129C8A001DC5BB /* FirmwareFileSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirmwareFileSelectionViewController.h; sourceTree = "<group>"; };
 		1C1186E028129C8A001DC5BB /* FirmwareFileSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirmwareFileSelectionViewController.m; sourceTree = "<group>"; };
 		1C1359082819C20800ED3C56 /* FirmwareUpgradeSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareUpgradeSuccessViewController.swift; sourceTree = "<group>"; };
+		1C37AC2028EC4EB500B234E0 /* WatrThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatrThemeViewController.swift; sourceTree = "<group>"; };
 		1C504F2826A1A2340042C2DD /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		1C504F2E26A1E3500042C2DD /* HubDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubDeviceTableViewCell.swift; sourceTree = "<group>"; };
 		1C532614283AA9F1003A4847 /* FlipValueReadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipValueReadingViewController.swift; sourceTree = "<group>"; };
@@ -283,7 +575,6 @@
 		1C5AE42527512240008F6643 /* HubRenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubRenameViewController.swift; sourceTree = "<group>"; };
 		1C5AE427275135DE008F6643 /* NextDaysWeatherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextDaysWeatherData.swift; sourceTree = "<group>"; };
 		1C5AE4292751363B008F6643 /* WeatherForHour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherForHour.swift; sourceTree = "<group>"; };
-		1C6ACCEC28BE00DE00696CAF /* Mump.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mump.storyboard; sourceTree = "<group>"; };
 		1C8697C327B6749800CBC6D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1C8AD93828167BAD006AA386 /* FirmwereUpdateAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwereUpdateAlertViewController.swift; sourceTree = "<group>"; };
 		1C8D5DA9283D2CD100FA50BA /* DiagnosticErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticErrorViewController.swift; sourceTree = "<group>"; };
@@ -302,8 +593,25 @@
 		1CAD60D928117F1800879A45 /* CyCBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CyCBManager.h; sourceTree = "<group>"; };
 		1CAD60DA28117F1800879A45 /* CyCBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CyCBManager.m; sourceTree = "<group>"; };
 		1CAD60DC28117FDC00879A45 /* Flipr.cyacd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Flipr.cyacd; sourceTree = "<group>"; };
+		1CC696A128EB36F00076DAD1 /* PlaceModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModule.swift; sourceTree = "<group>"; };
 		1CC9930A26C515AB00E85B47 /* MeasureAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureAlertViewController.swift; sourceTree = "<group>"; };
 		1CCB4F0326A34B6E00FDED47 /* EducationScreenContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationScreenContainerViewController.swift; sourceTree = "<group>"; };
+		1CCD7FBE28EACB6800AF1635 /* Watr.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Watr.storyboard; sourceTree = "<group>"; };
+		1CCD7FC228EAD6A600AF1635 /* PlaceDropdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDropdownViewController.swift; sourceTree = "<group>"; };
+		1CCD7FC628EADC0700AF1635 /* PlaceDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDropdown.swift; sourceTree = "<group>"; };
+		1CCD7FCA28EAE44900AF1635 /* PlaceDropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDropdownTableViewCell.swift; sourceTree = "<group>"; };
+		1CD2B3B828EC15540013BD98 /* ShareModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
+		1CD2B3BB28EC15720013BD98 /* FliprShare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FliprShare.swift; sourceTree = "<group>"; };
+		1CD2B3BE28EC18630013BD98 /* NewPool.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewPool.storyboard; sourceTree = "<group>"; };
+		1CD2B3C128EC18810013BD98 /* NewPoolSimpleListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPoolSimpleListViewController.swift; sourceTree = "<group>"; };
+		1CD2B3C228EC18810013BD98 /* NewPoolLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPoolLocationViewController.swift; sourceTree = "<group>"; };
+		1CD2B3C328EC18810013BD98 /* NewPoolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPoolViewController.swift; sourceTree = "<group>"; };
+		1CD2B3C428EC18820013BD98 /* PoolShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoolShareViewController.swift; sourceTree = "<group>"; };
+		1CD2B3CD28EC18970013BD98 /* NewPoolSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPoolSettingsTableViewCell.swift; sourceTree = "<group>"; };
+		1CD2B3CE28EC18980013BD98 /* NewPoolTextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPoolTextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		1CD2B3D328EC18AA0013BD98 /* NewPoolTitles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPoolTitles.swift; sourceTree = "<group>"; };
+		1CD2B3D628EC2AB00013BD98 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		1CD2B3D928EC35250013BD98 /* WatrSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatrSettingsViewController.swift; sourceTree = "<group>"; };
 		1CD6992626E5F1C400563CBE /* FliprHubMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprHubMenuViewController.swift; sourceTree = "<group>"; };
 		1CD6992926E5F6AF00563CBE /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		1CD6992B26E6039F00563CBE /* ExpertMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertMenuViewController.swift; sourceTree = "<group>"; };
@@ -578,6 +886,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1C044F8C28EA30BE00807F01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C044F8D28EA30BE00807F01 /* Omnisense.framework in Frameworks */,
+				1C044F8E28EA30BE00807F01 /* Pods_Flipr.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B58A372F1E79859B00C67F6C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -618,14 +935,6 @@
 			path = "Last measurement";
 			sourceTree = "<group>";
 		};
-		1C71F27328BCE94C0034FF99 /* MUMP */ = {
-			isa = PBXGroup;
-			children = (
-				1C6ACCEC28BE00DE00696CAF /* Mump.storyboard */,
-			);
-			path = MUMP;
-			sourceTree = "<group>";
-		};
 		1C9A756B27354DE400D4FEE6 /* Hub */ = {
 			isa = PBXGroup;
 			children = (
@@ -643,6 +952,52 @@
 				1CAD60BE281142B200879A45 /* Firmware.storyboard */,
 			);
 			path = FirmwareUpdate;
+			sourceTree = "<group>";
+		};
+		1CCD7FBD28EACB4300AF1635 /* Watr */ = {
+			isa = PBXGroup;
+			children = (
+				1CCD7FBE28EACB6800AF1635 /* Watr.storyboard */,
+				1CD2B3BE28EC18630013BD98 /* NewPool.storyboard */,
+				1CD2B3D628EC2AB00013BD98 /* Settings.storyboard */,
+			);
+			path = Watr;
+			sourceTree = "<group>";
+		};
+		1CCD7FC128EAD67D00AF1635 /* Watr */ = {
+			isa = PBXGroup;
+			children = (
+				1CCD7FC228EAD6A600AF1635 /* PlaceDropdownViewController.swift */,
+				1CD2B3C228EC18810013BD98 /* NewPoolLocationViewController.swift */,
+				1CD2B3C128EC18810013BD98 /* NewPoolSimpleListViewController.swift */,
+				1CD2B3C328EC18810013BD98 /* NewPoolViewController.swift */,
+				1CD2B3C428EC18820013BD98 /* PoolShareViewController.swift */,
+				1CD2B3D928EC35250013BD98 /* WatrSettingsViewController.swift */,
+				1C37AC2028EC4EB500B234E0 /* WatrThemeViewController.swift */,
+			);
+			path = Watr;
+			sourceTree = "<group>";
+		};
+		1CCD7FC528EADBEF00AF1635 /* Watr */ = {
+			isa = PBXGroup;
+			children = (
+				1CD2B3B828EC15540013BD98 /* ShareModel.swift */,
+				1CD2B3D328EC18AA0013BD98 /* NewPoolTitles.swift */,
+				1CD2B3BB28EC15720013BD98 /* FliprShare.swift */,
+				1CCD7FC628EADC0700AF1635 /* PlaceDropdown.swift */,
+				1CC696A128EB36F00076DAD1 /* PlaceModule.swift */,
+			);
+			path = Watr;
+			sourceTree = "<group>";
+		};
+		1CCD7FC928EAE42900AF1635 /* Watr */ = {
+			isa = PBXGroup;
+			children = (
+				1CD2B3CD28EC18970013BD98 /* NewPoolSettingsTableViewCell.swift */,
+				1CD2B3CE28EC18980013BD98 /* NewPoolTextFieldTableViewCell.swift */,
+				1CCD7FCA28EAE44900AF1635 /* PlaceDropdownTableViewCell.swift */,
+			);
+			path = Watr;
 			sourceTree = "<group>";
 		};
 		1CD6992526E5EEB700563CBE /* Menu */ = {
@@ -818,7 +1173,7 @@
 		4828D36F25C0602300F95683 /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
-				1C71F27328BCE94C0034FF99 /* MUMP */,
+				1CCD7FBD28EACB4300AF1635 /* Watr */,
 				1CAD60BD2811424500879A45 /* FirmwareUpdate */,
 				48F91FB62677A3BD00FFD44B /* Dashboard */,
 				48210CF12668EC2A00AE4507 /* Pool */,
@@ -1099,6 +1454,7 @@
 		B50009821F0101BC00A84A4F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1CCD7FC928EAE42900AF1635 /* Watr */,
 				488FC81F267A7C3900D41EB4 /* New Design */,
 				4895F7562667FCF000FA8ED3 /* DeviceList */,
 				B5FCC3472243A7410064370D /* SimplePageViewController.swift */,
@@ -1114,6 +1470,7 @@
 		B518F0EA1E9F8DAF0092156C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1CCD7FC128EAD67D00AF1635 /* Watr */,
 				48980EA726171DFA009A0F24 /* BaseViewContorller */,
 				489BD3D72614749D007E9BEF /* NewDesign */,
 				484CEBA225E2DAA2005CD208 /* NewController */,
@@ -1152,6 +1509,7 @@
 		B518F0ED1E9F90AC0092156C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1CCD7FC528EADBEF00AF1635 /* Watr */,
 				1C5AE4292751363B008F6643 /* WeatherForHour.swift */,
 				1C5AE427275135DE008F6643 /* NextDaysWeatherData.swift */,
 				B518F0EE1E9F90B70092156C /* User.swift */,
@@ -1232,6 +1590,7 @@
 				B58A37331E79859B00C67F6C /* Products */,
 				8DE53968CCEDEEDDE573FE5B /* Pods */,
 				EF51DA7FDCFD3864856CF089 /* Frameworks */,
+				1C044FBD28EA30BF00807F01 /* Watr-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1239,6 +1598,7 @@
 			isa = PBXGroup;
 			children = (
 				B58A37321E79859B00C67F6C /* Flipr.app */,
+				1C044FBC28EA30BE00807F01 /* Watr.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1346,6 +1706,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1C044EB128EA30BE00807F01 /* Watr */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C044FB928EA30BE00807F01 /* Build configuration list for PBXNativeTarget "Watr" */;
+			buildPhases = (
+				1C044EB228EA30BE00807F01 /* [CP] Check Pods Manifest.lock */,
+				1C044EB328EA30BE00807F01 /* Sources */,
+				1C044F8C28EA30BE00807F01 /* Frameworks */,
+				1C044F8F28EA30BE00807F01 /* Resources */,
+				1C044FB628EA30BE00807F01 /* [CP] Embed Pods Frameworks */,
+				1C044FB728EA30BE00807F01 /* ShellScript */,
+				1C044FB828EA30BE00807F01 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Watr;
+			productName = Flipr;
+			productReference = 1C044FBC28EA30BE00807F01 /* Watr.app */;
+			productType = "com.apple.product-type.application";
+		};
 		B58A37311E79859B00C67F6C /* Flipr */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B58A37441E79859B00C67F6C /* Build configuration list for PBXNativeTarget "Flipr" */;
@@ -1377,6 +1758,10 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "I See U";
 				TargetAttributes = {
+					1C044EB128EA30BE00807F01 = {
+						DevelopmentTeam = 6M9RZXR8UH;
+						ProvisioningStyle = Automatic;
+					};
 					B58A37311E79859B00C67F6C = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 6M9RZXR8UH;
@@ -1409,11 +1794,60 @@
 			projectRoot = "";
 			targets = (
 				B58A37311E79859B00C67F6C /* Flipr */,
+				1C044EB128EA30BE00807F01 /* Watr */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1C044F8F28EA30BE00807F01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C044F9028EA30BE00807F01 /* GUIDE_1.mp4 in Resources */,
+				1C044F9128EA30BE00807F01 /* HUBElectrical.storyboard in Resources */,
+				1C044F9228EA30BE00807F01 /* GUIDE_2.mp4 in Resources */,
+				1C044F9328EA30BE00807F01 /* LaunchScreen.storyboard in Resources */,
+				1C044F9428EA30BE00807F01 /* Firmware.storyboard in Resources */,
+				1C044F9528EA30BE00807F01 /* ImageHeader.xib in Resources */,
+				1C044F9628EA30BE00807F01 /* PoolLog.storyboard in Resources */,
+				1C044F9728EA30BE00807F01 /* LoginSignup.storyboard in Resources */,
+				1C044F9828EA30BE00807F01 /* SideMenuViews.storyboard in Resources */,
+				1C044F9928EA30BE00807F01 /* Lato-Bold.ttf in Resources */,
+				1C044F9A28EA30BE00807F01 /* Flipr-eau2.mp4 in Resources */,
+				1CD2B3D828EC2AB00013BD98 /* Settings.storyboard in Resources */,
+				1C044F9B28EA30BE00807F01 /* HUB.storyboard in Resources */,
+				1C044F9C28EA30BE00807F01 /* FliprDevice.storyboard in Resources */,
+				1C044F9D28EA30BE00807F01 /* Assets.xcassets in Resources */,
+				1C044F9E28EA30BE00807F01 /* Devices.storyboard in Resources */,
+				1C044F9F28EA30BE00807F01 /* HUBDevicePairing.storyboard in Resources */,
+				1C044FA028EA30BE00807F01 /* Lato-Light.ttf in Resources */,
+				1C044FA128EA30BE00807F01 /* HUB.xcassets in Resources */,
+				1C044FA228EA30BE00807F01 /* GUIDE_3.mp4 in Resources */,
+				1C044FA328EA30BE00807F01 /* Lato-Regular.ttf in Resources */,
+				1C044FA428EA30BE00807F01 /* Localizable.strings in Resources */,
+				1C044FA528EA30BE00807F01 /* DashCollectionViewCell.xib in Resources */,
+				1C044FA628EA30BE00807F01 /* Dashboard.storyboard in Resources */,
+				1C044FA728EA30BE00807F01 /* Subscription.storyboard in Resources */,
+				1C044FA828EA30BE00807F01 /* Climacons.ttf in Resources */,
+				1C044FA928EA30BE00807F01 /* GUIDE_5.mp4 in Resources */,
+				1C044FAA28EA30BE00807F01 /* GUIDE_6.mp4 in Resources */,
+				1C044FAB28EA30BE00807F01 /* InfoPlist.strings in Resources */,
+				1C044FAC28EA30BE00807F01 /* Calibration.storyboard in Resources */,
+				1C044FAD28EA30BE00807F01 /* Notifications.storyboard in Resources */,
+				1C044FAE28EA30BE00807F01 /* GoogleService-Info.plist in Resources */,
+				1C044FAF28EA30BE00807F01 /* PoolSettings.storyboard in Resources */,
+				1C044FB028EA30BE00807F01 /* Flipr.cyacd in Resources */,
+				1C044FB128EA30BE00807F01 /* Signup.storyboard in Resources */,
+				1C044FB228EA30BE00807F01 /* DashScrollViewItem.xib in Resources */,
+				1C044FB328EA30BE00807F01 /* Main.storyboard in Resources */,
+				1C044FB428EA30BE00807F01 /* GUIDE_4.mp4 in Resources */,
+				1CD2B3C028EC18630013BD98 /* NewPool.storyboard in Resources */,
+				1CCD7FC028EACB6800AF1635 /* Watr.storyboard in Resources */,
+				1C044FB528EA30BE00807F01 /* HUBOnboarding.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B58A37301E79859B00C67F6C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1429,6 +1863,7 @@
 				484CEB9D25E2AAE2005CD208 /* SideMenuViews.storyboard in Resources */,
 				B5CB6FE41E801D58007F82BC /* Lato-Bold.ttf in Resources */,
 				B503971022C4AD56005B9D30 /* Flipr-eau2.mp4 in Resources */,
+				1CD2B3D728EC2AB00013BD98 /* Settings.storyboard in Resources */,
 				B5713F16241163F800278166 /* HUB.storyboard in Resources */,
 				48B421882639DC8C005D0AB2 /* FliprDevice.storyboard in Resources */,
 				B58A373D1E79859B00C67F6C /* Assets.xcassets in Resources */,
@@ -1443,7 +1878,6 @@
 				48F91FB82677A45300FFD44B /* Dashboard.storyboard in Resources */,
 				B58B2A51224A7B4B0003BE46 /* Subscription.storyboard in Resources */,
 				B5CB6FE01E801A7A007F82BC /* Climacons.ttf in Resources */,
-				1C6ACCED28BE00DE00696CAF /* Mump.storyboard in Resources */,
 				B5F457BE24C07BF6006C309A /* GUIDE_5.mp4 in Resources */,
 				B5F457BD24C07BF6006C309A /* GUIDE_6.mp4 in Resources */,
 				B5666B491F8F9B7E006D42EF /* InfoPlist.strings in Resources */,
@@ -1456,6 +1890,8 @@
 				1CFBFC9D27317FAB00AB5771 /* DashScrollViewItem.xib in Resources */,
 				B58A373B1E79859B00C67F6C /* Main.storyboard in Resources */,
 				B5F457C224C07BF6006C309A /* GUIDE_4.mp4 in Resources */,
+				1CD2B3BF28EC18630013BD98 /* NewPool.storyboard in Resources */,
+				1CCD7FBF28EACB6800AF1635 /* Watr.storyboard in Resources */,
 				4895F7602668000E00FA8ED3 /* HUBOnboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1463,6 +1899,121 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1C044EB228EA30BE00807F01 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Flipr-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1C044FB628EA30BE00807F01 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Flipr/Pods-Flipr-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/BAFluidView/BAFluidView.framework",
+				"${BUILT_PRODUCTS_DIR}/BarcodeScanner/BarcodeScanner.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/Device/Device.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MSCircularSlider/MSCircularSlider.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/RangeSeekSlider/RangeSeekSlider.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftVideoBackground/SwiftVideoBackground.framework",
+				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActiveLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BAFluidView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BarcodeScanner.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Device.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseMessaging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSCircularSlider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RangeSeekSlider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftVideoBackground.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Flipr/Pods-Flipr-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1C044FB728EA30BE00807F01 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 4f6ec4b85f028ad524701c734b5ec25337a6e60b 24b97594bbf7c8ddf706ce4417db66aa0bda8f3a21217900fcf48b6afa14020f\n";
+		};
+		1C044FB828EA30BE00807F01 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Flipr/Pods-Flipr-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Flipr/Pods-Flipr-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		40B345A61466E1F065749618 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1581,6 +2132,244 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1C044EB328EA30BE00807F01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C044EB428EA30BE00807F01 /* MyNSObject.swift in Sources */,
+				1C044EB528EA30BE00807F01 /* WaterLevelTableViewController.swift in Sources */,
+				1C044EB628EA30BE00807F01 /* SimplePageViewController.swift in Sources */,
+				1C044EB728EA30BE00807F01 /* Log.swift in Sources */,
+				1C044EB828EA30BE00807F01 /* EquipmentTableViewController.swift in Sources */,
+				1C044EB928EA30BE00807F01 /* FliprSplashViewController.swift in Sources */,
+				1C044EBA28EA30BE00807F01 /* OTAFileParser.m in Sources */,
+				1C044EBB28EA30BE00807F01 /* ProductsAndEquipmentsViewController.swift in Sources */,
+				1C044EBC28EA30BE00807F01 /* KeyEnterViewController.swift in Sources */,
+				1C044EBD28EA30BE00807F01 /* SubscriptionOptionTableViewCell.swift in Sources */,
+				1C044EBE28EA30BE00807F01 /* CyCBManager.m in Sources */,
+				1C044EBF28EA30BE00807F01 /* UIButton+Activity.swift in Sources */,
+				1CCD7FC428EAD6A600AF1635 /* PlaceDropdownViewController.swift in Sources */,
+				1C044EC028EA30BE00807F01 /* DescribeMyPoolViewController.swift in Sources */,
+				1C044EC128EA30BE00807F01 /* PoolCharacteristicsViewController.swift in Sources */,
+				1C044EC228EA30BE00807F01 /* Extensions.swift in Sources */,
+				1C044EC328EA30BE00807F01 /* EmailVerifyViewController.swift in Sources */,
+				1CD2B3BD28EC15720013BD98 /* FliprShare.swift in Sources */,
+				1C044EC428EA30BE00807F01 /* AddHubViewController.swift in Sources */,
+				1C044EC528EA30BE00807F01 /* NSString+hex.m in Sources */,
+				1C044EC628EA30BE00807F01 /* WaterLevelViewController.swift in Sources */,
+				1C044EC728EA30BE00807F01 /* WaveTableViewCell.swift in Sources */,
+				1C044EC828EA30BE00807F01 /* ViewController.swift in Sources */,
+				1C044EC928EA30BE00807F01 /* DashCollectionViewCell.swift in Sources */,
+				1C044ECA28EA30BE00807F01 /* LogType.swift in Sources */,
+				1C044ECB28EA30BE00807F01 /* FirmwareUpgradeHomeViewController.m in Sources */,
+				1C044ECC28EA30BE00807F01 /* ActivationViewController.swift in Sources */,
+				1C044ECD28EA30BE00807F01 /* Stock.swift in Sources */,
+				1C044ECE28EA30BE00807F01 /* HUBManager.swift in Sources */,
+				1C044ECF28EA30BE00807F01 /* SubscriptionPageViewController.swift in Sources */,
+				1C044ED028EA30BE00807F01 /* HUBProgramViewController.swift in Sources */,
+				1C044ED128EA30BE00807F01 /* HUB.swift in Sources */,
+				1C044ED228EA30BE00807F01 /* Error+Code.swift in Sources */,
+				1C044ED328EA30BE00807F01 /* UIAlertController+Additions.m in Sources */,
+				1C044ED428EA30BE00807F01 /* BLEManager.swift in Sources */,
+				1C044ED528EA30BE00807F01 /* PoolUsageViewController.swift in Sources */,
+				1C044ED628EA30BE00807F01 /* SettingsViewController.swift in Sources */,
+				1C044ED728EA30BE00807F01 /* PoolLocationViewController.swift in Sources */,
+				1C044ED828EA30BE00807F01 /* LoginEducationViewOneController.swift in Sources */,
+				1C044ED928EA30BE00807F01 /* MeasureAlertViewController.swift in Sources */,
+				1C044EDA28EA30BE00807F01 /* FliprHubNonSubscriptionMenuViewController.swift in Sources */,
+				1C044EDB28EA30BE00807F01 /* HUBOnboardingViewController.swift in Sources */,
+				1C044EDC28EA30BE00807F01 /* capsenseModel.m in Sources */,
+				1C044EDD28EA30BE00807F01 /* WelcomeViewController.swift in Sources */,
+				1C044EDE28EA30BE00807F01 /* FlipValueReaderViewController.swift in Sources */,
+				1C044EDF28EA30BE00807F01 /* Product.swift in Sources */,
+				1CD2B3DB28EC35250013BD98 /* WatrSettingsViewController.swift in Sources */,
+				1C044EE028EA30BE00807F01 /* ChlorineCalibrationViewController.swift in Sources */,
+				1C044EE128EA30BE00807F01 /* ElectricalSetupViewController.swift in Sources */,
+				1C044EE228EA30BE00807F01 /* ExpertMenuViewController.swift in Sources */,
+				1C044EE328EA30BE00807F01 /* ElectricalSetupPrepareViewController.swift in Sources */,
+				1C044EE428EA30BE00807F01 /* VigilanceViewController.swift in Sources */,
+				1C044EE528EA30BE00807F01 /* WeatherForDay.swift in Sources */,
+				1C044EE628EA30BE00807F01 /* LoginViewController.swift in Sources */,
+				1C044EE728EA30BE00807F01 /* RoundBorderedButton.swift in Sources */,
+				1C044EE828EA30BE00807F01 /* ResourceHandler.m in Sources */,
+				1C044EE928EA30BE00807F01 /* CalibrationPh7IntroViewController.swift in Sources */,
+				1C044EEA28EA30BE00807F01 /* SetupFifthStepViewController.swift in Sources */,
+				1C044EEB28EA30BE00807F01 /* UIViewController+Helper.swift in Sources */,
+				1C044EEC28EA30BE00807F01 /* HUBNamingViewController.swift in Sources */,
+				1C044EED28EA30BE00807F01 /* LandingViewController.swift in Sources */,
+				1C37AC2128EC4EB500B234E0 /* WatrThemeViewController.swift in Sources */,
+				1C044EEE28EA30BE00807F01 /* StartViewController.swift in Sources */,
+				1C044EEF28EA30BE00807F01 /* ElectricalVideoViewController.swift in Sources */,
+				1C044EF028EA30BE00807F01 /* FunCamViewController.swift in Sources */,
+				1C044EF128EA30BE00807F01 /* HomeViewController.m in Sources */,
+				1C044EF228EA30BE00807F01 /* PoolSettingsStartViewController.swift in Sources */,
+				1C044EF328EA30BE00807F01 /* HUBPairingSuccessViewController.swift in Sources */,
+				1C044EF428EA30BE00807F01 /* ModuleTypeSelectionViewController.swift in Sources */,
+				1C044EF528EA30BE00807F01 /* FirmwareBaseViewController.m in Sources */,
+				1C044EF628EA30BE00807F01 /* ProductTableViewController.swift in Sources */,
+				1C044EF728EA30BE00807F01 /* ActionsTableViewController.swift in Sources */,
+				1CD2B3D228EC18980013BD98 /* NewPoolTextFieldTableViewCell.swift in Sources */,
+				1C044EF828EA30BE00807F01 /* ValuePickerController.swift in Sources */,
+				1C044EF928EA30BE00807F01 /* String+FliprDate.swift in Sources */,
+				1C044EFA28EA30BE00807F01 /* Decoder.swift in Sources */,
+				1C044EFB28EA30BE00807F01 /* AccountViewController.swift in Sources */,
+				1C044EFC28EA30BE00807F01 /* CalibrationSuccessViewController.swift in Sources */,
+				1C044EFD28EA30BE00807F01 /* CSCModel.m in Sources */,
+				1C044EFE28EA30BE00807F01 /* CalibrationChlorineIntroViewController.swift in Sources */,
+				1C044EFF28EA30BE00807F01 /* BaseViewController.swift in Sources */,
+				1C044F0028EA30BE00807F01 /* DashScrollViewItem.swift in Sources */,
+				1C044F0128EA30BE00807F01 /* ProductTypeTableViewController.swift in Sources */,
+				1CD2B3CC28EC18820013BD98 /* PoolShareViewController.swift in Sources */,
+				1C044F0228EA30BE00807F01 /* NewDashboardViewController.swift in Sources */,
+				1C044F0328EA30BE00807F01 /* AccelerometerModel.m in Sources */,
+				1C044F0428EA30BE00807F01 /* EmailVerificationViewController.swift in Sources */,
+				1C044F0528EA30BE00807F01 /* CablesSelectionViewController.swift in Sources */,
+				1C044F0628EA30BE00807F01 /* PoolLogEditViewController.swift in Sources */,
+				1C044F0728EA30BE00807F01 /* StripViewController.swift in Sources */,
+				1C044F0828EA30BE00807F01 /* FliprHubMenuViewController.swift in Sources */,
+				1CD2B3C628EC18820013BD98 /* NewPoolSimpleListViewController.swift in Sources */,
+				1C044F0928EA30BE00807F01 /* BPModel.m in Sources */,
+				1C044F0A28EA30BE00807F01 /* HubSettingsViewController.swift in Sources */,
+				1C044F0B28EA30BE00807F01 /* LogTableViewCell.swift in Sources */,
+				1C044F0C28EA30BE00807F01 /* LoadingViewController.swift in Sources */,
+				1C044F0D28EA30BE00807F01 /* HUBScanTableViewController.swift in Sources */,
+				1C044F0E28EA30BE00807F01 /* PaidSubscription.swift in Sources */,
+				1C044F0F28EA30BE00807F01 /* LightNavigationViewController.swift in Sources */,
+				1C044F1028EA30BE00807F01 /* NotificationSwitchTableViewCell.swift in Sources */,
+				1C044F1128EA30BE00807F01 /* Strip.swift in Sources */,
+				1C044F1228EA30BE00807F01 /* HUBWifiNetwork.swift in Sources */,
+				1C044F1328EA30BE00807F01 /* BatteryServiceModel.m in Sources */,
+				1C044F1428EA30BE00807F01 /* DeviceViewController.swift in Sources */,
+				1C044F1528EA30BE00807F01 /* DashboardViewController.swift in Sources */,
+				1C044F1628EA30BE00807F01 /* CBOR.swift in Sources */,
+				1C044F1728EA30BE00807F01 /* MajorTypes.swift in Sources */,
+				1C044F1828EA30BE00807F01 /* Reachability.m in Sources */,
+				1C044F1928EA30BE00807F01 /* EducationScreenContainerViewController.swift in Sources */,
+				1C044F1A28EA30BE00807F01 /* PairingSuccessViewController.swift in Sources */,
+				1CD2B3C828EC18820013BD98 /* NewPoolLocationViewController.swift in Sources */,
+				1C044F1B28EA30BE00807F01 /* BootLoaderServiceModel.m in Sources */,
+				1C044F1C28EA30BE00807F01 /* HubRemoveViewController.swift in Sources */,
+				1C044F1D28EA30BE00807F01 /* LoggerHandler.m in Sources */,
+				1C044F1E28EA30BE00807F01 /* ExpertModeViewController.swift in Sources */,
+				1C044F1F28EA30BE00807F01 /* GATTDBDetailsViewController.m in Sources */,
+				1C044F2028EA30BE00807F01 /* WaterLevel.swift in Sources */,
+				1C044F2128EA30BE00807F01 /* BluetoothAlertViewController.swift in Sources */,
+				1C044F2228EA30BE00807F01 /* AddnewDeviceViewController.swift in Sources */,
+				1C044F2328EA30BE00807F01 /* FlipValueReadingViewController.swift in Sources */,
+				1C044F2428EA30BE00807F01 /* UIView+EmptyStateView.swift in Sources */,
+				1CCD7FC828EADC0700AF1635 /* PlaceDropdown.swift in Sources */,
+				1CD2B3D528EC18AA0013BD98 /* NewPoolTitles.swift in Sources */,
+				1C044F2528EA30BE00807F01 /* ProductAttributesViewController.swift in Sources */,
+				1C044F2628EA30BE00807F01 /* DeviceInfoTableViewCell.swift in Sources */,
+				1C044F2728EA30BE00807F01 /* NotificationsAlertViewController.swift in Sources */,
+				1C044F2828EA30BE00807F01 /* RemoteControl.swift in Sources */,
+				1C044F2928EA30BE00807F01 /* ElectricalCableSelectionViewController.swift in Sources */,
+				1C044F2A28EA30BE00807F01 /* WaterLevelTableViewCell.swift in Sources */,
+				1C044F2B28EA30BE00807F01 /* AppDelegate.swift in Sources */,
+				1C044F2C28EA30BE00807F01 /* Utilities.m in Sources */,
+				1C044F2D28EA30BE00807F01 /* RSCModel.m in Sources */,
+				1C044F2E28EA30BE00807F01 /* ProgramCollectionViewCell.swift in Sources */,
+				1C044F2F28EA30BE00807F01 /* ForgotPasswordViewController.swift in Sources */,
+				1C044F3028EA30BE00807F01 /* HubMenuViewController.swift in Sources */,
+				1C044F3128EA30BE00807F01 /* CustomTextField.swift in Sources */,
+				1C044F3228EA30BE00807F01 /* Router.swift in Sources */,
+				1C044F3328EA30BE00807F01 /* ActionsViewController.swift in Sources */,
+				1C044F3428EA30BE00807F01 /* PoolViewController.swift in Sources */,
+				1C044F3528EA30BE00807F01 /* DeviceSize.swift in Sources */,
+				1C044F3628EA30BE00807F01 /* ScannedPeripheralTableViewCell.m in Sources */,
+				1C044F3728EA30BE00807F01 /* WifiListViewController.swift in Sources */,
+				1C044F3828EA30BE00807F01 /* HubTypeSelectionViewController.swift in Sources */,
+				1C044F3928EA30BE00807F01 /* HistoricViewController.swift in Sources */,
+				1C044F3A28EA30BE00807F01 /* FirmwareFileSelectionViewController.m in Sources */,
+				1C044F3B28EA30BE00807F01 /* SubscriptionService.swift in Sources */,
+				1C044F3C28EA30BE00807F01 /* Ph7CalibrationViewController.swift in Sources */,
+				1C044F3D28EA30BE00807F01 /* AlertTableViewController.swift in Sources */,
+				1C044F3E28EA30BE00807F01 /* CongratsViewController.swift in Sources */,
+				1C044F3F28EA30BE00807F01 /* FliperListViewController.swift in Sources */,
+				1C044F4028EA30BE00807F01 /* Encoder.swift in Sources */,
+				1C044F4128EA30BE00807F01 /* ProductViewController.swift in Sources */,
+				1C044F4228EA30BE00807F01 /* Constants.swift in Sources */,
+				1C044F4328EA30BE00807F01 /* LogTypeTableViewController.swift in Sources */,
+				1C044F4428EA30BE00807F01 /* Alert.swift in Sources */,
+				1C044F4528EA30BE00807F01 /* FirmwereUpdateAlertViewController.swift in Sources */,
+				1C044F4628EA30BE00807F01 /* HUBWifiTableViewController.swift in Sources */,
+				1CD2B3CA28EC18820013BD98 /* NewPoolViewController.swift in Sources */,
+				1C044F4728EA30BE00807F01 /* HUBActivationViewController.swift in Sources */,
+				1C044F4828EA30BE00807F01 /* StockTableViewCell.swift in Sources */,
+				1C044F4928EA30BE00807F01 /* DropDownView.m in Sources */,
+				1C044F4A28EA30BE00807F01 /* AppReview.swift in Sources */,
+				1C044F4B28EA30BE00807F01 /* SignUpProfileController.swift in Sources */,
+				1C044F4C28EA30BE00807F01 /* DevieInformationModel.m in Sources */,
+				1C044F4D28EA30BE00807F01 /* BackupFliprReaderViewController.swift in Sources */,
+				1C044F4E28EA30BE00807F01 /* OnboardingCollectionViewCell.swift in Sources */,
+				1C044F4F28EA30BE00807F01 /* GlucoseModel.m in Sources */,
+				1C044F5028EA30BE00807F01 /* PasswordViewController.swift in Sources */,
+				1C044F5128EA30BE00807F01 /* MenuViewController.swift in Sources */,
+				1C044F5228EA30BE00807F01 /* HUBViewController.swift in Sources */,
+				1C044F5328EA30BE00807F01 /* OnboardingViewController.swift in Sources */,
+				1C044F5428EA30BE00807F01 /* HelpViewController.swift in Sources */,
+				1C044F5528EA30BE00807F01 /* Subscription.swift in Sources */,
+				1C044F5628EA30BE00807F01 /* Pool.swift in Sources */,
+				1C044F5728EA30BE00807F01 /* SignUpViewController.swift in Sources */,
+				1C044F5828EA30BE00807F01 /* DiagnosticHelpViewController.swift in Sources */,
+				1C044F5928EA30BE00807F01 /* SubscriptionTableViewController.swift in Sources */,
+				1C044F5A28EA30BE00807F01 /* WifiListTableViewCell.swift in Sources */,
+				1CD2B3D028EC18980013BD98 /* NewPoolSettingsTableViewCell.swift in Sources */,
+				1C044F5B28EA30BE00807F01 /* TableViewController.swift in Sources */,
+				1C044F5C28EA30BE00807F01 /* HubProgramViewController.swift in Sources */,
+				1CCD7FCC28EAE44900AF1635 /* PlaceDropdownTableViewCell.swift in Sources */,
+				1C044F5D28EA30BE00807F01 /* SignInViewController.swift in Sources */,
+				1C044F5E28EA30BE00807F01 /* DeviceListTableViewCell.swift in Sources */,
+				1C044F5F28EA30BE00807F01 /* DeviceType.swift in Sources */,
+				1CC696A228EB36F00076DAD1 /* PlaceModule.swift in Sources */,
+				1C044F6028EA30BE00807F01 /* UIViewController+Error.swift in Sources */,
+				1C044F6128EA30BE00807F01 /* NextDaysWeatherData.swift in Sources */,
+				1C044F6228EA30BE00807F01 /* RGBModel.m in Sources */,
+				1C044F6328EA30BE00807F01 /* MenuTableViewCell.swift in Sources */,
+				1C044F6428EA30BE00807F01 /* DiaganosticHomeViewController.m in Sources */,
+				1C044F6528EA30BE00807F01 /* UNUserNotificationCenter+Additions.m in Sources */,
+				1C044F6628EA30BE00807F01 /* QuickActionViewController.swift in Sources */,
+				1C044F6728EA30BE00807F01 /* City.swift in Sources */,
+				1C044F6828EA30BE00807F01 /* SideMenuViewController.swift in Sources */,
+				1C044F6928EA30BE00807F01 /* FliprActivationSuccessViewController.swift in Sources */,
+				1C044F6A28EA30BE00807F01 /* FindMeModel.m in Sources */,
+				1C044F6B28EA30BE00807F01 /* LastMeasurementViewController.swift in Sources */,
+				1C044F6C28EA30BE00807F01 /* Bundle+version.swift in Sources */,
+				1C044F6D28EA30BE00807F01 /* CBPeripheralExt.m in Sources */,
+				1C044F6E28EA30BE00807F01 /* PoolLogTableViewController.swift in Sources */,
+				1C044F6F28EA30BE00807F01 /* TemperatureModel.m in Sources */,
+				1C044F7028EA30BE00807F01 /* SensorHubModel.m in Sources */,
+				1C044F7128EA30BE00807F01 /* HRMModel.m in Sources */,
+				1C044F7228EA30BE00807F01 /* HubDeviceTableViewCell.swift in Sources */,
+				1C044F7328EA30BE00807F01 /* PoolLogViewController.swift in Sources */,
+				1C044F7428EA30BE00807F01 /* Planning.swift in Sources */,
+				1C044F7528EA30BE00807F01 /* AddFliprViewController.swift in Sources */,
+				1C044F7628EA30BE00807F01 /* WeatherForHour.swift in Sources */,
+				1C044F7728EA30BE00807F01 /* SignUpEmailController.swift in Sources */,
+				1C044F7828EA30BE00807F01 /* SubscriptionView.swift in Sources */,
+				1C044F7928EA30BE00807F01 /* BarometerModel.m in Sources */,
+				1C044F7A28EA30BE00807F01 /* Equipment.swift in Sources */,
+				1C044F7B28EA30BE00807F01 /* AppSharedData.swift in Sources */,
+				1C044F7C28EA30BE00807F01 /* FirmwareUpgradeSuccessViewController.swift in Sources */,
+				1C044F7D28EA30BE00807F01 /* RoundShadowView.swift in Sources */,
+				1C044F7E28EA30BE00807F01 /* Module.swift in Sources */,
+				1C044F7F28EA30BE00807F01 /* HubListViewController.swift in Sources */,
+				1C044F8028EA30BE00807F01 /* FirmwareUpgradeFailureViewController.swift in Sources */,
+				1C044F8128EA30BE00807F01 /* HubRenameViewController.swift in Sources */,
+				1C044F8228EA30BE00807F01 /* ThermometerModel.m in Sources */,
+				1C044F8328EA30BE00807F01 /* DevicesViewController.swift in Sources */,
+				1C044F8428EA30BE00807F01 /* CityPickerViewController.swift in Sources */,
+				1C044F8528EA30BE00807F01 /* CalibrationViewController.swift in Sources */,
+				1C044F8628EA30BE00807F01 /* EmailVerifyMessageViewController.swift in Sources */,
+				1C044F8728EA30BE00807F01 /* User.swift in Sources */,
+				1C044F8828EA30BE00807F01 /* DiagnosticErrorViewController.swift in Sources */,
+				1C044F8928EA30BE00807F01 /* NSData+hexString.m in Sources */,
+				1C044F8A28EA30BE00807F01 /* AlertViewController.swift in Sources */,
+				1CD2B3BA28EC15540013BD98 /* ShareModel.swift in Sources */,
+				1C044F8B28EA30BE00807F01 /* VideoHelpViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B58A372E1E79859B00C67F6C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1597,16 +2386,20 @@
 				B59436E1225652580030F16D /* SubscriptionOptionTableViewCell.swift in Sources */,
 				1CAD60DB28117F1800879A45 /* CyCBManager.m in Sources */,
 				B518F0F31E9FC0840092156C /* UIButton+Activity.swift in Sources */,
+				1CCD7FC328EAD6A600AF1635 /* PlaceDropdownViewController.swift in Sources */,
+				1CD2B3CB28EC18820013BD98 /* PoolShareViewController.swift in Sources */,
 				4880E1EF26558C09006D4472 /* DescribeMyPoolViewController.swift in Sources */,
 				4880E1F126558C09006D4472 /* PoolCharacteristicsViewController.swift in Sources */,
 				B5FE6BF1241F71E70031853D /* Extensions.swift in Sources */,
 				4895F7542667F4D300FA8ED3 /* EmailVerifyViewController.swift in Sources */,
 				48F49ABC2666A44000DFB18B /* AddHubViewController.swift in Sources */,
 				1CD8DF3228076E8B004412D9 /* NSString+hex.m in Sources */,
+				1CD2B3DA28EC35250013BD98 /* WatrSettingsViewController.swift in Sources */,
 				B5E1F1F420872EBE008AED25 /* WaterLevelViewController.swift in Sources */,
 				488FC822267A7C7600D41EB4 /* WaveTableViewCell.swift in Sources */,
 				B58A37381E79859B00C67F6C /* ViewController.swift in Sources */,
 				1CFBFC9F27317FAB00AB5771 /* DashCollectionViewCell.swift in Sources */,
+				1CD2B3B928EC15540013BD98 /* ShareModel.swift in Sources */,
 				B57131A922E9F36400421705 /* LogType.swift in Sources */,
 				1C1186DC2812977F001DC5BB /* FirmwareUpgradeHomeViewController.m in Sources */,
 				B59BEFAC1EA65EBD00F3AD73 /* ActivationViewController.swift in Sources */,
@@ -1630,6 +2423,7 @@
 				1C8D5DAE283D7C9500FA50BA /* FlipValueReaderViewController.swift in Sources */,
 				B5BD60281EF9574600B3A403 /* Product.swift in Sources */,
 				48691A5C265EC23500E977BB /* ChlorineCalibrationViewController.swift in Sources */,
+				1CD2B3D128EC18980013BD98 /* NewPoolTextFieldTableViewCell.swift in Sources */,
 				4895F779266803AF00FA8ED3 /* ElectricalSetupViewController.swift in Sources */,
 				1CD6992C26E6039F00563CBE /* ExpertMenuViewController.swift in Sources */,
 				4895F778266803AF00FA8ED3 /* ElectricalSetupPrepareViewController.swift in Sources */,
@@ -1648,6 +2442,7 @@
 				B503971222C50A58005B9D30 /* FunCamViewController.swift in Sources */,
 				1CAD60CF281177CF00879A45 /* HomeViewController.m in Sources */,
 				4880E1F426558C09006D4472 /* PoolSettingsStartViewController.swift in Sources */,
+				1CD2B3BC28EC15720013BD98 /* FliprShare.swift in Sources */,
 				4895F7682668002D00FA8ED3 /* HUBPairingSuccessViewController.swift in Sources */,
 				B5BE18D724485DB8006CCB1E /* ModuleTypeSelectionViewController.swift in Sources */,
 				1CAD60CC28114B8200879A45 /* FirmwareBaseViewController.m in Sources */,
@@ -1659,6 +2454,7 @@
 				481624E325DD7E750085F3C4 /* AccountViewController.swift in Sources */,
 				48691A5F265ECA1100E977BB /* CalibrationSuccessViewController.swift in Sources */,
 				1CD8DF072807634C004412D9 /* CSCModel.m in Sources */,
+				1CD2B3C728EC18820013BD98 /* NewPoolLocationViewController.swift in Sources */,
 				48691A41265EB11E00E977BB /* CalibrationChlorineIntroViewController.swift in Sources */,
 				48980EA926171E1E009A0F24 /* BaseViewController.swift in Sources */,
 				1CFBFC9E27317FAB00AB5771 /* DashScrollViewItem.swift in Sources */,
@@ -1698,6 +2494,7 @@
 				48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */,
 				1C532615283AA9F1003A4847 /* FlipValueReadingViewController.swift in Sources */,
 				B555AF5F1EA8EC720053163F /* UIView+EmptyStateView.swift in Sources */,
+				1CCD7FC728EADC0700AF1635 /* PlaceDropdown.swift in Sources */,
 				B54676C82062B8C30052E131 /* ProductAttributesViewController.swift in Sources */,
 				48B2A7EC25E19B45001CCBCC /* DeviceInfoTableViewCell.swift in Sources */,
 				4828D37525C0705200F95683 /* NotificationsAlertViewController.swift in Sources */,
@@ -1749,11 +2546,13 @@
 				B59436E3225652580030F16D /* Subscription.swift in Sources */,
 				B54AED071EB8E17600174870 /* Pool.swift in Sources */,
 				B518F0F61E9FD6BB0092156C /* SignUpViewController.swift in Sources */,
+				1CD2B3D428EC18AA0013BD98 /* NewPoolTitles.swift in Sources */,
 				1C8D5DAC283D43CF00FA50BA /* DiagnosticHelpViewController.swift in Sources */,
 				B58B2A54224A7C390003BE46 /* SubscriptionTableViewController.swift in Sources */,
 				4895F76C2668002D00FA8ED3 /* WifiListTableViewCell.swift in Sources */,
 				B53C5E871E82CDA400C1C0FC /* TableViewController.swift in Sources */,
 				1C9A756D27354E0800D4FEE6 /* HubProgramViewController.swift in Sources */,
+				1CCD7FCB28EAE44900AF1635 /* PlaceDropdownTableViewCell.swift in Sources */,
 				B518F0EC1E9F8DD40092156C /* SignInViewController.swift in Sources */,
 				4895F7582667FD4500FA8ED3 /* DeviceListTableViewCell.swift in Sources */,
 				1C504F2926A1A2340042C2DD /* DeviceType.swift in Sources */,
@@ -1764,6 +2563,7 @@
 				1CD6AF982837F07500572108 /* DiaganosticHomeViewController.m in Sources */,
 				1CD8DF3128076E8B004412D9 /* UNUserNotificationCenter+Additions.m in Sources */,
 				484CEBA425E2DAC9005CD208 /* QuickActionViewController.swift in Sources */,
+				1CD2B3C928EC18820013BD98 /* NewPoolViewController.swift in Sources */,
 				B5FE070F1EB9CE2800962AEE /* City.swift in Sources */,
 				48A912A225F8EC2900EF863D /* SideMenuViewController.swift in Sources */,
 				48C8E4F6265D6DC60000FDA8 /* FliprActivationSuccessViewController.swift in Sources */,
@@ -1773,8 +2573,10 @@
 				1CD8DEE528076327004412D9 /* CBPeripheralExt.m in Sources */,
 				B57131A322E9AE3700421705 /* PoolLogTableViewController.swift in Sources */,
 				1CD8DF162807634C004412D9 /* TemperatureModel.m in Sources */,
+				1CD2B3C528EC18820013BD98 /* NewPoolSimpleListViewController.swift in Sources */,
 				1CD8DF0E2807634C004412D9 /* SensorHubModel.m in Sources */,
 				1CD8DF0B2807634C004412D9 /* HRMModel.m in Sources */,
+				1CD2B3CF28EC18980013BD98 /* NewPoolSettingsTableViewCell.swift in Sources */,
 				1C504F2F26A1E3500042C2DD /* HubDeviceTableViewCell.swift in Sources */,
 				B5FBF6A622EB2CD4003FBF49 /* PoolLogViewController.swift in Sources */,
 				B557864324897E9300B5BDCD /* Planning.swift in Sources */,
@@ -1851,6 +2653,75 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1C044FBA28EA30BE00807F01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E65D266F0D5F0122122D955D /* Pods-Flipr.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Watr";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Flipr/Flipr.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6M9RZXR8UH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Flipr",
+				);
+				INFOPLIST_FILE = "Watr-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.watr;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flipr/Flipr-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
+			};
+			name = Debug;
+		};
+		1C044FBB28EA30BE00807F01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E4E35BA3EEE1FBFF4CD6392 /* Pods-Flipr.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Watr";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Flipr/Flipr.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6M9RZXR8UH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Flipr",
+				);
+				INFOPLIST_FILE = "Watr-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.watr;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flipr/Flipr-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
+			};
+			name = Release;
+		};
 		B58A37421E79859B00C67F6C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1897,6 +2768,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(PROJECT_NAME)-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1939,6 +2811,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(PROJECT_NAME)-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2016,6 +2889,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1C044FB928EA30BE00807F01 /* Build configuration list for PBXNativeTarget "Watr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C044FBA28EA30BE00807F01 /* Debug */,
+				1C044FBB28EA30BE00807F01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B58A372D1E79859B00C67F6C /* Build configuration list for PBXProject "Flipr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

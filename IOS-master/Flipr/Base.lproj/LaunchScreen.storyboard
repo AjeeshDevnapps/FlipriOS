@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,20 +26,28 @@
                                     <constraint firstAttribute="height" constant="50" id="SsF-IJ-JV7"/>
                                 </constraints>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchWatr" translatesAutoresizingMaskIntoConstraints="NO" id="5Gk-br-Q77">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ivf-BH-1bt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="HoZ-tK-x7F"/>
                             <constraint firstItem="ivf-BH-1bt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="b7a-8f-sgY"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="5Gk-br-Q77" secondAttribute="bottom" id="dVV-ce-wGQ"/>
+                            <constraint firstItem="5Gk-br-Q77" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="kOM-rB-Tj0"/>
+                            <constraint firstAttribute="trailing" secondItem="5Gk-br-Q77" secondAttribute="trailing" id="miE-H6-GsL"/>
+                            <constraint firstItem="5Gk-br-Q77" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="reK-ns-voJ"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>
         <image name="Logo Flipr" width="166" height="50"/>
+        <image name="launchWatr" width="750" height="1520"/>
     </resources>
 </document>
