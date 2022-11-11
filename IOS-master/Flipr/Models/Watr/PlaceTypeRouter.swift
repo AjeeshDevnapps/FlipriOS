@@ -2,7 +2,7 @@
 //  PlaceTypeRouter.swift
 //  Flipr
 //
-//  Created by Vishnu T Vijay on 30/10/22.
+//  Created by Ajeesh T S on 30/10/22.
 //  Copyright © 2022 I See U. All rights reserved.
 //
 

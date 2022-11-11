@@ -1,3 +1,4 @@
+
 //
 //  NewPoolViewController.swift
 //  Flipr
@@ -18,17 +19,17 @@ class NewPoolViewController: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var titleLabelOnTop: UILabel!
     var hasLoadedShares = false
+    var isCreatingPlace = false
     var loadedShares = [ShareModel]()
+    var poolSettings: PoolSettingsModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor(hexString: "#eeeee4")
         view.backgroundColor = UIColor(hexString: "#eeeee4")
         navigationController?.navigationBar.backgroundColor = UIColor(hexString: "#eeeee4")
-        //title = "Piscine 123456 123345 - Melbourne"
-        
-        title = (User.currentUser?.firstName ?? "") +  " " +   (User.currentUser?.lastName ?? " ")
-
+        title = "Piscine 123456 123345 - Melbourne"
         setCustomBackbtn()
+        getPoolSettings()
         segmentStackView.cornerRadius = 10
         segmentStackView.clipsToBounds = true
         parametersButton.isSelected = true
@@ -36,6 +37,11 @@ class NewPoolViewController: UIViewController {
         adjustColorForSegmentButtons()
         submitButton.cornerRadius = 10.0
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SystemCellForEmails")
+        if isCreatingPlace{
+            self.partagesButton.isUserInteractionEnabled = false
+            self.partagesButton.isEnabled = false
+            self.parametersButton.isUserInteractionEnabled = false
+        }
     }
     
     override func goBack() {
@@ -46,14 +52,10 @@ class NewPoolViewController: UIViewController {
         if parametersButton.isSelected {
             
         } else {
-//            emailRecords.append("fliprtest\(11+emailRecords.count)@gmail.com")
-//            let range = NSMakeRange(0, self.tableView.numberOfSections)
-//            let sections = NSIndexSet(indexesIn: range)
-//            self.tableView.reloadSections(sections as IndexSet, with: .automatic)
             let sb = UIStoryboard(name: "NewPool", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "PoolShareViewControllerID") as! PoolShareViewController
-            vc.isAddingNew = true
             vc.changeDelegate = self
+            vc.isAddingNew = true
             self.present(vc, animated: true)
         }
     }
@@ -87,6 +89,23 @@ class NewPoolViewController: UIViewController {
         partagesButton.backgroundColor = partagesButton.isSelected ? UIColor.black : color
     }
     
+    func getPoolSettings() {
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.navigationController!.view)
+        PoolSettingsRouter().getPoolSettings(poolId: "") { settings, error in
+            hud?.dismiss()
+            if error != nil {
+                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
+                alertVC.addAction(alertAction)
+                self.present(alertVC, animated: true)
+                return
+            }
+            self.poolSettings = settings
+            self.tableView.reloadData()
+        }
+    }
+    
     func getCurrentShares() {
         let hud = JGProgressHUD(style:.dark)
         hud?.show(in: self.navigationController!.view)
@@ -94,8 +113,8 @@ class NewPoolViewController: UIViewController {
             hud?.dismiss()
             if error != nil {
                 self.hasLoadedShares = false
-                let alertVC = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-                let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
                 alertVC.addAction(alertAction)
                 self.present(alertVC, animated: true)
                 return
@@ -136,31 +155,91 @@ extension NewPoolViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: "NewPoolSettingsTableViewCell", for: indexPath) as! NewPoolSettingsTableViewCell
-        
+        var primaryText: String?
+        var secondaryText: String?
+        var hasSwitch = false
+        var isSwitchSelected = false
+        if parametersButton.isSelected {
+            switch indexPath.section {
+            case 0:
+                primaryText = NewPoolTitles.PoolGeneralTitles.allCases[indexPath.row].rawValue
+                switch indexPath.row {
+                case 0:
+                    secondaryText = poolSettings?.owner
+                case 1:
+                    secondaryText = poolSettings?.type?.name
+                case 2:
+                    secondaryText = poolSettings?.type?.name
+                case 3:
+                    secondaryText = poolSettings?.city?.name
+                default:
+                    secondaryText = "Définir"
+                }
+            case 1:
+                primaryText = NewPoolTitles.Characteristics.allCases[indexPath.row].rawValue
+                switch indexPath.row {
+                case 0:
+                    secondaryText = poolSettings?.volume?.toString
+                case 1:
+                    secondaryText = poolSettings?.shape?.name
+                case 2:
+                    secondaryText = poolSettings?.coating?.name
+                case 3:
+                    secondaryText = poolSettings?.integration?.name
+                case 4:
+                    secondaryText = poolSettings?.builtYear?.toString
+                default:
+                    secondaryText = "Définir"
+                }
+            case 2:
+                primaryText = NewPoolTitles.Maintenance.allCases[indexPath.row].rawValue
+                switch indexPath.row {
+                case 0:
+                    secondaryText = poolSettings?.volume?.toString
+                case 1:
+                    secondaryText = poolSettings?.shape?.name
+                default:
+                    secondaryText = "Définir"
+                }
+                
+            case 3:
+                primaryText = NewPoolTitles.Usage.allCases[indexPath.row].rawValue
+                hasSwitch = indexPath.row == 0 || indexPath.row == 3
+                if indexPath.row != 0 && indexPath.row != 3 {
+                    if indexPath.row == 1 {
+                        secondaryText = poolSettings?.numberOfUsers?.toString ?? "0"
+                    } else if indexPath.row == 2 {
+                        secondaryText = "Définir"//poolSettings?.status
+                    }
+                } else {
+                    if indexPath.row == 0 {
+                        isSwitchSelected = poolSettings?.isPublic ?? false
+                    } else if indexPath.row == 1 {
+                        isSwitchSelected = poolSettings?.isDefective ?? false
+                    }
+                }
+            default: break;
+            }
+        }
         if #available(iOS 14.0, *) {
             var content = tableViewCell.defaultContentConfiguration()
             if parametersButton.isSelected {
-                switch indexPath.section {
-                case 0:
-                    content.text = NewPoolTitles.PoolGeneralTitles.allCases[indexPath.row].rawValue
-                    content.secondaryText = "Définir"
-                case 1:
-                    content.text = NewPoolTitles.Characteristics.allCases[indexPath.row].rawValue
-                    content.secondaryText = "Définir"
-                case 2:
-                    content.text = NewPoolTitles.Maintenance.allCases[indexPath.row].rawValue
-                    content.secondaryText = "Définir"
-                case 3:
-                    content.text = NewPoolTitles.Usage.allCases[indexPath.row].rawValue
-                    if indexPath.row != 0 && indexPath.row != 3 {
-                        content.secondaryText = "Définir"
-                    }
-                default: break;
-                }
+                content.text = primaryText
+                content.secondaryText = hasSwitch ? "" : (secondaryText ?? "Définir")
                 content.prefersSideBySideTextAndSecondaryText = true
                 content.secondaryTextProperties.font = UIFont.systemFont(ofSize: 16)
-                content.secondaryTextProperties.color = .red
+                if content.secondaryText?.isEmpty ?? true || content.secondaryText == "Définir" {
+                    content.secondaryTextProperties.color = .red
+                } else {
+                    content.secondaryTextProperties.color = .darkText
+                }
                 tableViewCell.contentConfiguration = content
+                let indicator = UISwitch()
+                indicator.isOn = isSwitchSelected
+                tableViewCell.accessoryView = hasSwitch ? indicator : nil
+                if !isSwitchSelected {
+                    tableViewCell.accessoryType = .disclosureIndicator
+                }
                 tableViewCell.selectionStyle = .none
             } else {
                 var content = tableViewCell.defaultContentConfiguration()
@@ -183,27 +262,18 @@ extension NewPoolViewController: UITableViewDataSource {
             return tableViewCell
         } else {
             if parametersButton.isSelected {
-                switch indexPath.section {
-                case 0:
-                    tableViewCell.textLabel?.text = NewPoolTitles.PoolGeneralTitles.allCases[indexPath.row].rawValue
-                    tableViewCell.detailTextLabel?.text = "Définir"
-                case 1:
-                    tableViewCell.textLabel?.text = NewPoolTitles.Characteristics.allCases[indexPath.row].rawValue
-                    tableViewCell.detailTextLabel?.text = "Définir"
-                case 2:
-                    tableViewCell.textLabel?.text = NewPoolTitles.Maintenance.allCases[indexPath.row].rawValue
-                    tableViewCell.detailTextLabel?.text = "Définir"
-                case 3:
-                    tableViewCell.textLabel?.text = NewPoolTitles.Usage.allCases[indexPath.row].rawValue
-                    if indexPath.row != 0 && indexPath.row != 3 {
-                        tableViewCell.detailTextLabel?.text = "Définir"
-                    }
-                default: break;
+                tableViewCell.textLabel?.text = primaryText
+                tableViewCell.detailTextLabel?.text = hasSwitch ? "" : (secondaryText ?? "Définir")
+                if tableViewCell.detailTextLabel?.text?.isEmpty ?? true || tableViewCell.detailTextLabel?.text == "Définir" {
+                    tableViewCell.detailTextLabel?.textColor = .red
+                } else {
+                    tableViewCell.detailTextLabel?.textColor = .darkText
                 }
                 tableViewCell.detailTextLabel?.font = UIFont.systemFont(ofSize: 16)
-                if indexPath.section == 3 && indexPath.row == 0 || indexPath.section == 3 && indexPath.row == 3 {
-                    tableViewCell.accessoryView = UISwitch()
-                } else {
+                let indicator = UISwitch()
+                indicator.isOn = isSwitchSelected
+                tableViewCell.accessoryView = hasSwitch ? indicator : nil
+                if !isSwitchSelected {
                     tableViewCell.accessoryType = .disclosureIndicator
                 }
                 tableViewCell.selectionStyle = .none
@@ -320,6 +390,6 @@ extension NewPoolViewController: ChangeShareEmailDelegate {
     }
     
     func addedEmail() {
-            getCurrentShares()
+        getCurrentShares()
     }
 }

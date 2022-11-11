@@ -17,6 +17,9 @@ class WatrSettingsViewController: UIViewController {
     @IBOutlet weak var themTitleLbl: UILabel!
     @IBOutlet weak var themLbl: UILabel!
     @IBOutlet weak var NotificationLbl: UILabel!
+    @IBOutlet weak var unitLbl: UILabel!
+    @IBOutlet weak var themBkImage: UIImageView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,15 +31,41 @@ class WatrSettingsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupView()
+        setupUnitView()
+    }
+    
     func setupView(){
         if let currentThemColour = UserDefaults.standard.object(forKey: "CurrentTheme") as? String{
             if currentThemColour == "blue"{
                 themLbl.text = "Blue"
+                themBkImage.image = UIImage(named: "blurTheme")
             }else{
                 themLbl.text = "Rose"
+                themBkImage.image = UIImage(named: "RoseThemeBk")
+            }
+        }else{
+            UserDefaults.standard.set("orange", forKey: "CurrentTheme")
+            themLbl.text = "Rose"
+            themBkImage.image = UIImage(named: "RoseThemeBk")
+        }
+    }
+    
+    
+    func setupUnitView(){
+        if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+            if currentUnit == 2{
+                unitLbl.text = "Impérial : Feets,  °F"
+            }else{
+                unitLbl.text = "Métrique (m, m°C)"
             }
         }
     }
+    
+    
     
     @IBAction func logoutButtonTapped(){
     
@@ -64,10 +93,15 @@ class WatrSettingsViewController: UIViewController {
         if let themeVC = self.storyboard?.instantiateViewController(withIdentifier: "WatrThemeViewController") as? WatrThemeViewController{
             self.navigationController?.pushViewController(themeVC)
         }
-
-        
     }
 
+    
+    @IBAction func unitButtonTapped(){
+        if let themeVC = self.storyboard?.instantiateViewController(withIdentifier: "UnitViewController") as? UnitViewController{
+            self.navigationController?.pushViewController(themeVC)
+        }
+    }
+    
     
     @IBAction func accountButtonTapped(){
         if let accountVC = self.storyboard?.instantiateViewController(withIdentifier: "AccountViewController") as? AccountViewController{

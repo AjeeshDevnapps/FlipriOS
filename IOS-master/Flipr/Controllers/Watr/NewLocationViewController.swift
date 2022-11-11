@@ -2,7 +2,7 @@
 //  NewLocationViewController.swift
 //  Flipr
 //
-//  Created by Vishnu T Vijay on 30/10/22.
+//  Created by Ajeesh T S on 30/10/22.
 //  Copyright © 2022 I See U. All rights reserved.NewLocationTableViewCellID
 //
 
@@ -54,6 +54,13 @@ class NewLocationViewController: UIViewController {
     }
     
     func formatUI() {
+//        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
+//        tableView.tableFooterView = UIView()
+        let footerView = UIView()
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        tableView.tableFooterView = footerView
+
         tableView.contentInsetAdjustmentBehavior = .never
         var frame = CGRect.zero
         frame.size.height = .leastNormalMagnitude
@@ -88,9 +95,11 @@ class NewLocationViewController: UIViewController {
     
     @IBAction func submitAction(_ sender: UIButton) {
         let sb = UIStoryboard(name: "NewPool", bundle: nil)
-        if let viewController = sb.instantiateViewController(withIdentifier: "NewPoolViewControllerID") as? UINavigationController {
+        if let viewController = sb.instantiateViewController(withIdentifier: "NewPoolViewControllerSettings") as? NewPoolViewController {
             viewController.modalPresentationStyle = .fullScreen
-            self.present(viewController, animated: true, completion: nil)
+            let nav = UINavigationController.init(rootViewController: viewController)
+            viewController.isCreatingPlace = true
+            self.present(nav, animated: true, completion: nil)
         }
 
     }
@@ -107,11 +116,28 @@ extension NewLocationViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NewLocationTableViewCellID", for: indexPath)
-        cell.textLabel?.text = placeTypes[indexPath.row].name
-        cell.imageView?.image = UIImage(named: "menu_picto_pool")
-        cell.imageView?.backgroundColor = .black
-        cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NewLocationTableViewCellID", for: indexPath) as! LocationTypeTableViewCell
+        if let iconName  = placeTypes[indexPath.row].typeIcon{
+            let iconnameArray = iconName.components(separatedBy: ".")
+            let iconname: String = iconnameArray[0]
+            cell.icon.image = UIImage(named: iconname )
+        }
+        cell.titleName.text = placeTypes[indexPath.row].name
+        if let isPlaceTypeAvailable = placeTypes[indexPath.row].isAvailableAsPlace{
+            if isPlaceTypeAvailable{
+                
+            }else{
+                
+            }
+        }
+        
+//        cell.textLabel?.text = placeTypes[indexPath.row].name
+//        cell.imageView?.image = UIImage(named: "menu_picto_pool")
+//        cell.imageView?.backgroundColor = .black
+//        cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        if indexPath.row == placeTypes.count - 1 {
+               cell.separatorInset.left = UIScreen.main.bounds.width
+        }
         cell.selectionStyle = .none
         return cell
     }

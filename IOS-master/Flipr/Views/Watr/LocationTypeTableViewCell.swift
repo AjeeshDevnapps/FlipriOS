@@ -9,6 +9,8 @@
 import UIKit
 
 class LocationTypeTableViewCell: UITableViewCell {
+    @IBOutlet weak var titleName: UILabel!
+    @IBOutlet weak var icon: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

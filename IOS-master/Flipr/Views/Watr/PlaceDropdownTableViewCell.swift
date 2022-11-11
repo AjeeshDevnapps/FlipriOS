@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol PlaceDropdownCellDelegate {
+    func didSelectSettings(place:PlaceDropdown?)
+}
 class PlaceDropdownTableViewCell: UITableViewCell {
     @IBOutlet weak var typeLbl: UILabel!
     @IBOutlet weak var locationLbl: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var badgeButton: UIButton!
+    var delegate:PlaceDropdownCellDelegate?
+    var place:PlaceDropdown?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +30,10 @@ class PlaceDropdownTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    @IBAction func settingsButtonClicked(){
+        self.delegate?.didSelectSettings(place: self.place)
+    }
     
 
 }

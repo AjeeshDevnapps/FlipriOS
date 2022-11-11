@@ -44,10 +44,12 @@ class FliprSplashViewController: BaseViewController {
         super.viewDidLoad()
         userStatusChecking = true
         self.imageView.isHidden = true
-        perform(#selector(showWaveAnimation), with: nil, afterDelay: 0.5)
-        perform(#selector(showEducationScreen), with: nil, afterDelay: 2.0)
-        addRightImage()
-        self.titleLabel.text = "Goodbye to troubled waters".localized
+//        perform(#selector(showWaveAnimation), with: nil, afterDelay: 0.5)
+//        perform(#selector(showEducationScreen), with: nil, afterDelay: 2.0)
+//        addRightImage()
+//        self.titleLabel.text = "Goodbye to troubled waters".localized
+            self.checkUserStatus()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

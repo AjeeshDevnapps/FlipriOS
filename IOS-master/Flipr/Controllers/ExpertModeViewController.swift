@@ -98,6 +98,8 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
         
         pHValueLabel.text = Module.currentModule?.rawPH
         redoxValueLabel.text = Module.currentModule?.rawRedox
+        
+        
         conductivityValueLabel.text = Module.currentModule?.airTemperature
         waterTemperatureValueLabel.text = Module.currentModule?.rawWaterTemperature
         

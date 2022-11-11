@@ -12,15 +12,21 @@ class ExpertMenuViewController: UIViewController {
     @IBOutlet weak var settingTable: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
     var haveFirmwereUpgrade = true
+    var haveSubscription = false
+    @IBOutlet weak var menuView: UIView!
 
+    var cellTitleList = ["Activer la connexion à distance","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+    var imageNames = ["noSubscription","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
 
-    var cellTitleList = ["Mode Expert","Trigger a measurement","Nouveau calibrage","Nouveau test bandelette","Vidange de la piscine","Diagnostic","Flipr Firmware Update"]
-    var imageNames = ["expertMenu1","expertMenu2","expertMenu3","expertMenu4","expertMenu5","diagnostic","upgradebtn"]
+//    var cellTitleList = ["Activer la connexion à distance","Mode Expert","Trigger a measurement","Nouveau calibrage","Nouveau test bandelette","Vidange de la piscine","Diagnostic","Flipr Firmware Update"]
+//    var imageNames = ["noSubscription","expertMenu1","expertMenu2","expertMenu3","expertMenu4","expertMenu5","diagnostic","upgradebtn"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         settingTable.tableFooterView = UIView()
         haveFirmwereUpgrade = AppSharedData.sharedInstance.haveNewFirmwereUpdate
+        menuView.layer.cornerRadius = 14
+        menuView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         self.manageMenuList()
         NotificationCenter.default.addObserver(forName: K.Notifications.showFirmwereUpgradeScreen, object: nil, queue: nil) { (notification) in
             self.showFirmwereUdpateScreen()
@@ -34,6 +40,31 @@ class ExpertMenuViewController: UIViewController {
     }
     
     func manageMenuList(){
+        
+        if let module = Module.currentModule {
+            if let identifier = Module.currentModule?.serial {
+//                self.titleLbl.text = identifier
+//                self.haveFlipr = true
+            }
+
+            if module.isSubscriptionValid {
+                haveSubscription = true
+            }else{
+                haveSubscription = false
+            }
+        }
+        
+        if haveSubscription{
+            cellTitleList = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+             imageNames = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+        }else{
+            cellTitleList = ["Activer la connexion à distance","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+             imageNames = ["noSubscription","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+
+        }
+
+        
+        /*
         if haveFirmwereUpgrade{
             cellTitleList = ["Mode Expert","Trigger a measurement","Nouveau calibrage","Nouveau test bandelette","Vidange de la piscine","Diagnostic","Flipr Firmware Update"]
             imageNames = ["expertMenu1","expertMenu2","expertMenu3","expertMenu4","expertMenu5","diagnostic","upgradebtn"]
@@ -42,6 +73,7 @@ class ExpertMenuViewController: UIViewController {
             cellTitleList = ["Mode Expert","Trigger a measurement","Nouveau calibrage","Nouveau test bandelette","Vidange de la piscine","Diagnostic",]
             imageNames = ["expertMenu1","expertMenu2","expertMenu3","expertMenu4","expertMenu5","diagnostic"]
         }
+        */
 
     }
    
@@ -66,11 +98,166 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
         
         cell.menuTitleLbl.text = cellTitleList[indexPath.row].localized
         cell.menuIcon.image =  UIImage(named: imageNames[indexPath.row])
+        if cellTitleList.count  == (indexPath.row + 1){
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width);
+        }else{
+            
+        }
         return cell
     }
         
-   
+    func handlePlaceOwnerWithSubscriptionNavigation(indexPath: IndexPath){
+        if indexPath.row == 0{
+            triggerMesurement()
+        }
+        else if indexPath.row == 1{
+            showCalibrationView()
+        }
+        else if indexPath.row == 2{
+            showCalibrationView()
+        }
+        else if indexPath.row == 3{
+            stripTest()
+        }
+        else if indexPath.row == 4{
+            expertView()
+        }
+        else if indexPath.row == 5{
+            history()
+        }
+        else if indexPath.row == 6{
+            drainingWater()
+        }
+        else if indexPath.row == 7{
+            showFirmwereDiagnosticScreen()
+        }
+        else{
+            
+        }
+        
+    }
     
+    func handlePlaceOwnerWithOutSubscriptionNavigation(indexPath: IndexPath){
+        if indexPath.row == 0{
+            showSubscriptionView()
+        }
+        else if indexPath.row == 1{
+            triggerMesurement()
+        }
+        else if indexPath.row == 2{
+            showCalibrationView()
+        }
+        else if indexPath.row == 3{
+            stripTest()
+        }
+        else if indexPath.row == 4{
+            expertView()
+        }
+        else if indexPath.row == 5{
+            history()
+        }
+        else if indexPath.row == 6{
+            drainingWater()
+        }
+        else if indexPath.row == 7{
+            showFirmwereDiagnosticScreen()
+        }
+        else{
+            
+        }
+    }
+    
+    
+    func drainingWater(){
+        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+        if let viewController = mainSb.instantiateViewController(withIdentifier: "WaterLevelTableViewController") as? WaterLevelTableViewController {
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.present(viewController, animated: true, completion: nil)
+//
+            let navigationController = LightNavigationViewController.init(rootViewController: viewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion:nil)
+
+        }
+    }
+    
+    func history(){
+        
+        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+        if let viewController = mainSb.instantiateViewController(withIdentifier: "HistoricViewController") as? HistoricViewController {
+//            viewController.calibrationType = .simpleMeasure
+//            viewController.modalPresentationStyle = .fullScreen
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    func showSubscriptionView(){
+        if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
+//            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    func triggerMesurement(){
+        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+        if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
+            viewController.calibrationType = .simpleMeasure
+            viewController.modalPresentationStyle = .fullScreen
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    
+    func stripTest(){
+        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+        let alert = UIAlertController(title: "Strip test".localized, message:"Are you sure you want to do a new strip test?".localized, preferredStyle:.alert)
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
+            let sb:UIStoryboard = UIStoryboard.init(name: "Calibration", bundle: nil)
+            if let viewController = sb.instantiateViewController(withIdentifier: "StripViewControllerID") as? StripViewController {
+                viewController.recalibration = true
+                viewController.isPresentView = true
+                viewController.modalPresentationStyle = .fullScreen
+                self.present(viewController, animated: true, completion: nil)
+
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Order a calibration kit".localized, style: .default, handler: { (action) in
+            if let url = URL(string:"https://www.goflipr.com/produit/kit-de-calibration/".remotable) {
+                UIApplication.shared.open(url, options: self.convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func expertView(){
+        let tmpSb = UIStoryboard.init(name: "Main", bundle: nil)
+        if let navigationController = tmpSb.instantiateViewController(withIdentifier: "SettingsNavingation") as? UINavigationController {
+            if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertModeViewController") as? ExpertModeViewController {
+                navigationController.modalPresentationStyle = .fullScreen
+                viewController.isDirectPresenting = true
+                navigationController.setViewControllers([viewController], animated: false)
+                self.present(navigationController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        handlePlaceNavigation(indexPath: indexPath)
+    }
+    
+    func handlePlaceNavigation(indexPath: IndexPath){
+        if haveSubscription{
+            self.handlePlaceOwnerWithSubscriptionNavigation(indexPath: indexPath)
+
+        }else{
+            self.handlePlaceOwnerWithOutSubscriptionNavigation(indexPath: indexPath)
+        }
+
+    }
+    /*
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
             let tmpSb = UIStoryboard.init(name: "Main", bundle: nil)
@@ -159,6 +346,8 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
         }
         
     }
+    
+    */
     
     func showFirmwereUdpateScreen(){
         let navigationController = UIStoryboard(name:"Firmware", bundle: nil).instantiateViewController(withIdentifier: "FirmwareNav") as! UINavigationController

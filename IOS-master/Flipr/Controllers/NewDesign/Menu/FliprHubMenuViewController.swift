@@ -16,6 +16,9 @@ class FliprHubMenuViewController: UIViewController {
     @IBOutlet weak var subScriptiontitleLbl: UILabel!
     @IBOutlet weak var subScriptionView: UIView!
     @IBOutlet weak var subScriptionViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var menuView: UIView!
+    @IBOutlet weak var menuViewHeight: NSLayoutConstraint!
+
     var isShowSubscription = false
     var haveFlipr = false
     var haveHub = false
@@ -25,14 +28,27 @@ class FliprHubMenuViewController: UIViewController {
     var cellTitleList = [String]()
     var imageNames = [String]()
     
+    var isPlaceOwner = false
+    var haveSubscription = false
+    var placeDetails:PlaceDropdown!
+    var placesModules:PlaceModule!
+
+
+    
    // var cellTitleList = ["Carnet d’entretien","Flipr Predict","Flipr Expert","Pool House","Flipr Store","Conseils et astuces","Paramètres","Aide","Déconnexion"]
     
    // var imageNames = ["menu1","menu2","menu3","menu4","menu5","menu6","menu7","menu8","menu9"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.menuView.roundCorners([.topLeft, .topRight], radius: 14.0)
+        menuView.layer.cornerRadius = 14
+        menuView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        settingTable.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0.001))
+
 //        settingTable.tableFooterView = UIView()
-        settingTable.tableFooterView = UIView(frame: CGRect(x: 0, y: -1, width: settingTable.frame.size.width, height: 1))
+//        settingTable.tableFooterView = UIView(frame: CGRect(x: 0, y: -1, width: settingTable.frame.size.width, height: 1))
      
 //        getDeviceDetails()
         self.arrangeMenu()
@@ -58,6 +74,8 @@ class FliprHubMenuViewController: UIViewController {
     }
     
     func arrangeMenu(){
+        
+        /*
         if HUB.currentHUB != nil {
             self.haveHub = true
         }
@@ -82,8 +100,70 @@ class FliprHubMenuViewController: UIViewController {
             self.imageNames = ["menu1","menu4","menu5","menu6","menu7","menu8","menu9"]
         }
         self.settingTable.reloadData()
-        
+        */
+        createMenuOrder()
     }
+    
+    
+    func createMenuOrder(){
+        if self.placeDetails.permissionLevel == "Admin"{
+            isPlaceOwner = true
+        }else{
+            isPlaceOwner = false
+        }
+        
+        if let module = Module.currentModule {
+            if let identifier = Module.currentModule?.serial {
+                self.titleLbl.text = identifier
+                self.haveFlipr = true
+            }
+
+            if module.isSubscriptionValid {
+                haveSubscription = true
+            }else{
+                haveSubscription = false
+            }
+        }
+        
+        
+//        if self.placesModules.isStart{
+//            haveSubscription = true
+//        }else{
+//            haveSubscription = false
+//        }
+//
+        
+//        var haveFlipr = true
+        if haveFlipr{
+            if isPlaceOwner && (haveSubscription == false){
+                self.cellTitleList = ["Activer la connexion à distance","Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
+                self.imageNames = ["noSubscription","Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
+            }else{
+                if isPlaceOwner{
+                    self.cellTitleList = ["Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
+                    self.imageNames = ["Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
+
+                }else{
+                    self.cellTitleList = ["Aide","Paramètres","Déconnexion"]
+                    self.imageNames = ["Aide","Paramètres","Déconnexion"]
+                    self.menuViewHeight.constant = 369
+
+                }
+
+            }
+        }else{
+            self.cellTitleList = ["Paramètres","Déconnexion"]
+            self.imageNames = ["Paramètres","Déconnexion"]
+            self.menuViewHeight.constant = 260
+
+        }
+        
+        self.settingTable.reloadData()
+    }
+    
+    
+    
+    
     
     func getDeviceDetails(){
         hud?.show(in: self.view)
@@ -174,13 +254,178 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
         
         cell.menuTitleLbl.text = cellTitleList[indexPath.row]
         cell.menuIcon.image =  UIImage(named: imageNames[indexPath.row])
+        if cellTitleList.count  == (indexPath.row + 1){
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width);
+        }else{
+            
+        }
         return cell
     }
         
    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        handleNavigation(indexPath:indexPath)
+//        handleNavigation(indexPath:indexPath)
+        handlePlaceNavigation(indexPath: indexPath)
+    }
+    
+    
+    func handlePlaceNavigation(indexPath: IndexPath){
+        if haveFlipr{
+            if isPlaceOwner && (haveSubscription == false){
+                self.handlePlaceOwnerWithOutSubscriptionNavigation(indexPath: indexPath)
+            }
+            else{
+                if isPlaceOwner{
+                    self.handlePlaceOwnerWithSubscriptionNavigation(indexPath: indexPath)
+                }else{
+                    self.handleGuestNavigation(indexPath: indexPath)
+                }
+            }
+        }else{
+            self.handleNoFliprNavigation(indexPath: indexPath)
+        }
+
+    }
+    
+    
+    func handleNoFliprNavigation(indexPath: IndexPath){
+        if indexPath.row == 0{
+            showSettings()
+        }
+        else if indexPath.row == 1{
+            showLogout()
+        }
+    }
+    
+    
+    func handleGuestNavigation(indexPath: IndexPath){
+        if indexPath.row == 0{
+            showAde()
+        }
+        else if indexPath.row == 1{
+            showSettings()
+        }
+        else if indexPath.row == 2{
+            showLogout()
+        }
+    }
+
+    
+    
+    func handlePlaceOwnerWithSubscriptionNavigation(indexPath: IndexPath){
+      
+        if indexPath.row == 0{
+            showServiceBook()
+        }
+        else if indexPath.row == 1{
+            showPoolHouse()
+        }
+        else if indexPath.row == 2{
+            showExpertView()
+        }
+        else if indexPath.row == 3{
+            showAde()
+        }
+        else if indexPath.row == 4{
+            showSettings()
+        }
+        else if indexPath.row == 5{
+            showLogout()
+        }
+    }
+    
+    
+    func handlePlaceOwnerWithOutSubscriptionNavigation(indexPath: IndexPath){
+        if indexPath.row == 0{
+            self.showSubscriptionView()
+        }
+        else if indexPath.row == 1{
+            showServiceBook()
+        }
+        else if indexPath.row == 2{
+            showPoolHouse()
+        }
+        else if indexPath.row == 3{
+            showExpertView()
+        }
+        else if indexPath.row == 4{
+            showAde()
+        }
+        else if indexPath.row == 5{
+            showSettings()
+        }
+        else if indexPath.row == 6{
+            showLogout()
+        }
+        
+    }
+    
+    
+    func showSubscriptionView(){
+        if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
+//            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    
+    func showServiceBook(){
+        if let vc = UIStoryboard(name: "PoolLog", bundle: nil).instantiateInitialViewController() {
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    func showPoolHouse(){
+        let manSb = UIStoryboard.init(name: "Main", bundle: nil)
+        if let viewController = manSb.instantiateViewController(withIdentifier: "PoolViewControllerID") as? UINavigationController{
+            viewController.modalPresentationStyle = .fullScreen
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    func showExpertView(){
+        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ExpertMenuViewController") as? ExpertMenuViewController {
+           // viewController.modalPresentationStyle = .overCurrentContext
+            self.present(viewController, animated: true)
+        }
+    }
+    
+    func showAde(){
+        let navigationController = UIStoryboard(name:"SideMenuViews", bundle: nil).instantiateViewController(withIdentifier: "HelpNavigation") as! UINavigationController
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+
+    }
+    
+    func showSettings(){
+        let navigationController = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsNavigation") as! UINavigationController
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+
+    }
+    
+    func showLogout(){
+        let alertController = UIAlertController(title: "LOGOUT_TITLE".localized, message: "Are you sure you want to log out?".localized, preferredStyle: UIAlertController.Style.alert)
+        
+        let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.cancel)
+        
+        let okAction = UIAlertAction(title: "Log out".localized, style: UIAlertAction.Style.destructive)
+        {
+            (result : UIAlertAction) -> Void in
+            print("You pressed OK")
+            
+            self.dismiss(animated: true, completion: {
+                NotificationCenter.default.post(name: K.Notifications.UserDidLogout, object: nil)
+            })
+            
+            User.logout()
+            
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func handleNavigation(indexPath: IndexPath){

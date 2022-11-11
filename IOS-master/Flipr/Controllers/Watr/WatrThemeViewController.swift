@@ -14,6 +14,7 @@ class WatrThemeViewController: UIViewController {
     @IBOutlet weak var themBlueTick: UIImageView!
     @IBOutlet weak var themRoseTick: UIImageView!
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Thème"

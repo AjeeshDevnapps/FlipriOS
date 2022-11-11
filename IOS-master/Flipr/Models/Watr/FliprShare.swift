@@ -112,6 +112,27 @@ class FliprShare {
             })
         }
     
+    
+    func deleteShareWithPoolId(email: String, poolID: String, completion: ((_ error:Error?) -> Void)?) {
+        Alamofire.request(Router.deleteShare(poolId: poolID , email: email)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                
+                switch response.result {
+                    
+                case .success(_):
+                    completion?(nil)
+
+                case .failure(let error):
+                    if let serverError = User.serverError(response: response) {
+                        completion?(serverError)
+                    } else {
+                        completion?(error)
+                    }
+                    print("get shares Error \(error)")
+                }
+            })
+        }
+    
+    
 }
 
 

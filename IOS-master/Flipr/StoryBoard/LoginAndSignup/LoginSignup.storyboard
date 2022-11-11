@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w65-E9-iq8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w65-E9-iq8">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -52,10 +52,44 @@
                                     <constraint firstAttribute="width" constant="80" id="Q66-42-UjT"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFQ-Mv-QhY">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="watrIcon" translatesAutoresizingMaskIntoConstraints="NO" id="V6V-WO-eTn">
+                                        <rect key="frame" x="112.5" y="242" width="189" height="314"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Water Matters" translatesAutoresizingMaskIntoConstraints="NO" id="GIl-lj-Yqd">
+                                        <rect key="frame" x="106" y="614" width="202" height="88"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Watr" translatesAutoresizingMaskIntoConstraints="NO" id="7Ck-SR-fI6">
+                                        <rect key="frame" x="146.5" y="98" width="121" height="34"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkWaves" translatesAutoresizingMaskIntoConstraints="NO" id="oVd-Ho-AF3">
+                                        <rect key="frame" x="0.0" y="546" width="414" height="350"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="DVN-UY-s1M"/>
+                                            <constraint firstAttribute="height" constant="350" id="nxR-2F-wP6"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="oVd-Ho-AF3" secondAttribute="trailing" id="6lk-5l-6Qu"/>
+                                    <constraint firstItem="GIl-lj-Yqd" firstAttribute="centerX" secondItem="iFQ-Mv-QhY" secondAttribute="centerX" id="aej-3K-cbq"/>
+                                    <constraint firstItem="V6V-WO-eTn" firstAttribute="centerX" secondItem="iFQ-Mv-QhY" secondAttribute="centerX" id="atc-dS-So9"/>
+                                    <constraint firstAttribute="bottom" secondItem="GIl-lj-Yqd" secondAttribute="bottom" constant="194" id="bn3-zt-FI5"/>
+                                    <constraint firstItem="7Ck-SR-fI6" firstAttribute="top" secondItem="iFQ-Mv-QhY" secondAttribute="top" constant="98" id="ctB-JW-ICF"/>
+                                    <constraint firstItem="7Ck-SR-fI6" firstAttribute="centerX" secondItem="iFQ-Mv-QhY" secondAttribute="centerX" id="dxl-hy-gm2"/>
+                                    <constraint firstAttribute="bottom" secondItem="oVd-Ho-AF3" secondAttribute="bottom" id="e4d-v0-J84"/>
+                                    <constraint firstItem="GIl-lj-Yqd" firstAttribute="top" secondItem="V6V-WO-eTn" secondAttribute="bottom" constant="58" id="nFX-Bu-EmK"/>
+                                    <constraint firstItem="oVd-Ho-AF3" firstAttribute="leading" secondItem="iFQ-Mv-QhY" secondAttribute="leading" id="pEu-vy-h5W"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2dX-Ff-xgb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="iFQ-Mv-QhY" firstAttribute="top" secondItem="0pk-YT-wc3" secondAttribute="top" id="DQB-Hj-vQi"/>
                             <constraint firstAttribute="bottom" secondItem="8n9-9H-JxQ" secondAttribute="bottom" id="Epi-WN-Ody"/>
                             <constraint firstItem="8n9-9H-JxQ" firstAttribute="leading" secondItem="2dX-Ff-xgb" secondAttribute="leading" id="FGt-dt-8sk"/>
                             <constraint firstAttribute="trailing" secondItem="pTH-ti-4n8" secondAttribute="trailing" id="GiH-TI-hJO"/>
@@ -66,9 +100,12 @@
                             <constraint firstAttribute="bottom" secondItem="9Fm-iK-LXj" secondAttribute="bottom" constant="-200" id="WH9-cW-Io4"/>
                             <constraint firstAttribute="bottom" secondItem="pTH-ti-4n8" secondAttribute="bottom" id="YpY-MP-Jnq"/>
                             <constraint firstAttribute="trailing" secondItem="9Fm-iK-LXj" secondAttribute="trailing" constant="-7" id="Yui-Mq-73M"/>
+                            <constraint firstAttribute="bottom" secondItem="iFQ-Mv-QhY" secondAttribute="bottom" id="fft-Bt-fej"/>
                             <constraint firstItem="AEs-0t-8c5" firstAttribute="top" secondItem="PtQ-WO-Vkb" secondAttribute="bottom" constant="35" id="gAx-yt-lMe"/>
                             <constraint firstAttribute="trailing" secondItem="AEs-0t-8c5" secondAttribute="trailing" constant="5" id="icj-b9-RCg"/>
+                            <constraint firstItem="iFQ-Mv-QhY" firstAttribute="leading" secondItem="2dX-Ff-xgb" secondAttribute="leading" id="tnw-al-jSO"/>
                             <constraint firstItem="9Fm-iK-LXj" firstAttribute="leading" secondItem="2dX-Ff-xgb" secondAttribute="leading" id="vpA-5N-4yb"/>
+                            <constraint firstItem="2dX-Ff-xgb" firstAttribute="trailing" secondItem="iFQ-Mv-QhY" secondAttribute="trailing" id="y6N-Mx-GUi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TAQ-Ok-WVG"/>
@@ -84,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tx5-dp-ADs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-371.01449275362324" y="174.77678571428569"/>
+            <point key="canvasLocation" x="-400.00000000000006" y="174.77678571428569"/>
         </scene>
         <!--Login Education One View Controller-->
         <scene sceneID="Qeg-zh-XRs">
@@ -202,7 +239,7 @@
                                 </connections>
                             </button>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="axt-Ik-Crp">
-                                <rect key="frame" x="146" y="759" width="122" height="28"/>
+                                <rect key="frame" x="149.5" y="759" width="115.5" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="uEg-Gl-zaO"/>
                                 </constraints>
@@ -660,14 +697,103 @@
             </objects>
             <point key="canvasLocation" x="-399" y="834"/>
         </scene>
+        <!--Flipr Splash View Controller-->
+        <scene sceneID="nba-kB-JTl">
+            <objects>
+                <viewController storyboardIdentifier="FliprSplashViewControllerFlipr" id="DsA-ps-frV" customClass="FliprSplashViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="y3o-k2-GkH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Illustration Waves" translatesAutoresizingMaskIntoConstraints="NO" id="9zH-Pc-CLm">
+                                <rect key="frame" x="0.0" y="780" width="421" height="316"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="316" id="zKt-Xo-ntj"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adieu les eaux troubles" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9L-ho-3L7">
+                                <rect key="frame" x="5" y="508" width="404" height="117"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="49"/>
+                                <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo Flipr" translatesAutoresizingMaskIntoConstraints="NO" id="OLb-Uu-Mpc">
+                                <rect key="frame" x="124" y="423" width="166" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="166" id="OeX-dC-rgG"/>
+                                    <constraint firstAttribute="height" constant="50" id="vSZ-c7-WaO"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illustration left" translatesAutoresizingMaskIntoConstraints="NO" id="q3q-R3-XVb">
+                                <rect key="frame" x="0.0" y="640" width="94" height="256"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="97P-0G-hEO"/>
+                                    <constraint firstAttribute="height" constant="256" id="Tf2-lq-6Rg"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illustration right" translatesAutoresizingMaskIntoConstraints="NO" id="d26-2F-iGQ">
+                                <rect key="frame" x="334" y="551" width="80" height="345"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="BgS-xy-97w"/>
+                                    <constraint firstAttribute="height" constant="345" id="o5m-yH-n45"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbk-4c-yzC">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Mmy-g5-nZy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="9zH-Pc-CLm" secondAttribute="trailing" constant="-7" id="0aH-1c-Mg9"/>
+                            <constraint firstItem="f9L-ho-3L7" firstAttribute="centerX" secondItem="y3o-k2-GkH" secondAttribute="centerX" id="5VU-em-1O3"/>
+                            <constraint firstItem="fbk-4c-yzC" firstAttribute="top" secondItem="y3o-k2-GkH" secondAttribute="top" id="B3H-hi-HiJ"/>
+                            <constraint firstAttribute="bottom" secondItem="fbk-4c-yzC" secondAttribute="bottom" id="EY9-bb-bgU"/>
+                            <constraint firstAttribute="bottom" secondItem="q3q-R3-XVb" secondAttribute="bottom" id="HdO-7T-0BZ"/>
+                            <constraint firstItem="9zH-Pc-CLm" firstAttribute="leading" secondItem="Mmy-g5-nZy" secondAttribute="leading" id="MfV-Em-fIj"/>
+                            <constraint firstAttribute="bottom" secondItem="9zH-Pc-CLm" secondAttribute="bottom" constant="-200" id="Nxm-cS-iWL"/>
+                            <constraint firstItem="fbk-4c-yzC" firstAttribute="trailing" secondItem="Mmy-g5-nZy" secondAttribute="trailing" id="U92-9S-QcG"/>
+                            <constraint firstAttribute="trailing" secondItem="d26-2F-iGQ" secondAttribute="trailing" id="bcN-Tb-TZm"/>
+                            <constraint firstItem="OLb-Uu-Mpc" firstAttribute="centerY" secondItem="y3o-k2-GkH" secondAttribute="centerY" id="cI0-dD-Jv4"/>
+                            <constraint firstAttribute="trailing" secondItem="f9L-ho-3L7" secondAttribute="trailing" constant="5" id="jZ2-gY-yM2"/>
+                            <constraint firstItem="q3q-R3-XVb" firstAttribute="leading" secondItem="Mmy-g5-nZy" secondAttribute="leading" id="kzw-2o-oWP"/>
+                            <constraint firstItem="f9L-ho-3L7" firstAttribute="leading" secondItem="y3o-k2-GkH" secondAttribute="leading" constant="5" id="sqn-mv-uc6"/>
+                            <constraint firstItem="OLb-Uu-Mpc" firstAttribute="centerX" secondItem="y3o-k2-GkH" secondAttribute="centerX" id="ucU-oN-NDX"/>
+                            <constraint firstItem="fbk-4c-yzC" firstAttribute="leading" secondItem="Mmy-g5-nZy" secondAttribute="leading" id="yTp-n6-u85"/>
+                            <constraint firstItem="f9L-ho-3L7" firstAttribute="top" secondItem="OLb-Uu-Mpc" secondAttribute="bottom" constant="35" id="yTs-zo-ZoX"/>
+                            <constraint firstAttribute="bottom" secondItem="d26-2F-iGQ" secondAttribute="bottom" id="ygm-zs-7mi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="UHg-6Z-LSw"/>
+                    <connections>
+                        <outlet property="leftAnimationImageView" destination="q3q-R3-XVb" id="X7u-Yb-xsP"/>
+                        <outlet property="logoImageView" destination="OLb-Uu-Mpc" id="rvO-Ks-Uy3"/>
+                        <outlet property="logoImageViewYpost" destination="cI0-dD-Jv4" id="kG6-bI-bMc"/>
+                        <outlet property="rightAnimationImageView" destination="d26-2F-iGQ" id="CGn-O4-5eN"/>
+                        <outlet property="titleLabel" destination="f9L-ho-3L7" id="8Qo-nE-EAU"/>
+                        <outlet property="waveAnimationImageView" destination="9zH-Pc-CLm" id="kP3-NB-qSZ"/>
+                        <outlet property="waveAnimationImageViewYpost" destination="Nxm-cS-iWL" id="ZUv-No-5ih"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HZy-XT-kEz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1075.3623188405797" y="859.82142857142856"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Illustration Waves" width="375" height="315.5"/>
         <image name="Logo Flipr" width="166" height="50"/>
+        <image name="Water Matters" width="202" height="88"/>
+        <image name="Watr" width="121" height="34"/>
+        <image name="bkWaves" width="375" height="316"/>
         <image name="illustration left" width="93.5" height="256"/>
         <image name="illustration right" width="79.5" height="344.5"/>
         <image name="intro1" width="285" height="229"/>
         <image name="key" width="16" height="16"/>
+        <image name="watrIcon" width="189" height="314"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
