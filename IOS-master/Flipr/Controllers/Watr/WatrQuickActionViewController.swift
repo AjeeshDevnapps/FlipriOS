@@ -139,7 +139,7 @@ class WatrQuickActionViewController: UIViewController {
                 if isPlaceOwner && (haveSubscription == false){
                     self.cellTitleList = ["Activer la connexion à distance","Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres"]
                     self.imageNames = ["noSubscription","Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres"]
-                    self.menuViewHeight.constant = 400
+                    self.menuViewHeight.constant = 410
                 }else{
                     if isPlaceOwner{
                         self.cellTitleList = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres"]
@@ -149,7 +149,7 @@ class WatrQuickActionViewController: UIViewController {
                         self.cellTitleList = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres"]
                         self.imageNames = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres",]
                     }
-                    self.menuViewHeight.constant = 369
+                    self.menuViewHeight.constant = 346
 
                 }
             }else{
@@ -258,6 +258,19 @@ class WatrQuickActionViewController: UIViewController {
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width);
             }else{
                 
+            }
+            if haveFlipr{
+                if indexPath.row == 0{
+                    cell.disableView.isHidden = false
+                    cell.comingSoonLbl.isHidden = false
+                }else{
+                    cell.disableView.isHidden = true
+                    cell.comingSoonLbl.isHidden = true
+
+                }
+            }else{
+                cell.disableView.isHidden = true
+                cell.comingSoonLbl.isHidden = true
             }
             return cell
         }
@@ -394,9 +407,19 @@ class WatrQuickActionViewController: UIViewController {
         }
         
         func showExpertView(){
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ExpertMenuViewController") as? ExpertMenuViewController {
-               // viewController.modalPresentationStyle = .overCurrentContext
-                self.present(viewController, animated: true)
+//            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ExpertMenuViewController") as? ExpertMenuViewController {
+//               // viewController.modalPresentationStyle = .overCurrentContext
+//                self.present(viewController, animated: true)
+//            }
+            
+            let tmpSb = UIStoryboard.init(name: "Main", bundle: nil)
+            if let navigationController = tmpSb.instantiateViewController(withIdentifier: "SettingsNavingation") as? UINavigationController {
+                if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertModeViewController") as? ExpertModeViewController {
+                    navigationController.modalPresentationStyle = .fullScreen
+                    viewController.isDirectPresenting = true
+                    navigationController.setViewControllers([viewController], animated: false)
+                    self.present(navigationController, animated: true, completion: nil)
+                }
             }
         }
         
@@ -408,8 +431,8 @@ class WatrQuickActionViewController: UIViewController {
         }
         
         func showSettings(){
-            let navigationController = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsNavigation") as! UINavigationController
-            navigationController.modalPresentationStyle = .fullScreen
+            let navigationController = UIStoryboard(name:"Settings", bundle: nil).instantiateViewController(withIdentifier: "WatrSettingsNavigation") as! UINavigationController
+    //        navigationController.modalPresentationStyle = .fullScreen
             self.present(navigationController, animated: true, completion: nil)
 
         }

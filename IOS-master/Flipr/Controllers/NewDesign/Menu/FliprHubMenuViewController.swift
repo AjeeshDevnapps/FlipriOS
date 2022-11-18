@@ -138,15 +138,17 @@ class FliprHubMenuViewController: UIViewController {
             if isPlaceOwner && (haveSubscription == false){
                 self.cellTitleList = ["Activer la connexion à distance","Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
                 self.imageNames = ["noSubscription","Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
+                self.menuViewHeight.constant = 601
+
             }else{
                 if isPlaceOwner{
                     self.cellTitleList = ["Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
                     self.imageNames = ["Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
-
+                    self.menuViewHeight.constant = 535
                 }else{
                     self.cellTitleList = ["Aide","Paramètres","Déconnexion"]
                     self.imageNames = ["Aide","Paramètres","Déconnexion"]
-                    self.menuViewHeight.constant = 369
+                    self.menuViewHeight.constant = 337
 
                 }
 
@@ -154,7 +156,7 @@ class FliprHubMenuViewController: UIViewController {
         }else{
             self.cellTitleList = ["Paramètres","Déconnexion"]
             self.imageNames = ["Paramètres","Déconnexion"]
-            self.menuViewHeight.constant = 260
+            self.menuViewHeight.constant = 271
 
         }
         
@@ -259,13 +261,68 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
         }else{
             
         }
+        
+        if haveFlipr{
+            if isPlaceOwner && (haveSubscription == false){
+                if indexPath.row == 4{
+                    cell.disableView.isHidden = false
+                    cell.comingSoonLbl.isHidden = false
+                }else{
+                    cell.disableView.isHidden = true
+                    cell.comingSoonLbl.isHidden = true
+                }
+            }
+            else{
+                if isPlaceOwner{
+                    if indexPath.row == 3{
+                        cell.disableView.isHidden = false
+                        cell.comingSoonLbl.isHidden = false
+                    }else{
+                        cell.disableView.isHidden = true
+                        cell.comingSoonLbl.isHidden = true
+                    }
+                }else{
+                    if indexPath.row == 0{
+                        cell.disableView.isHidden = false
+                        cell.comingSoonLbl.isHidden = false
+                    }else{
+                        cell.disableView.isHidden = true
+                        cell.comingSoonLbl.isHidden = true
+                        
+                    }
+                }
+            }
+            
+        }else{
+            
+        }
+        
+       
         return cell
     }
         
    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        handleNavigation(indexPath:indexPath)
+        
+        if haveFlipr{
+            if isPlaceOwner && (haveSubscription == false){
+                if indexPath.row == 4{
+                    return
+                }
+            }
+            else{
+                if isPlaceOwner{
+                    if indexPath.row == 3{
+                        return
+                    }
+                }else{
+                    if indexPath.row == 0{
+                        return
+                    }
+                }
+            }
+        }
         handlePlaceNavigation(indexPath: indexPath)
     }
     
@@ -316,7 +373,7 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
     func handlePlaceOwnerWithSubscriptionNavigation(indexPath: IndexPath){
       
         if indexPath.row == 0{
-            showServiceBook()
+            showProductnEquipments()
         }
         else if indexPath.row == 1{
             showPoolHouse()
@@ -341,7 +398,7 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
             self.showSubscriptionView()
         }
         else if indexPath.row == 1{
-            showServiceBook()
+            showProductnEquipments()
         }
         else if indexPath.row == 2{
             showPoolHouse()
@@ -369,6 +426,14 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
         }
     }
     
+    
+    func showProductnEquipments(){
+        let eqpsVC = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "ProductsAndEquipmentsViewController") as! ProductsAndEquipmentsViewController
+        let navigationController = UINavigationController.init(rootViewController: eqpsVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+
+    }
     
     func showServiceBook(){
         if let vc = UIStoryboard(name: "PoolLog", bundle: nil).instantiateInitialViewController() {
@@ -400,9 +465,13 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
     }
     
     func showSettings(){
-        let navigationController = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsNavigation") as! UINavigationController
-        navigationController.modalPresentationStyle = .fullScreen
+        let navigationController = UIStoryboard(name:"Settings", bundle: nil).instantiateViewController(withIdentifier: "WatrSettingsNavigation") as! UINavigationController
+//        navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)
+
+//        let navigationController = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsNavigation") as! UINavigationController
+//        navigationController.modalPresentationStyle = .fullScreen
+//        self.present(navigationController, animated: true, completion: nil)
 
     }
     

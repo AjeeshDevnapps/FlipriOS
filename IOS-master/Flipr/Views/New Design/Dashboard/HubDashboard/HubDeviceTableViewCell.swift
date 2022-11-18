@@ -25,6 +25,7 @@ class HubDeviceTableViewCell: UITableViewCell {
     @IBOutlet weak var filtrationTimeLbl: UILabel!
 
     @IBOutlet weak var modeNameLbl: UILabel!
+    @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var powerBtn: UIButton!
     @IBOutlet weak var smartContrlBtn: UIButton!
     @IBOutlet weak var programBtn: UIButton!
@@ -147,8 +148,8 @@ class HubDeviceTableViewCell: UITableViewCell {
                                    if let tmpHub = self.hub {
                                        if tmpHub.equipementCode == 86{
                                            if tmpHub.behavior == "auto" {
-                                               self.filtrationTimeLbl.isHidden = false
-                                               self.filtrationTimeLbl.text = value
+//                                               self.filtrationTimeLbl.isHidden = false
+//                                               self.filtrationTimeLbl.text = value
                                            }else{
                                                self.clearFiltrationTimeLabel()
                                            }

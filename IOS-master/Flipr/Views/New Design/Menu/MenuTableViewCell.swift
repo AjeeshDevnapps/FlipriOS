@@ -11,6 +11,9 @@ import UIKit
 class MenuTableViewCell: UITableViewCell {
     @IBOutlet weak var menuTitleLbl: UILabel!
     @IBOutlet weak var menuIcon: UIImageView!
+    @IBOutlet weak var disableView: UIView!
+    @IBOutlet weak var comingSoonLbl: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

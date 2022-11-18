@@ -108,6 +108,7 @@ enum Router: URLRequestConvertible {
     case updatedFirmwere(serial: String,version:String)
 
     case startedUpdatedFirmwere(serial: String)
+    case getPlaceTypes
 
     
     //Shares
@@ -116,6 +117,9 @@ enum Router: URLRequestConvertible {
     case updateShare(poolId: String, email: String, permissionLevel: FliprRole)
     case deleteShare(poolId: String, email: String)
 
+    //PoolSettings
+    case getPoolSettings(poolId: String)
+   
     
     //Legacy
     //static let baseURLString = K.Server.BaseUrl + K.Server.ApiPath
@@ -293,7 +297,11 @@ enum Router: URLRequestConvertible {
             return .put
         case .deleteShare:
             return .delete
-            
+        case .getPoolSettings:
+            return .get
+           
+        case .getPlaceTypes:
+            return .get
             
         }
     }
@@ -475,6 +483,10 @@ enum Router: URLRequestConvertible {
             return "place/\(poolId)/shares"
         case .deleteShare(poolId: let poolId, email: let email):
             return "place/\(poolId)/shares"
+        case .getPoolSettings(poolId: let poolId):
+            return "place/\(poolId)"
+        case .getPlaceTypes:
+            return "place/types"
             
             
         }
@@ -881,6 +893,20 @@ enum Router: URLRequestConvertible {
             ]
             print("Posting measures with params: \(parameters)")
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+            
+         
+        case .getPoolSettings(poolId: _):
+            var lang = "en"
+            if let preferredLanguage = Locale.current.languageCode {
+                lang = preferredLanguage
+            }
+            let parameters: [String: Any] = [
+                "l": lang,
+            ]
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+       
+
+            
         default:
             break
         }

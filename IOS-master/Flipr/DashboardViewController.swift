@@ -255,8 +255,14 @@ class DashboardViewController: UIViewController {
     var haveFirmwereUpdate = false
     var firmwereLatestVersion = "0"
     var selectedPlace: PlaceDropdown?
+    
+    var isPlaceOwner = true
 
 
+    var placeDetails:PlaceDropdown!
+    var placesModules:PlaceModule!
+
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -375,7 +381,7 @@ class DashboardViewController: UIViewController {
             self.waterTmpChangeButton.isHidden = true
             self.phChangeButton.isHidden = true
             self.redoxChangeButton.isHidden = true
-            self.settingsButton.isHidden = true
+//            self.settingsButton.isHidden = true
             self.bleMeasureHasBeenSent = false
             self.refresh()
             self.perform(#selector(self.callGetStatusApis), with: nil, afterDelay: 3)
@@ -401,6 +407,11 @@ class DashboardViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: K.Notifications.ServerChanged, object: nil, queue: nil) { (notification) in
             self.refresh()
         }
+        
+        NotificationCenter.default.addObserver(forName: K.Notifications.MeasureUnitSettingsChanged, object: nil, queue: nil) { (notification) in
+            self.refresh()
+        }
+        
         
         
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprDiscovered, object: nil, queue: nil) { (notification) in
@@ -590,6 +601,8 @@ class DashboardViewController: UIViewController {
     
         let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "FliprHubMenuViewController") as? FliprHubMenuViewController {
+            viewController.placesModules = self.placesModules
+            viewController.placeDetails = self.placeDetails
            // viewController.modalPresentationStyle = .overCurrentContext
             self.present(viewController, animated: true) {
             }
@@ -2056,8 +2069,17 @@ class DashboardViewController: UIViewController {
                             textAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
                             self.airTemperatureLabel.layer.add(textAnimation, forKey: "changeAirTempratureTransition")
                             
-                            self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
-                            self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
+                            self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°C"
+                            self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°C"
+                            
+                            if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+                                if currentUnit == 2{
+                                    let funit = (temperature * 9/5) + 32
+                                    self.airTemperatureLabel.text = String(format: "%.0f", funit) + "°F"
+                                    self.airTemperatureLabelHubTab.text = String(format: "%.0f", funit) + "°F"
+                                }else{
+                                }
+                            }
 
                         }
                         if let icon = currently["icon"] as? String {
@@ -2628,8 +2650,17 @@ class DashboardViewController: UIViewController {
                             textAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
                             self.airTemperatureLabel.layer.add(textAnimation, forKey: "changeAirTempratureTransition")
                             
-                            self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
-                            self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
+                            self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°C"
+                            self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°C"
+                            
+                            if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+                                if currentUnit == 2{
+                                    let funit = (temperature * 9/5) + 32
+                                    self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°F"
+                                    self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°F"
+                                }else{
+                                }
+                            }
 
 
                             if let forecastTemperature = weather["NextHourTemperature"] as? Double {
@@ -2999,9 +3030,19 @@ class DashboardViewController: UIViewController {
                             textAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
                             self.airTemperatureLabel.layer.add(textAnimation, forKey: "changeAirTempratureTransition")
                             
-                            self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°"
-                            self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°"
-                            Module.currentModule?.airTemperature = String(format: "%.2f", temperature) + "°"
+                            self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°C"
+                            self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°C"
+                            Module.currentModule?.airTemperature = String(format: "%.2f", temperature) + "°C"
+                            
+                            if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+                                if currentUnit == 2{
+                                    let funit = (temperature * 9/5) + 32
+                                    self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°F"
+                                    self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°F"
+                                    Module.currentModule?.airTemperature = String(format: "%.2f", temperature) + "°F"
+                                }else{
+                                }
+                            }
 
                             
                             if let forecastTemperature = weather["NextHourTemperature"] as? Double {
@@ -3132,7 +3173,7 @@ class DashboardViewController: UIViewController {
                             if let lastDate = dateString.fliprDate {
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.dateFormat = "EEE dd/MM HH:mm"
-                                self.lastMeasureDateLabel.text = "Last measure".localized +  " : \(dateFormatter.string(from: lastDate))"
+                                self.lastMeasureDateLabel.text = "Lun.".localized +  " : \(dateFormatter.string(from: lastDate))"
                                 self.lastMeasureDateLabel.isHidden = false
                                 self.lastMeasureDate = lastDate
                                 Module.currentModule?.rawlastMeasure = dateFormatter.string(from: lastDate)
@@ -3195,7 +3236,9 @@ class DashboardViewController: UIViewController {
 
                                 // less than 75 / < 75 ex: -4400
                                else if lastDate.timeIntervalSinceNow  > -18000 {
-                                    self.signalStrengthLabel.text = "Signal excellent".localized
+//                                    self.signalStrengthLabel.text = "Signal excellent".localized
+                                    self.signalStrengthLabel.text = "Dernière mesure".localized
+
                                     self.signalStrengthImageView.image = UIImage(named: "Signalhigh")
 //                                    self.readBLEMeasure(completion: { (error) in
 //                                        if error != nil {
@@ -3221,16 +3264,20 @@ class DashboardViewController: UIViewController {
                                // less than 75 / < 75 ex: -85000
 
                                 else if lastDate.timeIntervalSinceNow > -54000 {
-                                    self.signalStrengthLabel.text = "Signal moyen".localized
+//                                    self.signalStrengthLabel.text = "Signal moyen".localized
+                                    self.signalStrengthLabel.text = "Dernière mesure".localized
                                     self.signalStrengthImageView.image = UIImage(named: "Signalmiddle")
 
                                 }
                                 else if  lastDate.timeIntervalSinceNow > -259200 {
-                                    self.signalStrengthLabel.text = "Signal faible".localized
+//                                    self.signalStrengthLabel.text = "Signal faible".localized
+                                    self.signalStrengthLabel.text = "Mesure ancienne".localized
                                     self.signalStrengthImageView.image = UIImage(named: "Signallow")
 
                                 }else{
-                                    self.signalStrengthLabel.text = "Signal inexistant".localized
+                                    
+//                                    self.signalStrengthLabel.text = "Signal inexistant".localized
+                                    self.signalStrengthLabel.text = "Mesure obsolète".localized
                                     self.signalStrengthImageView.image = UIImage(named: "SignalNo")
                                 }
                                 
@@ -3273,10 +3320,19 @@ class DashboardViewController: UIViewController {
                             textAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
                             self.waterTemperatureLabel.layer.add(textAnimation, forKey: "changeWaterTempratureTransition")
                             
-                            self.waterTemperatureLabel.text = String(format: "%.0f", temp) + "°"
-                            self.hubTabAirValLabel.text = String(format: "%.0f", temp) + "°"
-                            Module.currentModule?.rawWaterTemperature = String(format: "%.2f", temp) + "°"
+                            self.waterTemperatureLabel.text = String(format: "%.0f", temp) + "°C"
+                            self.hubTabAirValLabel.text = String(format: "%.0f", temp) + "°C"
+                            Module.currentModule?.rawWaterTemperature = String(format: "%.2f", temp) + "°C"
                             
+                            if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+                                if currentUnit == 2{
+                                    let funit = (temp * 9/5) + 32
+                                    self.waterTemperatureLabel.text = String(format: "%.0f", funit) + "°F"
+                                    self.hubTabAirValLabel.text = String(format: "%.0f", funit) + "°F"
+                                    Module.currentModule?.rawWaterTemperature = String(format: "%.2f", temp) + "°F"
+                                }else{
+                                }
+                            }
                             
                         }
                         
@@ -4045,7 +4101,7 @@ class DashboardViewController: UIViewController {
     }
     
     @IBAction func quickActionButtonAction(_ sender: Any) {
-    
+    /*
         let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "QuickActionViewController") as? QuickActionViewController {
             viewController.modalPresentationStyle = .overCurrentContext
@@ -4053,6 +4109,19 @@ class DashboardViewController: UIViewController {
                 viewController.showBackgroundView()
             }
         }
+        */
+        let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "WatrQuickActionViewController") as? WatrQuickActionViewController {
+            viewController.modalPresentationStyle = .overCurrentContext
+            viewController.placesModules = self.placesModules
+            viewController.placeDetails = self.placeDetails
+
+            self.present(viewController, animated: true) {
+                
+//                viewController.showBackgroundView()
+            }
+        }
+        
     }
     
     @IBAction func hubButtonAction(_ sender: Any) {
@@ -4441,7 +4510,7 @@ extension DashboardViewController{
         
         showUserPreferedHistory()
         self.hubDeviceTableView.reloadData()
-        self.hubDeviceTableViewHeightConstraint.constant = CGFloat(145 * self.hubs.count)
+        self.hubDeviceTableViewHeightConstraint.constant = CGFloat(112 * self.hubs.count)
         
         if hubScrollViewContainerView.height < self.hubTabScrollView.height{
             let diff = self.hubTabScrollView.height - hubScrollViewContainerView.height
@@ -4618,7 +4687,7 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 145
+        return 112
     }
     
     
@@ -4640,12 +4709,15 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource, UI
         else{
             cell.iconImageView.image = UIImage(named: "heatpump")
         }
-        cell.modeNameLbl.text = hub.behavior.capitalizingFirstLetter()
+//        cell.modeNameLbl.text = hub.behavior.capitalizingFirstLetter()
         cell.deviceNameLbl.text = hub.equipementName.capitalizingFirstLetter()
+        cell.settingsBtn.isHidden = !self.isPlaceOwner
         cell.manageIcons()
+        cell.filtrationTimeLbl.isHidden = false
+        cell.filtrationTimeLbl.text =  "asdsads asd"
+
         return cell
     }
-    
 
 }
 
@@ -4904,12 +4976,16 @@ extension DashboardViewController: HubSettingViewDelegate{
     //MUMP
     
     @IBAction func settingsButtonClicked(){
+        let navigationController = UIStoryboard(name:"Settings", bundle: nil).instantiateViewController(withIdentifier: "WatrSettingsNavigation") as! UINavigationController
+//        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+
     
-        let sb = UIStoryboard(name: "NewPool", bundle: nil)
-                if let viewController = sb.instantiateViewController(withIdentifier: "NewPoolViewControllerID") as? UINavigationController {
-                    viewController.modalPresentationStyle = .fullScreen
-                    self.present(viewController, animated: true, completion: nil)
-                }
+//        let sb = UIStoryboard(name: "NewPool", bundle: nil)
+//                if let viewController = sb.instantiateViewController(withIdentifier: "NewPoolViewControllerID") as? UINavigationController {
+//                    viewController.modalPresentationStyle = .fullScreen
+//                    self.present(viewController, animated: true, completion: nil)
+//                }
     }
     
     @IBAction func placeDropDownButtonClicked(){
@@ -4939,6 +5015,7 @@ extension DashboardViewController{
                     places = placesResult!
                     if places.count > 0{
                         self.selectedPlace = places[0]
+                        self.placeDetails =  self.selectedPlace
                         self.showPlaceInfo()
                     }
 //                    self.hud?.dismiss(afterDelay: 0)
@@ -4958,35 +5035,95 @@ extension DashboardViewController{
         placeDetails.append(self.selectedPlace?.placeOwnerLastName ?? "")
         placeDetails.append(" - ")
         placeDetails.append(self.selectedPlace?.placeCity ?? "")
-
-
         self.selectedPlaceDetailsLbl.text = placeDetails
+        if let placeId = self.selectedPlace?.placeId{
+            let placeIdStr = "\(placeId)"
+            getPlaceModules(placeId: placeIdStr)
+        }
+        if let level = self.selectedPlace?.permissionLevel{
+           if level == "Admin"{
+               isPlaceOwner = true
+           }else{
+               isPlaceOwner = false
+           }
+        }else{
+            isPlaceOwner = false
+        }
+        
     }
+    
+    func getPlaceModules(placeId:String){
+//        hud?.show(in: self.view)
+        User.currentUser?.getPlaceModules(placeId: placeId, completion: { (placesModuleResult,error) in
+            if (error != nil) {
+//                self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+//                self.hud?.textLabel.text = error?.localizedDescription
+//                self.hud?.dismiss(afterDelay: 3)
+            } else {
+                if placesModuleResult != nil{
+                    var pModules = placesModuleResult!
+
+                    var isFliprModule = false
+                    var fliprModule:PlaceModule?
+
+                    if pModules.count > 0{
+                        for module in pModules {
+                            if module.isFlipr{
+                                isFliprModule = true
+                                fliprModule = module
+                                self.placesModules = module
+                                break
+                            }
+                        }
+                        
+                        if isFliprModule{
+                            //            Module.currentModule = module
+                            Module.currentModule?.serial = fliprModule?.serial ?? ""
+                            Module.currentModule?.activationKey = fliprModule?.activationKey ?? ""
+                            Module.saveCurrentModuleLocally()
+                        }
+                        
+                    }else{
+                    }
+                }
+            }
+            
+        })
+    }
+
 }
 
 extension DashboardViewController:PlaceDropdownDelegate{
-    
-    
-    
-    func didSelectPlaceModules(placeModules:[PlaceModule]){
-
+    func didSelectPlaceModules(placeModules: [PlaceModule], placeDetails: PlaceDropdown) {
+        
+        if placeDetails.permissionLevel == "Admin"{
+            isPlaceOwner = true
+        }else{
+            isPlaceOwner = false
+        }
+        self.placeDetails = placeDetails
         var isFliprModule = false
         var fliprModule:PlaceModule?
         for module in placeModules {
             if module.isFlipr{
                 isFliprModule = true
                 fliprModule = module
+                self.placesModules = module
                 break
             }
         }
         
         if isFliprModule{
-//            Module.currentModule = module
+            //            Module.currentModule = module
             Module.currentModule?.serial = fliprModule?.serial ?? ""
             Module.currentModule?.activationKey = fliprModule?.activationKey ?? ""
             Module.saveCurrentModuleLocally()
         }
         
     }
-
+    
+    
+    
 }
+
+

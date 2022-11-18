@@ -114,22 +114,22 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
             showCalibrationView()
         }
         else if indexPath.row == 2{
-            showCalibrationView()
-        }
-        else if indexPath.row == 3{
             stripTest()
         }
-        else if indexPath.row == 4{
+        else if indexPath.row == 3{
             expertView()
         }
-        else if indexPath.row == 5{
+        else if indexPath.row == 4{
             history()
         }
-        else if indexPath.row == 6{
+        else if indexPath.row == 5{
             drainingWater()
         }
-        else if indexPath.row == 7{
+        else if indexPath.row == 6{
             showFirmwereDiagnosticScreen()
+        }
+        else if indexPath.row == 7{
+//            showFirmwereDiagnosticScreen()
         }
         else{
             

@@ -75,6 +75,8 @@ struct K {
 
         static let showLastMeasurementScreen = Notification.Name("fr.isee-u.showLastMeasurementScreen")
         static let ServerChanged = Notification.Name("fr.isee-u.serverChanged")
+        static let MeasureUnitSettingsChanged = Notification.Name("fr.isee-u.MeasureUnitSettingsChanged")
+
 
 
 
