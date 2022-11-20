@@ -11,6 +11,8 @@ import UIKit
 class ExpertMenuViewController: UIViewController {
     @IBOutlet weak var settingTable: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var menuViewHeight: NSLayoutConstraint!
+
     var haveFirmwereUpgrade = true
     var haveSubscription = false
     @IBOutlet weak var menuView: UIView!
@@ -57,9 +59,11 @@ class ExpertMenuViewController: UIViewController {
         if haveSubscription{
             cellTitleList = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
              imageNames = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+            self.menuViewHeight.constant = 600
         }else{
             cellTitleList = ["Activer la connexion à distance","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
              imageNames = ["noSubscription","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+            self.menuViewHeight.constant = 670
 
         }
 

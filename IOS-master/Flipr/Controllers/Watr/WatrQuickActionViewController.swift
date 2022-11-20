@@ -137,23 +137,23 @@ class WatrQuickActionViewController: UIViewController {
     //        var haveFlipr = true
             if haveFlipr{
                 if isPlaceOwner && (haveSubscription == false){
-                    self.cellTitleList = ["Activer la connexion à distance","Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres"]
+                    self.cellTitleList = ["Activer la connexion à distance".localized,"Entrée manuelle (DipR)".localized,"Récupérer la dernière mesure".localized,"Vue Expert".localized,"Paramètres".localized]
                     self.imageNames = ["noSubscription","Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres"]
                     self.menuViewHeight.constant = 410
                 }else{
                     if isPlaceOwner{
-                        self.cellTitleList = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres"]
+                        self.cellTitleList = ["Entrée manuelle (DipR)".localized,"Récupérer la dernière mesure".localized,"Vue Expert".localized,"Paramètres".localized]
                         self.imageNames = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres",]
 
                     }else{
-                        self.cellTitleList = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres"]
+                        self.cellTitleList = ["Entrée manuelle (DipR)".localized,"Récupérer la dernière mesure".localized,"Vue Expert".localized,"Paramètres".localized]
                         self.imageNames = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres",]
                     }
                     self.menuViewHeight.constant = 346
 
                 }
             }else{
-                self.cellTitleList = ["Paramètres"]
+                self.cellTitleList = ["Paramètres".localized]
                 self.imageNames = ["Paramètres"]
                 self.menuViewHeight.constant = 180
             }

@@ -136,17 +136,17 @@ class FliprHubMenuViewController: UIViewController {
 //        var haveFlipr = true
         if haveFlipr{
             if isPlaceOwner && (haveSubscription == false){
-                self.cellTitleList = ["Activer la connexion à distance","Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
+                self.cellTitleList = ["Activer la connexion à distance".localized,"Carnet d’entretien".localized,"Pool House".localized,"Mode Expert".localized,"Aide".localized,"Paramètres".localized,"Déconnexion".localized]
                 self.imageNames = ["noSubscription","Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
                 self.menuViewHeight.constant = 601
 
             }else{
                 if isPlaceOwner{
-                    self.cellTitleList = ["Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
+                    self.cellTitleList = ["Carnet d’entretien".localized,"Pool House".localized,"Mode Expert".localized,"Aide".localized,"Paramètres".localized,"Déconnexion".localized]
                     self.imageNames = ["Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
                     self.menuViewHeight.constant = 535
                 }else{
-                    self.cellTitleList = ["Aide","Paramètres","Déconnexion"]
+                    self.cellTitleList = ["Aide".localized,"Paramètres".localized,"Déconnexion".localized]
                     self.imageNames = ["Aide","Paramètres","Déconnexion"]
                     self.menuViewHeight.constant = 337
 
@@ -154,7 +154,7 @@ class FliprHubMenuViewController: UIViewController {
 
             }
         }else{
-            self.cellTitleList = ["Paramètres","Déconnexion"]
+            self.cellTitleList = ["Paramètres".localized,"Déconnexion".localized]
             self.imageNames = ["Paramètres","Déconnexion"]
             self.menuViewHeight.constant = 271
 
@@ -262,42 +262,6 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
             
         }
         
-        if haveFlipr{
-            if isPlaceOwner && (haveSubscription == false){
-                if indexPath.row == 4{
-                    cell.disableView.isHidden = false
-                    cell.comingSoonLbl.isHidden = false
-                }else{
-                    cell.disableView.isHidden = true
-                    cell.comingSoonLbl.isHidden = true
-                }
-            }
-            else{
-                if isPlaceOwner{
-                    if indexPath.row == 3{
-                        cell.disableView.isHidden = false
-                        cell.comingSoonLbl.isHidden = false
-                    }else{
-                        cell.disableView.isHidden = true
-                        cell.comingSoonLbl.isHidden = true
-                    }
-                }else{
-                    if indexPath.row == 0{
-                        cell.disableView.isHidden = false
-                        cell.comingSoonLbl.isHidden = false
-                    }else{
-                        cell.disableView.isHidden = true
-                        cell.comingSoonLbl.isHidden = true
-                        
-                    }
-                }
-            }
-            
-        }else{
-            
-        }
-        
-       
         return cell
     }
         
@@ -443,11 +407,12 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
     }
     
     func showPoolHouse(){
-        let manSb = UIStoryboard.init(name: "Main", bundle: nil)
-        if let viewController = manSb.instantiateViewController(withIdentifier: "PoolViewControllerID") as? UINavigationController{
-            viewController.modalPresentationStyle = .fullScreen
-            self.present(viewController, animated: true, completion: nil)
-        }
+        showServiceBook()
+//        let manSb = UIStoryboard.init(name: "Main", bundle: nil)
+//        if let viewController = manSb.instantiateViewController(withIdentifier: "PoolViewControllerID") as? UINavigationController{
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.present(viewController, animated: true, completion: nil)
+//        }
     }
     
     func showExpertView(){

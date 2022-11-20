@@ -950,42 +950,16 @@
                                                             <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FfM-CW-Jij">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming soon" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8v7-tJ-Waf">
-                                                                    <rect key="frame" x="240" y="44" width="120" height="14"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="120" id="Oav-Nq-DLh"/>
-                                                                        <constraint firstAttribute="height" constant="14" id="vm0-Xx-9RY"/>
-                                                                    </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.68535156249999996" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="bottom" secondItem="8v7-tJ-Waf" secondAttribute="bottom" constant="6" id="ZUg-Zd-uav"/>
-                                                                <constraint firstAttribute="trailing" secondItem="8v7-tJ-Waf" secondAttribute="trailing" constant="15" id="fO1-FM-eOM"/>
-                                                            </constraints>
-                                                        </view>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="FfM-CW-Jij" secondAttribute="bottom" id="0RZ-6c-2Iv"/>
                                                         <constraint firstAttribute="trailing" secondItem="Gg8-If-bRn" secondAttribute="trailing" constant="8" id="34c-2l-Rrj"/>
                                                         <constraint firstItem="Gg8-If-bRn" firstAttribute="centerY" secondItem="eH6-dA-rcw" secondAttribute="centerY" id="B8Z-kS-UUn"/>
-                                                        <constraint firstAttribute="trailing" secondItem="FfM-CW-Jij" secondAttribute="trailing" id="ZOU-Pp-SC5"/>
-                                                        <constraint firstItem="FfM-CW-Jij" firstAttribute="leading" secondItem="eH6-dA-rcw" secondAttribute="leading" id="er3-3S-lWu"/>
                                                         <constraint firstItem="BXJ-Y1-e9M" firstAttribute="centerY" secondItem="eH6-dA-rcw" secondAttribute="centerY" id="hH8-sB-kGi"/>
                                                         <constraint firstItem="Gg8-If-bRn" firstAttribute="leading" secondItem="BXJ-Y1-e9M" secondAttribute="trailing" constant="16" id="kji-fO-ok1"/>
-                                                        <constraint firstItem="FfM-CW-Jij" firstAttribute="top" secondItem="eH6-dA-rcw" secondAttribute="top" id="pg8-Vb-5Da"/>
                                                         <constraint firstItem="BXJ-Y1-e9M" firstAttribute="leading" secondItem="eH6-dA-rcw" secondAttribute="leading" constant="16" id="vzW-xL-OHh"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="comingSoonLbl" destination="8v7-tJ-Waf" id="wSX-48-54c"/>
-                                                    <outlet property="disableView" destination="FfM-CW-Jij" id="6WG-eN-VWu"/>
                                                     <outlet property="menuIcon" destination="BXJ-Y1-e9M" id="50A-3I-frX"/>
                                                     <outlet property="menuTitleLbl" destination="Gg8-If-bRn" id="LIL-go-2xh"/>
                                                 </connections>
@@ -1016,9 +990,9 @@
                         <viewLayoutGuide key="safeArea" id="GUP-5s-Jq8"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="SoH-bU-mnL" firstAttribute="trailing" secondItem="GUP-5s-Jq8" secondAttribute="trailing" id="RFJ-W7-gL8"/>
-                            <constraint firstItem="SoH-bU-mnL" firstAttribute="bottom" secondItem="GUP-5s-Jq8" secondAttribute="bottom" id="Xha-MF-JCT"/>
+                            <constraint firstItem="SoH-bU-mnL" firstAttribute="trailing" secondItem="Hqz-jr-uLg" secondAttribute="trailing" id="RFJ-W7-gL8"/>
                             <constraint firstAttribute="trailing" secondItem="YpW-XG-yWM" secondAttribute="trailing" id="XmR-Pp-OoX"/>
+                            <constraint firstAttribute="bottom" secondItem="SoH-bU-mnL" secondAttribute="bottom" id="Y41-qV-pGP"/>
                             <constraint firstItem="YpW-XG-yWM" firstAttribute="leading" secondItem="Hqz-jr-uLg" secondAttribute="leading" id="dOD-V1-oeP"/>
                             <constraint firstItem="SoH-bU-mnL" firstAttribute="leading" secondItem="GUP-5s-Jq8" secondAttribute="leading" id="t0n-7r-ZsH"/>
                         </constraints>
@@ -2009,8 +1983,8 @@ supprimer le Hub ?</string>
                         <viewLayoutGuide key="safeArea" id="uBf-to-cyu"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="SXq-U9-aLi" firstAttribute="bottom" secondItem="uBf-to-cyu" secondAttribute="bottom" id="9P6-hx-kkt"/>
                             <constraint firstAttribute="trailing" secondItem="iqF-c5-7n5" secondAttribute="trailing" id="ApD-Vj-ot9"/>
+                            <constraint firstAttribute="bottom" secondItem="SXq-U9-aLi" secondAttribute="bottom" id="BAd-tt-uEH"/>
                             <constraint firstItem="iqF-c5-7n5" firstAttribute="leading" secondItem="BgV-kD-9L9" secondAttribute="leading" id="L64-Wf-syA"/>
                             <constraint firstItem="SXq-U9-aLi" firstAttribute="trailing" secondItem="uBf-to-cyu" secondAttribute="trailing" id="ivn-te-l3a"/>
                             <constraint firstItem="SXq-U9-aLi" firstAttribute="leading" secondItem="uBf-to-cyu" secondAttribute="leading" id="waz-VY-kj4"/>
@@ -2018,6 +1992,7 @@ supprimer le Hub ?</string>
                     </view>
                     <connections>
                         <outlet property="menuView" destination="SXq-U9-aLi" id="czY-9M-g4Y"/>
+                        <outlet property="menuViewHeight" destination="Eb1-9Q-7Ju" id="wm5-4Y-pyC"/>
                         <outlet property="settingTable" destination="T7g-Y3-Xt6" id="IiH-pI-GlY"/>
                         <outlet property="titleLbl" destination="s4P-gv-1Ju" id="uyG-oS-994"/>
                     </connections>
