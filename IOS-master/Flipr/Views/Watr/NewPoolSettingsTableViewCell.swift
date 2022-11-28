@@ -13,7 +13,10 @@ class NewPoolSettingsTableViewCell: UITableViewCell {
     var isToggle: Bool = false
     @IBOutlet weak var titleName: UILabel!
     @IBOutlet weak var valueText: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
+
     var switchy: UISwitch = UISwitch()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -44,6 +44,10 @@ class NewLocationViewController: UIViewController {
                 return
             }
             self.placeTypes = types ?? []
+            if self.placeTypes.count > 0 {
+                self.placeTypes.sort { $0.isAvailableAsPlace! && !$1.isAvailableAsPlace! }
+            }
+
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.tableHeightConstraint.constant = CGFloat(50 * self.placeTypes.count)
@@ -131,6 +135,18 @@ extension NewLocationViewController: UITableViewDataSource, UITableViewDelegate 
             }
         }
         
+        let place = placeTypes[indexPath.row]
+        cell.disableView.isHidden = place.isAvailableAsPlace ?? true
+        cell.contentView.alpha = 0.5
+        if let isAvaible = placeTypes[indexPath.row].isAvailableAsPlace{
+            if isAvaible == false{
+                cell.contentView.alpha = 0.5
+            }else{
+                cell.contentView.alpha = 1.0
+            }
+        }
+
+        
 //        cell.textLabel?.text = placeTypes[indexPath.row].name
 //        cell.imageView?.image = UIImage(named: "menu_picto_pool")
 //        cell.imageView?.backgroundColor = .black
@@ -147,6 +163,11 @@ extension NewLocationViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let isAvaible = placeTypes[indexPath.row].isAvailableAsPlace{
+            if isAvaible == false{
+                return
+            }
+        }
         if selectedIndex != nil {
             tableView.cellForRow(at: selectedIndex)?.accessoryType = .none
         }

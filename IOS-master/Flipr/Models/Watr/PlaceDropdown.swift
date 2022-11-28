@@ -12,6 +12,7 @@ class PlaceDropdown{
     var guestUser : String!
     var isPending : Bool!
     var name : String!
+    var privateName : String!
     var permissionLevel : String!
     var placeCity : String!
     var placeId : Int!
@@ -37,6 +38,7 @@ class PlaceDropdown{
         placeOwnerLastName = dictionary["PlaceOwnerLastName"] as? String
         placeType = dictionary["PlaceType"] as? String
         typeIcon = dictionary["TypeIcon"] as? String
+        privateName = dictionary["PrivateName"] as? String
     }
 
 }

@@ -16,10 +16,22 @@ protocol PlaceDropdownDelegate {
 
 class PlaceDropdownViewController: UIViewController {
     var places = [PlaceDropdown]()
+    
+    var placesList = [PlaceDropdown]()
+    var invitationList = [PlaceDropdown]()
+
+    
     var placesModules = [PlaceModule]()
     
     let hud = JGProgressHUD(style:.dark)
+    var haveInvitation = false
+    var havePlace = false
+    var placeTitle : String?
     
+    var selectedPlace : PlaceDropdown?
+
+
+
     @IBOutlet weak var placesTableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
     var delegate:PlaceDropdownDelegate?
@@ -44,7 +56,28 @@ class PlaceDropdownViewController: UIViewController {
                 self.hud?.dismiss(afterDelay: 0)
             } else {
                 if placesResult != nil{
+                   // print(placesResult)
                     self.places = placesResult!
+//                    self.places.sort { $0.isPending && !$1.isPending }
+                     self.placesList = self.places.filter { $0.isPending == false }
+                    self.invitationList = self.places.filter { $0.isPending == true }
+
+                    
+                    
+                    self.haveInvitation = false
+                    self.havePlace = false
+                    if self.placesList.count > 0 {
+                        self.havePlace = true
+                    }
+                    if self.invitationList.count > 0 {
+                        self.haveInvitation = true
+                    }
+//                    for obj in self.places {
+//                        if obj.isPending{
+//                            self.haveInvitation = true
+//                            self.havePlace = true
+//                        }
+//                    }
                     self.hud?.dismiss(afterDelay: 0)
                     self.placesTableView.reloadData()
                 }
@@ -94,32 +127,248 @@ class PlaceDropdownViewController: UIViewController {
 
 extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if self.haveInvitation && self.havePlace{
+            return 2
+        }else{
+            return 1
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.places.count
+        if self.haveInvitation && self.havePlace{
+            if section == 0{
+                return self.placesList.count
+            }else{
+                return self.invitationList.count
+            }
+        }else{
+            if self.haveInvitation{
+                return self.invitationList.count
+            }else{
+                return self.placesList.count
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50.0
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if self.haveInvitation && self.havePlace{
+            if section == 0{
+                return "Emplacements actifs"
+            }else{
+                return "Invitations"
+            }
+        }else{
+            if self.haveInvitation{
+                return "Invitations"
+            }else{
+                return "Emplacements actifs"
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        
+        if self.haveInvitation && self.havePlace{
+            if indexPath.section == 0{
+                return 80
+            }else{
+                return 110
+            }
+        }else{
+            if self.haveInvitation{
+                return 110
+            }else{
+                return 80
+            }
+        }
+       
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"PlaceDropdownTableViewCell",
-                                                 for: indexPath) as! PlaceDropdownTableViewCell
-        if indexPath.row >  self.places.count{
-            return cell
-        }
-        cell.delegate = self
-        let place = self.places[indexPath.row]
-        cell.place = place
-        if place.permissionLevel == "Admin"{
-            cell.badgeButton.setImage(UIImage(named: "settingPlace"), for: .normal)
-        }
-        //        else if place.permissionLevel == "View"{
-        else{
-            cell.badgeButton.setImage(UIImage(named: "viewer"), for: .normal)
+       
+        if self.haveInvitation && self.havePlace{
+            if indexPath.section == 0{
+                let cell = tableView.dequeueReusableCell(withIdentifier:"PlaceDropdownTableViewCell",
+                                                         for: indexPath) as! PlaceDropdownTableViewCell
+                if indexPath.row >  self.places.count{
+                    return cell
+                }
+                cell.delegate = self
+                let place = self.placesList[indexPath.row]
+                cell.place = place
+                if place.permissionLevel == "Admin"{
+                    cell.badgeButton.setImage(UIImage(named: "settingPlace"), for: .normal)
+                }
+                //        else if place.permissionLevel == "View"{
+                else{
+                    cell.badgeButton.setImage(UIImage(named: "viewer"), for: .normal)
+                }
+                if let iconName  = place.typeIcon{
+                    let iconnameArray = iconName.components(separatedBy: ".")
+                    let iconname: String = iconnameArray[0]
+                    cell.iconImageView.image = UIImage(named: iconname )
+                }
+                
+                cell.typeLbl.text = place.name
+                var loc = place.placeOwnerFirstName
+                if !place.placeOwnerLastName.isEmpty{
+                    loc?.append(" ")
+                    loc?.append(place.placeOwnerLastName)
+                }
+                loc?.append(", ")
+                loc?.append(place.placeCity)
+                cell.locationLbl.text = loc
+                return cell;
+            }else{
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier:"InvitationTableViewCell",
+                                                         for: indexPath) as! InvitationTableViewCell
+                if indexPath.row >  self.places.count{
+                    return cell
+                }
+                cell.delegate = self
+                let place = self.invitationList[indexPath.row]
+                cell.place = place
+                cell.typeLbl.text = place.name
+                var loc = place.placeOwnerFirstName
+                if !place.placeOwnerLastName.isEmpty{
+                    loc?.append(" ")
+                    loc?.append(place.placeOwnerLastName)
+                }
+                loc?.append(", ")
+                loc?.append(place.placeCity)
+                cell.locationLbl.text = loc
+                if let iconName  = place.typeIcon{
+                    let iconnameArray = iconName.components(separatedBy: ".")
+                    let iconname: String = iconnameArray[0]
+                    cell.iconImageView.image = UIImage(named: iconname )
+                }
+                return cell;
+                
+               
+            }
+        }else{
+            if self.haveInvitation == false{
+                let cell = tableView.dequeueReusableCell(withIdentifier:"PlaceDropdownTableViewCell",
+                                                         for: indexPath) as! PlaceDropdownTableViewCell
+                if indexPath.row >  self.places.count{
+                    return cell
+                }
+                cell.delegate = self
+                let place = self.placesList[indexPath.row]
+                cell.place = place
+                if place.permissionLevel == "Admin"{
+                    cell.badgeButton.setImage(UIImage(named: "settingPlace"), for: .normal)
+                }
+                //        else if place.permissionLevel == "View"{
+                else{
+                    cell.badgeButton.setImage(UIImage(named: "viewer"), for: .normal)
+                }
+                if let iconName  = place.typeIcon{
+                    let iconnameArray = iconName.components(separatedBy: ".")
+                    let iconname: String = iconnameArray[0]
+                    cell.iconImageView.image = UIImage(named: iconname )
+                }
+                
+                cell.typeLbl.text = place.name
+                var loc = place.placeOwnerFirstName
+                if !place.placeOwnerLastName.isEmpty{
+                    loc?.append(" ")
+                    loc?.append(place.placeOwnerLastName)
+                }
+                loc?.append(", ")
+                loc?.append(place.placeCity)
+                cell.locationLbl.text = loc
+                return cell;
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier:"InvitationTableViewCell",
+                                                         for: indexPath) as! InvitationTableViewCell
+                if indexPath.row >  self.places.count{
+                    return cell
+                }
+                cell.delegate = self
+                let place = self.invitationList[indexPath.row]
+                cell.place = place
+                cell.typeLbl.text = place.name
+                var loc = place.placeOwnerFirstName
+                if !place.placeOwnerLastName.isEmpty{
+                    loc?.append(" ")
+                    loc?.append(place.placeOwnerLastName)
+                }
+                loc?.append(", ")
+                loc?.append(place.placeCity)
+                cell.locationLbl.text = loc
+                if let iconName  = place.typeIcon{
+                    let iconnameArray = iconName.components(separatedBy: ".")
+                    let iconname: String = iconnameArray[0]
+                    cell.iconImageView.image = UIImage(named: iconname )
+                }
+                
+                return cell;
+                
+            }
         }
         
+//        let place = self.places[indexPath.row]
+//        if place.isPending{
+//            let cell = tableView.dequeueReusableCell(withIdentifier:"InvitationTableViewCell",
+//                                                     for: indexPath) as! InvitationTableViewCell
+//            if indexPath.row >  self.places.count{
+//                return cell
+//            }
+//            cell.delegate = self
+//            cell.place = place
+//            cell.typeLbl.text = place.name
+//            var loc = place.placeOwnerFirstName
+//            if !place.placeOwnerLastName.isEmpty{
+//                loc?.append(" ")
+//                loc?.append(place.placeOwnerLastName)
+//            }
+//            loc?.append(", ")
+//            loc?.append(place.placeCity)
+//            cell.locationLbl.text = loc
+//            return cell;
+//        }else{
+//            let cell = tableView.dequeueReusableCell(withIdentifier:"PlaceDropdownTableViewCell",
+//                                                     for: indexPath) as! PlaceDropdownTableViewCell
+//            if indexPath.row >  self.places.count{
+//                return cell
+//            }
+//            cell.delegate = self
+//            cell.place = place
+//            if place.permissionLevel == "Admin"{
+//                cell.badgeButton.setImage(UIImage(named: "settingPlace"), for: .normal)
+//            }
+//            //        else if place.permissionLevel == "View"{
+//            else{
+//                cell.badgeButton.setImage(UIImage(named: "viewer"), for: .normal)
+//            }
+//            if let iconName  = place.typeIcon{
+//                let iconnameArray = iconName.components(separatedBy: ".")
+//                let iconname: String = iconnameArray[0]
+//                cell.iconImageView.image = UIImage(named: iconname )
+//            }
+//
+//            cell.typeLbl.text = place.name
+//            var loc = place.placeOwnerFirstName
+//            if !place.placeOwnerLastName.isEmpty{
+//                loc?.append(" ")
+//                loc?.append(place.placeOwnerLastName)
+//            }
+//            loc?.append(", ")
+//            loc?.append(place.placeCity)
+//            cell.locationLbl.text = loc
+//            return cell;
+//        }
+//
+//
         /*
          if place.permissionLevel == "Admin"{
          cell.badgeButton.setImage(UIImage(named: "levelBadge"), for: .normal)
@@ -142,21 +391,7 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
         //
         //        }
         
-        if let iconName  = place.typeIcon{
-            let iconnameArray = iconName.components(separatedBy: ".")
-            let iconname: String = iconnameArray[0]
-            cell.iconImageView.image = UIImage(named: iconname )
-        }
-        
-        cell.typeLbl.text = place.name
-        var loc = place.placeOwnerFirstName
-        if !place.placeOwnerLastName.isEmpty{
-            loc?.append(" ")
-            loc?.append(place.placeOwnerLastName)
-        }
-        loc?.append(", ")
-        loc?.append(place.placeCity)
-        cell.locationLbl.text = loc
+      
         
         //        if place.placeOwner == 1{
         //            cell.badgeButton.setImage(UIImage(named: "settingPlace"), for: .normal)
@@ -165,7 +400,7 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
         //
         //        }
         
-        return cell
+//        return cell
     }
     
     
@@ -192,15 +427,70 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
     
 }
 
+
+extension PlaceDropdownViewController: InvitationTableViewCellDelegate{
+
+    func didSelectAccept(place:PlaceDropdown?){
+        if let placeId = place?.placeId{
+            let placeIdStr = "\(placeId)"
+            self.acceptShare(email: place?.guestUser ?? "" , placeId: placeIdStr)
+        }
+    }
+    
+    func didSelectDecline(place:PlaceDropdown?){
+        
+        if let placeId = place?.placeId{
+            let placeIdStr = "\(placeId)"
+            self.declineSharePrompt(email: place?.guestUser ?? "" , placeId: placeIdStr)
+        }
+    }
+    
+    
+    
+    func declineSharePrompt(email: String,placeId:String){
+        let alertVC = UIAlertController(title: "Refuser le partage", message: "Vous ne serez pas en mesure de consulter cet emplacement", preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "Annuler", style: .cancel)
+        let confirmAction = UIAlertAction(title: "Refuser le partage", style: .destructive) { action in
+            self.deleteShare(email: email, placeId: placeId)
+            self.dismiss(animated: true)
+        }
+        alertVC.addAction(confirmAction)
+        alertVC.addAction(action)
+        present(alertVC, animated: true)
+    }
+    
+    
+    func acceptShare(email: String,placeId:String) {
+        FliprShare().acceptShareWithPoolId( poolID: placeId) { error in
+            if error != nil {
+                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
+                alertVC.addAction(alertAction)
+                self.present(alertVC, animated: true)
+                return
+            }else{
+                self.callPlacesApi()
+            }
+        }
+    }
+    
+
+}
+
+
 extension PlaceDropdownViewController: PlaceDropdownCellDelegate{
     
     func didSelectSettings(place: PlaceDropdown?) {
+        selectedPlace = place
         if let permision = place?.permissionLevel{
             if permision == "Admin"{
                 let sb = UIStoryboard(name: "NewPool", bundle: nil)
-                if let viewController = sb.instantiateViewController(withIdentifier: "NewPoolViewControllerID") as? UINavigationController {
-                    viewController.modalPresentationStyle = .fullScreen
-                    self.present(viewController, animated: true, completion: nil)
+                if let viewController = sb.instantiateViewController(withIdentifier: "NewPoolViewControllerSettings") as? NewPoolViewController {
+                    viewController.placeTitle = self.placeTitle
+                    viewController.placeDetails = selectedPlace
+                    let nav = UINavigationController.init(rootViewController: viewController)
+                    nav.modalPresentationStyle = .fullScreen
+                    self.present(nav, animated: true, completion: nil)
                 }
             }else{
                 if let placeId = place?.placeId{
@@ -213,12 +503,13 @@ extension PlaceDropdownViewController: PlaceDropdownCellDelegate{
     }
     
     
+    
     func deleteSharePrompt(email: String,placeId:String){
-        let alertVC = UIAlertController(title: "Supprimer le partage", message: "Cet utilisateur ne pourra plus consulter les données et agir sur vos équipements", preferredStyle: .actionSheet)
+        let alertVC = UIAlertController(title: "Quitter le partage", message: "Vous ne serez plus en mesure de consulter cet emplacement", preferredStyle: .actionSheet)
         let action = UIAlertAction(title: "Annuler", style: .cancel)
-        let confirmAction = UIAlertAction(title: "Supprimer le partage", style: .destructive) { action in
+        let confirmAction = UIAlertAction(title: "Quitter le partage", style: .destructive) { action in
             self.deleteShare(email: email, placeId: placeId)
-            self.dismiss(animated: true)
+//            self.dismiss(animated: true)
         }
         alertVC.addAction(confirmAction)
         alertVC.addAction(action)
@@ -226,18 +517,25 @@ extension PlaceDropdownViewController: PlaceDropdownCellDelegate{
     }
     
     
+    
+    
+    
     func deleteShare(email: String,placeId:String) {
         FliprShare().deleteShareWithPoolId(email: email, poolID: placeId) { error in
             if error != nil {
-                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
-                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
-                alertVC.addAction(alertAction)
-                self.present(alertVC, animated: true)
-                return
+//                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
+//                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
+//                alertVC.addAction(alertAction)
+//                self.present(alertVC, animated: true)
+//                return
+                self.callPlacesApi()
+
             }else{
                 self.callPlacesApi()
             }
         }
     }
+    
+    
     
 }

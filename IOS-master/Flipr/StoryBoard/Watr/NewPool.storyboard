@@ -133,20 +133,35 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wr6-MZ-Tsq">
-                                                    <rect key="frame" x="300.5" y="36" width="41.5" height="20.5"/>
+                                                    <rect key="frame" x="277.5" y="36" width="41.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efX-U1-Kbs">
+                                                    <rect key="frame" x="330" y="30" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="KMC-6n-atD"/>
+                                                        <constraint firstAttribute="height" constant="32" id="Xiu-BD-re9"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="ButtonClose"/>
+                                                    <connections>
+                                                        <action selector="closeButtonActionWithSender:" destination="edd-Bb-zSO" eventType="touchUpInside" id="knX-1Y-qQU"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="wr6-MZ-Tsq" secondAttribute="trailing" constant="12" id="FkB-6s-Lys"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="wr6-MZ-Tsq" secondAttribute="trailing" constant="35" id="FkB-6s-Lys"/>
                                                 <constraint firstItem="pLr-iE-5r6" firstAttribute="leading" secondItem="ISf-22-Omd" secondAttribute="leading" constant="18" id="TLM-gR-dar"/>
                                                 <constraint firstItem="wr6-MZ-Tsq" firstAttribute="centerY" secondItem="ISf-22-Omd" secondAttribute="centerY" id="WDf-zl-eC0"/>
                                                 <constraint firstItem="pLr-iE-5r6" firstAttribute="centerY" secondItem="ISf-22-Omd" secondAttribute="centerY" id="ajX-bg-3ri"/>
+                                                <constraint firstAttribute="trailing" secondItem="efX-U1-Kbs" secondAttribute="trailing" constant="12" id="f6K-qH-x5P"/>
+                                                <constraint firstItem="efX-U1-Kbs" firstAttribute="centerY" secondItem="ISf-22-Omd" secondAttribute="centerY" id="glV-ql-LxH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="closeButton" destination="efX-U1-Kbs" id="nl5-3X-bXq"/>
                                             <outlet property="titleName" destination="pLr-iE-5r6" id="9Be-pw-Iif"/>
                                             <outlet property="valueText" destination="wr6-MZ-Tsq" id="fAD-0h-y7y"/>
                                         </connections>
@@ -548,6 +563,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ButtonClose" width="32" height="32"/>
         <image name="location" width="25" height="25"/>
         <image name="newpool_settings" width="22" height="22"/>
         <image name="newpool_share" width="22" height="22"/>

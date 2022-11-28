@@ -129,7 +129,7 @@ class PoolShareViewController: UIViewController {
     }
     
     func inviteNewShare() {
-        FliprShare().addShare(email: emailTextField.text!, role: selectedRole) { error in
+        FliprShare().addShare(poolId: "", email: emailTextField.text!, role: selectedRole) { error in
             if error != nil {
                 let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
                 let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)

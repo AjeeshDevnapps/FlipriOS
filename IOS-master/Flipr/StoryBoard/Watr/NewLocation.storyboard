@@ -79,16 +79,41 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view alpha="0.26000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mqo-kl-k36">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming soon" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fL9-W0-Qds">
+                                                            <rect key="frame" x="247" y="23.5" width="120" height="14"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="14" id="cC0-Mg-RUt"/>
+                                                                <constraint firstAttribute="width" constant="120" id="nvb-iD-19f"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <color key="textColor" red="0.14509803921568626" green="0.25490196078431371" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="fL9-W0-Qds" secondAttribute="bottom" constant="6" id="5Tn-x6-vbn"/>
+                                                        <constraint firstAttribute="trailing" secondItem="fL9-W0-Qds" secondAttribute="trailing" constant="15" id="q6u-to-bCM"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Bg6-Fa-RgB" firstAttribute="centerY" secondItem="bCz-RC-xSB" secondAttribute="centerY" id="1FQ-hh-7kj"/>
+                                                <constraint firstItem="Mqo-kl-k36" firstAttribute="top" secondItem="bCz-RC-xSB" secondAttribute="top" id="426-V1-xuc"/>
+                                                <constraint firstItem="Mqo-kl-k36" firstAttribute="leading" secondItem="bCz-RC-xSB" secondAttribute="leading" id="F2e-sK-Y12"/>
                                                 <constraint firstItem="ZUN-st-B4d" firstAttribute="leading" secondItem="bCz-RC-xSB" secondAttribute="leading" constant="8" id="VE4-lS-xQB"/>
                                                 <constraint firstAttribute="trailing" secondItem="Bg6-Fa-RgB" secondAttribute="trailing" constant="8" id="Vit-1M-HIq"/>
                                                 <constraint firstItem="Bg6-Fa-RgB" firstAttribute="leading" secondItem="ZUN-st-B4d" secondAttribute="trailing" constant="19" id="gSI-S4-g1a"/>
                                                 <constraint firstItem="ZUN-st-B4d" firstAttribute="centerY" secondItem="bCz-RC-xSB" secondAttribute="centerY" id="njb-it-6U6"/>
+                                                <constraint firstAttribute="bottom" secondItem="Mqo-kl-k36" secondAttribute="bottom" id="xxo-C1-bFM"/>
+                                                <constraint firstAttribute="trailing" secondItem="Mqo-kl-k36" secondAttribute="trailing" id="yX4-cj-jVf"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="disableView" destination="Mqo-kl-k36" id="yz7-O0-Kzg"/>
                                             <outlet property="icon" destination="ZUN-st-B4d" id="c9t-q3-ECm"/>
                                             <outlet property="titleName" destination="Bg6-Fa-RgB" id="0mT-HT-9Uh"/>
                                         </connections>

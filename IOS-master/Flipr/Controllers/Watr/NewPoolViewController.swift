@@ -22,12 +22,15 @@ class NewPoolViewController: UIViewController {
     var isCreatingPlace = false
     var loadedShares = [ShareModel]()
     var poolSettings: PoolSettingsModel?
+    var placeTitle:String?
+    var placeDetails:PlaceDropdown?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.backgroundColor = UIColor(hexString: "#eeeee4")
         view.backgroundColor = UIColor(hexString: "#eeeee4")
         navigationController?.navigationBar.backgroundColor = UIColor(hexString: "#eeeee4")
-        title = "Piscine 123456 123345 - Melbourne"
+        title = placeTitle
         setCustomBackbtn()
         getPoolSettings()
         segmentStackView.cornerRadius = 10
@@ -52,13 +55,65 @@ class NewPoolViewController: UIViewController {
         if parametersButton.isSelected {
             
         } else {
-            let sb = UIStoryboard(name: "NewPool", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "PoolShareViewControllerID") as! PoolShareViewController
-            vc.changeDelegate = self
-            vc.isAddingNew = true
-            self.present(vc, animated: true)
+            showAddShareAlert()
+//            let sb = UIStoryboard(name: "NewPool", bundle: nil)
+//            let vc = sb.instantiateViewController(withIdentifier: "PoolShareViewControllerID") as! PoolShareViewController
+//            vc.changeDelegate = self
+//            vc.isAddingNew = true
+//            self.present(vc, animated: true)
         }
     }
+    
+    
+
+    
+    func showAddShareAlert(){
+        self.alertWithTextField(title: "Ajout d’un invité".localized, message: nil, placeholder: "email".localized) { email in
+            
+            if email.isValidEmail {
+                var placeId:String = ""
+                if let pId = self.placeDetails?.placeId{
+                    placeId = "\(pId)"
+                    FliprShare().poolId = placeId
+                }
+                FliprShare().addShare(poolId: placeId, email:email, role: .guest) { error in
+                    if error != nil {
+                        let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
+                        let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
+                        alertVC.addAction(alertAction)
+                        self.present(alertVC, animated: true)
+                        return
+                    }
+//                    DispatchQueue.main.async {
+                        self.getCurrentShares()
+//                    }
+                }
+            }
+            else {
+                self.showAlert(title: "Email incorrect".localized, message: "Invalid email address format".localized)
+            }
+
+        }
+    }
+    
+    func alertWithTextField(title: String? = nil, message: String? = nil, placeholder: String? = nil, completion: @escaping ((String) -> Void) = { _ in }) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addTextField() { newTextField in
+            newTextField.placeholder = placeholder
+        }
+        alert.addAction(UIAlertAction(title: "Annuler".localized, style: .cancel) { _ in completion("") })
+        alert.addAction(UIAlertAction(title: "Inviter".localized, style: .default) { action in
+            if
+                let textFields = alert.textFields,
+                let tf = textFields.first,
+                let result = tf.text
+            { completion(result) }
+            else
+            { completion("") }
+        })
+        navigationController?.present(alert, animated: true)
+    }
+    
     
     @IBAction func segmentClicked(_ sender: UIButton) {
         parametersButton.isSelected = !parametersButton.isSelected
@@ -92,7 +147,13 @@ class NewPoolViewController: UIViewController {
     func getPoolSettings() {
         let hud = JGProgressHUD(style:.dark)
         hud?.show(in: self.navigationController!.view)
-        PoolSettingsRouter().getPoolSettings(poolId: "") { settings, error in
+        var placeId:String = ""
+        if let pId = self.placeDetails?.placeId{
+            placeId = "\(pId)"
+            FliprShare().poolId = placeId
+
+        }
+        PoolSettingsRouter().getPoolSettings(poolId: placeId) { settings, error in
             hud?.dismiss()
             if error != nil {
                 let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
@@ -109,7 +170,12 @@ class NewPoolViewController: UIViewController {
     func getCurrentShares() {
         let hud = JGProgressHUD(style:.dark)
         hud?.show(in: self.navigationController!.view)
-        FliprShare().viewShares { shares, error in
+        var placeId:String = ""
+        if let pId = self.placeDetails?.placeId{
+            placeId = "\(pId)"
+            FliprShare().poolId = placeId
+        }
+        FliprShare().viewShares(poolId: placeId) { shares, error in
             hud?.dismiss()
             if error != nil {
                 self.hasLoadedShares = false
@@ -126,7 +192,33 @@ class NewPoolViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func closeButtonAction(sender:UIButton){
+        let shareInfo  = self.loadedShares[sender.tag]
+        var placeId:String = ""
+        if let pId = self.placeDetails?.placeId{
+            placeId = "\(pId)"
+            FliprShare().poolId = placeId
+        }
+        FliprShare().deleteShareWithPoolId(email: shareInfo.guestUser, poolID: placeId) { error in
+            if error != nil {
+//                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
+//                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
+//                alertVC.addAction(alertAction)
+//                self.present(alertVC, animated: true)
+//                return
+
+            }else{
+            }
+            
+        }
+
+        
+    }
 }
+
+
+
 
 extension NewPoolViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -255,9 +347,14 @@ extension NewPoolViewController: UITableViewDataSource {
                 default:
                     content.image = UIImage(named: "guest_role")
                 }
+               // tableViewCell.closeButton.tag = indexPath.row
                 tableViewCell.contentConfiguration = content
-                tableViewCell.accessoryType = .disclosureIndicator
+                tableViewCell.accessoryType = .none
                 tableViewCell.selectionStyle = .none
+                let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+                imgView.image = UIImage(named: "ButtonClose")!
+                tableViewCell.accessoryView = imgView
+
             }
             return tableViewCell
         } else {
@@ -292,7 +389,7 @@ extension NewPoolViewController: UITableViewDataSource {
                     cell?.imageView?.image = UIImage(named: "guest_role")
                 }
                 cell?.textLabel?.text = loadedShares[indexPath.row].guestUser
-                cell?.accessoryType = .disclosureIndicator
+                cell?.accessoryType = .none
                 cell?.selectionStyle = .none
                 return cell!
             }
@@ -368,14 +465,51 @@ extension NewPoolViewController: UITableViewDelegate {
                 }
             }
         } else {
-            let sb = UIStoryboard(name: "NewPool", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "PoolShareViewControllerID") as! PoolShareViewController
-            vc.selectedShare = loadedShares[indexPath.row]
-            vc.selectedIndex = indexPath.row
-            vc.changeDelegate = self
-            vc.isAddingNew = false
-            vc.shareModel = loadedShares[indexPath.row]
-            self.present(vc, animated: true)
+            var placeId:String = ""
+            if let pId = self.placeDetails?.placeId{
+                placeId = "\(pId)"
+                FliprShare().poolId = placeId
+            }
+            let shareInfo = loadedShares[indexPath.row]
+            
+            self.deleteSharePrompt(email: shareInfo.guestUser, placeId: placeId)
+//            let sb = UIStoryboard(name: "NewPool", bundle: nil)
+//            let vc = sb.instantiateViewController(withIdentifier: "PoolShareViewControllerID") as! PoolShareViewController
+//            vc.selectedShare = loadedShares[indexPath.row]
+//            vc.selectedIndex = indexPath.row
+//            vc.changeDelegate = self
+//            vc.isAddingNew = false
+//            vc.shareModel = loadedShares[indexPath.row]
+//            self.present(vc, animated: true)
+        }
+    }
+    
+    
+    
+    
+    func deleteSharePrompt(email: String,placeId:String){
+        let alertVC = UIAlertController(title: "Supprimer le partage de \(email)", message: "Cet utilisateur ne pourra plus consulter les données et agir sur vos équipements", preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "Annuler", style: .cancel)
+        let confirmAction = UIAlertAction(title: "Supprimer le partage", style: .destructive) { action in
+            self.deleteShare(email: email, placeId: placeId)
+        }
+        alertVC.addAction(confirmAction)
+        alertVC.addAction(action)
+        present(alertVC, animated: true)
+    }
+    
+    func deleteShare(email: String,placeId:String) {
+        FliprShare().deleteShareWithPoolId(email: email, poolID: placeId) { error in
+            if error != nil {
+//                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
+//                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
+//                alertVC.addAction(alertAction)
+//                self.present(alertVC, animated: true)
+//                return
+
+            }else{
+            }
+            self.getCurrentShares()
         }
     }
 }

@@ -116,6 +116,8 @@ enum Router: URLRequestConvertible {
     case addShare(poolId: String, email: String, permissionLevel: FliprRole)
     case updateShare(poolId: String, email: String, permissionLevel: FliprRole)
     case deleteShare(poolId: String, email: String)
+    case acceptShare(poolId: String)
+
 
     //PoolSettings
     case getPoolSettings(poolId: String)
@@ -303,6 +305,9 @@ enum Router: URLRequestConvertible {
         case .getPlaceTypes:
             return .get
             
+        case .acceptShare:
+            return .post
+            
         }
     }
     
@@ -487,6 +492,10 @@ enum Router: URLRequestConvertible {
             return "place/\(poolId)"
         case .getPlaceTypes:
             return "place/types"
+            
+        case .acceptShare(let poolId):
+            return "place/\(poolId)/shares/accept"
+
             
             
         }
@@ -905,7 +914,7 @@ enum Router: URLRequestConvertible {
             ]
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
        
-
+            
             
         default:
             break

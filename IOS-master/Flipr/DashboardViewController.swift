@@ -216,6 +216,9 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var settingsButtonContainer: UIView!
     @IBOutlet weak var selectedPlaceDetailsLbl: UILabel!
+    @IBOutlet weak var placeDropdownButton: UIButton!
+    @IBOutlet weak var placeDropdownArrowImage: UIImageView!
+
 
 
 
@@ -266,7 +269,7 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        self.placeDropdownArrowImage.isHidden = true
         manageFlipTabTitle()
         setUpStatusScroll()
 //        if -300 > -400{
@@ -598,15 +601,17 @@ class DashboardViewController: UIViewController {
     
     
     @IBAction func menuButtonTab(){
-    
-        let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
-        if let viewController = sb.instantiateViewController(withIdentifier: "FliprHubMenuViewController") as? FliprHubMenuViewController {
-            viewController.placesModules = self.placesModules
-            viewController.placeDetails = self.placeDetails
-           // viewController.modalPresentationStyle = .overCurrentContext
-            self.present(viewController, animated: true) {
+        if  ((self.placesModules != nil) && (self.placeDetails != nil)){
+            let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
+            if let viewController = sb.instantiateViewController(withIdentifier: "FliprHubMenuViewController") as? FliprHubMenuViewController {
+                viewController.placesModules = self.placesModules
+                viewController.placeDetails = self.placeDetails
+               // viewController.modalPresentationStyle = .overCurrentContext
+                self.present(viewController, animated: true) {
+                }
             }
         }
+       
     }
     
     @IBAction func measureAlertButtonTab(){
@@ -1654,8 +1659,8 @@ class DashboardViewController: UIViewController {
         var startElevation = 0.85
         
         let modelName = UIDevice().type
-        if  modelName.rawValue == "iPhone 12 Pro"{
-            startElevation = 0.91
+        if  modelName.rawValue == "iPhone 12 Pro" || modelName.rawValue == "iPhone 11 Pro" || modelName.rawValue == "iPhone 13 Pro"{
+            startElevation = 0.96
         }
         else if modelName.rawValue == "iPhone 12 Pro Max"{
             startElevation = 0.75
@@ -3172,7 +3177,7 @@ class DashboardViewController: UIViewController {
                         if let dateString = current["DateTime"] as? String {
                             if let lastDate = dateString.fliprDate {
                                 let dateFormatter = DateFormatter()
-                                dateFormatter.dateFormat = "EEE dd/MM HH:mm"
+                                dateFormatter.dateFormat = "dd/MM HH:mm"
                                 self.lastMeasureDateLabel.text = "Lun.".localized +  " : \(dateFormatter.string(from: lastDate))"
                                 self.lastMeasureDateLabel.isHidden = false
                                 self.lastMeasureDate = lastDate
@@ -4101,25 +4106,29 @@ class DashboardViewController: UIViewController {
     }
     
     @IBAction func quickActionButtonAction(_ sender: Any) {
-    /*
-        let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
-        if let viewController = sb.instantiateViewController(withIdentifier: "QuickActionViewController") as? QuickActionViewController {
-            viewController.modalPresentationStyle = .overCurrentContext
-            self.present(viewController, animated: true) {
-                viewController.showBackgroundView()
-            }
-        }
-        */
-        let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
-        if let viewController = sb.instantiateViewController(withIdentifier: "WatrQuickActionViewController") as? WatrQuickActionViewController {
-            viewController.modalPresentationStyle = .overCurrentContext
-            viewController.placesModules = self.placesModules
-            viewController.placeDetails = self.placeDetails
-
-            self.present(viewController, animated: true) {
+        /*
+         let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
+         if let viewController = sb.instantiateViewController(withIdentifier: "QuickActionViewController") as? QuickActionViewController {
+         viewController.modalPresentationStyle = .overCurrentContext
+         self.present(viewController, animated: true) {
+         viewController.showBackgroundView()
+         }
+         }
+         */
+        if  ((self.placesModules != nil) && (self.placeDetails != nil)){
+            
+            let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
+            if let viewController = sb.instantiateViewController(withIdentifier: "WatrQuickActionViewController") as? WatrQuickActionViewController {
+                viewController.modalPresentationStyle = .overCurrentContext
+                viewController.placesModules = self.placesModules
+                viewController.placeDetails = self.placeDetails
                 
-//                viewController.showBackgroundView()
+                self.present(viewController, animated: true) {
+                    
+                    //                viewController.showBackgroundView()
+                }
             }
+            
         }
         
     }
@@ -4713,8 +4722,8 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource, UI
         cell.deviceNameLbl.text = hub.equipementName.capitalizingFirstLetter()
         cell.settingsBtn.isHidden = !self.isPlaceOwner
         cell.manageIcons()
-        cell.filtrationTimeLbl.isHidden = false
-        cell.filtrationTimeLbl.text =  "asdsads asd"
+//        cell.filtrationTimeLbl.isHidden = false
+//        cell.filtrationTimeLbl.text =  "asdsads asd"
 
         return cell
     }
@@ -4749,12 +4758,13 @@ extension DashboardViewController: HubDeviceDelegate{
     
 
     func didSelectSettingsButton(hub:HUB){
-        let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
-        if let viewController = sb.instantiateViewController(withIdentifier: "HubSettingsViewController") as? HubSettingsViewController {
+        let sb = UIStoryboard.init(name: "WatrFlipr", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "WatrHubSettingsViewController") as? WatrHubSettingsViewController {
             viewController.hub = hub
-            viewController.delegate = self
+//            viewController.delegate = self
            // viewController.modalPresentationStyle = .overCurrentContext
-            self.present(viewController, animated: true) {
+            let nav = UINavigationController.init(rootViewController: viewController)
+            self.present(nav, animated: true) {
             }
         }
         
@@ -4976,9 +4986,16 @@ extension DashboardViewController: HubSettingViewDelegate{
     //MUMP
     
     @IBAction func settingsButtonClicked(){
-        let navigationController = UIStoryboard(name:"Settings", bundle: nil).instantiateViewController(withIdentifier: "WatrSettingsNavigation") as! UINavigationController
+        
+        let navigationController = UIStoryboard(name:"WatrFlipr", bundle: nil).instantiateViewController(withIdentifier: "FliprSettingsNavigation") as! UINavigationController
 //        navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)
+        
+
+        
+//        let navigationController = UIStoryboard(name:"Settings", bundle: nil).instantiateViewController(withIdentifier: "WatrSettingsNavigation") as! UINavigationController
+//        navigationController.modalPresentationStyle = .fullScreen
+//        self.present(navigationController, animated: true, completion: nil)
 
     
 //        let sb = UIStoryboard(name: "NewPool", bundle: nil)
@@ -4992,6 +5009,7 @@ extension DashboardViewController: HubSettingViewDelegate{
         let sb = UIStoryboard.init(name: "Watr", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "PlaceDropdownViewController") as? PlaceDropdownViewController {
             viewController.delegate = self
+            viewController.placeTitle = self.selectedPlaceDetailsLbl.text
             viewController.modalPresentationStyle = .overCurrentContext
             self.present(viewController, animated: true) {
             }
@@ -5036,6 +5054,8 @@ extension DashboardViewController{
         placeDetails.append(" - ")
         placeDetails.append(self.selectedPlace?.placeCity ?? "")
         self.selectedPlaceDetailsLbl.text = placeDetails
+        self.placeDropdownArrowImage.isHidden = false
+
         if let placeId = self.selectedPlace?.placeId{
             let placeIdStr = "\(placeId)"
             getPlaceModules(placeId: placeIdStr)
@@ -5049,6 +5069,9 @@ extension DashboardViewController{
         }else{
             isPlaceOwner = false
         }
+        
+        self.settingsButton.isHidden = !isPlaceOwner
+
         
     }
     
@@ -5102,6 +5125,8 @@ extension DashboardViewController:PlaceDropdownDelegate{
             isPlaceOwner = false
         }
         self.placeDetails = placeDetails
+        self.selectedPlace = placeDetails
+        self.showPlaceInfo()
         var isFliprModule = false
         var fliprModule:PlaceModule?
         for module in placeModules {
@@ -5115,9 +5140,9 @@ extension DashboardViewController:PlaceDropdownDelegate{
         
         if isFliprModule{
             //            Module.currentModule = module
-            Module.currentModule?.serial = fliprModule?.serial ?? ""
-            Module.currentModule?.activationKey = fliprModule?.activationKey ?? ""
-            Module.saveCurrentModuleLocally()
+//            Module.currentModule?.serial = fliprModule?.serial ?? ""
+//            Module.currentModule?.activationKey = fliprModule?.activationKey ?? ""
+//            Module.saveCurrentModuleLocally()
         }
         
     }

@@ -268,7 +268,7 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        /*
         if haveFlipr{
             if isPlaceOwner && (haveSubscription == false){
                 if indexPath.row == 4{
@@ -287,6 +287,7 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
                 }
             }
         }
+        */
         handlePlaceNavigation(indexPath: indexPath)
     }
     
@@ -337,10 +338,10 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
     func handlePlaceOwnerWithSubscriptionNavigation(indexPath: IndexPath){
       
         if indexPath.row == 0{
-            showProductnEquipments()
+            showServiceBook()
         }
         else if indexPath.row == 1{
-            showPoolHouse()
+            showProductnEquipments()
         }
         else if indexPath.row == 2{
             showExpertView()
@@ -362,10 +363,10 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
             self.showSubscriptionView()
         }
         else if indexPath.row == 1{
-            showProductnEquipments()
+            showServiceBook()
         }
         else if indexPath.row == 2{
-            showPoolHouse()
+            showProductnEquipments()
         }
         else if indexPath.row == 3{
             showExpertView()
@@ -407,7 +408,6 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
     }
     
     func showPoolHouse(){
-        showServiceBook()
 //        let manSb = UIStoryboard.init(name: "Main", bundle: nil)
 //        if let viewController = manSb.instantiateViewController(withIdentifier: "PoolViewControllerID") as? UINavigationController{
 //            viewController.modalPresentationStyle = .fullScreen

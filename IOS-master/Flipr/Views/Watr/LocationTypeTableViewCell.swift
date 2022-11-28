@@ -11,6 +11,7 @@ import UIKit
 class LocationTypeTableViewCell: UITableViewCell {
     @IBOutlet weak var titleName: UILabel!
     @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var disableView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
