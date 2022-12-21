@@ -8,17 +8,18 @@
 
 import UIKit
 import Alamofire
+import JGProgressHUD
 
 extension UIView {
-
-
+    
+    
     func rotate(degrees: CGFloat) {
-
+        
         let degreesToRadians: (CGFloat) -> CGFloat = { (degrees: CGFloat) in
             return degrees / 180.0 * CGFloat.pi
         }
         self.transform =  CGAffineTransform(rotationAngle: degreesToRadians(degrees))
-
+        
         // If you like to use layer you can uncomment the following line
         //layer.transform = CATransform3DMakeRotation(degreesToRadians(degrees), 0.0, 0.0, 1.0)
     }
@@ -29,26 +30,44 @@ class FliprSplashViewController: BaseViewController {
     @IBOutlet weak var leftAnimationImageView: UIImageView!
     @IBOutlet weak var waveAnimationImageView: UIImageView!
     @IBOutlet weak var logoImageView: UIImageView!
-
+    
     @IBOutlet weak var rightAnimationContainerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
-
+    
     
     @IBOutlet weak var waveAnimationImageViewYpost: NSLayoutConstraint!
     @IBOutlet weak var logoImageViewYpost: NSLayoutConstraint!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+
+    var places = [PlaceDropdown]()
+    
+    var placesList = [PlaceDropdown]()
+    var invitationList = [PlaceDropdown]()
+    
+    
+    var placesModules = [PlaceModule]()
+    
+    let hud = JGProgressHUD(style:.light)
+    var haveInvitation = false
+    var havePlace = false
+    var placeTitle : String?
+    
+    var selectedPlace : PlaceDropdown?
+    
     
     var userStatusChecking = false
     var isAnimationCompleted = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userStatusChecking = true
         self.imageView.isHidden = true
-//        perform(#selector(showWaveAnimation), with: nil, afterDelay: 0.5)
-//        perform(#selector(showEducationScreen), with: nil, afterDelay: 2.0)
-//        addRightImage()
-//        self.titleLabel.text = "Goodbye to troubled waters".localized
-            self.checkUserStatus()
+        //        perform(#selector(showWaveAnimation), with: nil, afterDelay: 0.5)
+        //        perform(#selector(showEducationScreen), with: nil, afterDelay: 2.0)
+        //        addRightImage()
+        //        self.titleLabel.text = "Goodbye to troubled waters".localized
+        self.checkUserStatusForWatr()
+        //        self.checkUserStatus()
 
     }
     
@@ -76,8 +95,8 @@ class FliprSplashViewController: BaseViewController {
     
     @objc func showEducationScreen(){
         if userStatusChecking == false{
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginEducationViewOneController") as! LoginEducationOneViewController
-//            self.navigationController?.pushViewController(vc)
+            //            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginEducationViewOneController") as! LoginEducationOneViewController
+            //            self.navigationController?.pushViewController(vc)
         }
     }
     
@@ -85,7 +104,7 @@ class FliprSplashViewController: BaseViewController {
     func addRightImage(){
         self.rightAnimationImageView.transform = CGAffineTransform(translationX: 110.0, y: 0.0)
         self.leftAnimationImageView.transform = CGAffineTransform(translationX: -58.0, y: 0.0)
-
+        
         UIView.animate(withDuration: 1, animations: {
             let rightRotationMatrix = CGAffineTransform(rotationAngle: -0.01)
             let rightTranslationMatrix = CGAffineTransform(translationX: 0.0, y: 0.0)
@@ -111,18 +130,193 @@ class FliprSplashViewController: BaseViewController {
         }
     }
     
+    
+    
+    func checkUserStatusForWatr(){
+        if User.currentUser == nil {
+            userStatusChecking = false
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "EducationScreenContainerViewController") as! EducationScreenContainerViewController
+            self.navigationController?.pushViewController(vc)
+            
+        }
+        else{
+            if let user = User.currentUser {
+                //            Omnisense.currentUser().registered = true
+                //            Omnisense.saveCurrentUser()
+                
+                Alamofire.request(Router.updateLanguage).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let value):
+                        print("Update language response: \(value)")
+                    case .failure(let error):
+                        print("Update language error: \(error.localizedDescription)")
+                    }
+                })
+                self.indicator.startAnimating()
+                DispatchQueue.global().async {
+                    self.checkUserPlaces()
+                }
+                
+                
+                /*
+                 if let module = Module.currentModule {
+                 if !module.pH7CalibrationDone {
+                 presentCalibrationViewController(type:.ph7, animated: false)
+                 } else if !module.pH4CalibrationDone {
+                 presentCalibrationViewController(type:.ph4, animated: false)
+                 } else {
+                 presentDashboard(animated: false)
+                 }
+                 } else if user.isActivated == false {
+                 //presentEmailVerificationController(animated: false)
+                 //Il doit se reconnecter car on ne sauvegarde pas le password
+                 } else {
+                 
+                 if HUB.currentHUB != nil {
+                 presentDashboard(animated: false)
+                 } else {
+                 presentLandingController(animated: false)
+                 }
+                 }
+                 */
+            }
+            
+        }
+        
+    }
+    
+    
+    func checkUserPlaces(){
+//        hud?.show(in: self.view)
+        User.currentUser?.getPlaces(completion: { (placesResult,error) in
+            DispatchQueue.main.async {
+                self.indicator.stopAnimating()
+            }
+
+            if (error != nil) {
+                DispatchQueue.main.async {
+                    self.showError(title: "Error", message: error?.localizedDescription)
+                }
+//                self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+//                self.hud?.textLabel.text = error?.localizedDescription
+//                self.hud?.dismiss(afterDelay: 0)
+            } else {
+                if placesResult != nil{
+                    self.places = placesResult!
+                    self.placesList = self.places.filter { $0.isPending == false }
+                    self.invitationList = self.places.filter { $0.isPending == true }
+                    self.haveInvitation = false
+                    self.havePlace = false
+                    AppSharedData.sharedInstance.havePlace = false
+                    AppSharedData.sharedInstance.haveInvitation = false
+                    if self.placesList.count > 0 {
+                        self.havePlace = true
+                        AppSharedData.sharedInstance.havePlace = true
+                    }
+                    if self.invitationList.count > 0 {
+                        self.haveInvitation = true
+                        AppSharedData.sharedInstance.haveInvitation = true
+                    }
+//                    self.hud?.dismiss(afterDelay: 0)
+                }
+            }
+            self.processFlow()
+        })
+    }
+    
+    
+    func processFlow(){
+        
+        let fName = User.currentUser?.firstName ?? ""
+        let lName = User.currentUser?.lastName ?? ""
+
+        if fName.isValidString && lName.isValidString{
+            if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+                if (currentUnit != 1) && (currentUnit != 2){
+                    self.showUnitSelectionView()
+                }else{
+                    self.checkPlaceViewFlow()
+                }
+            }else{
+                self.showUnitSelectionView()
+            }
+        }else{
+            self.showUpdateProfile()
+        }
+        
+    }
+    
+    
+    func checkPlaceViewFlow(){
+        if AppSharedData.sharedInstance.haveInvitation{
+            self.showPlaceDropdownView()
+        }else{
+            if AppSharedData.sharedInstance.havePlace{
+                self.showDashboardView()
+            }
+            else{
+                self.addPlaceView()
+            }
+        }
+    }
+    
+    
+    func showPlaceDropdownView(){
+        let sb = UIStoryboard.init(name: "Watr", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "PlaceDropdownViewController") as? PlaceDropdownViewController {
+//            viewController.delegate = self
+//            viewController.placeTitle = self.selectedPlaceDetailsLbl.text
+//            viewController.modalPresentationStyle = .overCurrentContext
+//            self.present(viewController, animated: true) {
+//            }
+            viewController.isInvitationFlow = true
+            self.navigationController?.pushViewController(viewController, completion: nil)
+        }
+    }
+    
+    
+    func addPlaceView(){
+        let sb = UIStoryboard(name: "NewLocation", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "NewLocationViewControllerID") as? NewLocationViewController {
+            self.navigationController?.pushViewController(viewController, completion: nil)
+            //            viewController.modalPresentationStyle = .fullScreen
+//            self.present(viewController, animated: true)
+        }
+    }
+    
+    
+    func showUnitSelectionView(){
+        let sb = UIStoryboard.init(name: "Settings", bundle: nil)
+        if let unintVC = sb.instantiateViewController(withIdentifier: "UnitViewController") as? UnitViewController{
+            unintVC.isLoginFlow = true
+            self.navigationController?.pushViewController(unintVC)
+        }
+    }
+    
+    func showDashboardView(){
+        presentDashboard(animated: false)
+
+    }
+    
+    
+    func showUpdateProfile(){
+        let completeProfileVC =  self.storyboard?.instantiateViewController(withIdentifier: "CompleteProfileViewController") as! CompleteProfileViewController
+        self.navigationController?.pushViewController(completeProfileVC, completion: nil)
+    }
+    
+    
     func checkUserStatus(){
         
         if User.currentUser == nil {
             userStatusChecking = false
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "EducationScreenContainerViewController") as! EducationScreenContainerViewController
             self.navigationController?.pushViewController(vc)
-        
+            
         }
         
         if let user = User.currentUser {
-//            Omnisense.currentUser().registered = true
-//            Omnisense.saveCurrentUser()
+            //            Omnisense.currentUser().registered = true
+            //            Omnisense.saveCurrentUser()
             
             Alamofire.request(Router.updateLanguage).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
                 switch response.result {
@@ -162,13 +356,13 @@ class FliprSplashViewController: BaseViewController {
 extension FliprSplashViewController{
     
     func presentDashboard(animated:Bool) {
-//        let mainSB = UIStoryboard.init(name: "Dashboard", bundle: nil)
-//        let dashboard = mainSB.instantiateViewController(withIdentifier: "NewDashboardViewController")
-//        dashboard.modalTransitionStyle = .flipHorizontal
-//        dashboard.modalPresentationStyle = .fullScreen
-//        self.present(dashboard, animated: animated, completion: {
-//        })
-//
+        //        let mainSB = UIStoryboard.init(name: "Dashboard", bundle: nil)
+        //        let dashboard = mainSB.instantiateViewController(withIdentifier: "NewDashboardViewController")
+        //        dashboard.modalTransitionStyle = .flipHorizontal
+        //        dashboard.modalPresentationStyle = .fullScreen
+        //        self.present(dashboard, animated: animated, completion: {
+        //        })
+        //
         let mainSB = UIStoryboard.init(name: "Main", bundle: nil)
         let dashboard = mainSB.instantiateViewController(withIdentifier: "DashboardViewControllerID")
         dashboard.modalTransitionStyle = .flipHorizontal
@@ -188,7 +382,7 @@ extension FliprSplashViewController{
             // Fallback on earlier versions
         }
         self.navigationController?.setViewControllers([vc,viewController], animated: true)
-//        self.navigationController?.pushViewController(viewController, animated: animated)
+        //        self.navigationController?.pushViewController(viewController, animated: animated)
     }
     
     func presentActivationController(animated:Bool) {
@@ -205,8 +399,8 @@ extension FliprSplashViewController{
     
     func presentEmailVerificationController(animated:Bool) {
         let mainSB = UIStoryboard.init(name: "Main", bundle: nil)
-         let viewController = mainSB.instantiateViewController(withIdentifier: "EmailVerificationViewControllerID")
-            self.navigationController?.pushViewController(viewController, animated: animated)
+        let viewController = mainSB.instantiateViewController(withIdentifier: "EmailVerificationViewControllerID")
+        self.navigationController?.pushViewController(viewController, animated: animated)
     }
     
     func presentCalibrationViewController(type:CalibrationType, animated:Bool) {
@@ -217,3 +411,4 @@ extension FliprSplashViewController{
         }
     }
 }
+

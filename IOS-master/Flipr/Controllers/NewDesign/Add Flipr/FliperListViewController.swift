@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreBluetooth
+import JGProgressHUD
 
 class FliprListViewController: BaseViewController {
     @IBOutlet weak var fliprListTableView: UITableView!
@@ -18,6 +19,7 @@ class FliprListViewController: BaseViewController {
     @IBOutlet weak var serialTitleLabel: UILabel!
     @IBOutlet weak var selectButton: UIButton!
     var fliprList = [String]()
+    let hud = JGProgressHUD(style:.dark)
 
     var serialKey: String!
     var flipType: String!
@@ -113,18 +115,43 @@ extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "KeyEnterViewController") as? KeyEnterViewController{
-            vc.serialKey = fliprList[indexPath.row]
-            vc.flipType = flipType
-            vc.isSignupFlow =  self.isSignupFlow
-            self.navigationController?.pushViewController(vc)
-        }
+        
+        let skey = fliprList[indexPath.row]
+        hud?.show(in: self.view)
+        Module.activate(serial:skey, activationKey: "123456", completion: { (error) in
+            self.hud?.dismiss(afterDelay: 0)
+            if error != nil {
+                self.showError(title: "Error".localized, message: error?.localizedDescription)
+            } else {
+                self.showSuccessScreen()
+            }
+        })
+        
+//        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "KeyEnterViewController") as? KeyEnterViewController{
+//            vc.serialKey = fliprList[indexPath.row]
+//            vc.flipType = flipType
+//            vc.isSignupFlow =  self.isSignupFlow
+//            self.navigationController?.pushViewController(vc)
+//        }
         
     }
     
     @IBAction func alertsActivationSwitchValueChanged(_ sender: UISwitch) {
         
     }
+    
+    
+    
+    func showSuccessScreen(){
+        
+        let sb = UIStoryboard(name: "FliprDevice", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "FliprActivationSuccessViewController") as? FliprActivationSuccessViewController {
+            self.navigationController?.pushViewController(viewController)
+        }
+    }
+
+    
+    
     
     
 }

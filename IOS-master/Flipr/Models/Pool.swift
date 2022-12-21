@@ -11,6 +11,10 @@ import Foundation
 import Foundation
 import Alamofire
 
+
+
+
+
 class Pool {
     
     var id:Int?

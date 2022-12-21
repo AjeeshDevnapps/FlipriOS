@@ -13,11 +13,13 @@ class WatrThemeViewController: UIViewController {
     @IBOutlet weak var themRoseLbl: UILabel!
     @IBOutlet weak var themBlueTick: UIImageView!
     @IBOutlet weak var themRoseTick: UIImageView!
+    @IBOutlet weak var container1: UIView!
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Thème"
+        container1.addShadow(offset: CGSize.init(width: 0, height: 0), color: UIColor(hexString: "E3E7F0"), radius: 25.0, opacity: 1.0)
         managetheme()
         // Do any additional setup after loading the view.
     }

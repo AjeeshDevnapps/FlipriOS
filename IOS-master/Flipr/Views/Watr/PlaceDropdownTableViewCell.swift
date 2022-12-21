@@ -16,6 +16,8 @@ class PlaceDropdownTableViewCell: UITableViewCell {
     @IBOutlet weak var locationLbl: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var badgeButton: UIButton!
+    @IBOutlet weak var disableView: UIView!
+
     var delegate:PlaceDropdownCellDelegate?
     var place:PlaceDropdown?
 

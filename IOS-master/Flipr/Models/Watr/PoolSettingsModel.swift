@@ -7,32 +7,35 @@ import Foundation
 
 // MARK: - PoolSettingsModel
 struct PoolSettingsModel: Codable {
-    let owner: String?
-    let id, builtYear, volume: Int?
-    let surface: Double?
-    let coating: TypeInfo?
-    let integration: TypeInfo?
-    let shape: TypeInfo?
-    let filtration: TypeInfo?
-    let treatment, location: TypeInfo?
-    let isDefective: Bool?
-    let electrolyzerThreshold: Int?
-    let isPublic: Bool?
-    let numberOfUsers: Int?
-    let mode: TypeInfo?
-    let numberOfPlaces: Int?
-    let latitude, longitude: Double?
-    let filtrationMode: Int?
-    let isFiltrationCommandOn: Bool?
-    let lastIFTTTCheck, recommandedFiltrationDuration, commandTemperature: Double?
-    let cityID: Int?
-    let type: PoolType?
-    let spaKind: String?
-    let city: CityInSettings?
-    let ownerID: Int?
+    var owner: Owner?
+    var privateName:String?
+    var location: String?
+    var id, builtYear, volume: Int?
+    var surface: Double?
+    var coating: TypeInfo?
+    var integration: TypeInfo?
+    var shape: TypeInfo?
+    var filtration: TypeInfo?
+    var treatment:TypeInfo?
+    var isDefective: Bool?
+    var electrolyzerThreshold: Int?
+    var isPublic: Bool?
+    var numberOfUsers: Int?
+    var mode: TypeInfo?
+    var numberOfPlaces: Int?
+    var latitude, longitude: Double?
+    var filtrationMode: Int?
+    var isFiltrationCommandOn: Bool?
+    var lastIFTTTCheck, recommandedFiltrationDuration, commandTemperature: Double?
+    var cityID: Int?
+    var type: PoolType?
+    var spaKind: String?
+    var city: CityInSettings?
+    var ownerID: Int?
 
     enum CodingKeys: String, CodingKey {
         case owner = "Owner"
+        case privateName = "PrivateName"
         case id = "Id"
         case builtYear = "BuiltYear"
         case volume = "Volume"
@@ -122,4 +125,54 @@ struct PoolType: Codable {
         case equipments = "Equipments"
         case filtrations = "Filtrations"
     }
+}
+
+
+
+struct Owner : Codable {
+
+    let actualRights : [String]?
+    let birthday : String?
+    let email : String?
+    let firstName : String?
+    let isActivated : Bool?
+    let isDesactivated : Bool?
+    let isNewsletter : Bool?
+    let isOkToShareData : String?
+    let isSocietyCreator : Bool?
+    let joinedSocietyDate : String?
+    let lang : String?
+    let lastName : String?
+    let notifyFiltrationDuration : Bool?
+    let notifyPoolsHealth : Bool?
+    let notifyProbeIssues : Bool?
+    let notifyStock : Bool?
+    let phoneNumber : String?
+    let societyId : String?
+    let systemPauseNotifications : Bool?
+
+
+    enum CodingKeys: String, CodingKey {
+        case actualRights = "ActualRights"
+        case birthday = "Birthday"
+        case email = "Email"
+        case firstName = "FirstName"
+        case isActivated = "IsActivated"
+        case isDesactivated = "IsDesactivated"
+        case isNewsletter = "IsNewsletter"
+        case isOkToShareData = "IsOkToShareData"
+        case isSocietyCreator = "IsSocietyCreator"
+        case joinedSocietyDate = "JoinedSocietyDate"
+        case lang = "Lang"
+        case lastName = "LastName"
+        case notifyFiltrationDuration = "NotifyFiltrationDuration"
+        case notifyPoolsHealth = "NotifyPoolsHealth"
+        case notifyProbeIssues = "NotifyProbeIssues"
+        case notifyStock = "NotifyStock"
+        case phoneNumber = "PhoneNumber"
+        case societyId = "SocietyId"
+        case systemPauseNotifications = "SystemPauseNotifications"
+    }
+   
+
 }

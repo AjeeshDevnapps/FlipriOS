@@ -12,6 +12,10 @@ import MapKit
 class NewPoolSimpleListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var submitButton: UIButton!
+
+    var order = 0
+    
     var isTextField = false
     var inputType: UIKeyboardType = .numberPad
     var listItems = [String]()
@@ -20,12 +24,73 @@ class NewPoolSimpleListViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hexString: "#eeeee4")
         tableView.backgroundColor = .clear
-        setCustomBackbtn()
+        if AppSharedData.sharedInstance.isAddPlaceFlow{
+//            self.navigationItem.setHidesBackButton(true, animated: true)
+            self.submitButton.isHidden = false
+        }else{
+            setCustomBackbtn()
+        }
     }
     
     override func goBack() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func submitAction(_ sender: UIButton) {
+        showViews()
+
+    }
+    
+    func showViews(){
+        switch order {
+        case 0:
+            self.showFormView()
+            break;
+        case 1:
+            showValuePickerForStatus()
+            break;
+        
+        default: break;
+        }
+    }
+    
+    
+    func showFormView(){
+//        AppSharedData.sharedInstance.addPlaceInfo.volume =
+//        let sb = UIStoryboard(name: "Main", bundle: nil)
+//        if let viewController = sb.instantiateViewController(withIdentifier: "ValuePickerController") as? ValuePickerController {
+//            viewController.title = "Shape".localized
+//            viewController.apiPath = "coatings"
+//            viewController.completion(block: { (formValue) in
+//            })
+//            navigationController?.pushViewController(viewController)
+//        }
+
+    }
+    
+    func showValuePickerForStatus(){
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "ValuePickerController") as? ValuePickerController {
+            viewController.order = 5
+            viewController.title = "Status".localized
+            viewController.apiPath = "coatings"
+            viewController.completion(block: { (formValue) in
+            })
+            navigationController?.pushViewController(viewController)
+        }
+
+    }
+    
+    
+    func showValuePicker(){
+//
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let locationVC = sb.instantiateViewController(withIdentifier: "ValuePickerController") as? ValuePickerController {
+//            locationVC.title = "Localisation"
+            navigationController?.pushViewController(locationVC)
+        }
+    }
+
     
 //    func searchAndDisplayAddresses(_ searchText: String) {
 //        
@@ -90,9 +155,7 @@ extension NewPoolSimpleListViewController: UITableViewDataSource {
             
             if #available(iOS 14.0, *) {
                 var content = tableViewCell.defaultContentConfiguration()
-                
                 content.text = listItems[indexPath.row]
-                
                 content.prefersSideBySideTextAndSecondaryText = true
                 content.secondaryTextProperties.font = UIFont.systemFont(ofSize: 16)
                 tableViewCell.contentConfiguration = content

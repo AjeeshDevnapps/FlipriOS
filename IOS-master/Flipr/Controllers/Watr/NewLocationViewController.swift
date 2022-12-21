@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 enum LocationTypes: String, CaseIterable {
     case pool = "Pool"
@@ -24,18 +25,22 @@ class NewLocationViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
-    
+    let hud = JGProgressHUD(style:.dark)
+
     var selectedIndex: IndexPath!
     var placeTypes = PlaceTypes()
     override func viewDidLoad() {
         super.viewDidLoad()
         formatUI()
+        self.hideBackButtonForAddPlaceflow()
         getPlaceTypes()
     }
     
     func getPlaceTypes() {
         let router = PlaceRouter()
+        hud?.show(in: self.view)
         router.getPlaceTypes { types, error in
+            self.hud?.dismiss(afterDelay: 0)
             if error != nil {
                 let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
                 let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
@@ -98,14 +103,20 @@ class NewLocationViewController: UIViewController {
 //    }
     
     @IBAction func submitAction(_ sender: UIButton) {
-        let sb = UIStoryboard(name: "NewPool", bundle: nil)
-        if let viewController = sb.instantiateViewController(withIdentifier: "NewPoolViewControllerSettings") as? NewPoolViewController {
-            viewController.modalPresentationStyle = .fullScreen
-            let nav = UINavigationController.init(rootViewController: viewController)
-            viewController.isCreatingPlace = true
-            self.present(nav, animated: true, completion: nil)
+        let name:String = textField.text ?? ""
+        if selectedIndex != nil && name.isValidString{
+            AppSharedData.sharedInstance.addPlaceName = name
+            showLocationSelectionVC()
         }
-
+    }
+    
+    func showLocationSelectionVC(){
+        let sb = UIStoryboard(name: "NewPool", bundle: nil)
+        if let locationVC = sb.instantiateViewController(withIdentifier: "NewPoolLocationViewController") as? NewPoolLocationViewController {
+            locationVC.title = "Localisation"
+            AppSharedData.sharedInstance.isAddPlaceFlow = true 
+            navigationController?.pushViewController(locationVC)
+        }
     }
     
 }
@@ -174,5 +185,10 @@ extension NewLocationViewController: UITableViewDataSource, UITableViewDelegate 
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         selectedIndex = indexPath
         tableView.deselectRow(at: indexPath, animated: true)
+        AppSharedData.sharedInstance.addPlaceLocationInfo.palceId = placeTypes[indexPath.row].id ?? 0
+        AppSharedData.sharedInstance.addPlaceLocationInfo.typeIcon = placeTypes[indexPath.row].typeIcon ?? ""
+        AppSharedData.sharedInstance.addPlaceLocationInfo.IsAvailableAsPlace = placeTypes[indexPath.row].isAvailableAsPlace ?? false
+        AppSharedData.sharedInstance.addPlaceLocationInfo.name = placeTypes[indexPath.row].name ?? ""
+
     }
 }

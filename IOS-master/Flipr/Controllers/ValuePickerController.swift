@@ -37,14 +37,35 @@ class ValuePickerController: UITableViewController {
     var values = [FormValue]()
     var selectedValue:FormValue?
     
+    var value:FormValue!
+    
     var completionBlock:(_: (_ value:FormValue) -> Void)?
     
     func completion(block: @escaping (_ value:FormValue) -> Void) {
         completionBlock = block
     }
+    var nextButton:UIButton!
+    
+    var order = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if AppSharedData.sharedInstance.isAddPlaceFlow{
+//            self.navigationItem.setHidesBackButton(true, animated: true)
+            let bkView = UIView.init(frame: CGRect(x:0,y:0,width:self.view.frame.size.width,height:100))
+            bkView.backgroundColor = .clear
+            nextButton = UIButton.init(frame:CGRect(x:20,y:25,width:bkView.frame.size.width - 40,height:50))
+            nextButton.setTitle("Suivant".localized, for: .normal)
+            nextButton.backgroundColor = .black
+            nextButton.titleLabel?.textColor = .white
+            nextButton.roundCorner(corner: 12)
+            nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
+            bkView.addSubview(nextButton)
+            tableView.tableFooterView = bkView
+            nextButton.isHidden = true
+        }
+        
         
         if let path = self.apiPath {
             
@@ -68,7 +89,12 @@ class ValuePickerController: UITableViewController {
                         }
                         
                         self.values = formValues
-                        self.tableView.reloadData()
+                        let range = NSMakeRange(0, self.tableView.numberOfSections)
+                        let sections = NSIndexSet(indexesIn: range)
+                        self.tableView.reloadSections(sections as IndexSet, with: .bottom)
+                        if AppSharedData.sharedInstance.isAddPlaceFlow{
+                            self.nextButton.isHidden = false
+                        }
                         
                     } else {
                         print("response.result.value: \(value)")
@@ -129,9 +155,11 @@ class ValuePickerController: UITableViewController {
         let value = self.values[indexPath.row]
         cell.textLabel?.text = value.label
         
-        if apiPath == "modes" {
-            cell.accessoryType = .detailButton
-        } else if let selectedValue = selectedValue {
+//        if apiPath == "modes" {
+//            cell.accessoryType = .none
+////            cell.accessoryType = .detailButton
+//        } else
+        if let selectedValue = selectedValue {
             if value.id == selectedValue.id {
                 cell.accessoryType = .checkmark
             } else {
@@ -145,10 +173,125 @@ class ValuePickerController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let value = self.values[indexPath.row]
-        completionBlock?(value)
-        navigationController?.popViewController()
+        value = self.values[indexPath.row]
+        if AppSharedData.sharedInstance.isAddPlaceFlow{
+            self.showNextScreen()
+        }else{
+            completionBlock?(value)
+            navigationController?.popViewController()
+        }
     }
+    
+    @objc func nextButtonPressed(){
+        showNextScreen()
+    }
+    
+    
+    func showNextScreen(){
+        switch order{
+            case 0:
+            AppSharedData.sharedInstance.addPlaceInfo.shape = value
+            self.showCoatingView()
+            break;
+            case 1:
+            AppSharedData.sharedInstance.addPlaceInfo.coating = value
+            self.showIntegrationView()
+            case 2:
+            AppSharedData.sharedInstance.addPlaceInfo.integration = value
+            showTreatmentView()
+            case 3:
+            AppSharedData.sharedInstance.addPlaceInfo.treatment = value
+            showFiltrationView()
+            case 4:
+            AppSharedData.sharedInstance.addPlaceInfo.filtration = value
+            showNoOfUsers()
+            case 5:
+            AppSharedData.sharedInstance.addPlaceInfo.mode = value
+            showEditPlaceView()
+            break;
+            
+            default : break;
+        }
+    }
+    
+    
+    func showEditPlaceView(){
+        let sb = UIStoryboard(name: "NewPool", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "NewPoolViewControllerSettings") as? NewPoolViewController {
+            viewController.placeTitle = AppSharedData.sharedInstance.addPlaceName
+            self.navigationController?.pushViewController(viewController, completion: nil)
+//            let nav = UINavigationController.init(rootViewController: viewController)
+//            nav.modalPresentationStyle = .fullScreen
+//            self.present(nav, animated: true, completion: nil)
+        }
+    }
+    
+    
+    func showCoatingView(){
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "ValuePickerController") as? ValuePickerController {
+            viewController.order = 1
+            viewController.apiPath = "coatings"
+            viewController.title = "Type of coating".localized
+            viewController.completion(block: { (formValue) in
+
+            })
+            navigationController?.pushViewController(viewController)
+        }
+    }
+    
+    
+    func showIntegrationView(){
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "ValuePickerController") as? ValuePickerController {
+            viewController.order = 2
+            viewController.apiPath = "integration"
+            viewController.title = "Integration".localized
+            viewController.completion(block: { (formValue) in
+           })
+            navigationController?.pushViewController(viewController)
+        }
+    }
+    
+    
+    func showTreatmentView(){
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "ValuePickerController") as? ValuePickerController {
+            viewController.order = 3
+            viewController.apiPath = "treatment"
+            viewController.title = "Treatement".localized
+            viewController.completion(block: { (formValue) in
+            })
+            navigationController?.pushViewController(viewController)
+        }
+    }
+    
+    
+    func showFiltrationView(){
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "ValuePickerController") as? ValuePickerController {
+            viewController.order = 4
+            viewController.apiPath = "filtrations"
+            viewController.title = "Filtration".localized
+            viewController.completion(block: { (formValue) in
+             })
+            navigationController?.pushViewController(viewController)
+        }
+    }
+    
+    
+    func showNoOfUsers(){
+        let sb = UIStoryboard(name: "NewPool", bundle: nil)
+        let listVC = sb.instantiateViewController(withIdentifier: "WatrInputViewController") as! WatrInputViewController
+        listVC.order = 1
+        listVC.title = "Nombre d’utilisateurs".localized
+        navigationController?.pushViewController(listVC, animated: true)
+    }
+    
+    
+    
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let value = self.values[indexPath.row]

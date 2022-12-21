@@ -19,6 +19,7 @@ class PlaceDropdownViewController: UIViewController {
     
     var placesList = [PlaceDropdown]()
     var invitationList = [PlaceDropdown]()
+    
 
     
     var placesModules = [PlaceModule]()
@@ -29,16 +30,25 @@ class PlaceDropdownViewController: UIViewController {
     var placeTitle : String?
     
     var selectedPlace : PlaceDropdown?
+    
+    var isInvitationFlow = false
 
 
 
     @IBOutlet weak var placesTableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var backgrndView: UIView!
+
+
     var delegate:PlaceDropdownDelegate?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if isInvitationFlow{
+            self.title = "Place"
+        }
+        backgrndView.isHidden = !isInvitationFlow
         placesTableView.tableFooterView = UIView()
         callPlacesApi()
         // Do any additional setup after loading the view.
@@ -100,7 +110,11 @@ class PlaceDropdownViewController: UIViewController {
                     self.placesModules = placesModuleResult!
                     if self.placesModules.count > 0{
                         self.hud?.dismiss(afterDelay: 0)
-                        self.callDidSelectedDelegate(modules: placesModuleResult!, placeInfo: placeDetails)
+                        if self.isInvitationFlow{
+                            self.presentDashboard()
+                        }else{
+                            self.callDidSelectedDelegate(modules: placesModuleResult!, placeInfo: placeDetails)
+                        }
                     }else{
                         self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                         self.hud?.textLabel.text = "This place have no modules"
@@ -121,6 +135,16 @@ class PlaceDropdownViewController: UIViewController {
     
     @IBAction func closeButtonClicked(){
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func presentDashboard() {
+        let mainSB = UIStoryboard.init(name: "Main", bundle: nil)
+        let dashboard = mainSB.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+        dashboard.modalTransitionStyle = .flipHorizontal
+        dashboard.modalPresentationStyle = .fullScreen
+        self.present(dashboard, animated: false, completion: {
+        })
+    
     }
 }
 
@@ -216,7 +240,7 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                     cell.iconImageView.image = UIImage(named: iconname )
                 }
                 
-                cell.typeLbl.text = place.name
+                cell.typeLbl.text = place.privateName ??  place.name
                 var loc = place.placeOwnerFirstName
                 if !place.placeOwnerLastName.isEmpty{
                     loc?.append(" ")
@@ -225,6 +249,16 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 loc?.append(", ")
                 loc?.append(place.placeCity)
                 cell.locationLbl.text = loc
+                let moduelsNo = self.places[indexPath.row].numberOfModules
+                cell.disableView.isHidden = true
+                cell.contentView.alpha = 1.0
+                if moduelsNo > 0 {
+                    cell.disableView.isHidden = true
+                }else{
+                    cell.disableView.isHidden = false
+                    cell.contentView.alpha = 0.5
+                }
+
                 return cell;
             }else{
                 
@@ -236,7 +270,7 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 cell.delegate = self
                 let place = self.invitationList[indexPath.row]
                 cell.place = place
-                cell.typeLbl.text = place.name
+                cell.typeLbl.text = place.privateName
                 var loc = place.placeOwnerFirstName
                 if !place.placeOwnerLastName.isEmpty{
                     loc?.append(" ")
@@ -250,6 +284,7 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                     let iconname: String = iconnameArray[0]
                     cell.iconImageView.image = UIImage(named: iconname )
                 }
+                cell.contentView.alpha = 1.0
                 return cell;
                 
                
@@ -277,15 +312,26 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                     cell.iconImageView.image = UIImage(named: iconname )
                 }
                 
-                cell.typeLbl.text = place.name
+                cell.typeLbl.text = place.privateName ??  place.name
+                
                 var loc = place.placeOwnerFirstName
                 if !place.placeOwnerLastName.isEmpty{
                     loc?.append(" ")
                     loc?.append(place.placeOwnerLastName)
                 }
                 loc?.append(", ")
-                loc?.append(place.placeCity)
+                loc?.append(place.placeCity ?? "")
                 cell.locationLbl.text = loc
+                let moduelsNo = self.places[indexPath.row].numberOfModules
+                cell.disableView.isHidden = true
+                cell.contentView.alpha = 1.0
+                if moduelsNo > 0 {
+                    cell.disableView.isHidden = true
+                }else{
+                    cell.disableView.isHidden = false
+                    cell.contentView.alpha = 0.5
+                }
+
                 return cell;
             }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier:"InvitationTableViewCell",
@@ -296,7 +342,8 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 cell.delegate = self
                 let place = self.invitationList[indexPath.row]
                 cell.place = place
-                cell.typeLbl.text = place.name
+                cell.typeLbl.text = place.privateName ??  place.name
+                
                 var loc = place.placeOwnerFirstName
                 if !place.placeOwnerLastName.isEmpty{
                     loc?.append(" ")
@@ -310,104 +357,25 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                     let iconname: String = iconnameArray[0]
                     cell.iconImageView.image = UIImage(named: iconname )
                 }
+                cell.contentView.alpha = 1.0
                 
                 return cell;
                 
             }
         }
         
-//        let place = self.places[indexPath.row]
-//        if place.isPending{
-//            let cell = tableView.dequeueReusableCell(withIdentifier:"InvitationTableViewCell",
-//                                                     for: indexPath) as! InvitationTableViewCell
-//            if indexPath.row >  self.places.count{
-//                return cell
-//            }
-//            cell.delegate = self
-//            cell.place = place
-//            cell.typeLbl.text = place.name
-//            var loc = place.placeOwnerFirstName
-//            if !place.placeOwnerLastName.isEmpty{
-//                loc?.append(" ")
-//                loc?.append(place.placeOwnerLastName)
-//            }
-//            loc?.append(", ")
-//            loc?.append(place.placeCity)
-//            cell.locationLbl.text = loc
-//            return cell;
-//        }else{
-//            let cell = tableView.dequeueReusableCell(withIdentifier:"PlaceDropdownTableViewCell",
-//                                                     for: indexPath) as! PlaceDropdownTableViewCell
-//            if indexPath.row >  self.places.count{
-//                return cell
-//            }
-//            cell.delegate = self
-//            cell.place = place
-//            if place.permissionLevel == "Admin"{
-//                cell.badgeButton.setImage(UIImage(named: "settingPlace"), for: .normal)
-//            }
-//            //        else if place.permissionLevel == "View"{
-//            else{
-//                cell.badgeButton.setImage(UIImage(named: "viewer"), for: .normal)
-//            }
-//            if let iconName  = place.typeIcon{
-//                let iconnameArray = iconName.components(separatedBy: ".")
-//                let iconname: String = iconnameArray[0]
-//                cell.iconImageView.image = UIImage(named: iconname )
-//            }
-//
-//            cell.typeLbl.text = place.name
-//            var loc = place.placeOwnerFirstName
-//            if !place.placeOwnerLastName.isEmpty{
-//                loc?.append(" ")
-//                loc?.append(place.placeOwnerLastName)
-//            }
-//            loc?.append(", ")
-//            loc?.append(place.placeCity)
-//            cell.locationLbl.text = loc
-//            return cell;
-//        }
-//
-//
-        /*
-         if place.permissionLevel == "Admin"{
-         cell.badgeButton.setImage(UIImage(named: "levelBadge"), for: .normal)
-         }
-         else if place.permissionLevel == "View"{
-         cell.badgeButton.setImage(UIImage(named: "viewOnly"), for: .normal)
-         }
-         else if place.permissionLevel == "Manage"{
-         cell.badgeButton.setImage(UIImage(named: "manageBig"), for: .normal)
-         }
-         else{
-         cell.badgeButton.setImage(UIImage(named: "levelBadge"), for: .normal)
-         }
-         */
-        //        if place.placeType == "SwimmingPool"{
-        //            cell.iconImageView.image = UIImage(named: "SwimmingPool")
-        //        }
-        //        else{
-        //            cell.iconImageView.image = UIImage(named: "spaPlaceType")
-        //
-        //        }
-        
-      
-        
-        //        if place.placeOwner == 1{
-        //            cell.badgeButton.setImage(UIImage(named: "settingPlace"), for: .normal)
-        //        }else{
-        //            cell.badgeButton.setImage(UIImage(named: "viewer"), for: .normal)
-        //
-        //        }
-        
-//        return cell
+
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let placeId:String = "\(String(describing: self.places[indexPath.row].placeId ?? 0))"
-        let place = self.places[indexPath.row]
-        self.getPlaceModules(placeId: placeId, placeDetails: place)
+        let moduelsNo = self.places[indexPath.row].numberOfModules
+        if moduelsNo > 0 {
+            let placeId:String = "\(String(describing: self.places[indexPath.row].placeId ?? 0))"
+            let place = self.places[indexPath.row]
+            self.getPlaceModules(placeId: placeId, placeDetails: place)
+        }
+        
     }
     
     
@@ -417,7 +385,8 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
         if let viewController = sb.instantiateViewController(withIdentifier: "NewLocationViewControllerID") as? NewLocationViewController {
             //            self.navigationController?.pushViewController(viewController, completion: nil)
             //            viewController.modalPresentationStyle = .fullScreen
-            self.present(viewController, animated: true)
+            let nav = UINavigationController.init(rootViewController: viewController)
+            self.present(nav, animated: true)
         }
     }
     
@@ -463,14 +432,14 @@ extension PlaceDropdownViewController: InvitationTableViewCellDelegate{
     func acceptShare(email: String,placeId:String) {
         FliprShare().acceptShareWithPoolId( poolID: placeId) { error in
             if error != nil {
-                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
-                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
-                alertVC.addAction(alertAction)
-                self.present(alertVC, animated: true)
-                return
+//                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
+//                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
+//                alertVC.addAction(alertAction)
+//                self.present(alertVC, animated: true)
+//                return
             }else{
-                self.callPlacesApi()
             }
+            self.callPlacesApi()
         }
     }
     
@@ -489,7 +458,7 @@ extension PlaceDropdownViewController: PlaceDropdownCellDelegate{
                     viewController.placeTitle = self.placeTitle
                     viewController.placeDetails = selectedPlace
                     let nav = UINavigationController.init(rootViewController: viewController)
-                    nav.modalPresentationStyle = .fullScreen
+//                    nav.modalPresentationStyle = .fullScreen
                     self.present(nav, animated: true, completion: nil)
                 }
             }else{
@@ -528,11 +497,12 @@ extension PlaceDropdownViewController: PlaceDropdownCellDelegate{
 //                alertVC.addAction(alertAction)
 //                self.present(alertVC, animated: true)
 //                return
-                self.callPlacesApi()
+//                self.callPlacesApi()
 
             }else{
-                self.callPlacesApi()
+//                self.callPlacesApi()
             }
+            self.callPlacesApi()
         }
     }
     

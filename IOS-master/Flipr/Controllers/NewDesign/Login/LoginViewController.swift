@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class LoginViewController: BaseViewController {
     @IBOutlet weak var emailLbl: UILabel!
@@ -22,6 +23,21 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var signupLblBold: UILabel!
     @IBOutlet weak var signInButton: UIButton!
     var isNeedToHideBackButton = false
+    
+    var places = [PlaceDropdown]()
+    
+    var placesList = [PlaceDropdown]()
+    var invitationList = [PlaceDropdown]()
+    
+    
+    var placesModules = [PlaceModule]()
+    
+    let hud = JGProgressHUD(style:.dark)
+    var haveInvitation = false
+    var havePlace = false
+    var placeTitle : String?
+    var selectedPlace : PlaceDropdown?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,10 +150,12 @@ class LoginViewController: BaseViewController {
                         Module.currentModule?.pH7CalibrationDone = true
                         Module.currentModule?.pH4CalibrationDone = true
                         Module.saveCurrentModuleLocally()
-                        self.presentDashboard(animated: false)
+//                        self.presentDashboard(animated: false)
                         
                        
-                    } else if User.currentUser?.isActivated == false {
+                    }
+                    /*
+                    else if User.currentUser?.isActivated == false {
                         //self.presentEmailVerificationController(animated: false)
                         if let emailVerificationViewController = self.storyboard?.instantiateViewController(withIdentifier: "EmailVerificationViewControllerID") as? EmailVerificationViewController {
                             emailVerificationViewController.email = email
@@ -149,6 +167,9 @@ class LoginViewController: BaseViewController {
                     } else {
                         self.presentLandingController(animated: false)
                     }
+                    */
+                    self.checkUserPlaces()
+                    
                 } else {
                     self.showError(title: "Error".localized, message: error?.localizedDescription)
                 }
@@ -259,5 +280,120 @@ extension LoginViewController{
             viewController.calibrationType = type
             self.navigationController?.pushViewController(viewController, animated: animated)
         }
+    }
+}
+
+
+extension LoginViewController{
+    
+    func checkUserPlaces(){
+        hud?.show(in: self.view)
+        User.currentUser?.getPlaces(completion: { (placesResult,error) in
+            if (error != nil) {
+                self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                self.hud?.textLabel.text = error?.localizedDescription
+                self.hud?.dismiss(afterDelay: 0)
+            } else {
+                if placesResult != nil{
+                    self.places = placesResult!
+                    self.placesList = self.places.filter { $0.isPending == false }
+                    self.invitationList = self.places.filter { $0.isPending == true }
+                    self.haveInvitation = false
+                    self.havePlace = false
+                    AppSharedData.sharedInstance.havePlace = false
+                    AppSharedData.sharedInstance.haveInvitation = false
+                    if self.placesList.count > 0 {
+                        self.havePlace = true
+                        AppSharedData.sharedInstance.havePlace = true
+                    }
+                    if self.invitationList.count > 0 {
+                        self.haveInvitation = true
+                        AppSharedData.sharedInstance.haveInvitation = true
+                    }
+                    self.hud?.dismiss(afterDelay: 0)
+                }
+            }
+            self.processFlow()
+        })
+    }
+    
+    
+    func processFlow(){
+        
+        let fName = User.currentUser?.firstName ?? ""
+        let lName = User.currentUser?.lastName ?? ""
+
+        if fName.isValidString && lName.isValidString{
+            if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+                if (currentUnit != 1) && (currentUnit != 2){
+                    self.showUnitSelectionView()
+                }else{
+                    self.checkPlaceViewFlow()
+                }
+            }else{
+                self.showUnitSelectionView()
+            }
+        }else{
+            self.showUpdateProfile()
+        }
+        
+    }
+    
+    
+    func checkPlaceViewFlow(){
+        if AppSharedData.sharedInstance.haveInvitation{
+            self.showPlaceDropdownView()
+        }else{
+            if AppSharedData.sharedInstance.havePlace{
+                self.showDashboardView()
+            }
+            else{
+                self.addPlaceDropdownView()
+            }
+        }
+    }
+    
+    
+    func showPlaceDropdownView(){
+        let sb = UIStoryboard.init(name: "Watr", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "PlaceDropdownViewController") as? PlaceDropdownViewController {
+//            viewController.delegate = self
+//            viewController.placeTitle = self.selectedPlaceDetailsLbl.text
+//            viewController.modalPresentationStyle = .overCurrentContext
+//            self.present(viewController, animated: true) {
+//            }
+            viewController.isInvitationFlow = true
+            self.navigationController?.pushViewController(viewController, completion: nil)
+        }
+    }
+    
+    
+    func addPlaceDropdownView(){
+        let sb = UIStoryboard(name: "NewLocation", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "NewLocationViewControllerID") as? NewLocationViewController {
+            self.navigationController?.pushViewController(viewController, completion: nil)
+            //            viewController.modalPresentationStyle = .fullScreen
+//            self.present(viewController, animated: true)
+        }
+    }
+    
+    
+    func showUnitSelectionView(){
+        let sb = UIStoryboard.init(name: "Settings", bundle: nil)
+        if let unitVC = sb.instantiateViewController(withIdentifier: "UnitViewController") as? UnitViewController{
+            unitVC.isLoginFlow = true
+            self.navigationController?.pushViewController(unitVC)
+        }
+    }
+    
+    func showDashboardView(){
+        presentDashboard(animated: false)
+
+    }
+    
+    
+    func showUpdateProfile(){
+        let completeProfileVC =  self.storyboard?.instantiateViewController(withIdentifier: "CompleteProfileViewController") as! CompleteProfileViewController
+        self.navigationController?.pushViewController(completeProfileVC, completion: nil)
     }
 }

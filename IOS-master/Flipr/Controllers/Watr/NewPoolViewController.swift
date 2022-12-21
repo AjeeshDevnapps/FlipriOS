@@ -24,18 +24,29 @@ class NewPoolViewController: UIViewController {
     var poolSettings: PoolSettingsModel?
     var placeTitle:String?
     var placeDetails:PlaceDropdown?
+    let hud = JGProgressHUD(style:.dark)
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if AppSharedData.sharedInstance.isAddPlaceFlow{
+            self.navigationItem.setHidesBackButton(true, animated: true)
+            self.submitButton.isHidden = false
+            parametersButton.isSelected = true
+            parametersButton.isUserInteractionEnabled = false
+        }else{
+            parametersButton.isSelected = true
+//            self.submitButton.isHidden = true
+            setCustomBackbtn()
+            getPoolSettings()
+        }
         tableView.backgroundColor = UIColor(hexString: "#eeeee4")
         view.backgroundColor = UIColor(hexString: "#eeeee4")
         navigationController?.navigationBar.backgroundColor = UIColor(hexString: "#eeeee4")
         title = placeTitle
-        setCustomBackbtn()
-        getPoolSettings()
+//        setCustomBackbtn()
         segmentStackView.cornerRadius = 10
         segmentStackView.clipsToBounds = true
-        parametersButton.isSelected = true
         partagesButton.isSelected = false
         adjustColorForSegmentButtons()
         submitButton.cornerRadius = 10.0
@@ -45,6 +56,10 @@ class NewPoolViewController: UIViewController {
             self.partagesButton.isEnabled = false
             self.parametersButton.isUserInteractionEnabled = false
         }
+        if AppSharedData.sharedInstance.isAddPlaceFlow{
+//            createPlace()
+        }
+        AppSharedData.sharedInstance.isAddPlaceFlow = false
     }
     
     override func goBack() {
@@ -76,6 +91,8 @@ class NewPoolViewController: UIViewController {
                     placeId = "\(pId)"
                     FliprShare().poolId = placeId
                 }
+                self.callShareApi(email: email, poolId: placeId)
+              /*
                 FliprShare().addShare(poolId: placeId, email:email, role: .guest) { error in
                     if error != nil {
                         let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
@@ -88,6 +105,7 @@ class NewPoolViewController: UIViewController {
                         self.getCurrentShares()
 //                    }
                 }
+                */
             }
             else {
                 self.showAlert(title: "Email incorrect".localized, message: "Invalid email address format".localized)
@@ -95,6 +113,27 @@ class NewPoolViewController: UIViewController {
 
         }
     }
+    
+    
+    
+    func callShareApi(email:String,poolId:String){
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.navigationController!.view)
+        FliprShare().addShare(poolId: poolId, email:email, role: .guest) { error in
+            hud?.dismiss()
+            if error != nil {
+                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
+                alertVC.addAction(alertAction)
+                self.present(alertVC, animated: true)
+                return
+            }
+//                    DispatchQueue.main.async {
+                self.getCurrentShares()
+//                    }
+        }
+    }
+    
     
     func alertWithTextField(title: String? = nil, message: String? = nil, placeholder: String? = nil, completion: @escaping ((String) -> Void) = { _ in }) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -128,11 +167,11 @@ class NewPoolViewController: UIViewController {
     
     func toggleSubmitButtonStyleAndText() {
         if parametersButton.isSelected {
-            submitButton.setTitle("Submit", for: .normal)
+            submitButton.setTitle("Submit".localized, for: .normal)
             submitButton.setTitleColor(.white, for: .normal)
             submitButton.backgroundColor = .black
         } else {
-            submitButton.setTitle("Add share", for: .normal)
+            submitButton.setTitle("Ajouter un invité".localized, for: .normal)
             submitButton.setTitleColor(.black, for: .normal)
             submitButton.backgroundColor = .white
         }
@@ -212,11 +251,55 @@ class NewPoolViewController: UIViewController {
             }
             
         }
+    }
+    
+    
+    func createPlace(){
+        hud?.show(in: self.view)
+        User.currentUser?.createPlace( completion: { (settings,error) in
+            if (error != nil) {
+                self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                self.hud?.textLabel.text = error?.localizedDescription
+                self.hud?.dismiss(afterDelay: 3)
+            } else {
+                self.hud?.dismiss(afterDelay: 0)
+                self.poolSettings = settings
+                self.tableView.reloadData()
+            }
+            
+        })
+    }
+    
+    
+    func getPlaceSettings() {
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.navigationController!.view)
+        var placeId:String = ""
+        if let pId = self.placeDetails?.placeId{
+            placeId = "\(pId)"
+            FliprShare().poolId = placeId
 
+        }
+        PoolSettingsRouter().getPoolSettings(poolId: placeId) { settings, error in
+            hud?.dismiss()
+            if error != nil {
+                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
+                alertVC.addAction(alertAction)
+                self.present(alertVC, animated: true)
+                return
+            }
+            self.poolSettings = settings
+            self.tableView.reloadData()
+        }
+    }
+    
+    
+    func updateSettings(){
         
     }
-}
 
+}
 
 
 
@@ -257,11 +340,11 @@ extension NewPoolViewController: UITableViewDataSource {
                 primaryText = NewPoolTitles.PoolGeneralTitles.allCases[indexPath.row].rawValue
                 switch indexPath.row {
                 case 0:
-                    secondaryText = poolSettings?.owner
+                    secondaryText = poolSettings?.owner?.firstName
                 case 1:
                     secondaryText = poolSettings?.type?.name
                 case 2:
-                    secondaryText = poolSettings?.type?.name
+                    secondaryText = poolSettings?.privateName
                 case 3:
                     secondaryText = poolSettings?.city?.name
                 default:
@@ -287,11 +370,11 @@ extension NewPoolViewController: UITableViewDataSource {
                 primaryText = NewPoolTitles.Maintenance.allCases[indexPath.row].rawValue
                 switch indexPath.row {
                 case 0:
-                    secondaryText = poolSettings?.volume?.toString
+                    secondaryText = poolSettings?.treatment?.name
                 case 1:
-                    secondaryText = poolSettings?.shape?.name
+                    secondaryText = poolSettings?.filtration?.name
                 default:
-                    secondaryText = "Définir"
+                    secondaryText = poolSettings?.mode?.name
                 }
                 
             case 3:
@@ -301,7 +384,7 @@ extension NewPoolViewController: UITableViewDataSource {
                     if indexPath.row == 1 {
                         secondaryText = poolSettings?.numberOfUsers?.toString ?? "0"
                     } else if indexPath.row == 2 {
-                        secondaryText = "Définir"//poolSettings?.status
+                        secondaryText = poolSettings?.mode?.name
                     }
                 } else {
                     if indexPath.row == 0 {
@@ -331,11 +414,21 @@ extension NewPoolViewController: UITableViewDataSource {
                 tableViewCell.accessoryView = hasSwitch ? indicator : nil
                 if !isSwitchSelected {
                     tableViewCell.accessoryType = .disclosureIndicator
+                    if indexPath.section == 0{
+                        if indexPath.row == 0 || indexPath.row == 01{
+                            tableViewCell.accessoryType = .none
+                        }
+                    }
+                    
                 }
                 tableViewCell.selectionStyle = .none
             } else {
                 var content = tableViewCell.defaultContentConfiguration()
-                content.text = loadedShares[indexPath.row].guestUser
+                let name:String = loadedShares[indexPath.row].guestUser
+//                name.append(" ")
+//                name.append(loadedShares[indexPath.row].placeOwnerLastName)
+                content.text = name
+//                content.text = loadedShares[indexPath.row].guestUser
                 let role = loadedShares[indexPath.row].permissionLevel
                 switch role {
                 case "View":
@@ -388,7 +481,13 @@ extension NewPoolViewController: UITableViewDataSource {
                 default:
                     cell?.imageView?.image = UIImage(named: "guest_role")
                 }
-                cell?.textLabel?.text = loadedShares[indexPath.row].guestUser
+//                cell?.textLabel?.text = loadedShares[indexPath.row].guestUser
+                
+                var name:String = loadedShares[indexPath.row].placeOwnerFirstName
+                name.append(" ")
+                name.append(loadedShares[indexPath.row].placeOwnerLastName)
+                cell?.textLabel?.text = name
+
                 cell?.accessoryType = .none
                 cell?.selectionStyle = .none
                 return cell!
@@ -439,30 +538,152 @@ extension NewPoolViewController: UITableViewDelegate {
                     break;
                 default: break;
                 }
-            } else if indexPath.section == 1 {
+            }
+            else if indexPath.section == 1 {
+                
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = sb.instantiateViewController(withIdentifier: "ValuePickerController") as! ValuePickerController
+                
                 let listVC = self.storyboard?.instantiateViewController(withIdentifier: "NewPoolSimpleListViewController") as! NewPoolSimpleListViewController
                 switch indexPath.row {
                 case 0:
-                    listVC.isTextField = true
-                    listVC.title = NewPoolTitles.Characteristics.Volume.rawValue + " - m³"
+                    
+                    let sb = UIStoryboard(name: "NewPool", bundle: nil)
+                    let listVC = sb.instantiateViewController(withIdentifier: "WatrInputViewController") as! WatrInputViewController
+                    listVC.order = 0
+                    listVC.defaultValue = poolSettings?.volume?.toString
+                    listVC.title = "Volume".localized //+ " - m³"
+                    listVC.completion(block: { (inputValue) in
+                            self.poolSettings?.volume = Int(inputValue) ?? 0
+                            self.tableView.reloadData()
+                        })
                     navigationController?.pushViewController(listVC, animated: true)
+
+                    
+//                    listVC.isTextField = true
+//                    listVC.title = NewPoolTitles.Characteristics.Volume.rawValue + " - m³"
+//                    navigationController?.pushViewController(listVC, animated: true)
                     break;  //Volume
                 case 1:
-                    listVC.isTextField = false
-                    listVC.listItems = ["Rectagle", "Oval", "Circle", "Sqauere"]
-                    listVC.title = NewPoolTitles.Characteristics.Shape.rawValue
-                    navigationController?.pushViewController(listVC, animated: true)
+                    viewController.apiPath = "shapes"
+                    viewController.title = "Shape".localized
+                    viewController.completion(block: { (formValue) in
+                        self.poolSettings?.shape = TypeInfo.init(id: formValue.id, name: formValue.label)
+                        self.tableView.reloadData()
+                    })
+
+//                    listVC.isTextField = false
+//                    listVC.listItems = ["Rectagle", "Oval", "Circle", "Sqauere"]
+//                    listVC.title = NewPoolTitles.Characteristics.Shape.rawValue
+                    navigationController?.pushViewController(viewController, animated: true)
                     break; //Forme
                 case 2:
-                    listVC.isTextField = false
-                    listVC.listItems = ["Rectagle", "Oval", "Circle"]
-                    listVC.title = NewPoolTitles.Characteristics.CoatingType.rawValue
-                    navigationController?.pushViewController(listVC, animated: true)
+                    viewController.apiPath = "coatings"
+                    viewController.title = "Coatingsg".localized
+                    viewController.completion(block: { (formValue) in
+                        self.poolSettings?.coating = TypeInfo.init(id: formValue.id, name: formValue.label)
+                        self.tableView.reloadData()
+                    })
+                    navigationController?.pushViewController(viewController, animated: true)
+
+//                    listVC.isTextField = false
+//                    listVC.listItems = ["Rectagle", "Oval", "Circle"]
+//                    listVC.title = NewPoolTitles.Characteristics.CoatingType.rawValue
+//                    navigationController?.pushViewController(listVC, animated: true)
                     break; //revetement
-                case 3: break; //integration
+                case 3:
+                    viewController.apiPath = "integration"
+                    viewController.title = "Integration".localized
+                    viewController.completion(block: { (formValue) in
+                        self.poolSettings?.integration = TypeInfo.init(id: formValue.id, name: formValue.label)
+                        self.tableView.reloadData()
+                    })
+                    navigationController?.pushViewController(viewController, animated: true)
+
+                    //integration
                 case 4: break; //anne de construction
                 default : break;
                 }
+            }
+            
+            
+            else if indexPath.section == 2{
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = sb.instantiateViewController(withIdentifier: "ValuePickerController") as! ValuePickerController
+
+                switch indexPath.row {
+                
+                case 0:
+                    viewController.apiPath = "treatment"
+                    viewController.title = "Treatement".localized
+                    viewController.completion(block: { (formValue) in
+                        self.poolSettings?.treatment = TypeInfo.init(id: formValue.id, name: formValue.label)
+                        self.tableView.reloadData()
+                    })
+                    navigationController?.pushViewController(viewController, animated: true)
+
+
+                    break; //Forme
+                case 1:
+                    viewController.apiPath = "filtrations"
+                    viewController.title = "Filtration".localized
+                    viewController.completion(block: { (formValue) in
+                        self.poolSettings?.filtration = TypeInfo.init(id: formValue.id, name: formValue.label)
+                        self.tableView.reloadData()
+                    })
+                    navigationController?.pushViewController(viewController, animated: true)
+
+                    break;
+                
+                default : break;
+                }
+                
+            }
+
+            
+            
+            else if indexPath.section == 3{
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = sb.instantiateViewController(withIdentifier: "ValuePickerController") as! ValuePickerController
+
+                switch indexPath.row {
+                case 0:
+                    
+
+                    
+                    break;
+                case 1:
+                    let sb = UIStoryboard(name: "NewPool", bundle: nil)
+                    let listVC = sb.instantiateViewController(withIdentifier: "WatrInputViewController") as! WatrInputViewController
+                    listVC.order = 1
+                    listVC.defaultValue = poolSettings?.numberOfUsers?.toString
+                    listVC.title = "Utilisateurs".localized
+                    listVC.completion(block: { (inputValue) in
+                            self.poolSettings?.numberOfUsers = Int(inputValue) ?? 0
+                            self.tableView.reloadData()
+                        })
+                    navigationController?.pushViewController(listVC, animated: true)
+                    break; //Forme
+                case 2:
+                    viewController.title = "Statut".localized
+                    viewController.apiPath = "modes"
+                    viewController.completion(block: { (formValue) in
+                        self.poolSettings?.mode = TypeInfo.init(id: formValue.id, name: formValue.label)
+                        self.tableView.reloadData()
+                    })
+                    navigationController?.pushViewController(viewController, animated: true)
+
+//                    listVC.isTextField = false
+//                    listVC.listItems = ["Rectagle", "Oval", "Circle"]
+//                    listVC.title = NewPoolTitles.Characteristics.CoatingType.rawValue
+//                    navigationController?.pushViewController(listVC, animated: true)
+                    break; //revetement
+                
+                    //integration
+                case 4: break; //anne de construction
+                default : break;
+                }
+                
             }
         } else {
             var placeId:String = ""

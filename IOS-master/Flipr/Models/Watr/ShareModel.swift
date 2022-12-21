@@ -45,7 +45,7 @@ struct ShareModel {
             self.placeOwnerId = 0
         }
         
-        if let value = JSON["placeOwnerFirstName"] as? String {
+        if let value = JSON["PlaceOwnerFirstName"] as? String {
             self.placeOwnerFirstName = value
         } else {
             self.placeOwnerFirstName = ""

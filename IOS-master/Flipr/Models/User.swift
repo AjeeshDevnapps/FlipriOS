@@ -618,6 +618,8 @@ class User {
         UserDefaults.standard.removeObject(forKey: "CurrentPool")
         UserDefaults.standard.removeObject(forKey: "CurrentHUB")
         UserDefaults.standard.set("orange", forKey: "CurrentTheme")
+        UserDefaults.standard.set("0", forKey: "CurrentUnit")
+        UserDefaults.standard.removeObject(forKey: "CurrentUnit")
         UserDefaults.standard.removeObject(forKey: "FirstHubSerialKey")
         UserDefaults.standard.removeObject(forKey: "SecondHubSerialKey")
         UserDefaults.standard.removeObject(forKey: "userDefaultThresholdValuesKey")
@@ -819,6 +821,43 @@ class User {
             }
         })
     }
+    
+    
+    
+    
+    func createPlace(completion: ((_ settings:PoolSettingsModel?, _ error: Error?) -> Void)?) {
+        
+        Alamofire.request(Router.createPlace(typeId: "")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+
+            switch response.result {
+                
+            case .success(let value):
+                print("Create place - response.result.value: \(value)")
+                if let data = response.data {
+                    do {
+                        let setting = try JSONDecoder().decode(PoolSettingsModel.self, from: data)
+                        completion?(setting, nil)
+                    } catch let error {
+                        completion?(nil, error)
+                    }
+                }
+//                completion?(nil,nil)
+
+            case .failure(let error):
+                
+                print("Create place did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(nil,serverError)
+                } else {
+                    completion?(nil,error)
+                }
+            }
+        })
+    }
+
+    
+    
 
 }
 

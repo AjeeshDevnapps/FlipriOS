@@ -23,7 +23,19 @@ import Foundation
     var haveNewFirmwereUpdate : Bool = false
 
     @objc var diagnosticErrorCount : Int = 0
+    
+    var placesList = [PlaceDropdown]()
+    var invitationList = [PlaceDropdown]()
+    var haveInvitation = false
+    var havePlace = false
+    
+    var addPlaceInfo = Pool()
+    var addPlaceLocationInfo = LocationInfo()
 
+    var addPlaceName:String!
+
+    var isAddPlaceFlow = false
+//    var isAddPlace
     
     private override init() {
         

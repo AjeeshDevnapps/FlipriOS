@@ -21,12 +21,18 @@ class PlaceDropdown{
     var placeOwnerLastName : String!
     var placeType : String!
     var typeIcon : String!
+    var numberOfModules : Int = 0
+
+    
 
 
     /**
      * Instantiate the instance using the passed dictionary values to set the properties values
      */
     init(dictionary: [String:Any]){
+        if let noOfModules = dictionary["NumberOfModules"] as? Int{
+            numberOfModules = noOfModules
+        }
         guestUser = dictionary["GuestUser"] as? String
         isPending = dictionary["IsPending"] as? Bool
         name = dictionary["Name"] as? String
