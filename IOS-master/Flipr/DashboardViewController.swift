@@ -23,13 +23,13 @@ let FliprDataPosted = Notification.Name("FliprDataDidPosted")
 
 class DashboardViewController: UIViewController {
     @IBOutlet weak var topButton: UIButton!
-
+    
     var motionManager = CMMotionManager()
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var backgroundOverlayImageView: UIImageView!
     @IBOutlet weak var backgroundOverlayHubImageView: UIImageView!
-
+    
     
     @IBOutlet weak var alert0Button: AlertButton!
     @IBOutlet weak var alert1Button: AlertButton!
@@ -46,7 +46,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var phChangeButton: UIButton!
     @IBOutlet weak var redoxChangeButton: UIButton!
     @IBOutlet weak var quickActionButtonContainer: UIView!
-
+    
     
     
     
@@ -67,12 +67,12 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var airTemperatureLabelHubTab: UILabel!
     @IBOutlet weak var airLabelHubTab: UILabel!
     @IBOutlet weak var airTendendcyImageViewHubTab: UIImageView!
-
+    
     @IBOutlet weak var currentlyWeatherIconHubTab: UILabel!
     @IBOutlet weak var weatherChevronImageViewHubTab: UIImageView!
     @IBOutlet weak var startWeatherIconHubTab: UILabel!
     @IBOutlet weak var comingWeatherIconHubTab: UILabel!
-
+    
     
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var uvLabel: UILabel!
@@ -85,7 +85,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var pHSateView: UIView!
     @IBOutlet weak var pHStateLabel: UILabel!
     @IBOutlet weak var pHStatusImageView: UIImageView!
-
+    
     @IBOutlet weak var orpView: UIView!
     @IBOutlet weak var orpLabel: UILabel!
     @IBOutlet weak var orpIndicatorImageView: UIImageView!
@@ -95,7 +95,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var bleStatusView: UIView!
     @IBOutlet weak var bleStatusLabel: UILabel!
     @IBOutlet weak var bleStatusImageView: UIImageView!
-
+    
     var pHValueCircle = CAShapeLayer()
     
     @IBOutlet weak var lastMeasureDateLabel: UILabel!
@@ -111,7 +111,7 @@ class DashboardViewController: UIViewController {
     
     @IBOutlet weak var waveView: UIView!
     @IBOutlet weak var gradiantView: UIView!
-
+    
     @IBOutlet weak var circularSlider: MSCircularSlider!
     @IBOutlet weak var addNewProgramView: UIView!
     @IBOutlet weak var addNewProgramLabel: UILabel!
@@ -124,7 +124,7 @@ class DashboardViewController: UIViewController {
     
     @IBOutlet weak var pumbStatusView: UIView!
     @IBOutlet weak var bulbStatusView: UIView!
-
+    
     
     @IBOutlet weak var fliprTabView: UIView!
     @IBOutlet weak var hubTabView: UIView!
@@ -138,13 +138,13 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var fliprTabScrollView: UIScrollView!
     @IBOutlet weak var bulbStatuImageView: UIImageView!
     @IBOutlet weak var pumbStatuImageView: UIImageView!
-
-
+    
+    
     //Tabs
     @IBOutlet weak var flipTabButton: UIButton!
     @IBOutlet weak var hubTabButton: UIButton!
-
-
+    
+    
     //Hub Tab
     @IBOutlet weak var hubTabScrollView: UIScrollView!
     @IBOutlet weak var hubScrollViewContainerView: UIView!
@@ -169,10 +169,10 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var measureAlertLbl: UILabel!
     @IBOutlet weak var measureAlertView: UIView!
     @IBOutlet weak var measureAlertTouchAreaButton: UIButton!
-
-
+    
+    
     @IBOutlet weak var connectNewDeviceLbl: UILabel!
-
+    
     @IBOutlet weak var phStatusView: DashScrollViewItem!
     @IBOutlet weak var tempStatusView: DashScrollViewItem!
     @IBOutlet weak var redoxStatusView: DashScrollViewItem!
@@ -204,7 +204,7 @@ class DashboardViewController: UIViewController {
     
     @IBOutlet weak var windSpeedLabel: UILabel!
     @IBOutlet weak var tempPrecipitationLabel: UILabel!
-
+    
     @IBOutlet weak var next5hourTitleLabel: UILabel!
     @IBOutlet weak var fliprTabTitleLbl: UILabel!
     @IBOutlet weak var hubTabTitleLbl: UILabel!
@@ -218,15 +218,15 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var selectedPlaceDetailsLbl: UILabel!
     @IBOutlet weak var placeDropdownButton: UIButton!
     @IBOutlet weak var placeDropdownArrowImage: UIImageView!
-
-
-
-
+    
+    
+    
+    
     var hubTabWaveTopConstraintPreValue = 0
-
+    
     var isShowingAddFirstProgramView = false
     var isShowingHubView = false
-
+    
     let maskView = UIImageView()
     
     var bleMeasureHasBeenSent = false
@@ -234,13 +234,13 @@ class DashboardViewController: UIViewController {
     var isPhOutOfRangeAlert = false
     var isRedoxOutOfRangeAlert = false
     var isShowingLoadingForAlertApi = false
-
-
-
+    
+    
+    
     var hub:HUB?
     var hubPumb:HUB?
     var hubBulb:HUB?
-
+    
     var hubs:[HUB] = []
     var fluidViewTopEdge:BAFluidView!
     var fluidView:BAFluidView!
@@ -250,7 +250,7 @@ class DashboardViewController: UIViewController {
     
     var isHubTabSelected = false
     var lastMeasureDate: Date?
-
+    
     var isThemeChanged = false
     var waveFrame:CGRect?
     var notificationReportTime:String?
@@ -260,11 +260,14 @@ class DashboardViewController: UIViewController {
     var selectedPlace: PlaceDropdown?
     
     var isPlaceOwner = true
+    
+    var isDefaultPlaceLoaded = false
 
-
+    
+    
     var placeDetails:PlaceDropdown!
     var placesModules:PlaceModule!
-
+    
     
     override func viewDidLoad() {
         
@@ -272,30 +275,30 @@ class DashboardViewController: UIViewController {
         self.placeDropdownArrowImage.isHidden = true
         manageFlipTabTitle()
         setUpStatusScroll()
-//        if -300 > -400{
-//            print("true")
-//        }else{
-//            print("false")
-//        }
-//        let tmp = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationControllerID") as? SideMenuNavigationController
-//        tmp?.view.addShadow(offset: CGSize.init(width: 10, height: 10), color: UIColor.black, radius: 100.0, opacity:1.0)
-//        SideMenuManager.default.leftMenuNavigationController = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationControllerID") as? SideMenuNavigationController
+        //        if -300 > -400{
+        //            print("true")
+        //        }else{
+        //            print("false")
+        //        }
+        //        let tmp = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationControllerID") as? SideMenuNavigationController
+        //        tmp?.view.addShadow(offset: CGSize.init(width: 10, height: 10), color: UIColor.black, radius: 100.0, opacity:1.0)
+        //        SideMenuManager.default.leftMenuNavigationController = storyboard?.instantiateViewController(withIdentifier: "UISideMenuNavigationControllerID") as? SideMenuNavigationController
         
-//        var settings = SideMenuSettings()
-//        settings.presentationStyle = .menuSlideIn
-//        SideMenuManager.default.leftMenuNavigationController?.settings = settings
-//
-//        if SideMenuManager.default.leftMenuNavigationController == nil {
-//            print("FUCK")
-//        }
-//        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.view, forMenu: .left)
-//        self.view.clipsToBounds = true
-//        self.quickActionButtonContainer.cornerRadius =  self.quickActionButtonContainer.frame.size.height / 2
-//        quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
-//        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius:         self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
+        //        var settings = SideMenuSettings()
+        //        settings.presentationStyle = .menuSlideIn
+        //        SideMenuManager.default.leftMenuNavigationController?.settings = settings
+        //
+        //        if SideMenuManager.default.leftMenuNavigationController == nil {
+        //            print("FUCK")
+        //        }
+        //        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.view, forMenu: .left)
+        //        self.view.clipsToBounds = true
+        //        self.quickActionButtonContainer.cornerRadius =  self.quickActionButtonContainer.frame.size.height / 2
+        //        quickActionButtonContainer.layer.cornerRadius = self.quickActionButtonContainer.frame.size.height / 2
+        //        quickActionButtonContainer.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.init(hexString: "#213A4E"), radius:         self.quickActionButtonContainer.frame.size.height / 2, opacity: 0.3)
         self.fliprTabTitleLbl.text = "Analysis".localized
         self.hubTabTitleLbl.text = "Control".localized
-
+        
         hubDeviceTableView.dragDelegate = self
         hubDeviceTableView.dragInteractionEnabled = true
         self.signalStrengthLabel.text = "Signal moyen".localized
@@ -309,13 +312,13 @@ class DashboardViewController: UIViewController {
             let attributedTitle = NSAttributedString(string: "Alert in progress: act now!".localized, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor) : UIColor.white]))
             alertButton.setAttributedTitle(attributedTitle, for: .normal)
         }
-       // topButton.layer.borderColor = UIColor.init(hexString: "111729").cgColor
-       // topButton.layer.borderWidth = 2.0
-       // topButton.roundCorner(corner: topButton.frame.size.height / 2 )
+        // topButton.layer.borderColor = UIColor.init(hexString: "111729").cgColor
+        // topButton.layer.borderWidth = 2.0
+        // topButton.roundCorner(corner: topButton.frame.size.height / 2 )
         uvView.roundCorner(corner: 6)
         uvViewHubTab.roundCorner(corner: 6)
-//        measureAlertView.roundCorner(corner: 12)
-//        addNewProgramLabel.roundCorner(corner: 4.0)
+        //        measureAlertView.roundCorner(corner: 12)
+        //        addNewProgramLabel.roundCorner(corner: 4.0)
         uvView.layer.borderColor = UIColor.init(hexString: "111729").cgColor
         uvView.layer.borderWidth = 1.0
         uvViewHubTab.layer.borderColor = UIColor.init(hexString: "111729").cgColor
@@ -327,27 +330,27 @@ class DashboardViewController: UIViewController {
         bulbStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
         phStatusView.roundCorner(corner: 12)
         phStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
-
+        
         tempStatusView.roundCorner(corner: 12)
         tempStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
-
+        
         redoxStatusView.roundCorner(corner: 12)
         redoxStatusView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
-
+        
         tempWindView.roundCorner(corner: 12)
         tempWindView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
-
+        
         weatherView.roundCorner(corner: 12)
         weatherView.addShadow(offset: CGSize.init(width: 0, height: 12), color: UIColor.init(red: 0, green: 0.071, blue: 0.278, alpha: 0.17), radius: 32, opacity:1)
-
-       // subscriptionButton.roundCorner(corner: 12)
+        
+        // subscriptionButton.roundCorner(corner: 12)
         addFirstFliprView.roundCorner(corner: 12)
         connectNewDeviceLbl.text = "Connect new equipment".localized
-       // shareButton.setTitle("share".localized, for: .normal)
+        // shareButton.setTitle("share".localized, for: .normal)
         self.measureAlertButton.setTitle("En savoir plus".localized, for: .normal)
         measureAlertButton.underline()
         measureAlertLbl.text = "Mesure ancienne".localized
-
+        
         airLabel.text = "air".localized
         airLabelHubTab.text = "air".localized
         
@@ -384,7 +387,7 @@ class DashboardViewController: UIViewController {
             self.waterTmpChangeButton.isHidden = true
             self.phChangeButton.isHidden = true
             self.redoxChangeButton.isHidden = true
-//            self.settingsButton.isHidden = true
+            //            self.settingsButton.isHidden = true
             self.bleMeasureHasBeenSent = false
             self.refresh()
             self.perform(#selector(self.callGetStatusApis), with: nil, afterDelay: 3)
@@ -444,13 +447,13 @@ class DashboardViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: K.Notifications.SessionExpired, object: nil, queue: nil) { (notification) in
             AppSharedData.sharedInstance.logout = true
             self.dismiss(animated: true, completion: nil)
-//            self.showLoginScreen()
+            //            self.showLoginScreen()
             User.logout()
         }
         
         NotificationCenter.default.addObserver(forName: K.Notifications.AlertDidClose, object: nil, queue: nil) { (notification) in
             self.updateFliprData()
-//            self.updateAlerts()
+            //            self.updateAlerts()
         }
         
         
@@ -472,7 +475,7 @@ class DashboardViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil, queue: nil) { (notification) in
             self.manageRedoxValueChangeButtton()
         }
-      
+        
         NotificationCenter.default.addObserver(forName: K.Notifications.PoolSettingsUpdated, object: nil, queue: nil) { (notification) in
             self.callGetStatusApis()
         }
@@ -510,9 +513,9 @@ class DashboardViewController: UIViewController {
         self.appTrackingRequestPermission()
         self.view.bringSubviewToFront(addEquipmentView)
         self.view.bringSubviewToFront(quicActionButton)
-
-
-      
+        
+        
+        
         /*
          readBLEMeasure(completion: { (error) in
          if error != nil {
@@ -601,17 +604,21 @@ class DashboardViewController: UIViewController {
     
     
     @IBAction func menuButtonTab(){
-        if  ((self.placesModules != nil) && (self.placeDetails != nil)){
+        
+        if isDefaultPlaceLoaded{
+        //if  ((self.placesModules != nil) && (self.placeDetails != nil)){
             let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
             if let viewController = sb.instantiateViewController(withIdentifier: "FliprHubMenuViewController") as? FliprHubMenuViewController {
                 viewController.placesModules = self.placesModules
                 viewController.placeDetails = self.placeDetails
-               // viewController.modalPresentationStyle = .overCurrentContext
+                // viewController.modalPresentationStyle = .overCurrentContext
                 self.present(viewController, animated: true) {
                 }
             }
+    
         }
-       
+       // }
+        
     }
     
     @IBAction func measureAlertButtonTab(){
@@ -626,37 +633,37 @@ class DashboardViewController: UIViewController {
         
     }
     
-  
+    
     
     @IBAction func tappedFliprTab(){
         self.fliprTabView.backgroundColor = UIColor(hexString: "111729")
         self.hubTabView.backgroundColor = UIColor(hexString: "97A3B6")
-
+        
         isHubTabSelected = !isHubTabSelected
         handlTabSelcection()
-//        if self.hubs.count > 0{
-//            if let firstHubKey  = self.hubs[0].serial as? String{
-//                UserDefaults.standard.set(firstHubKey, forKey: "FirstHubSerialKey")
-//            }
-//        }
-//        if self.hubs.count > 1{
-//            if let secondHubKey  = self.hubs[1].serial as? String{
-//                UserDefaults.standard.set(secondHubKey, forKey: "SecondHubSerialKey")
-//            }
-//        }
+        //        if self.hubs.count > 0{
+        //            if let firstHubKey  = self.hubs[0].serial as? String{
+        //                UserDefaults.standard.set(firstHubKey, forKey: "FirstHubSerialKey")
+        //            }
+        //        }
+        //        if self.hubs.count > 1{
+        //            if let secondHubKey  = self.hubs[1].serial as? String{
+        //                UserDefaults.standard.set(secondHubKey, forKey: "SecondHubSerialKey")
+        //            }
+        //        }
         handleHubViews()
     }
     
     @IBAction func tappedHubTab(){
-      
+        
         hubTabAirInfoBoxWidthConstraint.constant = (self.view.frame.width - 32) / 3
-//        hubTabAirInfoBoxWidthConstraint.constant = 10
-
+        //        hubTabAirInfoBoxWidthConstraint.constant = 10
+        
         hubTabAirInfoView.setNeedsUpdateConstraints()
         self.view.setNeedsUpdateConstraints()
         hubTabAirInfoView.layoutIfNeeded()
         view.layoutIfNeeded()
-
+        
         self.fliprTabView.backgroundColor = UIColor(hexString: "97A3B6")
         self.hubTabView.backgroundColor = UIColor(hexString: "111729")
         isHubTabSelected = !isHubTabSelected
@@ -700,6 +707,7 @@ class DashboardViewController: UIViewController {
     }
     
     func addFlipr(){
+        AppSharedData.sharedInstance.addedPlaceId = self.placeDetails.placeId ?? 0
         let fliprStoryboard = UIStoryboard(name: "FliprDevice", bundle: nil)
         let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddFliprViewController") as! AddFliprViewController
         viewController.fromMenu = true
@@ -709,7 +717,7 @@ class DashboardViewController: UIViewController {
     }
     
     func addHubEquipments(){
-    
+        AppSharedData.sharedInstance.addedPlaceId = self.placeDetails.placeId ?? 0
         let fliprStoryboard = UIStoryboard(name: "HUBElectrical", bundle: nil)
         let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController") as! ElectricalSetupViewController
         viewController.isPresentView = true
@@ -720,45 +728,45 @@ class DashboardViewController: UIViewController {
     
     
     /*
-    func refreshHUBdisplay() {
+     func refreshHUBdisplay() {
      
-        if let hub = hub {
-            hubButton.setTitle(hub.equipementName, for: .normal)
-            if hub.equipementState {
-                stateLabel.text = "Working".localized()
-                stateImageView.image = UIImage(named: "play_circle")
-                manualSwitch.isOn = hub.equipementState
-            } else {
-                stateLabel.text = "Stopped".localized()
-                stateImageView.image = UIImage(named: "stop_circle")
-                manualSwitch.isOn = hub.equipementState
-            }
-            if hub.behavior == "manual" {
-                modeValueLabel.text = "Manual".localized()
-                automSwitch.isOn = false
-                manualButtonAction(self)
-            } else if hub.behavior == "planning" {
-                modeValueLabel.text = "Program".localized()
-                automSwitch.isOn = false
-                progButtonAction(self)
-            } else if hub.behavior == "auto" {
-                modeValueLabel.text = "Smart Control"
-                automSwitch.isOn = true
-                automButtonAction(self)
-                hub.getAutomMessage { (message) in
-                    if message != nil {
-                        self.autoMessageLabel.text = message
-                        self.autoMessageLabel.isHidden = false
-                    }
-                }
-            } else {
-                modeValueLabel.text = "Unkown mode"
-                automSwitch.isOn = false
-                manualButtonAction(self)
-            }
-        }
-       
-    }
+     if let hub = hub {
+     hubButton.setTitle(hub.equipementName, for: .normal)
+     if hub.equipementState {
+     stateLabel.text = "Working".localized()
+     stateImageView.image = UIImage(named: "play_circle")
+     manualSwitch.isOn = hub.equipementState
+     } else {
+     stateLabel.text = "Stopped".localized()
+     stateImageView.image = UIImage(named: "stop_circle")
+     manualSwitch.isOn = hub.equipementState
+     }
+     if hub.behavior == "manual" {
+     modeValueLabel.text = "Manual".localized()
+     automSwitch.isOn = false
+     manualButtonAction(self)
+     } else if hub.behavior == "planning" {
+     modeValueLabel.text = "Program".localized()
+     automSwitch.isOn = false
+     progButtonAction(self)
+     } else if hub.behavior == "auto" {
+     modeValueLabel.text = "Smart Control"
+     automSwitch.isOn = true
+     automButtonAction(self)
+     hub.getAutomMessage { (message) in
+     if message != nil {
+     self.autoMessageLabel.text = message
+     self.autoMessageLabel.isHidden = false
+     }
+     }
+     } else {
+     modeValueLabel.text = "Unkown mode"
+     automSwitch.isOn = false
+     manualButtonAction(self)
+     }
+     }
+     
+     }
      */
     
     func pumbOffOn(isOn:Bool){
@@ -775,21 +783,21 @@ class DashboardViewController: UIViewController {
                 hud?.dismiss(afterDelay: 3)
             }
             /*
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.loadHUBs()
-            }
-            */
-
+             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+             self.loadHUBs()
+             }
+             */
+            
             self.refreshHUBdisplay()
             self.view.hideStateView()
         })
         
     }
-//
-//    HUB.currentHUB = hub
-//    HUB.saveCurrentHUBLocally()
-//    self.refreshHUBdisplay()
-
+    //
+    //    HUB.currentHUB = hub
+    //    HUB.saveCurrentHUBLocally()
+    //    self.refreshHUBdisplay()
+    
     
     @IBAction func pumbSwitchActionFliptrTab(sender:UIButton){
         HUB.currentHUB =  self.hubPumb
@@ -809,7 +817,7 @@ class DashboardViewController: UIViewController {
             }
         }
         else{
-//            self.hubButtonAction(self)
+            //            self.hubButtonAction(self)
             showHubSettingView()
         }
     }
@@ -841,12 +849,12 @@ class DashboardViewController: UIViewController {
         addHubEquipments()
     }
     
- 
+    
     func handleSmartControll(hub:HUB){
         HUB.currentHUB =  hub
         HUB.saveCurrentHUBLocally()
-
-//        self.automView.showEmptyStateViewLoading(title: nil, message: nil)
+        
+        //        self.automView.showEmptyStateViewLoading(title: nil, message: nil)
         let hud = JGProgressHUD(style:.dark)
         hud?.show(in: self.view)
         if hub.behavior == "auto" {
@@ -865,22 +873,22 @@ class DashboardViewController: UIViewController {
                 })
             } else {
                 /*
-                HUB.currentHUB?.updateBehavior(value: "manual", completion: { (message, error) in
-                    if error != nil {
-    //                    self.showError(title: "Error", message: error?.localizedDescription)
-                        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-                        hud?.textLabel.text = error?.localizedDescription
-                        hud?.dismiss(afterDelay: 3)
-
-                    } else {
-                        HUB.currentHUB?.behavior = "auto"
-                        hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
-                        hud?.dismiss(afterDelay: 3)
-                    }
-                    self.loadHUBs()
-                })
-                
-                */
+                 HUB.currentHUB?.updateBehavior(value: "manual", completion: { (message, error) in
+                 if error != nil {
+                 //                    self.showError(title: "Error", message: error?.localizedDescription)
+                 hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                 hud?.textLabel.text = error?.localizedDescription
+                 hud?.dismiss(afterDelay: 3)
+                 
+                 } else {
+                 HUB.currentHUB?.behavior = "auto"
+                 hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                 hud?.dismiss(afterDelay: 3)
+                 }
+                 self.loadHUBs()
+                 })
+                 
+                 */
             }
         }else{
             HUB.currentHUB?.updateBehavior(value: "auto", completion: { (message, error) in
@@ -888,7 +896,7 @@ class DashboardViewController: UIViewController {
                     hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                     hud?.textLabel.text = error?.localizedDescription
                     hud?.dismiss(afterDelay: 0)
-
+                    
                 } else {
                     HUB.currentHUB?.behavior = "auto"
                     hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
@@ -897,59 +905,15 @@ class DashboardViewController: UIViewController {
                 self.loadHUBs()
             })
         }
-
+        
     }
     
     
     func keepUserOrderHubViews(){
-        /*
-        if self.hubs.count < 1{
-            return
-        }
-        var secondHubKey = ""
-        var firstHubKey = ""
-        var isNotSavedHubPosition = false
-        if let firstHub = UserDefaults.standard.object(forKey: "FirstHubSerialKey") as? String{
-            firstHubKey = firstHub
-            isNotSavedHubPosition = true
-        }
-        
-        if let secondHub = UserDefaults.standard.object(forKey: "SecondHubSerialKey") as? String{
-            secondHubKey = secondHub
-        }
-        if isNotSavedHubPosition{
-            var tmpHubs:[HUB] = [HUB]()
-            var firstHub : HUB?
-            var secondHub : HUB?
-
-            for hubObj in self.hubs{
-                
-                if hubObj.serial == firstHubKey{
-                    firstHub = hubObj
-                }
-                else if hubObj.serial == secondHubKey{
-                    secondHub = hubObj
-                }
-               
-            }
-            if let first = firstHub{
-                tmpHubs.append(first)
-            }
-            if let second = secondHub{
-                tmpHubs.append(second)
-            }
-            for hubObj in self.hubs{
-                if hubObj.serial != firstHubKey || hubObj.serial != secondHubKey{
-                    tmpHubs.append(hubObj)
-                }
-            }
-            self.hubs = tmpHubs
-        }
-        
-        */
-        self.handleHubViews()
-
        
+        self.handleHubViews()
+        
+        
     }
     
     
@@ -992,6 +956,20 @@ class DashboardViewController: UIViewController {
         }
     }
     
+    
+    func clearHubsInFliprTab(){
+        self.hubBulb = nil
+        self.hubPumb =  nil
+        bulbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
+        bulbActionButton.isUserInteractionEnabled = false
+        self.bulbStatuImageView.image =  UIImage(named: "lightDisabled")
+        pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
+        self.pumbStatuImageView.image =  UIImage(named: "pumbdisabled")
+        pumbActionButton.isUserInteractionEnabled = false
+
+    }
+    
+    
     // hub state handling
     
     func handleHubViews(){
@@ -1014,25 +992,25 @@ class DashboardViewController: UIViewController {
         }
         if isNotSavedHubPosition{
             for hubObj in self.hubs{
-            
+                
                 if hubObj.serial == firstHubKey{
                     self.hubPumb = hubObj
                 }
                 else if hubObj.serial == secondHubKey{
                     self.hubBulb = hubObj
                 }
-            
+                
                 /*
-                if hubObj.serial == firstHubKey{
-                    self.hubBulb = hubObj
-                }
-                else if hubObj.serial == secondHubKey{
-                    self.hubPumb = hubObj
-                }
-               */
-               
+                 if hubObj.serial == firstHubKey{
+                 self.hubBulb = hubObj
+                 }
+                 else if hubObj.serial == secondHubKey{
+                 self.hubPumb = hubObj
+                 }
+                 */
+                
             }
-           
+            
         }else{
             self.hubBulb = nil
             self.hubPumb = nil
@@ -1046,28 +1024,28 @@ class DashboardViewController: UIViewController {
                     }else{
                         
                     }
-/*
-                    if hubObj.equipementCode == 84{
-                        self.hubBulb = hubObj
-                    }
-                    else if hubObj.equipementCode == 86{
-                        self.hubPumb = hubObj
-                    }
-                    else{
-                        self.hubBulb = hubObj
-                    }
-                    */
+                    /*
+                     if hubObj.equipementCode == 84{
+                     self.hubBulb = hubObj
+                     }
+                     else if hubObj.equipementCode == 86{
+                     self.hubPumb = hubObj
+                     }
+                     else{
+                     self.hubBulb = hubObj
+                     }
+                     */
                 }
             }
-          
+            
         }
-       
+        
         
         if let hubObj = self.hubBulb{
             if hubObj.equipementState {
                 bulbActionButton.setImage(UIImage(named: "ON"), for: .normal)
                 bulbActionButton.tag = 1
-//                bulbStatuImageView.image =  UIImage(named: "lightOn")
+                //                bulbStatuImageView.image =  UIImage(named: "lightOn")
                 if hubObj.equipementCode == 84{
                     self.bulbStatuImageView.image =  UIImage(named: "lightOn")
                 }
@@ -1091,7 +1069,7 @@ class DashboardViewController: UIViewController {
                     
                 }
             }else{
-//                bulbStatuImageView.image =  UIImage(named: "lightDisabled")
+                //                bulbStatuImageView.image =  UIImage(named: "lightDisabled")
                 bulbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
                 if hubObj.equipementCode == 84{
                     self.bulbStatuImageView.image =  UIImage(named: "lightDisabled")
@@ -1148,7 +1126,7 @@ class DashboardViewController: UIViewController {
                     
                 }
             }else{
-              //  pumbStatuImageView.image = UIImage(named: "pumbdisabled")
+                //  pumbStatuImageView.image = UIImage(named: "pumbdisabled")
                 if hubObj.equipementCode == 84{
                     self.pumbStatuImageView.image =  UIImage(named: "lightDisabled")
                 }
@@ -1179,65 +1157,65 @@ class DashboardViewController: UIViewController {
             
             firstHubNameLbl.text = self.hubPumb?.equipementName.capitalized
             secondHubNameLbl.text = self.hubBulb?.equipementName.capitalized
-
+            
             
         }
         /*
-        for hubObj in self.hubs{
-            if hubObj.equipementCode == 84{
-                self.hubBulb = hubObj
-            }
-            else if hubObj.equipementCode == 86{
-                self.hubPumb = hubObj
-            }
-            else{
-                
-            }
-            if hubObj.equipementState {
-                if hubObj.equipementCode == 84{
-                    bulbActionButton.setImage(UIImage(named: "ON"), for: .normal)
-                    bulbActionButton.tag = 1
-                }
-                else if hubObj.equipementCode == 86{
-                    pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
-                    pumbActionButton.tag = 1
-                    if hubObj.behavior == "manual" {
-                        pumbActionButton.setImage(UIImage(named: "ON"), for: .normal)
-                    }
-                    else if hubObj.behavior == "planning" {
-                        pumbActionButton.setImage(UIImage(named: "pumbPgmOn"), for: .normal)
-                    }
-                    else if hubObj.behavior == "auto" {
-                        pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
-                    }else{
-                        
-                    }
-                }
-            } else {
-                if hubObj.equipementCode == 84{
-                    bulbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
-                    bulbActionButton.tag = 0
-                }
-                else if hubObj.equipementCode == 86{
-                    pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
-                    pumbActionButton.tag = 0
-                    if hubObj.behavior == "manual" {
-                        pumbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
-                    }
-                    else if hubObj.behavior == "planning" {
-                        pumbActionButton.setImage(UIImage(named: "pumbPrgmOff"), for: .normal)
-                    }
-                    else if hubObj.behavior == "auto" {
-                        pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
-                    }else{
-                        
-                    }
-                  
-                }
-            }
-        }
-        
-        */
+         for hubObj in self.hubs{
+         if hubObj.equipementCode == 84{
+         self.hubBulb = hubObj
+         }
+         else if hubObj.equipementCode == 86{
+         self.hubPumb = hubObj
+         }
+         else{
+         
+         }
+         if hubObj.equipementState {
+         if hubObj.equipementCode == 84{
+         bulbActionButton.setImage(UIImage(named: "ON"), for: .normal)
+         bulbActionButton.tag = 1
+         }
+         else if hubObj.equipementCode == 86{
+         pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
+         pumbActionButton.tag = 1
+         if hubObj.behavior == "manual" {
+         pumbActionButton.setImage(UIImage(named: "ON"), for: .normal)
+         }
+         else if hubObj.behavior == "planning" {
+         pumbActionButton.setImage(UIImage(named: "pumbPgmOn"), for: .normal)
+         }
+         else if hubObj.behavior == "auto" {
+         pumbActionButton.setImage(UIImage(named: "pumbOn"), for: .normal)
+         }else{
+         
+         }
+         }
+         } else {
+         if hubObj.equipementCode == 84{
+         bulbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
+         bulbActionButton.tag = 0
+         }
+         else if hubObj.equipementCode == 86{
+         pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
+         pumbActionButton.tag = 0
+         if hubObj.behavior == "manual" {
+         pumbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
+         }
+         else if hubObj.behavior == "planning" {
+         pumbActionButton.setImage(UIImage(named: "pumbPrgmOff"), for: .normal)
+         }
+         else if hubObj.behavior == "auto" {
+         pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
+         }else{
+         
+         }
+         
+         }
+         }
+         }
+         
+         */
         
         return
         
@@ -1257,7 +1235,7 @@ class DashboardViewController: UIViewController {
             self.isShowingHubView = true
             self.programListView.isHidden = false
             self.programListViewHeightConstraint.constant = 128
-//            self.updateWaterAnimation()
+            //            self.updateWaterAnimation()
         }else{
             self.addNewProgramViewHeightConstraint.constant = 0
             self.addNewProgramViewBottomConstraint.constant = 0
@@ -1269,24 +1247,24 @@ class DashboardViewController: UIViewController {
         }
     }
     
-   /*
-    func updateWaterFlowAnimation(){
-        var startElevation =  0.71
-        if self.isShowingAddFirstProgramView && self.isShowingHubView {
-            startElevation = 0.51
-        }else{
-            if self.isShowingAddFirstProgramView {
-                startElevation =  0.65
-            }
-            if self.isShowingHubView {
-                startElevation =  0.58
-            }
-        }
-//        fluidViewTopEdge
-        fluidViewTopEdge.fill(to: NSNumber(floatLiteral: startElevation))
-        fluidView.fill(to: NSNumber(floatLiteral: startElevation))
-    }
-    */
+    /*
+     func updateWaterFlowAnimation(){
+     var startElevation =  0.71
+     if self.isShowingAddFirstProgramView && self.isShowingHubView {
+     startElevation = 0.51
+     }else{
+     if self.isShowingAddFirstProgramView {
+     startElevation =  0.65
+     }
+     if self.isShowingHubView {
+     startElevation =  0.58
+     }
+     }
+     //        fluidViewTopEdge
+     fluidViewTopEdge.fill(to: NSNumber(floatLiteral: startElevation))
+     fluidView.fill(to: NSNumber(floatLiteral: startElevation))
+     }
+     */
     
     func appTrackingRequestPermission() {
         if #available(iOS 14, *) {
@@ -1328,7 +1306,7 @@ class DashboardViewController: UIViewController {
     @objc func callGetStatusApis(){
         self.loadHUBs()
         getThresholdValues()
-//        getNotificationStatus()
+        //        getNotificationStatus()
     }
     
     func getThresholdValues(){
@@ -1336,7 +1314,7 @@ class DashboardViewController: UIViewController {
             Alamofire.request(Router.readModuleThresholds(serialId: module.serial)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
                 
                 switch response.result {
-                
+                    
                 case .success(let value):
                     
                     print("get thresholds response.result.value: \(value)")
@@ -1357,7 +1335,7 @@ class DashboardViewController: UIViewController {
         Alamofire.request(Router.readUserNotifications).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             
             switch response.result {
-            
+                
             case .success(let value):
                 
                 print("get notifications response.result.value: \(value)")
@@ -1384,87 +1362,87 @@ class DashboardViewController: UIViewController {
     func manageRedoxValueChangeButtton(){
         manageAllThreshhhold()
         /*
-        let value = UserDefaults.standard.bool(forKey: userDefaultThresholdValuesKey)
-        //        self.redoxChangeButton.isHidden = value
-        
-        UIView.transition(with:  self.redoxChangeButton, duration: 0.4,
-                          options: .transitionCrossDissolve,
-                          animations: {
-                            self.redoxChangeButton.isHidden = value
-                          })
-        */
+         let value = UserDefaults.standard.bool(forKey: userDefaultThresholdValuesKey)
+         //        self.redoxChangeButton.isHidden = value
+         
+         UIView.transition(with:  self.redoxChangeButton, duration: 0.4,
+         options: .transitionCrossDissolve,
+         animations: {
+         self.redoxChangeButton.isHidden = value
+         })
+         */
         
     }
     
     func manageTemperatureValueChangeButtton(){
         manageThresholdButton()
         /*
-        let minValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMinValuesKey)
-        let maxValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMaxValuesKey)
-        if minValue && maxValue{
-            //            self.waterTmpChangeButton.isHidden = true
-            UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                                self.waterTmpChangeButton.isHidden = true
-                              })
-        }else{
-            UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                                self.waterTmpChangeButton.isHidden = false
-                              })
-        }
-        */
+         let minValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMinValuesKey)
+         let maxValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMaxValuesKey)
+         if minValue && maxValue{
+         //            self.waterTmpChangeButton.isHidden = true
+         UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
+         options: .transitionCrossDissolve,
+         animations: {
+         self.waterTmpChangeButton.isHidden = true
+         })
+         }else{
+         UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
+         options: .transitionCrossDissolve,
+         animations: {
+         self.waterTmpChangeButton.isHidden = false
+         })
+         }
+         */
     }
     
     func managePhValueChangeButtton(){
         manageThresholdButton()
         /*
-        let minValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMinValuesKey)
-        let maxValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMaxValuesKey)
-        if minValue && maxValue{
-            UIView.transition(with:  self.phChangeButton, duration: 0.4,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                                self.phChangeButton.isHidden = true
-                              })
-        }else{
-            UIView.transition(with:  self.phChangeButton, duration: 0.4,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                                self.waterTmpChangeButton.isHidden = false
-                              })
-        }
-        */
+         let minValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMinValuesKey)
+         let maxValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMaxValuesKey)
+         if minValue && maxValue{
+         UIView.transition(with:  self.phChangeButton, duration: 0.4,
+         options: .transitionCrossDissolve,
+         animations: {
+         self.phChangeButton.isHidden = true
+         })
+         }else{
+         UIView.transition(with:  self.phChangeButton, duration: 0.4,
+         options: .transitionCrossDissolve,
+         animations: {
+         self.waterTmpChangeButton.isHidden = false
+         })
+         }
+         */
     }
     
     func manageThresholdButton(){
         manageAllThreshhhold()
         /*
-        let phMinValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMinValuesKey)
-        let phMaxValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMaxValuesKey)
-        
-        let waterMinValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMinValuesKey)
-        let waterMaxValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMaxValuesKey)
-        let redoxValue = UserDefaults.standard.bool(forKey: userDefaultThresholdValuesKey)
-
-        
-        if phMinValue && phMaxValue && waterMinValue && waterMaxValue && redoxValue{
-            UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                                self.waterTmpChangeButton.isHidden = true
-                              })
-        }else{
-            UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
-                              options: .transitionCrossDissolve,
-                              animations: {
-                                self.waterTmpChangeButton.isHidden = false
-                              })
-        }
-
-*/
+         let phMinValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMinValuesKey)
+         let phMaxValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMaxValuesKey)
+         
+         let waterMinValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMinValuesKey)
+         let waterMaxValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMaxValuesKey)
+         let redoxValue = UserDefaults.standard.bool(forKey: userDefaultThresholdValuesKey)
+         
+         
+         if phMinValue && phMaxValue && waterMinValue && waterMaxValue && redoxValue{
+         UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
+         options: .transitionCrossDissolve,
+         animations: {
+         self.waterTmpChangeButton.isHidden = true
+         })
+         }else{
+         UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
+         options: .transitionCrossDissolve,
+         animations: {
+         self.waterTmpChangeButton.isHidden = false
+         })
+         }
+         
+         */
     }
     
     
@@ -1475,20 +1453,20 @@ class DashboardViewController: UIViewController {
         let waterMinValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMinValuesKey)
         let waterMaxValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMaxValuesKey)
         let redoxValue = UserDefaults.standard.bool(forKey: userDefaultThresholdValuesKey)
-
+        
         
         if phMinValue && phMaxValue && waterMinValue && waterMaxValue && redoxValue{
             UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
                               options: .transitionCrossDissolve,
                               animations: {
-                                self.waterTmpChangeButton.isHidden = true
-                              })
+                self.waterTmpChangeButton.isHidden = true
+            })
         }else{
             UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
                               options: .transitionCrossDissolve,
                               animations: {
-                                self.waterTmpChangeButton.isHidden = false
-                              })
+                self.waterTmpChangeButton.isHidden = false
+            })
         }
     }
     
@@ -1498,8 +1476,8 @@ class DashboardViewController: UIViewController {
             UIView.transition(with:  self.notificationDisabledButton, duration: 0.4,
                               options: .transitionCrossDissolve,
                               animations: {
-                                self.notificationDisabledButton.isHidden = value
-                              })
+                self.notificationDisabledButton.isHidden = value
+            })
         }else{
             if self.notificationReportDate != nil{
                 if self.notificationReportDate!.timeIntervalSinceNow < 0 {
@@ -1513,14 +1491,14 @@ class DashboardViewController: UIViewController {
                     }else{
                         self.showSubscriptionButton()
                     }
-//                    UserDefaults.standard.set(false, forKey: notificationOnOffValuesKey)
+                    //                    UserDefaults.standard.set(false, forKey: notificationOnOffValuesKey)
                 }else{
                     self.notificationDisabledButton.isHidden = true
                     self.showActivateMeasureAlert()
                 }
             }
         }
-       
+        
         
         //        self.notificationDisabledButton.isHidden = value
     }
@@ -1552,7 +1530,7 @@ class DashboardViewController: UIViewController {
         if !isOrangeTheme {
             backgroundOverlayImageView.image = UIImage(named: "blue gradient")
             backgroundOverlayHubImageView.image = UIImage(named: "blue gradient")
-//            fluidColor =  UIColor.init(red: 40/255.0, green: 154/255.0, blue: 194/255.0, alpha: 1)
+            //            fluidColor =  UIColor.init(red: 40/255.0, green: 154/255.0, blue: 194/255.0, alpha: 1)
             fluidColor =  UIColor.init(hexString: "2cd3c1")
         }else{
             fluidColor =  UIColor.init(hexString: "fcad71")
@@ -1560,8 +1538,8 @@ class DashboardViewController: UIViewController {
             backgroundOverlayHubImageView.image = UIImage(named: "gradient")
         }
         
-      //  var fluidColor =  UIColor.init(red: 40/255.0, green: 154/255.0, blue: 194/255.0, alpha: 1)
-//        let fluidColor =  UIColor.init(hexString: "fcad71")
+        //  var fluidColor =  UIColor.init(red: 40/255.0, green: 154/255.0, blue: 194/255.0, alpha: 1)
+        //        let fluidColor =  UIColor.init(hexString: "fcad71")
         
         if let module = Module.currentModule {
             self.hideUserHasNoFlipr()
@@ -1591,7 +1569,7 @@ class DashboardViewController: UIViewController {
         pHSateView.layer.borderColor = UIColor.white.cgColor
         orpStateView.layer.borderWidth = 2
         orpStateView.layer.borderColor = UIColor.white.cgColor
-
+        
         
         if Device.size() == Size.screen3_5Inch || Device.size() == Size.screen4Inch {
             if orpViewRightConstraint != nil{
@@ -1599,7 +1577,7 @@ class DashboardViewController: UIViewController {
                 phViewLeftConstraint.constant = 0
             }
         }
-    
+        
         /*
          // iPhone 6,7
          var startElevation = 0.67
@@ -1643,17 +1621,17 @@ class DashboardViewController: UIViewController {
         
         
         
-//        var startElevation =  0.71
-//        if self.isShowingAddFirstProgramView && self.isShowingHubView {
-//            startElevation = 0.51
-//        }else{
-//            if self.isShowingAddFirstProgramView {
-//                startElevation =  0.65
-//            }
-//            if self.isShowingHubView {
-//                startElevation =  0.58
-//            }
-//        }
+        //        var startElevation =  0.71
+        //        if self.isShowingAddFirstProgramView && self.isShowingHubView {
+        //            startElevation = 0.51
+        //        }else{
+        //            if self.isShowingAddFirstProgramView {
+        //                startElevation =  0.65
+        //            }
+        //            if self.isShowingHubView {
+        //                startElevation =  0.58
+        //            }
+        //        }
         
         
         var startElevation = 0.85
@@ -1665,19 +1643,19 @@ class DashboardViewController: UIViewController {
         else if modelName.rawValue == "iPhone 12 Pro Max"{
             startElevation = 0.75
         }
-
+        
         else if modelName.rawValue == "iPhone 8 Plus" || modelName.rawValue == "iPhone 7 Plus" {
             startElevation = 0.95
         }
-//        temperaturesTopConstraint.constant = self.view.frame.height * (1 - CGFloat(startElevation)) + 20
+        //        temperaturesTopConstraint.constant = self.view.frame.height * (1 - CGFloat(startElevation)) + 20
         if #available(iOS 11.0, tvOS 11.0, *) {
             if (UIApplication.shared.delegate?.window??.safeAreaInsets.top)! > CGFloat(20) { // hasTopNotch
-//                temperaturesTopConstraint.constant = self.view.frame.height * (1 - CGFloat(startElevation))
+                //                temperaturesTopConstraint.constant = self.view.frame.height * (1 - CGFloat(startElevation))
             }
         }
         
-//        let frame = CGRect(x: -(self.view.frame.height - self.view.frame.width)/2 - 50, y: 0, width: sqrt(self.view.frame.height * self.view.frame.height + self.view.frame.width * self.view.frame.width) + 100, height: self.view.frame.height + 100)
-       
+        //        let frame = CGRect(x: -(self.view.frame.height - self.view.frame.width)/2 - 50, y: 0, width: sqrt(self.view.frame.height * self.view.frame.height + self.view.frame.width * self.view.frame.width) + 100, height: self.view.frame.height + 100)
+        
         
         var frame = self.waveView.frame
         
@@ -1691,12 +1669,12 @@ class DashboardViewController: UIViewController {
         fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  startElevation))
         fluidView.strokeColor = .clear
         if !isOrangeTheme {
-//            fluidView.fillColor = UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
+            //            fluidView.fillColor = UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
             fluidView.fillColor = UIColor.init(hexString: "6e75c5")
         }else{
             fluidView.fillColor = UIColor.init(hexString: "CD69C0")
         }
-       // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
+        // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
         fluidView.fill(to: NSNumber(floatLiteral: startElevation))
         fluidView.startAnimation()
         fluidView.clipsToBounds = false
@@ -1709,15 +1687,15 @@ class DashboardViewController: UIViewController {
         fluidViewTopEdge.fill(to: NSNumber(floatLiteral: startElevation))
         fluidViewTopEdge.startAnimation()
         fluidViewTopEdge.clipsToBounds = false
-
-       
-     //   fluidView.clipsToBounds = true
+        
+        
+        //   fluidView.clipsToBounds = true
         self.scrollViewContainerView.insertSubview(fluidViewTopEdge, aboveSubview: fluidView)
         
         
         //Hun wave setup
         let hubTabStartElevation = 0.85
-
+        
         let hubWaveframe = self.hubWaveContainerView.frame
         hubTabfluidView = BAFluidView.init(frame: hubWaveframe, startElevation: NSNumber(floatLiteral:  hubTabStartElevation))
         hubTabfluidView.strokeColor = .clear
@@ -1740,92 +1718,8 @@ class DashboardViewController: UIViewController {
         hubTabFluidViewTopEdge.fill(to: NSNumber(floatLiteral: hubTabStartElevation))
         hubTabFluidViewTopEdge.startAnimation()
         hubTabFluidViewTopEdge.clipsToBounds = true
-       
+        
         self.hubScrollViewContainerView.insertSubview(hubTabFluidViewTopEdge, aboveSubview: hubTabfluidView)
-
-       // setGradientBackground()
-        motionManager.deviceMotionUpdateInterval = 0.01
-        motionManager.startDeviceMotionUpdates(to: .main) {
-            [weak self] (data, error) in
-            
-            guard let data = data, error == nil else {
-                return
-            }
-            
-            //
-            
-            //if data.gravity.x > -0.025 && data.gravity.x < 0.025 || data.gravity.y > -0.05 { //&& data.gravity.y < 0.05 {
-            if data.gravity.y > -0.05 {
-                self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: 0)
-                self!.fluidView.transform = CGAffineTransform(rotationAngle: 0)
-//                self!.hubTabFluidViewTopEdge.transform = CGAffineTransform(rotationAngle: 0)
-//                self!.hubTabfluidView.transform = CGAffineTransform(rotationAngle: 0)
-            } else {
-                let rotation = atan2(data.gravity.x,data.gravity.y) - .pi
-                self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
-                self!.fluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
-//                self!.hubTabFluidViewTopEdge.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
-//                self!.hubTabfluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
-
-            }
-            
-        }
-        self.view.bringSubviewToFront(quicActionButton)
-        showUserPreferedHistory()
-       /*
-        let pHCircle = CAShapeLayer()
-        
-        let startAngle = CGFloat(150 * Double.pi / 180)
-        let endAngle = CGFloat(30 * Double.pi / 180)
-        
-        pHCircle.path = UIBezierPath(arcCenter: CGPoint(x: pHView.bounds.width/2, y: 84), radius: 66, startAngle: startAngle, endAngle: endAngle, clockwise: true).cgPath
-        pHCircle.fillColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
-        pHCircle.strokeColor = K.Color.DarkBlue.cgColor
-        pHCircle.lineWidth = 8
-        pHCircle.lineCap = CAShapeLayerLineCap.round
-        pHView.layer.addSublayer(pHCircle)
-        */
-    }
-    
-    /*
-    func updateWaterAnimation(){
-        fluidView.removeFromSuperview()
-        fluidView = nil
-        fluidViewTopEdge.removeFromSuperview()
-        fluidViewTopEdge = nil
-        let fluidColor =  UIColor.init(hexString: "fcad71")
-        var startElevation =  0.71
-        if self.isShowingAddFirstProgramView && self.isShowingHubView {
-            startElevation = 0.37
-        }else{
-            if self.isShowingAddFirstProgramView {
-                startElevation =  0.65
-            }
-            if self.isShowingHubView {
-                startElevation =  0.58
-            }
-        }
-        
-        let frame = self.waveView.frame
-        fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  startElevation))
-        fluidView.strokeColor = .clear
-        fluidView.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
-        fluidView.fill(to: NSNumber(floatLiteral: startElevation))
-        fluidView.startAnimation()
-        fluidView.clipsToBounds = false
-
-        self.scrollViewContainerView.insertSubview(fluidView, belowSubview: backgroundOverlayImageView)
-        
-        fluidViewTopEdge = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: startElevation))
-        fluidViewTopEdge.strokeColor = .clear
-        fluidViewTopEdge.fillColor = fluidColor
-        fluidViewTopEdge.fill(to: NSNumber(floatLiteral: startElevation))
-        fluidViewTopEdge.startAnimation()
-        fluidViewTopEdge.clipsToBounds = false
-
-        //   fluidView.clipsToBounds = true
-        self.scrollViewContainerView.insertSubview(fluidViewTopEdge, aboveSubview: fluidView)
-        
         
         // setGradientBackground()
         motionManager.deviceMotionUpdateInterval = 0.01
@@ -1842,16 +1736,100 @@ class DashboardViewController: UIViewController {
             if data.gravity.y > -0.05 {
                 self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: 0)
                 self!.fluidView.transform = CGAffineTransform(rotationAngle: 0)
+                //                self!.hubTabFluidViewTopEdge.transform = CGAffineTransform(rotationAngle: 0)
+                //                self!.hubTabfluidView.transform = CGAffineTransform(rotationAngle: 0)
             } else {
                 let rotation = atan2(data.gravity.x,data.gravity.y) - .pi
                 self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
                 self!.fluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+                //                self!.hubTabFluidViewTopEdge.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+                //                self!.hubTabfluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+                
             }
+            
         }
-    
+        self.view.bringSubviewToFront(quicActionButton)
+        showUserPreferedHistory()
+        /*
+         let pHCircle = CAShapeLayer()
+         
+         let startAngle = CGFloat(150 * Double.pi / 180)
+         let endAngle = CGFloat(30 * Double.pi / 180)
+         
+         pHCircle.path = UIBezierPath(arcCenter: CGPoint(x: pHView.bounds.width/2, y: 84), radius: 66, startAngle: startAngle, endAngle: endAngle, clockwise: true).cgPath
+         pHCircle.fillColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+         pHCircle.strokeColor = K.Color.DarkBlue.cgColor
+         pHCircle.lineWidth = 8
+         pHCircle.lineCap = CAShapeLayerLineCap.round
+         pHView.layer.addSublayer(pHCircle)
+         */
     }
     
-    */
+    /*
+     func updateWaterAnimation(){
+     fluidView.removeFromSuperview()
+     fluidView = nil
+     fluidViewTopEdge.removeFromSuperview()
+     fluidViewTopEdge = nil
+     let fluidColor =  UIColor.init(hexString: "fcad71")
+     var startElevation =  0.71
+     if self.isShowingAddFirstProgramView && self.isShowingHubView {
+     startElevation = 0.37
+     }else{
+     if self.isShowingAddFirstProgramView {
+     startElevation =  0.65
+     }
+     if self.isShowingHubView {
+     startElevation =  0.58
+     }
+     }
+     
+     let frame = self.waveView.frame
+     fluidView = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral:  startElevation))
+     fluidView.strokeColor = .clear
+     fluidView.fillColor = UIColor.init(hexString: "CD69C0") // UIColor.init(red: 93/255.0, green: 193/255.0, blue: 226/255.0, alpha: 1)
+     fluidView.fill(to: NSNumber(floatLiteral: startElevation))
+     fluidView.startAnimation()
+     fluidView.clipsToBounds = false
+     
+     self.scrollViewContainerView.insertSubview(fluidView, belowSubview: backgroundOverlayImageView)
+     
+     fluidViewTopEdge = BAFluidView.init(frame: frame, startElevation: NSNumber(floatLiteral: startElevation))
+     fluidViewTopEdge.strokeColor = .clear
+     fluidViewTopEdge.fillColor = fluidColor
+     fluidViewTopEdge.fill(to: NSNumber(floatLiteral: startElevation))
+     fluidViewTopEdge.startAnimation()
+     fluidViewTopEdge.clipsToBounds = false
+     
+     //   fluidView.clipsToBounds = true
+     self.scrollViewContainerView.insertSubview(fluidViewTopEdge, aboveSubview: fluidView)
+     
+     
+     // setGradientBackground()
+     motionManager.deviceMotionUpdateInterval = 0.01
+     motionManager.startDeviceMotionUpdates(to: .main) {
+     [weak self] (data, error) in
+     
+     guard let data = data, error == nil else {
+     return
+     }
+     
+     //
+     
+     //if data.gravity.x > -0.025 && data.gravity.x < 0.025 || data.gravity.y > -0.05 { //&& data.gravity.y < 0.05 {
+     if data.gravity.y > -0.05 {
+     self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: 0)
+     self!.fluidView.transform = CGAffineTransform(rotationAngle: 0)
+     } else {
+     let rotation = atan2(data.gravity.x,data.gravity.y) - .pi
+     self!.fluidViewTopEdge.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+     self!.fluidView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+     }
+     }
+     
+     }
+     
+     */
     
     
     func setGradientBackground(){
@@ -1865,6 +1843,21 @@ class DashboardViewController: UIViewController {
         self.gradiantView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
+    
+    @objc func refresh() {
+        
+        self.hideFliprData()
+        self.hideWeatherForecast()
+        if Module.currentModule == nil && HUB.currentHUB != nil {
+            self.updateHUBData()
+        }
+        self.updateFliprData()
+        
+    }
+     
+     
+    
+    /*
     @objc func refresh() {
         
         self.hideFliprData()
@@ -1966,6 +1959,8 @@ class DashboardViewController: UIViewController {
         }
         
     }
+    */
+    
     
     func readBLEMeasure(completion: ((_ error: Error?) -> Void)?) {
         
@@ -2028,23 +2023,23 @@ class DashboardViewController: UIViewController {
     
     func manageFlipTabTitle(){
         /*
-        var fliprTabName = "Flipr Start"
-        if let module = Module.currentModule {
-            if let nameStr = module.deviceTypename{
-                fliprTabName = nameStr
-            }else{
-                if let fliprName = UserDefaults.standard.object(forKey: "FliprName") as? String{
-                    fliprTabName = fliprName
-                }
-            }
-        }else{
-            if let fliprName = UserDefaults.standard.object(forKey: "FliprName") as? String{
-                fliprTabName = fliprName
-            }
-        }
-        */
-//        self.fliprTabTitleLbl.text = "Analysis".localized
-
+         var fliprTabName = "Flipr Start"
+         if let module = Module.currentModule {
+         if let nameStr = module.deviceTypename{
+         fliprTabName = nameStr
+         }else{
+         if let fliprName = UserDefaults.standard.object(forKey: "FliprName") as? String{
+         fliprTabName = fliprName
+         }
+         }
+         }else{
+         if let fliprName = UserDefaults.standard.object(forKey: "FliprName") as? String{
+         fliprTabName = fliprName
+         }
+         }
+         */
+        //        self.fliprTabTitleLbl.text = "Analysis".localized
+        
     }
     
     func updateWeatherForecast() {
@@ -2085,7 +2080,7 @@ class DashboardViewController: UIViewController {
                                 }else{
                                 }
                             }
-
+                            
                         }
                         if let icon = currently["icon"] as? String {
                             print("Icon: \(icon)")
@@ -2099,7 +2094,7 @@ class DashboardViewController: UIViewController {
                             
                             self.currentlyWeatherIcon.text = self.climaconsCharWithIcon(icon: icon)
                             self.currentlyWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: icon)
-
+                            
                         }
                         if let hourly = JSON["hourly"] as? [String:Any] {
                             if let data = hourly["data"] as? [[String:Any]] {
@@ -2117,7 +2112,7 @@ class DashboardViewController: UIViewController {
                                             self.comingWeatherIcon.layer.add(textAnimation, forKey: "changeComingWeatherIconTransition")
                                             self.comingWeatherIcon.text = self.climaconsCharWithIcon(icon: icon)
                                             self.comingWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: icon)
-
+                                            
                                         }
                                         if let forecastTemperature = item["temperature"] as? Double {
                                             print("Forecast Air T°: \(forecastTemperature)")
@@ -2138,7 +2133,7 @@ class DashboardViewController: UIViewController {
                                         } else {
                                             self.airTendendcyImageView.isHidden = true
                                             self.airTendendcyImageViewHubTab.isHidden = true
-
+                                            
                                         }
                                     }
                                     i = i + 1
@@ -2233,17 +2228,17 @@ class DashboardViewController: UIViewController {
         airTemperatureLabel.text = "  "
         airTemperatureLabelHubTab.text = "  "
         self.hubTabAirValLabel.text = "  "
-
+        
         currentlyWeatherIcon.text = "  "
         currentlyWeatherIconHubTab.text = "  "
-
+        
         startWeatherIcon.text = "   "
         startWeatherIcon.isHidden = true
         startWeatherIconHubTab.text = "   "
         startWeatherIconHubTab.isHidden = true
         weatherChevronImageView.isHidden = true
         weatherChevronImageViewHubTab.isHidden = true
-
+        
         comingWeatherIcon.text = "  "
         comingWeatherIconHubTab.text = "  "
         for view in self.view.subviews {
@@ -2295,21 +2290,27 @@ class DashboardViewController: UIViewController {
     
     func updateAlerts() {
         
+        self.measureAlertView.isHidden = true
+        self.measureAlertTouchAreaButton.isHidden = true
+        self.subscriptionButton.isUserInteractionEnabled = true
+        self.subscriptionButton.isHidden = true
+
+        
         if self.lastMeasureDate == nil{
             return
         }
         else{
             if self.lastMeasureDate!.timeIntervalSinceNow > -86400 {
                 
-//                let phMinValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMinValuesKey)
-//                let phMaxValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMaxValuesKey)
-//                let redoxMinValue = UserDefaults.standard.bool(forKey: userDefaultThresholdValuesKey)
+                //                let phMinValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMinValuesKey)
+                //                let phMaxValue = UserDefaults.standard.bool(forKey: userDefaultPhvalueMaxValuesKey)
+                //                let redoxMinValue = UserDefaults.standard.bool(forKey: userDefaultThresholdValuesKey)
                 
                 if isRedoxOutOfRangeAlert ||  isPhOutOfRangeAlert{
                     let value = UserDefaults.standard.bool(forKey: notificationOnOffValuesKey)
                     if value{
                         self.getAlertFromServer()
-//                        self.showActivateMeasureAlert()
+                        //                        self.showActivateMeasureAlert()
                     }else{
                         if self.notificationReportDate != nil{
                             if self.notificationReportDate!.timeIntervalSinceNow < 0 {
@@ -2349,7 +2350,7 @@ class DashboardViewController: UIViewController {
     
     
     func callReactivateAlertApi(alertStatus:Bool){
-    
+        
         if let serialNo = Module.currentModule?.serial {
             let hud = JGProgressHUD(style:.dark)
             hud?.show(in: self.view)
@@ -2428,14 +2429,14 @@ class DashboardViewController: UIViewController {
     
     func callAlertAPi(){
         self.alert = nil
-//        self.alertButton.isHidden = true
-//        self.alertCheckView.isHidden = true
-//
-//        self.alert0Button.isHidden = true
-//        self.alert1Button.isHidden = true
-//        self.alert2Button.isHidden = true
-//        self.alert3Button.isHidden = true
-//        self.alert4Button.isHidden = true
+        //        self.alertButton.isHidden = true
+        //        self.alertCheckView.isHidden = true
+        //
+        //        self.alert0Button.isHidden = true
+        //        self.alert1Button.isHidden = true
+        //        self.alert2Button.isHidden = true
+        //        self.alert3Button.isHidden = true
+        //        self.alert4Button.isHidden = true
         
         //        let hud = JGProgressHUD(style:.dark)
         //        hud?.show(in: self.view)
@@ -2615,7 +2616,7 @@ class DashboardViewController: UIViewController {
             })
         }
     }
-
+    
     
     
     
@@ -2661,13 +2662,13 @@ class DashboardViewController: UIViewController {
                             if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
                                 if currentUnit == 2{
                                     let funit = (temperature * 9/5) + 32
-                                    self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°F"
-                                    self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°F"
+                                    self.airTemperatureLabel.text = String(format: "%.0f", funit) + "°F"
+                                    self.airTemperatureLabelHubTab.text = String(format: "%.0f", funit) + "°F"
                                 }else{
                                 }
                             }
-
-
+                            
+                            
                             if let forecastTemperature = weather["NextHourTemperature"] as? Double {
                                 if forecastTemperature > temperature {
                                     self.airTendendcyImageView.image = UIImage(named: "arrow_air_up")
@@ -2683,7 +2684,7 @@ class DashboardViewController: UIViewController {
                             } else {
                                 self.airTendendcyImageView.isHidden = true
                                 self.airTendendcyImageViewHubTab.isHidden = true
-
+                                
                             }
                             
                         }
@@ -2701,7 +2702,7 @@ class DashboardViewController: UIViewController {
                                 self.currentlyWeatherIcon.layer.add(textAnimation, forKey: "changeCurrentlyWeatherIconTransition")
                                 self.currentlyWeatherIcon.text = self.climaconsCharWithIcon(icon: icon)
                                 self.currentlyWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: icon)
-
+                                
                                 let textAnimation = CATransition()
                                 textAnimation.type = CATransitionType.push
                                 textAnimation.subtype = CATransitionSubtype.fromRight
@@ -2710,10 +2711,10 @@ class DashboardViewController: UIViewController {
                                 self.comingWeatherIcon.layer.add(textAnimation, forKey: "changeComingWeatherIconTransition")
                                 self.comingWeatherIcon.text = self.climaconsCharWithIcon(icon: nextIcon)
                                 self.comingWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: nextIcon)
-
+                                
                                 self.weatherChevronImageView.isHidden = false
                                 self.weatherChevronImageViewHubTab.isHidden = false
-
+                                
                             } else {
                                 self.startWeatherIcon.isHidden = false
                                 self.startWeatherIconHubTab.isHidden = false
@@ -2722,7 +2723,7 @@ class DashboardViewController: UIViewController {
                                 self.startWeatherIcon.layer.add(textAnimation, forKey: "changeCurrentlyWeatherIconTransition")
                                 self.startWeatherIcon.text = self.climaconsCharWithIcon(icon: icon)
                                 self.startWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: icon)
-
+                                
                             }
                             
                         }
@@ -2731,36 +2732,36 @@ class DashboardViewController: UIViewController {
                         if let uvIndex = weather["UvIndex"] as? Double {
                             self.uvLabel.isHidden = false
                             self.uvLabelHubTab.isHidden = false
-
+                            
                             self.uvView.isHidden = false
                             self.uvViewHubTab.isHidden = false
                             let index = String(format: "%.0f", uvIndex)
                             self.uvLabel.text = index
                             self.uvLabel.layer.borderWidth = 0
-//                            self.uvLabel.layer.cornerRadius = (self.uvLabel.frame.size.height / 2)
+                            //                            self.uvLabel.layer.cornerRadius = (self.uvLabel.frame.size.height / 2)
                             self.uvLabelHubTab.text = index
                             self.uvLabelHubTab.layer.borderWidth = 0
                             self.uvLabelHubTab.layer.cornerRadius = (self.uvLabelHubTab.frame.size.height / 2)
                             if uvIndex <= 2 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 41/255.0, green: 255/255.0, blue: 3/255.0, alpha: 1).cgColor
                                 self.uvLabelHubTab.layer.borderColor = UIColor(red: 41/255.0, green: 255/255.0, blue: 3/255.0, alpha: 1).cgColor
-
+                                
                             } else if  uvIndex <= 5 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 235/255.0, green: 212/255.0, blue: 15/255.0, alpha: 1).cgColor
                                 self.uvLabelHubTab.layer.borderColor = UIColor(red: 235/255.0, green: 212/255.0, blue: 15/255.0, alpha: 1).cgColor
-
+                                
                             } else if  uvIndex <= 7 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 255/255.0, green: 145/255.0, blue: 33/255.0, alpha: 1).cgColor
                                 self.uvLabelHubTab.layer.borderColor = UIColor(red: 255/255.0, green: 145/255.0, blue: 33/255.0, alpha: 1).cgColor
-
+                                
                             } else if  uvIndex <= 10 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 255/255.0, green: 91/255.0, blue: 95/255.0, alpha: 1).cgColor
                                 self.uvLabelHubTab.layer.borderColor = UIColor(red: 255/255.0, green: 91/255.0, blue: 95/255.0, alpha: 1).cgColor
-
+                                
                             } else {
                                 self.uvLabel.layer.borderColor = UIColor(red: 240/255.0, green: 3/255.0, blue: 0/255.0, alpha: 1).cgColor
                                 self.uvLabelHubTab.layer.borderColor = UIColor(red: 240/255.0, green: 3/255.0, blue: 0/255.0, alpha: 1).cgColor
-
+                                
                             }
                         } else {
                             self.uvLabel.text = "NA"
@@ -2769,7 +2770,7 @@ class DashboardViewController: UIViewController {
                             self.uvLabelHubTab.isHidden = true
                             self.uvView.isHidden = true
                             self.uvViewHubTab.isHidden = true
-
+                            
                         }
                         
                         UIView.animate(withDuration: 0.5, animations: {
@@ -2799,9 +2800,9 @@ class DashboardViewController: UIViewController {
     
     func dayOfTheWeek(dateString: String) -> String? {
         let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        //        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-
+        
         if let date = dateFormatter.date(from: dateString) {
             dateFormatter.dateFormat = "EEE"
             return dateFormatter.string(from: date)
@@ -2822,7 +2823,7 @@ class DashboardViewController: UIViewController {
                 }
                 
                 if let error = response.result.error {
-//                    self.showHubTabInfoView(hide: true)
+                    //                    self.showHubTabInfoView(hide: true)
                     print("Update Flipr data did fail with error: \(error)")
                     
                     self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "Refresh error".localized, message: error.localizedDescription, buttonTitle: "Retry".localized,bottomAlignment:0, buttonAction: {
@@ -2837,7 +2838,7 @@ class DashboardViewController: UIViewController {
                     self.showHubTabInfoView(hide: false)
                     print("JSON: \(JSON)")
                     
-                   
+                    
                     
                     if let fliprData = JSON["fliprSection"] as? [String:Any] {
                         if let deviceName = fliprData["CommercialType"] as? String {
@@ -2871,17 +2872,17 @@ class DashboardViewController: UIViewController {
                                 self.haveFirmwereUpdate = false
                                 AppSharedData.sharedInstance.haveNewFirmwereUpdate = false
                                 
-//                                self.haveFirmwereUpdate = true
-//                                AppSharedData.sharedInstance.haveNewFirmwereUpdate = true
-//                                self.showFirmwereUpdatePrompt()
-
+                                //                                self.haveFirmwereUpdate = true
+                                //                                AppSharedData.sharedInstance.haveNewFirmwereUpdate = true
+                                //                                self.showFirmwereUpdatePrompt()
+                                
                             }else{
                                 self.haveFirmwereUpdate = true
                                 AppSharedData.sharedInstance.haveNewFirmwereUpdate = true
                                 self.showFirmwereUpdatePrompt()
                             }
                         }
-                      
+                        
                     }
                     
                     if let msg = JSON["Message"] as? String {
@@ -2894,11 +2895,11 @@ class DashboardViewController: UIViewController {
                     
                     if let notificationData = JSON["userSection"] as? [String:Any] {
                         if let time = notificationData["NotificationReportDate"] as? String{
-                             self.notificationReportTime = time
+                            self.notificationReportTime = time
                             if let lastDate = time.fliprDate {
                                 self.notificationReportDate = lastDate
                             }
-
+                            
                         }
                         if let notificationStatus = notificationData["NotificationStatut"] as? Int{
                             UserDefaults.standard.set(notificationStatus == 1 ? true : false, forKey: notificationOnOffValuesKey)
@@ -2918,8 +2919,8 @@ class DashboardViewController: UIViewController {
                             if let givenDate = formatter.date(from: weatherForFifthHour?.hourTemperature ?? "") {
                                 formatter.dateFormat = "dd/MM"
                             }
-//                            self.probableWeatherIcon.text = self.climaconsCharWithIcon(icon: weatherForFifthHour?.weatherIcon ?? "")
-//                            self.tempPrecipitationLabel.text =  "\(weatherForFifthHour?.precipitationProbability ?? 0 )" + "%"
+                            //                            self.probableWeatherIcon.text = self.climaconsCharWithIcon(icon: weatherForFifthHour?.weatherIcon ?? "")
+                            //                            self.tempPrecipitationLabel.text =  "\(weatherForFifthHour?.precipitationProbability ?? 0 )" + "%"
                             if let precipitation = weatherForFifthHour?.precipitationProbability{
                                 let val = precipitation * 100
                                 self.tempPrecipitationLabel.text = (val.fixedFraction(digits: 0).toString) + "%"
@@ -2943,11 +2944,11 @@ class DashboardViewController: UIViewController {
                             self.day2IconLabel.text = self.climaconsCharWithIcon(icon: decodedValues[1].weatherIcon ?? "")
                             self.day2TitleLabel.text = self.dayOfTheWeek(dateString: decodedValues[1].tempMaxTime ?? "")
                             self.day2ValueLabel.text = (decodedValues[1].tempMin?.fixedFraction(digits: 0).toString ?? "") +  " | " + (decodedValues[1].tempMax?.fixedFraction(digits: 0).toString ?? "")  + "°"
-
+                            
                             self.day3IconLabel.text = self.climaconsCharWithIcon(icon: decodedValues[2].weatherIcon ?? "")
                             self.day3TitleLabel.text = self.dayOfTheWeek(dateString: decodedValues[2].tempMaxTime ?? "")
                             self.day3ValueLabel.text = (decodedValues[2].tempMin?.fixedFraction(digits: 0).toString ?? "") + " | " + (decodedValues[2].tempMax?.fixedFraction(digits: 0).toString ?? "") + "°"
-
+                            
                             self.day4IconLabel.text = self.climaconsCharWithIcon(icon: decodedValues[3].weatherIcon ?? "")
                             self.day4TitleLabel.text = self.dayOfTheWeek(dateString: decodedValues[3].tempMaxTime ?? "")
                             self.day4ValueLabel.text = (decodedValues[3].tempMin?.fixedFraction(digits: 0).toString ?? "") + " | " + (decodedValues[3].tempMax?.fixedFraction(digits: 0).toString ?? "") + "°"
@@ -2975,25 +2976,25 @@ class DashboardViewController: UIViewController {
                                 self.reloadWeatherStatus()
                                 
                                 /*
-                                let lastFourDaysData = Array(decodedValues.suffix(4))
-                                if lastFourDaysData.count == 4 {
-                                    self.day1IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[0].weatherIcon ?? "")
-                                    self.day1TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[0].date)
-                                    self.day1ValueLabel.text = (lastFourDaysData[0].minTemp?.fixedFraction(digits: 0).toString ?? "") + " - " + (lastFourDaysData[0].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
-                                    
-                                    self.day2IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[1].weatherIcon ?? "")
-                                    self.day2TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[1].date)
-                                    self.day2ValueLabel.text = (lastFourDaysData[1].minTemp?.fixedFraction(digits: 0).toString ?? "") +  " - " + (lastFourDaysData[1].maxTemp?.fixedFraction(digits: 0).toString ?? "")  + "°"
-
-                                    self.day3IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[2].weatherIcon ?? "")
-                                    self.day3TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[2].date)
-                                    self.day3ValueLabel.text = (lastFourDaysData[2].minTemp?.fixedFraction(digits: 0).toString ?? "") + " - " + (lastFourDaysData[2].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
-
-                                    self.day4IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[3].weatherIcon ?? "")
-                                    self.day4TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[3].date)
-                                    self.day4ValueLabel.text = (lastFourDaysData[3].minTemp?.fixedFraction(digits: 0).toString ?? "") + " - " + (lastFourDaysData[3].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
-
-                                }
+                                 let lastFourDaysData = Array(decodedValues.suffix(4))
+                                 if lastFourDaysData.count == 4 {
+                                 self.day1IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[0].weatherIcon ?? "")
+                                 self.day1TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[0].date)
+                                 self.day1ValueLabel.text = (lastFourDaysData[0].minTemp?.fixedFraction(digits: 0).toString ?? "") + " - " + (lastFourDaysData[0].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
+                                 
+                                 self.day2IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[1].weatherIcon ?? "")
+                                 self.day2TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[1].date)
+                                 self.day2ValueLabel.text = (lastFourDaysData[1].minTemp?.fixedFraction(digits: 0).toString ?? "") +  " - " + (lastFourDaysData[1].maxTemp?.fixedFraction(digits: 0).toString ?? "")  + "°"
+                                 
+                                 self.day3IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[2].weatherIcon ?? "")
+                                 self.day3TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[2].date)
+                                 self.day3ValueLabel.text = (lastFourDaysData[2].minTemp?.fixedFraction(digits: 0).toString ?? "") + " - " + (lastFourDaysData[2].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
+                                 
+                                 self.day4IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[3].weatherIcon ?? "")
+                                 self.day4TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[3].date)
+                                 self.day4ValueLabel.text = (lastFourDaysData[3].minTemp?.fixedFraction(digits: 0).toString ?? "") + " - " + (lastFourDaysData[3].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
+                                 
+                                 }
                                  */
                                 
                             } catch let error {
@@ -3042,13 +3043,13 @@ class DashboardViewController: UIViewController {
                             if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
                                 if currentUnit == 2{
                                     let funit = (temperature * 9/5) + 32
-                                    self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°F"
-                                    self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°F"
+                                    self.airTemperatureLabel.text = String(format: "%.0f", funit) + "°F"
+                                    self.airTemperatureLabelHubTab.text = String(format: "%.0f", funit) + "°F"
                                     Module.currentModule?.airTemperature = String(format: "%.2f", temperature) + "°F"
                                 }else{
                                 }
                             }
-
+                            
                             
                             if let forecastTemperature = weather["NextHourTemperature"] as? Double {
                                 if forecastTemperature > temperature {
@@ -3065,7 +3066,7 @@ class DashboardViewController: UIViewController {
                             } else {
                                 self.airTendendcyImageView.isHidden = true
                                 self.airTendendcyImageViewHubTab.isHidden = true
-
+                                
                             }
                             
                         }
@@ -3083,7 +3084,7 @@ class DashboardViewController: UIViewController {
                                 self.currentlyWeatherIcon.layer.add(textAnimation, forKey: "changeCurrentlyWeatherIconTransition")
                                 self.currentlyWeatherIcon.text = self.climaconsCharWithIcon(icon: icon)
                                 self.currentlyWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: icon)
-
+                                
                                 let textAnimation = CATransition()
                                 textAnimation.type = CATransitionType.push
                                 textAnimation.subtype = CATransitionSubtype.fromRight
@@ -3094,7 +3095,7 @@ class DashboardViewController: UIViewController {
                                 self.comingWeatherIconHubTab.text = self.climaconsCharWithIcon(icon: nextIcon)
                                 self.weatherChevronImageView.isHidden = false
                                 self.weatherChevronImageViewHubTab.isHidden = false
-
+                                
                             } else {
                                 self.startWeatherIcon.isHidden = false
                                 self.startWeatherIconHubTab.isHidden = false
@@ -3111,10 +3112,10 @@ class DashboardViewController: UIViewController {
                         if let uvIndex = weather["UvIndex"] as? Double {
                             self.uvLabel.isHidden = false
                             self.uvLabelHubTab.isHidden = false
-
+                            
                             self.uvView.isHidden = false
                             self.uvViewHubTab.isHidden = false
-
+                            
                             let index = String(format: "%.0f", uvIndex)
                             self.uvLabel.text = index
                             self.uvLabel.layer.borderWidth = 0
@@ -3128,15 +3129,15 @@ class DashboardViewController: UIViewController {
                             } else if  uvIndex <= 5 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 235/255.0, green: 212/255.0, blue: 15/255.0, alpha: 1).cgColor
                                 self.uvLabelHubTab.layer.borderColor = UIColor(red: 235/255.0, green: 212/255.0, blue: 15/255.0, alpha: 1).cgColor
-
+                                
                             } else if  uvIndex <= 7 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 255/255.0, green: 145/255.0, blue: 33/255.0, alpha: 1).cgColor
                                 self.uvLabelHubTab.layer.borderColor = UIColor(red: 255/255.0, green: 145/255.0, blue: 33/255.0, alpha: 1).cgColor
-
+                                
                             } else if  uvIndex <= 10 {
                                 self.uvLabel.layer.borderColor = UIColor(red: 255/255.0, green: 91/255.0, blue: 95/255.0, alpha: 1).cgColor
                                 self.uvLabelHubTab.layer.borderColor = UIColor(red: 255/255.0, green: 91/255.0, blue: 95/255.0, alpha: 1).cgColor
-
+                                
                             } else {
                                 self.uvLabel.layer.borderColor = UIColor(red: 240/255.0, green: 3/255.0, blue: 0/255.0, alpha: 1).cgColor
                                 self.uvLabelHubTab.layer.borderColor = UIColor(red: 240/255.0, green: 3/255.0, blue: 0/255.0, alpha: 1).cgColor
@@ -3148,7 +3149,7 @@ class DashboardViewController: UIViewController {
                             self.uvLabelHubTab.isHidden = true
                             self.uvView.isHidden = true
                             self.uvViewHubTab.isHidden = true
-
+                            
                         }
                         
                         UIView.animate(withDuration: 0.5, animations: {
@@ -3183,40 +3184,40 @@ class DashboardViewController: UIViewController {
                                 self.lastMeasureDate = lastDate
                                 Module.currentModule?.rawlastMeasure = dateFormatter.string(from: lastDate)
                                 print("lastDate interval since now:\(lastDate.timeIntervalSinceNow)")
-//
-                        /*
-                          
+                                //
+                                /*
+                                 
                                  
                                  if let dateString = current["DateTime"] as? String {
-                                     if let lastDate = dateString.fliprDate {
-                                         let dateFormatter = DateFormatter()
-                                         dateFormatter.dateFormat = "EEE HH:mm"
-                                         self.lastMeasureDateLabel.text = "Last measure".localized +  " : \(dateFormatter.string(from: lastDate))"
-                                         self.lastMeasureDateLabel.isHidden = false
-                                         
-                                         Module.currentModule?.rawlastMeasure = dateFormatter.string(from: lastDate)
-                                         
-                                         print("lastDate interval since now:\(lastDate.timeIntervalSinceNow)")
-                                         if lastDate.timeIntervalSinceNow < -4500 {
-                                             self.readBLEMeasure(completion: { (error) in
-                                                 if error != nil {
-                                                     self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
-                                                     self.bleStatusView.isHidden = true
-                                                 } else {
-                                                     self.bleMeasureHasBeenSent = true
-                                                 }
-                                             })
-                                         }
-                                     }
+                                 if let lastDate = dateString.fliprDate {
+                                 let dateFormatter = DateFormatter()
+                                 dateFormatter.dateFormat = "EEE HH:mm"
+                                 self.lastMeasureDateLabel.text = "Last measure".localized +  " : \(dateFormatter.string(from: lastDate))"
+                                 self.lastMeasureDateLabel.isHidden = false
+                                 
+                                 Module.currentModule?.rawlastMeasure = dateFormatter.string(from: lastDate)
+                                 
+                                 print("lastDate interval since now:\(lastDate.timeIntervalSinceNow)")
+                                 if lastDate.timeIntervalSinceNow < -4500 {
+                                 self.readBLEMeasure(completion: { (error) in
+                                 if error != nil {
+                                 self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+                                 self.bleStatusView.isHidden = true
                                  } else {
-                                     self.readBLEMeasure(completion: { (error) in
-                                         if error != nil {
-                                             self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
-                                             self.bleStatusView.isHidden = true
-                                         } else {
-                                             self.bleMeasureHasBeenSent = true
-                                         }
-                                     })
+                                 self.bleMeasureHasBeenSent = true
+                                 }
+                                 })
+                                 }
+                                 }
+                                 } else {
+                                 self.readBLEMeasure(completion: { (error) in
+                                 if error != nil {
+                                 self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+                                 self.bleStatusView.isHidden = true
+                                 } else {
+                                 self.bleMeasureHasBeenSent = true
+                                 }
+                                 })
                                  }
                                  
                                  
@@ -3238,50 +3239,50 @@ class DashboardViewController: UIViewController {
                                         }
                                     })
                                 }
-
+                                
                                 // less than 75 / < 75 ex: -4400
-                               else if lastDate.timeIntervalSinceNow  > -18000 {
-//                                    self.signalStrengthLabel.text = "Signal excellent".localized
+                                else if lastDate.timeIntervalSinceNow  > -18000 {
+                                    //                                    self.signalStrengthLabel.text = "Signal excellent".localized
                                     self.signalStrengthLabel.text = "Dernière mesure".localized
-
+                                    
                                     self.signalStrengthImageView.image = UIImage(named: "Signalhigh")
-//                                    self.readBLEMeasure(completion: { (error) in
-//                                        if error != nil {
-//                                            self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
-//                                            self.bleStatusView.isHidden = true
-//                                        } else {
-//                                            self.bleMeasureHasBeenSent = true
-//                                        }
-//                                    })
-
+                                    //                                    self.readBLEMeasure(completion: { (error) in
+                                    //                                        if error != nil {
+                                    //                                            self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+                                    //                                            self.bleStatusView.isHidden = true
+                                    //                                        } else {
+                                    //                                            self.bleMeasureHasBeenSent = true
+                                    //                                        }
+                                    //                                    })
+                                    
                                 }
                                 
-//                                else if lastDate.timeIntervalSinceNow < -4500 {
-//                                    self.readBLEMeasure(completion: { (error) in
-//                                        if error != nil {
-//                                            self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
-//                                            self.bleStatusView.isHidden = true
-//                                        } else {
-//                                            self.bleMeasureHasBeenSent = true
-//                                        }
-//                                    })
-//                                }
-                               // less than 75 / < 75 ex: -85000
-
+                                //                                else if lastDate.timeIntervalSinceNow < -4500 {
+                                //                                    self.readBLEMeasure(completion: { (error) in
+                                //                                        if error != nil {
+                                //                                            self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+                                //                                            self.bleStatusView.isHidden = true
+                                //                                        } else {
+                                //                                            self.bleMeasureHasBeenSent = true
+                                //                                        }
+                                //                                    })
+                                //                                }
+                                // less than 75 / < 75 ex: -85000
+                                
                                 else if lastDate.timeIntervalSinceNow > -54000 {
-//                                    self.signalStrengthLabel.text = "Signal moyen".localized
+                                    //                                    self.signalStrengthLabel.text = "Signal moyen".localized
                                     self.signalStrengthLabel.text = "Dernière mesure".localized
                                     self.signalStrengthImageView.image = UIImage(named: "Signalmiddle")
-
+                                    
                                 }
                                 else if  lastDate.timeIntervalSinceNow > -259200 {
-//                                    self.signalStrengthLabel.text = "Signal faible".localized
+                                    //                                    self.signalStrengthLabel.text = "Signal faible".localized
                                     self.signalStrengthLabel.text = "Mesure ancienne".localized
                                     self.signalStrengthImageView.image = UIImage(named: "Signallow")
-
+                                    
                                 }else{
                                     
-//                                    self.signalStrengthLabel.text = "Signal inexistant".localized
+                                    //                                    self.signalStrengthLabel.text = "Signal inexistant".localized
                                     self.signalStrengthLabel.text = "Mesure obsolète".localized
                                     self.signalStrengthImageView.image = UIImage(named: "SignalNo")
                                 }
@@ -3301,7 +3302,7 @@ class DashboardViewController: UIViewController {
                             })
                         }
                         
-
+                        
                         if let tendency = current["Tendancy"] as? Double {
                             if tendency >= 1 {
                                 self.waterTendencyImageView.image = UIImage(named: "watertmpUp")
@@ -3314,7 +3315,7 @@ class DashboardViewController: UIViewController {
                             }
                         } else {
                             self.waterTendencyImageView.isHidden = true
-                        } 
+                        }
                         
                         
                         if let temp = current["Temperature"] as? Double {
@@ -3356,7 +3357,7 @@ class DashboardViewController: UIViewController {
                                 
                                 self.pHLabel.text = String(format: "%.1f", value)
                                 self.hubTabPhValLabel.text = String(format: "%.1f", value)
-
+                                
                                 if value < 0 {
                                     self.pHLabel.text = "0"
                                     self.hubTabPhValLabel.text = "0"
@@ -3382,7 +3383,7 @@ class DashboardViewController: UIViewController {
                                     self.pHSateView.backgroundColor = K.Color.clear
                                     self.pHStateLabel.textColor = .white
                                     self.pHStatusImageView.image = UIImage(named:"thumbs-up")
-
+                                    
                                 }
                                 
                                 if let sector = pH["DeviationSector"] as? String {
@@ -3391,13 +3392,13 @@ class DashboardViewController: UIViewController {
                                         self.pHSateView.backgroundColor = K.Color.white
                                         self.pHStatusImageView.image = #imageLiteral(resourceName: "Material Icon Font")
                                         self.pHStateLabel.textColor = .black
-
+                                        
                                     } else if sector == "MediumHigh" || sector == "MediumLow" {
                                         self.isPhOutOfRangeAlert = false
                                         self.pHSateView.backgroundColor = K.Color.clear
                                         self.pHStateLabel.textColor = .white
                                         self.pHStatusImageView.image = UIImage(named:"thumbs-up")
-
+                                        
                                     } else if sector == "Medium" {
                                         self.isPhOutOfRangeAlert = false
                                         self.pHSateView.backgroundColor = K.Color.clear
@@ -3406,46 +3407,46 @@ class DashboardViewController: UIViewController {
                                     }
                                 }
                                 self.circularSlider.currentValue = (78/14)*value
-                             /*
-                                let startAngle = CGFloat(150 * Double.pi / 180)
-                                let endAngle = CGFloat(30 * Double.pi / 180)
-                                
-                                self.pHValueCircle = CAShapeLayer()
-                                
-                                self.pHValueCircle.path = UIBezierPath(arcCenter: CGPoint(x: self.pHView.bounds.width/2, y: 84), radius: 66, startAngle: startAngle, endAngle: endAngle, clockwise: true).cgPath
-                                self.pHValueCircle.fillColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
-                                self.pHValueCircle.strokeColor = UIColor.init(hexString: "111729").cgColor //UIColor(red: 39/255, green: 226/255, blue: 253/255, alpha: 1).cgColor
-                                self.pHValueCircle.lineWidth = 8
-                                self.pHValueCircle.lineCap = CAShapeLayerLineCap.round
-                                self.pHValueCircle.strokeEnd = 0.0
-                                self.pHView.layer.addSublayer(self.pHValueCircle)
-                                
-                                let drawAnimation = CABasicAnimation(keyPath: "strokeEnd")
-                                drawAnimation.duration = 1
-                                drawAnimation.repeatCount = 0.0
-                                drawAnimation.isRemovedOnCompletion = false
-                                drawAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-                                
-                                drawAnimation.fromValue = 0
-                                drawAnimation.toValue = value / 14
-                                
-                                self.pHValueCircle.strokeEnd = CGFloat(value) / 14
-                                self.pHValueCircle.add(drawAnimation, forKey: "drawPHValueCircleAnimation")
-                                
-//                               let track = UIBezierPath(arcCenter: CGPoint(x: self.pHView.bounds.width/2, y: 84), radius: 66, startAngle: startAngle, endAngle: endAngle, clockwise: true)
-//                                let bkColr = UIColor.white.withAlphaComponent(0.2)
-//                                bkColr.setStroke()
-//                                track.lineWidth = 8
-//
-//                                track.stroke()
-                         */
+                                /*
+                                 let startAngle = CGFloat(150 * Double.pi / 180)
+                                 let endAngle = CGFloat(30 * Double.pi / 180)
+                                 
+                                 self.pHValueCircle = CAShapeLayer()
+                                 
+                                 self.pHValueCircle.path = UIBezierPath(arcCenter: CGPoint(x: self.pHView.bounds.width/2, y: 84), radius: 66, startAngle: startAngle, endAngle: endAngle, clockwise: true).cgPath
+                                 self.pHValueCircle.fillColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+                                 self.pHValueCircle.strokeColor = UIColor.init(hexString: "111729").cgColor //UIColor(red: 39/255, green: 226/255, blue: 253/255, alpha: 1).cgColor
+                                 self.pHValueCircle.lineWidth = 8
+                                 self.pHValueCircle.lineCap = CAShapeLayerLineCap.round
+                                 self.pHValueCircle.strokeEnd = 0.0
+                                 self.pHView.layer.addSublayer(self.pHValueCircle)
+                                 
+                                 let drawAnimation = CABasicAnimation(keyPath: "strokeEnd")
+                                 drawAnimation.duration = 1
+                                 drawAnimation.repeatCount = 0.0
+                                 drawAnimation.isRemovedOnCompletion = false
+                                 drawAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+                                 
+                                 drawAnimation.fromValue = 0
+                                 drawAnimation.toValue = value / 14
+                                 
+                                 self.pHValueCircle.strokeEnd = CGFloat(value) / 14
+                                 self.pHValueCircle.add(drawAnimation, forKey: "drawPHValueCircleAnimation")
+                                 
+                                 //                               let track = UIBezierPath(arcCenter: CGPoint(x: self.pHView.bounds.width/2, y: 84), radius: 66, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+                                 //                                let bkColr = UIColor.white.withAlphaComponent(0.2)
+                                 //                                bkColr.setStroke()
+                                 //                                track.lineWidth = 8
+                                 //
+                                 //                                track.stroke()
+                                 */
                                 UIView.animate(withDuration: 0.5, animations: {
                                     self.pHView.alpha = 1
                                 }, completion: { (success) in
                                     
                                 })
                                 
-                               
+                                
                                 
                             }
                             
@@ -3481,7 +3482,7 @@ class DashboardViewController: UIViewController {
                             if let label = orp["Label"] as? String, let deviation = orp["Deviation"] as? Double {
                                 self.orpLabel.text = label
                                 self.hubTabClorineLabel.text = label
-
+                                
                                 if let message = orp["Message"] as? String {
                                     self.orpStateLabel.text = message
                                     self.hubTabClorineValLabel.text = message
@@ -3495,7 +3496,7 @@ class DashboardViewController: UIViewController {
                                 
                                 let maxAngle = Double.pi/5.7
                                 var gaugeAngle:CGFloat = 0
-                                   
+                                
                                 if deviation >= 1 {
                                     self.orpStateView.backgroundColor = K.Color.white
                                     self.orpStateLabel.textColor = .black
@@ -3522,12 +3523,12 @@ class DashboardViewController: UIViewController {
                                         self.orpStateLabel.textColor = .black
                                     } else if sector == "MediumHigh" || sector == "MediumLow" {
                                         self.isRedoxOutOfRangeAlert = false
-
+                                        
                                         self.orpStateView.backgroundColor = K.Color.clear
                                         self.orpStateLabel.textColor    = .white
                                         self.bleStatusImageView.image = UIImage(named:"thumbs-up")
-
-
+                                        
+                                        
                                     } else if sector == "Medium" {
                                         self.isRedoxOutOfRangeAlert = false
                                         self.orpStateView.backgroundColor = K.Color.clear
@@ -3549,15 +3550,15 @@ class DashboardViewController: UIViewController {
                             
                         }
                         
-                      
-
+                        
+                        
                         
                         if let subscription = JSON["Subscription"] as? [String:Any] {
                             if let isValid = subscription["IsValid"] as? Bool {
                                 if isValid{
                                     //self.subscriptionButton.isHidden = true
                                 }else{
-                                   // self.handleSubscriptionButton()
+                                    // self.handleSubscriptionButton()
                                 }
                                 Module.currentModule?.isSubscriptionValid = isValid
                                 Module.saveCurrentModuleLocally()
@@ -3573,7 +3574,7 @@ class DashboardViewController: UIViewController {
                             }
                             if let module = Module.currentModule {
                                 if module.isSubscriptionValid == false {
-//                                    self.subscriptionView.alpha = 1
+                                    //                                    self.subscriptionView.alpha = 1
                                     self.signalStrengthImageView.isHidden = false
                                     self.signalStrengthImageView.image = UIImage(named: "Bluetooth icon")
                                     self.signalStrengthLabel.isHidden = true
@@ -3581,8 +3582,8 @@ class DashboardViewController: UIViewController {
                                 } else {
                                     self.signalStrengthLabel.isHidden = false
                                     self.signalStrengthImageView.isHidden = false
-//                                    self.subscriptionView.alpha = 0
-//                                    self.subscriptionButton.isHidden = true
+                                    //                                    self.subscriptionView.alpha = 0
+                                    //                                    self.subscriptionButton.isHidden = true
                                 }
                             }
                         }, completion: { (success) in
@@ -3834,11 +3835,11 @@ class DashboardViewController: UIViewController {
         
     }
     
-
+    
     func hideFliprData() {
         waterTemperatureLabel.text = "  "
         self.hubTabAirValLabel.text = "  "
-
+        
         pHValueCircle.removeFromSuperlayer()
         pHView.alpha = 0
         orpView.alpha = 0
@@ -3861,7 +3862,7 @@ class DashboardViewController: UIViewController {
         alert4Button.isHidden = true
         
         
-            
+        
     }
     
     func hideBottomAlertButton(){
@@ -4053,13 +4054,13 @@ class DashboardViewController: UIViewController {
                 self.present(navigationController, animated: true, completion: nil)
             }
         }
-//        let sb = UIStoryboard.init(name: "Notifications", bundle: nil)
-//        if let viewController = sb.instantiateViewController(withIdentifier: "NotificationsAlertViewController") as? NotificationsAlertViewController {
-//            viewController.alertType = .Threshold
-//            viewController.delegate = self
-//            viewController.modalPresentationStyle = .overCurrentContext
-//            self.present(viewController, animated: true, completion: nil)
-//        }
+        //        let sb = UIStoryboard.init(name: "Notifications", bundle: nil)
+        //        if let viewController = sb.instantiateViewController(withIdentifier: "NotificationsAlertViewController") as? NotificationsAlertViewController {
+        //            viewController.alertType = .Threshold
+        //            viewController.delegate = self
+        //            viewController.modalPresentationStyle = .overCurrentContext
+        //            self.present(viewController, animated: true, completion: nil)
+        //        }
     }
     
     
@@ -4199,10 +4200,10 @@ class DashboardViewController: UIViewController {
                 }
             }
             
-//            let storyboard = UIStoryboard(name: "HUB", bundle: nil)
-//            let viewController = storyboard.instantiateViewController(withIdentifier: "HUBNavigationControllerID")
-//            viewController.modalPresentationStyle = .fullScreen
-//            self.present(viewController, animated: true, completion: nil)
+            //            let storyboard = UIStoryboard(name: "HUB", bundle: nil)
+            //            let viewController = storyboard.instantiateViewController(withIdentifier: "HUBNavigationControllerID")
+            //            viewController.modalPresentationStyle = .fullScreen
+            //            self.present(viewController, animated: true, completion: nil)
             
         }
         
@@ -4237,7 +4238,7 @@ extension DashboardViewController: AlertPresentViewDelegate{
                 }
             }
         }
-       
+        
     }
     
     
@@ -4247,11 +4248,11 @@ extension DashboardViewController: AlertPresentViewDelegate{
             if let isDefaultValue = phMax["IsDefaultValue"] as? Bool {
                 if !isDefaultValue {
                     UserDefaults.standard.set(false, forKey: userDefaultPhvalueMaxValuesKey)
-//                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
+                    //                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
                     
                 } else {
                     UserDefaults.standard.set(true, forKey: userDefaultPhvalueMaxValuesKey)
-//                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
+                    //                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
                 }
             }
         }
@@ -4260,11 +4261,11 @@ extension DashboardViewController: AlertPresentViewDelegate{
             if let isDefaultValue = phMax["IsDefaultValue"] as? Bool {
                 if !isDefaultValue {
                     UserDefaults.standard.set(false, forKey: userDefaultPhvalueMinValuesKey)
-//                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
+                    //                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
                     
                 } else {
                     UserDefaults.standard.set(true, forKey: userDefaultPhvalueMinValuesKey)
-//                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
+                    //                    NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
                 }
             }
         }
@@ -4273,11 +4274,11 @@ extension DashboardViewController: AlertPresentViewDelegate{
             if let isDefaultValue = redox["IsDefaultValue"] as? Bool {
                 if !isDefaultValue {
                     UserDefaults.standard.set(false, forKey: userDefaultThresholdValuesKey)
-//                    NotificationCenter.default.post(name: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil)
+                    //                    NotificationCenter.default.post(name: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil)
                 } else {
                     
                     UserDefaults.standard.set(true, forKey: userDefaultThresholdValuesKey)
-//                    NotificationCenter.default.post(name: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil)
+                    //                    NotificationCenter.default.post(name: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil)
                 }
             }
         }
@@ -4287,10 +4288,10 @@ extension DashboardViewController: AlertPresentViewDelegate{
             if let isDefaultValue = temp["IsDefaultValue"] as? Bool {
                 if !isDefaultValue {
                     UserDefaults.standard.set(false, forKey: userDefaultTemperatureMinValuesKey)
-//                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
+                    //                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
                 } else {
                     UserDefaults.standard.set(true, forKey: userDefaultTemperatureMinValuesKey)
-//                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
+                    //                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
                 }
             }
             
@@ -4301,10 +4302,10 @@ extension DashboardViewController: AlertPresentViewDelegate{
             if let isDefaultValue = temp["IsDefaultValue"] as? Bool {
                 if !isDefaultValue {
                     UserDefaults.standard.set(false, forKey: userDefaultTemperatureMaxValuesKey)
-//                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
+                    //                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
                 } else {
                     UserDefaults.standard.set(true, forKey: userDefaultTemperatureMaxValuesKey)
-//                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
+                    //                    NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
                 }
             }
             
@@ -4318,8 +4319,8 @@ extension DashboardViewController: AlertPresentViewDelegate{
 extension DashboardViewController: UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     private func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+                                layout collectionViewLayout: UICollectionViewLayout,
+                                sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 164, height: 128)
     }
     
@@ -4343,40 +4344,40 @@ extension DashboardViewController: UICollectionViewDataSource,UICollectionViewDe
                 cell.subTitleLbl.text = "Working".localized()
                 cell.buttonShadowView.backgroundColor = UIColor(hexString: "00DA4F")
                 cell.iconImageView.image = UIImage(named: "powerWhite")
-//                    stateImageView.image = UIImage(named: "play_circle")
-//                    manualSwitch.isOn = hub.equipementState
+                //                    stateImageView.image = UIImage(named: "play_circle")
+                //                    manualSwitch.isOn = hub.equipementState
             } else {
                 cell.subTitleLbl.text = "Stopped".localized()
                 cell.buttonShadowView.backgroundColor = .white
                 cell.iconImageView.image = UIImage(named: "powerGray")
-
-//                    stateImageView.image = UIImage(named: "stop_circle")
-//                    manualSwitch.isOn = hub.equipementState
+                
+                //                    stateImageView.image = UIImage(named: "stop_circle")
+                //                    manualSwitch.isOn = hub.equipementState
             }
             if hub.behavior == "manual" {
                 cell.subTitleLbl.text = "Manual".localized()
                 cell.buttonShadowView.backgroundColor = UIColor(hexString: "00DA4F")
                 cell.iconImageView.image = UIImage(named: "powerWhite")
-
-//                automSwitch.isOn = false
-//                manualButtonAction(self)
+                
+                //                automSwitch.isOn = false
+                //                manualButtonAction(self)
             } else if hub.behavior == "planning" {
                 cell.subTitleLbl.text  = "Program".localized()
                 cell.buttonShadowView.backgroundColor = UIColor(hexString: "00DA4F")
                 cell.iconImageView.image = UIImage(named: "timerWhite")
-
-//                automSwitch.isOn = false
-//                progButtonAction(self)
+                
+                //                automSwitch.isOn = false
+                //                progButtonAction(self)
             } else if hub.behavior == "auto" {
                 cell.subTitleLbl.text = "Smart Control"
                 cell.iconImageView.image = #imageLiteral(resourceName: "Flash_select")
                 cell.buttonShadowView.backgroundColor = UIColor(hexString: "00DA4F")
-//                automSwitch.isOn = true
-//                automButtonAction(self)
+                //                automSwitch.isOn = true
+                //                automButtonAction(self)
                 hub.getAutomMessage { (message) in
                     if message != nil {
-//                        self.autoMessageLabel.text = message
-//                        self.autoMessageLabel.isHidden = false
+                        //                        self.autoMessageLabel.text = message
+                        //                        self.autoMessageLabel.isHidden = false
                     }
                 }
             }
@@ -4386,23 +4387,23 @@ extension DashboardViewController: UICollectionViewDataSource,UICollectionViewDe
                     cell.subTitleLbl.text = "Working".localized()
                     cell.buttonShadowView.backgroundColor = UIColor(hexString: "00DA4F")
                     cell.iconImageView.image = UIImage(named: "powerWhite")
-    //                    stateImageView.image = UIImage(named: "play_circle")
-    //                    manualSwitch.isOn = hub.equipementState
+                    //                    stateImageView.image = UIImage(named: "play_circle")
+                    //                    manualSwitch.isOn = hub.equipementState
                 } else {
                     cell.subTitleLbl.text = "Stopped".localized()
                     cell.buttonShadowView.backgroundColor = .white
                     cell.iconImageView.image = UIImage(named: "powerGray")
-
-    //                    stateImageView.image = UIImage(named: "stop_circle")
-    //                    manualSwitch.isOn = hub.equipementState
+                    
+                    //                    stateImageView.image = UIImage(named: "stop_circle")
+                    //                    manualSwitch.isOn = hub.equipementState
                 }
             }
             
-         
+            
         }
         
         
-
+        
         return cell
     }
 }
@@ -4418,18 +4419,25 @@ extension DashboardViewController: UICollectionViewDelegate{
 extension DashboardViewController{
     
     func loadHUBs() {
-//        let theme = EmptyStateViewTheme.shared
-//        theme.activityIndicatorType = .ballPulse
-//        self.view.showEmptyStateViewLoading(title: nil, message: nil, theme: theme)
+        //        let theme = EmptyStateViewTheme.shared
+        //        theme.activityIndicatorType = .ballPulse
+        //        self.view.showEmptyStateViewLoading(title: nil, message: nil, theme: theme)
         if  Pool.currentPool ==  nil{
             updateHubWaveForNoHubs()
+            self.hubs.removeAll()
+            self.hubDeviceTableView.reloadData()
+            self.keepUserOrderHubViews()
             return
         }
         Pool.currentPool?.getHUBS(completion: { (hubs, error) in
-//            self.view.hideStateView()
+            //            self.view.hideStateView()
             if error != nil {
+                self.hubs.removeAll()
+                self.hubDeviceTableView.reloadData()
+                self.keepUserOrderHubViews()
                 self.updateHubWaveForNoHubs()
-                self.showError(title: "Error".localized, message: error!.localizedDescription)
+
+//                self.showError(title: "Error".localized, message: error!.localizedDescription)
             } else if hubs != nil {
                 if hubs!.count > 0 {
                     
@@ -4449,7 +4457,7 @@ extension DashboardViewController{
                         var tmpHubs:[HUB] = [HUB]()
                         var firstHub : HUB?
                         var secondHub : HUB?
-
+                        
                         for hubObj in hubs!{
                             
                             if hubObj.serial == firstHubKey{
@@ -4458,7 +4466,7 @@ extension DashboardViewController{
                             else if hubObj.serial == secondHubKey{
                                 secondHub = hubObj
                             }
-                           
+                            
                         }
                         if let first = firstHub{
                             tmpHubs.append(first)
@@ -4504,13 +4512,13 @@ extension DashboardViewController{
                     self.hubs.removeAll()
                     self.hubDeviceTableView.reloadData()
                     self.keepUserOrderHubViews()
-//                   self.showError(title: "Error".localized, message: "No hubs :/")
+                    //                   self.showError(title: "Error".localized, message: "No hubs :/")
                 }
             } else {
                 self.hubs.removeAll()
                 self.hubDeviceTableView.reloadData()
                 self.keepUserOrderHubViews()
-//                self.showError(title: "Error".localized, message: "No hubs :/")
+                //                self.showError(title: "Error".localized, message: "No hubs :/")
             }
         })
     }
@@ -4535,85 +4543,85 @@ extension DashboardViewController{
                     self.hubTabfluidView.frame = hubWaveframe
                     self.hubTabFluidViewTopEdge.frame = hubWaveframe
                 })
-//                self.hubScrollViewContainerView.updateConstraints()
+                //                self.hubScrollViewContainerView.updateConstraints()
             }
         }
-
+        
         let hubWaveframe = self.hubWaveContainerView.frame
         self.hubTabfluidView.frame = hubWaveframe
         self.hubTabFluidViewTopEdge.frame = hubWaveframe
         self.keepUserOrderHubViews()
         /*
-        if let hub = hub {
-            hubButton.setTitle(hub.equipementName, for: .normal)
-            if hub.equipementState {
-                stateLabel.text = "Working".localized()
-                stateImageView.image = UIImage(named: "play_circle")
-                manualSwitch.isOn = hub.equipementState
-            } else {
-                stateLabel.text = "Stopped".localized()
-                stateImageView.image = UIImage(named: "stop_circle")
-                manualSwitch.isOn = hub.equipementState
-            }
-            if hub.behavior == "manual" {
-                modeValueLabel.text = "Manual".localized()
-                automSwitch.isOn = false
-                manualButtonAction(self)
-            } else if hub.behavior == "planning" {
-                modeValueLabel.text = "Program".localized()
-                automSwitch.isOn = false
-                progButtonAction(self)
-            } else if hub.behavior == "auto" {
-                modeValueLabel.text = "Smart Control"
-                automSwitch.isOn = true
-                automButtonAction(self)
-                hub.getAutomMessage { (message) in
-                    if message != nil {
-                        self.autoMessageLabel.text = message
-                        self.autoMessageLabel.isHidden = false
-                    }
-                }
-            } else {
-                modeValueLabel.text = "Unkown mode"
-                automSwitch.isOn = false
-                manualButtonAction(self)
-            }
-        }
-        
-        */
+         if let hub = hub {
+         hubButton.setTitle(hub.equipementName, for: .normal)
+         if hub.equipementState {
+         stateLabel.text = "Working".localized()
+         stateImageView.image = UIImage(named: "play_circle")
+         manualSwitch.isOn = hub.equipementState
+         } else {
+         stateLabel.text = "Stopped".localized()
+         stateImageView.image = UIImage(named: "stop_circle")
+         manualSwitch.isOn = hub.equipementState
+         }
+         if hub.behavior == "manual" {
+         modeValueLabel.text = "Manual".localized()
+         automSwitch.isOn = false
+         manualButtonAction(self)
+         } else if hub.behavior == "planning" {
+         modeValueLabel.text = "Program".localized()
+         automSwitch.isOn = false
+         progButtonAction(self)
+         } else if hub.behavior == "auto" {
+         modeValueLabel.text = "Smart Control"
+         automSwitch.isOn = true
+         automButtonAction(self)
+         hub.getAutomMessage { (message) in
+         if message != nil {
+         self.autoMessageLabel.text = message
+         self.autoMessageLabel.isHidden = false
+         }
+         }
+         } else {
+         modeValueLabel.text = "Unkown mode"
+         automSwitch.isOn = false
+         manualButtonAction(self)
+         }
+         }
+         
+         */
     }
     
     
     func refreshPlannings() {
-//        self.programView.showEmptyStateViewLoading(title: nil, message: nil)
+        //        self.programView.showEmptyStateViewLoading(title: nil, message: nil)
         HUB.currentHUB?.getPlannings(completion: { (error) in
             if error != nil {
                 if HUB.currentHUB!.plannings.count > 0 {
-//                    self.programView.showEmptyStateViewLoading(title: "Error".localized, message: error?.localizedDescription)
+                    //                    self.programView.showEmptyStateViewLoading(title: "Error".localized, message: error?.localizedDescription)
                 } else {
                     self.showError(title: "Error".localized, message: error?.localizedDescription)
                 }
             } else {
                 if HUB.currentHUB!.plannings.count == 0 {
                     /*
-                    self.programView.showEmptyStateView(image: nil, title: nil, message: "No program".localized(), buttonTitle: "Add a new program".localized()) {
-                        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "HUBProgramViewControllerID") as? HUBProgramViewController {
-                            self.present(vc, animated: true, completion: nil)
-                        }
-                    }
-                    */
+                     self.programView.showEmptyStateView(image: nil, title: nil, message: "No program".localized(), buttonTitle: "Add a new program".localized()) {
+                     if let vc = self.storyboard?.instantiateViewController(withIdentifier: "HUBProgramViewControllerID") as? HUBProgramViewController {
+                     self.present(vc, animated: true, completion: nil)
+                     }
+                     }
+                     */
                 } else {
                     /*
-                    self.programView.hideStateView()
-                    self.tableView.reloadData()
- */
+                     self.programView.hideStateView()
+                     self.tableView.reloadData()
+                     */
                 }
                 
             }
         })
     }
-
-
+    
+    
 }
 
 extension DashboardViewController{
@@ -4637,6 +4645,7 @@ extension DashboardViewController{
     }
     
     func updateHubWaveForNoHubs(){
+        clearHubsInFliprTab()
         if hubScrollViewContainerView.height < self.hubTabScrollView.height{
             let diff = self.hubTabScrollView.height - hubScrollViewContainerView.height
             self.hubTabWaveTopConstraint.constant =  self.hubTabWaveTopConstraint.constant + diff
@@ -4674,7 +4683,7 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource, UI
             }
         }
     }
- 
+    
     func tableView(_ tableView: UITableView, dragSessionDidEnd session: UIDragSession){
         if self.hubs.count > 0{
             if let firstHubKey  = self.hubs[0].serial as? String{
@@ -4687,9 +4696,9 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource, UI
             }
         }
     }
-
     
-   
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.hubs.count
@@ -4718,16 +4727,16 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource, UI
         else{
             cell.iconImageView.image = UIImage(named: "heatpump")
         }
-//        cell.modeNameLbl.text = hub.behavior.capitalizingFirstLetter()
+        //        cell.modeNameLbl.text = hub.behavior.capitalizingFirstLetter()
         cell.deviceNameLbl.text = hub.equipementName.capitalizingFirstLetter()
         cell.settingsBtn.isHidden = !self.isPlaceOwner
         cell.manageIcons()
-//        cell.filtrationTimeLbl.isHidden = false
-//        cell.filtrationTimeLbl.text =  "asdsads asd"
-
+        //        cell.filtrationTimeLbl.isHidden = false
+        //        cell.filtrationTimeLbl.text =  "asdsads asd"
+        
         return cell
     }
-
+    
 }
 
 
@@ -4737,38 +4746,38 @@ extension DashboardViewController: UIScrollViewDelegate{
         UserDefaults.standard.set(indexOfPage, forKey: "HistoryScrollIndex")
         self.stoppedScrolling()
     }
-
+    
     func scrollViewDidEndDragging(_scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             self.stoppedScrolling()
         }
     }
-
+    
     func stoppedScrolling() {
-
-
+        
+        
     }
 }
 
 extension DashboardViewController: HubDeviceDelegate{
-   
+    
     func didSelectSmartControllButton(hub: HUB) {
         self.handleSmartControll(hub: hub)
     }
     
-
+    
     func didSelectSettingsButton(hub:HUB){
         let sb = UIStoryboard.init(name: "WatrFlipr", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "WatrHubSettingsViewController") as? WatrHubSettingsViewController {
             viewController.hub = hub
-//            viewController.delegate = self
-           // viewController.modalPresentationStyle = .overCurrentContext
+            //            viewController.delegate = self
+            // viewController.modalPresentationStyle = .overCurrentContext
             let nav = UINavigationController.init(rootViewController: viewController)
             self.present(nav, animated: true) {
             }
         }
         
-       // self.hubButtonAction(self)
+        // self.hubButtonAction(self)
     }
     
     
@@ -4790,23 +4799,23 @@ extension DashboardViewController: HubDeviceDelegate{
                 hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
                 hud?.dismiss(afterDelay: 3)
             }
-//            self.refreshHUBdisplay()
+            //            self.refreshHUBdisplay()
             self.view.hideStateView()
             self.loadHUBs()
-
+            
             
             /*
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.loadHUBs()
-            }
-            */
+             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+             self.loadHUBs()
+             }
+             */
         })
     }
     
-//    func didSelectPlanningButton(hub:HUB){
-//        self.getSelectedHubDetails(selectedHub: hub)
-//
-//    }
+    //    func didSelectPlanningButton(hub:HUB){
+    //        self.getSelectedHubDetails(selectedHub: hub)
+    //
+    //    }
     
     func didSelectProgramButton(hub:HUB){
         self.getSelectedHubDetails(selectedHub: hub)
@@ -4816,7 +4825,7 @@ extension DashboardViewController: HubDeviceDelegate{
     func didSelectProgramEditButton(hub:HUB){
         self.getSelectedHubDetails(selectedHub: hub)
     }
-//    HUBProgramViewControllerID
+    //    HUBProgramViewControllerID
     func getSelectedHubDetails(selectedHub:HUB) {
         HUB.currentHUB = selectedHub
         HUB.saveCurrentHUBLocally()
@@ -4834,7 +4843,7 @@ extension DashboardViewController: HubDeviceDelegate{
                         vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
                         self.present(vc, animated: true, completion: nil)
                     }
-
+                    
                 } else {
                     let sb = UIStoryboard.init(name: "HUB", bundle: nil)
                     if let viewController = sb.instantiateViewController(withIdentifier: "HubProgramViewController") as? HubProgramViewController {
@@ -4881,7 +4890,7 @@ extension DashboardViewController: HubDeviceDelegate{
 
 
 extension DashboardViewController: HubSettingViewDelegate{
-
+    
     func didSelectRenameButton(hub:HUB){
         let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "HubRenameViewController") as? HubRenameViewController {
@@ -4898,8 +4907,8 @@ extension DashboardViewController: HubSettingViewDelegate{
             viewController.fromSetting = false
             let nav = UINavigationController.init(rootViewController: viewController)
             self.present(nav, animated: true, completion: nil)
-//            self.navigationController?.pushViewController(viewController, animated: true)
-//            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            //            self.navigationController?.pushViewController(viewController, animated: true)
+            //            self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
     
@@ -4958,16 +4967,16 @@ extension DashboardViewController: HubSettingViewDelegate{
     
     func callStartFirmwereUpdateApi(){
         if let serialNo = Module.currentModule?.serial {
-//            let hud = JGProgressHUD(style:.dark)
-//            hud?.show(in: self.view)
+            //            let hud = JGProgressHUD(style:.dark)
+            //            hud?.show(in: self.view)
             Alamofire.request(Router.startedUpdatedFirmwere(serial: serialNo)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
                 
                 switch response.result {
                 case .success(let value):
                     print("Started firmware upgrade api")
-//                    hud?.dismiss(afterDelay: 0)
+                    //                    hud?.dismiss(afterDelay: 0)
                 case .failure(let error):
-//                    hud?.dismiss(afterDelay: 0)
+                    //                    hud?.dismiss(afterDelay: 0)
                     print("Started firmware upgrade  did fail with error: \(error)")
                     
                 }
@@ -4986,23 +4995,22 @@ extension DashboardViewController: HubSettingViewDelegate{
     //MUMP
     
     @IBAction func settingsButtonClicked(){
+        /*
+        AppSharedData.sharedInstance.isAddPlaceFlow = true
+        let sb = UIStoryboard(name: "NewLocation", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "NewLocationViewControllerID") as? NewLocationViewController {
+            //            self.navigationController?.pushViewController(viewController, completion: nil)
+            //            viewController.modalPresentationStyle = .fullScreen
+            let nav = UINavigationController.init(rootViewController: viewController)
+            self.present(nav, animated: true)
+        }
+        */
+
         
         let navigationController = UIStoryboard(name:"WatrFlipr", bundle: nil).instantiateViewController(withIdentifier: "FliprSettingsNavigation") as! UINavigationController
-//        navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)
         
-
-        
-//        let navigationController = UIStoryboard(name:"Settings", bundle: nil).instantiateViewController(withIdentifier: "WatrSettingsNavigation") as! UINavigationController
-//        navigationController.modalPresentationStyle = .fullScreen
-//        self.present(navigationController, animated: true, completion: nil)
-
-    
-//        let sb = UIStoryboard(name: "NewPool", bundle: nil)
-//                if let viewController = sb.instantiateViewController(withIdentifier: "NewPoolViewControllerID") as? UINavigationController {
-//                    viewController.modalPresentationStyle = .fullScreen
-//                    self.present(viewController, animated: true, completion: nil)
-//                }
+       
     }
     
     @IBAction func placeDropDownButtonClicked(){
@@ -5020,14 +5028,17 @@ extension DashboardViewController: HubSettingViewDelegate{
 
 extension DashboardViewController{
     func callPlacesApi(){
+        isDefaultPlaceLoaded = false
         var places = [PlaceDropdown]()
-
-//        hud?.show(in: self.view)
+        
+        //        hud?.show(in: self.view)
         User.currentUser?.getPlaces(completion: { (placesResult,error) in
             if (error != nil) {
-//                self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-//                self.hud?.textLabel.text = error?.localizedDescription
-//                self.hud?.dismiss(afterDelay: 0)
+                self.isDefaultPlaceLoaded = true
+
+                //                self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                //                self.hud?.textLabel.text = error?.localizedDescription
+                //                self.hud?.dismiss(afterDelay: 0)
             } else {
                 if placesResult != nil{
                     places = placesResult!
@@ -5036,13 +5047,13 @@ extension DashboardViewController{
                         self.placeDetails =  self.selectedPlace
                         self.showPlaceInfo()
                     }
-//                    self.hud?.dismiss(afterDelay: 0)
-//                    self.placesTableView.reloadData()
+                    //                    self.hud?.dismiss(afterDelay: 0)
+                    //                    self.placesTableView.reloadData()
                 }
             }
-                    
+            
         })
-       
+        
     }
     
     func showPlaceInfo(){
@@ -5055,40 +5066,40 @@ extension DashboardViewController{
         placeDetails.append(self.selectedPlace?.placeCity ?? "")
         self.selectedPlaceDetailsLbl.text = placeDetails
         self.placeDropdownArrowImage.isHidden = false
-
+        
         if let placeId = self.selectedPlace?.placeId{
             let placeIdStr = "\(placeId)"
             getPlaceModules(placeId: placeIdStr)
         }
         if let level = self.selectedPlace?.permissionLevel{
-           if level == "Admin"{
-               isPlaceOwner = true
-           }else{
-               isPlaceOwner = false
-           }
+            if level == "Admin"{
+                isPlaceOwner = true
+            }else{
+                isPlaceOwner = false
+            }
         }else{
             isPlaceOwner = false
         }
         
         self.settingsButton.isHidden = !isPlaceOwner
-
         
     }
     
     func getPlaceModules(placeId:String){
-//        hud?.show(in: self.view)
+        //        hud?.show(in: self.view)
         User.currentUser?.getPlaceModules(placeId: placeId, completion: { (placesModuleResult,error) in
+            self.isDefaultPlaceLoaded = true
             if (error != nil) {
-//                self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-//                self.hud?.textLabel.text = error?.localizedDescription
-//                self.hud?.dismiss(afterDelay: 3)
+                //                self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                //                self.hud?.textLabel.text = error?.localizedDescription
+                //                self.hud?.dismiss(afterDelay: 3)
             } else {
                 if placesModuleResult != nil{
                     var pModules = placesModuleResult!
-
+                    
                     var isFliprModule = false
                     var fliprModule:PlaceModule?
-
+                    
                     if pModules.count > 0{
                         for module in pModules {
                             if module.isFlipr{
@@ -5113,7 +5124,7 @@ extension DashboardViewController{
             
         })
     }
-
+    
 }
 
 extension DashboardViewController:PlaceDropdownDelegate{
@@ -5139,14 +5150,56 @@ extension DashboardViewController:PlaceDropdownDelegate{
         }
         
         if isFliprModule{
-            //            Module.currentModule = module
-//            Module.currentModule?.serial = fliprModule?.serial ?? ""
-//            Module.currentModule?.activationKey = fliprModule?.activationKey ?? ""
-//            Module.saveCurrentModuleLocally()
+            //            Module.currentModule = fliprModule
+            //            let placeIsStr:String = "\(fliprModule?.placeid ?? 0)"
+            //            Module.currentModule?.serial = placeIsStr
+            Module.currentModule?.serial = fliprModule?.serial ?? ""
+            Module.currentModule?.activationKey = fliprModule?.activationKey ?? ""
+            Module.saveCurrentModuleLocally()
+//            updatePool()
+            
         }
+        
+        Pool.currentPool?.id = placeDetails.placeId
+        Pool.saveCurrentPoolLocally()
+        refreshDashboardForSelectedPlace()
         
     }
     
+    func updatePool(){
+        User.currentUser?.getPool(completion: { (error) in
+            if error != nil {
+                print("Pool issue")
+                Pool.currentPool = nil
+                Pool.currentPool = nil
+                HUB.currentHUB = nil
+                self.showNoDevicePool()
+                self.refreshDashboardForSelectedPlace()
+            } else {
+                self.refreshDashboardForSelectedPlace()
+            }
+            
+        })
+        
+    }
+    
+    
+    
+    func showNoDevicePool(){
+        clearHubsInFliprTab()
+    }
+    
+    func refreshDashboardForSelectedPlace(){
+        self.notificationDisabledButton.isHidden = true
+        self.waterTmpChangeButton.isHidden = true
+        self.phChangeButton.isHidden = true
+        self.redoxChangeButton.isHidden = true
+        //            self.settingsButton.isHidden = true
+        self.bleMeasureHasBeenSent = false
+        self.refresh()
+        self.perform(#selector(self.callGetStatusApis), with: nil, afterDelay: 3)
+        
+    }
     
     
 }

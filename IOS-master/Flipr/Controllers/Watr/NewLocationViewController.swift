@@ -63,6 +63,8 @@ class NewLocationViewController: UIViewController {
     }
     
     func formatUI() {
+        self.navigationController?.isNavigationBarHidden = false
+
 //        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
 //        tableView.tableFooterView = UIView()
         let footerView = UIView()

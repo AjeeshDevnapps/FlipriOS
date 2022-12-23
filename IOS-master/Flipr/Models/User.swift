@@ -855,6 +855,40 @@ class User {
             }
         })
     }
+    
+    
+    func updatePlace(completion: ((_ settings:PoolSettingsModel?, _ error: Error?) -> Void)?) {
+        let placeIdVal = AppSharedData.sharedInstance.updatePlaceInfo.id ?? 0
+        let placeIdStr = String(placeIdVal)
+        Alamofire.request(Router.updatePlace(placeId: placeIdStr)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+
+            switch response.result {
+                
+            case .success(let value):
+                print("Create place - response.result.value: \(value)")
+                if let data = response.data {
+                    do {
+                        let setting = try JSONDecoder().decode(PoolSettingsModel.self, from: data)
+                        completion?(setting, nil)
+                    } catch let error {
+                        completion?(nil, error)
+                    }
+                }
+//                completion?(nil,nil)
+
+            case .failure(let error):
+                
+                print("Create place did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(nil,serverError)
+                } else {
+                    completion?(nil,error)
+                }
+            }
+        })
+    }
+
 
     
     

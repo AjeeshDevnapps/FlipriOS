@@ -19,6 +19,7 @@ class ElectricalSetupViewController: BaseViewController, UITableViewDataSource, 
     override func viewDidLoad() {
 //        self.isPresentingView = isPresentView
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         self.view.backgroundColor = #colorLiteral(red: 0.9476600289, green: 0.9772188067, blue: 0.9940286279, alpha: 1)
         tableView.backgroundColor = .clear
         if #available(iOS 11.0, *) {

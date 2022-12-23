@@ -50,11 +50,14 @@ class PlaceDropdownViewController: UIViewController {
         }
         backgrndView.isHidden = !isInvitationFlow
         placesTableView.tableFooterView = UIView()
-        callPlacesApi()
         // Do any additional setup after loading the view.
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        callPlacesApi()
+    }
     
     
     func callPlacesApi(){

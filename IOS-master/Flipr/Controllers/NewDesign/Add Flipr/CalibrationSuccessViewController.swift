@@ -33,8 +33,8 @@ class CalibrationSuccessViewController: UIViewController {
     
 
     @IBAction func nextButton(_ sender: UIButton) {
-        showPoolSettings()
-        return
+//        showPoolSettings()
+//        return
         let theme = EmptyStateViewTheme.shared
         theme.activityIndicatorType = .ballZigZag
         self.view.showEmptyStateViewLoading(title: "Launch of the 1st measure".localized, message: "Connecting to flipr...".localized, theme: theme)

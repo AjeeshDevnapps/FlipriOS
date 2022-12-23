@@ -10,7 +10,8 @@ struct PoolSettingsModel: Codable {
     var owner: Owner?
     var privateName:String?
     var location: String?
-    var id, builtYear, volume: Int?
+    var id, builtYear: Int?
+    var volume: Double?
     var surface: Double?
     var coating: TypeInfo?
     var integration: TypeInfo?

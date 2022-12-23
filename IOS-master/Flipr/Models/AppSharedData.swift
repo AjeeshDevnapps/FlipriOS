@@ -33,6 +33,10 @@ import Foundation
     var addPlaceLocationInfo = LocationInfo()
 
     var addPlaceName:String!
+    var addedPlaceId : Int  = 0
+    
+    var updatePlaceInfo = PoolSettingsModel()
+
 
     var isAddPlaceFlow = false
 //    var isAddPlace

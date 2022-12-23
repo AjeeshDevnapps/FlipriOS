@@ -68,7 +68,8 @@ class WatrInputViewController: UIViewController {
             if let input = textField.text{
                 if input.isValidString{
                     if order == 0{
-                        AppSharedData.sharedInstance.addPlaceInfo.volume = Double(input) ?? 0.0
+                        let m3Val = 264.172052 * (Double(input) ?? 1)
+                        AppSharedData.sharedInstance.addPlaceInfo.volume = m3Val
                         self.showShapeList()
                     }else{
                         AppSharedData.sharedInstance.addPlaceInfo.numberOfUsers = Int(input) ?? 0

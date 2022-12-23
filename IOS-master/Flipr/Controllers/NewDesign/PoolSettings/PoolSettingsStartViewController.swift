@@ -49,18 +49,23 @@ class PoolSettingsStartViewController: BaseViewController {
         viewSubTitleLbl.text  = "Flipr à besoin d'être calibré et de connaître votre bassin pour fonctionner de façon optimale.".localized
         titleFirst.text = "Connectez votre piscine".localized
         titleSecond.text = "Calibration".localized
-        titleThird.text = "Describe your pool".localized
+//        titleThird.text = "Describe your pool".localized
         
         subTitle1.text = ""
         subTitle2.text = "3 steps".localized
-        subTitle3.text = "3rd subtitle".localized
+//        subTitle3.text = "3rd subtitle".localized
         
         accessory1Btn.setTitle("Effectué".localized, for: .normal)
         
         accessory1Btn.isHidden = !isPoolConnected
         accesory2Btn.setTitle("Effectué".localized, for: .normal)
         accesory2Btn.isHidden = !isCaliberated
-        accesory3Btn.isHidden = false
+        accesory3Btn.isHidden = true
+        titleThird.isHidden = true
+        subTitle3.isHidden = true
+        slLblThird.isHidden = true
+
+
     }
     
     

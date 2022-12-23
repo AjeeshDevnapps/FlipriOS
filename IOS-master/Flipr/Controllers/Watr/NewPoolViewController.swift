@@ -68,7 +68,7 @@ class NewPoolViewController: UIViewController {
     
     @IBAction func submitAction(_ sender: UIButton) {
         if parametersButton.isSelected {
-            
+            self.deletePlace()
         } else {
             showAddShareAlert()
 //            let sb = UIStoryboard(name: "NewPool", bundle: nil)
@@ -80,6 +80,44 @@ class NewPoolViewController: UIViewController {
     }
     
     
+    func updatePlaceDetails(){
+        AppSharedData.sharedInstance.updatePlaceInfo = self.poolSettings ?? PoolSettingsModel()
+        User.currentUser?.updatePlace( completion: { (settings,error) in
+//            if (error != nil) {
+//                self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+//                self.hud?.textLabel.text = error?.localizedDescription
+//                self.hud?.dismiss(afterDelay: 3)
+//            } else {
+//                self.hud?.dismiss(afterDelay: 0)
+                self.poolSettings = settings
+//                self.tableView.reloadData()
+//            }
+            
+        })
+    }
+    
+    
+    func deletePlace(){
+        var placeId:String = ""
+        if let pId = self.placeDetails?.placeId{
+            placeId = "\(pId)"
+            FliprShare().poolId = placeId
+        }
+        FliprShare().deletePlace(placeId: placeId) { error in
+            if error != nil {
+//                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
+//                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
+//                alertVC.addAction(alertAction)
+//                self.present(alertVC, animated: true)
+//                return
+            }
+            else{
+//                self.dismiss(animated: true, completion: nil)
+            }
+            self.dismiss(animated: true, completion: nil)
+
+        }
+    }
 
     
     func showAddShareAlert(){
@@ -167,9 +205,9 @@ class NewPoolViewController: UIViewController {
     
     func toggleSubmitButtonStyleAndText() {
         if parametersButton.isSelected {
-            submitButton.setTitle("Submit".localized, for: .normal)
-            submitButton.setTitleColor(.white, for: .normal)
-            submitButton.backgroundColor = .black
+            submitButton.setTitle("Supprimer".localized, for: .normal)
+            submitButton.setTitleColor(UIColor.init(hexString: "#FE0101"), for: .normal)
+            submitButton.backgroundColor = .clear
         } else {
             submitButton.setTitle("Ajouter un invité".localized, for: .normal)
             submitButton.setTitleColor(.black, for: .normal)
@@ -296,7 +334,7 @@ class NewPoolViewController: UIViewController {
     
     
     func updateSettings(){
-        
+        updatePlaceDetails()
     }
 
 }
@@ -355,6 +393,20 @@ extension NewPoolViewController: UITableViewDataSource {
                 switch indexPath.row {
                 case 0:
                     secondaryText = poolSettings?.volume?.toString
+                    var voltitle = NewPoolTitles.Characteristics.allCases[indexPath.row].rawValue
+                    if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+                        if currentUnit == 2{
+                            let val: Double =  Double(poolSettings?.volume ?? 0)
+                            let funit = val * 264.172052
+                            secondaryText = funit.toString
+                            voltitle.append(" - gal")
+                        }else{
+                            voltitle.append(" - m³")
+                        }
+                    }else{
+                        voltitle.append(" - m³")
+                    }
+                    primaryText = voltitle
                 case 1:
                     secondaryText = poolSettings?.shape?.name
                 case 2:
@@ -393,7 +445,7 @@ extension NewPoolViewController: UITableViewDataSource {
                         isSwitchSelected = poolSettings?.isDefective ?? false
                     }
                 }
-            default: break;
+                default: break;
             }
         }
         if #available(iOS 14.0, *) {
@@ -419,7 +471,6 @@ extension NewPoolViewController: UITableViewDataSource {
                             tableViewCell.accessoryType = .none
                         }
                     }
-                    
                 }
                 tableViewCell.selectionStyle = .none
             } else {
@@ -554,8 +605,9 @@ extension NewPoolViewController: UITableViewDelegate {
                     listVC.defaultValue = poolSettings?.volume?.toString
                     listVC.title = "Volume".localized //+ " - m³"
                     listVC.completion(block: { (inputValue) in
-                            self.poolSettings?.volume = Int(inputValue) ?? 0
+                            self.poolSettings?.volume = Double(inputValue) ?? 0
                             self.tableView.reloadData()
+                            self.updateSettings()
                         })
                     navigationController?.pushViewController(listVC, animated: true)
 
@@ -570,6 +622,7 @@ extension NewPoolViewController: UITableViewDelegate {
                     viewController.completion(block: { (formValue) in
                         self.poolSettings?.shape = TypeInfo.init(id: formValue.id, name: formValue.label)
                         self.tableView.reloadData()
+                        self.updateSettings()
                     })
 
 //                    listVC.isTextField = false
@@ -583,6 +636,7 @@ extension NewPoolViewController: UITableViewDelegate {
                     viewController.completion(block: { (formValue) in
                         self.poolSettings?.coating = TypeInfo.init(id: formValue.id, name: formValue.label)
                         self.tableView.reloadData()
+                        self.updateSettings()
                     })
                     navigationController?.pushViewController(viewController, animated: true)
 
@@ -597,6 +651,7 @@ extension NewPoolViewController: UITableViewDelegate {
                     viewController.completion(block: { (formValue) in
                         self.poolSettings?.integration = TypeInfo.init(id: formValue.id, name: formValue.label)
                         self.tableView.reloadData()
+                        self.updateSettings()
                     })
                     navigationController?.pushViewController(viewController, animated: true)
 
@@ -619,6 +674,7 @@ extension NewPoolViewController: UITableViewDelegate {
                     viewController.completion(block: { (formValue) in
                         self.poolSettings?.treatment = TypeInfo.init(id: formValue.id, name: formValue.label)
                         self.tableView.reloadData()
+                        self.updateSettings()
                     })
                     navigationController?.pushViewController(viewController, animated: true)
 
@@ -630,6 +686,7 @@ extension NewPoolViewController: UITableViewDelegate {
                     viewController.completion(block: { (formValue) in
                         self.poolSettings?.filtration = TypeInfo.init(id: formValue.id, name: formValue.label)
                         self.tableView.reloadData()
+                        self.updateSettings()
                     })
                     navigationController?.pushViewController(viewController, animated: true)
 
@@ -661,6 +718,7 @@ extension NewPoolViewController: UITableViewDelegate {
                     listVC.completion(block: { (inputValue) in
                             self.poolSettings?.numberOfUsers = Int(inputValue) ?? 0
                             self.tableView.reloadData()
+                            self.updateSettings()
                         })
                     navigationController?.pushViewController(listVC, animated: true)
                     break; //Forme
@@ -670,6 +728,7 @@ extension NewPoolViewController: UITableViewDelegate {
                     viewController.completion(block: { (formValue) in
                         self.poolSettings?.mode = TypeInfo.init(id: formValue.id, name: formValue.label)
                         self.tableView.reloadData()
+                        self.updateSettings()
                     })
                     navigationController?.pushViewController(viewController, animated: true)
 

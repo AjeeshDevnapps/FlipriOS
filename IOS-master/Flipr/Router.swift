@@ -39,7 +39,8 @@ enum Router: URLRequestConvertible {
     case forgetModuleEquipment(serial: String, code: String)
 
     case getModules
-    
+    case createPlace(typeId:String)
+    case updatePlace(placeId:String)
     case getPlaces
     case getPlaceModules(placeId: String)
 
@@ -118,6 +119,9 @@ enum Router: URLRequestConvertible {
     case deleteShare(poolId: String, email: String)
     case acceptShare(poolId: String)
 
+    //Place
+    case deletePlace(placeId: String)
+
 
     //PoolSettings
     case getPoolSettings(poolId: String)
@@ -137,7 +141,10 @@ enum Router: URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
-            
+        case .createPlace:
+            return .post
+        case .updatePlace:
+            return .put
         case .reactivateAlert:
             return .put
         case .authentifyUser:
@@ -299,6 +306,9 @@ enum Router: URLRequestConvertible {
             return .put
         case .deleteShare:
             return .delete
+            
+        case .deletePlace:
+            return .delete
         case .getPoolSettings:
             return .get
            
@@ -313,7 +323,11 @@ enum Router: URLRequestConvertible {
     
     var path: String {
         switch self {
-        
+        case .createPlace(let typeId):
+            return "place"
+        case .updatePlace(let placeId):
+            return "place/\(placeId)"
+
         case .authentifyUser:
             return "oauth2/token"
         case .createUser:
@@ -456,8 +470,15 @@ enum Router: URLRequestConvertible {
             return "pools/\(poolId)/Log"
         case .updateLog(let poolId, let logId, _):
             return "pools/\(poolId)/Log/\(logId)"
+            
+            //flipr
+//        case .getHUBS(let poolId):
+//            return "hub/Pool/\(poolId)/AllHubs"
+            
+                //water
         case .getHUBS(let poolId):
-            return "hub/Pool/\(poolId)/AllHubs"
+            return "hub/Place/\(poolId)/AllHubs"
+
         case .getHUBState(let serial):
             return "hub/\(serial)/state"
         case .updateHUBState(let serial, let value):
@@ -488,6 +509,9 @@ enum Router: URLRequestConvertible {
             return "place/\(poolId)/shares"
         case .deleteShare(poolId: let poolId, email: let email):
             return "place/\(poolId)/shares"
+            
+        case .deletePlace(placeId: let placeId):
+            return "place/\(placeId)"
         case .getPoolSettings(poolId: let poolId):
             return "place/\(poolId)"
         case .getPlaceTypes:
@@ -656,9 +680,10 @@ enum Router: URLRequestConvertible {
         case .addModule(let serial, let activationKey, let delete):
             let parameters: [String : Any] = [
                 "Serial": serial,
-                "ActivationKey": activationKey,
-                "Delete": delete,
-                "NickName": "Flipr " + serial
+//                "ActivationKey": activationKey,
+//                "Delete": delete,
+                "placeId" : AppSharedData.sharedInstance.addedPlaceId,
+//                "NickName": "Flipr " + serial
             ]
             print(parameters)
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
@@ -902,8 +927,10 @@ enum Router: URLRequestConvertible {
             ]
             print("Posting measures with params: \(parameters)")
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-            
          
+        case .deletePlace(placeId: let poolId):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: [:])
+
         case .getPoolSettings(poolId: _):
             var lang = "en"
             if let preferredLanguage = Locale.current.languageCode {
@@ -915,7 +942,28 @@ enum Router: URLRequestConvertible {
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
        
             
+        case .createPlace(typeId: _):
             
+            let placeInfo = AppSharedData.sharedInstance.addPlaceInfo
+            let placeLoc = AppSharedData.sharedInstance.addPlaceLocationInfo
+            
+            let parameters: [String : Any] = ["PrivateName": AppSharedData.sharedInstance.addPlaceName,"BuiltYear": 2022,"ElectrolyzerThreshold": 0.0,"Id" : placeLoc.palceId, "IsPublic" : false, "Latitude" : placeInfo.latitude ?? 123.9, "Longitude" : placeInfo.longitude ?? 123.9, "NumberOfUsers" : placeInfo.numberOfUsers ?? 0, "NumberOfPlaces" : 0, "Surface" : 17.25, "Volume" : placeInfo.volume ?? 0.0, "City" : ["Latitude" : placeInfo.latitude ?? 123.9 , "Longitude" : placeInfo.longitude ?? 23.0, "Name" : placeInfo.city?.name ?? "",  "ZipCode" : placeInfo.city?.zipCode ?? ""], "Coating" : ["Id" : placeInfo.coating?.id ?? 0, "Name" : placeInfo.coating?.label ?? "" ], "Filtration" : ["Id" : placeInfo.filtration?.id ?? 0, "Name" : placeInfo.filtration?.label ?? "" ], "Integration" : ["Id" : placeInfo.integration?.id ?? 0, "Name" : placeInfo.integration?.label ?? "" ], "Mode" : ["Id" : placeInfo.mode?.id ?? 0, "Name" : placeInfo.mode?.label ?? "" ], "Shape" : ["Id" : placeInfo.shape?.id ?? 0, "Name" : placeInfo.shape?.label ?? "" ],  "Treatment" : ["Id" : placeInfo.treatment?.id ?? 0, "Name" : placeInfo.treatment?.label ?? "" ], "Type" : ["id" : placeLoc.palceId ]]
+            
+            print("Posting create place with params: \(parameters)")
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+            
+        case .updatePlace:
+            
+            let placeInfo = AppSharedData.sharedInstance.updatePlaceInfo
+            
+            let parameters: [String : Any] = ["PrivateName": AppSharedData.sharedInstance.addPlaceName,"BuiltYear": 2022,"ElectrolyzerThreshold": 0.0,"Id" : placeInfo.id ?? 0, "IsPublic" : false, "Latitude" : placeInfo.latitude ?? 123.9, "Longitude" : placeInfo.longitude ?? 123.9, "NumberOfUsers" : placeInfo.numberOfUsers ?? 0, "NumberOfPlaces" : 0, "Surface" : 17.25, "Volume" : placeInfo.volume ?? 0.0, "City" : ["Latitude" : placeInfo.latitude ?? 123.9 , "Longitude" : placeInfo.longitude ?? 23.0, "Name" : placeInfo.city?.name ?? "",  "ZipCode" : placeInfo.city?.zipCode ?? ""], "Coating" : ["Id" : placeInfo.coating?.id ?? 0, "Name" : placeInfo.coating?.name ?? "" ], "Filtration" : ["Id" : placeInfo.filtration?.id ?? 0, "Name" : placeInfo.filtration?.name ?? "" ], "Integration" : ["Id" : placeInfo.integration?.id ?? 0, "Name" : placeInfo.integration?.name ?? "" ], "Mode" : ["Id" : placeInfo.mode?.id ?? 0, "Name" : placeInfo.mode?.name ?? "" ], "Shape" : ["Id" : placeInfo.shape?.id ?? 0, "Name" : placeInfo.shape?.name ?? "" ],  "Treatment" : ["Id" : placeInfo.treatment?.id ?? 0, "Name" : placeInfo.treatment?.name ?? "" ], "Type" : ["id" : placeInfo.type?.id ?? 0, "IsAvailableAsPlace" : placeInfo.type?.isAvailableAsPlace ?? true ]]
+            
+            print("Posting create place with params: \(parameters)")
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+
+            
+//            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+
         default:
             break
         }
