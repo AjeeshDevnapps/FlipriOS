@@ -77,6 +77,7 @@ struct K {
         static let ServerChanged = Notification.Name("fr.isee-u.serverChanged")
         static let MeasureUnitSettingsChanged = Notification.Name("fr.isee-u.MeasureUnitSettingsChanged")
 
+        static let PlaceDeleted = Notification.Name("fr.isee-u.PlaceDeleted")
 
 
 

@@ -9,7 +9,7 @@ import Foundation
 struct PoolSettingsModel: Codable {
     var owner: Owner?
     var privateName:String?
-    var location: String?
+    var location: TypeInfo?
     var id, builtYear: Int?
     var volume: Double?
     var surface: Double?
@@ -19,7 +19,7 @@ struct PoolSettingsModel: Codable {
     var filtration: TypeInfo?
     var treatment:TypeInfo?
     var isDefective: Bool?
-    var electrolyzerThreshold: Int?
+    var electrolyzerThreshold: Double?
     var isPublic: Bool?
     var numberOfUsers: Int?
     var mode: TypeInfo?
@@ -27,7 +27,7 @@ struct PoolSettingsModel: Codable {
     var latitude, longitude: Double?
     var filtrationMode: Int?
     var isFiltrationCommandOn: Bool?
-    var lastIFTTTCheck, recommandedFiltrationDuration, commandTemperature: Double?
+  //  var lastIFTTTCheck, recommandedFiltrationDuration, commandTemperature: Double?
     var cityID: Int?
     var type: PoolType?
     var spaKind: String?
@@ -57,9 +57,9 @@ struct PoolSettingsModel: Codable {
         case longitude = "Longitude"
         case filtrationMode = "FiltrationMode"
         case isFiltrationCommandOn = "IsFiltrationCommandOn"
-        case lastIFTTTCheck = "LastIFTTTCheck"
-        case recommandedFiltrationDuration = "RecommandedFiltrationDuration"
-        case commandTemperature = "CommandTemperature"
+//        case lastIFTTTCheck = "LastIFTTTCheck"
+//        case recommandedFiltrationDuration = "RecommandedFiltrationDuration"
+//        case commandTemperature = "CommandTemperature"
         case cityID = "City_Id"
         case type = "Type"
         case spaKind = "SpaKind"
@@ -73,9 +73,10 @@ struct CityInSettings: Codable {
     let id: Int?
     let isSigfoxRelayLocation: Bool?
     let country: Country?
-    let zipCode, name: String?
-    let longitude, latitude: Double?
-    let altitude: Int?
+    var name: String?
+    var zipCode: String?
+    var longitude, latitude: Double?
+    let altitude: Double?
 
     enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -91,7 +92,7 @@ struct CityInSettings: Codable {
 
 // MARK: - Country
 struct Country: Codable {
-    let code, name: String?
+    var code, name: String?
 
     enum CodingKeys: String, CodingKey {
         case code = "Code"
@@ -132,29 +133,28 @@ struct PoolType: Codable {
 
 struct Owner : Codable {
 
-    let actualRights : [String]?
+   // let actualRights : [String]?
     let birthday : String?
     let email : String?
     let firstName : String?
-    let isActivated : Bool?
-    let isDesactivated : Bool?
-    let isNewsletter : Bool?
     let isOkToShareData : String?
-    let isSocietyCreator : Bool?
     let joinedSocietyDate : String?
     let lang : String?
     let lastName : String?
-    let notifyFiltrationDuration : Bool?
-    let notifyPoolsHealth : Bool?
-    let notifyProbeIssues : Bool?
-    let notifyStock : Bool?
+//    let notifyPoolsHealth : Bool?
+//    let notifyProbeIssues : Bool?
     let phoneNumber : String?
     let societyId : String?
     let systemPauseNotifications : Bool?
-
+    let isActivated : Bool?
+    let isDesactivated : Bool?
+    let isNewsletter : Bool?
+    let notifyFiltrationDuration : Bool?
+    let isSocietyCreator : Bool?
+    let notifyStock : Bool?
 
     enum CodingKeys: String, CodingKey {
-        case actualRights = "ActualRights"
+      //  case actualRights = "ActualRights"
         case birthday = "Birthday"
         case email = "Email"
         case firstName = "FirstName"
@@ -167,8 +167,8 @@ struct Owner : Codable {
         case lang = "Lang"
         case lastName = "LastName"
         case notifyFiltrationDuration = "NotifyFiltrationDuration"
-        case notifyPoolsHealth = "NotifyPoolsHealth"
-        case notifyProbeIssues = "NotifyProbeIssues"
+//        case notifyPoolsHealth = "NotifyPoolsHealth"
+//        case notifyProbeIssues = "NotifyProbeIssues"
         case notifyStock = "NotifyStock"
         case phoneNumber = "PhoneNumber"
         case societyId = "SocietyId"

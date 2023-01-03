@@ -28,8 +28,8 @@ class AddDeviceListViewController: UIViewController {
         hubVw.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
         dipRVw.roundCorner(corner: 12)
         watrVw.roundCorner(corner: 12)
-        dipRVw.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
-        watrVw.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
+        dipRVw.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 10.0, opacity: 0.21)
+        watrVw.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 10.0, opacity: 0.21)
 
         // Do any additional setup after loading the view.
     }

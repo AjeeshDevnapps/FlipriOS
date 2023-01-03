@@ -204,7 +204,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RemoteControl.sync(ISEEU_REMOTE_CONTROL_FILE_URL)
         
         if Pool.currentPool != nil {
-            User.currentUser?.getPool(completion: nil)
+//            User.currentUser?.getPool(completion: nil)
             //User.currentUser?.getModule(completion: nil)
             //User.currentUser?.getAccount(completion: nil)
             //updateUserData()

@@ -14,6 +14,9 @@ class WatrInputViewController: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
     var order = 0
     var defaultValue:String?
+    var titleStr:String?
+
+    var isNonType = false
     
     var completionBlock:(_: (_ value:String) -> Void)?
     
@@ -30,8 +33,10 @@ class WatrInputViewController: UIViewController {
             self.textField.text = defaultValue
             setCustomBackbtn()
         }
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.submitButton.isHidden = false
         manageUnit()
+        
 
     }
     
@@ -58,9 +63,15 @@ class WatrInputViewController: UIViewController {
             }
             self.title = titleStr
         }
-       
+        showTitle()
     }
     
+    
+    func showTitle(){
+        if isNonType{
+            self.title = titleStr
+        }
+    }
     
     @IBAction func submitAction(_ sender: UIButton) {
         
@@ -68,8 +79,20 @@ class WatrInputViewController: UIViewController {
             if let input = textField.text{
                 if input.isValidString{
                     if order == 0{
-                        let m3Val = 264.172052 * (Double(input) ?? 1)
-                        AppSharedData.sharedInstance.addPlaceInfo.volume = m3Val
+                        if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+                            if currentUnit == 2{
+                                let inputVal = Double(input) ?? 1
+                                let m3Val = Double(inputVal / 264.172052 )
+                                AppSharedData.sharedInstance.addPlaceInfo.volume = m3Val
+                            }else{
+                                let m3Val = 264.172052 * (Double(input) ?? 1)
+                                AppSharedData.sharedInstance.addPlaceInfo.volume = m3Val
+                            }
+                        }else{
+                            let m3Val = 264.172052 * (Double(input) ?? 1)
+                            AppSharedData.sharedInstance.addPlaceInfo.volume = m3Val
+                        }
+                        
                         self.showShapeList()
                     }else{
                         AppSharedData.sharedInstance.addPlaceInfo.numberOfUsers = Int(input) ?? 0
@@ -107,7 +130,6 @@ class WatrInputViewController: UIViewController {
             navigationController?.pushViewController(viewController)
         }
  
-        
         
     }
                                   

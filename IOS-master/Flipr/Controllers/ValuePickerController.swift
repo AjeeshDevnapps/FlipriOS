@@ -53,6 +53,7 @@ class ValuePickerController: UITableViewController {
         
         if AppSharedData.sharedInstance.isAddPlaceFlow{
 //            self.navigationItem.setHidesBackButton(true, animated: true)
+            /*
             let bkView = UIView.init(frame: CGRect(x:0,y:0,width:self.view.frame.size.width,height:100))
             bkView.backgroundColor = .clear
             nextButton = UIButton.init(frame:CGRect(x:20,y:25,width:bkView.frame.size.width - 40,height:50))
@@ -64,6 +65,8 @@ class ValuePickerController: UITableViewController {
             bkView.addSubview(nextButton)
             tableView.tableFooterView = bkView
             nextButton.isHidden = true
+            */
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         }
         
         
@@ -93,7 +96,7 @@ class ValuePickerController: UITableViewController {
                         let sections = NSIndexSet(indexesIn: range)
                         self.tableView.reloadSections(sections as IndexSet, with: .bottom)
                         if AppSharedData.sharedInstance.isAddPlaceFlow{
-                            self.nextButton.isHidden = false
+//                            self.nextButton.isHidden = false
                         }
                         
                     } else {

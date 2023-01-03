@@ -697,9 +697,13 @@ class DashboardViewController: UIViewController {
     }
     
     func hideUserHasNoFlipr(){
-        self.waveView.isHidden = false
-        self.settingsButtonContainer.isHidden = false
-        self.addFirstFliprView.isHidden = true
+        if isPlaceOwner{
+            self.waveView.isHidden = false
+            self.settingsButtonContainer.isHidden = false
+            self.addFirstFliprView.isHidden = true
+        }else{
+            userHasNoFlipr()
+        }
     }
     
     @IBAction func addFirstFliprButtonClicked(){
@@ -910,10 +914,7 @@ class DashboardViewController: UIViewController {
     
     
     func keepUserOrderHubViews(){
-       
         self.handleHubViews()
-        
-        
     }
     
     
@@ -960,13 +961,12 @@ class DashboardViewController: UIViewController {
     func clearHubsInFliprTab(){
         self.hubBulb = nil
         self.hubPumb =  nil
-        bulbActionButton.setImage(UIImage(named: "OFF"), for: .normal)
-        bulbActionButton.isUserInteractionEnabled = false
+        bulbActionButton.setImage(UIImage(named: "add"), for: .normal)
+        bulbActionButton.isUserInteractionEnabled = true
         self.bulbStatuImageView.image =  UIImage(named: "lightDisabled")
-        pumbActionButton.setImage(UIImage(named: "pumbOff"), for: .normal)
+        pumbActionButton.setImage(UIImage(named: "add"), for: .normal)
         self.pumbStatuImageView.image =  UIImage(named: "pumbdisabled")
-        pumbActionButton.isUserInteractionEnabled = false
-
+        pumbActionButton.isUserInteractionEnabled = true
     }
     
     
@@ -2163,6 +2163,10 @@ class DashboardViewController: UIViewController {
     }
     
     func showSubscriptionButton(){
+        if !isPlaceOwner{
+            hideAlertArea()
+            return
+        }
         self.measureAlertView.isHidden = true
         self.measureAlertTouchAreaButton.isHidden = true
         self.subscriptionButton.tag = 3
@@ -2175,6 +2179,10 @@ class DashboardViewController: UIViewController {
     }
     
     func showAlertButton(){
+        if !isPlaceOwner{
+            hideAlertArea()
+            return
+        }
         self.measureAlertView.isHidden = true
         self.measureAlertTouchAreaButton.isHidden = true
         self.subscriptionButton.tag = 2
@@ -2187,6 +2195,10 @@ class DashboardViewController: UIViewController {
     }
     
     func showGreenAlertButton(){
+        if !isPlaceOwner{
+            hideAlertArea()
+            return
+        }
         self.measureAlertView.isHidden = true
         self.measureAlertTouchAreaButton.isHidden = true
         self.subscriptionButton.tag = 4
@@ -2199,6 +2211,10 @@ class DashboardViewController: UIViewController {
     }
     
     func showGoodMeasureButton(){
+        if !isPlaceOwner{
+            hideAlertArea()
+            return
+        }
         self.measureAlertView.isHidden = true
         self.measureAlertTouchAreaButton.isHidden = true
         self.subscriptionButton.tag = 1
@@ -2212,6 +2228,10 @@ class DashboardViewController: UIViewController {
     
     
     func showVigilanceButton(){
+        if !isPlaceOwner{
+            hideAlertArea()
+            return
+        }
         self.measureAlertView.isHidden = true
         self.measureAlertTouchAreaButton.isHidden = true
         self.subscriptionButton.tag = 5
@@ -2223,6 +2243,17 @@ class DashboardViewController: UIViewController {
         self.subscriptionButton.setImage(UIImage(named: "eye"), for: .normal)
     }
     
+    
+    func hideAlertArea(){
+        self.subscriptionButton.isHidden = true
+        self.measureAlertView.isHidden = true
+    }
+    
+    func manageGestView(){
+        redoxChangeButton.isHidden = true
+        waterTmpChangeButton.isHidden = true
+        phChangeButton.isHidden = true
+    }
     
     func hideWeatherForecast() {
         airTemperatureLabel.text = "  "
@@ -5057,11 +5088,24 @@ extension DashboardViewController{
     }
     
     func showPlaceInfo(){
-        var placeDetails =  (self.selectedPlace?.name ?? "")
+//        var placeDetails =  (self.selectedPlace?.name ?? "")
+
+        var placeDetails =  (self.selectedPlace?.privateName ?? "")
         placeDetails.append(" - ")
+//        if self.selectedPlace?.privateName != nil{
+//            placeDetails.append(self.selectedPlace?.privateName ?? "")
+//        }else{
+//            placeDetails.append(self.selectedPlace?.placeOwnerFirstName ?? "")
+//            placeDetails.append(" ")
+//            placeDetails.append(self.selectedPlace?.placeOwnerLastName ?? "")
+//        }
+        
         placeDetails.append(self.selectedPlace?.placeOwnerFirstName ?? "")
         placeDetails.append(" ")
         placeDetails.append(self.selectedPlace?.placeOwnerLastName ?? "")
+
+//        placeDetails.append(self.selectedPlace?.name ?? "")
+
         placeDetails.append(" - ")
         placeDetails.append(self.selectedPlace?.placeCity ?? "")
         self.selectedPlaceDetailsLbl.text = placeDetails
@@ -5080,9 +5124,10 @@ extension DashboardViewController{
         }else{
             isPlaceOwner = false
         }
-        
+        AppSharedData.sharedInstance.isOwner = isPlaceOwner
+        self.shareButton.isHidden = !isPlaceOwner
         self.settingsButton.isHidden = !isPlaceOwner
-        
+        self.manageGestView()
     }
     
     func getPlaceModules(placeId:String){
@@ -5132,8 +5177,10 @@ extension DashboardViewController:PlaceDropdownDelegate{
         
         if placeDetails.permissionLevel == "Admin"{
             isPlaceOwner = true
+            self.addEquipmentView.isHidden = false
         }else{
             isPlaceOwner = false
+            self.addEquipmentView.isHidden = true
         }
         self.placeDetails = placeDetails
         self.selectedPlace = placeDetails
@@ -5197,7 +5244,7 @@ extension DashboardViewController:PlaceDropdownDelegate{
         //            self.settingsButton.isHidden = true
         self.bleMeasureHasBeenSent = false
         self.refresh()
-        self.perform(#selector(self.callGetStatusApis), with: nil, afterDelay: 3)
+        self.perform(#selector(self.callGetStatusApis), with: nil, afterDelay: 0)
         
     }
     

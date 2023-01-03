@@ -114,6 +114,7 @@ class NewPoolViewController: UIViewController {
             else{
 //                self.dismiss(animated: true, completion: nil)
             }
+            NotificationCenter.default.post(name: K.Notifications.PlaceDeleted, object: nil)
             self.dismiss(animated: true, completion: nil)
 
         }
@@ -397,7 +398,7 @@ extension NewPoolViewController: UITableViewDataSource {
                     if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
                         if currentUnit == 2{
                             let val: Double =  Double(poolSettings?.volume ?? 0)
-                            let funit = val * 264.172052
+                            let funit = Int(val * 264.172052)
                             secondaryText = funit.toString
                             voltitle.append(" - gal")
                         }else{
@@ -575,16 +576,45 @@ extension NewPoolViewController: UITableViewDelegate {
                 let listVC = self.storyboard?.instantiateViewController(withIdentifier: "NewPoolSimpleListViewController") as! NewPoolSimpleListViewController
                 
                 switch indexPath.row {
+                case 0:
+                    break
+                    
                 case 1:
-                    listVC.listItems = []
-                    listVC.isTextField = true
-                    listVC.inputType = UIKeyboardType.default
-                    listVC.title = NewPoolTitles.PoolGeneralTitles.poolType.rawValue
-                    navigationController?.pushViewController(listVC, animated: true)
+//                    listVC.listItems = []
+//                    listVC.isTextField = true
+//                    listVC.inputType = UIKeyboardType.default
+//                    listVC.title = NewPoolTitles.PoolGeneralTitles.poolType.rawValue
+//                    navigationController?.pushViewController(listVC, animated: true)
                     break; //Type
+                case 2:
+                    let sb = UIStoryboard(name: "NewPool", bundle: nil)
+                    let listVC = sb.instantiateViewController(withIdentifier: "WatrInputViewController") as! WatrInputViewController
+                    listVC.order = 0
+                    listVC.isNonType = true
+                    listVC.defaultValue = poolSettings?.privateName
+                    listVC.titleStr = "Libellé".localized //+ " - m³"
+                    listVC.completion(block: { (inputValue) in
+                            self.poolSettings?.privateName = inputValue
+                            self.tableView.reloadData()
+                            self.updateSettings()
+                        })
+                    navigationController?.pushViewController(listVC, animated: true)
+                    break
                 case 3:
                     let locationVC = storyboard?.instantiateViewController(withIdentifier: "NewPoolLocationViewController") as! NewPoolLocationViewController
                     locationVC.title = "Localisation"
+                    locationVC.completion { value, latitude, longitude in
+                        self.poolSettings?.longitude = longitude
+                        self.poolSettings?.latitude = latitude
+                        self.poolSettings?.city?.name = value.name
+                        self.poolSettings?.city?.zipCode = value.zipCode
+                        self.poolSettings?.city?.longitude = value.longitude
+                        self.poolSettings?.city?.latitude = value.latitude
+
+
+                        self.tableView.reloadData()
+                        self.updateSettings()
+                    }
                     navigationController?.pushViewController(locationVC)
                     break;
                 default: break;
@@ -705,8 +735,6 @@ extension NewPoolViewController: UITableViewDelegate {
 
                 switch indexPath.row {
                 case 0:
-                    
-
                     
                     break;
                 case 1:

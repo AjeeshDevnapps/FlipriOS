@@ -278,6 +278,17 @@
                                     <action selector="addPlaceButtonClicked" destination="Y6W-OH-hqX" eventType="touchUpInside" id="e1j-Dv-wLg"/>
                                 </connections>
                             </button>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="7QN-S2-ekG">
+                                <rect key="frame" x="27" y="150" width="360" height="48"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ajoutez un emplacement pour commencer l’aventure" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFi-5C-PXp">
+                                        <rect key="frame" x="0.0" y="0.0" width="360" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -285,27 +296,33 @@
                             <constraint firstItem="CtN-iQ-HfU" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="40" id="0tl-Pl-osb"/>
                             <constraint firstItem="CtN-iQ-HfU" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="2P3-mp-tP5"/>
                             <constraint firstItem="CtN-iQ-HfU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="4kn-ng-Lbm"/>
+                            <constraint firstItem="7QN-S2-ekG" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="106" id="7H9-md-zbo"/>
                             <constraint firstItem="LRu-be-eSJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="9WD-0J-x9U"/>
                             <constraint firstItem="yVN-Ph-AY2" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Eyy-k4-VaL"/>
                             <constraint firstItem="NpG-1z-pXO" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="GDs-Wt-43a"/>
                             <constraint firstItem="LRu-be-eSJ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="GZb-Wx-DYt"/>
+                            <constraint firstItem="7QN-S2-ekG" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="27" id="Ln3-Kz-Mxp"/>
                             <constraint firstItem="CtN-iQ-HfU" firstAttribute="top" secondItem="LRu-be-eSJ" secondAttribute="bottom" id="Mwx-hC-1RR"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="yVN-Ph-AY2" secondAttribute="trailing" constant="16" id="SyM-Rn-UoA"/>
                             <constraint firstAttribute="bottom" secondItem="NpG-1z-pXO" secondAttribute="bottom" id="WwY-oC-ERi"/>
                             <constraint firstAttribute="bottom" secondItem="CtN-iQ-HfU" secondAttribute="bottom" id="a6x-kw-UC9"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="yVN-Ph-AY2" secondAttribute="bottom" constant="50" id="bjh-ar-5BZ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7QN-S2-ekG" secondAttribute="trailing" constant="27" id="dge-4D-IDE"/>
                             <constraint firstItem="LRu-be-eSJ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="epz-aQ-Z7K"/>
                             <constraint firstItem="NpG-1z-pXO" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="gmd-va-1Zf"/>
                             <constraint firstItem="bOS-gQ-cNg" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="hPh-5U-Cuc"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bOS-gQ-cNg" secondAttribute="trailing" id="hdW-5Y-OKN"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="bOS-gQ-cNg" secondAttribute="bottom" constant="129" id="iEX-iT-meM"/>
                             <constraint firstItem="NpG-1z-pXO" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="kOr-h4-kSA"/>
+                            <constraint firstItem="7QN-S2-ekG" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="kgl-6x-Qo4"/>
                             <constraint firstItem="bOS-gQ-cNg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="uEE-gp-zTQ"/>
                         </constraints>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="414" height="500"/>
                     <connections>
                         <outlet property="backgrndView" destination="NpG-1z-pXO" id="QYR-bR-7G2"/>
+                        <outlet property="noPlaceMsgLabel" destination="eFi-5C-PXp" id="JFN-Sw-nEp"/>
+                        <outlet property="noPlaceMsgStack" destination="7QN-S2-ekG" id="LDg-Wq-Hfd"/>
                         <outlet property="placesTableView" destination="bOS-gQ-cNg" id="72Q-wf-b0K"/>
                     </connections>
                 </viewController>

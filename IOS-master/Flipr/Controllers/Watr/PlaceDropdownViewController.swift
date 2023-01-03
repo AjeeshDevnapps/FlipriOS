@@ -38,6 +38,8 @@ class PlaceDropdownViewController: UIViewController {
     @IBOutlet weak var placesTableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var backgrndView: UIView!
+    @IBOutlet weak var noPlaceMsgStack: UIStackView!
+    @IBOutlet weak var noPlaceMsgLabel: UILabel!
 
 
     var delegate:PlaceDropdownDelegate?
@@ -50,6 +52,9 @@ class PlaceDropdownViewController: UIViewController {
         }
         backgrndView.isHidden = !isInvitationFlow
         placesTableView.tableFooterView = UIView()
+        NotificationCenter.default.addObserver(forName: K.Notifications.PlaceDeleted, object: nil, queue: nil) { (notification) in
+            self.callPlacesApi()
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -60,10 +65,23 @@ class PlaceDropdownViewController: UIViewController {
     }
     
     
+    func clearData(){
+     //   self.noPlaceMsgLabel.text = "noPlaceMsg".localized
+        self.noPlaceMsgStack.isHidden = false
+        self.haveInvitation = false
+        self.havePlace = false
+        self.placesList.removeAll()
+        self.invitationList.removeAll()
+        self.places.removeAll()
+        
+    }
+    
+    
     func callPlacesApi(){
         hud?.show(in: self.view)
         User.currentUser?.getPlaces(completion: { (placesResult,error) in
             if (error != nil) {
+                self.clearData()
                 self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud?.textLabel.text = error?.localizedDescription
                 self.hud?.dismiss(afterDelay: 0)
@@ -71,12 +89,12 @@ class PlaceDropdownViewController: UIViewController {
                 if placesResult != nil{
                    // print(placesResult)
                     self.places = placesResult!
+                    if self.places.count > 0 {
+                        self.noPlaceMsgStack.isHidden = true
+                    }
 //                    self.places.sort { $0.isPending && !$1.isPending }
                      self.placesList = self.places.filter { $0.isPending == false }
                     self.invitationList = self.places.filter { $0.isPending == true }
-
-                    
-                    
                     self.haveInvitation = false
                     self.havePlace = false
                     if self.placesList.count > 0 {
@@ -377,6 +395,13 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
             let placeId:String = "\(String(describing: self.places[indexPath.row].placeId ?? 0))"
             let place = self.places[indexPath.row]
             self.getPlaceModules(placeId: placeId, placeDetails: place)
+        }else{
+            
+            let sb = UIStoryboard(name: "NewPool", bundle: nil)
+            if let viewController = sb.instantiateViewController(withIdentifier: "AddDeviceListViewController") as? AddDeviceListViewController {
+                AppSharedData.sharedInstance.addedPlaceId = self.places[indexPath.row].placeId 
+                self.present(viewController, animated: true, completion: nil)
+            }
         }
         
     }
@@ -384,17 +409,19 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
     
     
     @IBAction func addPlaceButtonClicked(){
-        let sb = UIStoryboard(name: "NewLocation", bundle: nil)
-        if let viewController = sb.instantiateViewController(withIdentifier: "NewLocationViewControllerID") as? NewLocationViewController {
-            //            self.navigationController?.pushViewController(viewController, completion: nil)
-            //            viewController.modalPresentationStyle = .fullScreen
-            let nav = UINavigationController.init(rootViewController: viewController)
-            self.present(nav, animated: true)
+        if placesList.count  < 50{
+            let sb = UIStoryboard(name: "NewLocation", bundle: nil)
+            if let viewController = sb.instantiateViewController(withIdentifier: "NewLocationViewControllerID") as? NewLocationViewController {
+                //            self.navigationController?.pushViewController(viewController, completion: nil)
+                //            viewController.modalPresentationStyle = .fullScreen
+                let nav = UINavigationController.init(rootViewController: viewController)
+                self.present(nav, animated: true)
+            }
+        }else{
+            self.showError(title: "Warning!", message: "Exceeded the Max Count 3")
         }
+       
     }
-    
-    
-    
     
     
 }

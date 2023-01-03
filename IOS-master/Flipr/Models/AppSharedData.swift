@@ -39,6 +39,10 @@ import Foundation
 
 
     var isAddPlaceFlow = false
+    
+    var isOwner = false
+
+    
 //    var isAddPlace
     
     private override init() {

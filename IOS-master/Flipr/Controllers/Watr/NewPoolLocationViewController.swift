@@ -19,7 +19,11 @@ class NewPoolLocationViewController: UIViewController, CLLocationManagerDelegate
     var locations:[Location] = []
     var selectedCity: City?
     var completionBlock:(_: (_ value:City,_ latitude:Double?,_ longitude: Double?) -> Void)?
+    func completion(block: @escaping (_ value:City,_ latitude:Double?,_ longitude: Double?) -> Void) {
+        completionBlock = block
+    }
     let locationManager = CLLocationManager()
+    var isSelectedLocation = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +36,9 @@ class NewPoolLocationViewController: UIViewController, CLLocationManagerDelegate
             self.submitButton.isHidden = true
             setCustomBackbtn()
         }
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.submitButton.isHidden = true
+
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
     }
@@ -104,6 +111,10 @@ class NewPoolLocationViewController: UIViewController, CLLocationManagerDelegate
                             AppSharedData.sharedInstance.addPlaceInfo.latitude = currentLocation.coordinate.latitude
                             AppSharedData.sharedInstance.addPlaceInfo.longitude = currentLocation.coordinate.longitude
                             AppSharedData.sharedInstance.addPlaceInfo.city = city
+                            if self.isSelectedLocation{
+                                self.submitAction(self.submitButton)
+                            }
+
                         }else{
                             self.completionBlock?(city,currentLocation.coordinate.latitude,currentLocation.coordinate.longitude)
                         }
@@ -228,6 +239,7 @@ extension NewPoolLocationViewController: UITableViewDelegate {
 //        }
 //        else {
             if indexPath.section == 0 {
+                self.isSelectedLocation = true
                 useCurrentLocation()
             }else{
                 let city = City(name: locations[indexPath.row].locality, latitude: (locations[indexPath.row].latitude), longitude: (locations[indexPath.row].longitude))
@@ -239,7 +251,15 @@ extension NewPoolLocationViewController: UITableViewDelegate {
                 }
                 self.selectedCity = city
                 textField.text = locations[indexPath.row].locality
-                self.completionBlock?(city,locations[indexPath.row].latitude,locations[indexPath.row].longitude)
+                
+                if AppSharedData.sharedInstance.isAddPlaceFlow{
+                    AppSharedData.sharedInstance.addPlaceInfo.latitude = city.latitude
+                    AppSharedData.sharedInstance.addPlaceInfo.longitude = city.longitude
+                    AppSharedData.sharedInstance.addPlaceInfo.city = city
+                    self.submitAction(self.submitButton)
+                }else{
+                    self.completionBlock?(city,locations[indexPath.row].latitude,locations[indexPath.row].longitude)
+                }
             }
            
         }

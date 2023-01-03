@@ -151,6 +151,17 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func handleGuestView(){
+        if !AppSharedData.sharedInstance.isOwner{
+            self.lowDisinfectantTresholdTextField.isUserInteractionEnabled = false
+            self.lowTemperatureThresholdTextField.isUserInteractionEnabled = false
+            highPHTresholdTextField.isUserInteractionEnabled = false
+            lowPHTresholdTextField.isUserInteractionEnabled = false
+            phRangeSlider.isUserInteractionEnabled = false
+            rangeSlider.isUserInteractionEnabled = false
+            self.resetButton.isUserInteractionEnabled = false
+        }
+    }
     
     func refresh() {
         if let module = Module.currentModule {
@@ -240,6 +251,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
                     } else {
                         self.showError(title: "Error".localized, message: "Data format returned by the server is not supported.".localized)
                     }
+                    self.handleGuestView()
                     
                 case .failure(let error):
                     
@@ -250,6 +262,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
                     } else {
                         self.showError(title: "Error".localized, message: error.localizedDescription)
                     }
+                    self.handleGuestView()
                 }
                 
                 })
@@ -285,6 +298,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
                             self.showError(title: "Error".localized, message: error.localizedDescription)
                         }
                     }
+                    self.handleGuestView()
             })
                 
             }
