@@ -18,6 +18,9 @@ class WatrInputViewController: UIViewController {
 
     var isNonType = false
     
+    var isNumberKey = false
+
+    
     var completionBlock:(_: (_ value:String) -> Void)?
     
     func completion(block: @escaping (_ value:String) -> Void) {
@@ -56,10 +59,10 @@ class WatrInputViewController: UIViewController {
             var titleStr  = self.title ?? ""
 
             if !isDegree{
-                titleStr = titleStr + " - m³"
+                titleStr = titleStr + " - gal "
                 
             }else{
-                titleStr = titleStr + " - gal"
+                titleStr = titleStr + " - m³"
             }
             self.title = titleStr
         }
@@ -70,6 +73,10 @@ class WatrInputViewController: UIViewController {
     func showTitle(){
         if isNonType{
             self.title = titleStr
+            textField.keyboardType = .default
+            if isNumberKey{
+                textField.keyboardType = .numberPad
+            }
         }
     }
     
@@ -85,19 +92,20 @@ class WatrInputViewController: UIViewController {
                                 let m3Val = Double(inputVal / 264.172052 )
                                 AppSharedData.sharedInstance.addPlaceInfo.volume = m3Val
                             }else{
-                                let m3Val = 264.172052 * (Double(input) ?? 1)
-                                AppSharedData.sharedInstance.addPlaceInfo.volume = m3Val
+//                                let m3Val = 264.172052 * (Double(input) ?? 1)
+                                AppSharedData.sharedInstance.addPlaceInfo.volume = Double(input) ?? 0
                             }
                         }else{
                             let m3Val = 264.172052 * (Double(input) ?? 1)
-                            AppSharedData.sharedInstance.addPlaceInfo.volume = m3Val
+                            AppSharedData.sharedInstance.addPlaceInfo.volume = Double(input) ?? 0
                         }
                         
                         self.showShapeList()
                     }else{
                         AppSharedData.sharedInstance.addPlaceInfo.numberOfUsers = Int(input) ?? 0
 //                        showModesSelectionVC()
-                        self.showCreatePlaceVC()
+//                        self.showCreatePlaceVC()
+                        self.showPlacePoitionsVC()
                     }
                 }
             }
@@ -117,6 +125,23 @@ class WatrInputViewController: UIViewController {
         
     }
     
+    
+    
+    func showPlacePoitionsVC(){
+        
+      
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "ValuePickerController") as? ValuePickerController {
+            viewController.order = 5
+            viewController.title = "Situation".localized
+            viewController.apiPath = "locations"
+            viewController.completion(block: { (formValue) in
+            })
+            navigationController?.pushViewController(viewController)
+        }
+ 
+        
+    }
     
     func showModesSelectionVC(){
         

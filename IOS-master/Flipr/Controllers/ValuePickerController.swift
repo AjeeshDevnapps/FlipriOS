@@ -209,14 +209,30 @@ class ValuePickerController: UITableViewController {
             AppSharedData.sharedInstance.addPlaceInfo.filtration = value
             showNoOfUsers()
             case 5:
-            AppSharedData.sharedInstance.addPlaceInfo.mode = value
-            showEditPlaceView()
+            AppSharedData.sharedInstance.addPlaceInfo.spaKind = value
+                self.showCreatePlaceVC()
+//            AppSharedData.sharedInstance.addPlaceInfo.mode = value
+//            showEditPlaceView()
             break;
             
             default : break;
         }
     }
     
+    func showCreatePlaceVC(){
+        
+    
+        
+        let sb = UIStoryboard(name: "NewPool", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "CreatePlaceViewController") as? CreatePlaceViewController {
+            self.navigationController?.pushViewController(viewController, completion: nil)
+//            let nav = UINavigationController.init(rootViewController: viewController)
+//            nav.modalPresentationStyle = .fullScreen
+//            self.present(nav, animated: true, completion: nil)
+        }
+
+        
+    }
     
     func showEditPlaceView(){
         let sb = UIStoryboard(name: "NewPool", bundle: nil)

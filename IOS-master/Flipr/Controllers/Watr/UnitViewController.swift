@@ -55,14 +55,14 @@ class UnitViewController: UIViewController {
     }
     
     
-    @IBAction func blueThemeButtonTapped(){
+    @IBAction func matricButtonTapped(){
         UserDefaults.standard.set(1, forKey: "CurrentUnit")
         NotificationCenter.default.post(name: K.Notifications.MeasureUnitSettingsChanged, object: nil)
         manageUnit()
 
     }
 
-    @IBAction func roseThemeButtonTapped(){
+    @IBAction func galButtonTapped(){
         UserDefaults.standard.set(2, forKey: "CurrentUnit")
         NotificationCenter.default.post(name: K.Notifications.MeasureUnitSettingsChanged, object: nil)
         manageUnit()

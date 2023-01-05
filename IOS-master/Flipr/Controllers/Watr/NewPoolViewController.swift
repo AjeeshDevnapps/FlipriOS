@@ -379,7 +379,11 @@ extension NewPoolViewController: UITableViewDataSource {
                 primaryText = NewPoolTitles.PoolGeneralTitles.allCases[indexPath.row].rawValue
                 switch indexPath.row {
                 case 0:
-                    secondaryText = poolSettings?.owner?.firstName
+                    var name:String = ""
+                    name = poolSettings?.owner?.firstName ?? ""
+                    name.append(" ")
+                    name.append(poolSettings?.owner?.lastName ?? "")
+                    secondaryText = name
                 case 1:
                     secondaryText = poolSettings?.type?.name
                 case 2:
@@ -442,8 +446,9 @@ extension NewPoolViewController: UITableViewDataSource {
                 } else {
                     if indexPath.row == 0 {
                         isSwitchSelected = poolSettings?.isPublic ?? false
-                    } else if indexPath.row == 1 {
-                        isSwitchSelected = poolSettings?.isDefective ?? false
+                    } else if indexPath.row == 3 {
+                        let loc = poolSettings?.location?.id ?? 0
+                        isSwitchSelected = (loc == 1) ? true : false
                     }
                 }
                 default: break;
@@ -686,7 +691,25 @@ extension NewPoolViewController: UITableViewDelegate {
                     navigationController?.pushViewController(viewController, animated: true)
 
                     //integration
-                case 4: break; //anne de construction
+                case 4:
+//                    viewController.apiPath = "integration"
+                    let sb = UIStoryboard(name: "NewPool", bundle: nil)
+                    let listVC = sb.instantiateViewController(withIdentifier: "WatrInputViewController") as! WatrInputViewController
+                    listVC.order = 0
+                    listVC.isNonType = true
+                    listVC.isNumberKey = true
+                    listVC.defaultValue = poolSettings?.builtYear?.toString
+                    listVC.titleStr = NewPoolTitles.Characteristics.allCases[indexPath.row].rawValue.localized
+                    listVC.completion(block: { (inputValue) in
+                            self.poolSettings?.builtYear = Int(inputValue) ?? 0
+                            self.tableView.reloadData()
+                            self.updateSettings()
+                        })
+                    navigationController?.pushViewController(listVC, animated: true)
+
+
+                    
+                    break; //anne de construction
                 default : break;
                 }
             }

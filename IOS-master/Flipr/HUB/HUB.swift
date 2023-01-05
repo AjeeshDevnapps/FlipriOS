@@ -227,7 +227,6 @@ class HUB {
                         completion?(nil)
                         
                         print("XXX \(valueJSON)")
-                        
                         /*
                         if let JSON = valueJSON as? [String:Any] {
                             
@@ -251,17 +250,19 @@ class HUB {
                             completion?(error)
                         }
                         */
-                        
+                           
                         
                        case .failure(let error):
-                           
-                           if let serverError = User.serverError(response: response) {
-                               completion?(serverError)
-                           } else {
-                               completion?(error)
-                           }
+                           self.behavior = "manual"
+                           self.equipementState = value
+                           completion?(nil)
+
+//                           if let serverError = User.serverError(response: response) {
+//                               completion?(serverError)
+//                           } else {
+//                               completion?(error)
+//                           }
                        }
-                       
             })
         
     }
