@@ -253,7 +253,7 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 }
                 //        else if place.permissionLevel == "View"{
                 else{
-                    cell.badgeButton.setImage(UIImage(named: "viewer"), for: .normal)
+                    cell.badgeButton.setImage(UIImage(named: "Button_Close"), for: .normal)
                 }
                 if let iconName  = place.typeIcon{
                     let iconnameArray = iconName.components(separatedBy: ".")
@@ -269,7 +269,12 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 }
                 loc?.append(", ")
                 loc?.append(place.placeCity)
-                cell.locationLbl.text = loc
+                if place.permissionLevel == "Admin"{
+                    cell.locationLbl.text = place.placeCity
+                }else{
+                    cell.locationLbl.text = loc
+                }
+                
                 let moduelsNo = self.places[indexPath.row].numberOfModules
                 cell.disableView.isHidden = true
                 cell.contentView.alpha = 1.0
@@ -300,6 +305,7 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 loc?.append(", ")
                 loc?.append(place.placeCity)
                 cell.locationLbl.text = loc
+               
                 if let iconName  = place.typeIcon{
                     let iconnameArray = iconName.components(separatedBy: ".")
                     let iconname: String = iconnameArray[0]
@@ -325,7 +331,7 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 }
                 //        else if place.permissionLevel == "View"{
                 else{
-                    cell.badgeButton.setImage(UIImage(named: "viewer"), for: .normal)
+                    cell.badgeButton.setImage(UIImage(named: "Button_Close"), for: .normal)
                 }
                 if let iconName  = place.typeIcon{
                     let iconnameArray = iconName.components(separatedBy: ".")
@@ -342,7 +348,12 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 }
                 loc?.append(", ")
                 loc?.append(place.placeCity ?? "")
-                cell.locationLbl.text = loc
+//                cell.locationLbl.text = loc
+                if place.permissionLevel == "Admin"{
+                    cell.locationLbl.text = place.placeCity
+                }else{
+                    cell.locationLbl.text = loc
+                }
                 let moduelsNo = self.places[indexPath.row].numberOfModules
                 cell.disableView.isHidden = true
                 cell.contentView.alpha = 1.0
@@ -447,7 +458,7 @@ extension PlaceDropdownViewController: InvitationTableViewCellDelegate{
     
     
     func declineSharePrompt(email: String,placeId:String){
-        let alertVC = UIAlertController(title: "Refuser le partage", message: "Vous ne serez pas en mesure de consulter cet emplacement", preferredStyle: .actionSheet)
+        let alertVC = UIAlertController(title: "Refuser le partage", message: "Vous ne serez pas en mesure de consulter cet emplacement", preferredStyle: .alert)
         let action = UIAlertAction(title: "Annuler", style: .cancel)
         let confirmAction = UIAlertAction(title: "Refuser le partage", style: .destructive) { action in
             self.deleteShare(email: email, placeId: placeId)
@@ -504,7 +515,7 @@ extension PlaceDropdownViewController: PlaceDropdownCellDelegate{
     
     
     func deleteSharePrompt(email: String,placeId:String){
-        let alertVC = UIAlertController(title: "Quitter le partage", message: "Vous ne serez plus en mesure de consulter cet emplacement", preferredStyle: .actionSheet)
+        let alertVC = UIAlertController(title: "Quitter le partage", message: "Vous ne serez plus en mesure de consulter cet emplacement", preferredStyle: .alert)
         let action = UIAlertAction(title: "Annuler", style: .cancel)
         let confirmAction = UIAlertAction(title: "Quitter le partage", style: .destructive) { action in
             self.deleteShare(email: email, placeId: placeId)

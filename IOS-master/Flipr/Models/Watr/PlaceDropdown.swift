@@ -23,7 +23,7 @@ class PlaceDropdown{
     var typeIcon : String!
     var numberOfModules : Int = 0
 
-    
+
 
 
     /**
@@ -34,6 +34,7 @@ class PlaceDropdown{
             numberOfModules = noOfModules
         }
         guestUser = dictionary["GuestUser"] as? String
+
         isPending = dictionary["IsPending"] as? Bool
         name = dictionary["Name"] as? String
         permissionLevel = dictionary["PermissionLevel"] as? String

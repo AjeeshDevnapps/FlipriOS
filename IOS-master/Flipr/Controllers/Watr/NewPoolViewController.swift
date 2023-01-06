@@ -25,6 +25,7 @@ class NewPoolViewController: UIViewController {
     var placeTitle:String?
     var placeDetails:PlaceDropdown?
     let hud = JGProgressHUD(style:.dark)
+    var volume = 0
 
     
     override func viewDidLoad() {
@@ -241,6 +242,15 @@ class NewPoolViewController: UIViewController {
                 return
             }
             self.poolSettings = settings
+            var titleStr = settings?.privateName ?? ""
+            titleStr.append(" - ")
+            titleStr.append(settings?.owner?.firstName ?? "")
+            titleStr.append(" ")
+            titleStr.append(settings?.owner?.lastName ?? "")
+
+            titleStr.append(" - ")
+            titleStr.append(settings?.city?.name ?? "")
+            self.title = titleStr
             self.tableView.reloadData()
         }
     }
@@ -398,11 +408,14 @@ extension NewPoolViewController: UITableViewDataSource {
                 switch indexPath.row {
                 case 0:
                     secondaryText = poolSettings?.volume?.toString
+                    self.volume = Int(poolSettings?.volume ?? 0)
+
                     var voltitle = NewPoolTitles.Characteristics.allCases[indexPath.row].rawValue
                     if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
                         if currentUnit == 2{
                             let val: Double =  Double(poolSettings?.volume ?? 0)
                             let funit = Int(val * 264.172052)
+                            self.volume = funit
                             secondaryText = funit.toString
                             voltitle.append(" - gal")
                         }else{
@@ -481,7 +494,18 @@ extension NewPoolViewController: UITableViewDataSource {
                 tableViewCell.selectionStyle = .none
             } else {
                 var content = tableViewCell.defaultContentConfiguration()
-                let name:String = loadedShares[indexPath.row].guestUser
+                var name:String = loadedShares[indexPath.row].guestUser
+
+                if let fname = loadedShares[indexPath.row].guestFirstName as? String{
+                    name = fname
+                    if let lname = loadedShares[indexPath.row].guestLastName as? String{
+                        name.append(" ")
+                        name.append(lname)
+                    }
+                }else{
+                    
+                }
+                
 //                name.append(" ")
 //                name.append(loadedShares[indexPath.row].placeOwnerLastName)
                 content.text = name
@@ -616,7 +640,6 @@ extension NewPoolViewController: UITableViewDelegate {
                         self.poolSettings?.city?.longitude = value.longitude
                         self.poolSettings?.city?.latitude = value.latitude
 
-
                         self.tableView.reloadData()
                         self.updateSettings()
                     }
@@ -637,10 +660,22 @@ extension NewPoolViewController: UITableViewDelegate {
                     let sb = UIStoryboard(name: "NewPool", bundle: nil)
                     let listVC = sb.instantiateViewController(withIdentifier: "WatrInputViewController") as! WatrInputViewController
                     listVC.order = 0
-                    listVC.defaultValue = poolSettings?.volume?.toString
+                    listVC.defaultValue = self.volume.toString
                     listVC.title = "Volume".localized //+ " - m³"
                     listVC.completion(block: { (inputValue) in
-                            self.poolSettings?.volume = Double(inputValue) ?? 0
+                        if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+                            if currentUnit == 2{
+                                let inputVal = Double(inputValue) ?? 1
+                                let m3Val = Double(inputVal / 264.172052 )
+                                self.poolSettings?.volume = m3Val
+                            }else{
+//                                let m3Val = 264.172052 * (Double(input) ?? 1)
+                                self.poolSettings?.volume = Double(inputValue)
+                            }
+                        }else{
+                            self.poolSettings?.volume = Double(inputValue)
+                        }
+//                            self.poolSettings?.volume = Double(inputValue) ?? 0
                             self.tableView.reloadData()
                             self.updateSettings()
                         })

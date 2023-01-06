@@ -96,7 +96,6 @@ class WatrInputViewController: UIViewController {
                                 AppSharedData.sharedInstance.addPlaceInfo.volume = Double(input) ?? 0
                             }
                         }else{
-                            let m3Val = 264.172052 * (Double(input) ?? 1)
                             AppSharedData.sharedInstance.addPlaceInfo.volume = Double(input) ?? 0
                         }
                         

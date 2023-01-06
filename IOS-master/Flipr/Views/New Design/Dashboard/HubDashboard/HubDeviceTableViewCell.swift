@@ -33,6 +33,7 @@ class HubDeviceTableViewCell: UITableViewCell {
     @IBOutlet weak var editProgramIcon: UIImageView!
 
     var hub: HUB?
+    var isOwner = true
 
 
     var delegate:HubDeviceDelegate?
@@ -63,7 +64,12 @@ class HubDeviceTableViewCell: UITableViewCell {
             if hub.behavior == "manual" {
                 let imageName = hubState ? "ON" : "OFF-pause"
                 powerBtn.setImage(UIImage(named: imageName), for: .normal)
+                powerBtn.isHidden = false
             } else{
+                if !isOwner {
+                    powerBtn.isHidden = true
+                }
+
                 powerBtn.setImage(UIImage(named: "OFF"), for: .normal)
             }
             if hub.behavior == "planning" {
@@ -77,6 +83,11 @@ class HubDeviceTableViewCell: UITableViewCell {
 //                    self.getFiltrationTime()
 //                }
             } else{
+                if !isOwner {
+//                    if hub.behavior != "manual"{
+                        programBtn.isHidden = true
+//                    }
+                }
                 programBtn.setImage(UIImage(named: "pumbPrgmOff"), for: .normal)
             }
             self.smartContrlBtn.isUserInteractionEnabled = true
@@ -86,6 +97,9 @@ class HubDeviceTableViewCell: UITableViewCell {
                 let imageName = hubState ? "smartContrlOn" : "smartContrlActivated"
                 smartContrlBtn.setImage(UIImage(named: imageName), for: .normal)
             }else{
+                if !isOwner {
+                    smartContrlBtn.isHidden = true
+                }
                 smartContrlBtn.setImage(UIImage(named: "smartContrlOff"), for: .normal)
             }
             
@@ -101,6 +115,11 @@ class HubDeviceTableViewCell: UITableViewCell {
                 if let module = Module.currentModule {
                     if module.isSubscriptionValid {
                         self.smartContrlBtn.isHidden = false
+                        if hub.behavior != "auto" {
+                            if !isOwner {
+                                smartContrlBtn.isHidden = true
+                            }
+                        }
                     }else{
                         self.smartContrlBtn.isHidden = true
                     }
@@ -109,6 +128,9 @@ class HubDeviceTableViewCell: UITableViewCell {
                 }
                 let icon  = hubState ? "pumbactive" : "pumbactive"
                 self.iconImageView.image =  UIImage(named: icon)
+//                if !isOwner {
+//                    iconImageView.isHidden = !hubState
+//                }
             }
             else{
                 self.smartContrlBtn.isHidden = true
@@ -184,22 +206,27 @@ class HubDeviceTableViewCell: UITableViewCell {
     }
 
     @IBAction func tapSettingsButton(){
+        if !isOwner {return}
         self.delegate?.didSelectSettingsButton(hub: self.hub!)
     }
     
     @IBAction func tapPowerButton(){
+        if !isOwner {return}
         self.delegate?.didSelectPowerButton(hub: self.hub!)
     }
     
     @IBAction func tapSmartControllButton(){
+        if !isOwner {return}
         self.delegate?.didSelectSmartControllButton(hub:self.hub!)
     }
     
     @IBAction func tapProgrameButton(){
+        if !isOwner {return}
         self.delegate?.didSelectProgramButton(hub:self.hub!)
     }
     
     @IBAction func tapProgrameEditButton(){
+        if !isOwner {return}
         self.delegate?.didSelectProgramEditButton(hub:self.hub!)
     }
 }

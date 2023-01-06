@@ -704,33 +704,33 @@
                                                                         <constraint firstAttribute="height" constant="14" id="hJV-hW-a7v"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJN-eN-zKQ">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="It4-Mq-fwX">
                                                                     <rect key="frame" x="241" y="0.0" width="100" height="46"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="100" id="9zU-rH-Izc"/>
+                                                                        <constraint firstAttribute="width" constant="100" id="IM7-zh-Mv6"/>
                                                                     </constraints>
-                                                                    <state key="normal" title="Button"/>
-                                                                    <buttonConfiguration key="configuration" style="plain"/>
-                                                                    <connections>
-                                                                        <action selector="renameButtonAction:" destination="ae0-71-A46" eventType="touchUpInside" id="vql-8W-cjj"/>
-                                                                    </connections>
+                                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                    <state key="normal" title=" ">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </state>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="EJN-eN-zKQ" secondAttribute="trailing" id="2Hh-qX-rZ4"/>
                                                                 <constraint firstItem="I7h-uO-ECL" firstAttribute="leading" secondItem="nHy-8l-l9u" secondAttribute="leading" id="55q-jU-ppJ"/>
                                                                 <constraint firstAttribute="trailing" secondItem="AUS-dt-7qE" secondAttribute="trailing" id="5Hr-mi-2vq"/>
+                                                                <constraint firstAttribute="trailing" secondItem="It4-Mq-fwX" secondAttribute="trailing" id="EVo-u2-WAz"/>
                                                                 <constraint firstItem="xy7-fV-F3O" firstAttribute="leading" secondItem="nHy-8l-l9u" secondAttribute="leading" id="FaI-fW-bAk"/>
-                                                                <constraint firstItem="EJN-eN-zKQ" firstAttribute="top" secondItem="nHy-8l-l9u" secondAttribute="top" id="INk-zH-J2Z"/>
+                                                                <constraint firstItem="It4-Mq-fwX" firstAttribute="top" secondItem="nHy-8l-l9u" secondAttribute="top" id="GQk-LA-G2K"/>
                                                                 <constraint firstAttribute="trailing" secondItem="xy7-fV-F3O" secondAttribute="trailing" id="N0q-9M-e44"/>
                                                                 <constraint firstAttribute="height" constant="47" id="NWd-i4-LjJ"/>
                                                                 <constraint firstItem="w6l-2A-cOv" firstAttribute="centerY" secondItem="nHy-8l-l9u" secondAttribute="centerY" id="PdG-Qa-KO8"/>
                                                                 <constraint firstItem="I7h-uO-ECL" firstAttribute="centerY" secondItem="nHy-8l-l9u" secondAttribute="centerY" id="ZXa-KU-xhb"/>
+                                                                <constraint firstItem="xy7-fV-F3O" firstAttribute="top" secondItem="It4-Mq-fwX" secondAttribute="bottom" id="ZhQ-g2-TdS"/>
                                                                 <constraint firstAttribute="bottom" secondItem="xy7-fV-F3O" secondAttribute="bottom" id="ae4-7o-1oZ"/>
                                                                 <constraint firstItem="AUS-dt-7qE" firstAttribute="leading" secondItem="w6l-2A-cOv" secondAttribute="trailing" constant="17" id="irT-hS-ca1"/>
                                                                 <constraint firstItem="AUS-dt-7qE" firstAttribute="centerY" secondItem="nHy-8l-l9u" secondAttribute="centerY" id="ll8-Li-uBH"/>
-                                                                <constraint firstItem="xy7-fV-F3O" firstAttribute="top" secondItem="EJN-eN-zKQ" secondAttribute="bottom" id="sR0-UZ-U06"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OIx-Vf-5fo">

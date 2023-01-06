@@ -36,6 +36,9 @@ struct ShareModel {
     var name:String
     var typeIcon: String
     var isPending: Bool
+    var guestFirstName : String?
+    var guestLastName : String?
+
     
     init?(withJSON JSON:[String:Any]) {
         
@@ -56,6 +59,12 @@ struct ShareModel {
         } else {
             self.placeOwnerLastName = ""
         }
+        
+        
+                
+        guestFirstName = JSON["GuestFirstName"] as? String
+        guestLastName = JSON["GuestLastName"] as? String
+
         
         if let value = JSON["PlaceCity"] as? String {
             self.placeCity = value
