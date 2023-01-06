@@ -7,18 +7,48 @@
 //
 
 import UIKit
+import JGProgressHUD
+import Alamofire
 
 class WatrHubSettingsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var placeDetails:PlaceDropdown!
     var placesModules:PlaceModule!
     var hub: HUB?
+    var settings:ControlRSettings?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "ContrôlR"
         tableView.tableFooterView =  UIView()
+        self.getSettings()
         // Do any additional setup after loading the view.
+    }
+    
+    func getSettings(){
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.view)
+        
+        Alamofire.request(Router.hUBSettings(serial: self.hub?.serial ?? "")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let responseData):
+                if let settingsDic = responseData as? [String:Any] {
+                    self.settings = ControlRSettings.init(fromDictionary: settingsDic)
+                }
+                self.tableView.reloadData()
+                hud?.dismiss(afterDelay: 0)
+            case .failure(let error):
+                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                hud?.textLabel.text = error.localizedDescription
+                hud?.dismiss(afterDelay: 3)
+            }
+        })
+    }
+    
+    @IBAction func renameButtonAction(_ sender: Any) {
+        self.showRename()
     }
 
 }
@@ -28,7 +58,7 @@ extension WatrHubSettingsViewController: UITableViewDataSource,UITableViewDelega
    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        return settings == nil ? 0 : 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -37,19 +67,22 @@ extension WatrHubSettingsViewController: UITableViewDataSource,UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FliprSettingsTableViewCell", for: indexPath) as! FliprSettingsTableViewCell
-        var name = ""
-        if let fname = User.currentUser?.firstName{
-            name.append(fname)
-        }
-        if let lname = User.currentUser?.lastName{
-            name.append(" ")
-            name.append(lname)
-        }
-        cell.ownerLbl.text = name
-        cell.locationLbl.text = "Sample data"
-        cell.serialNoLbl.text = Module.currentModule?.serial
-//        cell.typeLbl.text = Module.currentModule?.deviceTypename
+        cell.ownerLbl.text = settings?.userName
+        cell.locationLbl.text = settings?.placeName
+        cell.typeLbl.text = settings?.moduleName
+        cell.serialNoLbl.text = settings?.serial
+
+        let mode = settings?.mode ?? ""
+        cell.lastMesureLbl.text = mode.capitalized
+        let state = settings?.state ?? 0
+        cell.batteryInfoLbl.text = state == 0  ? "Inactif".localized : "Actif".localized
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 2{
+            self.showRename()
+        }
     }
 }
 
@@ -65,13 +98,31 @@ extension WatrHubSettingsViewController{
     }
     
     func showSettings(){
+        let sb = UIStoryboard(name: "HUB", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "HUBWifiTableViewControllerID") as? HUBWifiTableViewController {
+            viewController.serial = hub?.serial ?? ""
+            viewController.fromSetting = false
+            let nav = UINavigationController.init(rootViewController: viewController)
+            self.present(nav, animated: true, completion: nil)
+//            self.navigationController?.pushViewController(viewController, animated: true)
+//            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+//        let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
+//        if let viewController = sb.instantiateViewController(withIdentifier: "HubSettingsViewController") as? HubSettingsViewController {
+//            viewController.hub = hub
+//            viewController.delegate = self
+//           // viewController.modalPresentationStyle = .overCurrentContext
+//            self.present(viewController, animated: true) {
+//            }
+//        }
+    }
+    
+    
+    func showRename(){
         let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
-        if let viewController = sb.instantiateViewController(withIdentifier: "HubSettingsViewController") as? HubSettingsViewController {
+        if let viewController = sb.instantiateViewController(withIdentifier: "HubRenameViewController") as? HubRenameViewController {
             viewController.hub = hub
-            viewController.delegate = self
-           // viewController.modalPresentationStyle = .overCurrentContext
-            self.present(viewController, animated: true) {
-            }
+            self.present(viewController, animated: true, completion: nil)
         }
     }
     
