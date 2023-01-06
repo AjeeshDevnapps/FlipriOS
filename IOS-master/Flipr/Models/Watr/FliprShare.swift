@@ -19,6 +19,37 @@ enum FliprRole: String, CaseIterable {
 class FliprShare {
     
     var poolId:String? = ""
+    
+    func getContacts(email: String, completion: ((_ shares:[ContactsWatr]?,_ error:Error?) -> Void)?) {
+//        self.poolId = poolId
+        Alamofire.request(Router.contactList(email: email)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                
+                if let JSON = value as? [[String:Any]] {
+                    var contacts = [ContactsWatr]()
+                    print("get contact JSON \(JSON)")
+                    for item in JSON {
+                        let contact = ContactsWatr(fromDictionary: item)
+                            contacts.append(contact)
+//                        }
+                    }
+                    completion?(contacts, nil)
+                }
+            case .failure(let error):
+                if let serverError = User.serverError(response: response) {
+                    completion?(nil, serverError)
+                } else {
+                    completion?(nil, error)
+                }
+                print("get shares Error \(error)")
+            }
+            
+        })
+    }
+    
 
     func viewShares(poolId: String, completion: ((_ shares:[ShareModel]?,_ error:Error?) -> Void)?) {
         self.poolId = poolId

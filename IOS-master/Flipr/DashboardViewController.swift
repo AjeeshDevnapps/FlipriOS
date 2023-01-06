@@ -721,6 +721,7 @@ class DashboardViewController: UIViewController {
     }
     
     func addHubEquipments(){
+        if !isPlaceOwner {return }
         AppSharedData.sharedInstance.addedPlaceId = self.placeDetails.placeId ?? 0
         let fliprStoryboard = UIStoryboard(name: "HUBElectrical", bundle: nil)
         let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController") as! ElectricalSetupViewController
@@ -4746,6 +4747,7 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource, UI
         if indexPath.row >  self.hubs.count{
             return cell
         }
+        cell.isOwner = self.isPlaceOwner
         cell.delegate = self
         let hub = self.hubs[indexPath.row]
         cell.hub = hub
@@ -5038,8 +5040,12 @@ extension DashboardViewController: HubSettingViewDelegate{
         */
 
         
-        let navigationController = UIStoryboard(name:"WatrFlipr", bundle: nil).instantiateViewController(withIdentifier: "FliprSettingsNavigation") as! UINavigationController
-        self.present(navigationController, animated: true, completion: nil)
+        let vc = UIStoryboard(name:"WatrFlipr", bundle: nil).instantiateViewController(withIdentifier: "WatrFliprSettingsViewController") as! WatrFliprSettingsViewController
+        vc.placeDetails = self.placeDetails
+        vc.placesModules = self.placesModules
+        let nav = UINavigationController.init(rootViewController: vc)
+        self.present(nav, animated: true, completion: nil)
+        
         
        
     }

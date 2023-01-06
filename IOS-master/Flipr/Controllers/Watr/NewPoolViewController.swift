@@ -21,6 +21,8 @@ class NewPoolViewController: UIViewController {
     var hasLoadedShares = false
     var isCreatingPlace = false
     var loadedShares = [ShareModel]()
+    var contactList = [ContactsWatr]()
+
     var poolSettings: PoolSettingsModel?
     var placeTitle:String?
     var placeDetails:PlaceDropdown?
@@ -124,33 +126,37 @@ class NewPoolViewController: UIViewController {
     
     func showAddShareAlert(){
         self.alertWithTextField(title: "Ajout d’un invité".localized, message: nil, placeholder: "email".localized) { email in
-            
-            if email.isValidEmail {
-                var placeId:String = ""
-                if let pId = self.placeDetails?.placeId{
-                    placeId = "\(pId)"
-                    FliprShare().poolId = placeId
-                }
-                self.callShareApi(email: email, poolId: placeId)
-              /*
-                FliprShare().addShare(poolId: placeId, email:email, role: .guest) { error in
-                    if error != nil {
-                        let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
-                        let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
-                        alertVC.addAction(alertAction)
-                        self.present(alertVC, animated: true)
-                        return
+            if email == "cancel"
+            {
+                
+            }else{
+                if email.isValidEmail {
+                    var placeId:String = ""
+                    if let pId = self.placeDetails?.placeId{
+                        placeId = "\(pId)"
+                        FliprShare().poolId = placeId
                     }
-//                    DispatchQueue.main.async {
-                        self.getCurrentShares()
-//                    }
+                    self.callShareApi(email: email, poolId: placeId)
+                  /*
+                    FliprShare().addShare(poolId: placeId, email:email, role: .guest) { error in
+                        if error != nil {
+                            let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
+                            let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
+                            alertVC.addAction(alertAction)
+                            self.present(alertVC, animated: true)
+                            return
+                        }
+    //                    DispatchQueue.main.async {
+                            self.getCurrentShares()
+    //                    }
+                    }
+                    */
                 }
-                */
+                else {
+                    self.showAlert(title: "Email incorrect".localized, message: "Invalid email address format".localized)
+                }
             }
-            else {
-                self.showAlert(title: "Email incorrect".localized, message: "Invalid email address format".localized)
-            }
-
+            
         }
     }
     
@@ -170,6 +176,8 @@ class NewPoolViewController: UIViewController {
             }
 //                    DispatchQueue.main.async {
                 self.getCurrentShares()
+            self.getContactList()
+                
 //                    }
         }
     }
@@ -180,7 +188,7 @@ class NewPoolViewController: UIViewController {
         alert.addTextField() { newTextField in
             newTextField.placeholder = placeholder
         }
-        alert.addAction(UIAlertAction(title: "Annuler".localized, style: .cancel) { _ in completion("") })
+        alert.addAction(UIAlertAction(title: "Annuler".localized, style: .cancel) { _ in completion("cancel") })
         alert.addAction(UIAlertAction(title: "Inviter".localized, style: .default) { action in
             if
                 let textFields = alert.textFields,
@@ -202,6 +210,7 @@ class NewPoolViewController: UIViewController {
         tableView.reloadData()
         if partagesButton.isSelected && !hasLoadedShares {
             getCurrentShares()
+            getContactList()
         }
     }
     
@@ -275,6 +284,26 @@ class NewPoolViewController: UIViewController {
             }
             self.loadedShares = shares ?? []
             self.hasLoadedShares = true
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func getContactList() {
+//        let hud = JGProgressHUD(style:.dark)
+//        hud?.show(in: self.navigationController!.view)
+        let email:String = self.poolSettings?.owner?.email ?? ""
+//        if let pId = self.placeDetails?.placeId{
+//            placeId = "\(pId)"
+//            FliprShare().poolId = placeId
+//        }
+        FliprShare().getContacts(email: email) { contacts, error in
+//            hud?.dismiss()
+            if error != nil {
+                return
+            }
+            self.contactList = contacts ?? []
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -357,6 +386,10 @@ extension NewPoolViewController: UITableViewDataSource {
         if parametersButton.isSelected {
             return NewPoolTitles.PoolSectionTitles.allCases.count
         } else {
+            let contactCount = self.contactList.count
+            if contactCount > 0{
+                return 2
+            }
             return 1
         }
     }
@@ -371,6 +404,14 @@ extension NewPoolViewController: UITableViewDataSource {
             default: return 0
             }
         } else {
+            let contactCount = self.contactList.count
+            if contactCount > 0{
+                if section == 0{
+                    return loadedShares.count
+                }else{
+                    return contactList.count
+                }
+            }
             return loadedShares.count
         }
         
@@ -493,41 +534,57 @@ extension NewPoolViewController: UITableViewDataSource {
                 }
                 tableViewCell.selectionStyle = .none
             } else {
-                var content = tableViewCell.defaultContentConfiguration()
-                var name:String = loadedShares[indexPath.row].guestUser
-
-                if let fname = loadedShares[indexPath.row].guestFirstName as? String{
-                    name = fname
-                    if let lname = loadedShares[indexPath.row].guestLastName as? String{
-                        name.append(" ")
-                        name.append(lname)
+                
+                if indexPath.section == 0 {
+                    var content = tableViewCell.defaultContentConfiguration()
+                    var name:String = loadedShares[indexPath.row].guestUser
+                    if let fname = loadedShares[indexPath.row].guestFirstName as? String{
+                        name = fname
+                        if let lname = loadedShares[indexPath.row].guestLastName as? String{
+                            name.append(" ")
+                            name.append(lname)
+                        }
+                    }else{
+                        
                     }
-                }else{
-                    
+    //                name.append(" ")
+    //                name.append(loadedShares[indexPath.row].placeOwnerLastName)
+                    content.text = name
+    //                content.text = loadedShares[indexPath.row].guestUser
+                    let role = loadedShares[indexPath.row].permissionLevel
+                    switch role {
+                    case "View":
+                        content.image = UIImage(named: "guest_role")
+                    case "Admin":
+                        content.image = UIImage(named: "man_role")
+                    case "Manage":
+                        content.image = UIImage(named: "boy_role")
+                    default:
+                        content.image = UIImage(named: "guest_role")
+                    }
+                   // tableViewCell.closeButton.tag = indexPath.row
+                    tableViewCell.contentConfiguration = content
+                    tableViewCell.accessoryType = .none
+                    tableViewCell.selectionStyle = .none
+                    let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+                    imgView.image = UIImage(named: "ButtonClose")!
+                    tableViewCell.accessoryView = imgView
+                }
+
+                else{
+                    var content = tableViewCell.defaultContentConfiguration()
+                    var name:String = contactList[indexPath.row].firstName ?? ""
+                    name.append(" ")
+                    name.append(contactList[indexPath.row].lastName ?? "")
+                    content.text = name
+                    tableViewCell.contentConfiguration = content
+                    tableViewCell.accessoryType = .none
+                    tableViewCell.selectionStyle = .none
+                    let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+                    imgView.image = UIImage(named: "contacts")!
+                    tableViewCell.accessoryView = imgView
                 }
                 
-//                name.append(" ")
-//                name.append(loadedShares[indexPath.row].placeOwnerLastName)
-                content.text = name
-//                content.text = loadedShares[indexPath.row].guestUser
-                let role = loadedShares[indexPath.row].permissionLevel
-                switch role {
-                case "View":
-                    content.image = UIImage(named: "guest_role")
-                case "Admin":
-                    content.image = UIImage(named: "man_role")
-                case "Manage":
-                    content.image = UIImage(named: "boy_role")
-                default:
-                    content.image = UIImage(named: "guest_role")
-                }
-               // tableViewCell.closeButton.tag = indexPath.row
-                tableViewCell.contentConfiguration = content
-                tableViewCell.accessoryType = .none
-                tableViewCell.selectionStyle = .none
-                let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-                imgView.image = UIImage(named: "ButtonClose")!
-                tableViewCell.accessoryView = imgView
 
             }
             return tableViewCell
@@ -550,28 +607,48 @@ extension NewPoolViewController: UITableViewDataSource {
                 tableViewCell.selectionStyle = .none
                 return tableViewCell
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "SystemCellForEmails")
-                let role = loadedShares[indexPath.row].permissionLevel
-                switch role {
-                case "View":
-                    cell?.imageView?.image = UIImage(named: "guest_role")
-                case "Admin":
-                    cell?.imageView?.image = UIImage(named: "man_role")
-                case "Manage":
-                    cell?.imageView?.image = UIImage(named: "boy_role")
-                default:
-                    cell?.imageView?.image = UIImage(named: "guest_role")
-                }
-//                cell?.textLabel?.text = loadedShares[indexPath.row].guestUser
                 
-                var name:String = loadedShares[indexPath.row].placeOwnerFirstName
-                name.append(" ")
-                name.append(loadedShares[indexPath.row].placeOwnerLastName)
-                cell?.textLabel?.text = name
+                if indexPath.section == 0{
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "SystemCellForEmails")
+                    let role = loadedShares[indexPath.row].permissionLevel
+                    switch role {
+                    case "View":
+                        cell?.imageView?.image = UIImage(named: "guest_role")
+                    case "Admin":
+                        cell?.imageView?.image = UIImage(named: "man_role")
+                    case "Manage":
+                        cell?.imageView?.image = UIImage(named: "boy_role")
+                    default:
+                        cell?.imageView?.image = UIImage(named: "guest_role")
+                    }
+    //                cell?.textLabel?.text = loadedShares[indexPath.row].guestUser
+                    
+                    var name:String = loadedShares[indexPath.row].placeOwnerFirstName
+                    name.append(" ")
+                    name.append(loadedShares[indexPath.row].placeOwnerLastName)
+                    cell?.textLabel?.text = name
 
-                cell?.accessoryType = .none
-                cell?.selectionStyle = .none
-                return cell!
+                    cell?.accessoryType = .none
+                    cell?.selectionStyle = .none
+                    
+                    
+                    return cell!
+                }else{
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "SystemCellForEmails")
+                  
+                    var name:String = contactList[indexPath.row].firstName ?? ""
+                    name.append(" ")
+                    name.append(contactList[indexPath.row].lastName ?? "")
+                    cell?.textLabel?.text = name
+                    cell?.accessoryType = .none
+                    cell?.selectionStyle = .none
+                    let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+                    imgView.image = UIImage(named: "contacts")!
+                    tableViewCell.accessoryView = imgView
+
+                    return cell!
+                }
+                
             }
         }
     }
@@ -589,7 +666,20 @@ extension NewPoolViewController: UITableViewDataSource {
                 return label
             }
         } else {
-            return nil
+            if section == 0{
+                return nil
+            }else{
+                if #available(iOS 14.0, *) {
+                    var config = UIListContentConfiguration.plainHeader()
+                    config.text = "Contacts".localized
+                    let view = UIListContentView(configuration: config)
+                    return view
+                } else {
+                    let label = UILabel()
+                    label.text = "Contacts".localized
+                    return label
+                }
+            }
         }
     }
     
@@ -831,14 +921,28 @@ extension NewPoolViewController: UITableViewDelegate {
                 
             }
         } else {
-            var placeId:String = ""
-            if let pId = self.placeDetails?.placeId{
-                placeId = "\(pId)"
-                FliprShare().poolId = placeId
+           
+            if indexPath.section == 0 {
+                var placeId:String = ""
+                if let pId = self.placeDetails?.placeId{
+                    placeId = "\(pId)"
+                    FliprShare().poolId = placeId
+                }
+                let shareInfo = loadedShares[indexPath.row]
+                
+                self.deleteSharePrompt(email: shareInfo.guestUser, placeId: placeId)
+
+            }else{
+                
+                var placeId:String = ""
+                if let pId = self.placeDetails?.placeId{
+                    placeId = "\(pId)"
+                    FliprShare().poolId = placeId
+                }
+                let contactInfoInfo = contactList[indexPath.row]
+                self.addContact(placeId: placeId, email: contactInfoInfo.email ?? "")
+
             }
-            let shareInfo = loadedShares[indexPath.row]
-            
-            self.deleteSharePrompt(email: shareInfo.guestUser, placeId: placeId)
 //            let sb = UIStoryboard(name: "NewPool", bundle: nil)
 //            let vc = sb.instantiateViewController(withIdentifier: "PoolShareViewControllerID") as! PoolShareViewController
 //            vc.selectedShare = loadedShares[indexPath.row]
@@ -850,7 +954,9 @@ extension NewPoolViewController: UITableViewDelegate {
         }
     }
     
-    
+    func addContact(placeId:String, email:String){
+        self.callShareApi(email: email, poolId: placeId)
+    }
     
     
     func deleteSharePrompt(email: String,placeId:String){
