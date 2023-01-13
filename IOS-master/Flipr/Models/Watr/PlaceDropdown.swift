@@ -9,18 +9,18 @@
 import Foundation
 class PlaceDropdown{
 
-    var guestUser : String!
+    var guestUser : String?
     var isPending : Bool!
-    var name : String!
-    var privateName : String!
-    var permissionLevel : String!
-    var placeCity : String!
-    var placeId : Int!
-    var placeOwner : Int!
-    var placeOwnerFirstName : String!
-    var placeOwnerLastName : String!
-    var placeType : String!
-    var typeIcon : String!
+    var name : String?
+    var privateName : String?
+    var permissionLevel : String?
+    var placeCity : String?
+    var placeId : Int?
+    var placeOwner : Int?
+    var placeOwnerFirstName : String?
+    var placeOwnerLastName : String?
+    var placeType : String?
+    var typeIcon : String?
     var numberOfModules : Int = 0
 
 

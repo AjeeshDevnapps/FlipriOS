@@ -10,6 +10,9 @@ class ContactsWatr{
 	var firstName : String!
 	var id : Int!
 	var isPending : Bool!
+    var isInvited : Bool!
+    var isKnow : Bool!
+
 	var language : String!
 	var lastName : String!
 	var sharedHisPlace : Bool!
@@ -23,6 +26,9 @@ class ContactsWatr{
 		firstName = dictionary["FirstName"] as? String
 		id = dictionary["Id"] as? Int
 		isPending = dictionary["IsPending"] as? Bool
+        isInvited = dictionary["IsInvited"] as? Bool
+        isKnow = dictionary["Isknow"] as? Bool
+
 		language = dictionary["Language"] as? String
 		lastName = dictionary["LastName"] as? String
 		sharedHisPlace = dictionary["SharedHisPlace"] as? Bool

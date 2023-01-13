@@ -380,7 +380,7 @@ extension LoginViewController{
     
     func showUnitSelectionView(){
         let sb = UIStoryboard.init(name: "Settings", bundle: nil)
-        if let unitVC = sb.instantiateViewController(withIdentifier: "UnitViewController") as? UnitViewController{
+        if let unitVC = sb.instantiateViewController(withIdentifier: "PreferenceViewController") as? PreferenceViewController{
             unitVC.isLoginFlow = true
             self.navigationController?.pushViewController(unitVC)
         }

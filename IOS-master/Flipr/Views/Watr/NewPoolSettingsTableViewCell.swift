@@ -14,6 +14,8 @@ class NewPoolSettingsTableViewCell: UITableViewCell {
     @IBOutlet weak var titleName: UILabel!
     @IBOutlet weak var valueText: UILabel!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var infoLbl: UILabel!
+    @IBOutlet weak var titleConstraint: NSLayoutConstraint!
 
     var switchy: UISwitch = UISwitch()
     

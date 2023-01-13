@@ -57,16 +57,20 @@ class FliprSplashViewController: BaseViewController {
     
     var userStatusChecking = false
     var isAnimationCompleted = false
+    var isApiCallOnProgress = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         userStatusChecking = true
         self.imageView.isHidden = true
-        //        perform(#selector(showWaveAnimation), with: nil, afterDelay: 0.5)
-        //        perform(#selector(showEducationScreen), with: nil, afterDelay: 2.0)
-        //        addRightImage()
-        //        self.titleLabel.text = "Goodbye to troubled waters".localized
+        self.isApiCallOnProgress = true
         self.checkUserStatusForWatr()
+        perform(#selector(showWaveAnimation), with: nil, afterDelay: 0.5)
+        perform(#selector(showEducationScreen), with: nil, afterDelay: 2.0)
+        addRightImage()
+        //        self.titleLabel.text = "Goodbye to troubled waters".localized
+//        self.checkUserStatusForWatr()
         //        self.checkUserStatus()
 
     }
@@ -74,8 +78,6 @@ class FliprSplashViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -120,12 +122,13 @@ class FliprSplashViewController: BaseViewController {
     @objc func showWaveAnimation(){
         waveAnimationImageView.isHidden = false
         self.waveAnimationImageViewYpost.constant = 0
-        self.logoImageViewYpost.constant =  self.logoImageViewYpost.constant - 100
+//        self.logoImageViewYpost.constant =  self.logoImageViewYpost.constant - 100
         UIView.animate(withDuration: 0.5) {
             self.logoImageView.transform = self.logoImageView.transform.scaledBy(x: 0.8, y: 0.8)
             self.view.layoutIfNeeded()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.checkUserStatus()
+//                self.checkUserStatus()
+//                self.checkUserStatusForWatr()
             }
         }
     }
@@ -152,7 +155,9 @@ class FliprSplashViewController: BaseViewController {
                         print("Update language error: \(error.localizedDescription)")
                     }
                 })
-                self.indicator.startAnimating()
+//                DispatchQueue.main.async {
+//                    self.indicator.startAnimating()
+//                }
                 DispatchQueue.global().async {
                     self.checkUserPlaces()
                 }
@@ -190,7 +195,7 @@ class FliprSplashViewController: BaseViewController {
 //        hud?.show(in: self.view)
         User.currentUser?.getPlaces(completion: { (placesResult,error) in
             DispatchQueue.main.async {
-                self.indicator.stopAnimating()
+//                self.indicator.stopAnimating()
             }
 
             if (error != nil) {
@@ -287,7 +292,7 @@ class FliprSplashViewController: BaseViewController {
     
     func showUnitSelectionView(){
         let sb = UIStoryboard.init(name: "Settings", bundle: nil)
-        if let unintVC = sb.instantiateViewController(withIdentifier: "UnitViewController") as? UnitViewController{
+        if let unintVC = sb.instantiateViewController(withIdentifier: "PreferenceViewController") as? PreferenceViewController{
             unintVC.isLoginFlow = true
             self.navigationController?.pushViewController(unintVC)
         }

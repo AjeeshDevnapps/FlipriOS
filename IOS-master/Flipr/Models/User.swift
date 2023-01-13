@@ -617,7 +617,7 @@ class User {
         UserDefaults.standard.removeObject(forKey: "CurrentModule")
         UserDefaults.standard.removeObject(forKey: "CurrentPool")
         UserDefaults.standard.removeObject(forKey: "CurrentHUB")
-        UserDefaults.standard.set("orange", forKey: "CurrentTheme")
+        UserDefaults.standard.set("blue", forKey: "CurrentTheme")
         UserDefaults.standard.set("0", forKey: "CurrentUnit")
         UserDefaults.standard.removeObject(forKey: "CurrentUnit")
         UserDefaults.standard.removeObject(forKey: "FirstHubSerialKey")

@@ -36,9 +36,11 @@ struct ShareModel {
     var name:String
     var typeIcon: String
     var isPending: Bool
+    var email:String
     var guestFirstName : String?
     var guestLastName : String?
-
+    var isInvited : Bool!
+    var isKnow : Bool!
     
     init?(withJSON JSON:[String:Any]) {
         
@@ -61,9 +63,14 @@ struct ShareModel {
         }
         
         
+        if let value = JSON["Email"] as? String {
+            self.email = value
+        } else {
+            self.email = ""
+        }
                 
-        guestFirstName = JSON["GuestFirstName"] as? String
-        guestLastName = JSON["GuestLastName"] as? String
+        guestFirstName = JSON["FirstName"] as? String
+        guestLastName = JSON["LastName"] as? String
 
         
         if let value = JSON["PlaceCity"] as? String {
@@ -95,7 +102,9 @@ struct ShareModel {
         } else {
             self.placeType = ""
         }
-        
+        isInvited = JSON["IsInvited"] as? Bool
+        isKnow = JSON["Isknow"] as? Bool
+
         if let value = JSON["Name"] as? String {
             self.name = value
         } else {

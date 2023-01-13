@@ -95,12 +95,20 @@ class SignUpProfileController: UIViewController, UITextFieldDelegate {
         User.updateUserProfile(lastName: lastName, firstName: firstName, password: trimmed) { error in
             self.view.hideStateView()
             if error == nil {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
-                vc.isSignupFlow = true
-                self.navigationController?.pushViewController(vc)
+                self.addPlaceView()
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
+//                vc.isSignupFlow = true
+//                self.navigationController?.pushViewController(vc)
             } else {
                 self.showError(title: "Error", message: error?.localizedDescription)
             }
+        }
+    }
+    
+    func addPlaceView(){
+        let sb = UIStoryboard(name: "NewLocation", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "NewLocationViewControllerID") as? NewLocationViewController {
+            self.navigationController?.pushViewController(viewController, completion: nil)
         }
     }
 }

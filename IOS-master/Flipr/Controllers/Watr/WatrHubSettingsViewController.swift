@@ -73,9 +73,9 @@ extension WatrHubSettingsViewController: UITableViewDataSource,UITableViewDelega
         cell.serialNoLbl.text = settings?.serial
 
         let mode = settings?.mode ?? ""
-        cell.lastMesureLbl.text = mode.capitalized
+        cell.batteryInfoLbl.text = mode.capitalized
         let state = settings?.state ?? 0
-        cell.batteryInfoLbl.text = state == 0  ? "Inactif".localized : "Actif".localized
+        cell.lastMesureLbl.text = state == 0  ? "Inactif".localized : "Actif".localized
         return cell
     }
     

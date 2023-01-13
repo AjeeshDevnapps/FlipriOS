@@ -32,12 +32,11 @@ class WatrSettingsViewController: UIViewController {
         setupView()
         self.nameLbl.text  = (User.currentUser?.firstName ?? "") +  " " +   (User.currentUser?.lastName ?? "")
         self.nameLbl.text = self.nameLbl.text?.capitalized
-        self.fliprDetailsLbl.text  = (Module.currentModule?.serial ?? "") //+  "," +   (User.currentUser?.lastName ?? "")
+      //  self.fliprDetailsLbl.text  = (Module.currentModule?.serial ?? "") //+  "," +   (User.currentUser?.lastName ?? "")
         
         container1.addShadow(offset: CGSize.init(width: 0, height: 0), color: UIColor(hexString: "E3E7F0"), radius: 25.0, opacity: 1.0)
         container2.addShadow(offset: CGSize.init(width: 0, height: 0), color: UIColor(hexString: "E3E7F0"), radius: 25.0, opacity: 1.0)
         saveButton.addShadow(offset: CGSize.init(width: 0, height: 0), color: UIColor(hexString: "E3E7F0"), radius: 25.0, opacity: 1.0)
-
 
         // Do any additional setup after loading the view.
     }

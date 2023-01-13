@@ -130,6 +130,90 @@
             </objects>
             <point key="canvasLocation" x="-400.00000000000006" y="174.77678571428569"/>
         </scene>
+        <!--Flipr Splash View Controller-->
+        <scene sceneID="Gww-cN-dK2">
+            <objects>
+                <viewController id="lZJ-uA-bwj" customClass="FliprSplashViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8ay-du-7KN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Illustration Waves" translatesAutoresizingMaskIntoConstraints="NO" id="HPS-tn-teW">
+                                <rect key="frame" x="0.0" y="780" width="421" height="316"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="316" id="Ceh-gr-hHO"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nv6-Bn-3le">
+                                <rect key="frame" x="5" y="539.5" width="404" height="0.0"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="49"/>
+                                <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWater" translatesAutoresizingMaskIntoConstraints="NO" id="2ne-T6-itH">
+                                <rect key="frame" x="69" y="250" width="276" height="113"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="113" id="5Om-fj-Y1k"/>
+                                    <constraint firstAttribute="width" constant="276" id="UzG-8F-Nx0"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illustration left" translatesAutoresizingMaskIntoConstraints="NO" id="oMO-4I-VQV">
+                                <rect key="frame" x="0.0" y="640" width="94" height="256"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="256" id="ibX-9e-guX"/>
+                                    <constraint firstAttribute="width" constant="94" id="y65-Ge-xcU"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="illustration right" translatesAutoresizingMaskIntoConstraints="NO" id="FhN-00-VhX">
+                                <rect key="frame" x="334" y="551" width="80" height="345"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="345" id="GgL-Po-UE9"/>
+                                    <constraint firstAttribute="width" constant="80" id="rOl-U3-5xs"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WaterMatters" translatesAutoresizingMaskIntoConstraints="NO" id="FaH-p3-YNy">
+                                <rect key="frame" x="73.5" y="463" width="267" height="88"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="267" id="rCj-2a-09c"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pQ1-zd-El3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2ne-T6-itH" firstAttribute="centerX" secondItem="8ay-du-7KN" secondAttribute="centerX" id="20k-Xq-JzU"/>
+                            <constraint firstAttribute="bottom" secondItem="FhN-00-VhX" secondAttribute="bottom" id="2zN-Ib-UHK"/>
+                            <constraint firstAttribute="trailing" secondItem="HPS-tn-teW" secondAttribute="trailing" constant="-7" id="3Te-QH-wSX"/>
+                            <constraint firstAttribute="trailing" secondItem="FhN-00-VhX" secondAttribute="trailing" id="7eo-PV-7yY"/>
+                            <constraint firstAttribute="bottom" secondItem="oMO-4I-VQV" secondAttribute="bottom" id="A7U-Bz-6QI"/>
+                            <constraint firstAttribute="trailing" secondItem="nv6-Bn-3le" secondAttribute="trailing" constant="5" id="EOY-ot-Iky"/>
+                            <constraint firstItem="FaH-p3-YNy" firstAttribute="centerX" secondItem="8ay-du-7KN" secondAttribute="centerX" id="IUM-NY-8PO"/>
+                            <constraint firstAttribute="bottom" secondItem="HPS-tn-teW" secondAttribute="bottom" constant="-200" id="JLL-hG-r5m"/>
+                            <constraint firstItem="nv6-Bn-3le" firstAttribute="centerX" secondItem="8ay-du-7KN" secondAttribute="centerX" id="PtO-f0-A0P"/>
+                            <constraint firstItem="2ne-T6-itH" firstAttribute="top" secondItem="pQ1-zd-El3" secondAttribute="top" constant="110" id="S3I-Mr-bXH"/>
+                            <constraint firstItem="nv6-Bn-3le" firstAttribute="leading" secondItem="8ay-du-7KN" secondAttribute="leading" constant="5" id="T2g-f7-6pc"/>
+                            <constraint firstItem="oMO-4I-VQV" firstAttribute="leading" secondItem="pQ1-zd-El3" secondAttribute="leading" id="UFS-wA-mX3"/>
+                            <constraint firstItem="FaH-p3-YNy" firstAttribute="top" secondItem="2ne-T6-itH" secondAttribute="bottom" constant="100" id="ioD-dv-Jag"/>
+                            <constraint firstItem="HPS-tn-teW" firstAttribute="leading" secondItem="pQ1-zd-El3" secondAttribute="leading" id="m6u-Cg-Itp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="mkV-9B-R8F"/>
+                    <connections>
+                        <outlet property="leftAnimationImageView" destination="oMO-4I-VQV" id="htx-rQ-zQL"/>
+                        <outlet property="logoImageView" destination="2ne-T6-itH" id="Lz8-bc-UUo"/>
+                        <outlet property="logoImageViewYpost" destination="S3I-Mr-bXH" id="0j9-vH-8aL"/>
+                        <outlet property="rightAnimationImageView" destination="FhN-00-VhX" id="fhF-fP-2Ot"/>
+                        <outlet property="titleLabel" destination="nv6-Bn-3le" id="hVY-1Q-DUr"/>
+                        <outlet property="waveAnimationImageView" destination="HPS-tn-teW" id="R1c-p4-whS"/>
+                        <outlet property="waveAnimationImageViewYpost" destination="JLL-hG-r5m" id="iXG-HH-Yer"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nf6-e7-DCG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-400" y="-585"/>
+        </scene>
         <!--Login Education One View Controller-->
         <scene sceneID="Qeg-zh-XRs">
             <objects>
@@ -681,7 +765,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="a7e-nM-Gf6" kind="relationship" relationship="rootViewController" id="XGI-qa-0YH"/>
+                        <segue destination="lZJ-uA-bwj" kind="relationship" relationship="rootViewController" id="mkl-Si-Jkl"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B1V-TQ-4Am" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -908,12 +992,14 @@
         <image name="Illustration Waves" width="375" height="315.5"/>
         <image name="Logo Flipr" width="166" height="50"/>
         <image name="Water Matters" width="202" height="88"/>
+        <image name="WaterMatters" width="202" height="88"/>
         <image name="Watr" width="121" height="34"/>
         <image name="bkWaves" width="375" height="316"/>
         <image name="illustration left" width="93.5" height="256"/>
         <image name="illustration right" width="79.5" height="344.5"/>
         <image name="intro1" width="285" height="229"/>
         <image name="key" width="16" height="16"/>
+        <image name="logoWater" width="276" height="113"/>
         <image name="watrIcon" width="189" height="314"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

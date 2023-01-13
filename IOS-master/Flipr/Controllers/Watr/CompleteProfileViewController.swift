@@ -55,7 +55,7 @@ class CompleteProfileViewController: UIViewController {
     
     func showUnitSelectionView(){
         let sb = UIStoryboard.init(name: "Settings", bundle: nil)
-        if let unintVC = sb.instantiateViewController(withIdentifier: "UnitViewController") as? UnitViewController{
+        if let unintVC = sb.instantiateViewController(withIdentifier: "PreferenceViewController") as? PreferenceViewController{
             unintVC.isLoginFlow = true
             self.navigationController?.pushViewController(unintVC)
         }

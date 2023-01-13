@@ -263,12 +263,14 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 
                 cell.typeLbl.text = place.privateName ??  place.name
                 var loc = place.placeOwnerFirstName
-                if !place.placeOwnerLastName.isEmpty{
+                if place.placeOwnerLastName != nil{
                     loc?.append(" ")
-                    loc?.append(place.placeOwnerLastName)
+                    loc?.append(place.placeOwnerLastName ?? "")
                 }
                 loc?.append(", ")
-                loc?.append(place.placeCity)
+                if place.placeCity != nil{
+                    loc?.append(place.placeCity ?? "")
+                }
                 if place.permissionLevel == "Admin"{
                     cell.locationLbl.text = place.placeCity
                 }else{
@@ -298,12 +300,14 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 cell.place = place
                 cell.typeLbl.text = place.privateName
                 var loc = place.placeOwnerFirstName
-                if !place.placeOwnerLastName.isEmpty{
+                if place.placeOwnerLastName != nil{
                     loc?.append(" ")
-                    loc?.append(place.placeOwnerLastName)
+                    loc?.append(place.placeOwnerLastName ?? "")
                 }
                 loc?.append(", ")
-                loc?.append(place.placeCity)
+                if place.placeCity != nil{
+                    loc?.append(place.placeCity ?? "")
+                }
                 cell.locationLbl.text = loc
                
                 if let iconName  = place.typeIcon{
@@ -342,12 +346,16 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 cell.typeLbl.text = place.privateName ??  place.name
                 
                 var loc = place.placeOwnerFirstName
-                if !place.placeOwnerLastName.isEmpty{
+                if place.placeOwnerLastName != nil{
                     loc?.append(" ")
-                    loc?.append(place.placeOwnerLastName)
+                    loc?.append(place.placeOwnerLastName ?? "")
                 }
                 loc?.append(", ")
-                loc?.append(place.placeCity ?? "")
+                if place.placeCity != nil{
+
+                    loc?.append(place.placeCity ?? "")
+                    
+                }
 //                cell.locationLbl.text = loc
                 if place.permissionLevel == "Admin"{
                     cell.locationLbl.text = place.placeCity
@@ -377,12 +385,14 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 cell.typeLbl.text = place.privateName ??  place.name
                 
                 var loc = place.placeOwnerFirstName
-                if !place.placeOwnerLastName.isEmpty{
+                if place.placeOwnerLastName != nil{
                     loc?.append(" ")
-                    loc?.append(place.placeOwnerLastName)
+                    loc?.append(place.placeOwnerLastName ?? "")
                 }
                 loc?.append(", ")
-                loc?.append(place.placeCity)
+                if place.placeCity != nil{
+                    loc?.append(place.placeCity ?? "")
+                }
                 cell.locationLbl.text = loc
                 if let iconName  = place.typeIcon{
                     let iconnameArray = iconName.components(separatedBy: ".")
@@ -410,7 +420,7 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
             
             let sb = UIStoryboard(name: "NewPool", bundle: nil)
             if let viewController = sb.instantiateViewController(withIdentifier: "AddDeviceListViewController") as? AddDeviceListViewController {
-                AppSharedData.sharedInstance.addedPlaceId = self.places[indexPath.row].placeId 
+                AppSharedData.sharedInstance.addedPlaceId = self.places[indexPath.row].placeId ?? 0
                 self.present(viewController, animated: true, completion: nil)
             }
         }

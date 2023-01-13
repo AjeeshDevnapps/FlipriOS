@@ -21,7 +21,9 @@ class NewPoolViewController: UIViewController {
     var hasLoadedShares = false
     var isCreatingPlace = false
     var loadedShares = [ShareModel]()
-    var contactList = [ContactsWatr]()
+//    var contactList = [ContactsWatr]()
+    var contacts = [ShareModel]()
+
 
     var poolSettings: PoolSettingsModel?
     var placeTitle:String?
@@ -282,16 +284,26 @@ class NewPoolViewController: UIViewController {
                 self.present(alertVC, animated: true)
                 return
             }
-            self.loadedShares = shares ?? []
-            self.hasLoadedShares = true
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            
+            if shares != nil{
+                if shares!.count > 0 {
+                    
+                    self.loadedShares =  shares!.filter { $0.isInvited == true }
+                    self.contacts =  shares!.filter { $0.isInvited == false }
+
+                    self.hasLoadedShares = true
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
             }
+            
         }
     }
     
     func getContactList() {
-//        let hud = JGProgressHUD(style:.dark)
+        return
+//        let hud = JGProgressHUD(style:.dark)#imageLiteral(resourceName: "simulator_screenshot_30A5A067-CC76-4FBF-80B8-1231C3934D90.png")
 //        hud?.show(in: self.navigationController!.view)
         let email:String = self.poolSettings?.owner?.email ?? ""
 //        if let pId = self.placeDetails?.placeId{
@@ -303,7 +315,7 @@ class NewPoolViewController: UIViewController {
             if error != nil {
                 return
             }
-            self.contactList = contacts ?? []
+//            self.contactList = contacts ?? []
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -386,13 +398,23 @@ extension NewPoolViewController: UITableViewDataSource {
         if parametersButton.isSelected {
             return NewPoolTitles.PoolSectionTitles.allCases.count
         } else {
-            let contactCount = self.contactList.count
-            if contactCount > 0{
-                return 2
+            let contactCount = self.contacts.count
+            let shareCount = self.loadedShares.count
+            var numberOfsection = 0
+            if shareCount > 0 {
+                numberOfsection = numberOfsection + 1
             }
-            return 1
+            if contactCount > 0{
+                numberOfsection = numberOfsection + 1
+            }
+            return numberOfsection
         }
     }
+    
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        55
+//    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if parametersButton.isSelected {
@@ -404,12 +426,12 @@ extension NewPoolViewController: UITableViewDataSource {
             default: return 0
             }
         } else {
-            let contactCount = self.contactList.count
+            let contactCount = self.contacts.count
             if contactCount > 0{
                 if section == 0{
                     return loadedShares.count
                 }else{
-                    return contactList.count
+                    return contacts.count
                 }
             }
             return loadedShares.count
@@ -449,23 +471,31 @@ extension NewPoolViewController: UITableViewDataSource {
                 switch indexPath.row {
                 case 0:
                     secondaryText = poolSettings?.volume?.toString
+                    var volUnitStr = ""
+                    volUnitStr = secondaryText ?? ""
+                    
                     self.volume = Int(poolSettings?.volume ?? 0)
-
-                    var voltitle = NewPoolTitles.Characteristics.allCases[indexPath.row].rawValue
+                    let voltitle = NewPoolTitles.Characteristics.allCases[indexPath.row].rawValue
                     if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
                         if currentUnit == 2{
                             let val: Double =  Double(poolSettings?.volume ?? 0)
                             let funit = Int(val * 264.172052)
                             self.volume = funit
                             secondaryText = funit.toString
-                            voltitle.append(" - gal")
+                            volUnitStr = secondaryText ?? ""
+                            volUnitStr.append(" gal")
                         }else{
-                            voltitle.append(" - m³")
+                            volUnitStr.append(" m³")
                         }
                     }else{
-                        voltitle.append(" - m³")
+                        volUnitStr.append(" m³")
+                    }
+                    if secondaryText != nil{
+                        secondaryText = volUnitStr
                     }
                     primaryText = voltitle
+                    
+                    
                 case 1:
                     secondaryText = poolSettings?.shape?.name
                 case 2:
@@ -508,6 +538,7 @@ extension NewPoolViewController: UITableViewDataSource {
                 default: break;
             }
         }
+        /*
         if #available(iOS 14.0, *) {
             var content = tableViewCell.defaultContentConfiguration()
             if parametersButton.isSelected {
@@ -537,31 +568,47 @@ extension NewPoolViewController: UITableViewDataSource {
                 
                 if indexPath.section == 0 {
                     var content = tableViewCell.defaultContentConfiguration()
-                    var name:String = loadedShares[indexPath.row].guestUser
-                    if let fname = loadedShares[indexPath.row].guestFirstName as? String{
-                        name = fname
-                        if let lname = loadedShares[indexPath.row].guestLastName as? String{
-                            name.append(" ")
-                            name.append(lname)
+                    let user = loadedShares[indexPath.row]
+                    var name:String = ""
+                    
+                    if user.isKnow {
+                        name = loadedShares[indexPath.row].guestUser
+                        if let fname = loadedShares[indexPath.row].guestFirstName as? String{
+                            name = fname
+                            if let lname = loadedShares[indexPath.row].guestLastName as? String{
+                                name.append(" ")
+                                name.append(lname)
+                            }
+                        }else{
+                            
                         }
+                    }else{
+                        name = loadedShares[indexPath.row].email
+                    }
+                    
+                    if user.isPending {
+                        
                     }else{
                         
                     }
+//                    tableViewCell.infoLbl.isHidden = !user.isPending
+//
+//                    tableViewCell.titleName = name
     //                name.append(" ")
     //                name.append(loadedShares[indexPath.row].placeOwnerLastName)
                     content.text = name
     //                content.text = loadedShares[indexPath.row].guestUser
-                    let role = loadedShares[indexPath.row].permissionLevel
-                    switch role {
-                    case "View":
-                        content.image = UIImage(named: "guest_role")
-                    case "Admin":
-                        content.image = UIImage(named: "man_role")
-                    case "Manage":
-                        content.image = UIImage(named: "boy_role")
-                    default:
-                        content.image = UIImage(named: "guest_role")
-                    }
+//                    let role = loadedShares[indexPath.row].permissionLevel
+//                    switch role {
+//                    case "View":
+//                        content.image = UIImage(named: "guest_role")
+//                    case "Admin":
+//                        content.image = UIImage(named: "man_role")
+//                    case "Manage":
+//                        content.image = UIImage(named: "boy_role")
+//                    default:
+//                        content.image = UIImage(named: "guest_role")
+//                    }
                    // tableViewCell.closeButton.tag = indexPath.row
                     tableViewCell.contentConfiguration = content
                     tableViewCell.accessoryType = .none
@@ -573,9 +620,9 @@ extension NewPoolViewController: UITableViewDataSource {
 
                 else{
                     var content = tableViewCell.defaultContentConfiguration()
-                    var name:String = contactList[indexPath.row].firstName ?? ""
+                    var name:String = contacts[indexPath.row].guestFirstName ?? ""
                     name.append(" ")
-                    name.append(contactList[indexPath.row].lastName ?? "")
+                    name.append(contacts[indexPath.row].guestLastName ?? "")
                     content.text = name
                     tableViewCell.contentConfiguration = content
                     tableViewCell.accessoryType = .none
@@ -588,10 +635,12 @@ extension NewPoolViewController: UITableViewDataSource {
 
             }
             return tableViewCell
-        } else {
+        }
+        else {
+            */
             if parametersButton.isSelected {
-                tableViewCell.textLabel?.text = primaryText
-                tableViewCell.detailTextLabel?.text = hasSwitch ? "" : (secondaryText ?? "Définir")
+                tableViewCell.titleName?.text = primaryText
+                tableViewCell.valueText?.text = hasSwitch ? "" : (secondaryText ?? "Définir")
                 if tableViewCell.detailTextLabel?.text?.isEmpty ?? true || tableViewCell.detailTextLabel?.text == "Définir" {
                     tableViewCell.detailTextLabel?.textColor = .red
                 } else {
@@ -604,11 +653,19 @@ extension NewPoolViewController: UITableViewDataSource {
                 if !isSwitchSelected {
                     tableViewCell.accessoryType = .disclosureIndicator
                 }
+                if indexPath.section == 0{
+                    if indexPath.row == 0 || indexPath.row == 1{
+                        tableViewCell.accessoryType = .none
+                    }
+                }
                 tableViewCell.selectionStyle = .none
                 return tableViewCell
             } else {
                 
                 if indexPath.section == 0{
+                    
+                    /*
+                    
                     let cell = tableView.dequeueReusableCell(withIdentifier: "SystemCellForEmails")
                     let role = loadedShares[indexPath.row].permissionLevel
                     switch role {
@@ -631,25 +688,55 @@ extension NewPoolViewController: UITableViewDataSource {
                     cell?.accessoryType = .none
                     cell?.selectionStyle = .none
                     
+                    */
+                    let tableViewCell = tableView.dequeueReusableCell(withIdentifier: "NewPlaceShareTableViewCell", for: indexPath) as! NewPoolSettingsTableViewCell
+                    let user = loadedShares[indexPath.row]
+                    var name:String = ""
                     
-                    return cell!
+                    if user.isKnow {
+                        name = loadedShares[indexPath.row].guestUser
+                        if let fname = loadedShares[indexPath.row].guestFirstName{
+                            name = fname
+                            if let lname = loadedShares[indexPath.row].guestLastName{
+                                name.append(" ")
+                                name.append(lname)
+                            }
+                        }else{
+                            
+                        }
+                    }else{
+                        name = loadedShares[indexPath.row].email
+                    }
+                    
+                    if user.isPending {
+                        tableViewCell.titleConstraint.constant = 10.5
+                    }else{
+                        tableViewCell.titleConstraint.constant = 17.5
+                    }
+                    tableViewCell.titleName.text = name
+                    tableViewCell.infoLbl.text = "Invitation en attente"
+                    
+                    tableViewCell.infoLbl.isHidden = !user.isPending
+                    
+                    return tableViewCell
                 }else{
                     let cell = tableView.dequeueReusableCell(withIdentifier: "SystemCellForEmails")
                   
-                    var name:String = contactList[indexPath.row].firstName ?? ""
+                    var name:String = contacts[indexPath.row].guestFirstName ?? ""
                     name.append(" ")
-                    name.append(contactList[indexPath.row].lastName ?? "")
+                    name.append(contacts[indexPath.row].guestLastName ?? "")
                     cell?.textLabel?.text = name
                     cell?.accessoryType = .none
                     cell?.selectionStyle = .none
                     let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
                     imgView.image = UIImage(named: "contacts")!
-                    tableViewCell.accessoryView = imgView
+                    cell?.accessoryView = imgView
+                    
 
                     return cell!
                 }
                 
-            }
+//            }
         }
     }
     
@@ -742,7 +829,6 @@ extension NewPoolViewController: UITableViewDelegate {
                 
                 let sb = UIStoryboard(name: "Main", bundle: nil)
                 let viewController = sb.instantiateViewController(withIdentifier: "ValuePickerController") as! ValuePickerController
-                
                 let listVC = self.storyboard?.instantiateViewController(withIdentifier: "NewPoolSimpleListViewController") as! NewPoolSimpleListViewController
                 switch indexPath.row {
                 case 0:
@@ -930,7 +1016,7 @@ extension NewPoolViewController: UITableViewDelegate {
                 }
                 let shareInfo = loadedShares[indexPath.row]
                 
-                self.deleteSharePrompt(email: shareInfo.guestUser, placeId: placeId)
+                self.deleteSharePrompt(email: shareInfo.email, placeId: placeId)
 
             }else{
                 
@@ -939,8 +1025,8 @@ extension NewPoolViewController: UITableViewDelegate {
                     placeId = "\(pId)"
                     FliprShare().poolId = placeId
                 }
-                let contactInfoInfo = contactList[indexPath.row]
-                self.addContact(placeId: placeId, email: contactInfoInfo.email ?? "")
+                let contactInfoInfo = contacts[indexPath.row]
+                self.addContact(placeId: placeId, email: contactInfoInfo.email )
 
             }
 //            let sb = UIStoryboard(name: "NewPool", bundle: nil)

@@ -545,7 +545,6 @@ class HUBViewController: UIViewController {
                         }
                     }
                     self.refreshPlannings()
-                    
                 }
             }
             

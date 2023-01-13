@@ -59,10 +59,10 @@ class WatrInputViewController: UIViewController {
             var titleStr  = self.title ?? ""
 
             if !isDegree{
-                titleStr = titleStr + " - gal "
+                titleStr = titleStr + " (gal)"
                 
             }else{
-                titleStr = titleStr + " - m³"
+                titleStr = titleStr + " (m³)"
             }
             self.title = titleStr
         }
