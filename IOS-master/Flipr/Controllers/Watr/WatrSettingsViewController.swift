@@ -20,6 +20,8 @@ class WatrSettingsViewController: UIViewController {
     @IBOutlet weak var unitLbl: UILabel!
     @IBOutlet weak var themBkImage: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var notificationSwitch: UISwitch!
+
 
 
     @IBOutlet weak var container1: UIView!
@@ -37,6 +39,8 @@ class WatrSettingsViewController: UIViewController {
         container1.addShadow(offset: CGSize.init(width: 0, height: 0), color: UIColor(hexString: "E3E7F0"), radius: 25.0, opacity: 1.0)
         container2.addShadow(offset: CGSize.init(width: 0, height: 0), color: UIColor(hexString: "E3E7F0"), radius: 25.0, opacity: 1.0)
         saveButton.addShadow(offset: CGSize.init(width: 0, height: 0), color: UIColor(hexString: "E3E7F0"), radius: 25.0, opacity: 1.0)
+        let value = UserDefaults.standard.bool(forKey: notificationOnOffValuesKey)
+        notificationSwitch.isOn = value
 
         // Do any additional setup after loading the view.
     }
@@ -47,6 +51,7 @@ class WatrSettingsViewController: UIViewController {
         setupView()
         setupUnitView()
     }
+    
     
     func setupView(){
         if let currentThemColour = UserDefaults.standard.object(forKey: "CurrentTheme") as? String{
@@ -63,6 +68,7 @@ class WatrSettingsViewController: UIViewController {
             themBkImage.image = UIImage(named: "RoseThemeBk")
         }
     }
+    
     
     
     func setupUnitView(){

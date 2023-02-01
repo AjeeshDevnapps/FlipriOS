@@ -16,34 +16,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Watr" translatesAutoresizingMaskIntoConstraints="NO" id="gDq-3S-HF7">
-                                <rect key="frame" x="146.5" y="98" width="121" height="34"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="watrIcon" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-sA-Opo">
-                                <rect key="frame" x="112.5" y="242" width="189" height="314"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Water Matters" translatesAutoresizingMaskIntoConstraints="NO" id="Ayt-81-mo7">
-                                <rect key="frame" x="106" y="614" width="202" height="88"/>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkWaves" translatesAutoresizingMaskIntoConstraints="NO" id="aHi-Ix-7f5">
                                 <rect key="frame" x="0.0" y="546" width="414" height="350"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="350" id="xQH-7w-I5H"/>
                                 </constraints>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo Flipr" translatesAutoresizingMaskIntoConstraints="NO" id="mGa-Dx-xhs">
+                                <rect key="frame" x="124" y="423" width="166" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="166" id="LWz-5O-MAQ"/>
+                                    <constraint firstAttribute="height" constant="50" id="RYW-6e-msQ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="fa9-sA-Opo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1pJ-ex-GXk"/>
+                            <constraint firstItem="mGa-Dx-xhs" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="52G-17-aBD"/>
                             <constraint firstAttribute="bottom" secondItem="aHi-Ix-7f5" secondAttribute="bottom" id="6P4-NQ-yeW"/>
                             <constraint firstItem="aHi-Ix-7f5" firstAttribute="trailing" secondItem="Bcu-3y-fUS" secondAttribute="trailing" id="8S5-5z-g9i"/>
-                            <constraint firstItem="Ayt-81-mo7" firstAttribute="top" secondItem="fa9-sA-Opo" secondAttribute="bottom" constant="58" id="9C4-3g-Dwp"/>
+                            <constraint firstItem="mGa-Dx-xhs" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Hat-f8-jYH"/>
                             <constraint firstItem="aHi-Ix-7f5" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="U0i-fM-8lf"/>
-                            <constraint firstItem="gDq-3S-HF7" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="54" id="d9m-rz-5dd"/>
-                            <constraint firstItem="Ayt-81-mo7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="o1W-pb-fkA"/>
-                            <constraint firstItem="gDq-3S-HF7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="vHa-Pd-BgM"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="Ayt-81-mo7" secondAttribute="bottom" constant="160" id="xEc-LJ-bz5"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -53,9 +47,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Water Matters" width="202" height="88"/>
-        <image name="Watr" width="121" height="34"/>
+        <image name="Logo Flipr" width="166" height="50"/>
         <image name="bkWaves" width="375" height="316"/>
-        <image name="watrIcon" width="189" height="314"/>
     </resources>
 </document>

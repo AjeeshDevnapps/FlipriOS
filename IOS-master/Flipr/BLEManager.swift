@@ -76,6 +76,7 @@ class BLEManager: NSObject {
     
     var fliprReadingVerification = false
     var isHandling409 = false
+    var currentMeasuringSerial:String = ""
 
 
 
@@ -172,6 +173,24 @@ class BLEManager: NSObject {
     }
     
     func post(measures:String, type:String) {
+        
+        if self.currentMeasuringSerial != Module.currentModule?.serial{
+            let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Measuring diff device :/"])
+            self.calibrationMeasuresCompletionBlock?(error)
+            self.calibrationMeasuresCompletionBlock = nil
+            self.sendMeasuresCompletionBlock?(error)
+            self.sendMeasuresCompletionBlock = nil
+            return;
+        }else{
+//            let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Diff Device"])
+//            self.calibrationMeasuresCompletionBlock?(error)
+//            self.calibrationMeasuresCompletionBlock = nil
+//            self.sendMeasuresCompletionBlock?(error)
+//            self.sendMeasuresCompletionBlock = nil
+//            return;
+            debugPrint("Sending measurement...")
+        }
+    
         
 //        var measureBackup = "0"
 //        var isZerioValue = false
@@ -328,6 +347,7 @@ extension BLEManager: CBCentralManagerDelegate {
                 serial = name.replacingOccurrences(of: "FliprHUB", with: "").trimmed
             }
             
+            self.currentMeasuringSerial = serial ?? ""
             print("Flipr device discovered with serial:\(serial) , Module.currentModule?.serial: \(Module.currentModule?.serial)")
             
             if let currentModuleSerial = Module.currentModule?.serial {

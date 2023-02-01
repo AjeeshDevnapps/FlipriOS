@@ -466,6 +466,24 @@ class DashboardViewController: UIViewController {
             
         }
         
+        NotificationCenter.default.addObserver(forName: K.Notifications.FliprDeviceDeleted, object: nil, queue: nil) { (notification) in
+            Module.currentModule?.serial = ""
+            self.hideFliprData()
+            self.hideWeatherForecast()
+            self.settingsButtonContainer.isHidden = true
+            self.userHasNoFlipr()
+            if self.isPlaceOwner{
+                self.addFirstFliprView.isHidden = false
+            }
+//            self.hideUserHasNoFlipr()
+            self.showHubTabInfoView(hide: true)
+            self.refresh()
+            self.showPlaceSelectionView()
+        }
+        
+        NotificationCenter.default.addObserver(forName: K.Notifications.HubDeviceDeleted, object: nil, queue: nil) { (notification) in
+            self.loadHUBs()
+        }
         
         NotificationCenter.default.addObserver(forName: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil, queue: nil) { (notification) in
             self.manageTemperatureValueChangeButtton()
@@ -805,6 +823,7 @@ class DashboardViewController: UIViewController {
     
     
     @IBAction func pumbSwitchActionFliptrTab(sender:UIButton){
+        if !isPlaceOwner {return}
         HUB.currentHUB =  self.hubPumb
         HUB.saveCurrentHUBLocally()
         if sender.tag == 1{
@@ -829,6 +848,7 @@ class DashboardViewController: UIViewController {
     
     
     @IBAction func bulbSwitchActionFliptrTab(sender:UIButton){
+        if !isPlaceOwner {return}
         HUB.currentHUB =  self.hubBulb
         HUB.saveCurrentHUBLocally()
         if sender.tag == 1{
@@ -968,6 +988,9 @@ class DashboardViewController: UIViewController {
         pumbActionButton.setImage(UIImage(named: "add"), for: .normal)
         self.pumbStatuImageView.image =  UIImage(named: "pumbdisabled")
         pumbActionButton.isUserInteractionEnabled = true
+        firstHubNameLbl.text = ""
+        secondHubNameLbl.text = ""
+
     }
     
     
@@ -991,6 +1014,8 @@ class DashboardViewController: UIViewController {
         if let secondHub = UserDefaults.standard.object(forKey: "SecondHubSerialKey") as? String{
             secondHubKey = secondHub
         }
+        self.hubBulb = nil
+        self.hubPumb = nil
         if isNotSavedHubPosition{
             for hubObj in self.hubs{
                 
@@ -1097,6 +1122,12 @@ class DashboardViewController: UIViewController {
                 }
             }
             self.manageFirstHubStatusIcon(hub: hubObj)
+        }
+        else{
+            secondHubNameLbl.text = ""
+            bulbActionButton.setImage(UIImage(named: "add"), for: .normal)
+            self.bulbStatuImageView.image =  UIImage(named: "pumbdisabled")
+            bulbActionButton.isUserInteractionEnabled = true
         }
         
         if let hubObj = self.hubPumb{
@@ -1455,6 +1486,9 @@ class DashboardViewController: UIViewController {
         let waterMaxValue = UserDefaults.standard.bool(forKey: userDefaultTemperatureMaxValuesKey)
         let redoxValue = UserDefaults.standard.bool(forKey: userDefaultThresholdValuesKey)
         
+        if !isPlaceOwner{
+            return
+        }
         
         if phMinValue && phMaxValue && waterMinValue && waterMaxValue && redoxValue{
             UIView.transition(with:  self.waterTmpChangeButton, duration: 0.4,
@@ -1516,6 +1550,8 @@ class DashboardViewController: UIViewController {
         hubTabFluidViewTopEdge = nil
         
         setupInitialView()
+//        self.refresh()
+
     }
     
     func setupInitialView() {
@@ -1543,13 +1579,15 @@ class DashboardViewController: UIViewController {
         //        let fluidColor =  UIColor.init(hexString: "fcad71")
         
         if let module = Module.currentModule {
-            self.hideUserHasNoFlipr()
+            self.settingsButtonContainer.isHidden = false
+//            self.hideUserHasNoFlipr()
             if module.isForSpa {
                 //backgroundImageView.image = UIImage(named:"Dashboard_BG_SPA")
                 //backgroundOverlayImageView.image = UIImage(named:"Degrade_dashboard_SPA")
                 //fluidColor =  UIColor.init(colorLiteralRed: 64/255.0, green: 125/255.0, blue: 136/255.0, alpha: 1)
             }
         }else{
+            self.hideUserHasNoFlipr()
             self.userHasNoFlipr()
         }
         
@@ -2846,7 +2884,7 @@ class DashboardViewController: UIViewController {
         
         hideFliprData()
         
-        if let identifier = Module.currentModule?.serial {
+        if let identifier = Module.currentModule?.serial, identifier.isValidString {
             
             Alamofire.request(Router.readModuleResume(serialId: identifier)).responseJSON(completionHandler: { (response) in
                 
@@ -2868,9 +2906,7 @@ class DashboardViewController: UIViewController {
                 {
                     self.scrollView.isHidden = false
                     self.showHubTabInfoView(hide: false)
-                    print("JSON: \(JSON)")
-                    
-                    
+                    print("JSON: Flipr Data \(JSON)")
                     
                     if let fliprData = JSON["fliprSection"] as? [String:Any] {
                         if let deviceName = fliprData["CommercialType"] as? String {
@@ -3210,8 +3246,8 @@ class DashboardViewController: UIViewController {
                         if let dateString = current["DateTime"] as? String {
                             if let lastDate = dateString.fliprDate {
                                 let dateFormatter = DateFormatter()
-                                dateFormatter.dateFormat = "dd/MM HH:mm"
-                                self.lastMeasureDateLabel.text = "Lun.".localized +  " : \(dateFormatter.string(from: lastDate))"
+                                dateFormatter.dateFormat = "EEE dd/MM HH:mm"
+                                self.lastMeasureDateLabel.text = "\(dateFormatter.string(from: lastDate))"
                                 self.lastMeasureDateLabel.isHidden = false
                                 self.lastMeasureDate = lastDate
                                 Module.currentModule?.rawlastMeasure = dateFormatter.string(from: lastDate)
@@ -3261,15 +3297,25 @@ class DashboardViewController: UIViewController {
                                 //            print("false")
                                 //        }
                                 // Greater than 75 minute ex: -4600
+                                
+                                
+                                
                                 if lastDate.timeIntervalSinceNow < -4500 {
-                                    self.readBLEMeasure(completion: { (error) in
-                                        if error != nil {
-                                            self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
-                                            self.bleStatusView.isHidden = true
-                                        } else {
-                                            self.bleMeasureHasBeenSent = true
-                                        }
-                                    })
+                                    if self.isPlaceOwner{
+                                        self.readBLEMeasure(completion: { (error) in
+                                            if error != nil {
+                                                if error?.localizedDescription == "Diff Device"{
+                                                    debugPrint("Diff Device error")
+                                                }else{
+                                                    self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+                                                    self.bleStatusView.isHidden = true
+                                                }
+                                                
+                                            } else {
+                                                self.bleMeasureHasBeenSent = true
+                                            }
+                                        })
+                                    }
                                 }
                                 
                                 // less than 75 / < 75 ex: -4400
@@ -3324,14 +3370,18 @@ class DashboardViewController: UIViewController {
                         else {
                             self.signalStrengthLabel.text = "Signal inexistant".localized
                             self.signalStrengthImageView.image = UIImage(named: "SignalNo")
-                            self.readBLEMeasure(completion: { (error) in
-                                if error != nil {
-                                    self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
-                                    self.bleStatusView.isHidden = true
-                                } else {
-                                    self.bleMeasureHasBeenSent = true
-                                }
-                            })
+                            /*
+                            if self.isPlaceOwner{
+                                self.readBLEMeasure(completion: { (error) in
+                                    if error != nil {
+                                        self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+                                        self.bleStatusView.isHidden = true
+                                    } else {
+                                        self.bleMeasureHasBeenSent = true
+                                    }
+                                })
+                            }
+                            */
                         }
                         
                         
@@ -3624,19 +3674,21 @@ class DashboardViewController: UIViewController {
                         
                         let value = UserDefaults.standard.bool(forKey: notificationOnOffValuesKey)
                         if value{
-                            self.updateAlerts()
-                            
-                            
-                            
-                            self.getProrityAlert()
+                            if self.isPlaceOwner{
+                                self.updateAlerts()
+                                self.getProrityAlert()
+                            }
                         }else{
-                            self.manageNotificationDisabledButtton()
+                            if self.isPlaceOwner{
+                                self.manageNotificationDisabledButtton()
+                            }
                         }
                     } else {
-                        
+                        /*
                         print("response.result.value: \(response.result.value)")
                         self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "The first analysis is in progress!".localized, message: "Waiting for the first measure...".localized, bottomAlignment: 0)
-                        
+                        */
+                        /*
                         self.readBLEMeasure(completion: { (error) in
                             if error != nil {
                                 self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
@@ -3645,14 +3697,21 @@ class DashboardViewController: UIViewController {
                                 self.bleMeasureHasBeenSent = true
                             }
                         })
+                        */
                     }
                     
-                    
+                    if self.isPlaceOwner{
+                        self.settingsButtonContainer.isHidden = false
+                    }else{
+                        self.settingsButtonContainer.isHidden = true
+                    }
                     
                 } else {
+                    /*
                     print("response.result.value: \(response.result.value)")
                     self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "The first analysis is in progress!".localized, message: "Waiting for the first measure...".localized, bottomAlignment: 0)
-                    
+                    */
+                    /*
                     self.readBLEMeasure(completion: { (error) in
                         if error != nil {
                             self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
@@ -3661,217 +3720,21 @@ class DashboardViewController: UIViewController {
                             self.bleMeasureHasBeenSent = true
                         }
                     })
+                    */
                 }
             })
-            /*
-             Alamofire.request(Router.readModuleLastMetrics(serialId: identifier)).responseJSON(completionHandler: { (response) in
-             if let error = response.result.error {
-             print("Update Flipr data did fail with error: \(error)")
-             
-             self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\nErreur de rafraichissement", message: error.localizedDescription, buttonTitle: "Réessayer", buttonAction: {
-             self.view.hideStateView()
-             self.updateFliprData()
-             })
-             
-             } else if let JSON = response.result.value as? [String:Any] {
-             
-             self.updateAlerts()
-             
-             
-             print("JSON: \(JSON)")
-             
-             self.view.hideStateView()
-             
-             if let dateString = JSON["DateTime"] as? String {
-             if let lastDate = dateString.date(withFormat: "yyyy-MM-dd'T'HH:mm:ss'Z'")?.addingTimeInterval(7200) {
-             //let style = DateFo
-             let dateFormatter = DateFormatter()
-             dateFormatter.dateFormat = "EEE HH:mm"
-             self.lastMeasureDateLabel.text = "Dernière mesure : \(dateFormatter.string(from: lastDate))"
-             self.lastMeasureDateLabel.isHidden = false
-             
-             print("lastDate interval since now:\(lastDate.timeIntervalSinceNow)")
-             if lastDate.timeIntervalSinceNow < -3600 {
-             self.readBLEMeasure(completion: { (error) in
-             if error != nil {
-             self.showError(title: "Erreur de connexion Bluetooth", message: error?.localizedDescription)
-             self.bleStatusView.isHidden = true
-             } else {
-             self.bleMeasureHasBeenSent = true
-             }
-             })
-             }
-             }
-             } else {
-             self.readBLEMeasure(completion: { (error) in
-             if error != nil {
-             self.showError(title: "Erreur de connexion Bluetooth", message: error?.localizedDescription)
-             self.bleStatusView.isHidden = true
-             } else {
-             self.bleMeasureHasBeenSent = true
-             }
-             })
-             }
-             
-             
-             if let temp = JSON["Temperature"] as? Double {
-             let textAnimation = CATransition()
-             textAnimation.type = kCATransitionPush
-             textAnimation.subtype = kCATransitionFromTop
-             textAnimation.duration = 0.5
-             textAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-             self.waterTemperatureLabel.layer.add(textAnimation, forKey: "changeWaterTempratureTransition")
-             
-             self.waterTemperatureLabel.text = String(format: "%.0f", temp) + "°"
-             }
-             if let pH = JSON["PH"] as? Double {
-             
-             self.pHLabel.text = String(format: "%.1f", pH)
-             
-             if pH > 7.5 {
-             self.pHSateView.backgroundColor = UIColor(colorLiteralRed: 229/255.0, green: 125/255.0, blue: 125/255.0, alpha: 1)
-             self.pHStateLabel.text = "Trop élevé"
-             self.pHStateIcon.image = UIImage(named:"warning_result_picto")
-             } else if pH < 6.9 {
-             self.pHSateView.backgroundColor = UIColor(colorLiteralRed: 229/255.0, green: 125/255.0, blue: 125/255.0, alpha: 1)
-             self.pHStateLabel.text = "Trop faible"
-             self.pHStateIcon.image = UIImage(named:"warning_result_picto")
-             } else {
-             self.pHSateView.backgroundColor = UIColor(colorLiteralRed: 48/255.0, green: 225/255.0, blue: 175/255.0, alpha: 1)
-             self.pHStateLabel.text = "Parfait"
-             self.pHStateIcon.image = UIImage(named:"check_result_picto")
-             }
-             
-             let startAngle = CGFloat(150 * Double.pi / 180)
-             let endAngle = CGFloat(30 * Double.pi / 180)
-             
-             self.pHValueCircle = CAShapeLayer()
-             
-             self.pHValueCircle.path = UIBezierPath(arcCenter: CGPoint(x: self.pHView.bounds.width/2, y: 84), radius: 66, startAngle: startAngle, endAngle: endAngle, clockwise: true).cgPath
-             self.pHValueCircle.fillColor = UIColor(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0).cgColor
-             self.pHValueCircle.strokeColor = UIColor(colorLiteralRed: 139/255.0, green: 205/255.0, blue: 217/255.0, alpha: 1).cgColor
-             self.pHValueCircle.lineWidth = 8
-             self.pHValueCircle.lineCap = kCALineCapRound
-             self.pHValueCircle.strokeEnd = 0.0
-             self.pHView.layer.addSublayer(self.pHValueCircle)
-             
-             let drawAnimation = CABasicAnimation(keyPath: "strokeEnd")
-             drawAnimation.duration = 1
-             drawAnimation.repeatCount = 0.0
-             drawAnimation.isRemovedOnCompletion = false
-             drawAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-             
-             drawAnimation.fromValue = 0
-             drawAnimation.toValue = pH / 14
-             
-             self.pHValueCircle.strokeEnd = CGFloat(pH) / 14
-             self.pHValueCircle.add(drawAnimation, forKey: "drawPHValueCircleAnimation")
-             
-             UIView.animate(withDuration: 0.5, animations: {
-             self.pHView.alpha = 1
-             }, completion: { (success) in
-             
-             })
-             }
-             
-             var orpField = "FreeChlore"
-             self.orpLabel.text = "Chlore"
-             var orpMax:Double = 2 //avt 1.5
-             var orpMin:Double = 0.4 //avt 1
-             if let treatment = Pool.currentPool?.treatment {
-             if treatment.id == 3 {
-             orpField = "Brome"
-             orpMax = 3
-             orpMin = 0.4
-             self.orpLabel.text = treatment.label.capitalized
-             } // else if treatment.id == 4 {
-             //  orpField = "Salinity"
-             //  orpMax = 8
-             //  orpMin = 3 // et 0.4 chlore pour dire "Trop Failble" (avt ct 0.7)
-             //  self.orpLabel.text = "Chlore" //treatment.label.capitalized
-             // }
-             }
-             
-             if let orp = JSON[orpField] as? Double {
-             
-             if orp > orpMax {
-             self.orpStateView.backgroundColor = UIColor(colorLiteralRed: 229/255.0, green: 125/255.0, blue: 125/255.0, alpha: 1)
-             self.orpStateLabel.text = "Trop élevé"
-             self.orpImageView.image = UIImage(named:"chlore_graph_up")
-             self.orpStateIcon.image = UIImage(named:"warning_result_picto")
-             } else if orp < orpMin {
-             if orpField == "Salinity" {
-             if let orpChlore = JSON["FreeChlore"] as? Double {
-             if orpChlore < 0.4 {
-             self.orpStateView.backgroundColor = UIColor(colorLiteralRed: 229/255.0, green: 125/255.0, blue: 125/255.0, alpha: 1)
-             self.orpStateLabel.text = "Trop faible"
-             self.orpImageView.image = UIImage(named:"chlore_graph_down")
-             self.orpStateIcon.image = UIImage(named:"warning_result_picto")
-             } else {
-             self.orpStateView.backgroundColor = UIColor(colorLiteralRed: 48/255.0, green: 225/255.0, blue: 175/255.0, alpha: 1)
-             self.orpStateLabel.text = "Parfait"
-             self.orpImageView.image = UIImage(named:"chlore_graph_ok")
-             self.orpStateIcon.image = UIImage(named:"check_result_picto")
-             }
-             }
-             }else {
-             self.orpStateView.backgroundColor = UIColor(colorLiteralRed: 229/255.0, green: 125/255.0, blue: 125/255.0, alpha: 1)
-             self.orpStateLabel.text = "Trop faible"
-             self.orpImageView.image = UIImage(named:"chlore_graph_down")
-             self.orpStateIcon.image = UIImage(named:"warning_result_picto")
-             }
-             
-             } else {
-             self.orpStateView.backgroundColor = UIColor(colorLiteralRed: 48/255.0, green: 225/255.0, blue: 175/255.0, alpha: 1)
-             self.orpStateLabel.text = "Parfait"
-             self.orpImageView.image = UIImage(named:"chlore_graph_ok")
-             self.orpStateIcon.image = UIImage(named:"check_result_picto")
-             }
-             
-             
-             UIView.animate(withDuration: 0.5, animations: {
-             self.orpView.alpha = 1
-             }, completion: { (success) in
-             
-             })
-             }
-             
-             UIView.animate(withDuration: 0.5, animations: {
-             for view in self.view.subviews {
-             if view.tag == 2 {
-             view.alpha = 1
-             }
-             }
-             }, completion: { (success) in
-             
-             })
-             } else {
-             print("response.result.value: \(response.result.value)")
-             self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\nLa première analyse est en cours !", message: "En attente de la première mesure...")
-             
-             self.readBLEMeasure(completion: { (error) in
-             if error != nil {
-             self.showError(title: "Erreur de connexion Bluetooth", message: error?.localizedDescription)
-             self.bleStatusView.isHidden = true
-             } else {
-             self.bleMeasureHasBeenSent = true
-             }
-             })
-             }
-             })*/
+         
             
         } else {
             print("The Flipr module identifier does not exist :/")
         }
-        
-        
     }
+    
     
     
     func hideFliprData() {
         waterTemperatureLabel.text = "  "
         self.hubTabAirValLabel.text = "  "
-        
         pHValueCircle.removeFromSuperlayer()
         pHView.alpha = 0
         orpView.alpha = 0
@@ -4257,9 +4120,14 @@ fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Ke
 extension DashboardViewController: AlertPresentViewDelegate{
     func settingsButtonClicked(type:AlertType){
         if type == .Notification{
-            let navigationController = self.storyboard?.instantiateViewController(withIdentifier: "SettingsNavigation") as! UINavigationController
-            navigationController.modalPresentationStyle = .fullScreen
-            self.present(navigationController, animated: true, completion: nil)
+//            let navigationController = self.storyboard?.instantiateViewController(withIdentifier: "SettingsNavigation") as! UINavigationController
+//            navigationController.modalPresentationStyle = .fullScreen
+//            self.present(navigationController, animated: true, completion: nil)
+            let vc = UIStoryboard(name:"WatrFlipr", bundle: nil).instantiateViewController(withIdentifier: "WatrFliprSettingsViewController") as! WatrFliprSettingsViewController
+            vc.placeDetails = self.placeDetails
+            vc.placesModules = self.placesModules
+            let nav = UINavigationController.init(rootViewController: vc)
+            self.present(nav, animated: true, completion: nil)
         }else{
             if let navigationController = self.storyboard?.instantiateViewController(withIdentifier: "SettingsNavingation") as? UINavigationController {
                 if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ExpertModeViewController") as? ExpertModeViewController {
@@ -4471,6 +4339,7 @@ extension DashboardViewController{
 
 //                self.showError(title: "Error".localized, message: error!.localizedDescription)
             } else if hubs != nil {
+                self.hubs.removeAll()
                 if hubs!.count > 0 {
                     
                     
@@ -5051,6 +4920,10 @@ extension DashboardViewController: HubSettingViewDelegate{
     }
     
     @IBAction func placeDropDownButtonClicked(){
+        self.showPlaceSelectionView()
+    }
+    
+    func showPlaceSelectionView(){
         let sb = UIStoryboard.init(name: "Watr", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "PlaceDropdownViewController") as? PlaceDropdownViewController {
             viewController.delegate = self
@@ -5080,9 +4953,24 @@ extension DashboardViewController{
                 if placesResult != nil{
                     places = placesResult!
                     if places.count > 0{
-                        self.selectedPlace = places[0]
-                        self.placeDetails =  self.selectedPlace
-                        self.showPlaceInfo()
+                        var haveSavedPlace = false
+                        for (pos,place) in places.enumerated() {
+                            let tmpPlace:Int = place.placeId ?? 0
+                            if Module.currentModule?.placeId == tmpPlace {
+                                self.selectedPlace = places[pos]
+                                self.placeDetails =  self.selectedPlace
+                                self.showPlaceInfo()
+                                haveSavedPlace = true
+                                break
+                            }
+                        }
+                        if haveSavedPlace == false{
+                            self.selectedPlace = places[0]
+                            self.placeDetails =  self.selectedPlace
+                            self.showPlaceInfo()
+                        }
+                        
+                        
                     }
                     //                    self.hud?.dismiss(afterDelay: 0)
                     //                    self.placesTableView.reloadData()
@@ -5094,10 +4982,19 @@ extension DashboardViewController{
     }
     
     func showPlaceInfo(){
+        
+        if let level = self.selectedPlace?.permissionLevel{
+            if level == "Admin"{
+                isPlaceOwner = true
+            }else{
+                isPlaceOwner = false
+            }
+        }else{
+            isPlaceOwner = false
+        }
 //        var placeDetails =  (self.selectedPlace?.name ?? "")
 
         var placeDetails =  (self.selectedPlace?.privateName ?? "")
-        placeDetails.append(" - ")
 //        if self.selectedPlace?.privateName != nil{
 //            placeDetails.append(self.selectedPlace?.privateName ?? "")
 //        }else{
@@ -5105,10 +5002,15 @@ extension DashboardViewController{
 //            placeDetails.append(" ")
 //            placeDetails.append(self.selectedPlace?.placeOwnerLastName ?? "")
 //        }
-        
-        placeDetails.append(self.selectedPlace?.placeOwnerFirstName ?? "")
-        placeDetails.append(" ")
-        placeDetails.append(self.selectedPlace?.placeOwnerLastName ?? "")
+        if isPlaceOwner {
+            
+            
+        }else{
+            placeDetails.append(" - ")
+            placeDetails.append(self.selectedPlace?.placeOwnerFirstName ?? "")
+            placeDetails.append(" ")
+            placeDetails.append(self.selectedPlace?.placeOwnerLastName ?? "")
+        }
 
 //        placeDetails.append(self.selectedPlace?.name ?? "")
 
@@ -5121,18 +5023,14 @@ extension DashboardViewController{
             let placeIdStr = "\(placeId)"
             getPlaceModules(placeId: placeIdStr)
         }
-        if let level = self.selectedPlace?.permissionLevel{
-            if level == "Admin"{
-                isPlaceOwner = true
-            }else{
-                isPlaceOwner = false
-            }
-        }else{
-            isPlaceOwner = false
-        }
+      
         AppSharedData.sharedInstance.isOwner = isPlaceOwner
         self.shareButton.isHidden = !isPlaceOwner
         self.settingsButton.isHidden = !isPlaceOwner
+        self.waterTmpChangeButton.isHidden = !isPlaceOwner;
+        self.notificationDisabledButton.isHidden = !isPlaceOwner;
+        self.phChangeButton.isHidden = !isPlaceOwner;
+        self.redoxChangeButton.isHidden = !isPlaceOwner;
         self.manageGestView()
     }
     
@@ -5207,16 +5105,25 @@ extension DashboardViewController:PlaceDropdownDelegate{
             //            let placeIsStr:String = "\(fliprModule?.placeid ?? 0)"
             //            Module.currentModule?.serial = placeIsStr
             Module.currentModule?.serial = fliprModule?.serial ?? ""
+            Module.currentModule?.placeId = placeDetails.placeId
             Module.currentModule?.activationKey = fliprModule?.activationKey ?? ""
             Module.saveCurrentModuleLocally()
-//            updatePool()
+            Pool.currentPool?.id = placeDetails.placeId
+            Pool.saveCurrentPoolLocally()
+            refreshDashboardForSelectedPlace()
             
+        }else{
+            userHasNoFlipr()
+            Module.currentModule?.serial = ""
+            Module.currentModule?.placeId = placeDetails.placeId
+            self.notificationDisabledButton.isHidden = true
+            self.waterTmpChangeButton.isHidden = true
+            self.phChangeButton.isHidden = true
+            self.redoxChangeButton.isHidden = true
+            Pool.currentPool?.id = placeDetails.placeId
+            Pool.saveCurrentPoolLocally()
+            loadHUBs()
         }
-        
-        Pool.currentPool?.id = placeDetails.placeId
-        Pool.saveCurrentPoolLocally()
-        refreshDashboardForSelectedPlace()
-        
     }
     
     func updatePool(){

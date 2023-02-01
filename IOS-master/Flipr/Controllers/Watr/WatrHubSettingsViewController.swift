@@ -93,6 +93,8 @@ extension WatrHubSettingsViewController{
         self.showDelete()
     }
     
+ 
+    
     @IBAction func updateButtonClicked(_ sender: UIButton) {
         self.showSettings()
     }
@@ -122,6 +124,12 @@ extension WatrHubSettingsViewController{
         let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "HubRenameViewController") as? HubRenameViewController {
             viewController.hub = hub
+            viewController.completion(block: { (inputValue) in
+                if inputValue != nil{
+                    self.settings?.moduleName =  inputValue
+                    self.tableView.reloadData()
+                }
+                })
             self.present(viewController, animated: true, completion: nil)
         }
     }
@@ -135,7 +143,7 @@ extension WatrHubSettingsViewController{
         let okAction = UIAlertAction(title: "Supprimer".localized, style: UIAlertAction.Style.destructive)
         {
             (result : UIAlertAction) -> Void in
-            self.deleteFlipr()
+            self.deleteHub()
             
         }
         alertController.addAction(cancelAction)
@@ -143,8 +151,25 @@ extension WatrHubSettingsViewController{
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func deleteFlipr(){
+    func deleteHub(){
         
+        func deleteFlipr(){
+            Alamofire.request(Router.deleteModule(moduleId: self.hub?.serial ?? "")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                
+                switch response.result {
+                    
+                case .success(_):
+                    self.dismiss(animated: true, completion: nil)
+                    NotificationCenter.default.post(name: K.Notifications.HubDeviceDeleted, object: nil)
+                    break
+                case .failure(let error):
+    //                NotificationCenter.default.post(name: K.Notifications.FliprDeviceDeleted, object: nil)
+                    print("get shares Error \(error)")
+                    self.dismiss(animated: true, completion: nil)
+
+                }
+            })
+        }
     }
 }
 

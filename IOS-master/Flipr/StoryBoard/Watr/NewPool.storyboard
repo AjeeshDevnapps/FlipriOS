@@ -1108,6 +1108,89 @@
             </objects>
             <point key="canvasLocation" x="4786" y="-104"/>
         </scene>
+        <!--Watr Input View Controller-->
+        <scene sceneID="XgQ-GQ-grZ">
+            <objects>
+                <viewController storyboardIdentifier="WatrInputViewControllerTmp" id="IdH-hy-DcM" customClass="WatrInputViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oVK-uj-M5u">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QUj-9Y-OuE">
+                                <rect key="frame" x="18" y="74" width="378" height="50"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter value" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="pSp-uj-gvi">
+                                        <rect key="frame" x="20" y="7.5" width="338" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="qRo-J5-FGh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="pSp-uj-gvi" firstAttribute="centerX" secondItem="QUj-9Y-OuE" secondAttribute="centerX" id="3gv-En-xIg"/>
+                                    <constraint firstItem="pSp-uj-gvi" firstAttribute="leading" secondItem="QUj-9Y-OuE" secondAttribute="leading" constant="20" id="QWc-ep-UQb"/>
+                                    <constraint firstItem="pSp-uj-gvi" firstAttribute="centerY" secondItem="QUj-9Y-OuE" secondAttribute="centerY" id="dmf-i7-X4t"/>
+                                    <constraint firstAttribute="height" constant="50" id="y37-Gf-wgj"/>
+                                    <constraint firstAttribute="trailing" secondItem="pSp-uj-gvi" secondAttribute="trailing" constant="20" id="zQw-YD-t6e"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jzV-mK-F1r">
+                                <rect key="frame" x="20" y="312" width="374" height="53"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="lPU-Lf-4aY"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Suivant">
+                                    <backgroundConfiguration key="background" cornerRadius="10"/>
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="submitAction:" destination="hJ0-o9-GNM" eventType="touchUpInside" id="6K1-zL-76i"/>
+                                    <action selector="submitAction:" destination="IdH-hy-DcM" eventType="touchUpInside" id="i5W-Ts-pOa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QgI-ZH-RlN"/>
+                        <color key="backgroundColor" red="0.90005737539999997" green="0.88731491569999998" blue="0.8870257735" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="QUj-9Y-OuE" firstAttribute="leading" secondItem="QgI-ZH-RlN" secondAttribute="leading" constant="18" id="33C-Dw-VyC"/>
+                            <constraint firstItem="QgI-ZH-RlN" firstAttribute="trailing" secondItem="QUj-9Y-OuE" secondAttribute="trailing" constant="18" id="A60-CF-Y64"/>
+                            <constraint firstItem="jzV-mK-F1r" firstAttribute="top" secondItem="QUj-9Y-OuE" secondAttribute="bottom" constant="188" id="InQ-GH-qq6"/>
+                            <constraint firstItem="jzV-mK-F1r" firstAttribute="leading" secondItem="QgI-ZH-RlN" secondAttribute="leading" constant="20" id="cMe-JJ-o0T"/>
+                            <constraint firstItem="QUj-9Y-OuE" firstAttribute="top" secondItem="QgI-ZH-RlN" secondAttribute="top" constant="30" id="dru-3k-qmW"/>
+                            <constraint firstItem="QgI-ZH-RlN" firstAttribute="trailing" secondItem="jzV-mK-F1r" secondAttribute="trailing" constant="20" id="fZu-Ix-pfX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="submitButton" destination="jzV-mK-F1r" id="Zo3-gb-IIQ"/>
+                        <outlet property="textField" destination="pSp-uj-gvi" id="9qf-e5-Tn5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B6L-zI-OJg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5519" y="-106"/>
+        </scene>
     </scenes>
     <resources>
         <image name="ButtonClose" width="32" height="32"/>

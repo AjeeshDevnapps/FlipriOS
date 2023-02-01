@@ -18,6 +18,11 @@ class HubRenameViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var textField: UITextField!
+    var completionBlock:(_: (_ value:String?) -> Void)?
+    
+    func completion(block: @escaping (_ value:String?) -> Void) {
+        completionBlock = block
+    }
 
     var hub: HUB?
 
@@ -78,6 +83,7 @@ class HubRenameViewController: UIViewController {
                               hud?.dismiss(afterDelay: 0)
 
                               NotificationCenter.default.post(name: K.Notifications.UpdateHubViews, object: nil)
+                              self.completionBlock?(name)
                               self.dismiss(animated: true)
 /*
                            if let JSON = value as? [String:Any] {
@@ -99,6 +105,8 @@ class HubRenameViewController: UIViewController {
                               hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                               hud?.textLabel.text = error.localizedDescription
                               hud?.dismiss(afterDelay: 3)
+                              self.completionBlock?(nil)
+
                           }
                           
                })

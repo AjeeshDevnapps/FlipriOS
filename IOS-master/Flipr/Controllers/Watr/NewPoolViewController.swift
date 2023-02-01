@@ -398,8 +398,10 @@ extension NewPoolViewController: UITableViewDataSource {
         if parametersButton.isSelected {
             return NewPoolTitles.PoolSectionTitles.allCases.count
         } else {
-            let contactCount = self.contacts.count
+            return 2
+            /*
             let shareCount = self.loadedShares.count
+            let contactCount = self.contacts.count
             var numberOfsection = 0
             if shareCount > 0 {
                 numberOfsection = numberOfsection + 1
@@ -408,6 +410,7 @@ extension NewPoolViewController: UITableViewDataSource {
                 numberOfsection = numberOfsection + 1
             }
             return numberOfsection
+            */
         }
     }
     
@@ -426,15 +429,15 @@ extension NewPoolViewController: UITableViewDataSource {
             default: return 0
             }
         } else {
-            let contactCount = self.contacts.count
-            if contactCount > 0{
+//            let contactCount = self.contacts.count
+//            if contactCount > 0{
                 if section == 0{
                     return loadedShares.count
                 }else{
                     return contacts.count
                 }
-            }
-            return loadedShares.count
+//            }
+//            return loadedShares.count
         }
         
     }
@@ -771,7 +774,14 @@ extension NewPoolViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        let shareCount = self.loadedShares.count
+        let contactCount = self.contacts.count
+        if section == 0 {
+            return shareCount > 0 ? 40 :0
+        }else{
+            return contactCount > 0 ? 40 :0
+        }
+//        return 40
     }
 }
 

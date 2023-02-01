@@ -39,6 +39,8 @@ enum Router: URLRequestConvertible {
     case forgetModuleEquipment(serial: String, code: String)
 
     case getModules
+    case deleteModule(moduleId:String)
+
     case createPlace(typeId:String)
     case updatePlace(placeId:String)
     case getPlaces
@@ -187,6 +189,8 @@ enum Router: URLRequestConvertible {
             return .delete
         case .getModules:
             return .get
+        case .deleteModule:
+            return .delete
         case .getPlaces:
             return .get
 
@@ -380,6 +384,8 @@ enum Router: URLRequestConvertible {
             
         case .getModules:
             return "modules"
+        case .deleteModule(let moduleId):
+            return "modules/\(moduleId)"
             
         case .getPlaces:
             return "place"
@@ -429,6 +435,12 @@ enum Router: URLRequestConvertible {
             return "pools"
         case .getPools:
             return "pools"
+        //MUMP
+//        case .getAlerts(let serial):
+//            return "modules/\(serial)/currentAlert"
+
+            
+            //Flipr
         case .getAlerts(let serial):
             return "modules/\(serial)/alerts"
         case .postponeAlerts(let serial, _):
@@ -517,7 +529,7 @@ enum Router: URLRequestConvertible {
         case .startedUpdatedFirmwere(let serial):
             return "modules/"
         case .viewShares(let poolId):
-            return "place/\(poolId)/shares"
+            return "place/\(poolId)/contacts"
             
         case .contactList(let email):
             return "accounts/contacts"
@@ -952,14 +964,17 @@ enum Router: URLRequestConvertible {
             print("Posting measures with params: \(parameters)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
             
-        case .deleteShare(poolId: let poolId, email: let email):
+        case .deleteShare(poolId: _, email: let email):
             let parameters: [String : Any] = [
                 "email": email,
             ]
             print("Posting measures with params: \(parameters)")
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
          
-        case .deletePlace(placeId: let poolId):
+        case .deletePlace(placeId: _):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: [:])
+            
+        case .deleteModule(moduleId: _):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: [:])
 
         case .getPoolSettings(poolId: _):
@@ -991,6 +1006,19 @@ enum Router: URLRequestConvertible {
             
             print("Posting create place with params: \(parameters)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+         /*
+        case .getAlerts:
+            var lang = "en"
+            if let preferredLanguage = Locale.current.languageCode {
+                lang = preferredLanguage
+            }
+            let parameters: [String: Any] = [
+                "l": lang,
+            ]
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+       
+            break
+            */
 
             
 //            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)

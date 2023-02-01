@@ -12,6 +12,8 @@ import Alamofire
 class Module {
     
     var serial:String
+    var placeId:Int?
+
     var activationKey:String?
     var nickName:String?
     var pH4CalibrationDone = false
@@ -77,6 +79,11 @@ class Module {
         if let vers = JSON["Version"] as? Int {
             version = vers
         }
+        
+        if let vers = JSON["placeId"] as? Int {
+            placeId = vers
+        }
+        
         if let vers = JSON["ModuleType_Id"] as? Int {
             moduleType = vers
         }
@@ -113,6 +120,9 @@ class Module {
         var JSON : [String:Any] = ["Serial":self.serial]
         if let activationKey = self.activationKey {
             JSON.updateValue(activationKey, forKey: "ActivationKey")
+        }
+        if let placeId = self.placeId {
+            JSON.updateValue(placeId, forKey: "placeId")
         }
         if let nickName = self.nickName {
             JSON.updateValue(nickName, forKey: "NickName")
@@ -270,7 +280,8 @@ class Module {
         
     }
     
-    func getAlerts(completion: ((_ alert:Alert?, _ priorityAlerts:[Alert],_ error: Error?) -> Void)?) {
+    
+    func getAlertsForPlace(completion: ((_ alert:Alert?, _ priorityAlerts:[Alert],_ error: Error?) -> Void)?) {
         
         Alamofire.request(Router.getAlerts(serial: self.serial)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             
@@ -293,6 +304,66 @@ class Module {
                                 }else{
                                     priorityAlerts.append(alert)
                                 }
+                                if mainAlert == nil {
+                                    if alert.status == 0 {
+                                        mainAlert = alert
+                                    }
+                                }
+                            } else {
+                                if mainAlert == nil {
+                                    if alert.status == 0 {
+                                        mainAlert = alert
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    completion?(mainAlert,priorityAlerts,nil)
+                } else {
+                    let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                    completion?(nil,[],error)
+                }
+                
+            case .failure(let error):
+                
+                print("Get module alerts did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(nil, [],serverError)
+                } else {
+                    completion?(nil, [],error)
+                }
+            }
+        })
+    }
+
+    
+    
+    func getAlerts(completion: ((_ alert:Alert?, _ priorityAlerts:[Alert],_ error: Error?) -> Void)?) {
+        var placeId = "\(self.placeId ?? 0)"
+
+        Alamofire.request(Router.getAlerts(serial: placeId)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                print("Get module alerts - response.result.value: \(value)")
+                
+                if let alerts = value as? [[String:Any]] {
+                    
+                    var mainAlert:Alert?
+                    var priorityAlerts = [Alert]()
+                    
+                    for JSON in alerts {
+                        if let alert = Alert.init(withJSON: JSON) {
+                            if alert.iconUrl != nil {
+                                
+                                if priorityAlerts.contains(where: {$0.iconUrl == alert.iconUrl }){
+                                    print("Same iconurl")
+                                }else{
+                                    priorityAlerts.append(alert)
+                                }
+                                // adding first json from server.
                                 if mainAlert == nil {
                                     if alert.status == 0 {
                                         mainAlert = alert
