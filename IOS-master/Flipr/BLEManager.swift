@@ -175,12 +175,12 @@ class BLEManager: NSObject {
     func post(measures:String, type:String) {
         
         if self.currentMeasuringSerial != Module.currentModule?.serial{
-            let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Measuring diff device :/"])
-            self.calibrationMeasuresCompletionBlock?(error)
-            self.calibrationMeasuresCompletionBlock = nil
-            self.sendMeasuresCompletionBlock?(error)
-            self.sendMeasuresCompletionBlock = nil
-            return;
+//            let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Measuring diff device :/"])
+//            self.calibrationMeasuresCompletionBlock?(error)
+//            self.calibrationMeasuresCompletionBlock = nil
+//            self.sendMeasuresCompletionBlock?(error)
+//            self.sendMeasuresCompletionBlock = nil
+//            return;
         }else{
 //            let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Diff Device"])
 //            self.calibrationMeasuresCompletionBlock?(error)

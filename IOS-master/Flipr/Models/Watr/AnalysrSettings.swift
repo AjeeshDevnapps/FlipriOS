@@ -11,7 +11,7 @@ class AnalysrSettings{
 	var percentageBattery : Double!
 	var placeName : String!
 	var serial : String!
-	var tensionBattery : Float!
+	var tensionBattery : Double!
 	var userName : String!
 	var version : Int!
 
@@ -25,7 +25,7 @@ class AnalysrSettings{
 		percentageBattery = dictionary["PercentageBattery"] as? Double
 		placeName = dictionary["PlaceName"] as? String
 		serial = dictionary["Serial"] as? String
-		tensionBattery = dictionary["TensionBattery"] as? Float
+		tensionBattery = dictionary["TensionBattery"] as? Double
 		userName = dictionary["UserName"] as? String
 		version = dictionary["Version"] as? Int
 	}

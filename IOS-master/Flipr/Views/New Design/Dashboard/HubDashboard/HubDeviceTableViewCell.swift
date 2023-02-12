@@ -41,8 +41,7 @@ class HubDeviceTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 //        self.innerContainerViewView.clipsToBounds = true
-//        self.innerContainerViewView.roundCorner(corner: 12)
-      //  innerContainerViewView.addShadow(offset: CGSize.init(width: 0, height: 3), color:UIColor(red: 0.621, green: 0.633, blue: 0.677, alpha: 0.13), radius: 14, opacity:1)
+       // innerContainerViewView.addShadow(offset: CGSize.init(width: 0, height: 3), color:UIColor(red: 0.621, green: 0.633, blue: 0.677, alpha: 0.13), radius: 14, opacity:1)
         // Initialization code
     }
 
@@ -53,6 +52,9 @@ class HubDeviceTableViewCell: UITableViewCell {
     }
     
     func manageIcons(){
+//                self.innerContainerViewView.clipsToBounds = true
+//        self.innerContainerViewView.layer.cornerRadius = 30
+        self.innerContainerViewView.roundCorner(corner: 12)
         filtrationTimeLbl.isHidden = true
         editProgramLbl.isHidden = true
         editProgramIcon.isHidden = true
@@ -73,15 +75,15 @@ class HubDeviceTableViewCell: UITableViewCell {
                 powerBtn.setImage(UIImage(named: "OFF"), for: .normal)
             }
             if hub.behavior == "planning" {
-//                getFiltrationTime()
+                getFiltrationTime()
                 editProgramLbl.isHidden = false
-                editProgramIcon.isHidden = false
+//                editProgramIcon.isHidden = false
                 setupEditButton()
                 let imageName = hubState ? "pumbPgmOn" : "pumbPgmInactive"
                 programBtn.setImage(UIImage(named: imageName), for: .normal)
-//                if hubState{
-//                    self.getFiltrationTime()
-//                }
+                if hubState{
+                    self.getFiltrationTime()
+                }
             } else{
                 if !isOwner {
 //                    if hub.behavior != "manual"{
@@ -92,7 +94,7 @@ class HubDeviceTableViewCell: UITableViewCell {
             }
             self.smartContrlBtn.isUserInteractionEnabled = true
             if hub.behavior == "auto" {
-//                self.getFiltrationTime()
+                self.getFiltrationTime()
                 self.smartContrlBtn.isUserInteractionEnabled =  hubState ? false : true
                 let imageName = hubState ? "smartContrlOn" : "smartContrlActivated"
                 smartContrlBtn.setImage(UIImage(named: imageName), for: .normal)
@@ -143,13 +145,15 @@ class HubDeviceTableViewCell: UITableViewCell {
     
     func setupEditButton(){
         editProgramLbl.textColor = UIColor(red: 0.592, green: 0.639, blue: 0.714, alpha: 1)
+        editProgramLbl.textColor = .black
         editProgramLbl.font = UIFont(name: "SFProDisplay-Regular", size: 15)
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.23
+        editProgramLbl.text = self.hub?.planningName
         // Line height: 22 pt
         // (identical to box height)
 
-        editProgramLbl.attributedText = NSMutableAttributedString(string: "Mes programmes", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue])
+//        editProgramLbl.attributedText = NSMutableAttributedString(string: "Mes programmes", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue])
     }
     
     func clearFiltrationTimeLabel(){
@@ -171,8 +175,8 @@ class HubDeviceTableViewCell: UITableViewCell {
                                    if let tmpHub = self.hub {
                                        if tmpHub.equipementCode == 86{
                                            if tmpHub.behavior == "auto" {
-//                                               self.filtrationTimeLbl.isHidden = false
-//                                               self.filtrationTimeLbl.text = value
+                                               self.filtrationTimeLbl.isHidden = false
+                                               self.filtrationTimeLbl.text = value
                                            }else{
                                                self.clearFiltrationTimeLabel()
                                            }
@@ -212,14 +216,38 @@ class HubDeviceTableViewCell: UITableViewCell {
     
     @IBAction func tapPowerButton(){
         if !isOwner {return}
+        if let hub = hub {
+            if hub.behavior == "manual" {
+                let hubState = hub.equipementState
+                let imageName = hubState ?  "OFF-pause" : "ON"
+                powerBtn.setImage(UIImage(named: imageName), for: .normal)
+                powerBtn.isHidden = false
+            }else{
+                let imageName =  "OFF-pause" //: "ON"
+                powerBtn.setImage(UIImage(named: imageName), for: .normal)
+            }
+        }
         self.delegate?.didSelectPowerButton(hub: self.hub!)
     }
     
     @IBAction func tapSmartControllButton(){
         if !isOwner {return}
-        self.delegate?.didSelectSmartControllButton(hub:self.hub!)
+        if let hub = hub {
+            
+            if hub.behavior == "auto" {
+                let hubState = hub.equipementState
+                if !hubState{
+                    smartContrlBtn.setImage(UIImage(named: "smartContrlActivated"), for: .normal)
+                }
+            }else{
+                let imageName = "smartContrlActivated" // : "smartContrlActivated"
+                smartContrlBtn.setImage(UIImage(named: imageName), for: .normal)
+            }
+            self.delegate?.didSelectSmartControllButton(hub:self.hub!)
+        }
+        
     }
-    
+        
     @IBAction func tapProgrameButton(){
         if !isOwner {return}
         self.delegate?.didSelectProgramButton(hub:self.hub!)

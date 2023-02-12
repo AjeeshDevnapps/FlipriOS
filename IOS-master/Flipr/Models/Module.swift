@@ -283,12 +283,12 @@ class Module {
     
     func getAlertsForPlace(completion: ((_ alert:Alert?, _ priorityAlerts:[Alert],_ error: Error?) -> Void)?) {
         
-        Alamofire.request(Router.getAlerts(serial: self.serial)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+        Alamofire.request(Router.getAlerts(serial: "\(self.placeId ?? 0)" )).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             
             switch response.result {
                 
             case .success(let value):
-                print("Get module alerts - response.result.value: \(value)")
+                print("Get All alerts - response.result.value: \(value)")
                 
                 if let alerts = value as? [[String:Any]] {
                     
@@ -426,6 +426,69 @@ class Module {
             UserDefaults.standard.set(module.serialized, forKey: "CurrentModule")
             print("Save module: \(module.serialized)")
         }
+    }
+    
+    func getCurrentAlertsMump(completion: ((_ alert:Alert?, _ priorityAlerts:[Alert],_ error: Error?) -> Void)?) {
+        var placeId = "\(self.placeId ?? 0)"
+
+        Alamofire.request(Router.getCurrentAlert(serial: placeId)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                print("Get module alerts - response.result.value: \(value)")
+                
+                if let currentAlert = value as? [String:Any] {
+                    
+                    var mainAlert:Alert?
+                    var priorityAlerts = [Alert]()
+                    
+                    if let alert = Alert.init(withJSON: currentAlert) {
+                        mainAlert = alert
+                    }
+                    /*
+                    for JSON in alerts {
+                        if let alert = Alert.init(withJSON: JSON) {
+                            if alert.iconUrl != nil {
+                                
+                                if priorityAlerts.contains(where: {$0.iconUrl == alert.iconUrl }){
+                                    print("Same iconurl")
+                                }else{
+                                    priorityAlerts.append(alert)
+                                }
+                                // adding first json from server.
+                                if mainAlert == nil {
+                                    if alert.status == 0 {
+                                        mainAlert = alert
+                                    }
+                                }
+                            } else {
+                                if mainAlert == nil {
+                                    if alert.status == 0 {
+                                        mainAlert = alert
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    */
+                    completion?(mainAlert,priorityAlerts,nil)
+                } else {
+                    let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                    completion?(nil,[],error)
+                }
+                
+            case .failure(let error):
+                
+                print("Get module alerts did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(nil, [],serverError)
+                } else {
+                    completion?(nil, [],error)
+                }
+            }
+        })
     }
     
 }

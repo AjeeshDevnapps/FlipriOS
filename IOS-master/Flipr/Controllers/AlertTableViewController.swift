@@ -16,6 +16,7 @@ class AlertTableViewController: UITableViewController {
     
     var alert:Alert!
     var infoMode = false
+    var placeId:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,12 +169,16 @@ class AlertTableViewController: UITableViewController {
         } else {
             let hud = JGProgressHUD(style:.dark)
             hud?.show(in: self.view)
-            
+            alert.placeId =  self.placeId
             alert?.close(completion: { (error) in
                 if (error != nil) {
+                    /*
                     hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                     hud?.textLabel.text = error?.localizedDescription
                     hud?.dismiss(afterDelay: 3)
+                    */
+                    self.dismiss(animated: true, completion: nil)
+
                 } else {
                     NotificationCenter.default.post(name: K.Notifications.AlertDidClose, object: nil)
                     hud?.indicatorView = JGProgressHUDSuccessIndicatorView()

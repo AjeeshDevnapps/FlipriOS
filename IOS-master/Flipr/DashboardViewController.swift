@@ -821,6 +821,48 @@ class DashboardViewController: UIViewController {
     //    HUB.saveCurrentHUBLocally()
     //    self.refreshHUBdisplay()
     
+    /*
+    
+    func manageFirstHubStatusIcon(hub:HUB){
+        let hubState = hub.equipementState
+        if hub.behavior == "auto" {
+            let imageName = hubState ? "smartContrlOn" : "smartContrlActivated"
+            bulbActionButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+        else if hub.behavior == "planning" {
+            let imageName = hubState ? "pumbPgmOn" : "pumbPgmInactive"
+            bulbActionButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+        else if hub.behavior == "manual" {
+            let imageName = hubState ? "ON" : "OFF-pause"
+            bulbActionButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+        else{
+            
+        }
+    }
+    
+    
+    func manageSecondHubStatusIcon(hub:HUB){
+        let hubState = hub.equipementState
+        if hub.behavior == "auto" {
+            let imageName = hubState ? "smartContrlOn" : "smartContrlActivated"
+            pumbActionButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+        else if hub.behavior == "planning" {
+            let imageName = hubState ? "pumbPgmOn" : "pumbPgmInactive"
+            pumbActionButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+        else if hub.behavior == "manual" {
+            let imageName = hubState ? "ON" : "OFF-pause"
+            pumbActionButton.setImage(UIImage(named: imageName), for: .normal)
+        }
+        else{
+            
+        }
+    }
+    
+    */
     
     @IBAction func pumbSwitchActionFliptrTab(sender:UIButton){
         if !isPlaceOwner {return}
@@ -828,6 +870,7 @@ class DashboardViewController: UIViewController {
         HUB.saveCurrentHUBLocally()
         if sender.tag == 1{
             if self.hubPumb?.behavior == "manual" {
+                pumbActionButton.setImage(UIImage(named: "OFF-pause"), for: .normal)
                 self.pumbOffOn(isOn: false)
             }else{
                 self.hubButtonAction(self)
@@ -835,6 +878,7 @@ class DashboardViewController: UIViewController {
         }
         else if sender.tag == 0{
             if self.hubPumb?.behavior == "manual" {
+                pumbActionButton.setImage(UIImage(named: "ON"), for: .normal)
                 self.pumbOffOn(isOn: true)
             }else{
                 self.hubButtonAction(self)
@@ -853,6 +897,7 @@ class DashboardViewController: UIViewController {
         HUB.saveCurrentHUBLocally()
         if sender.tag == 1{
             if self.hubBulb?.behavior == "manual" {
+                bulbActionButton.setImage(UIImage(named: "OFF-pause"), for: .normal)
                 self.pumbOffOn(isOn: false)
             }else{
                 self.hubButtonAction(self)
@@ -860,7 +905,9 @@ class DashboardViewController: UIViewController {
         }
         else if sender.tag == 0{
             if self.hubBulb?.behavior == "manual" {
+                bulbActionButton.setImage(UIImage(named: "ON"), for: .normal)
                 self.pumbOffOn(isOn: true)
+                
             }else{
                 self.hubButtonAction(self)
             }
@@ -2510,7 +2557,7 @@ class DashboardViewController: UIViewController {
         
         //        let hud = JGProgressHUD(style:.dark)
         //        hud?.show(in: self.view)
-        Module.currentModule?.getAlerts(completion: { (alert, priorityAlerts, error) in
+        Module.currentModule?.getAlertsForPlace(completion: { (alert, priorityAlerts, error) in
             //            hud?.dismiss(afterDelay: 0)
             
             DispatchQueue.main.async {
@@ -2582,7 +2629,7 @@ class DashboardViewController: UIViewController {
         }
         DispatchQueue.global().async {
             
-            Module.currentModule?.getAlerts(completion: { (alert, priorityAlerts, error) in
+            Module.currentModule?.getCurrentAlertsMump(completion: { (alert, priorityAlerts, error) in
                 
                 DispatchQueue.main.async {
                     
@@ -3782,6 +3829,7 @@ class DashboardViewController: UIViewController {
                 if let navController = self.storyboard?.instantiateViewController(withIdentifier: "AlertNavigationControllerID") as? UINavigationController {
                     if let viewController = navController.viewControllers[0] as? AlertTableViewController {
                         viewController.alert = alert
+                        viewController.placeId = self.placeDetails.placeId ?? 0
                         navController.modalPresentationStyle = .fullScreen
                         self.present(navController, animated: true, completion: nil)
                     }
@@ -3797,6 +3845,7 @@ class DashboardViewController: UIViewController {
             if let navController = self.storyboard?.instantiateViewController(withIdentifier: "AlertNavigationControllerID") as? UINavigationController {
                 if let viewController = navController.viewControllers[0] as? AlertTableViewController {
                     viewController.alert = alert
+                    viewController.placeId = self.placeDetails.placeId ?? 0
                     navController.modalPresentationStyle = .fullScreen
                     self.present(navController, animated: true, completion: nil)
                 }
@@ -3970,6 +4019,7 @@ class DashboardViewController: UIViewController {
                 if let navController = self.storyboard?.instantiateViewController(withIdentifier: "AlertNavigationControllerID") as? UINavigationController {
                     if let viewController = navController.viewControllers[0] as? AlertTableViewController {
                         viewController.alert = alert
+                        viewController.placeId = self.placeDetails.placeId ?? 0
                         navController.modalPresentationStyle = .fullScreen
                         self.present(navController, animated: true, completion: nil)
                     }
@@ -4428,7 +4478,7 @@ extension DashboardViewController{
         
         showUserPreferedHistory()
         self.hubDeviceTableView.reloadData()
-        self.hubDeviceTableViewHeightConstraint.constant = CGFloat(112 * self.hubs.count)
+        self.hubDeviceTableViewHeightConstraint.constant = CGFloat(127 * self.hubs.count)
         
         if hubScrollViewContainerView.height < self.hubTabScrollView.height{
             let diff = self.hubTabScrollView.height - hubScrollViewContainerView.height

@@ -66,16 +66,16 @@ extension WatrHubSettingsViewController: UITableViewDataSource,UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FliprSettingsTableViewCell", for: indexPath) as! FliprSettingsTableViewCell
-        cell.ownerLbl.text = settings?.userName
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HubMumbSettingsTableViewCell", for: indexPath) as! HubMumbSettingsTableViewCell
+        cell.nameLbl.text = settings?.moduleName
         cell.locationLbl.text = settings?.placeName
-        cell.typeLbl.text = settings?.moduleName
+        cell.ownerLbl.text = settings?.userName
         cell.serialNoLbl.text = settings?.serial
 
         let mode = settings?.mode ?? ""
-        cell.batteryInfoLbl.text = mode.capitalized
+        cell.modeLbl.text = mode.capitalized
         let state = settings?.state ?? 0
-        cell.lastMesureLbl.text = state == 0  ? "Inactif".localized : "Actif".localized
+        cell.statusLbl.text = state == 0  ? "Active".localized : "Inactive".localized
         return cell
     }
     
@@ -136,7 +136,7 @@ extension WatrHubSettingsViewController{
     
     
     func showDelete(){
-        let alertController = UIAlertController(title: "Supprimer le ControlR".localized, message: "Ce controlR ne sera plus disponible".localized, preferredStyle: UIAlertController.Style.actionSheet)
+        let alertController = UIAlertController(title: "".localized, message: "Supprimer le ControlR\nCe controlR ne sera plus disponible".localized, preferredStyle: UIAlertController.Style.actionSheet)
         
         let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.cancel)
         

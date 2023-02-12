@@ -23,6 +23,7 @@ class HUB {
     var behavior:String = "manual"
     
     var plannings:[Planning] = []
+    var planningName:String = ""
     
     var activationDate = Date(timeIntervalSince1970: 0)
     var response :[String:Any]?
@@ -83,6 +84,10 @@ class HUB {
                     activationDate = date
                 }
             }
+        }
+        
+        if let value = JSON["PlanningName"] as? String {
+            planningName = value
         }
         
         if let value = JSON["NameEquipment"] as? String {

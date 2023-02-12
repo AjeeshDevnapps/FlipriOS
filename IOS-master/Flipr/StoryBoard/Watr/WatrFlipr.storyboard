@@ -528,15 +528,27 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="batteryInfoLbl" destination="tIH-dj-B8x" id="rKC-3y-7S8"/>
+                                            <outlet property="batteryInfoLblTitle" destination="EWk-oS-Q7k" id="pHf-Cd-xp7"/>
                                             <outlet property="container1" destination="mpH-Zs-2UG" id="4Mf-6E-22G"/>
                                             <outlet property="container2" destination="k0r-66-b9K" id="HjX-2D-njU"/>
                                             <outlet property="container3" destination="kBP-4b-6vv" id="UB1-hc-mA9"/>
+                                            <outlet property="diagHeaderTitle" destination="091-Fs-J5D" id="jBl-b7-3Cm"/>
+                                            <outlet property="diagnosticTitle" destination="sv4-xh-o1K" id="gUt-Fy-ufg"/>
+                                            <outlet property="firmwareUpdateTitle" destination="h9x-eW-vdS" id="hbu-4c-4sz"/>
                                             <outlet property="firmwareVerLbl" destination="nEp-W2-A2x" id="W2h-nk-4Vz"/>
+                                            <outlet property="firmwareVerLblTitle" destination="CnQ-zI-q4g" id="4xI-N1-CwG"/>
+                                            <outlet property="generalHeaderTitle" destination="W6V-rG-0P6" id="T1J-Ml-vuJ"/>
                                             <outlet property="lastMesureLbl" destination="cMA-yj-GSd" id="VMn-D0-gD7"/>
+                                            <outlet property="lastMesureLblTitle" destination="wqW-O1-qgd" id="ffG-wS-BGV"/>
                                             <outlet property="locationLbl" destination="lZd-zR-VUC" id="xer-hG-lKv"/>
+                                            <outlet property="locationLblTitle" destination="Jbw-Ah-5Ts" id="chJ-0Q-c7i"/>
                                             <outlet property="ownerLbl" destination="i1a-U2-HaR" id="S4L-fC-jsA"/>
+                                            <outlet property="ownerLblTitle" destination="vV9-fW-Tc4" id="AIF-Dd-Xit"/>
                                             <outlet property="serialNoLbl" destination="ZLB-jk-q7g" id="UDM-uK-O3r"/>
+                                            <outlet property="serialNoLblTitle" destination="u21-Xn-8XY" id="AL7-dj-7tc"/>
+                                            <outlet property="settingsHeaderTitle" destination="WoY-fB-DfX" id="zUP-nK-aYa"/>
                                             <outlet property="typeLbl" destination="HSB-Yk-A9X" id="CPp-Yc-615"/>
+                                            <outlet property="typeLblTitle" destination="hvA-si-xhO" id="K91-2P-BON"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -576,7 +588,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FliprSettingsTableViewCell" id="sin-Ai-biZ" customClass="FliprSettingsTableViewCell" customModule="Flipr" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HubMumbSettingsTableViewCell" id="sin-Ai-biZ" customClass="HubMumbSettingsTableViewCell" customModule="Flipr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="800"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sin-Ai-biZ" id="KcO-tG-aOH">
@@ -996,15 +1008,26 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="batteryInfoLbl" destination="OLj-Se-0Xn" id="7Mp-jo-bsm"/>
                                             <outlet property="container1" destination="dfq-hU-GQJ" id="20x-wv-bDe"/>
                                             <outlet property="container2" destination="aPQ-Lt-6yo" id="rId-OP-WFp"/>
                                             <outlet property="container3" destination="stj-6S-epD" id="z6P-eJ-j3R"/>
-                                            <outlet property="lastMesureLbl" destination="K5m-wz-uUJ" id="Aqj-wx-AUL"/>
+                                            <outlet property="deleteBtn" destination="sWV-rD-yib" id="Mfy-yO-gQH"/>
+                                            <outlet property="generalHeaderTitle" destination="sfa-dD-zhY" id="9WK-kA-1Nb"/>
                                             <outlet property="locationLbl" destination="74f-kc-CW4" id="QAS-SE-5Rd"/>
+                                            <outlet property="locationLblTitle" destination="AIk-mF-SAC" id="Zz4-qd-5xE"/>
+                                            <outlet property="modeLbl" destination="OLj-Se-0Xn" id="Dyf-T3-D2i"/>
+                                            <outlet property="modeLblTitle" destination="DWf-of-2Mg" id="Lfv-hf-nN3"/>
+                                            <outlet property="nameLbl" destination="w6l-2A-cOv" id="Rca-Dv-pHj"/>
+                                            <outlet property="nameLblTitle" destination="I7h-uO-ECL" id="Wx7-mY-ROZ"/>
                                             <outlet property="ownerLbl" destination="Tj9-ZU-Zk7" id="G7x-FI-Fz1"/>
+                                            <outlet property="ownerLblTitle" destination="9FB-IA-Y9M" id="lai-Jh-SWm"/>
                                             <outlet property="serialNoLbl" destination="xjm-7y-icB" id="v4j-Z6-JHH"/>
-                                            <outlet property="typeLbl" destination="w6l-2A-cOv" id="yna-Ur-3OF"/>
+                                            <outlet property="serialNoLblTitle" destination="RHp-eR-IIk" id="Cw2-Jg-YZn"/>
+                                            <outlet property="settingsHeaderTitle" destination="Fsf-8b-fGg" id="L5B-16-xtL"/>
+                                            <outlet property="settingsLblTitle" destination="ZIn-cc-Om0" id="eno-Sr-dMJ"/>
+                                            <outlet property="statusHeaderTitle" destination="Pgg-K9-PhR" id="fTm-Pg-zCG"/>
+                                            <outlet property="statusLbl" destination="K5m-wz-uUJ" id="qZf-3a-Toy"/>
+                                            <outlet property="statusLblTitle" destination="4VQ-Sf-ram" id="I1o-jT-J8v"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

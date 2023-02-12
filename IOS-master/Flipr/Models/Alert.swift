@@ -19,6 +19,7 @@ class Alert {
     var status = 0
     var iconUrl:String?
     var shop : [String:Any]?
+    var placeId:Int = 0
     
     init(id: String, title:String, subtitle:String) {
         self.id = id
@@ -67,7 +68,7 @@ class Alert {
         
         print("Close alert: \(self.serialized)")
         
-        Alamofire.request(Router.closeAlert(serial: Module.currentModule!.serial, alertId: self.id)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+        Alamofire.request(Router.closeAlert(serial: "\(self.placeId)", alertId: self.id)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             
             switch response.result {
                 

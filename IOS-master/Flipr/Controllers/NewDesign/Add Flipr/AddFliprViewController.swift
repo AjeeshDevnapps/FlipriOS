@@ -30,6 +30,8 @@ class AddFliprViewController: BaseViewController {
     var fromMenu = false
     var isPresent = false
     var isSignupFlow = false
+    var isPushFlow = false
+
     var fliprArray = [String]()
 
 
@@ -56,6 +58,7 @@ class AddFliprViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.isNavigationBarHidden = false
     }
 
@@ -143,7 +146,11 @@ class AddFliprViewController: BaseViewController {
             if isPoped { return }
             self.navigationController?.popViewController(animated: true)
         } else {
-            dismiss(animated: true, completion: nil)
+            if isPushFlow{
+                self.navigationController?.popViewController(animated: true)
+            }else{
+                dismiss(animated: true, completion: nil)
+            }
         }
     }
     

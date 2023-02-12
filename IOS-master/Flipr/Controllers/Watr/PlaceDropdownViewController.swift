@@ -417,14 +417,18 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
             let place = self.places[indexPath.row]
             self.getPlaceModules(placeId: placeId, placeDetails: place)
         }else{
-            
-            let sb = UIStoryboard(name: "NewPool", bundle: nil)
-            if let viewController = sb.instantiateViewController(withIdentifier: "AddDeviceListViewController") as? AddDeviceListViewController {
-                AppSharedData.sharedInstance.addedPlaceId = self.places[indexPath.row].placeId ?? 0
-                self.present(viewController, animated: true, completion: nil)
+            let permission = self.places[indexPath.row].permissionLevel ?? ""
+            if permission == "Admin"{
+                let sb = UIStoryboard(name: "NewPool", bundle: nil)
+                if let viewController = sb.instantiateViewController(withIdentifier: "AddDeviceListViewController") as? AddDeviceListViewController {
+                    AppSharedData.sharedInstance.addedPlaceId = self.places[indexPath.row].placeId ?? 0
+                    viewController.isSignupFlow = false
+                    viewController.isPushFlow = true
+                    let nav = UINavigationController.init(rootViewController: viewController)
+                    self.present(nav, animated: true, completion: nil)
+                }
             }
         }
-        
     }
     
     

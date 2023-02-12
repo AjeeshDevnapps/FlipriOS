@@ -17,7 +17,7 @@ class AddDeviceListViewController: UIViewController {
     @IBOutlet weak var dipRVw: UIView!
     @IBOutlet weak var watrVw: UIView!
     var isSignupFlow = false
-
+    var isPushFlow = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +38,7 @@ class AddDeviceListViewController: UIViewController {
     @IBAction func clickedOnAnalyser() {
         let fliprStoryboard = UIStoryboard(name: "FliprDevice", bundle: nil)
         let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddFliprViewController") as! AddFliprViewController
+        viewController.isPushFlow = self.isPushFlow
         viewController.isSignupFlow = self.isSignupFlow
         self.navigationController?.pushViewController(viewController, animated: true)
 

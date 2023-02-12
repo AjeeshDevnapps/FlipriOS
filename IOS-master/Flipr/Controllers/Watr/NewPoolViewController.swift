@@ -73,7 +73,7 @@ class NewPoolViewController: UIViewController {
     
     @IBAction func submitAction(_ sender: UIButton) {
         if parametersButton.isSelected {
-            self.deletePlace()
+            self.deletePlacePrompt()
         } else {
             showAddShareAlert()
 //            let sb = UIStoryboard(name: "NewPool", bundle: nil)
@@ -473,7 +473,9 @@ extension NewPoolViewController: UITableViewDataSource {
                 primaryText = NewPoolTitles.Characteristics.allCases[indexPath.row].rawValue
                 switch indexPath.row {
                 case 0:
-                    secondaryText = poolSettings?.volume?.toString
+                    let vol = String(format: "%.2f", poolSettings?.volume ?? 0.00)
+//                    secondaryText = poolSettings?.volume?.toString
+                    secondaryText = vol
                     var volUnitStr = ""
                     volUnitStr = secondaryText ?? ""
                     
@@ -777,9 +779,9 @@ extension NewPoolViewController: UITableViewDataSource {
         let shareCount = self.loadedShares.count
         let contactCount = self.contacts.count
         if section == 0 {
-            return shareCount > 0 ? 40 :0
+            return shareCount > 0 ? 100 :0
         }else{
-            return contactCount > 0 ? 40 :0
+            return contactCount > 0 ? 100 :0
         }
 //        return 40
     }
@@ -790,7 +792,6 @@ extension NewPoolViewController: UITableViewDelegate {
         if parametersButton.isSelected {
             if indexPath.section == 0 {
                 let listVC = self.storyboard?.instantiateViewController(withIdentifier: "NewPoolSimpleListViewController") as! NewPoolSimpleListViewController
-                
                 switch indexPath.row {
                 case 0:
                     break
@@ -1056,9 +1057,9 @@ extension NewPoolViewController: UITableViewDelegate {
     
     
     func deleteSharePrompt(email: String,placeId:String){
-        let alertVC = UIAlertController(title: "Supprimer le partage de \(email)", message: "Cet utilisateur ne pourra plus consulter les données et agir sur vos équipements", preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: "Annuler", style: .cancel)
-        let confirmAction = UIAlertAction(title: "Supprimer le partage", style: .destructive) { action in
+        let alertVC = UIAlertController(title: "Supprimer le partage de \(email)", message: "Cet utilisateur ne pourra plus consulter les données et agir sur vos équipements".localized, preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "Annuler".localized, style: .cancel)
+        let confirmAction = UIAlertAction(title: "Supprimer le partage".localized, style: .destructive) { action in
             self.deleteShare(email: email, placeId: placeId)
         }
         alertVC.addAction(confirmAction)
@@ -1080,6 +1081,41 @@ extension NewPoolViewController: UITableViewDelegate {
             self.getCurrentShares()
         }
     }
+    
+    
+    func deletePlacePrompt(){
+        let alertVC = UIAlertController(title: "Supprimer l’emplacement".localized, message: "Elle entrainera la supression et l’arret des équipements et des partages.La suppression est définitive.".localized, preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "Annuler".localized, style: .cancel)
+        let confirmAction = UIAlertAction(title: "Supprimer l’emplacement".localized, style: .destructive) { action in
+//            self.deleteShare(email: email, placeId: placeId)
+            self.callDeletePlaceApi()
+        }
+        alertVC.addAction(confirmAction)
+        alertVC.addAction(action)
+        present(alertVC, animated: true)
+    }
+    
+    func callDeletePlaceApi(){
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.navigationController!.view)
+
+            var placeId:String = ""
+            if let pId = self.placeDetails?.placeId{
+                placeId = "\(pId)"
+                FliprShare().poolId = placeId
+            }
+            FliprShare().deletePlace(placeId: placeId) { error in
+                hud?.dismiss()
+                if error != nil {
+                }
+                else{
+                }
+                NotificationCenter.default.post(name: K.Notifications.PlaceDeleted, object: nil)
+                self.dismiss(animated: true, completion: nil)
+
+            }
+    }
+    
 }
 
 extension NewPoolViewController: ChangeShareEmailDelegate {
