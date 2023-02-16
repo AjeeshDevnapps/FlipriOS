@@ -34,6 +34,8 @@ class NewPoolViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         if AppSharedData.sharedInstance.isAddPlaceFlow{
             self.navigationItem.setHidesBackButton(true, animated: true)
             self.submitButton.isHidden = false
@@ -45,6 +47,15 @@ class NewPoolViewController: UIViewController {
             setCustomBackbtn()
             getPoolSettings()
         }
+        let settingsTitle =  "      \("Paramètres".localized)"
+        parametersButton.setTitle(settingsTitle, for: .normal)
+        
+        let partagesTitle =  "      \("Partages".localized)"
+        partagesButton.setTitle(partagesTitle, for: .normal)
+
+        submitButton.setTitle("Supprimer".localized, for: .normal)
+
+        
         tableView.backgroundColor = UIColor(hexString: "#eeeee4")
         view.backgroundColor = UIColor(hexString: "#eeeee4")
         navigationController?.navigationBar.backgroundColor = UIColor(hexString: "#eeeee4")
@@ -127,7 +138,8 @@ class NewPoolViewController: UIViewController {
 
     
     func showAddShareAlert(){
-        self.alertWithTextField(title: "Ajout d’un invité".localized, message: nil, placeholder: "email".localized) { email in
+        self.alertWithTextField(title: "Ajout d’un invité\n"
+                                    .localized, message: nil, placeholder: "email".localized) { email in
             if email == "cancel"
             {
                 
@@ -452,7 +464,7 @@ extension NewPoolViewController: UITableViewDataSource {
         if parametersButton.isSelected {
             switch indexPath.section {
             case 0:
-                primaryText = NewPoolTitles.PoolGeneralTitles.allCases[indexPath.row].rawValue
+                primaryText = NewPoolTitles.PoolGeneralTitles.allCases[indexPath.row].rawValue.localized
                 switch indexPath.row {
                 case 0:
                     var name:String = ""
@@ -470,7 +482,7 @@ extension NewPoolViewController: UITableViewDataSource {
                     secondaryText = "Définir"
                 }
             case 1:
-                primaryText = NewPoolTitles.Characteristics.allCases[indexPath.row].rawValue
+                primaryText = NewPoolTitles.Characteristics.allCases[indexPath.row].rawValue.localized
                 switch indexPath.row {
                 case 0:
                     let vol = String(format: "%.2f", poolSettings?.volume ?? 0.00)
@@ -513,7 +525,7 @@ extension NewPoolViewController: UITableViewDataSource {
                     secondaryText = "Définir"
                 }
             case 2:
-                primaryText = NewPoolTitles.Maintenance.allCases[indexPath.row].rawValue
+                primaryText = NewPoolTitles.Maintenance.allCases[indexPath.row].rawValue.localized
                 switch indexPath.row {
                 case 0:
                     secondaryText = poolSettings?.treatment?.name
@@ -524,7 +536,7 @@ extension NewPoolViewController: UITableViewDataSource {
                 }
                 
             case 3:
-                primaryText = NewPoolTitles.Usage.allCases[indexPath.row].rawValue
+                primaryText = NewPoolTitles.Usage.allCases[indexPath.row].rawValue.localized
                 hasSwitch = indexPath.row == 0 || indexPath.row == 3
                 if indexPath.row != 0 && indexPath.row != 3 {
                     if indexPath.row == 1 {
@@ -749,12 +761,12 @@ extension NewPoolViewController: UITableViewDataSource {
         if (parametersButton.isSelected) {
             if #available(iOS 14.0, *) {
                 var config = UIListContentConfiguration.plainHeader()
-                config.text = NewPoolTitles.PoolSectionTitles.allCases[section].rawValue
+                config.text = NewPoolTitles.PoolSectionTitles.allCases[section].rawValue.localized.uppercased()
                 let view = UIListContentView(configuration: config)
                 return view
             } else {
                 let label = UILabel()
-                label.text = NewPoolTitles.PoolSectionTitles.allCases[section].rawValue
+                label.text = NewPoolTitles.PoolSectionTitles.allCases[section].rawValue.localized.uppercased()
                 return label
             }
         } else {
@@ -763,12 +775,12 @@ extension NewPoolViewController: UITableViewDataSource {
             }else{
                 if #available(iOS 14.0, *) {
                     var config = UIListContentConfiguration.plainHeader()
-                    config.text = "Contacts".localized
+                    config.text = "Contacts".localized.uppercased()
                     let view = UIListContentView(configuration: config)
                     return view
                 } else {
                     let label = UILabel()
-                    label.text = "Contacts".localized
+                    label.text = "Contacts".localized.uppercased()
                     return label
                 }
             }
@@ -779,9 +791,9 @@ extension NewPoolViewController: UITableViewDataSource {
         let shareCount = self.loadedShares.count
         let contactCount = self.contacts.count
         if section == 0 {
-            return shareCount > 0 ? 100 :0
+            return shareCount > 0 ? 0 :0
         }else{
-            return contactCount > 0 ? 100 :0
+            return contactCount > 0 ? 0 :0
         }
 //        return 40
     }
@@ -1057,7 +1069,12 @@ extension NewPoolViewController: UITableViewDelegate {
     
     
     func deleteSharePrompt(email: String,placeId:String){
-        let alertVC = UIAlertController(title: "Supprimer le partage de \(email)", message: "Cet utilisateur ne pourra plus consulter les données et agir sur vos équipements".localized, preferredStyle: .actionSheet)
+        
+        let msg = "Supprimer le partage de \nEMAIL@gmail.com\nCet utilisateur ne pourra plus consulter cet emplacement".localized
+        let replaced = msg.replacingOccurrences(of: "EMAIL@gmail.com", with: email)
+
+        
+        let alertVC = UIAlertController(title: "", message:replaced , preferredStyle: .actionSheet)
         let action = UIAlertAction(title: "Annuler".localized, style: .cancel)
         let confirmAction = UIAlertAction(title: "Supprimer le partage".localized, style: .destructive) { action in
             self.deleteShare(email: email, placeId: placeId)

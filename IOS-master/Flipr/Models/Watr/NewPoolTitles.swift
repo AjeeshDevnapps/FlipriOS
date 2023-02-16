@@ -19,16 +19,16 @@ struct NewPoolTitles {
     enum PoolGeneralTitles: String, CaseIterable {
         case owner = "Propriétaire"
         case poolType = "Type"
-        case poolName = "Libellé"
-        case city = "Ville"
+        case poolName = "Libellé "
+        case city = "City"
     }
     
     enum Characteristics: String, CaseIterable {
         case Volume = "Volume"
-        case Shape = "Forme"
+        case Shape = "Forme "
         case CoatingType = "Revêtement"
         case Integration = "Intégration"
-        case Construction = "Annee de construction"
+        case Construction = "Année de construction"
     }
     
     enum Maintenance: String, CaseIterable {
@@ -37,9 +37,9 @@ struct NewPoolTitles {
     }
     
     enum Usage: String, CaseIterable {
-        case UsagePublic = "Usage public"
+        case UsagePublic = "Public"
         case UsersCount = "Utilisateurs"
         case Status = "Statut"
-        case Interior = "Interieur"
+        case Interior = "En intérieur"
     }
 }

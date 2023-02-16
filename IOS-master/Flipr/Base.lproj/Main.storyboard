@@ -3044,9 +3044,9 @@ Essai gratuit 7 jours</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TjM-nA-vu4">
-                                <rect key="frame" x="64" y="430" width="247" height="173"/>
+                                <rect key="frame" x="64" y="429.5" width="247" height="173.5"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="UTA-cN-PoJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="247" height="173"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="247" height="174"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe" translatesAutoresizingMaskIntoConstraints="NO" id="or2-DK-krG">
@@ -9238,7 +9238,7 @@ DE BANDELETTE</string>
         <scene sceneID="jYb-TF-cAL">
             <objects>
                 <viewController storyboardIdentifier="Page" id="QeI-t8-qJb" customClass="SimplePage" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jAp-gx-NOF">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="jAp-gx-NOF">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nAg-01-xwZ">
@@ -13885,14 +13885,14 @@ Essai gratuit 7 jours</string>
                                                                                         <constraint firstAttribute="height" constant="45" id="qEm-qM-mwo"/>
                                                                                     </constraints>
                                                                                 </imageView>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pompe à filtration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="JOc-kA-RQL">
-                                                                                    <rect key="frame" x="16" y="71" width="107" height="16"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pompe à filtration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="JOc-kA-RQL">
+                                                                                    <rect key="frame" x="16" y="71" width="147" height="16"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                     <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pompe à filtration" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="D6W-LK-Qdm">
-                                                                                    <rect key="frame" x="220" y="71" width="107" height="16"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pompe à filtration" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="D6W-LK-Qdm">
+                                                                                    <rect key="frame" x="180" y="71" width="147" height="16"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                     <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <nil key="highlightedColor"/>
@@ -13901,6 +13901,17 @@ Essai gratuit 7 jours</string>
                                                                                     <rect key="frame" x="16" y="95" width="0.0" height="0.0"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                     <color key="textColor" red="0.59215686270000001" green="0.63921568630000003" blue="0.71372549019999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZH-sF-w1u">
+                                                                                    <rect key="frame" x="171" y="54" width="1" height="50"/>
+                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="1" id="4Ak-gb-51v"/>
+                                                                                        <constraint firstAttribute="height" constant="50" id="gfe-7i-yXZ"/>
+                                                                                    </constraints>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                    <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="69l-Sc-sBU">
@@ -13986,6 +13997,7 @@ Essai gratuit 7 jours</string>
                                                                                 <constraint firstItem="69l-Sc-sBU" firstAttribute="top" secondItem="JcM-GX-o3H" secondAttribute="top" constant="10" id="FDu-eq-b3k"/>
                                                                                 <constraint firstItem="hBy-yh-pBS" firstAttribute="centerX" secondItem="BRn-Bt-m3h" secondAttribute="centerX" id="FyK-Za-UnQ"/>
                                                                                 <constraint firstItem="JOc-kA-RQL" firstAttribute="leading" secondItem="JcM-GX-o3H" secondAttribute="leading" constant="16" id="N1G-4B-KdY"/>
+                                                                                <constraint firstItem="IZH-sF-w1u" firstAttribute="centerX" secondItem="JcM-GX-o3H" secondAttribute="centerX" id="Pfz-Qk-moH"/>
                                                                                 <constraint firstItem="ojq-tT-VKo" firstAttribute="leading" secondItem="JcM-GX-o3H" secondAttribute="leading" constant="16" id="QtW-17-QT5"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="BRn-Bt-m3h" secondAttribute="trailing" constant="20" id="TzQ-3t-x8h"/>
                                                                                 <constraint firstItem="hBy-yh-pBS" firstAttribute="width" secondItem="BRn-Bt-m3h" secondAttribute="width" multiplier="0.482014" id="UZf-Lq-XZk"/>
@@ -13993,9 +14005,12 @@ Essai gratuit 7 jours</string>
                                                                                 <constraint firstAttribute="height" constant="112" id="XGc-8K-TPU"/>
                                                                                 <constraint firstItem="JOc-kA-RQL" firstAttribute="top" secondItem="M9N-zM-rHs" secondAttribute="bottom" constant="12" id="cqf-mU-2JY"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="BRn-Bt-m3h" secondAttribute="bottom" constant="20" id="eMQ-kr-tux"/>
+                                                                                <constraint firstItem="IZH-sF-w1u" firstAttribute="centerY" secondItem="D6W-LK-Qdm" secondAttribute="centerY" id="ghg-QY-IVs"/>
+                                                                                <constraint firstItem="IZH-sF-w1u" firstAttribute="leading" secondItem="JOc-kA-RQL" secondAttribute="trailing" constant="8" id="jjc-fm-VOq"/>
                                                                                 <constraint firstItem="M9N-zM-rHs" firstAttribute="top" secondItem="JcM-GX-o3H" secondAttribute="top" constant="14" id="k0h-Hi-2uM"/>
                                                                                 <constraint firstItem="ojq-tT-VKo" firstAttribute="top" secondItem="JOc-kA-RQL" secondAttribute="bottom" constant="8" id="kff-6v-eKJ"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="D6W-LK-Qdm" secondAttribute="trailing" constant="16" id="lyn-zQ-LtH"/>
+                                                                                <constraint firstItem="D6W-LK-Qdm" firstAttribute="leading" secondItem="IZH-sF-w1u" secondAttribute="trailing" constant="8" id="nac-CM-bVv"/>
                                                                                 <constraint firstItem="M9N-zM-rHs" firstAttribute="leading" secondItem="JcM-GX-o3H" secondAttribute="leading" constant="16" id="oEr-f8-DJa"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
@@ -15951,7 +15966,7 @@ Essai gratuit 7 jours</string>
         <image name="pumbdisabled" width="45" height="45"/>
         <image name="readinglevel" width="39" height="107"/>
         <image name="smartContrlOff" width="40" height="40"/>
-        <image name="sun" width="24" height="24"/>
+        <image name="sun" width="22" height="22"/>
         <image name="support" width="21" height="21"/>
         <image name="swipe" width="54" height="68"/>
         <image name="tresholdChange" width="32" height="32"/>

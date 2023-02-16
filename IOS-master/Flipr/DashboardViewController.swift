@@ -302,6 +302,9 @@ class DashboardViewController: UIViewController {
         hubDeviceTableView.dragDelegate = self
         hubDeviceTableView.dragInteractionEnabled = true
         self.signalStrengthLabel.text = "Signal moyen".localized
+        
+        self.signalStrengthLabel.text = "Last measure".localized
+
         self.next5hourTitleLabel.text = "Probability within 5 hours".localized
         self.signalStrengthImageView.image = UIImage(named: "Signalmiddle")
         self.intialTabSetup()
@@ -3370,6 +3373,7 @@ class DashboardViewController: UIViewController {
                                     //                                    self.signalStrengthLabel.text = "Signal excellent".localized
                                     self.signalStrengthLabel.text = "Dernière mesure".localized
                                     
+                                    
                                     self.signalStrengthImageView.image = UIImage(named: "Signalhigh")
                                     //                                    self.readBLEMeasure(completion: { (error) in
                                     //                                        if error != nil {
@@ -3412,10 +3416,13 @@ class DashboardViewController: UIViewController {
                                     self.signalStrengthImageView.image = UIImage(named: "SignalNo")
                                 }
                                 
+                                self.signalStrengthLabel.text = "Last measure".localized
+                                
                             }
                         }
                         else {
                             self.signalStrengthLabel.text = "Signal inexistant".localized
+                            self.signalStrengthLabel.text = "Last measure".localized
                             self.signalStrengthImageView.image = UIImage(named: "SignalNo")
                             /*
                             if self.isPlaceOwner{
