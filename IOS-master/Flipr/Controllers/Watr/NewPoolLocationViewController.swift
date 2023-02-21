@@ -204,7 +204,7 @@ extension NewPoolLocationViewController: UITableViewDataSource {
             if #available(iOS 14.0, *) {
                 var content = cell?.defaultContentConfiguration()
                 content?.image = UIImage(systemName: "location")
-                content?.text = "Utiliser le position actuelle"
+                content?.text = "Utiliser le position actuelle".localized
                 content?.textProperties.color = UIColor.init(hexString: "56A4C3")
                 content?.imageProperties.tintColor = UIColor.init(hexString: "56A4C3")
                 cell?.textLabel?.textAlignment = .center
@@ -213,7 +213,7 @@ extension NewPoolLocationViewController: UITableViewDataSource {
             } else {
                 // Fallback on earlier versions
                 cell?.imageView?.image = UIImage(named: "location")
-                cell?.textLabel?.text = "Utiliser le position actuelle"
+                cell?.textLabel?.text = "Utiliser le position actuelle".localized
                 cell?.textLabel?.textColor = UIColor.init(hexString: "56A4C3")
                 cell?.imageView?.tintColor = UIColor.init(hexString: "56A4C3")
                 cell?.textLabel?.textAlignment = .center

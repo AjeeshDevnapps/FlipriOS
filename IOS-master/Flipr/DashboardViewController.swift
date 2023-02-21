@@ -1566,7 +1566,9 @@ class DashboardViewController: UIViewController {
         }else{
             if self.notificationReportDate != nil{
                 if self.notificationReportDate!.timeIntervalSinceNow < 0 {
-                    self.notificationDisabledButton.isHidden = false
+                    if self.isPlaceOwner {
+                        self.notificationDisabledButton.isHidden = false
+                    }
                     if let module = Module.currentModule {
                         if module.isSubscriptionValid {
                             // nothing to do
@@ -5085,7 +5087,7 @@ extension DashboardViewController{
         self.shareButton.isHidden = !isPlaceOwner
         self.settingsButton.isHidden = !isPlaceOwner
         self.waterTmpChangeButton.isHidden = !isPlaceOwner;
-        self.notificationDisabledButton.isHidden = !isPlaceOwner;
+//        self.notificationDisabledButton.isHidden = !isPlaceOwner;
         self.phChangeButton.isHidden = !isPlaceOwner;
         self.redoxChangeButton.isHidden = !isPlaceOwner;
         self.manageGestView()

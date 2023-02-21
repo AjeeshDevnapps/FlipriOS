@@ -48,8 +48,11 @@ class PlaceDropdownViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if isInvitationFlow{
-            self.title = "Place"
+            self.title = "Place".localized
         }
+        
+        self.noPlaceMsgLabel.text = "Ajoutez un emplacement pour commencer l’aventure".localized
+        addButton.setTitle("Ajouter emplacement".localized, for: .normal)
         backgrndView.isHidden = !isInvitationFlow
         placesTableView.tableFooterView = UIView()
         NotificationCenter.default.addObserver(forName: K.Notifications.PlaceDeleted, object: nil, queue: nil) { (notification) in
@@ -204,15 +207,15 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
         
         if self.haveInvitation && self.havePlace{
             if section == 0{
-                return "Emplacements actifs"
+                return "Emplacements actifs".localized
             }else{
-                return "Invitations"
+                return "Invitations".localized
             }
         }else{
             if self.haveInvitation{
-                return "Invitations"
+                return "Invitations".localized
             }else{
-                return "Emplacements actifs"
+                return "Emplacements actifs".localized
             }
         }
     }

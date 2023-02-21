@@ -42,7 +42,7 @@ class WatrQuickActionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        titleLbl.text = "Quick Actions".localized
         //        self.menuView.roundCorners([.topLeft, .topRight], radius: 14.0)
         menuView.layer.cornerRadius = 14
         menuView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -137,16 +137,18 @@ class WatrQuickActionViewController: UIViewController {
         //        var haveFlipr = true
         if haveFlipr{
             if isPlaceOwner && (haveSubscription == false){
-                self.cellTitleList = ["Activer la connexion à distance".localized,"Entrée manuelle (DipR)".localized,"Récupérer la dernière mesure".localized,"Vue Expert".localized,"Paramètres".localized]
+                self.cellTitleList = ["Activer la connexion à distance".localized,"Entrée manuelle (DipR)".localized,
+                                      "Retrieve the last measurement".localized,"Vue Expert".localized,"Paramètres".localized]
                 self.imageNames = ["noSubscription","Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres"]
                 self.menuViewHeight.constant = 410
             }else{
                 if isPlaceOwner{
-                    self.cellTitleList = ["Entrée manuelle (DipR)".localized,"Récupérer la dernière mesure".localized,"Vue Expert".localized,"Paramètres".localized]
+                    self.cellTitleList = ["Entrée manuelle (DipR)".localized,"Retrieve the last measurement".localized,"Vue Expert".localized,"Paramètres".localized]
                     self.imageNames = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres",]
                     
                 }else{
-                    self.cellTitleList = ["Entrée manuelle (DipR)".localized,"Récupérer la dernière mesure".localized,"Vue Expert".localized,"Paramètres".localized]
+                    self.cellTitleList = ["Entrée manuelle (DipR)".localized,
+                                          "Retrieve the last measurement".localized,"Vue Expert".localized,"Paramètres".localized]
                     self.imageNames = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres",]
                 }
                 self.menuViewHeight.constant = 346

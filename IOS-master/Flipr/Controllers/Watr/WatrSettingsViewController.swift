@@ -15,13 +15,16 @@ class WatrSettingsViewController: UIViewController {
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var fliprDetailsLbl: UILabel!
     @IBOutlet weak var themTitleLbl: UILabel!
+    @IBOutlet weak var systemTitleLbl: UILabel!
     @IBOutlet weak var themLbl: UILabel!
     @IBOutlet weak var NotificationLbl: UILabel!
     @IBOutlet weak var unitLbl: UILabel!
     @IBOutlet weak var themBkImage: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var notificationSwitch: UISwitch!
+    @IBOutlet weak var gatewaysTitleLbl: UILabel!
 
+    @IBOutlet weak var equipmentsTitleLbl: UILabel!
 
 
     @IBOutlet weak var container1: UIView!
@@ -30,7 +33,14 @@ class WatrSettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.title = "Settings".localized
+        themTitleLbl.text = "Settings".localized
+        systemTitleLbl.text = "Système".localized
+        NotificationLbl.text = "notifications".localized
+        gatewaysTitleLbl.text = "Passerelles".localized
+        equipmentsTitleLbl.text = "Equipments".localized
+        
         setupView()
         self.nameLbl.text  = (User.currentUser?.firstName ?? "") +  " " +   (User.currentUser?.lastName ?? "")
         self.nameLbl.text = self.nameLbl.text?.capitalized
@@ -42,8 +52,11 @@ class WatrSettingsViewController: UIViewController {
         let value = UserDefaults.standard.bool(forKey: notificationOnOffValuesKey)
         notificationSwitch.isOn = value
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.                 self.notificationDisabledButton.isHidden = value
+
     }
+    
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,6 +137,16 @@ class WatrSettingsViewController: UIViewController {
             self.navigationController?.pushViewController(accountVC)
         }
     }
+    
+    
+    
+    @IBAction func EquipmentsButtonTapped(){
+        if let accountVC = self.storyboard?.instantiateViewController(withIdentifier: "EquipmentsViewController") as? EquipmentsViewController{
+            self.navigationController?.pushViewController(accountVC)
+        }
+    }
+    
+//
     
     
     @IBAction func alertsActivationSwitchValueChanged(_ sender: UISwitch) {

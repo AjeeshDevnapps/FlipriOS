@@ -22,7 +22,7 @@ class UnitViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Système"
+        self.title = "Système".localized
         nextButton.isHidden = !isLoginFlow
         if isLoginFlow{
             self.navigationItem.setHidesBackButton(true, animated: true)

@@ -16,6 +16,7 @@ class CreatePlaceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.titleLbl.text = "Nous construison votre emplacement".localized
         self.createPlace()
         // Do any additional setup after loading the view.
     }

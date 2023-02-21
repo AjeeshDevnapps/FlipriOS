@@ -19,6 +19,8 @@ class HubProgramViewController: UIViewController {
     var hub:HUB?
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLbl.text = "Programs".localized
+        addButton.setTitle("Add".localized, for: .normal)
         self.addButton.roundCorner(corner: 12)
         NotificationCenter.default.addObserver(forName: K.Notifications.ReloadProgrameList, object: nil, queue: nil) { (notification) in
             self.reloadList()

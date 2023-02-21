@@ -22,6 +22,10 @@ class AddDeviceListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
+        welcomeTitleLbl.text = "Votre emplacement est prêt!".localized
+        welcomeSubtitleLbl.text = "L'application est prête à accueillir votre premier appareil.".localized
+        devicesListHdrLbl.text = "Choisir un appareil à associer".localized
+
         statrVw.roundCorner(corner: 12)
         hubVw.roundCorner(corner: 12)
         statrVw.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)

@@ -63,6 +63,9 @@ class NewLocationViewController: UIViewController {
     }
     
     func formatUI() {
+        
+        submitButton.setTitle("Suivant".localized, for: .normal)
+        titleVC.text = "Nouvel Emplacement".localized
         self.navigationController?.isNavigationBarHidden = false
 
 //        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
@@ -77,7 +80,7 @@ class NewLocationViewController: UIViewController {
         frame.size.height = .leastNormalMagnitude
         tableView.tableHeaderView = UIView(frame: frame)
         
-        textField.attributedPlaceholder = NSAttributedString(string: "Nom de l'Emplacement",
+        textField.attributedPlaceholder = NSAttributedString(string: "Nom de l'Emplacement".localized,
                                                              attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)])
 //        tableView.clipsToBounds = false
 //        tableView.layer.masksToBounds = false

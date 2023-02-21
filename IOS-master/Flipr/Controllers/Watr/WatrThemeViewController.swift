@@ -18,7 +18,11 @@ class WatrThemeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Thème"
+        self.title = "Thème".localized
+        themBlueLbl.text = "Blue".localized
+        themRoseLbl.text = "Rose".localized
+
+        
         container1.addShadow(offset: CGSize.init(width: 0, height: 0), color: UIColor(hexString: "E3E7F0"), radius: 25.0, opacity: 1.0)
         managetheme()
         // Do any additional setup after loading the view.

@@ -83,7 +83,7 @@ extension WatrFliprSettingsViewController: UITableViewDataSource,UITableViewDele
         }
         
         cell.lastMesureLbl.text = settings?.lastMeasureDateTime
-        let batteryInfo = String(format: "%.1f", settings?.tensionBattery ?? 0.0)
+        let batteryInfo = String(format: "%.2f", settings?.tensionBattery ?? 0.0)
         cell.batteryInfoLbl.text = "\(batteryInfo) V"
 //        settings?.tensionBattery ?? 0
 //        cell.batteryInfoLbl.text = "\(Int(batteryInfo)) V"

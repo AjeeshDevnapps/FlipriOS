@@ -76,7 +76,11 @@ class HubDeviceTableViewCell: UITableViewCell {
             }
             if hub.behavior == "planning" {
                 getFiltrationTime()
-                editProgramLbl.isHidden = false
+                editProgramLbl.isHidden = true
+                self.filtrationTimeLbl.isHidden = false
+
+                self.filtrationTimeLbl.text = self.hub?.planningName
+
 //                editProgramIcon.isHidden = false
                 setupEditButton()
                 let imageName = hubState ? "pumbPgmOn" : "pumbPgmInactive"

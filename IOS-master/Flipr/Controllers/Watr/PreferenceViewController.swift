@@ -34,7 +34,10 @@ class PreferenceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Preferences"
+        self.title = "Preferences".localized
+        themBlueLbl.text = "Blue".localized
+        themRoseLbl.text = "Rose".localized
+
         nextButton.isHidden = !isLoginFlow
         if isLoginFlow{
             self.navigationItem.setHidesBackButton(true, animated: true)

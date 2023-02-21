@@ -291,6 +291,12 @@
 		1C5AE42627512240008F6643 /* HubRenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE42527512240008F6643 /* HubRenameViewController.swift */; };
 		1C5AE428275135DE008F6643 /* NextDaysWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE427275135DE008F6643 /* NextDaysWeatherData.swift */; };
 		1C5AE42A2751363B008F6643 /* WeatherForHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE4292751363B008F6643 /* WeatherForHour.swift */; };
+		1C5B560B29A52A1F0064C729 /* Equipments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5B560A29A52A1F0064C729 /* Equipments.swift */; };
+		1C5B560C29A52A1F0064C729 /* Equipments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5B560A29A52A1F0064C729 /* Equipments.swift */; };
+		1C5B560E29A530AD0064C729 /* EqipmentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5B560D29A530AD0064C729 /* EqipmentsTableViewCell.swift */; };
+		1C5B560F29A530AD0064C729 /* EqipmentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5B560D29A530AD0064C729 /* EqipmentsTableViewCell.swift */; };
+		1C5B561129A537820064C729 /* EquipmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5B561029A537820064C729 /* EquipmentsViewController.swift */; };
+		1C5B561229A537820064C729 /* EquipmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5B561029A537820064C729 /* EquipmentsViewController.swift */; };
 		1C8697C427B6749800CBC6D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C8697C327B6749800CBC6D7 /* GoogleService-Info.plist */; };
 		1C8AD93928167BAD006AA386 /* FirmwereUpdateAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8AD93828167BAD006AA386 /* FirmwereUpdateAlertViewController.swift */; };
 		1C8D5DAA283D2CD100FA50BA /* DiagnosticErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D5DA9283D2CD100FA50BA /* DiagnosticErrorViewController.swift */; };
@@ -645,6 +651,9 @@
 		1C5AE42527512240008F6643 /* HubRenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubRenameViewController.swift; sourceTree = "<group>"; };
 		1C5AE427275135DE008F6643 /* NextDaysWeatherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextDaysWeatherData.swift; sourceTree = "<group>"; };
 		1C5AE4292751363B008F6643 /* WeatherForHour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherForHour.swift; sourceTree = "<group>"; };
+		1C5B560A29A52A1F0064C729 /* Equipments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipments.swift; sourceTree = "<group>"; };
+		1C5B560D29A530AD0064C729 /* EqipmentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqipmentsTableViewCell.swift; sourceTree = "<group>"; };
+		1C5B561029A537820064C729 /* EquipmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentsViewController.swift; sourceTree = "<group>"; };
 		1C8697C327B6749800CBC6D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1C8AD93828167BAD006AA386 /* FirmwereUpdateAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwereUpdateAlertViewController.swift; sourceTree = "<group>"; };
 		1C8D5DA9283D2CD100FA50BA /* DiagnosticErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticErrorViewController.swift; sourceTree = "<group>"; };
@@ -1094,6 +1103,7 @@
 				1C9A098829394B6000FD4B71 /* CompleteProfileViewController.swift */,
 				1CC3F47529533A77004D4480 /* CreatePlaceViewController.swift */,
 				1CAE717929538B2700507574 /* AddDeviceListViewController.swift */,
+				1C5B561029A537820064C729 /* EquipmentsViewController.swift */,
 			);
 			path = Watr;
 			sourceTree = "<group>";
@@ -1114,6 +1124,7 @@
 				1CD2B3BB28EC15720013BD98 /* FliprShare.swift */,
 				1CCD7FC628EADC0700AF1635 /* PlaceDropdown.swift */,
 				1CC696A128EB36F00076DAD1 /* PlaceModule.swift */,
+				1C5B560A29A52A1F0064C729 /* Equipments.swift */,
 			);
 			path = Watr;
 			sourceTree = "<group>";
@@ -1127,6 +1138,7 @@
 				1CEA4F8F29351F3400D4619E /* InvitationTableViewCell.swift */,
 				1CA9A29229106EB90035F671 /* LocationTypeTableViewCell.swift */,
 				1C98B8DA2927E81E00AF089A /* FliprSettingsTableViewCell.swift */,
+				1C5B560D29A530AD0064C729 /* EqipmentsTableViewCell.swift */,
 			);
 			path = Watr;
 			sourceTree = "<group>";
@@ -2312,11 +2324,13 @@
 				1C044EBC28EA30BE00807F01 /* KeyEnterViewController.swift in Sources */,
 				1C044EBD28EA30BE00807F01 /* SubscriptionOptionTableViewCell.swift in Sources */,
 				1C044EBE28EA30BE00807F01 /* CyCBManager.m in Sources */,
+				1C5B560F29A530AD0064C729 /* EqipmentsTableViewCell.swift in Sources */,
 				1C044EBF28EA30BE00807F01 /* UIButton+Activity.swift in Sources */,
 				1CCD7FC428EAD6A600AF1635 /* PlaceDropdownViewController.swift in Sources */,
 				1C044EC028EA30BE00807F01 /* DescribeMyPoolViewController.swift in Sources */,
 				1C044EC128EA30BE00807F01 /* PoolCharacteristicsViewController.swift in Sources */,
 				1C044EC228EA30BE00807F01 /* Extensions.swift in Sources */,
+				1C5B560C29A52A1F0064C729 /* Equipments.swift in Sources */,
 				1C044EC328EA30BE00807F01 /* EmailVerifyViewController.swift in Sources */,
 				1CAE717B29538B2700507574 /* AddDeviceListViewController.swift in Sources */,
 				1C2D6646296755D900856D3E /* AnalysrSettings.swift in Sources */,
@@ -2443,6 +2457,7 @@
 				1C044F2B28EA30BE00807F01 /* AppDelegate.swift in Sources */,
 				1C044F2C28EA30BE00807F01 /* Utilities.m in Sources */,
 				1C044F2D28EA30BE00807F01 /* RSCModel.m in Sources */,
+				1C5B561229A537820064C729 /* EquipmentsViewController.swift in Sources */,
 				1C044F2E28EA30BE00807F01 /* ProgramCollectionViewCell.swift in Sources */,
 				1C044F2F28EA30BE00807F01 /* ForgotPasswordViewController.swift in Sources */,
 				1C044F3028EA30BE00807F01 /* HubMenuViewController.swift in Sources */,
@@ -2571,11 +2586,13 @@
 				484BEE3B25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift in Sources */,
 				48C8E4F3265D21490000FDA8 /* KeyEnterViewController.swift in Sources */,
 				B59436E1225652580030F16D /* SubscriptionOptionTableViewCell.swift in Sources */,
+				1C5B560E29A530AD0064C729 /* EqipmentsTableViewCell.swift in Sources */,
 				1CAD60DB28117F1800879A45 /* CyCBManager.m in Sources */,
 				B518F0F31E9FC0840092156C /* UIButton+Activity.swift in Sources */,
 				1CCD7FC328EAD6A600AF1635 /* PlaceDropdownViewController.swift in Sources */,
 				1CD2B3CB28EC18820013BD98 /* PoolShareViewController.swift in Sources */,
 				4880E1EF26558C09006D4472 /* DescribeMyPoolViewController.swift in Sources */,
+				1C5B560B29A52A1F0064C729 /* Equipments.swift in Sources */,
 				4880E1F126558C09006D4472 /* PoolCharacteristicsViewController.swift in Sources */,
 				1CAE717A29538B2700507574 /* AddDeviceListViewController.swift in Sources */,
 				1C2D6645296755D900856D3E /* AnalysrSettings.swift in Sources */,
@@ -2702,6 +2719,7 @@
 				48600E672685042600749C28 /* ProgramCollectionViewCell.swift in Sources */,
 				48C39C5C2618A0F5006EF569 /* ForgotPasswordViewController.swift in Sources */,
 				1CD6992E26E6144700563CBE /* HubMenuViewController.swift in Sources */,
+				1C5B561129A537820064C729 /* EquipmentsViewController.swift in Sources */,
 				4895F7512667F4D300FA8ED3 /* CustomTextField.swift in Sources */,
 				B574F50A1E953D82009294EA /* Router.swift in Sources */,
 				B5E1F1F620874D51008AED25 /* ActionsViewController.swift in Sources */,
@@ -2874,7 +2892,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2912,7 +2930,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -45,6 +45,8 @@ enum Router: URLRequestConvertible {
     case updatePlace(placeId:String)
     case getPlaces
     case getPlaceModules(placeId: String)
+    case getUserEquipments
+
 
     
     //case addStripTest(poolId:Int,params:[String:Any])
@@ -194,6 +196,9 @@ enum Router: URLRequestConvertible {
         case .deleteModule:
             return .delete
         case .getPlaces:
+            return .get
+        
+        case .getUserEquipments:
             return .get
 
         case .addStripTest:
@@ -470,6 +475,10 @@ enum Router: URLRequestConvertible {
             return "maintenance/\(type.rawValue)"
         case .getEquipments:
             return "pools/equipments"
+            
+        case .getUserEquipments:
+            return "modules/AllDevices"
+            
         case .getPoolEquipments(let poolId):
             return "pools/\(poolId)/equipments"
         case .updatePoolEquipments(let poolId, _):

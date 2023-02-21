@@ -29,6 +29,7 @@ class WatrInputViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        submitButton.setTitle("Suivant".localized, for: .normal)
         if AppSharedData.sharedInstance.isAddPlaceFlow{
 //            self.navigationItem.setHidesBackButton(true, animated: true)
             self.submitButton.isHidden = false
