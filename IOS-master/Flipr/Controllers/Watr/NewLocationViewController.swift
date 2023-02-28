@@ -63,7 +63,6 @@ class NewLocationViewController: UIViewController {
     }
     
     func formatUI() {
-        
         submitButton.setTitle("Suivant".localized, for: .normal)
         titleVC.text = "Nouvel Emplacement".localized
         self.navigationController?.isNavigationBarHidden = false

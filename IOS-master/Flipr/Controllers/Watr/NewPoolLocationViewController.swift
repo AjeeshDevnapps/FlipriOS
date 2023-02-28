@@ -27,6 +27,8 @@ class NewPoolLocationViewController: UIViewController, CLLocationManagerDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.isNavigationBarHidden = false
         view.backgroundColor = UIColor(hexString: "#EFEFEF")
         tableView.backgroundColor = .clear
         if AppSharedData.sharedInstance.isAddPlaceFlow{

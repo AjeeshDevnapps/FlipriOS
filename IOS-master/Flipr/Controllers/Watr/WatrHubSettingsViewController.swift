@@ -153,23 +153,21 @@ extension WatrHubSettingsViewController{
     
     func deleteHub(){
         
-        func deleteFlipr(){
-            Alamofire.request(Router.deleteModule(moduleId: self.hub?.serial ?? "")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+        Alamofire.request(Router.deleteModule(moduleId: self.hub?.serial ?? "")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
                 
-                switch response.result {
-                    
-                case .success(_):
-                    self.dismiss(animated: true, completion: nil)
-                    NotificationCenter.default.post(name: K.Notifications.HubDeviceDeleted, object: nil)
-                    break
-                case .failure(let error):
-    //                NotificationCenter.default.post(name: K.Notifications.FliprDeviceDeleted, object: nil)
-                    print("get shares Error \(error)")
-                    self.dismiss(animated: true, completion: nil)
+            case .success(_):
+                self.dismiss(animated: true, completion: nil)
+                NotificationCenter.default.post(name: K.Notifications.HubDeviceDeleted, object: nil)
+                break
+            case .failure(let error):
+//                NotificationCenter.default.post(name: K.Notifications.FliprDeviceDeleted, object: nil)
+                print("get shares Error \(error)")
+                self.dismiss(animated: true, completion: nil)
 
-                }
-            })
-        }
+            }
+        })
     }
 }
 

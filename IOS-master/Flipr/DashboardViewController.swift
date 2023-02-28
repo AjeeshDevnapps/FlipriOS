@@ -1047,8 +1047,7 @@ class DashboardViewController: UIViewController {
     // hub state handling
     
     func handleHubViews(){
-        
-        
+                
         if self.hubs.count < 1{
             self.updateHubWaveForNoHubs()
             return
@@ -3296,6 +3295,8 @@ class DashboardViewController: UIViewController {
                         self.view.hideStateView()
                         
                         if let dateString = current["DateTime"] as? String {
+                            self.signalStrengthLabel.textColor =  .black
+
                             if let lastDate = dateString.fliprDate {
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.dateFormat = "EEE dd/MM HH:mm"
@@ -3415,6 +3416,7 @@ class DashboardViewController: UIViewController {
                                     
                                     //                                    self.signalStrengthLabel.text = "Signal inexistant".localized
                                     self.signalStrengthLabel.text = "Mesure obsolète".localized
+                                    self.signalStrengthLabel.textColor =  .red
                                     self.signalStrengthImageView.image = UIImage(named: "SignalNo")
                                 }
                                 
@@ -3423,6 +3425,7 @@ class DashboardViewController: UIViewController {
                             }
                         }
                         else {
+                            self.signalStrengthLabel.textColor = .red
                             self.signalStrengthLabel.text = "Signal inexistant".localized
                             self.signalStrengthLabel.text = "Last measure".localized
                             self.signalStrengthImageView.image = UIImage(named: "SignalNo")
@@ -3757,9 +3760,9 @@ class DashboardViewController: UIViewController {
                     }
                     
                     if self.isPlaceOwner{
-                        self.settingsButtonContainer.isHidden = false
+                        self.settingsButton.isHidden = false
                     }else{
-                        self.settingsButtonContainer.isHidden = true
+                        self.settingsButton.isHidden = true
                     }
                     
                 } else {
@@ -4967,12 +4970,14 @@ extension DashboardViewController: HubSettingViewDelegate{
         }
         */
 
-        
-        let vc = UIStoryboard(name:"WatrFlipr", bundle: nil).instantiateViewController(withIdentifier: "WatrFliprSettingsViewController") as! WatrFliprSettingsViewController
-        vc.placeDetails = self.placeDetails
-        vc.placesModules = self.placesModules
-        let nav = UINavigationController.init(rootViewController: vc)
-        self.present(nav, animated: true, completion: nil)
+        if self.placesModules != nil && self.placeDetails != nil{
+            let vc = UIStoryboard(name:"WatrFlipr", bundle: nil).instantiateViewController(withIdentifier: "WatrFliprSettingsViewController") as! WatrFliprSettingsViewController
+            vc.placeDetails = self.placeDetails
+            vc.placesModules = self.placesModules
+            let nav = UINavigationController.init(rootViewController: vc)
+            self.present(nav, animated: true, completion: nil)
+        }
+      
         
         
        
@@ -5197,9 +5202,7 @@ extension DashboardViewController:PlaceDropdownDelegate{
             } else {
                 self.refreshDashboardForSelectedPlace()
             }
-            
         })
-        
     }
     
     
@@ -5217,7 +5220,6 @@ extension DashboardViewController:PlaceDropdownDelegate{
         self.bleMeasureHasBeenSent = false
         self.refresh()
         self.perform(#selector(self.callGetStatusApis), with: nil, afterDelay: 0)
-        
     }
     
     

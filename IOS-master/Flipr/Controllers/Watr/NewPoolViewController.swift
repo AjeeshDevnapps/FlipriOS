@@ -467,15 +467,16 @@ extension NewPoolViewController: UITableViewDataSource {
                 primaryText = NewPoolTitles.PoolGeneralTitles.allCases[indexPath.row].rawValue.localized
                 switch indexPath.row {
                 case 0:
+                    secondaryText = poolSettings?.privateName
+
+                case 1:
                     var name:String = ""
                     name = poolSettings?.owner?.firstName ?? ""
                     name.append(" ")
                     name.append(poolSettings?.owner?.lastName ?? "")
                     secondaryText = name
-                case 1:
-                    secondaryText = poolSettings?.type?.name
                 case 2:
-                    secondaryText = poolSettings?.privateName
+                    secondaryText = poolSettings?.type?.name
                 case 3:
                     secondaryText = poolSettings?.city?.name
                 default:
@@ -671,7 +672,7 @@ extension NewPoolViewController: UITableViewDataSource {
                     tableViewCell.accessoryType = .disclosureIndicator
                 }
                 if indexPath.section == 0{
-                    if indexPath.row == 0 || indexPath.row == 1{
+                    if indexPath.row == 1 || indexPath.row == 2{
                         tableViewCell.accessoryType = .none
                     }
                 }
@@ -806,6 +807,18 @@ extension NewPoolViewController: UITableViewDelegate {
                 let listVC = self.storyboard?.instantiateViewController(withIdentifier: "NewPoolSimpleListViewController") as! NewPoolSimpleListViewController
                 switch indexPath.row {
                 case 0:
+                    let sb = UIStoryboard(name: "NewPool", bundle: nil)
+                    let listVC = sb.instantiateViewController(withIdentifier: "WatrInputViewController") as! WatrInputViewController
+                    listVC.order = 0
+                    listVC.isNonType = true
+                    listVC.defaultValue = poolSettings?.privateName
+                    listVC.titleStr = "Libellé ".localized //+ " - m³"
+                    listVC.completion(block: { (inputValue) in
+                            self.poolSettings?.privateName = inputValue
+                            self.tableView.reloadData()
+                            self.updateSettings()
+                        })
+                    navigationController?.pushViewController(listVC, animated: true)
                     break
                     
                 case 1:
@@ -816,18 +829,7 @@ extension NewPoolViewController: UITableViewDelegate {
 //                    navigationController?.pushViewController(listVC, animated: true)
                     break; //Type
                 case 2:
-                    let sb = UIStoryboard(name: "NewPool", bundle: nil)
-                    let listVC = sb.instantiateViewController(withIdentifier: "WatrInputViewController") as! WatrInputViewController
-                    listVC.order = 0
-                    listVC.isNonType = true
-                    listVC.defaultValue = poolSettings?.privateName
-                    listVC.titleStr = "Libellé".localized //+ " - m³"
-                    listVC.completion(block: { (inputValue) in
-                            self.poolSettings?.privateName = inputValue
-                            self.tableView.reloadData()
-                            self.updateSettings()
-                        })
-                    navigationController?.pushViewController(listVC, animated: true)
+                   
                     break
                 case 3:
                     let locationVC = storyboard?.instantiateViewController(withIdentifier: "NewPoolLocationViewController") as! NewPoolLocationViewController

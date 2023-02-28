@@ -835,6 +835,12 @@ class User {
                 print("Create place - response.result.value: \(value)")
                 if let data = response.data {
                     do {
+                        
+                        if let poolsJson = value as? [String:Any] {
+                            let pool = Pool.init(withJSON: poolsJson)
+                            Pool.currentPool = pool
+                            Pool.saveCurrentPoolLocally()
+                        }
                         let setting = try JSONDecoder().decode(PoolSettingsModel.self, from: data)
                         completion?(setting, nil)
                     } catch let error {

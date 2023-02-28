@@ -17,9 +17,9 @@ struct NewPoolTitles {
     }
     
     enum PoolGeneralTitles: String, CaseIterable {
+        case poolName = "Libellé "
         case owner = "Propriétaire"
         case poolType = "Type"
-        case poolName = "Libellé "
         case city = "City"
     }
     

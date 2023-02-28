@@ -32,6 +32,9 @@ class CreatePlaceViewController: UIViewController {
             } else {
                 self.hud?.dismiss(afterDelay: 0)
                 self.poolSettings = settings
+                
+
+                
                 AppSharedData.sharedInstance.addedPlaceId = settings?.id ?? 0
                 self.showAddDeviceScreen()
                 
