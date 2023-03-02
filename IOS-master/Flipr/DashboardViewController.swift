@@ -264,6 +264,8 @@ class DashboardViewController: UIViewController {
     var isDefaultPlaceLoaded = false
 
     
+    var isLoadedDashboard = false
+
     
     var placeDetails:PlaceDropdown!
     var placesModules:PlaceModule!
@@ -563,6 +565,7 @@ class DashboardViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.isLoadedDashboard = true
         self.loadHUBs()
         AppReview.shared.requestReviewIfNeeded()
         self.view.bringSubviewToFront(quicActionButton)
@@ -589,11 +592,13 @@ class DashboardViewController: UIViewController {
     }
     
     @objc func show409Error(){
+        /*
         let hud = JGProgressHUD(style:.dark)
         hud?.show(in: self.view)
         hud?.indicatorView = JGProgressHUDErrorIndicatorView()
         hud?.textLabel.text = "There is no change in measurement"
         hud?.dismiss(afterDelay: 5)
+         */
     }
     
     func intialTabSetup(){
@@ -2052,6 +2057,68 @@ class DashboardViewController: UIViewController {
     */
     
     
+    @objc func hideFirstReadingMsg(){
+        self.view.showEmptyStateViewLoading(title: nil, message: nil)
+    }
+    
+    func startReading(){
+        
+        self.perform(#selector(self.updateFliprData), with: nil, afterDelay: 5)
+        self.perform(#selector(self.hideFirstReadingMsg), with: nil, afterDelay: 5)
+
+        
+     /*
+        BLEManager.shared.calibrationType = .simpleMeasure
+        BLEManager.shared.calibrationMeasures = true
+        BLEManager.shared.isHandling409 = true
+
+        BLEManager.shared.startMeasure { (error) in
+             
+            BLEManager.shared.doAcq = false
+            
+            if error != nil {
+              
+                self.showError(title: "Error".localized, message: error?.localizedDescription)
+                
+              
+            } else {
+//                self.readingSuccess()
+//                self.showError(title: "Success", message: "Value read")
+                
+//                UIApplication.shared.isIdleTimerDisabled = true
+                
+//                //timer 2 min et à la fin lire la measure.
+//                UserDefaults.standard.set(Date()?.addingTimeInterval(self.measuresInterval), forKey: self.calibrationType.rawValue + "CalibrationEndingDate")
+//
+//                let theme = EmptyStateViewTheme.shared
+//                theme.activityIndicatorType = .ballGridPulse
+//
+//                if self.calibrationType == .simpleMeasure {
+//                    self.view.showEmptyStateViewLoading(title: "New measurement".localized.uppercased(), message: "Measurement in progress...\n\nThis operation may take a few minutes, do not quit the app, keep the iPhone active and close to the Flipr.".localized, theme: theme)
+//                } else {
+//                    self.view.showEmptyStateViewLoading(title: "CALIBRATION ".localized + self.calibrationType.rawValue.uppercased(), message: "Measurement in progress...\n\nThis operation may take a few minutes, do not quit the app, keep the iPhone active and close to the Flipr.".localized, theme: theme)
+//                }
+//
+//
+//                self.progressView.isHidden = false
+//                self.progressView.setProgress(0, animated: false)
+//
+//                self.measuresTimer = Timer.scheduledTimer(timeInterval: 0.05,
+//                                                          target: self,
+//                                                          selector: #selector(self.updateTime),
+//                                                          userInfo: nil,
+//                                                          repeats: true)
+            }
+            
+        }
+
+        
+*/
+
+    }
+
+    
+    
     func readBLEMeasure(completion: ((_ error: Error?) -> Void)?) {
         
         if !self.bleMeasureHasBeenSent {
@@ -2931,7 +2998,7 @@ class DashboardViewController: UIViewController {
         return nil
     }
     
-    func updateFliprData() {
+    @objc func updateFliprData() {
         
         hideFliprData()
         
@@ -3743,10 +3810,14 @@ class DashboardViewController: UIViewController {
                             }
                         }
                     } else {
-                        /*
-                        print("response.result.value: \(response.result.value)")
-                        self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "The first analysis is in progress!".localized, message: "Waiting for the first measure...".localized, bottomAlignment: 0)
-                        */
+                        
+                        if self.isLoadedDashboard{
+                            self.showSuccess(title: "", message: "first analysis is in progress!")
+//                            print("response.result.value: \(response.result.value)")
+//                            self.view.showEmptyStateView(image: nil, title: "\n\n\n\n\n\n" + "The first analysis is in progress!".localized, message: "Waiting for the first measure...".localized, bottomAlignment: 0)
+//                            self.startReading()
+                        }
+                        
                         /*
                         self.readBLEMeasure(completion: { (error) in
                             if error != nil {
@@ -3756,7 +3827,9 @@ class DashboardViewController: UIViewController {
                                 self.bleMeasureHasBeenSent = true
                             }
                         })
+                        
                         */
+                        
                     }
                     
                     if self.isPlaceOwner{
