@@ -26,6 +26,7 @@ class NewLocationViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     let hud = JGProgressHUD(style:.dark)
+    var isHidebackArrow  = false
 
     var selectedIndex: IndexPath!
     var placeTypes = PlaceTypes()
@@ -33,6 +34,9 @@ class NewLocationViewController: UIViewController {
         super.viewDidLoad()
         formatUI()
         self.hideBackButtonForAddPlaceflow()
+        if isHidebackArrow{
+            
+        }
         getPlaceTypes()
     }
     

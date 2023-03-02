@@ -283,6 +283,7 @@ class FliprSplashViewController: BaseViewController {
     func addPlaceView(){
         let sb = UIStoryboard(name: "NewLocation", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "NewLocationViewControllerID") as? NewLocationViewController {
+//            AppSharedData.sharedInstance.isAddPlaceFlow = true
             self.navigationController?.pushViewController(viewController, completion: nil)
             //            viewController.modalPresentationStyle = .fullScreen
 //            self.present(viewController, animated: true)
