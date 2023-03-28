@@ -72,7 +72,7 @@ class ExpertModeViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Expert mode".localized
+        self.title = "Vue Expert".localized
         if self.isDirectPresenting{
             self.addCloseButton()
         }

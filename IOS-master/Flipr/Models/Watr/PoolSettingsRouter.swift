@@ -13,7 +13,7 @@ class PoolSettingsRouter {
     
     var poolId:String? = ""
 
-    func getPoolSettings(poolId: String, completion: ((_ settings:PoolSettingsModel?,_ error:Error?) -> Void)?) {
+    func getPoolSettings(poolId: String, completion: ((_ settings:PlaceSettingsDetails?,_ error:Error?) -> Void)?) {
         self.poolId = poolId
         Alamofire.request(Router.getPoolSettings(poolId: self.poolId ?? "")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             
@@ -22,7 +22,7 @@ class PoolSettingsRouter {
             case .success(_):
                 if let data = response.data {
                     do {
-                        let setting = try JSONDecoder().decode(PoolSettingsModel.self, from: data)
+                        let setting = try JSONDecoder().decode(PlaceSettingsDetails.self, from: data)
                         completion?(setting, nil)
                     } catch let error {
                         completion?(nil, error)

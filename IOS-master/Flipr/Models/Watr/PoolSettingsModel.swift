@@ -5,6 +5,20 @@
 
 import Foundation
 
+
+
+struct PlaceSettingsDetails: Codable {
+
+    var poolSettingsModel: PoolSettingsModel?
+    var analysRAssociated: Bool
+    
+    enum CodingKeys: String, CodingKey {
+        case poolSettingsModel = "Place"
+        case analysRAssociated = "AnalysRAssociated"
+    }
+
+}
+
 // MARK: - PoolSettingsModel
 struct PoolSettingsModel: Codable {
     var owner: Owner?

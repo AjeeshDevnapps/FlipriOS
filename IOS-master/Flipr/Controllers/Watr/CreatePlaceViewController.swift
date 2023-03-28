@@ -34,7 +34,7 @@ class CreatePlaceViewController: UIViewController {
                 self.poolSettings = settings
                 
 
-                
+                AppSharedData.sharedInstance.isAddPlaceSuccess = true 
                 AppSharedData.sharedInstance.addedPlaceId = settings?.id ?? 0
                 self.showAddDeviceScreen()
                 

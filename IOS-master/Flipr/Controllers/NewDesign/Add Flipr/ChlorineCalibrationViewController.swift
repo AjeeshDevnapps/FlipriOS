@@ -14,7 +14,8 @@ class ChlorineCalibrationViewController: BaseViewController {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var msgLbl: UILabel!
     @IBOutlet weak var successLbl: UILabel!
-    
+    var isAddingNewDevice = false
+
     
     let measuresInterval:Double = 150
     var recalibration = false
@@ -99,6 +100,12 @@ class ChlorineCalibrationViewController: BaseViewController {
                                                   selector: #selector(self.checkForAppStrucked),
                                                   userInfo: nil,
                                                   repeats: true)
+        
+        if self.isAddingNewDevice{
+            AppSharedData.sharedInstance.isFirstCalibrations = true
+        }else{
+            AppSharedData.sharedInstance.isFirstCalibrations = false
+        }
 
         BLEManager.shared.startMeasure { (error) in
             
@@ -138,6 +145,12 @@ class ChlorineCalibrationViewController: BaseViewController {
     @objc func checkForAppStrucked() {
     
         if self.isCalibrationStrucked{
+            if self.isAddingNewDevice{
+                AppSharedData.sharedInstance.isFirstCalibrations = false
+            }else{
+                AppSharedData.sharedInstance.isFirstCalibrations = false
+            }
+
             self.showStripView()
         }
     }
@@ -192,7 +205,12 @@ class ChlorineCalibrationViewController: BaseViewController {
                 BLEManager.shared.sendCalibrationMeasure(type: calibrationType, completion: { (error) in
                     
                     BLEManager.shared.calibrationMeasures = false
-                    
+                    if self.isAddingNewDevice{
+                        AppSharedData.sharedInstance.isFirstCalibrations = false
+                    }else{
+                        AppSharedData.sharedInstance.isFirstCalibrations = false
+                    }
+
                     if error != nil {
                         
 //                        self.view.hideStateView()

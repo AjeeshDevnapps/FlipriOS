@@ -25,6 +25,8 @@ class NewPoolViewController: UIViewController {
     var contacts = [ShareModel]()
 
 
+    var placeDetailsRespose: PlaceSettingsDetails?
+
     var poolSettings: PoolSettingsModel?
     var placeTitle:String?
     var placeDetails:PlaceDropdown?
@@ -75,7 +77,7 @@ class NewPoolViewController: UIViewController {
         if AppSharedData.sharedInstance.isAddPlaceFlow{
 //            createPlace()
         }
-        AppSharedData.sharedInstance.isAddPlaceFlow = false
+//        AppSharedData.sharedInstance.isAddPlaceFlow = false
     }
     
     override func goBack() {
@@ -264,15 +266,16 @@ class NewPoolViewController: UIViewController {
                 self.present(alertVC, animated: true)
                 return
             }
-            self.poolSettings = settings
-            var titleStr = settings?.privateName ?? ""
+            self.placeDetailsRespose = settings
+            self.poolSettings = settings?.poolSettingsModel
+            var titleStr = self.poolSettings?.privateName ?? ""
             titleStr.append(" - ")
-            titleStr.append(settings?.owner?.firstName ?? "")
+            titleStr.append(self.poolSettings?.owner?.firstName ?? "")
             titleStr.append(" ")
-            titleStr.append(settings?.owner?.lastName ?? "")
+            titleStr.append(self.poolSettings?.owner?.lastName ?? "")
 
             titleStr.append(" - ")
-            titleStr.append(settings?.city?.name ?? "")
+            titleStr.append(self.poolSettings?.city?.name ?? "")
             self.title = titleStr
             self.tableView.reloadData()
         }
@@ -391,7 +394,8 @@ class NewPoolViewController: UIViewController {
                 self.present(alertVC, animated: true)
                 return
             }
-            self.poolSettings = settings
+            self.placeDetailsRespose = settings
+            self.poolSettings = settings?.poolSettingsModel
             self.tableView.reloadData()
         }
     }
@@ -1010,6 +1014,11 @@ extension NewPoolViewController: UITableViewDelegate {
                     navigationController?.pushViewController(listVC, animated: true)
                     break; //Forme
                 case 2:
+                    
+                    if self.placeDetailsRespose?.analysRAssociated == false{
+                        return
+                    }
+                    
                     viewController.title = "Statut".localized
                     viewController.apiPath = "modes"
                     viewController.completion(block: { (formValue) in

@@ -44,6 +44,7 @@ class AddDeviceListViewController: UIViewController {
         let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddFliprViewController") as! AddFliprViewController
         viewController.isPushFlow = self.isPushFlow
         viewController.isSignupFlow = self.isSignupFlow
+        AppSharedData.sharedInstance.isAddDeviceStarted = true
         self.navigationController?.pushViewController(viewController, animated: true)
 
     }
@@ -53,6 +54,7 @@ class AddDeviceListViewController: UIViewController {
         let fliprStoryboard = UIStoryboard(name: "HUBElectrical", bundle: nil)
         let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "ElectricalSetupViewController") as! ElectricalSetupViewController
         viewController.isSignupFlow = self.isSignupFlow
+        AppSharedData.sharedInstance.isAddDeviceStarted = true
         self.navigationController?.pushViewController(viewController, animated: true)
 
     }

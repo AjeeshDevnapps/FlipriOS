@@ -39,6 +39,14 @@ import Foundation
 
 
     var isAddPlaceFlow = false
+    var isAddPlaceSuccess = false
+    var isAddDeviceStarted = false
+
+    var isFirstCalibrations = false
+    
+    var deviceSerialNo : String  = ""
+
+
     
     var isOwner = false
 

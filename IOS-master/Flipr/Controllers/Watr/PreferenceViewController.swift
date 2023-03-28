@@ -60,7 +60,7 @@ class PreferenceViewController: UIViewController {
             }
         }else{
             UserDefaults.standard.set(1, forKey: "CurrentUnit")
-            NotificationCenter.default.post(name: K.Notifications.MeasureUnitSettingsChanged, object: nil)
+//            NotificationCenter.default.post(name: K.Notifications.MeasureUnitSettingsChanged, object: nil)
         }
         if isDegree{
             imperialTick.isHidden = true

@@ -74,7 +74,7 @@ class NewPoolLocationViewController: UIViewController, CLLocationManagerDelegate
     func showLocationSelectionVC(){
         let sb = UIStoryboard(name: "NewPool", bundle: nil)
         if let locationVC = sb.instantiateViewController(withIdentifier: "NewPoolLocationViewController") as? NewPoolLocationViewController {
-            locationVC.title = "Localisation"
+            locationVC.title = "Location".localized
             navigationController?.pushViewController(locationVC)
         }
     }

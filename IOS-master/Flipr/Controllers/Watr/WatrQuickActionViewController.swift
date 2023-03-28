@@ -58,6 +58,14 @@ class WatrQuickActionViewController: UIViewController {
     }
     
     
+    func showGatewayListing(){
+        if let vc = UIStoryboard(name: "Gateway", bundle: nil).instantiateViewController(withIdentifier: "GateWayListingViewController") as? GateWayListingViewController {
+//            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
+        
+    }
+    
     @IBAction func closeButtonAction(){
         //        let sb = UIStoryboard.init(name: "Calibration", bundle: nil)
         //        if let viewController = sb.instantiateViewController(withIdentifier: "CalibrationPh7IntroViewController") as? CalibrationPh7IntroViewController {
@@ -294,8 +302,11 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        handleNavigation(indexPath:indexPath)
-        handlePlaceNavigation(indexPath: indexPath)
+        
+        showGatewayListing()
+        return
+        
+       handlePlaceNavigation(indexPath: indexPath)
     }
     
     

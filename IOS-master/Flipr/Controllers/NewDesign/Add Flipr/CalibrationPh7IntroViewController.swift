@@ -18,6 +18,7 @@ class CalibrationPh7IntroViewController: BaseViewController {
     @IBOutlet weak var contentLine2Lbl: UILabel!
     @IBOutlet weak var contentLine3Lbl: UILabel!
     @IBOutlet weak var contentLine4Lbl: UILabel!
+    var isAddingNewDevice = false
 
     
     var recalibration = false
@@ -54,6 +55,9 @@ class CalibrationPh7IntroViewController: BaseViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Ph7CalibrationViewController") as! Ph7CalibrationViewController
         vc.recalibration = self.recalibration
         vc.dismissEnabled = self.isPresentedFlow
+        if isAddingNewDevice{
+            vc.isAddingNewDevice =  self.isAddingNewDevice
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

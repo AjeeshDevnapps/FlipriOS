@@ -23,6 +23,7 @@ class CalibrationChlorineIntroViewController: UIViewController {
     @IBOutlet weak var contentLine4Lbl: UILabel!
 
     var recalibration = false
+    var isAddingNewDevice = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,9 @@ class CalibrationChlorineIntroViewController: UIViewController {
     @IBAction func nextButton(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChlorineCalibrationViewController") as! ChlorineCalibrationViewController
         vc.recalibration = self.recalibration
+        if isAddingNewDevice{
+            vc.isAddingNewDevice =  self.isAddingNewDevice
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

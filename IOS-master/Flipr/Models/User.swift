@@ -600,9 +600,7 @@ class User {
                 }
                 
             case .failure(let error):
-                
                 print("Get user pool did fail with error: \(error)")
-                
                 if let serverError = User.serverError(response: response) {
                     completion?(serverError)
                 } else {
@@ -611,6 +609,7 @@ class User {
             }
         })
     }
+    
     
     static func logout() {
         UserDefaults.standard.removeObject(forKey: "CurrentUser")
@@ -626,9 +625,6 @@ class User {
         UserDefaults.standard.removeObject(forKey: "FliprName")
         UserDefaults.standard.removeObject(forKey: K.AppConstant.CurrentServerIsDev)
 
-       
-        
-
         User.currentUser = nil
         Module.currentModule = nil
         Pool.currentPool = nil
@@ -638,6 +634,7 @@ class User {
         AppSharedData.sharedInstance.deviceName = ""
         UserDefaults.standard.synchronize()
     }
+    
     
     func sync(completion: ((_ success:Bool) -> Void)?) throws {
         print("Save user: \(self.serialized)")

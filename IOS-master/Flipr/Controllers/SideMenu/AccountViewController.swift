@@ -168,15 +168,19 @@ class AccountViewController: UIViewController {
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
+    
 
     func callDeleteUserApi(){
         let hud = JGProgressHUD(style:.dark)
         hud?.show(in: self.view)
         User.currentUser?.deleteUser(completion: { (error) in
             if error != nil {
-                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-                hud?.textLabel.text = error?.localizedDescription
-                hud?.dismiss(afterDelay: 3)
+//                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+//                hud?.textLabel.text = error?.localizedDescription
+//                hud?.dismiss(afterDelay: 3)
+                hud?.dismiss(afterDelay: 0)
+                User.logout()
+                NotificationCenter.default.post(name: K.Notifications.UserDidLogout, object: nil)
             } else {
                 hud?.dismiss(afterDelay: 0)
                 User.logout()

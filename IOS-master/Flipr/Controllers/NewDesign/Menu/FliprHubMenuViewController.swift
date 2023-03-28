@@ -136,13 +136,13 @@ class FliprHubMenuViewController: UIViewController {
 //        var haveFlipr = true
         if haveFlipr{
             if isPlaceOwner && (haveSubscription == false){
-                self.cellTitleList = ["Activer la connexion à distance".localized,"Carnet d’entretien".localized,"Pool House".localized,"Mode Expert".localized,"Aide".localized,"Paramètres".localized,"Déconnexion".localized]
+                self.cellTitleList = ["Activer la connexion à distance".localized,"Carnet d’entretien".localized,"Pool House".localized,"Expert mode".localized,"Aide".localized,"Paramètres".localized,"Déconnexion".localized]
                 self.imageNames = ["noSubscription","Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
                 self.menuViewHeight.constant = 601
 
             }else{
                 if isPlaceOwner{
-                    self.cellTitleList = ["Carnet d’entretien".localized,"Pool House".localized,"Mode Expert".localized,"Aide".localized,"Paramètres".localized,"Déconnexion".localized]
+                    self.cellTitleList = ["Carnet d’entretien".localized,"Pool House".localized,"Expert mode".localized,"Aide".localized,"Paramètres".localized,"Déconnexion".localized]
                     self.imageNames = ["Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
                     self.menuViewHeight.constant = 535
                 }else{

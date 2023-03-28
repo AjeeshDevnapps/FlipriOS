@@ -24,6 +24,7 @@ class Ph7CalibrationViewController: BaseViewController {
     var isPresentedFlow: Bool = false
     var checkCalibrationStruckTimer : Timer?
     var isCalibrationStrucked = false
+    var isAddingNewDevice = false
 
     
     override func viewDidLoad() {
@@ -99,6 +100,12 @@ class Ph7CalibrationViewController: BaseViewController {
                                                   userInfo: nil,
                                                   repeats: true)
 
+        if self.isAddingNewDevice{
+            AppSharedData.sharedInstance.isFirstCalibrations = true
+        }else{
+            AppSharedData.sharedInstance.isFirstCalibrations = false
+        }
+
         BLEManager.shared.startMeasure { (error) in
             
             BLEManager.shared.doAcq = false
@@ -138,6 +145,12 @@ class Ph7CalibrationViewController: BaseViewController {
     
         if self.isCalibrationStrucked{
             self.invalidateStruckChecktimer()
+            if self.isAddingNewDevice{
+                AppSharedData.sharedInstance.isFirstCalibrations = false
+            }else{
+                AppSharedData.sharedInstance.isFirstCalibrations = false
+            }
+
             self.showChlorineFlow()
         }
     }
@@ -188,11 +201,16 @@ class Ph7CalibrationViewController: BaseViewController {
                     self.view.showEmptyStateViewLoading(title: "CALIBRATION ".localized + calibrationType.rawValue.uppercased(), message: "Connecting to flipr...".localized, theme: theme)
                 }
                 
-                
+               
                 BLEManager.shared.sendCalibrationMeasure(type: calibrationType, completion: { (error) in
                     
                     BLEManager.shared.calibrationMeasures = false
-                    
+                    if self.isAddingNewDevice{
+                        AppSharedData.sharedInstance.isFirstCalibrations = false
+                    }else{
+                        AppSharedData.sharedInstance.isFirstCalibrations = false
+                    }
+
                     if error != nil {
                         
 //                        self.view.hideStateView()
@@ -264,6 +282,9 @@ class Ph7CalibrationViewController: BaseViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "CalibrationChlorineIntroViewController") as! CalibrationChlorineIntroViewController
             vc.recalibration = self.recalibration
+            if self.isAddingNewDevice{
+                vc.isAddingNewDevice =  self.isAddingNewDevice
+            }
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
