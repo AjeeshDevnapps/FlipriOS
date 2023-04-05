@@ -68,7 +68,11 @@ import Foundation
             serialNumber = "Flipr 00\(serial)"
         }
         else{
-            serialNumber = "Flipr \(serial)"
+            if serial.count == 8{
+                serialNumber = serial
+            }else{
+                serialNumber = "Flipr \(serial)"
+            }
         }
         return serialNumber
     }

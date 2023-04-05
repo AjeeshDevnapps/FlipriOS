@@ -146,6 +146,16 @@ class WatrSettingsViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func gateWaysButtonTapped(){
+        if let vc = UIStoryboard(name: "Gateway", bundle: nil).instantiateViewController(withIdentifier: "GateWayViewController") as? GateWayViewController{
+            self.navigationController?.pushViewController(vc)
+        }
+    }
+    
+    
+    
+    
 //
     
     

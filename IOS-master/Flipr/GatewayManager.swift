@@ -1,15 +1,17 @@
 //
-//  HUBManager.swift
+//  GatewayManager.swift
 //  Flipr
 //
-//  Created by Benjamin McMurrich on 05/03/2020.
-//  Copyright © 2020 I See U. All rights reserved.
+//  Created by Ajeesh on 31/03/23.
+//  Copyright © 2023 I See U. All rights reserved.
 //
 
 import Foundation
+
 import CoreBluetooth
 
-struct HUBBLENotifications {
+
+struct GatewayBLENotifications {
     static let BluetoothReady = "fr.isee-u.flipr.bluetoothReady"
     static let FoundDevice = "fr.isee-u.flipr.founddevice"
     static let ConnectionComplete = "fr.isee-u.flipr.connectioncomplete"
@@ -24,19 +26,20 @@ struct HUBBLENotifications {
     static let BateryLevelDidRead = "fr.isee-u.flipr.bateryLevelDidRead"
 }
 
-struct HUBBLEParameters {
+struct GATEWAYBLEParameters {
     
-    static let wifiServiceUUID = CBUUID(string: "A9D7166A-D72E-40A9-A002-48044CC30100")
-    static let channelCharactersticUUID = CBUUID(string:"A9D7166A-D72E-40A9-A002-48044CC30101")
+    static let gatewaySSIDUUID = CBUUID(string: "9500")
+    static let gatewayPasswordUUID = CBUUID(string:"9501")
     static let receptionCharactersticUUID = CBUUID(string:"A9D7166A-D72E-40A9-A002-48044CC30102")
-    static let sendCharactersticUUID = CBUUID(string:"A9D7166A-D72E-40A9-A002-48044CC30103")
+    static let wifiServiceUUID = CBUUID(string:"0A02F906-0000-1000-8000-00805F9B34FB")
 
 }
 
-class HUBManager: NSObject {
+
+class GatewayManager: NSObject {
     
-    static let shared: HUBManager = {
-        let instance = HUBManager()
+    static let shared: GatewayManager = {
+        let instance = GatewayManager()
         return instance
     }()
     
@@ -47,15 +50,17 @@ class HUBManager: NSObject {
     var detectedHubs:[String:CBPeripheral] = [:]
     var scanForHubsCompletionBlock:(_ : (_ hubsInfo:[String:CBPeripheral]) -> Void)?
     
-    var connectedHub:CBPeripheral?
+    var connectedGateway:CBPeripheral?
     var connectCompletionBlock:(_ : (_ error:Error?) -> Void)?
     var cancelConnectionCompletionBlock:(_ : (_ error:Error?) -> Void)?
     var getAvailableWifiCompletionBlock:(_ : (_ networks: HUBWifiNetwork?, _ error:Error?) -> Void)?
     var setWifiCompletionBlock:(_ : (_ error:Error?) -> Void)?
+    var setPasswordCompletionBlock:(_ : (_ error:Error?) -> Void)?
+
     
-    var channelCharacteristic:CBCharacteristic?
-    var receptionCharacteristic:CBCharacteristic?
-    var sendCharacteristic:CBCharacteristic?
+    var ssidCharacteristic:CBCharacteristic?
+//    var receptionCharacteristic:CBCharacteristic?
+    var passwordCharacteristic:CBCharacteristic?
     
     var module:Module?
     
@@ -64,7 +69,7 @@ class HUBManager: NSObject {
     var stopScanning = false
 
     
-    func scanForHubs(serials: [String]?, completion: ((_ hubsInfo:[String:CBPeripheral]) -> Void)?) {
+    func scanForGateways(serials: [String]?, completion: ((_ hubsInfo:[String:CBPeripheral]) -> Void)?) {
         scanForHubsWithSerials = serials
         scanForHubsCompletionBlock = completion
         if !centralManagerHasBeenInitialized {
@@ -73,9 +78,8 @@ class HUBManager: NSObject {
         } else {
             self.stopScanning = false
             perform(#selector(setTimeLimit), with: nil, afterDelay: 60)
-            //let services = [FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID]
             centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
-            print("CBCentralManager start scanning for Hub devices (already initialized)")
+            print("CBCentralManager start scanning for GateWay devices (already initialized)")
         }
     }
     
@@ -91,23 +95,27 @@ class HUBManager: NSObject {
     }
     
     
+    
+    
     func connect(serial: String, completion: ((_ error: Error?) -> Void)?) {
         
         connectCompletionBlock = completion
         if let peripheral = detectedHubs[serial] {
-            connectedHub = peripheral
-            
-            connectedHub?.delegate = self
-            centralManager.connect(connectedHub!, options: nil)
+            connectedGateway = peripheral
+            connectedGateway?.delegate = self
+            centralManager.connect(connectedGateway!, options: nil)
+            completion?(nil)
+//            connectedGateway?.discoverServices([GATEWAYBLEParameters.gatewayPasswordUUID,GATEWAYBLEParameters.gatewayPasswordUUID])
+//
         } else {
-            let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Could not connect to Gateway with serial:".localized + serial])
+            let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Could not connect to Gaetway with serial:".localized + serial])
             completion?(error)
         }
     }
     
     func cancelHubConnection(completion: ((_ error: Error?) -> Void)?) {
         cancelConnectionCompletionBlock = completion
-        if let hub = connectedHub {
+        if let hub = connectedGateway {
             centralManager.cancelPeripheralConnection(hub)
         } else {
             let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Could not disconnect from HUB".localized])
@@ -117,7 +125,7 @@ class HUBManager: NSObject {
     
     func deleteWifi(index: Int, completion: ((_ error: Error?) -> Void)?) {
         
-        if let hub = connectedHub, let sendChar = sendCharacteristic {
+        if let hub = connectedGateway, let sendChar = ssidCharacteristic {
             
             getAvailableWifiCompletionBlock = nil
             setWifiCompletionBlock = completion
@@ -134,10 +142,11 @@ class HUBManager: NSObject {
         }
     }
     
+    /*
     func getAvailableWifi(completion: ((_ network:HUBWifiNetwork?, _ error: Error?) -> Void)?) {
         
         getAvailableWifiCompletionBlock = completion
-        if let hub = connectedHub, let sendChar = sendCharacteristic {
+        if let hub = connectedGateway, let sendChar = ssidCharacteristic {
         
             let encoded = CBOR.encode(["w":1,"h":10,"t":10] as NSDictionary)
             
@@ -146,7 +155,7 @@ class HUBManager: NSObject {
             hub.writeValue(data, for: sendChar, type: .withResponse)
         } else {
             
-            if connectedHub == nil {
+            if connectedGateway == nil {
                 let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"No HUB connected :/".localized])
                 getAvailableWifiCompletionBlock?(nil,error)
             } else if sendCharacteristic == nil {
@@ -158,11 +167,49 @@ class HUBManager: NSObject {
         }
     }
     
+    */
+    
+    
+    
+    func setSSID(ssid:String, completion: ((_ error: Error?) -> Void)?) {
+        
+        getAvailableWifiCompletionBlock = nil
+        setWifiCompletionBlock = completion
+        if let hub = connectedGateway, let sendChar = ssidCharacteristic {
+            let data = ssid.data(using: .utf8)
+            connectedGateway?.writeValue(data!, for: ssidCharacteristic!, type: .withResponse)
+            completion?(nil)
+        } else {
+            //send error no hub connected or char discovered
+            let error = NSError(domain: "Gateway", code: -1, userInfo: [NSLocalizedDescriptionKey:"No Gateway connected :/".localized])
+            setWifiCompletionBlock?(error)
+            setWifiCompletionBlock = nil
+        }
+    }
+
+    
+    
+    func setPassword(password:String, completion: ((_ error: Error?) -> Void)?) {
+        
+        getAvailableWifiCompletionBlock = nil
+        setPasswordCompletionBlock = completion
+        if let hub = connectedGateway, let sendChar = passwordCharacteristic {
+            let data = password.data(using: .utf8)
+            connectedGateway?.writeValue(data!, for: passwordCharacteristic!, type: .withResponse)
+        } else {
+            //send error no hub connected or char discovered
+            let error = NSError(domain: "Gateway", code: -1, userInfo: [NSLocalizedDescriptionKey:"No Gateway connected :/".localized])
+            setPasswordCompletionBlock?(error)
+            setWifiCompletionBlock = nil
+        }
+    }
+    
+    
     func setWifi(network: HUBWifiNetwork, password:String, completion: ((_ error: Error?) -> Void)?) {
         
         getAvailableWifiCompletionBlock = nil
         setWifiCompletionBlock = completion
-        if let hub = connectedHub, let sendChar = sendCharacteristic {
+        if let hub = connectedGateway, let sendChar = passwordCharacteristic {
             
             var info = network.addSerialized
             info["w"] = 3
@@ -200,7 +247,7 @@ class HUBManager: NSObject {
 }
 
 //MARK: - Core bluetooth central manager delegate
-extension HUBManager: CBCentralManagerDelegate {
+extension GatewayManager: CBCentralManagerDelegate {
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if #available(iOS 10.0, *) {
@@ -235,25 +282,33 @@ extension HUBManager: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-       
+       print(advertisementData)
         if self.stopScanning{
 //            central.stopScan()
-            NotificationCenter.default.post(name: K.Notifications.HUBNotDiscovered, object: nil)
+            NotificationCenter.default.post(name: K.Notifications.GatewayNoteDiscovered, object: nil)
             return
         }
         
         if let name = peripheral.name {
             
-            
-            if !name.hasPrefix("Flipr HUB") && !name.hasPrefix("FliprHUB") {
+            if !name.hasPrefix("G1") {//&& !name.hasPrefix("FliprHUB") {
+                
                 return
             }
             
+//            if name.count != 8{
+//                return
+//            }
             print("Hub device discovered with name:\(peripheral.name) , identifier: \(peripheral.identifier)")
             
             let serial = name.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "FliprHUB", with: "").trimmed
-            //let serial = "DC89C0"
             
+            let userInfo = ["serial": serial]
+            NotificationCenter.default.post(name: K.Notifications.GatewayDiscovered, object: nil, userInfo: userInfo)
+            
+            
+            //let serial = "DC89C0"
+           
             if !detectedHubs.keys.contains(serial) {
                 if let searchedSerials = scanForHubsWithSerials {
                     if searchedSerials.contains(serial) {
@@ -268,14 +323,19 @@ extension HUBManager: CBCentralManagerDelegate {
                 print("Hub device discovered with serial:\(serial)")
             }
         
+            
         }
 
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("Central manager did connect to Hub")
-        connectCompletionBlock?(nil)
-        peripheral.discoverServices([HUBBLEParameters.wifiServiceUUID])
+        print("Central manager did connect to Gateway")
+//        connectCompletionBlock?(nil)
+        peripheral.discoverServices([GATEWAYBLEParameters.wifiServiceUUID])
+//                peripheral.discoverServices(nil)
+
+//        peripheral.discoverServices([GATEWAYBLEParameters.gatewayPasswordUUID])
+        
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -287,14 +347,14 @@ extension HUBManager: CBCentralManagerDelegate {
         print("Central manager did disconnect from device with name: \(peripheral.name), error: \(error?.localizedDescription)")
         cancelConnectionCompletionBlock?(error)
         setWifiCompletionBlock?(error)
-        connectedHub = nil
+        connectedGateway = nil
         cancelConnectionCompletionBlock = nil
     }
     
 }
 
 //MARK: - Core bluetooth peripheral delegate
-extension HUBManager: CBPeripheralDelegate {
+extension GatewayManager: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         
@@ -318,21 +378,23 @@ extension HUBManager: CBPeripheralDelegate {
                 print("- CHARACTERISTIC [\(i)] : \(characteristic)")
                 i = i+1
                 //peripheral.readValue(for: characteristic)
-                if characteristic.uuid == HUBBLEParameters.channelCharactersticUUID {
-                    channelCharacteristic = characteristic
+                if characteristic.uuid == GATEWAYBLEParameters.gatewaySSIDUUID {
+                    ssidCharacteristic = characteristic
                     //let data = Data(bytes:[UInt8(1)])
                     //peripheral.writeValue(data, for: characteristic, type: .withResponse)
+                    /*
                     if let data = Data(hexString: "01") {
                         peripheral.writeValue(data, for: characteristic, type: .withResponse)
                     }
+                    */
                 }
-                if characteristic.uuid == HUBBLEParameters.receptionCharactersticUUID {
-                    receptionCharacteristic = characteristic
+                if characteristic.uuid == GATEWAYBLEParameters.gatewayPasswordUUID {
+                    passwordCharacteristic = characteristic
                     peripheral.setNotifyValue(true, for: characteristic)
                 }
-                if characteristic.uuid == HUBBLEParameters.sendCharactersticUUID {
-                    sendCharacteristic = characteristic
-                }
+//                if characteristic.uuid == HUBBLEParameters.sendCharactersticUUID {
+//                    sendCharacteristic = characteristic
+//                }
             }
         }
         
@@ -393,36 +455,36 @@ extension HUBManager: CBPeripheralDelegate {
         
         if let value = characteristic.value {
             switch characteristic.uuid {
-            case HUBBLEParameters.channelCharactersticUUID:
+            case GATEWAYBLEParameters.gatewaySSIDUUID:
                 print("Channel charateristic value: \(value), hex: \(value.hexEncodedString())")
                 break
-            case HUBBLEParameters.receptionCharactersticUUID:
+            case GATEWAYBLEParameters.gatewayPasswordUUID:
                 print("Reception charateristic value: \(value), hex: \(value.hexEncodedString())")
-                if value.bytes.count > 0 {
-                    let decoded = CBOR.decode(value.bytes)
-                    print("Reception charateristic decoded value: \(decoded)")
-                    if let dict = decoded as? [String:Any] {
-                        print("wifi name: \(dict["r"])")
-                        if dict["r"] == nil {
-                            print("KEK")
-                            
-                            print(dict["s"])
-                            if("\(dict["s"])" == "Optional(1)")
-                            {
-                                let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Password error :/".localized])
-                                setWifiCompletionBlock?(error)
-                                setWifiCompletionBlock = nil
-                            }else{
-                                setWifiCompletionBlock?(nil)
-                                setWifiCompletionBlock = nil
-                            }
-                        } else {
-                            if let network = HUBWifiNetwork(withJSON: dict) {
-                                getAvailableWifiCompletionBlock?(network ,error)
-                            }
-                        }
-                    }
-                }
+//                if value.bytes.count > 0 {
+//                    let decoded = CBOR.decode(value.bytes)
+//                    print("Reception charateristic decoded value: \(decoded)")
+//                    if let dict = decoded as? [String:Any] {
+//                        print("wifi name: \(dict["r"])")
+//                        if dict["r"] == nil {
+//                            print("KEK")
+//
+//                            print(dict["s"])
+//                            if("\(dict["s"])" == "Optional(1)")
+//                            {
+//                                let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Password error :/".localized])
+//                                setWifiCompletionBlock?(error)
+//                                setWifiCompletionBlock = nil
+//                            }else{
+//                                setWifiCompletionBlock?(nil)
+//                                setWifiCompletionBlock = nil
+//                            }
+//                        } else {
+//                            if let network = HUBWifiNetwork(withJSON: dict) {
+//                                getAvailableWifiCompletionBlock?(network ,error)
+//                            }
+//                        }
+//                    }
+//                }
                 break
             case HUBBLEParameters.sendCharactersticUUID:
                 print("Send charateristic value: \(value), hex: \(value.hexEncodedString())")
@@ -437,16 +499,16 @@ extension HUBManager: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         
-        if characteristic.uuid == HUBBLEParameters.channelCharactersticUUID {
+        if characteristic.uuid == GATEWAYBLEParameters.gatewaySSIDUUID {
             print("did write !!!: \(error)")
             peripheral.readValue(for: characteristic)
         }
-        if characteristic.uuid == HUBBLEParameters.sendCharactersticUUID {
+        if characteristic.uuid == GATEWAYBLEParameters.gatewayPasswordUUID {
             print("did write sendCharacterstic: \(error)")
-            if let receptChar = receptionCharacteristic {
-                print("manually read receptionCharacteristic")
-                //peripheral.readValue(for: receptChar)
-            }
+//            if let receptChar = receptionCharacteristic {
+//                print("manually read receptionCharacteristic")
+//                //peripheral.readValue(for: receptChar)
+//            }
         }
         
         /*

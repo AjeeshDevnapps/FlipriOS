@@ -80,7 +80,9 @@ struct K {
         static let PlaceDeleted = Notification.Name("fr.isee-u.PlaceDeleted")
         static let FliprDeviceDeleted = Notification.Name("fr.isee-u.FliprDeviceDeleted")
         static let HubDeviceDeleted = Notification.Name("fr.isee-u.HubDeviceDeleted")
+        static let GatewayDiscovered = Notification.Name("fr.isee-u.GatewayDiscovered")
 
+        static let GatewayNoteDiscovered = Notification.Name("fr.isee-u.GatewayNoteDiscovered")
 
 
     }

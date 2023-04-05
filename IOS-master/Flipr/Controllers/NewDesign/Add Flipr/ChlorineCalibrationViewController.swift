@@ -28,6 +28,7 @@ class ChlorineCalibrationViewController: BaseViewController {
     var isCalibrationStrucked = false
     
     var isShowingStripView = false
+    var timerVal:Double = 180
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,8 +81,11 @@ class ChlorineCalibrationViewController: BaseViewController {
                 //backgroundImageView.image = UIImage(named:"BG_spa")
             }
             if let version = module.version {
-                if version > 1 {
+                if version < 2{
                     isFlipr2 = true
+                }
+                if version == 3{
+                    timerVal = 60
                 }
             }
         }
@@ -95,7 +99,7 @@ class ChlorineCalibrationViewController: BaseViewController {
         self.perform(#selector(self.checkForDeviceSearchingTimeOut), with: nil, afterDelay: 20)
 //        self.perform(#selector(self.checkForDeviceConnectingTimeOut), with: nil, afterDelay: 60)
         isCalibrationStrucked = true
-        self.checkCalibrationStruckTimer = Timer.scheduledTimer(timeInterval: 180,
+        self.checkCalibrationStruckTimer = Timer.scheduledTimer(timeInterval: timerVal,
                                                   target: self,
                                                   selector: #selector(self.checkForAppStrucked),
                                                   userInfo: nil,

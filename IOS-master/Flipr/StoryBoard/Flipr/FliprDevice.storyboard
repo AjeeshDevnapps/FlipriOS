@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,14 +33,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flipr Start Packshot" translatesAutoresizingMaskIntoConstraints="NO" id="NOw-WY-KsU">
-                                <rect key="frame" x="127" y="235" width="160" height="310"/>
+                                <rect key="frame" x="127" y="239" width="160" height="310"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="310" id="Dwd-lh-d9g"/>
                                     <constraint firstAttribute="width" constant="160" id="HSk-WR-KQo"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check-circle" translatesAutoresizingMaskIntoConstraints="NO" id="tfJ-0J-hVj">
-                                <rect key="frame" x="179" y="115" width="56" height="56"/>
+                                <rect key="frame" x="179" y="119" width="56" height="56"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBI-8v-lRb">
                                 <rect key="frame" x="16" y="812" width="382" height="50"/>
@@ -62,7 +62,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flipr Start Connecté" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jZ-II-cuX">
-                                <rect key="frame" x="62" y="609" width="290" height="39"/>
+                                <rect key="frame" x="62" y="613" width="290" height="39"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -91,6 +91,93 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o7u-Vg-Vod" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2957" y="102"/>
+        </scene>
+        <!--Add Gateway Intro View Controller-->
+        <scene sceneID="tJi-sF-c0I">
+            <objects>
+                <viewController storyboardIdentifier="AddGatewayIntroViewController" id="iEC-pu-UNq" customClass="AddGatewayIntroViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QxY-se-qsA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Uz-q0-ZjS">
+                                <rect key="frame" x="16" y="347" width="382" height="142.5"/>
+                                <string key="text">Si vous disposez d’une Passerelle (Gateway), nous vous recommandons de la configurer dès maintenant. 
+
+Si vous désirez effectuer cette installation plus tard, vous pourrez l’ajouter à partir du menu “Paramètres”.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gatewayAddIcon" translatesAutoresizingMaskIntoConstraints="NO" id="62v-nN-LoV">
+                                <rect key="frame" x="59.5" y="78" width="295" height="239"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="239" id="Pqt-5m-YgN"/>
+                                    <constraint firstAttribute="width" constant="295" id="eLl-g5-Mmg"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAj-Cf-fXI">
+                                <rect key="frame" x="16" y="539.5" width="382" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="VUg-Y1-pcL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Ajouter une passerelle">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextButtonClicked" destination="iEC-pu-UNq" eventType="touchUpInside" id="6Gl-Wr-vau"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fer-mK-nlh">
+                                <rect key="frame" x="16" y="597.5" width="382" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="mdk-q1-2JO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Passer">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="skipButtonClicked" destination="iEC-pu-UNq" eventType="touchUpInside" id="WLM-Xl-A7P"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Gsp-B2-Z0R"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Fer-mK-nlh" firstAttribute="leading" secondItem="Gsp-B2-Z0R" secondAttribute="leading" constant="16" id="7sw-yt-jAS"/>
+                            <constraint firstItem="Gsp-B2-Z0R" firstAttribute="trailing" secondItem="CAj-Cf-fXI" secondAttribute="trailing" constant="16" id="CC0-tk-bhK"/>
+                            <constraint firstItem="7Uz-q0-ZjS" firstAttribute="leading" secondItem="Gsp-B2-Z0R" secondAttribute="leading" constant="16" id="CjN-by-Hro"/>
+                            <constraint firstItem="Gsp-B2-Z0R" firstAttribute="trailing" secondItem="7Uz-q0-ZjS" secondAttribute="trailing" constant="16" id="IPD-eH-9tm"/>
+                            <constraint firstItem="Fer-mK-nlh" firstAttribute="top" secondItem="CAj-Cf-fXI" secondAttribute="bottom" constant="8" id="Tis-Ll-pxX"/>
+                            <constraint firstItem="CAj-Cf-fXI" firstAttribute="leading" secondItem="Gsp-B2-Z0R" secondAttribute="leading" constant="16" id="V0W-dJ-KC0"/>
+                            <constraint firstItem="CAj-Cf-fXI" firstAttribute="top" secondItem="7Uz-q0-ZjS" secondAttribute="bottom" constant="50" id="Xwp-Pg-fHZ"/>
+                            <constraint firstItem="Gsp-B2-Z0R" firstAttribute="trailing" secondItem="Fer-mK-nlh" secondAttribute="trailing" constant="16" id="nep-ei-nAX"/>
+                            <constraint firstItem="62v-nN-LoV" firstAttribute="top" secondItem="Gsp-B2-Z0R" secondAttribute="top" constant="30" id="p8o-Um-lFU"/>
+                            <constraint firstItem="7Uz-q0-ZjS" firstAttribute="top" secondItem="62v-nN-LoV" secondAttribute="bottom" constant="30" id="wmI-Vd-wT7"/>
+                            <constraint firstItem="62v-nN-LoV" firstAttribute="centerX" secondItem="QxY-se-qsA" secondAttribute="centerX" id="ySV-hz-U0d"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="submitButton" destination="CAj-Cf-fXI" id="HjC-up-gih"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N1c-Fv-5a7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3720" y="102"/>
         </scene>
         <!--Add Flipr View Controller-->
         <scene sceneID="8Uz-4R-ixE">
@@ -327,17 +414,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choisissez le Flipr Start à associer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7q-Pl-sUf">
-                                <rect key="frame" x="16" y="410" width="258.5" height="19.5"/>
+                                <rect key="frame" x="16" y="414" width="258.5" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <color key="highlightedColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="112" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gLj-QX-ewb">
-                                <rect key="frame" x="16" y="445.5" width="382" height="416.5"/>
+                                <rect key="frame" x="16" y="449.5" width="382" height="412.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DeviceInfoTableViewCell" id="IYU-Dz-Q6a" customClass="DeviceInfoTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="382" height="112"/>
+                                        <rect key="frame" x="0.0" y="50" width="382" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IYU-Dz-Q6a" id="BfZ-Ui-iBP">
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="112"/>
@@ -418,7 +505,7 @@
                                 </connections>
                             </tableView>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2a-E8-14R">
-                                <rect key="frame" x="16" y="445.5" width="382" height="80"/>
+                                <rect key="frame" x="16" y="449.5" width="382" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flipr Start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vki-AZ-vpF">
                                         <rect key="frame" x="24" y="40" width="93.5" height="24"/>
@@ -488,7 +575,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flipr Start Packshot" translatesAutoresizingMaskIntoConstraints="NO" id="Nxc-cP-OgQ">
-                                <rect key="frame" x="127" y="79" width="160" height="291"/>
+                                <rect key="frame" x="127" y="83" width="160" height="291"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="291" id="kYB-Dc-tjY"/>
                                 </constraints>
@@ -532,22 +619,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Renseignez la clé de sécurité de votre Flipr Start" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwY-Zt-kz2">
-                                <rect key="frame" x="16" y="79" width="382" height="57.5"/>
+                                <rect key="frame" x="16" y="83" width="382" height="57.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="La clé de sécurité à 5 chiffres (Key) se trouve à l'intérieur de la boîte de votre Flipr Start." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxe-EU-K3g">
-                                <rect key="frame" x="16" y="152.5" width="382" height="38.5"/>
+                                <rect key="frame" x="16" y="156.5" width="382" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Security Key Illustration" translatesAutoresizingMaskIntoConstraints="NO" id="GFh-Z6-8Le">
-                                <rect key="frame" x="241" y="199" width="173" height="215"/>
+                                <rect key="frame" x="241" y="203" width="173" height="215"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aa4-8M-Uih">
-                                <rect key="frame" x="16" y="321.5" width="236" height="48"/>
+                                <rect key="frame" x="16" y="325.5" width="236" height="48"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="-" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nss-8j-YWR">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="48"/>
@@ -640,13 +727,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clé de sécurité (Key)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gc7-em-xw9">
-                                <rect key="frame" x="16" y="290" width="157.5" height="19.5"/>
+                                <rect key="frame" x="16" y="294" width="157.5" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <color key="highlightedColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ja3-Hr-9Sk">
-                                <rect key="frame" x="16" y="434" width="382" height="50"/>
+                                <rect key="frame" x="16" y="438" width="382" height="50"/>
                                 <color key="backgroundColor" red="0.53333333329999999" green="0.5450980392" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="PMB-ln-8b4"/>
@@ -936,18 +1023,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addHub" translatesAutoresizingMaskIntoConstraints="NO" id="HVs-rS-2Dk">
-                                <rect key="frame" x="112.5" y="79" width="189" height="160"/>
+                                <rect key="frame" x="112.5" y="83" width="189" height="160"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="189" id="Hha-2V-I5C"/>
                                     <constraint firstAttribute="height" constant="160" id="gL0-Ye-XQy"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7fe-wg-8zj">
-                                <rect key="frame" x="16" y="314.5" width="382" height="581.5"/>
+                                <rect key="frame" x="16" y="318.5" width="382" height="577.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DeviceInfoTableViewCell" id="Edo-xH-dJj" customClass="DeviceInfoTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="382" height="80"/>
+                                        <rect key="frame" x="0.0" y="50" width="382" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Edo-xH-dJj" id="GQf-jN-cbn">
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="80"/>
@@ -1027,7 +1114,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choisissez le Flipr Start à associer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efS-Dp-pgI">
-                                <rect key="frame" x="16" y="279" width="258.5" height="19.5"/>
+                                <rect key="frame" x="16" y="283" width="258.5" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <color key="highlightedColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1062,6 +1149,7 @@
         <image name="addHub" width="189" height="160"/>
         <image name="bluetooth" width="80" height="80"/>
         <image name="check-circle" width="56" height="56"/>
+        <image name="gatewayAddIcon" width="295" height="239"/>
         <image name="help-circle" width="16" height="16"/>
         <image name="link" width="24" height="24"/>
         <image name="wifi-off" width="80" height="80"/>

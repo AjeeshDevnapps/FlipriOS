@@ -136,6 +136,11 @@ extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
         
     }
     
+    func enableNewFliprV3(){
+        
+    }
+    
+    
     @IBAction func alertsActivationSwitchValueChanged(_ sender: UISwitch) {
         
     }
@@ -147,6 +152,7 @@ extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
         let sb = UIStoryboard(name: "FliprDevice", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "FliprActivationSuccessViewController") as? FliprActivationSuccessViewController {
             self.navigationController?.pushViewController(viewController)
+            viewController.serialKey = self.serialKey
         }
     }
 

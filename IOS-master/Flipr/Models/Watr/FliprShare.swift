@@ -21,7 +21,7 @@ class FliprShare {
     var poolId:String? = ""
     
     func getContacts(email: String, completion: ((_ shares:[ContactsWatr]?,_ error:Error?) -> Void)?) {
-//        self.poolId = poolId
+        //        self.poolId = poolId
         Alamofire.request(Router.contactList(email: email)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             
             switch response.result {
@@ -33,8 +33,8 @@ class FliprShare {
                     print("get contact JSON \(JSON)")
                     for item in JSON {
                         let contact = ContactsWatr(fromDictionary: item)
-                            contacts.append(contact)
-//                        }
+                        contacts.append(contact)
+                        //                        }
                     }
                     completion?(contacts, nil)
                 }
@@ -50,7 +50,7 @@ class FliprShare {
         })
     }
     
-
+    
     func viewShares(poolId: String, completion: ((_ shares:[ShareModel]?,_ error:Error?) -> Void)?) {
         self.poolId = poolId
         Alamofire.request(Router.viewShares(poolId: self.poolId!)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
@@ -107,14 +107,14 @@ class FliprShare {
     }
     
     func updateShare(email: String, role: FliprRole, completion: ((_ error:Error?) -> Void)?) {
-//        self.poolId = poolId
+        //        self.poolId = poolId
         Alamofire.request(Router.updateShare(poolId: self.poolId ?? "", email: email, permissionLevel: role)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             
             switch response.result {
                 
             case .success(_):
                 completion?(nil)
-
+                
             case .failure(let error):
                 if let serverError = User.serverError(response: response) {
                     completion?(serverError)
@@ -128,83 +128,81 @@ class FliprShare {
     }
     
     func deleteShare(email: String, role: FliprRole, completion: ((_ error:Error?) -> Void)?) {
-            Alamofire.request(Router.deleteShare(poolId: self.poolId ?? "", email: email)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+        Alamofire.request(Router.deleteShare(poolId: self.poolId ?? "", email: email)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
                 
-                switch response.result {
-                    
-                case .success(_):
-                    completion?(nil)
-
-                case .failure(let error):
-                    if let serverError = User.serverError(response: response) {
-                        completion?(serverError)
-                    } else {
-                        completion?(error)
-                    }
-                    print("get shares Error \(error)")
+            case .success(_):
+                completion?(nil)
+                
+            case .failure(let error):
+                if let serverError = User.serverError(response: response) {
+                    completion?(serverError)
+                } else {
+                    completion?(error)
                 }
-            })
-        }
+                print("get shares Error \(error)")
+            }
+        })
+    }
     
     
     func deletePlace(placeId: String, completion: ((_ error:Error?) -> Void)?) {
-            Alamofire.request(Router.deletePlace(placeId: placeId)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+        Alamofire.request(Router.deletePlace(placeId: placeId)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
                 
-                switch response.result {
-                    
-                case .success(_):
-                    completion?(nil)
-
-                case .failure(let error):
-                    if let serverError = User.serverError(response: response) {
-                        completion?(serverError)
-                    } else {
-                        completion?(error)
-                    }
-                    print("get shares Error \(error)")
+            case .success(_):
+                completion?(nil)
+                
+            case .failure(let error):
+                if let serverError = User.serverError(response: response) {
+                    completion?(serverError)
+                } else {
+                    completion?(error)
                 }
-            })
-        }
+                print("get shares Error \(error)")
+            }
+        })
+    }
     
     func deleteShareWithPoolId(email: String, poolID: String, completion: ((_ error:Error?) -> Void)?) {
         Alamofire.request(Router.deleteShare(poolId: poolID , email: email)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
                 
-                switch response.result {
-                    
-                case .success(_):
-                    completion?(nil)
-
-                case .failure(let error):
-                    if let serverError = User.serverError(response: response) {
-                        completion?(serverError)
-                    } else {
-                        completion?(error)
-                    }
-                    print("get shares Error \(error)")
+            case .success(_):
+                completion?(nil)
+                
+            case .failure(let error):
+                if let serverError = User.serverError(response: response) {
+                    completion?(serverError)
+                } else {
+                    completion?(error)
                 }
-            })
-        }
+                print("get shares Error \(error)")
+            }
+        })
+    }
     
     func acceptShareWithPoolId(poolID: String, completion: ((_ error:Error?) -> Void)?) {
         Alamofire.request(Router.acceptShare(poolId: poolID)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
                 
-                switch response.result {
-                    
-                case .success(_):
-                    completion?(nil)
-
-                case .failure(let error):
-                    if let serverError = User.serverError(response: response) {
-                        completion?(serverError)
-                    } else {
-                        completion?(error)
-                    }
-                    print("get shares Error \(error)")
+            case .success(_):
+                completion?(nil)
+                
+            case .failure(let error):
+                if let serverError = User.serverError(response: response) {
+                    completion?(serverError)
+                } else {
+                    completion?(error)
                 }
-            })
-        }
-    
-    
+                print("get shares Error \(error)")
+            }
+        })
+    }
 }
 
 

@@ -16,6 +16,7 @@ class WatrFliprSettingsViewController: UIViewController {
     var placeDetails:PlaceDropdown!
     var placesModules:PlaceModule!
     var settings:AnalysrSettings?
+    var isV3flipr = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +83,12 @@ extension WatrFliprSettingsViewController: UITableViewDataSource,UITableViewDele
             cell.typeLbl.text?.append(type)
         }
         
+        let tmpSerial =  settings?.serial ?? ""
+        if tmpSerial.hasPrefix("F3"){
+            isV3flipr =  true
+            cell.firmwareUpdateView.alpha = 0.3
+        }
+
         cell.lastMesureLbl.text = settings?.lastMeasureDateTime
         let batteryInfo = String(format: "%.2f", settings?.tensionBattery ?? 0.0)
         cell.batteryInfoLbl.text = "\(batteryInfo) V"
@@ -111,10 +118,12 @@ extension WatrFliprSettingsViewController{
     }
     
     @IBAction func updateButtonClicked(_ sender: UIButton) {
+        if isV3flipr{return}
         self.showFirmwereUdpateScreen()
     }
     
     @IBAction func diagnosticButtonClicked(_ sender: UIButton) {
+        
         showFirmwereDiagnosticScreen()
     }
     

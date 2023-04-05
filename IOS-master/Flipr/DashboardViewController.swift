@@ -86,6 +86,9 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var pHStateLabel: UILabel!
     @IBOutlet weak var pHStatusImageView: UIImageView!
     
+    @IBOutlet weak var airSeparatorView: UIView!
+
+    
     @IBOutlet weak var orpView: UIView!
     @IBOutlet weak var orpLabel: UILabel!
     @IBOutlet weak var orpIndicatorImageView: UIImageView!
@@ -386,7 +389,7 @@ class DashboardViewController: UIViewController {
         
         callPlacesApi()
         
-        refresh()
+//        refresh()
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (notification) in
             self.notificationDisabledButton.isHidden = true
             self.waterTmpChangeButton.isHidden = true
@@ -719,7 +722,36 @@ class DashboardViewController: UIViewController {
     
     func userHasNoFlipr(){
         self.waveView.isHidden = true
-        self.addFirstFliprView.isHidden = false
+        if isPlaceOwner{
+            self.addFirstFliprView.isHidden = false
+        }
+        
+        self.phStatusView.valueStrings.removeAll()
+        self.phStatusView.dates.removeAll()
+        self.redoxStatusView.valueStrings.removeAll()
+        self.redoxStatusView.dates.removeAll()
+        self.tempStatusView.valueStrings.removeAll()
+        self.tempStatusView.dates.removeAll()
+        self.reloadWeatherStatus()
+
+        
+        self.phStatusView.isHidden = true
+        self.tempStatusView.isHidden = true
+        self.redoxStatusView.isHidden = true
+        self.tempWindView.isHidden = true
+        self.weatherView.isHidden = true
+        
+        self.airLabel.isHidden = true
+        self.airTendendcyImageView.isHidden = true
+        self.uvView.isHidden = true
+        
+        
+        self.airLabelHubTab.isHidden = true
+        self.airTendendcyImageViewHubTab.isHidden = true
+        self.uvViewHubTab.isHidden = true
+        
+        self.airSeparatorView.isHidden = true
+
     }
     
     func hideUserHasNoFlipr(){
@@ -1945,8 +1977,15 @@ class DashboardViewController: UIViewController {
         self.hideWeatherForecast()
         if Module.currentModule == nil && HUB.currentHUB != nil {
             self.updateHUBData()
+        }else{
+            if let serialNo =  Module.currentModule?.serial as? String{
+                if serialNo == ""{
+                    self.updateHUBData()
+                }
+            }
         }
         self.updateFliprData()
+        
         
     }
      
@@ -2830,7 +2869,23 @@ class DashboardViewController: UIViewController {
                 } else if let JSON = response.result.value as? [String:Any] {
                     
                     print("HUB JSON resume: \(JSON)")
+                    self.scrollView.isHidden = false
+                    self.phStatusView.isHidden = false
+                    self.tempStatusView.isHidden = false
+                    self.redoxStatusView.isHidden = false
+                    self.tempWindView.isHidden = false
+                    self.weatherView.isHidden = false
                     
+                    self.airLabel.isHidden = false
+                    self.airTendendcyImageView.isHidden = false
+                    self.uvView.isHidden = false
+                    
+                    
+                    self.airLabelHubTab.isHidden = false
+                    self.airTendendcyImageViewHubTab.isHidden = false
+                    self.uvViewHubTab.isHidden = false
+                    self.airSeparatorView.isHidden = false
+
                     if let weather = JSON["Weather"] as? [String:Any] {
                         if let temperature = weather["CurrentTemperature"] as? Double {
                             print("Air T°: \(temperature)")
@@ -2977,6 +3032,102 @@ class DashboardViewController: UIViewController {
                         })
                     }
                     
+                    if let lastWeekWeather = JSON["WeatherLastWeek"] as? [String: Any] {
+                        if let individualData = lastWeekWeather["ListWeatherOneDayUnit"] as? [[String: Any]] {
+                            do {
+                                let data = try JSONSerialization.data(withJSONObject: individualData, options: .prettyPrinted)
+                                let decoder = JSONDecoder()
+                                let decodedValues = try decoder.decode([WeatherForDay].self, from: data)
+                                let phValues = decodedValues.map { $0.moyPH }
+                                let rxValues = decodedValues.map { $0.moyRX }
+                                let highestTemp = decodedValues.map { $0.waterTemp }
+                                let dates = decodedValues.map { $0.date }
+                                self.phStatusView.valueStrings = phValues
+                                self.phStatusView.dates = dates
+                                self.redoxStatusView.valueStrings = rxValues
+                                self.redoxStatusView.dates = dates
+                                self.tempStatusView.valueStrings = highestTemp
+                                self.tempStatusView.dates = dates
+                                self.reloadWeatherStatus()
+                                
+                                /*
+                                 let lastFourDaysData = Array(decodedValues.suffix(4))
+                                 if lastFourDaysData.count == 4 {
+                                 self.day1IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[0].weatherIcon ?? "")
+                                 self.day1TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[0].date)
+                                 self.day1ValueLabel.text = (lastFourDaysData[0].minTemp?.fixedFraction(digits: 0).toString ?? "") + " - " + (lastFourDaysData[0].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
+                                 
+                                 self.day2IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[1].weatherIcon ?? "")
+                                 self.day2TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[1].date)
+                                 self.day2ValueLabel.text = (lastFourDaysData[1].minTemp?.fixedFraction(digits: 0).toString ?? "") +  " - " + (lastFourDaysData[1].maxTemp?.fixedFraction(digits: 0).toString ?? "")  + "°"
+                                 
+                                 self.day3IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[2].weatherIcon ?? "")
+                                 self.day3TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[2].date)
+                                 self.day3ValueLabel.text = (lastFourDaysData[2].minTemp?.fixedFraction(digits: 0).toString ?? "") + " - " + (lastFourDaysData[2].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
+                                 
+                                 self.day4IconLabel.text = self.climaconsCharWithIcon(icon: lastFourDaysData[3].weatherIcon ?? "")
+                                 self.day4TitleLabel.text = dayOfTheWeek(dateString: lastFourDaysData[3].date)
+                                 self.day4ValueLabel.text = (lastFourDaysData[3].minTemp?.fixedFraction(digits: 0).toString ?? "") + " - " + (lastFourDaysData[3].maxTemp?.fixedFraction(digits: 0).toString ?? "") + "°"
+                                 
+                                 }
+                                 */
+                                
+                            } catch let error {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                    
+                    if let nextFiveHoursData = JSON["WeatherNext5Hours"] as? [[String:Any]] {
+                        do {
+                            let data = try JSONSerialization.data(withJSONObject: nextFiveHoursData, options: .prettyPrinted)
+                            let decoder = JSONDecoder()
+                            let decodedValues = try decoder.decode([WeatherForHour].self, from: data)
+                            let weatherForFifthHour = decodedValues.last
+                            let formatter = DateFormatter()
+                            formatter.locale = Locale(identifier: "en_US_POSIX")
+                            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                            if let givenDate = formatter.date(from: weatherForFifthHour?.hourTemperature ?? "") {
+                                formatter.dateFormat = "dd/MM"
+                            }
+                            //                            self.probableWeatherIcon.text = self.climaconsCharWithIcon(icon: weatherForFifthHour?.weatherIcon ?? "")
+                            //                            self.tempPrecipitationLabel.text =  "\(weatherForFifthHour?.precipitationProbability ?? 0 )" + "%"
+                            if let precipitation = weatherForFifthHour?.precipitationProbability{
+                                let val = precipitation * 100
+                                self.tempPrecipitationLabel.text = (val.fixedFraction(digits: 0).toString) + "%"
+                            }
+                            self.windSpeedLabel.text = (weatherForFifthHour?.windSpeed?.fixedFraction(digits: 1).toString ?? "") + "km/h"
+                            
+                        } catch let error {
+                            
+                        }
+                    }
+                    
+                    if let nextDaysWeather = JSON["WeatherNext3Days"] as? [[String: Any]] {
+                        do {
+                            let data = try JSONSerialization.data(withJSONObject: nextDaysWeather, options: .prettyPrinted)
+                            let decoder = JSONDecoder()
+                            let decodedValues = try decoder.decode([NextDaysWeatherData].self, from: data)
+                            self.day1IconLabel.text = self.climaconsCharWithIcon(icon: decodedValues[0].weatherIcon ?? "")
+                            self.day1TitleLabel.text = self.dayOfTheWeek(dateString: decodedValues[0].tempMaxTime ?? "")
+                            self.day1ValueLabel.text = (decodedValues[0].tempMin?.fixedFraction(digits: 0).toString ?? "") + " | " + (decodedValues[0].tempMax?.fixedFraction(digits: 0).toString ?? "") + "°"
+                            
+                            self.day2IconLabel.text = self.climaconsCharWithIcon(icon: decodedValues[1].weatherIcon ?? "")
+                            self.day2TitleLabel.text = self.dayOfTheWeek(dateString: decodedValues[1].tempMaxTime ?? "")
+                            self.day2ValueLabel.text = (decodedValues[1].tempMin?.fixedFraction(digits: 0).toString ?? "") +  " | " + (decodedValues[1].tempMax?.fixedFraction(digits: 0).toString ?? "")  + "°"
+                            
+                            self.day3IconLabel.text = self.climaconsCharWithIcon(icon: decodedValues[2].weatherIcon ?? "")
+                            self.day3TitleLabel.text = self.dayOfTheWeek(dateString: decodedValues[2].tempMaxTime ?? "")
+                            self.day3ValueLabel.text = (decodedValues[2].tempMin?.fixedFraction(digits: 0).toString ?? "") + " | " + (decodedValues[2].tempMax?.fixedFraction(digits: 0).toString ?? "") + "°"
+                            
+                            self.day4IconLabel.text = self.climaconsCharWithIcon(icon: decodedValues[3].weatherIcon ?? "")
+                            self.day4TitleLabel.text = self.dayOfTheWeek(dateString: decodedValues[3].tempMaxTime ?? "")
+                            self.day4ValueLabel.text = (decodedValues[3].tempMin?.fixedFraction(digits: 0).toString ?? "") + " | " + (decodedValues[3].tempMax?.fixedFraction(digits: 0).toString ?? "") + "°"
+                        } catch let error {
+                            
+                        }
+                    }
+                    
                 }
             })
             
@@ -3022,7 +3173,29 @@ class DashboardViewController: UIViewController {
                 }
                 else if let JSON = response.result.value as? [String:Any]
                 {
+                    self.settingsButtonContainer.isHidden = false
+                    self.waterLabel.isHidden = false
+                    self.waterTendencyImageView.isHidden = false
+
                     self.scrollView.isHidden = false
+                    self.waveView.isHidden = false
+                    self.addFirstFliprView.isHidden = true
+                    self.phStatusView.isHidden = false
+                    self.tempStatusView.isHidden = false
+                    self.redoxStatusView.isHidden = false
+                    self.tempWindView.isHidden = false
+                    self.weatherView.isHidden = false
+                    
+                    self.airLabel.isHidden = false
+                    self.airTendendcyImageView.isHidden = false
+                    self.uvView.isHidden = false
+                    
+                    
+                    self.airLabelHubTab.isHidden = false
+                    self.airTendendcyImageViewHubTab.isHidden = false
+                    self.uvViewHubTab.isHidden = false
+                    self.airSeparatorView.isHidden = false
+
                     self.showHubTabInfoView(hide: false)
                     print("JSON: Flipr Data \(JSON)")
                     
@@ -3057,11 +3230,9 @@ class DashboardViewController: UIViewController {
                             if self.firmwereLatestVersion == firmwereCurrentVersion{
                                 self.haveFirmwereUpdate = false
                                 AppSharedData.sharedInstance.haveNewFirmwereUpdate = false
-                                
                                 //                                self.haveFirmwereUpdate = true
                                 //                                AppSharedData.sharedInstance.haveNewFirmwereUpdate = true
                                 //                                self.showFirmwereUpdatePrompt()
-                                
                             }else{
                                 self.haveFirmwereUpdate = true
                                 AppSharedData.sharedInstance.haveNewFirmwereUpdate = true
@@ -3112,7 +3283,6 @@ class DashboardViewController: UIViewController {
                                 self.tempPrecipitationLabel.text = (val.fixedFraction(digits: 0).toString) + "%"
                             }
                             self.windSpeedLabel.text = (weatherForFifthHour?.windSpeed?.fixedFraction(digits: 1).toString ?? "") + "km/h"
-                            
                         } catch let error {
                             
                         }
@@ -3785,7 +3955,7 @@ class DashboardViewController: UIViewController {
                                     //                                    self.subscriptionView.alpha = 1
                                     self.signalStrengthImageView.isHidden = false
                                     self.signalStrengthImageView.image = UIImage(named: "Bluetooth icon")
-                                    self.signalStrengthLabel.isHidden = true
+                                    self.signalStrengthLabel.isHidden = false
                                     self.showSubscriptionButton()
                                 } else {
                                     self.signalStrengthLabel.isHidden = false
@@ -3859,6 +4029,10 @@ class DashboardViewController: UIViewController {
             
         } else {
             print("The Flipr module identifier does not exist :/")
+            self.settingsButtonContainer.isHidden = true
+            self.waterLabel.isHidden = true
+            self.waterTendencyImageView.isHidden = true
+
         }
     }
     
@@ -5106,13 +5280,13 @@ extension DashboardViewController{
                             self.placeDetails =  self.selectedPlace
                             self.showPlaceInfo()
                         }
-                        
-                        
+                        Pool.currentPool?.id = self.placeDetails.placeId
                     }
                     //                    self.hud?.dismiss(afterDelay: 0)
                     //                    self.placesTableView.reloadData()
                 }
             }
+//            self.refresh()
             
         })
         
@@ -5157,6 +5331,8 @@ extension DashboardViewController{
         self.placeDropdownArrowImage.isHidden = false
         
         if let placeId = self.selectedPlace?.placeId{
+            Module.currentModule?.placeId = placeId
+            Module.saveCurrentModuleLocally() 
             let placeIdStr = "\(placeId)"
             getPlaceModules(placeId: placeIdStr)
         }
@@ -5198,11 +5374,19 @@ extension DashboardViewController{
                         
                         if isFliprModule{
                             //            Module.currentModule = module
+                            if Module.currentModule == nil{
+                                Module.currentModule = Module.init(serial: fliprModule?.serial ?? "")
+                            }
                             Module.currentModule?.serial = fliprModule?.serial ?? ""
                             Module.currentModule?.activationKey = fliprModule?.activationKey ?? ""
                             Module.saveCurrentModuleLocally()
                         }
-                        
+                        else{
+                            Module.currentModule?.serial = ""
+                            Module.currentModule?.activationKey = ""
+                            Module.saveCurrentModuleLocally()
+                        }
+                        self.refresh()
                     }else{
                     }
                 }
@@ -5241,6 +5425,9 @@ extension DashboardViewController:PlaceDropdownDelegate{
             //            Module.currentModule = fliprModule
             //            let placeIsStr:String = "\(fliprModule?.placeid ?? 0)"
             //            Module.currentModule?.serial = placeIsStr
+            if Module.currentModule == nil{
+                Module.currentModule = Module.init(serial: fliprModule?.serial ?? "")
+            }
             Module.currentModule?.serial = fliprModule?.serial ?? ""
             Module.currentModule?.placeId = placeDetails.placeId
             Module.currentModule?.activationKey = fliprModule?.activationKey ?? ""

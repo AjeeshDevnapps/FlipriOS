@@ -932,6 +932,86 @@ class User {
     }
     
     
+    func getUserGateways(completion: ((_ decices: [UserGateway]?, _ error: Error?) -> Void)?) {
+        
+        Alamofire.request(Router.getUserGateways).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success(let value):
+                print("Get user Equipments - response.result.value: \(value)")
+                if let equipmentsDic = value as? [[String:Any]] {
+                    //On filtre sur ModuleType_Id = 1 pour retirer les HUB
+                    var decices:[UserGateway] = []
+                    for equipmentsObj in equipmentsDic {
+                        let deviceTmp = UserGateway.init(fromDictionary: equipmentsObj)
+                        decices.append(deviceTmp)
+                    }
+                    completion?(decices,nil)
+                } else {
+                    let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                    completion?(nil, error)
+                }
+                
+            case .failure(let error):
+                
+                print("Get user Equipments did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(nil,serverError)
+                } else {
+                    completion?(nil,error)
+                }
+            }
+        })
+    }
+
+    
+    func activateGateWay(serialNo:String, completion: ((_ settings:GatewayActivate?, _ error: Error?) -> Void)?) {
+        let placeIdVal = AppSharedData.sharedInstance.updatePlaceInfo.id ?? 0
+        let placeIdStr = String(placeIdVal)
+        Alamofire.request(Router.activateGateway(serial: serialNo)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+
+            switch response.result {
+                
+            case .success(let value):
+                print("Get user Equipments - response.result.value: \(value)")
+
+                if let resultDic = value as? [String:Any] {
+                    
+                    if let msg = resultDic["Message"] as? String{
+                        let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"The device is already associate with you".localized])
+                        completion?(nil, error)
+                    }else{
+                        let info = GatewayActivate.init(fromDictionary: resultDic)
+                        completion?(info,nil)
+                    }
+                    
+//                    if let info = GatewayActivate.init(fromDictionary: resultDic){
+//                        completion?(info,nil)
+//                    }else{
+//
+//                    }
+                    
+                } else {
+                    let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Data format returned by the server is not supported.".localized])
+                    completion?(nil, error)
+                }
+//                completion?(nil,nil)
+
+            case .failure(let error):
+                
+                print("Create place did fail with error: \(error)")
+                
+                if let serverError = User.serverError(response: response) {
+                    completion?(nil,serverError)
+                } else {
+                    completion?(nil,error)
+                }
+            }
+        })
+    }
+
 
 }
 

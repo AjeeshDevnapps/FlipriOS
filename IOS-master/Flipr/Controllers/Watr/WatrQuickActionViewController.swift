@@ -303,8 +303,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        showGatewayListing()
-        return
+       
         
        handlePlaceNavigation(indexPath: indexPath)
     }

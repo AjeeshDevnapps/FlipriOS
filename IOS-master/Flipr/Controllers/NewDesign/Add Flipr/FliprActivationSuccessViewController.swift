@@ -11,6 +11,7 @@ import UIKit
 class FliprActivationSuccessViewController: BaseViewController {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
+    var serialKey: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,19 +23,33 @@ class FliprActivationSuccessViewController: BaseViewController {
     
     
     @IBAction func nextButtonClicked() {
-        
-        if AppSharedData.sharedInstance.isAddingDeviceFromPresentedVCFlow{
-            let sb = UIStoryboard(name: "Calibration", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
-            vc.isAddingNewDevice = true
-            self.navigationController?.pushViewController(vc, animated: true)
-            //            self.dismiss(animated: true, completion: nil)
-        }else{
-            let sb = UIStoryboard(name: "Calibration", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
-            vc.isAddingNewDevice = true
-            self.navigationController?.pushViewController(vc, animated: true)
+        var isFlipr3 = false
+        if serialKey != nil && serialKey.count > 0{
+            if serialKey.hasPrefix("F3"){
+                isFlipr3 = true
+            }
         }
+
+        if isFlipr3 == false{
+            if AppSharedData.sharedInstance.isAddingDeviceFromPresentedVCFlow{
+                let sb = UIStoryboard(name: "Calibration", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
+                vc.isAddingNewDevice = true
+                self.navigationController?.pushViewController(vc, animated: true)
+                //            self.dismiss(animated: true, completion: nil)
+            }else{
+                let sb = UIStoryboard(name: "Calibration", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
+                vc.isAddingNewDevice = true
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }else{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddGatewayIntroViewController") as! AddGatewayIntroViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+
+        }
+        
+       
         
     }
 

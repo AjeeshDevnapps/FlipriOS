@@ -131,6 +131,7 @@ class LastMeasurementViewController:BaseViewController {
         BLEManager.shared.calibrationType = .simpleMeasure
         BLEManager.shared.calibrationMeasures = true
         BLEManager.shared.isHandling409 = true
+        BLEManager.shared.activationNeeded = false
 
         BLEManager.shared.startMeasure { (error) in
              

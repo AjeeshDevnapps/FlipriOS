@@ -78,6 +78,7 @@ class AddFliprViewController: BaseViewController {
                                             message: nil,
                                             theme: theme)
         BLEManager.shared.startUpCentralManager(connectAutomatically: false, sendMeasure: false)
+        BLEManager.shared.activationNeeded = true
         NotificationCenter.default.addObserver(forName: K.Notifications.BluetoothNotAvailble, object: nil, queue: nil) { _ in
             self.scanningAlertContainerView.isHidden = true
             self.bluetoothAlertContainerView.isHidden = false

@@ -46,6 +46,8 @@ enum Router: URLRequestConvertible {
     case getPlaces
     case getPlaceModules(placeId: String)
     case getUserEquipments
+    case getUserGateways
+
 
 
     
@@ -55,7 +57,7 @@ enum Router: URLRequestConvertible {
     case readModuleLastMetrics(serialId: String)
     case readModuleLastSurvey(serialId: String)
     case readModuleResume(serialId: String)
-    case sendModuleMetrics(serialId: String, data: String, type:String)
+    case sendModuleMetrics(placeId:String, serialId: String, data: String, type:String)
     case readModuleHourlyMetrics(serialId: String)
     case readModuleDailyMetrics(serialId: String)
     case removeModule(serialId: String)
@@ -137,6 +139,11 @@ enum Router: URLRequestConvertible {
     case getPoolSettings(poolId: String)
    
     
+    //Gateway
+    
+    case activateGateway(serial: String)
+
+    
     //Legacy
     //static let baseURLString = K.Server.BaseUrl + K.Server.ApiPath
     
@@ -199,6 +206,9 @@ enum Router: URLRequestConvertible {
             return .get
         
         case .getUserEquipments:
+            return .get
+            
+        case .getUserGateways:
             return .get
 
         case .addStripTest:
@@ -341,8 +351,11 @@ enum Router: URLRequestConvertible {
             
         case .acceptShare:
             return .post
+        case .activateGateway:
+            return .post
             
         }
+        
     }
     
     var path: String {
@@ -357,7 +370,7 @@ enum Router: URLRequestConvertible {
         case .createUser:
             return "accounts"
         case .deleteUser:
-            return "Account"
+            return "accounts"
         case .readAccountActivation:
             return "accounts/isActivated"
         case .resetPassword:
@@ -424,8 +437,8 @@ enum Router: URLRequestConvertible {
             return "modules/\(serialId)/thresholds"
         case .updateModuleThreshold(let serialId,_,_):
             return "modules/\(serialId)/thresholds"
-        case .sendModuleMetrics:
-            return "callback/bluetooth"
+        case .sendModuleMetrics(let placeId,_,_,_):
+            return "callback/newBluetooth/\(placeId)"
             
         case .readModuleHourlyMetrics(let serialId):
             return "modules/\(serialId)/survey/lastHours/" + "72".remotable("HISTORIC_LAST_HOURS")
@@ -478,6 +491,10 @@ enum Router: URLRequestConvertible {
             
         case .getUserEquipments:
             return "modules/AllDevices"
+        
+        case .getUserGateways:
+            return "modules/AllDevices"
+
             
         case .getPoolEquipments(let poolId):
             return "pools/\(poolId)/equipments"
@@ -571,8 +588,9 @@ enum Router: URLRequestConvertible {
         case .acceptShare(let poolId):
             return "place/\(poolId)/shares/accept"
 
-            
-            
+        case .activateGateway(let serial):
+            return "modules/activateGateway/\(serial)"
+
         }
 
     }
@@ -743,7 +761,7 @@ enum Router: URLRequestConvertible {
         case .addStripTest(let params):
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: params)
             
-        case .sendModuleMetrics(let serialId, let data, let type):
+        case .sendModuleMetrics(_, let serialId, let data, let type):
             let parameters: [String : Any] = [
                 "data": data,
                 "device": serialId,
@@ -1040,7 +1058,7 @@ enum Router: URLRequestConvertible {
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
             break
             
-        case .getCurrentAlert:
+        case .getPlaceTypes:
             var lang = "en"
             if let preferredLanguage = Locale.current.languageCode {
                 lang = preferredLanguage
@@ -1051,8 +1069,28 @@ enum Router: URLRequestConvertible {
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
             break
             
+        case .getCurrentAlert:
+            var lang = "en"
+            if let preferredLanguage = Locale.current.languageCode {
+                lang = preferredLanguage
+            }
+            let parameters: [String: Any] = [
+                "l": lang,
+            ]
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+            break
+        case .getUserGateways:
+            let parameters: [String : Any] = [
+                "type": 3,
+            ]
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+
 
             
+//        case .activateGateway:
+//
+//            urlRequest = try JSONEncoding.default.encode(urlRequest, with: attributes)
+
 //            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
 
         default:

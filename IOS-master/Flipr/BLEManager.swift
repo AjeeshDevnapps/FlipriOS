@@ -78,11 +78,13 @@ class BLEManager: NSObject {
     var isHandling409 = false
     var currentMeasuringSerial:String = ""
 
+    var fliprList = [CBPeripheral]()
 
 
     func startUpCentralManager(connectAutomatically connect:Bool, sendMeasure send:Bool) {
+        fliprList.removeAll()
         self.stopScanning = false
-        perform(#selector(setTimeLimit), with: nil, afterDelay: 20)
+        perform(#selector(setTimeLimit), with: nil, afterDelay: 40)
         sendMeasureAfterConnection = send
         connectAfterDiscovery = connect
         if !centralManagerHasBeenInitialized {
@@ -92,12 +94,10 @@ class BLEManager: NSObject {
 //            let services = [FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID]
 //            centralManager.scanForPeripherals(withServices: services, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
             centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
-
             print("CBCentralManager start scanning for Flipr devices (already initialized)")
-           
         }
-        
     }
+    
     
     @objc func setTimeLimit(){
         self.stopScanning = true
@@ -175,6 +175,7 @@ class BLEManager: NSObject {
     func post(measures:String, type:String) {
         
         if self.currentMeasuringSerial != Module.currentModule?.serial{
+            return;
 //            let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Measuring diff device :/"])
 //            self.calibrationMeasuresCompletionBlock?(error)
 //            self.calibrationMeasuresCompletionBlock = nil
@@ -220,7 +221,12 @@ class BLEManager: NSObject {
                 //self.centralManager.cancelPeripheralConnection(self.flipr!)
             }
             else{
-                Alamofire.request(Router.sendModuleMetrics(serialId: identifier, data: measures, type:type))
+                var placeId:Int = Module.currentModule?.placeId ?? 0
+                if AppSharedData.sharedInstance.isFirstCalibrations {
+                    placeId = AppSharedData.sharedInstance.addedPlaceId
+                }
+                
+                Alamofire.request(Router.sendModuleMetrics(placeId:"\(placeId)" , serialId: identifier, data: measures, type:type))
                     .validate(statusCode: 200..<300)
                     .responseJSON { response in
                         
@@ -318,6 +324,10 @@ extension BLEManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         
+        print("advertisementData: %@",advertisementData)
+        
+//        print("peripheral: %@",peripheral)
+
         if self.stopScanning{
             central.stopScan()
             NotificationCenter.default.post(name: K.Notifications.FliprNotDiscovered, object: nil)
@@ -325,15 +335,21 @@ extension BLEManager: CBCentralManagerDelegate {
         }
         if let name = peripheral.name {
             
-            print(name)
+//            print("Name: %@",name)
             if !name.hasPrefix("Flipr 0") && !name.hasPrefix("FliprHUB") {
-                return
+                if !name.hasPrefix("F3"){
+                    return
+                }
             }
             
-            
-            print("Flipr device discovered with name:\(peripheral.name) , identifier: \(peripheral.identifier)")
+//            print("Flipr device discovered with name:\(peripheral.name) , identifier: \(peripheral.identifier)")
             var occuranceString = "Flipr 00"
 
+            var serialNo:String = Module.currentModule?.serial ?? ""
+            if AppSharedData.sharedInstance.isFirstCalibrations {
+                serialNo = AppSharedData.sharedInstance.deviceSerialNo
+            }
+            
             if name.hasPrefix("Flipr 00") {
                 occuranceString = "Flipr 00"
             }
@@ -348,25 +364,29 @@ extension BLEManager: CBCentralManagerDelegate {
             }
             
             self.currentMeasuringSerial = serial ?? ""
-            print("Flipr device discovered with serial:\(serial) , Module.currentModule?.serial: \(Module.currentModule?.serial)")
-            
+//            print("Flipr device discovered with serial:\(serial) , Module.currentModule?.serial: \(Module.currentModule?.serial)")
+            /*
             if let currentModuleSerial = Module.currentModule?.serial {
                 if serial != currentModuleSerial {
                     return
                 }
             }
+            */
+            
+            
+            
             self.stopScanning = false
             flipr = peripheral
             peripheral.delegate = self
             
 //            central.stopScan()
-            print("CBCentralManager stop scanning for Flipr devices")
-            
+//            print("CBCentralManager stop scanning for Flipr devices")
+            fliprList.append(peripheral)
             let userInfo = ["serial": serial]
             NotificationCenter.default.post(name: K.Notifications.FliprDiscovered, object: nil, userInfo: userInfo)
             
             if connectAfterDiscovery {
-                print("Connecting...")
+//                print("Connecting...")
                 isConnecting = true
                 central.connect(flipr!, options: nil)
             }
@@ -376,6 +396,29 @@ extension BLEManager: CBCentralManagerDelegate {
        
 
     }
+    
+    
+    func connectPerpheral(serial:String){
+        for item in fliprList{
+            if let name  = item.name{
+                var occuranceString = "Flipr 00"
+
+                if name.hasPrefix("Flipr 00") {
+                    occuranceString = "Flipr 00"
+                }
+                else if name.hasPrefix("Flipr 0"){
+                    occuranceString = "Flipr 0"
+                }
+                let ItemSerial = name.replacingOccurrences(of: occuranceString, with: "").trimmed
+                if ItemSerial == serial{
+                    centralManager.connect(item, options: nil)
+                }
+            }
+        }
+    }
+    
+    
+    
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         isConnecting = false

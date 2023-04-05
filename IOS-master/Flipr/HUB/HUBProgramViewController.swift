@@ -41,6 +41,9 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var space2HeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeSloteTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var titleLbl: UILabel!
+
 
 
     override func viewDidLoad() {
@@ -61,7 +64,7 @@ class HUBProgramViewController: UIViewController, ChartViewDelegate {
         
         selectionChartView.transparentCircleColor = UIColor.init(hexString: "111729")
         selectionChartView.holeColor = .black
-        
+        titleLbl.text = "Programs".localized()
         if (planning != nil) {
             cancelButton.setTitle("Delete".localized(), for: .normal)
             saveButton.setTitle("Save".localized(), for: .normal)
