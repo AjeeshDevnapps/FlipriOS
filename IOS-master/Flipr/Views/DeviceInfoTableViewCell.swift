@@ -130,3 +130,54 @@ class DeviceActionTableViewCell: UITableViewCell {
     }
 
 }
+
+
+class GatewayInfoTableViewCell: UITableViewCell {
+//    @IBOutlet weak var titleLabel: UILabel!
+//    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var modelLabel: UILabel!
+    @IBOutlet weak var serialLabel: UILabel!
+//    @IBOutlet weak var keyIdLabel: UILabel!
+    
+//    @IBOutlet weak var batteryLabel: UILabel!
+//    @IBOutlet weak var batteryLevelLabel: UILabel!
+//
+//    @IBOutlet weak var editButton: UIButton!
+//
+//    @IBOutlet weak var modelTitleLabel: UILabel!
+//    @IBOutlet weak var serialTitleLabel: UILabel!
+//    @IBOutlet weak var keyIdTitleLabel: UILabel!
+    @IBOutlet weak var shadowView: UIView!
+
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+//        shadowView.addShadow(offset: CGSize.init(width: 0, height: 2), color: UIColor.black, radius: 15.0, opacity: 0.21)
+
+//        if self.shadowView != nil{
+//            self.shadowView.roundCorner(corner: 12.0)
+//        }
+//        modelTitleLabel.text = "Model".localized
+//        if serialTitleLabel != nil{
+//            serialTitleLabel.text = "Serial Number".localized
+//        }
+//        if keyIdTitleLabel != nil{
+//            keyIdTitleLabel.text = "Key ID".localized
+//        }
+//        if titleLabel != nil{
+//            titleLabel.text = "Details".localized
+//        }
+//        if batteryLabel != nil{
+//            batteryLabel.text = "Battery".localized
+//        }
+
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+}

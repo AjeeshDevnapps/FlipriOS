@@ -27,10 +27,16 @@ class FliprActivationSuccessViewController: BaseViewController {
         if serialKey != nil && serialKey.count > 0{
             if serialKey.hasPrefix("F3"){
                 isFlipr3 = true
+                AppSharedData.sharedInstance.isFlipr3 = true
+            }else{
+                AppSharedData.sharedInstance.isFlipr3 = false
             }
         }
 
-        if isFlipr3 == false{
+        AppSharedData.sharedInstance.deviceSerialNo = serialKey
+        
+        
+//        if isFlipr3 == false{
             if AppSharedData.sharedInstance.isAddingDeviceFromPresentedVCFlow{
                 let sb = UIStoryboard(name: "Calibration", bundle: nil)
                 let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
@@ -43,11 +49,12 @@ class FliprActivationSuccessViewController: BaseViewController {
                 vc.isAddingNewDevice = true
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-        }else{
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddGatewayIntroViewController") as! AddGatewayIntroViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-
-        }
+//        }
+//        else{
+//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddGatewayIntroViewController") as! AddGatewayIntroViewController
+//            self.navigationController?.pushViewController(vc, animated: true)
+//
+//        }
         
        
         

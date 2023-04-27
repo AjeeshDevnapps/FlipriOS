@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -492,7 +492,7 @@
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuTableViewCell" rowHeight="64" id="Fyj-1d-zme" customClass="MenuTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="64"/>
+                                                <rect key="frame" x="0.0" y="50" width="375" height="64"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fyj-1d-zme" id="QNP-bN-M75">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -931,7 +931,7 @@
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuTableViewCell" rowHeight="64" id="YYn-O6-iDQ" customClass="MenuTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="64"/>
+                                                <rect key="frame" x="0.0" y="50" width="375" height="64"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YYn-O6-iDQ" id="eH6-dA-rcw">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -970,13 +970,30 @@
                                             <outlet property="delegate" destination="zao-hG-fyC" id="3Dq-F3-LsS"/>
                                         </connections>
                                     </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivb-jJ-Req">
+                                        <rect key="frame" x="8" y="25" width="120" height="50"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="Dd2-RN-Ish"/>
+                                            <constraint firstAttribute="height" constant="50" id="JWe-iL-lj7"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Change Delay time">
+                                            <color key="baseForegroundColor" red="0.99607843139999996" green="0.0039215686269999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="changeDelayTimeButtonAction" destination="zao-hG-fyC" eventType="touchUpInside" id="bvO-MP-m5L"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="FQE-2G-tuK" firstAttribute="top" secondItem="SoH-bU-mnL" secondAttribute="top" constant="20" id="7e6-91-5vg"/>
                                     <constraint firstItem="Qik-X8-h9F" firstAttribute="centerX" secondItem="SoH-bU-mnL" secondAttribute="centerX" id="93B-Rx-qLw"/>
                                     <constraint firstItem="kNJ-BC-aIH" firstAttribute="top" secondItem="fVj-mf-m0l" secondAttribute="bottom" constant="30" id="BvH-b9-X9y"/>
+                                    <constraint firstItem="ivb-jJ-Req" firstAttribute="leading" secondItem="SoH-bU-mnL" secondAttribute="leading" constant="8" id="Mm6-82-14b"/>
                                     <constraint firstItem="Qik-X8-h9F" firstAttribute="top" secondItem="SoH-bU-mnL" secondAttribute="top" constant="20" id="Pld-dh-Bv4"/>
+                                    <constraint firstItem="ivb-jJ-Req" firstAttribute="top" secondItem="SoH-bU-mnL" secondAttribute="top" constant="25" id="ULP-uK-Rdp"/>
                                     <constraint firstAttribute="trailing" secondItem="kNJ-BC-aIH" secondAttribute="trailing" id="WbT-bF-TRS"/>
                                     <constraint firstItem="fVj-mf-m0l" firstAttribute="top" secondItem="Qik-X8-h9F" secondAttribute="bottom" constant="20" id="Yn9-tB-Hqx"/>
                                     <constraint firstAttribute="bottom" secondItem="kNJ-BC-aIH" secondAttribute="bottom" id="c8p-ug-Z1x"/>
@@ -1027,7 +1044,7 @@
                                 <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuTableViewCell" rowHeight="64" id="DzJ-B9-q9N" customClass="MenuTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DzJ-B9-q9N" id="o2h-Fq-Thp">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1133,7 +1150,7 @@
                                 <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuTableViewCell" rowHeight="64" id="1Li-wX-ldh" customClass="MenuTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Li-wX-ldh" id="6aa-Fb-6cX">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1224,6 +1241,61 @@
             </objects>
             <point key="canvasLocation" x="4542" y="206"/>
         </scene>
+        <!--Change Delay View Controller-->
+        <scene sceneID="pyk-iU-ac8">
+            <objects>
+                <viewController storyboardIdentifier="ChangeDelayViewController" id="POu-wv-IpE" customClass="ChangeDelayViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v4j-e2-BMW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="60" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="69q-0c-Hdo">
+                                <rect key="frame" x="87.5" y="109" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="67L-cT-cYx"/>
+                                    <constraint firstAttribute="height" constant="50" id="jP0-QZ-xKY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YrD-WY-8S4">
+                                <rect key="frame" x="87.5" y="189" width="200" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="HYx-rP-U6v"/>
+                                    <constraint firstAttribute="height" constant="50" id="cGl-2q-nKT"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Change Delay">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="submitAction:" destination="POu-wv-IpE" eventType="touchUpInside" id="sGD-fq-H6a"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="es0-ge-Ls6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YrD-WY-8S4" firstAttribute="top" secondItem="69q-0c-Hdo" secondAttribute="bottom" constant="30" id="7D2-wF-MPy"/>
+                            <constraint firstItem="69q-0c-Hdo" firstAttribute="top" secondItem="es0-ge-Ls6" secondAttribute="top" constant="109" id="MsT-YU-9wT"/>
+                            <constraint firstItem="YrD-WY-8S4" firstAttribute="centerX" secondItem="v4j-e2-BMW" secondAttribute="centerX" id="hbX-v7-HS4"/>
+                            <constraint firstItem="69q-0c-Hdo" firstAttribute="centerX" secondItem="v4j-e2-BMW" secondAttribute="centerX" id="vZT-zT-lzv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="valueTextFld" destination="69q-0c-Hdo" id="KwR-7p-Xug"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZTv-Xn-7F0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5856.8000000000002" y="201.94902548725639"/>
+        </scene>
         <!--Expert Menu View Controller-->
         <scene sceneID="8ec-7o-ZFQ">
             <objects>
@@ -1239,7 +1311,7 @@
                                 <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuTableViewCell" rowHeight="64" id="Ndp-91-fOc" customClass="MenuTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ndp-91-fOc" id="ZrX-IM-03V">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1923,7 +1995,7 @@ supprimer le Hub ?</string>
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuTableViewCell" rowHeight="64" id="RVp-t7-AWQ" customClass="MenuTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="64"/>
+                                                <rect key="frame" x="0.0" y="50" width="375" height="64"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RVp-t7-AWQ" id="Xyg-d4-epH">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -2037,7 +2109,7 @@ supprimer le Hub ?</string>
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuTableViewCell" rowHeight="64" id="9tD-fz-pw9" customClass="MenuTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="64"/>
+                                                <rect key="frame" x="0.0" y="50" width="375" height="64"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9tD-fz-pw9" id="ukW-ET-uut">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>

@@ -88,7 +88,7 @@ class GatewayManager: NSObject {
     }
     
     
-    func stopScanForHubs() {
+    func stopScanForGateway() {
         centralManager.stopScan()
         scanForHubsWithSerials = nil
         scanForHubsCompletionBlock = nil
@@ -113,7 +113,7 @@ class GatewayManager: NSObject {
         }
     }
     
-    func cancelHubConnection(completion: ((_ error: Error?) -> Void)?) {
+    func cancelGatewayConnection(completion: ((_ error: Error?) -> Void)?) {
         cancelConnectionCompletionBlock = completion
         if let hub = connectedGateway {
             centralManager.cancelPeripheralConnection(hub)
@@ -196,6 +196,7 @@ class GatewayManager: NSObject {
         if let hub = connectedGateway, let sendChar = passwordCharacteristic {
             let data = password.data(using: .utf8)
             connectedGateway?.writeValue(data!, for: passwordCharacteristic!, type: .withResponse)
+            completion?(nil)
         } else {
             //send error no hub connected or char discovered
             let error = NSError(domain: "Gateway", code: -1, userInfo: [NSLocalizedDescriptionKey:"No Gateway connected :/".localized])

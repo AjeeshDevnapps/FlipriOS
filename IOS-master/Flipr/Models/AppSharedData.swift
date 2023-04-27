@@ -46,6 +46,7 @@ import Foundation
     
     var deviceSerialNo : String  = ""
 
+    var isFlipr3 = false
 
     
     var isOwner = false

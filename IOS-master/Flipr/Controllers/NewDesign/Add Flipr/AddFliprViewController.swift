@@ -9,6 +9,8 @@
 import UIKit
 
 class AddFliprViewController: BaseViewController {
+    @IBOutlet weak var listContainerView: UIView!
+
     @IBOutlet weak var scanningAlertContainerView: UIView!
     @IBOutlet weak var loaderView: UIView!
     @IBOutlet weak var bluetoothAlertContainerView: UIView!
@@ -24,6 +26,7 @@ class AddFliprViewController: BaseViewController {
     @IBOutlet weak var notFindTitleLbl: UILabel!
     @IBOutlet weak var notFindSubTitleLbl: UILabel!
     @IBOutlet weak var helpTitleLbl: UILabel!
+    var fliprListVC:FliprListViewController!
 
 
     var serialKey:String = ""
@@ -31,6 +34,9 @@ class AddFliprViewController: BaseViewController {
     var isPresent = false
     var isSignupFlow = false
     var isPushFlow = false
+    
+    var isShowingListView = false
+
 
     var fliprArray = [String]()
 
@@ -98,6 +104,12 @@ class AddFliprViewController: BaseViewController {
                     print(index) // Output: 4
                 }else{
                     self.fliprArray.append(serial)
+                    if self.isShowingListView == false{
+                        self.isShowingListView = true
+                        self.showFliprListVC()
+                    }
+                    self.fliprListVC.fliprList.append(serial)
+                    self.fliprListVC.fliprListTableView.reloadData()
                 }
 //                self.showFliprList(serialKey: serial)
             }else{
@@ -115,6 +127,33 @@ class AddFliprViewController: BaseViewController {
             fliprListVC.isSignupFlow = isSignupFlow
 //            self.navigationController?.pushViewController(fliprListVC)
         }
+    }
+    
+    
+    func showFliprListVC(){
+        fliprListVC = self.storyboard?.instantiateViewController(withIdentifier: "FliprListViewController") as! FliprListViewController
+//        if let fliprListVC = self.storyboard?.instantiateViewController(withIdentifier: "FliprListViewController") as? FliprListViewController{
+//            fliprListVC.fliprList = self.fliprArray
+//            fliprListVC.serialKey = serialKey
+//            fliprListVC.flipType = "Flipr"
+            fliprListVC.isSignupFlow = isSignupFlow
+
+            addChild(fliprListVC)
+//            fliprListVC.view.frame = ...  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+        /*
+        fliprListVC.view.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                fliprListVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+                fliprListVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+                fliprListVC.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+                fliprListVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
+                ])
+        */
+        fliprListVC.view.frame = self.view.bounds
+        
+            view.addSubview(fliprListVC.view)
+            fliprListVC.didMove(toParent: self)
+//        }
     }
     
     override func backButtonTapped() {
@@ -182,9 +221,9 @@ class AddFliprViewController: BaseViewController {
     func showFliprNotDiscoveredBanner(){
         
         if fliprArray.count > 0 {
-            self.scanningAlertContainerView.isHidden = true
-            self.loaderView.hideStateView()
-            showFliprList()
+//            self.scanningAlertContainerView.isHidden = true
+//            self.loaderView.hideStateView()
+//            showFliprList()
         }else{
             self.helpButtonContainerView.isHidden = false
             self.fliprNotDiscoverContainerView.isHidden = false

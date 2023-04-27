@@ -48,10 +48,13 @@ class LastMeasurementViewController:BaseViewController {
 //        mesureCompleteLabel.text = "mesureCompleted100".localized
         
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprMeasures409Error, object: nil, queue: nil) { (notification) in
+            NotificationCenter.default.removeObserver(self)
+            BLEManager.shared.disConnectCurrentDevice()
             self.dismiss(animated: true, completion: nil)
         }
         
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprMeasuresPosted, object: nil, queue: nil) { (notification) in
+            BLEManager.shared.disConnectCurrentDevice()
             self.readingSuccess()
         }
 /*
@@ -92,8 +95,9 @@ class LastMeasurementViewController:BaseViewController {
         BLEManager.shared.startUpCentralManager(connectAutomatically: true, sendMeasure: true)
         
         */
-        startReading()
+//        startReading()
 
+        readLastMeasurement()
         // Do any additional setup after loading the view.
     }
     
@@ -125,6 +129,67 @@ class LastMeasurementViewController:BaseViewController {
     }
 
     
+    func readLastMeasurement(){
+        if let currentFlipr = BLEManager.shared.flipr{
+            var name = currentFlipr.name ?? ""
+            var occuranceString = "Flipr 00"
+
+            if name.hasPrefix("Flipr 00") {
+                occuranceString = "Flipr 00"
+            }
+            else if name.hasPrefix("Flipr 0"){
+                occuranceString = "Flipr 0"
+            }
+            
+            let serial = name.replacingOccurrences(of: occuranceString, with: "").trimmed
+            
+            if Module.currentModule?.serial == serial{
+                BLEManager.shared.calibrationType = .simpleMeasure
+                BLEManager.shared.calibrationMeasures = true
+                BLEManager.shared.isHandling409 = true
+                BLEManager.shared.activationNeeded = false
+                BLEManager.shared.startMeasure { (error) in
+                    BLEManager.shared.doAcq = false
+                    if error != nil {
+                        self.showError(title: "Error".localized, message: error?.localizedDescription)
+                    }
+                    else {
+                    }
+                }
+            }else{
+                connectCurrentModuleFlipr()
+            }
+        }else{
+            print("No flipr in shared data")
+            connectCurrentModuleFlipr()
+        }
+    }
+    
+    func connectCurrentModuleFlipr(){
+        NotificationCenter.default.addObserver(forName: K.Notifications.FliprConnected, object: nil, queue: nil) { (notification) in
+            NotificationCenter.default.removeObserver(self)
+            self.startMeasureReading()
+        }
+        BLEManager.shared.startUpCentralManager(connectAutomatically: true, sendMeasure: false)
+
+    }
+    
+    
+    func startMeasureReading(){
+        BLEManager.shared.calibrationType = .simpleMeasure
+        BLEManager.shared.calibrationMeasures = true
+        BLEManager.shared.isHandling409 = true
+        BLEManager.shared.activationNeeded = false
+
+        BLEManager.shared.startMeasure { (error) in
+            BLEManager.shared.doAcq = false
+            if error != nil {
+                self.showError(title: "Error".localized, message: error?.localizedDescription)
+            }
+            else {
+            }
+        }
+    }
     
     func startReading(){
         

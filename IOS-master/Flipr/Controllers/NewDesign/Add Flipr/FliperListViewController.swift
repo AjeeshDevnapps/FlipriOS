@@ -123,6 +123,7 @@ extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
             if error != nil {
                 self.showError(title: "Error".localized, message: error?.localizedDescription)
             } else {
+                self.serialKey = skey
                 self.showSuccessScreen()
             }
         })
@@ -148,7 +149,7 @@ extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
     
     
     func showSuccessScreen(){
-        
+        BLEManager.shared.stopScanning = true
         let sb = UIStoryboard(name: "FliprDevice", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "FliprActivationSuccessViewController") as? FliprActivationSuccessViewController {
             self.navigationController?.pushViewController(viewController)

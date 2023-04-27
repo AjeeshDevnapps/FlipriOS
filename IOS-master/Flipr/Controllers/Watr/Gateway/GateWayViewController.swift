@@ -16,6 +16,8 @@ class GateWayViewController: UIViewController {
     var gatewayList:[UserGateway]?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Passerelles".localized
+        AppSharedData.sharedInstance.isFlipr3 = false
         // Do any additional setup after loading the view.
     }
     
@@ -40,6 +42,11 @@ class GateWayViewController: UIViewController {
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GateWayListingViewController") as? GateWayListingViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
+//
+//        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GatewaywifiViewController") as? GatewaywifiViewController {
+//            vc.serial = "asd"
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
     }
 }
 

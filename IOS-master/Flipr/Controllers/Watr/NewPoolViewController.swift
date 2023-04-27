@@ -122,6 +122,7 @@ class NewPoolViewController: UIViewController {
             FliprShare().poolId = placeId
         }
         FliprShare().deletePlace(placeId: placeId) { error in
+            
             if error != nil {
 //                let alertVC = UIAlertController(title: "Error".localized, message: error?.localizedDescription, preferredStyle: .alert)
 //                let alertAction = UIAlertAction(title: "OK".localized, style: .cancel, handler: nil)
@@ -132,6 +133,11 @@ class NewPoolViewController: UIViewController {
             else{
 //                self.dismiss(animated: true, completion: nil)
             }
+            if BLEManager.shared.flipr != nil{
+                BLEManager.shared.centralManager.cancelPeripheralConnection(BLEManager.shared.flipr!)
+            }
+            
+//            if self.placeDetails.
             NotificationCenter.default.post(name: K.Notifications.PlaceDeleted, object: nil)
             self.dismiss(animated: true, completion: nil)
 

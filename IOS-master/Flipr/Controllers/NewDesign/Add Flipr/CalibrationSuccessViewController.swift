@@ -30,41 +30,65 @@ class CalibrationSuccessViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
+  
+
 
     @IBAction func nextButton(_ sender: UIButton) {
-//        showPoolSettings()
-//        return
-        let theme = EmptyStateViewTheme.shared
-        theme.activityIndicatorType = .ballZigZag
-        self.view.showEmptyStateViewLoading(title: "Launch of the 1st measure".localized, message: "Connecting to flipr...".localized, theme: theme)
         
-        BLEManager.shared.startMeasure { (error) in
+        if AppSharedData.sharedInstance.isFlipr3{
+            showGatewaySetup()
+        }
+        else{
+            let theme = EmptyStateViewTheme.shared
+            theme.activityIndicatorType = .ballZigZag
+            self.view.showEmptyStateViewLoading(title: "Launch of the 1st measure".localized, message: "Connecting to flipr...".localized, theme: theme)
             
-            BLEManager.shared.doAcq = false
-            
-            if error != nil {
-                self.showError(title: "Error".localized, message: error?.localizedDescription)
-                self.view.hideStateView()
-            }
-            else {
-                UserDefaults.standard.set(Date(), forKey:"FirstMeasureStartDate")
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
-                dashboard.modalTransitionStyle = .flipHorizontal
-                dashboard.modalPresentationStyle = .fullScreen
-                self.present(dashboard, animated: true, completion: {
-                    self.navigationController?.popToRootViewController(animated: false)
-                })
-//                if let dashboard = self.storyboard?.instantiateViewController(withIdentifier: "DashboardViewControllerID") {
-//                    dashboard.modalTransitionStyle = .flipHorizontal
-//                    dashboard.modalPresentationStyle = .fullScreen
-//                    self.present(dashboard, animated: true, completion: {
-//                        self.navigationController?.popToRootViewController(animated: false)
-//                    })
-//                }
+            BLEManager.shared.startMeasure { (error) in
+                
+                BLEManager.shared.doAcq = false
+                
+                if error != nil {
+                    self.showError(title: "Error".localized, message: error?.localizedDescription)
+                    self.view.hideStateView()
+                }
+                else {
+                    UserDefaults.standard.set(Date(), forKey:"FirstMeasureStartDate")
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+                    dashboard.modalTransitionStyle = .flipHorizontal
+                    dashboard.modalPresentationStyle = .fullScreen
+                    self.present(dashboard, animated: true, completion: {
+                        self.navigationController?.popToRootViewController(animated: false)
+                    })
+    //                if let dashboard = self.storyboard?.instantiateViewController(withIdentifier: "DashboardViewControllerID") {
+    //                    dashboard.modalTransitionStyle = .flipHorizontal
+    //                    dashboard.modalPresentationStyle = .fullScreen
+    //                    self.present(dashboard, animated: true, completion: {
+    //                        self.navigationController?.popToRootViewController(animated: false)
+    //                    })
+    //                }
+                }
             }
         }
+    }
+    
+    
+    
+    func showGatewaySetup(){
+        let storyboard = UIStoryboard(name: "FliprDevice", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AddGatewayIntroViewController") as! AddGatewayIntroViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
+    
+    func showDashboard(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+        dashboard.modalTransitionStyle = .flipHorizontal
+        dashboard.modalPresentationStyle = .fullScreen
+        self.present(dashboard, animated: true, completion: {
+            self.navigationController?.popToRootViewController(animated: false)
+        })
     }
     
     func showPoolSettings(){

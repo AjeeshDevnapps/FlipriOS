@@ -15,7 +15,7 @@ class Ph7CalibrationViewController: BaseViewController {
     @IBOutlet weak var msgLbl: UILabel!
     @IBOutlet weak var successLbl: UILabel!
 
-    let measuresInterval:Double = 150
+    var measuresInterval:Double = 60
     var recalibration = false
     var calibrationType:CalibrationType = .ph7
     var measuresTimer : Timer?
@@ -33,7 +33,9 @@ class Ph7CalibrationViewController: BaseViewController {
         titleLbl.text  = "Calibrage en cours".localized
         msgLbl.text  = "Cette opération prend environs 2 minutes. Veuillez rester à proximité immédiate de votre téléphone et de l’appareil Flipr. Maintenez l’application ouverte et active.".localized
         successLbl.text  = "Calibration Ph7 réussie".localized
-
+        if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+            self.measuresInterval = Double(curretnValue) ?? 60
+        }
         self.calibrate()
         // Do any additional setup after loading the view.
     }
@@ -85,6 +87,10 @@ class Ph7CalibrationViewController: BaseViewController {
                 }
                 if version == 3{
                     timerVal = 60
+                    self.measuresInterval = 60
+                    if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+                        self.measuresInterval = Double(curretnValue) ?? 60
+                    }
                 }
             }
         }
@@ -105,8 +111,19 @@ class Ph7CalibrationViewController: BaseViewController {
                                                   repeats: true)
 
         if self.isAddingNewDevice{
+//            BLEManager.shared.fl
+            if BLEManager.shared.flipr != nil{
+                BLEManager.shared.centralManager.cancelPeripheralConnection( BLEManager.shared.flipr!)
+            }
             AppSharedData.sharedInstance.isFirstCalibrations = true
+            if AppSharedData.sharedInstance.isFlipr3 {
+                self.measuresInterval = 60
+                if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+                    self.measuresInterval = Double(curretnValue) ?? 60
+                }
+            }
         }else{
+            
             AppSharedData.sharedInstance.isFirstCalibrations = false
         }
 
@@ -131,9 +148,6 @@ class Ph7CalibrationViewController: BaseViewController {
                 } else {
 //                    self.view.showEmptyStateViewLoading(title: "CALIBRATION ".localized + self.calibrationType.rawValue.uppercased(), message: "Measurement in progress...\n\nThis operation may take a few minutes, do not quit the app, keep the iPhone active and close to the Flipr.".localized, theme: theme)
                 }
-               
-                
-                
                 self.measuresTimer = Timer.scheduledTimer(timeInterval: 0.05,
                                                           target: self,
                                                           selector: #selector(self.updateTime),

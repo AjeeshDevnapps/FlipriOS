@@ -69,6 +69,8 @@ class BLEManager: NSObject {
     var measuresCharacteristic:CBCharacteristic?
     var calibrationMeasuresCompletionBlock:(_ : (_ error:Error?) -> Void)?
     
+    
+    
     var module:Module?
     
     var isConnecting = false
@@ -84,7 +86,7 @@ class BLEManager: NSObject {
     func startUpCentralManager(connectAutomatically connect:Bool, sendMeasure send:Bool) {
         fliprList.removeAll()
         self.stopScanning = false
-        perform(#selector(setTimeLimit), with: nil, afterDelay: 40)
+        perform(#selector(setTimeLimit), with: nil, afterDelay: 30)
         sendMeasureAfterConnection = send
         connectAfterDiscovery = connect
         if !centralManagerHasBeenInitialized {
@@ -93,7 +95,7 @@ class BLEManager: NSObject {
         } else {
 //            let services = [FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID]
 //            centralManager.scanForPeripherals(withServices: services, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
-            centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
+            centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
             print("CBCentralManager start scanning for Flipr devices (already initialized)")
         }
     }
@@ -114,33 +116,103 @@ class BLEManager: NSObject {
         
     }
     
+    
+    func disConnectCurrentDevice(){
+        if self.flipr != nil{
+            let dispatchTime = DispatchTime.now() + .seconds(2)
+            DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+                self.centralManager.cancelPeripheralConnection(self.flipr!)
+            }
+        }
+    }
+    
     func startMeasure(completion: ((_ error: Error?) -> Void)?) {
-        
+//        var serialNo = ""
         doAcq = true
         doAcqCompletionBlock = completion
-        
-        if doAcqCharacteristic != nil {
-            if flipr?.state == .connected {
-                let data = "1".data(using: .utf8)
-                flipr?.writeValue(data!, for: doAcqCharacteristic!, type: .withResponse)
-            } else {
-                isConnecting = true
-                print("Connecting...")
-                centralManager.connect(flipr!, options: nil)
+        if AppSharedData.sharedInstance.isFirstCalibrations {
+            let name = self.flipr?.name ?? ""
+            var occuranceString = "Flipr 00"
+            if name.hasPrefix("Flipr 00") {
+                occuranceString = "Flipr 00"
             }
-        } else if flipr != nil {
-            if flipr?.state == .connected {
-                flipr?.discoverServices([FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.historicalServiceUUID])
-            } else {
-                print("Connecting...")
-                isConnecting = true
-                centralManager.connect(flipr!, options: nil)
+            else if name.hasPrefix("Flipr 0"){
+                occuranceString = "Flipr 0"
             }
-        } else {
-            startUpCentralManager(connectAutomatically: true, sendMeasure: false)
+            var currentSavedserial = name.replacingOccurrences(of: occuranceString, with: "").trimmed
+            if AppSharedData.sharedInstance.deviceSerialNo.isValidString && currentSavedserial.isValidString{
+                if currentSavedserial == AppSharedData.sharedInstance.deviceSerialNo{
+                    if doAcqCharacteristic != nil {
+                        if flipr?.state == .connected {
+                            let data = "1".data(using: .utf8)
+                            flipr?.writeValue(data!, for: doAcqCharacteristic!, type: .withResponse)
+                        } else {
+                            isConnecting = true
+            //                print("Connecting...")
+                            print("Connecting...\(flipr?.name ?? "")")
+
+                            centralManager.connect(flipr!, options: nil)
+                        }
+                    } else if flipr != nil {
+                        if flipr?.state == .connected {
+                            flipr?.discoverServices([FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.historicalServiceUUID])
+                        } else {
+            //                print("Connecting...")
+                            print("Connecting...\(flipr?.name ?? "")")
+
+                            isConnecting = true
+                            centralManager.connect(flipr!, options: nil)
+                        }
+                    } else {
+                        startUpCentralManager(connectAutomatically: true, sendMeasure: false)
+                    }
+
+                }else{
+                    startUpCentralManager(connectAutomatically: true, sendMeasure: false)
+                }
+            }else{
+                startUpCentralManager(connectAutomatically: true, sendMeasure: false)
+            }
+           
+            
+            
+        }else{
+            if doAcqCharacteristic != nil {
+                if flipr?.state == .connected {
+                    let data = "1".data(using: .utf8)
+                    flipr?.writeValue(data!, for: doAcqCharacteristic!, type: .withResponse)
+                } else {
+                    isConnecting = true
+    //                print("Connecting...")
+                    print("Connecting...\(flipr?.name ?? "")")
+
+                    centralManager.connect(flipr!, options: nil)
+                }
+            } else if flipr != nil {
+                if flipr?.state == .connected {
+                    flipr?.discoverServices([FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.historicalServiceUUID])
+                } else {
+    //                print("Connecting...")
+                    print("Connecting...\(flipr?.name ?? "")")
+
+                    isConnecting = true
+                    centralManager.connect(flipr!, options: nil)
+                }
+            } else {
+                startUpCentralManager(connectAutomatically: true, sendMeasure: false)
+            }
         }
 
+        
+      
+
     }
+    
+    
+    func searchAddingNewDevice(){
+        
+    }
+    
     
     func sendCalibrationMeasure(type:CalibrationType, completion: ((_ error: Error?) -> Void)?) {
         
@@ -154,7 +226,7 @@ class BLEManager: NSObject {
             if flipr?.state == .connected {
                 flipr?.readValue(for: measuresCharacteristic!)
             } else {
-                print("Connecting...")
+                print("Connecting...\(flipr?.name ?? "")")
                 isConnecting = true
                 centralManager.connect(flipr!, options: nil)
             }
@@ -162,7 +234,9 @@ class BLEManager: NSObject {
             if flipr?.state == .connected {
                 flipr?.discoverServices([FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.historicalServiceUUID])
             } else {
-                print("Connecting...")
+//                print("Connecting...")
+                print("Connecting...\(flipr?.name ?? "")")
+
                 isConnecting = true
                 centralManager.connect(flipr!, options: nil)
             }
@@ -363,7 +437,7 @@ extension BLEManager: CBCentralManagerDelegate {
                 serial = name.replacingOccurrences(of: "FliprHUB", with: "").trimmed
             }
             
-            self.currentMeasuringSerial = serial ?? ""
+//            self.currentMeasuringSerial = serial ?? ""
 //            print("Flipr device discovered with serial:\(serial) , Module.currentModule?.serial: \(Module.currentModule?.serial)")
             /*
             if let currentModuleSerial = Module.currentModule?.serial {
@@ -376,8 +450,8 @@ extension BLEManager: CBCentralManagerDelegate {
             
             
             self.stopScanning = false
-            flipr = peripheral
-            peripheral.delegate = self
+//            flipr = peripheral
+//            peripheral.delegate = self
             
 //            central.stopScan()
 //            print("CBCentralManager stop scanning for Flipr devices")
@@ -387,7 +461,26 @@ extension BLEManager: CBCentralManagerDelegate {
             
             if connectAfterDiscovery {
 //                print("Connecting...")
+                
+                
+                if AppSharedData.sharedInstance.isFirstCalibrations{
+                    
+                }
+//                if let currentModuleSerial = Module.currentModule?.serial {
+//                    if serial != currentModuleSerial {
+//                        return
+//                    }
+//                }
+                
+                 let currentModuleSerial = serialNo
+                if serial != currentModuleSerial {
+                    return
+                }
+                flipr = peripheral
+                peripheral.delegate = self
                 isConnecting = true
+                self.currentMeasuringSerial = serial ?? ""
+                print("Connecting...\(flipr?.name ?? "")")
                 central.connect(flipr!, options: nil)
             }
             
@@ -412,6 +505,7 @@ extension BLEManager: CBCentralManagerDelegate {
                 let ItemSerial = name.replacingOccurrences(of: occuranceString, with: "").trimmed
                 if ItemSerial == serial{
                     centralManager.connect(item, options: nil)
+                    print("Connecting...\(flipr?.name ?? "")")
                 }
             }
         }
@@ -422,7 +516,7 @@ extension BLEManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         isConnecting = false
-        print("Central manager did connect to Flipr")
+        print("Central manager did connect to Flipr: \(peripheral.identifier)")
         NotificationCenter.default.post(name: K.Notifications.FliprConnected, object: nil)
         peripheral.discoverServices([FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.historicalServiceUUID])
     }
@@ -515,8 +609,9 @@ extension BLEManager: CBPeripheralDelegate {
                     }
                     if characteristic.uuid == FliprBLEParameters.modeCharactersticUUID {
                         if activationNeeded {
-                            let data = Data(bytes: &activationNeeded, count: MemoryLayout.size(ofValue: activationNeeded))
-                            flipr?.writeValue(data, for: characteristic, type: .withResponse)
+//                            let data = Data(bytes: &activationNeeded, count: MemoryLayout.size(ofValue: activationNeeded))
+                            let data = "1".data(using: .utf8)
+                            flipr?.writeValue(data!, for: characteristic, type: .withResponse)
                         }
                         if turnOn || turnOff {
                             var value = true
@@ -543,6 +638,8 @@ extension BLEManager: CBPeripheralDelegate {
             switch characteristic.uuid {
             case FliprBLEParameters.measuresCharactersticUUID:
                 print("Measures charateric value: \(value.hexEncodedString())")
+                print("Connecting...\(peripheral.name)")
+
                 if calibrationMeasures {
                     if calibrationType == .simpleMeasure {
                         post(measures: value.hexEncodedString(), type: "0")

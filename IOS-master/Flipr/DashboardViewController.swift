@@ -277,6 +277,7 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        BLEManager.shared.disConnectCurrentDevice()
         self.placeDropdownArrowImage.isHidden = true
         manageFlipTabTitle()
         setUpStatusScroll()
@@ -3979,7 +3980,8 @@ class DashboardViewController: UIViewController {
                                 self.manageNotificationDisabledButtton()
                             }
                         }
-                    } else {
+                    }
+                    else {
                         
                         if self.isLoadedDashboard{
                             self.showSuccess(title: "", message: "first analysis is in progress!")
@@ -5435,7 +5437,7 @@ extension DashboardViewController:PlaceDropdownDelegate{
             Pool.currentPool?.id = placeDetails.placeId
             Pool.saveCurrentPoolLocally()
             refreshDashboardForSelectedPlace()
-            
+            BLEManager.shared.disConnectCurrentDevice()
         }else{
             userHasNoFlipr()
             Module.currentModule?.serial = ""

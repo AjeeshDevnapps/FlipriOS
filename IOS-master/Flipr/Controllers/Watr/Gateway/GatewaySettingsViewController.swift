@@ -18,12 +18,41 @@ class GatewaySettingsViewController: UIViewController {
     var hub: HUB?
     var settings:ControlRSettings?
     var info:UserGateway?
+    var isShowingWifiListScreen  = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = info?.serial
         tableView.tableFooterView =  UIView()
         self.tableView.reloadData()
+        
+        NotificationCenter.default.addObserver(forName: K.Notifications.GatewayDiscovered, object: nil, queue: nil) { (notification) in
+            //            self.scanningAlertContainerView.isHidden = true
+            //            self.loaderView.hideStateView()
+            if let serial = notification.userInfo?["serial"] as? String {
+                print("Gateway getting ... \(serial)")
+                if self.isShowingWifiListScreen{
+                    
+                }else{
+                    self.isShowingWifiListScreen = true
+                    DispatchQueue.main.async {
+                        self.reconnectGateway()
+                    }
+                }
+//                if let index = self.gatewayArray.firstIndex(of: serial) {
+//                    print(index) // Output: 4
+//                }else{
+//                    self.gatewayArray.append(serial)
+//                    DispatchQueue.main.async {
+//                        self.tableView.reloadData()
+//                    }
+//                }
+                //                self.showFliprList(serialKey: serial)
+            }else{
+                
+            }
+        }
+        
 
 //        self.getSettings()
         // Do any additional setup after loading the view.
@@ -54,6 +83,24 @@ class GatewaySettingsViewController: UIViewController {
     @IBAction func renameButtonAction(_ sender: Any) {
 //        self.showRename()
     }
+    
+    
+    func reconnectGateway(){
+        GatewayManager.shared.stopScanForGateway()
+        let serialNo = self.info?.serial ?? ""
+        GatewayManager.shared.connect(serial: serialNo) { error in
+            if error != nil {
+                self.showError(title: "Error".localized, message: error?.localizedDescription)
+            }
+            else {
+                print("Added selected Gateway")
+                if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GatewaywifiViewController") as? GatewaywifiViewController {
+                    vc.serial = serialNo
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
 
 }
 
@@ -75,7 +122,7 @@ extension GatewaySettingsViewController: UITableViewDataSource,UITableViewDelega
             cell.nameLbl.text = "\(version)"
         }
         if let serial = self.info?.serial {
-            cell.ownerLbl.text = serial
+//            cell.ownerLbl.text = serial
         }
 //        cell.locationLbl.text = settings?.placeName
 //        cell.serialNoLbl.text = settings?.serial
@@ -104,7 +151,11 @@ extension GatewaySettingsViewController{
  
     
     @IBAction func updateButtonClicked(_ sender: UIButton) {
-        self.showSettings()
+//        self.showSettings()
+        let serial = self.info?.serial ?? ""
+        GatewayManager.shared.scanForGateways(serials: [serial], completion: { (gatewayinfo) in
+            
+        })
     }
     
     func showSettings(){
@@ -151,20 +202,21 @@ extension GatewaySettingsViewController{
         let okAction = UIAlertAction(title: "Confirmer".localized, style: UIAlertAction.Style.destructive)
         {
             (result : UIAlertAction) -> Void in
-            self.deleteHub()
+            self.deleteGateway()
         }
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func deleteHub(){
+    func deleteGateway(){
         
         Alamofire.request(Router.deleteModule(moduleId: self.info?.serial ?? "")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             
             switch response.result {
                 
             case .success(_):
+//                    self.dismiss(animated: true, completion: nil)
                 self.navigationController?.popViewController(animated: true)
                 break
             case .failure(let error):

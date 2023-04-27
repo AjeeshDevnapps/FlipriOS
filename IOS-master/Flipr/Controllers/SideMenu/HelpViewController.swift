@@ -52,7 +52,7 @@ class HelpViewController: UIViewController {
         }
     }
     
-    @IBAction func faqButtonClicked(){
+    @IBAction func  faqButtonClicked(){
         if let url = URL(string: "FAQ_URL".localized.remotable) {
             let vc = SFSafariViewController(url: url, entersReaderIfAvailable: false)
             self.present(vc, animated: true)

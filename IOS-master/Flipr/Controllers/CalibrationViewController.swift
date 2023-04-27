@@ -17,7 +17,7 @@ enum CalibrationType: String {
 
 class CalibrationViewController: UIViewController {
     
-    let measuresInterval:Double = 150
+    var measuresInterval:Double = 30
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var headerLabel: UILabel!
@@ -45,6 +45,9 @@ class CalibrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+            self.measuresInterval = Double(curretnValue) ?? 60
+        }
         if let module = Module.currentModule {
             if module.isForSpa {
                 //backgroundImageView.image = UIImage(named:"BG_spa")
@@ -149,17 +152,92 @@ class CalibrationViewController: UIViewController {
                                                   selector: #selector(self.checkForAppStrucked),
                                                   userInfo: nil,
                                                   repeats: true)
+        
+        
+        if let currentFlipr = BLEManager.shared.flipr{
+            var name = currentFlipr.name ?? ""
+            var occuranceString = "Flipr 00"
 
+            if name.hasPrefix("Flipr 00") {
+                occuranceString = "Flipr 00"
+            }
+            else if name.hasPrefix("Flipr 0"){
+                occuranceString = "Flipr 0"
+            }
+            
+            let serial = name.replacingOccurrences(of: occuranceString, with: "").trimmed
+            
+            if Module.currentModule?.serial == serial{
+                
+                BLEManager.shared.startMeasure { (error) in
+                    
+                    BLEManager.shared.doAcq = false
+                    if error != nil {
+                        self.stackView.alpha = 1
+                        self.view.hideStateView()
+                        
+                        self.showError(title: "Error".localized, message: error?.localizedDescription)
+                        self.view.hideStateView()
+                        self.stackView.alpha = 1
+                        self.progressView.isHidden = true
+                    } else {
+                        
+                        UIApplication.shared.isIdleTimerDisabled = true
+                        
+                        //timer 2 min et à la fin lire la measure.
+                        UserDefaults.standard.set(Date()?.addingTimeInterval(self.measuresInterval), forKey: self.calibrationType.rawValue + "CalibrationEndingDate")
+                        
+                        let theme = EmptyStateViewTheme.shared
+                        theme.activityIndicatorType = .ballGridPulse
+                        if self.calibrationType == .simpleMeasure {
+                            self.view.showEmptyStateViewLoading(title: "New measurement".localized.uppercased(), message: "Measurement in progress...\n\nThis operation may take a few minutes, do not quit the app, keep the iPhone active and close to the Flipr.".localized, theme: theme)
+                        } else {
+                            self.view.showEmptyStateViewLoading(title: "CALIBRATION ".localized + self.calibrationType.rawValue.uppercased(), message: "Measurement in progress...\n\nThis operation may take a few minutes, do not quit the app, keep the iPhone active and close to the Flipr.".localized, theme: theme)
+                        }
+                       
+                        
+                        self.progressView.isHidden = false
+                        self.progressView.setProgress(0, animated: false)
+                        
+                        self.measuresTimer = Timer.scheduledTimer(timeInterval: 0.05,
+                                                                  target: self,
+                                                                  selector: #selector(self.updateTime),
+                                                                  userInfo: nil,
+                                                                  repeats: true)
+                    }
+                    
+                    self.backButton.isEnabled = true
+                }
+
+            }else{
+                connectCurrentModuleFlipr()
+            }
+        }else{
+            print("No flipr in shared data")
+            connectCurrentModuleFlipr()
+        }
+
+    }
+    
+    
+    func connectCurrentModuleFlipr(){
+        NotificationCenter.default.addObserver(forName: K.Notifications.FliprConnected, object: nil, queue: nil) { (notification) in
+            NotificationCenter.default.removeObserver(self)
+            self.startMeasureReading()
+        }
+        BLEManager.shared.startUpCentralManager(connectAutomatically: true, sendMeasure: false)
+
+    }
+    
+    func startMeasureReading(){
         BLEManager.shared.startMeasure { (error) in
             
             BLEManager.shared.doAcq = false
-            
             if error != nil {
                 self.stackView.alpha = 1
                 self.view.hideStateView()
                 
                 self.showError(title: "Error".localized, message: error?.localizedDescription)
-                
                 self.view.hideStateView()
                 self.stackView.alpha = 1
                 self.progressView.isHidden = true
@@ -172,7 +250,6 @@ class CalibrationViewController: UIViewController {
                 
                 let theme = EmptyStateViewTheme.shared
                 theme.activityIndicatorType = .ballGridPulse
-                
                 if self.calibrationType == .simpleMeasure {
                     self.view.showEmptyStateViewLoading(title: "New measurement".localized.uppercased(), message: "Measurement in progress...\n\nThis operation may take a few minutes, do not quit the app, keep the iPhone active and close to the Flipr.".localized, theme: theme)
                 } else {
@@ -192,6 +269,7 @@ class CalibrationViewController: UIViewController {
             
             self.backButton.isEnabled = true
         }
+
     }
     
     @objc func checkForAppStrucked() {
@@ -318,8 +396,6 @@ class CalibrationViewController: UIViewController {
                             }
                             Module.saveCurrentModuleLocally()
                         }
-                        
-                       
                     }
                 })
             } else {

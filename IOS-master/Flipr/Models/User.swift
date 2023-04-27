@@ -632,6 +632,15 @@ class User {
         AppSharedData.sharedInstance.isNeedtoCallModulesApiForSideMenu = true
         AppSharedData.sharedInstance.serialKey = ""
         AppSharedData.sharedInstance.deviceName = ""
+        
+        AppSharedData.sharedInstance.isAddPlaceFlow = false
+        AppSharedData.sharedInstance.isAddPlaceSuccess = false
+        AppSharedData.sharedInstance.isAddDeviceStarted = false
+        AppSharedData.sharedInstance.isFirstCalibrations = false
+        AppSharedData.sharedInstance.deviceSerialNo   = ""
+        AppSharedData.sharedInstance.isOwner = false
+        AppSharedData.sharedInstance.haveInvitation = false
+        AppSharedData.sharedInstance.havePlace = false
         UserDefaults.standard.synchronize()
     }
     

@@ -12,15 +12,17 @@ import JGProgressHUD
 
 
 
-class GateWayListingViewController: UIViewController {
+class GateWayListingViewController: BaseViewController {
     
     var gateWays = [NWEndpoint]()
     var gatewayArray = [String]()
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
+        self.hidCustombackbutton = true
         super.viewDidLoad()
-        
+        self.navigationItem.setHidesBackButton(true, animated: true)
+
         NotificationCenter.default.addObserver(forName: K.Notifications.GatewayDiscovered, object: nil, queue: nil) { (notification) in
             //            self.scanningAlertContainerView.isHidden = true
             //            self.loaderView.hideStateView()
@@ -29,7 +31,9 @@ class GateWayListingViewController: UIViewController {
                     print(index) // Output: 4
                 }else{
                     self.gatewayArray.append(serial)
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
                 //                self.showFliprList(serialKey: serial)
             }else{
@@ -40,6 +44,18 @@ class GateWayListingViewController: UIViewController {
         findFliprGatways()
         
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        GatewayManager.shared.stopScanForGateway()
+    }
+    
+    
+    @IBAction func cancelButtonClicked(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+
+    }
+    
     
     func findFliprGatways(){
         
@@ -73,23 +89,21 @@ extension GateWayListingViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DeviceInfoTableViewCell") as! DeviceInfoTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GatewayInfoTableViewCell") as! GatewayInfoTableViewCell
         //        let network = networks[indexPath.row]
-        cell.modelLabel.text = "WIBLUE"
-        cell.keyIdLabel.text = gatewayArray[indexPath.row]
+        cell.modelLabel.text = "N° Série".localized
+        cell.serialLabel.text = gatewayArray[indexPath.row]
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 96
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let serialNo = gatewayArray[indexPath.row]
         self.addGatewayInUserAccount(serialNo: serialNo)
-
-       
         
     }
     
@@ -103,7 +117,7 @@ extension GateWayListingViewController: UITableViewDataSource, UITableViewDelega
                 self.showError(title: "Error".localized, message: error?.localizedDescription)
             }else{
                 print(gatewayInfo)
-                GatewayManager.shared.stopScanForHubs()
+                GatewayManager.shared.stopScanForGateway()
                 GatewayManager.shared.connect(serial: serialNo) { error in
                     if error != nil {
                         self.showError(title: "Error".localized, message: error?.localizedDescription)

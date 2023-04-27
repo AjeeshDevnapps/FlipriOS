@@ -73,6 +73,14 @@ class FliprHubMenuViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func changeDelayTimeButtonAction(){
+        
+        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ChangeDelayViewController") as? ChangeDelayViewController {
+            self.present(viewController, animated: true)
+        }
+    }
+    
     func arrangeMenu(){
         
         /*
@@ -113,15 +121,27 @@ class FliprHubMenuViewController: UIViewController {
         }
         
         if let module = Module.currentModule {
+            var sNo =  ""
             if let identifier = Module.currentModule?.serial {
                 self.titleLbl.text = identifier
+                sNo = identifier
                 self.haveFlipr = true
             }
 
             if module.isSubscriptionValid {
                 haveSubscription = true
             }else{
-                haveSubscription = false
+                
+                if self.haveFlipr{
+                    if sNo.hasPrefix("F3"){
+                        haveSubscription = true
+                    }else{
+                        haveSubscription = false
+                    }
+                }else{
+                    haveSubscription = false
+                }
+
             }
         }
         

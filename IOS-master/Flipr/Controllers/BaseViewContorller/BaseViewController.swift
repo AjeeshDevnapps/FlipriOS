@@ -12,13 +12,18 @@ class BaseViewController: UIViewController {
     var backButtonTitle = ""
     let imageView = UIImageView(image: UIImage(named: "bkWaves.pdf"))
     var isPresentingView = false
+    var hidCustombackbutton = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor =  UIColor.init(hexString: "#F2F9FE")
         imageView.frame = CGRect(x: 0, y: self.view.height - 316, width: self.view.frame.width, height: 316)
         view.addSubview(imageView)
-        setCustomBackButton()
+        if hidCustombackbutton{
+            
+        }else{
+            setCustomBackButton()
+        }
 
         // Do any additional setup after loading the view.
     }

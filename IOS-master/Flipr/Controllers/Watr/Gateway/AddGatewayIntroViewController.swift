@@ -28,10 +28,18 @@ class AddGatewayIntroViewController: UIViewController {
     }
     
     @IBAction func skipButtonClicked() {
-        let sb = UIStoryboard(name: "Calibration", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
-        vc.isAddingNewDevice = true
-        self.navigationController?.pushViewController(vc, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+        dashboard.modalTransitionStyle = .flipHorizontal
+        dashboard.modalPresentationStyle = .fullScreen
+        self.present(dashboard, animated: true, completion: {
+            self.navigationController?.popToRootViewController(animated: false)
+        })
+
+//        let sb = UIStoryboard(name: "Calibration", bundle: nil)
+//        let vc = sb.instantiateViewController(withIdentifier: "PoolSettingsStartViewControllerFromFlipr") as! PoolSettingsStartViewController
+//        vc.isAddingNewDevice = true
+//        self.navigationController?.pushViewController(vc, animated: true)
 
     }
 

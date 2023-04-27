@@ -17,7 +17,7 @@ class ChlorineCalibrationViewController: BaseViewController {
     var isAddingNewDevice = false
 
     
-    let measuresInterval:Double = 150
+    var measuresInterval:Double = 60
     var recalibration = false
     var calibrationType:CalibrationType = .ph4
     var measuresTimer : Timer?
@@ -35,6 +35,9 @@ class ChlorineCalibrationViewController: BaseViewController {
         titleLbl.text  = "Calibrage en cours".localized
         msgLbl.text  = "Cette opération prend environs 2 minutes. Veuillez rester à proximité immédiate de votre téléphone et de l’appareil Flipr. Maintenez l’application ouverte et active.".localized
         successLbl.text  = "Calibration pH4 réussie !".localized
+        if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+            self.measuresInterval = Double(curretnValue) ?? 60
+        }
         self.calibrate()
         // Do any additional setup after loading the view.
     }
@@ -86,6 +89,11 @@ class ChlorineCalibrationViewController: BaseViewController {
                 }
                 if version == 3{
                     timerVal = 60
+                    if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+                        self.measuresInterval = Double(curretnValue) ?? 60
+                    }else{
+                        
+                    }
                 }
             }
         }
@@ -107,6 +115,12 @@ class ChlorineCalibrationViewController: BaseViewController {
         
         if self.isAddingNewDevice{
             AppSharedData.sharedInstance.isFirstCalibrations = true
+            if AppSharedData.sharedInstance.isFlipr3 {
+                self.measuresInterval = 60
+                if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+                    self.measuresInterval = Double(curretnValue) ?? 60
+                }
+            }
         }else{
             AppSharedData.sharedInstance.isFirstCalibrations = false
         }
@@ -224,6 +238,7 @@ class ChlorineCalibrationViewController: BaseViewController {
                         self.view.hideStateView()
                         
                     } else {
+                        BLEManager.shared.disConnectCurrentDevice()
                         if self.calibrationType == .simpleMeasure {
                             self.dismiss(animated: true, completion: nil)
 //                            self.navigationController?.dismiss(animated: true, completion: nil)
