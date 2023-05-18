@@ -25,7 +25,7 @@ class FliprActivationSuccessViewController: BaseViewController {
     @IBAction func nextButtonClicked() {
         var isFlipr3 = false
         if serialKey != nil && serialKey.count > 0{
-            if serialKey.hasPrefix("F3"){
+            if serialKey.hasPrefix("F"){
                 isFlipr3 = true
                 AppSharedData.sharedInstance.isFlipr3 = true
             }else{

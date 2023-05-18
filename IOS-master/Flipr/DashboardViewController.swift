@@ -3598,7 +3598,9 @@ class DashboardViewController: UIViewController {
                                                 if error?.localizedDescription == "Diff Device"{
                                                     debugPrint("Diff Device error")
                                                 }else{
-                                                    self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+                                                    //                                                    self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+
+//                                                    self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
                                                     self.bleStatusView.isHidden = true
                                                 }
                                                 
@@ -3708,13 +3710,23 @@ class DashboardViewController: UIViewController {
                             self.waterTemperatureLabel.text = String(format: "%.0f", temp) + "°C"
                             self.hubTabAirValLabel.text = String(format: "%.0f", temp) + "°C"
                             Module.currentModule?.rawWaterTemperature = String(format: "%.2f", temp) + "°C"
-                            
+                            if temp > 0 && temp < 41{
+                                
+                            }else{
+                                self.waterTemperatureLabel.text = "NA"
+                                self.hubTabAirValLabel.text = "NA"
+                            }
                             if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
                                 if currentUnit == 2{
                                     let funit = (temp * 9/5) + 32
-                                    self.waterTemperatureLabel.text = String(format: "%.0f", funit) + "°F"
-                                    self.hubTabAirValLabel.text = String(format: "%.0f", funit) + "°F"
-                                    Module.currentModule?.rawWaterTemperature = String(format: "%.2f", temp) + "°F"
+                                    if funit > 0 && funit < 41{
+                                        self.waterTemperatureLabel.text = String(format: "%.0f", funit) + "°F"
+                                        self.hubTabAirValLabel.text = String(format: "%.0f", funit) + "°F"
+                                        Module.currentModule?.rawWaterTemperature = String(format: "%.2f", temp) + "°F"
+                                    }else{
+                                        self.waterTemperatureLabel.text = "NA"
+                                        self.hubTabAirValLabel.text = "NA"
+                                    }
                                 }else{
                                 }
                             }
@@ -3741,6 +3753,14 @@ class DashboardViewController: UIViewController {
                                     self.pHLabel.text = "0"
                                     self.hubTabPhValLabel.text = "0"
                                 }
+                                
+                                if (value > 3.9 && value < 10.1){
+                                    
+                                }else{
+                                    self.pHLabel.text = "NA"
+                                    self.hubTabPhValLabel.text = "NA"
+                                }
+                                
                                 if let message = pH["Message"] as? String {
                                     self.pHStateLabel.text = message
                                     self.pHSateView.isHidden = false
@@ -4331,7 +4351,6 @@ class DashboardViewController: UIViewController {
                 viewController.placeDetails = self.placeDetails
                 
                 self.present(viewController, animated: true) {
-                    
                     //                viewController.showBackgroundView()
                 }
             }
@@ -5347,6 +5366,7 @@ extension DashboardViewController{
         self.phChangeButton.isHidden = !isPlaceOwner;
         self.redoxChangeButton.isHidden = !isPlaceOwner;
         self.manageGestView()
+        self.createUserInfoString()
     }
     
     func getPlaceModules(placeId:String){
@@ -5397,9 +5417,43 @@ extension DashboardViewController{
         })
     }
     
+    
+    
+    
 }
 
 extension DashboardViewController:PlaceDropdownDelegate{
+    
+    
+    func createUserInfoString(){
+//        self.placeDetails
+        
+        var info:String = "UID: "
+        if let userIDStr = self.placeDetails.placeOwner{
+            info.append("\(userIDStr)")
+        }
+
+//        if isPlaceOwner{
+//            if let userIDStr = self.placeDetails.placeOwner{
+//                info.append("\(userIDStr)")
+//            }
+//        }else{
+//            if let guestIDStr = self.placeDetails.guestId{
+//                info.append("\(guestIDStr)")
+//            }
+//        }
+        
+        if let placeIDStr = self.placeDetails.placeId{
+            info.append(" | PID: ")
+            info.append("\(placeIDStr)")
+        }
+        
+       
+        AppSharedData.sharedInstance.userInfoTitle = info
+        
+    }
+    
+    
     func didSelectPlaceModules(placeModules: [PlaceModule], placeDetails: PlaceDropdown) {
         
         if placeDetails.permissionLevel == "Admin"{
@@ -5450,6 +5504,7 @@ extension DashboardViewController:PlaceDropdownDelegate{
             Pool.saveCurrentPoolLocally()
             loadHUBs()
         }
+        createUserInfoString()
     }
     
     func updatePool(){

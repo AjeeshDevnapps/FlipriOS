@@ -33,6 +33,13 @@ class ExpertMenuViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: K.Notifications.showFirmwereUpgradeScreen, object: nil, queue: nil) { (notification) in
             self.showFirmwereUdpateScreen()
         }
+        
+        if let identifier = Module.currentModule?.serial {
+            var infoStr = AppSharedData.sharedInstance.userInfoTitle
+            infoStr.append(" | FID: ")
+            infoStr.append("\(identifier)")
+            self.titleLbl.text = infoStr
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -52,7 +59,14 @@ class ExpertMenuViewController: UIViewController {
             if module.isSubscriptionValid {
                 haveSubscription = true
             }else{
-                haveSubscription = false
+//                haveSubscription = false
+                if let identifier = Module.currentModule?.serial {
+                    if identifier.hasPrefix("F"){
+                        haveSubscription = true
+                    }else{
+                        haveSubscription = false
+                    }
+                }
             }
         }
         
@@ -106,6 +120,18 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width);
         }else{
             
+        }
+        if indexPath.row == 0{
+            if let identifier = Module.currentModule?.serial {
+                if identifier.hasPrefix("F"){
+                    cell.contentView.alpha = 0.5
+                }else{
+                    cell.contentView.alpha = 1.0
+                }
+            }
+        }
+        else{
+            cell.contentView.alpha = 1.0
         }
         return cell
     }
@@ -203,6 +229,12 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func triggerMesurement(){
+        
+        if let identifier = Module.currentModule?.serial {
+            if identifier.hasPrefix("F") || identifier.hasPrefix("f"){
+                return
+            }
+        }
         let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
         if let viewController = mainSb.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
             viewController.calibrationType = .simpleMeasure

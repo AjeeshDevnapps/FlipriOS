@@ -170,6 +170,9 @@ class GatewaySettingsTableViewCell: UITableViewCell {
     @IBOutlet weak var statusHeaderTitle: UILabel!
     @IBOutlet weak var settingsHeaderTitle: UILabel!
 
+    @IBOutlet weak var deleteHeaderTitle: UILabel!
+    @IBOutlet weak var changeeWifiTitle: UILabel!
+
 
     @IBOutlet weak var deleteBtn: UIButton!
 
@@ -178,18 +181,19 @@ class GatewaySettingsTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-//        nameLblTitle.text = "Libellé ".localized
+        nameLblTitle.text = "Type" .localized
+        
 //        ownerLblTitle.text = "Propriétaire".localized
-//        locationLblTitle.text = "Emplacement".localized
-//        serialNoLblTitle.text = "Numéro de série".localized
-//        modeLblTitle.text = "Mode".localized
-//        statusLblTitle.text = "Statut".localized
+        locationLblTitle.text = "State".localized
+        serialNoLblTitle.text = "Last connection".localized
+//        deleteHeaderTitle.text = "Mode".localized
+        changeeWifiTitle.text = "Changer le réseau Wifi".localized
 //        settingsLblTitle.text = "Paramètres de connexion".localized
 //
-//        generalHeaderTitle.text = "GENERAL".localized
+        generalHeaderTitle.text = "GENERAL".localized
 //        statusHeaderTitle.text = "Statut".localized
 //        settingsHeaderTitle.text = "REGLAGES".localized
-//        deleteBtn.setTitle("Supprimer".localized, for: .normal)
+        deleteBtn.setTitle("Supprimer".localized, for: .normal)
 
 
         container1.addShadow(offset: CGSize.init(width: 0, height: 0), color: UIColor(hexString: "E3E7F0"), radius: 25.0, opacity: 1.0)

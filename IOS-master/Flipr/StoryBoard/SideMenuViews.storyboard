@@ -915,7 +915,7 @@
                                             <constraint firstAttribute="width" constant="111" id="6bg-qR-YE3"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVj-mf-m0l">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fVj-mf-m0l">
                                         <rect key="frame" x="16" y="85" width="351" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="tEZ-2u-vqk"/>
@@ -970,30 +970,26 @@
                                             <outlet property="delegate" destination="zao-hG-fyC" id="3Dq-F3-LsS"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivb-jJ-Req">
-                                        <rect key="frame" x="8" y="25" width="120" height="50"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucx-vj-lNA">
+                                        <rect key="frame" x="20" y="80" width="335" height="21"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="Dd2-RN-Ish"/>
-                                            <constraint firstAttribute="height" constant="50" id="JWe-iL-lj7"/>
+                                            <constraint firstAttribute="height" constant="21" id="AC4-GS-iKb"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Change Delay time">
-                                            <color key="baseForegroundColor" red="0.99607843139999996" green="0.0039215686269999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="changeDelayTimeButtonAction" destination="zao-hG-fyC" eventType="touchUpInside" id="bvO-MP-m5L"/>
-                                        </connections>
-                                    </button>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="Ucx-vj-lNA" firstAttribute="top" secondItem="Qik-X8-h9F" secondAttribute="bottom" constant="15" id="1g5-US-FPp"/>
                                     <constraint firstItem="FQE-2G-tuK" firstAttribute="top" secondItem="SoH-bU-mnL" secondAttribute="top" constant="20" id="7e6-91-5vg"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ucx-vj-lNA" secondAttribute="trailing" constant="20" symbolic="YES" id="8fN-Qs-eFf"/>
                                     <constraint firstItem="Qik-X8-h9F" firstAttribute="centerX" secondItem="SoH-bU-mnL" secondAttribute="centerX" id="93B-Rx-qLw"/>
                                     <constraint firstItem="kNJ-BC-aIH" firstAttribute="top" secondItem="fVj-mf-m0l" secondAttribute="bottom" constant="30" id="BvH-b9-X9y"/>
-                                    <constraint firstItem="ivb-jJ-Req" firstAttribute="leading" secondItem="SoH-bU-mnL" secondAttribute="leading" constant="8" id="Mm6-82-14b"/>
+                                    <constraint firstItem="Ucx-vj-lNA" firstAttribute="leading" secondItem="SoH-bU-mnL" secondAttribute="leading" constant="20" symbolic="YES" id="PDe-6C-Juc"/>
                                     <constraint firstItem="Qik-X8-h9F" firstAttribute="top" secondItem="SoH-bU-mnL" secondAttribute="top" constant="20" id="Pld-dh-Bv4"/>
-                                    <constraint firstItem="ivb-jJ-Req" firstAttribute="top" secondItem="SoH-bU-mnL" secondAttribute="top" constant="25" id="ULP-uK-Rdp"/>
                                     <constraint firstAttribute="trailing" secondItem="kNJ-BC-aIH" secondAttribute="trailing" id="WbT-bF-TRS"/>
                                     <constraint firstItem="fVj-mf-m0l" firstAttribute="top" secondItem="Qik-X8-h9F" secondAttribute="bottom" constant="20" id="Yn9-tB-Hqx"/>
                                     <constraint firstAttribute="bottom" secondItem="kNJ-BC-aIH" secondAttribute="bottom" id="c8p-ug-Z1x"/>
@@ -1979,13 +1975,13 @@ supprimer le Hub ?</string>
                                             <constraint firstAttribute="height" constant="45" id="eFz-QM-qxh"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Numéro de série" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4P-gv-1Ju">
-                                        <rect key="frame" x="16" y="85" width="132.5" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Numéro de série" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4P-gv-1Ju">
+                                        <rect key="frame" x="16" y="85" width="343" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="10Z-ky-pEc"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" red="0.59215686270000001" green="0.63921568630000003" blue="0.71372549019999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="T7g-Y3-Xt6">
@@ -2043,6 +2039,7 @@ supprimer le Hub ?</string>
                                     </constraint>
                                     <constraint firstItem="epz-Tb-czO" firstAttribute="top" secondItem="SXq-U9-aLi" secondAttribute="top" constant="20" id="Efm-fZ-kMy"/>
                                     <constraint firstAttribute="bottom" secondItem="T7g-Y3-Xt6" secondAttribute="bottom" id="YEb-ve-VY8"/>
+                                    <constraint firstAttribute="trailing" secondItem="s4P-gv-1Ju" secondAttribute="trailing" constant="16" id="aQi-qW-Scw"/>
                                     <constraint firstItem="T7g-Y3-Xt6" firstAttribute="leading" secondItem="SXq-U9-aLi" secondAttribute="leading" id="bof-AX-Hun"/>
                                     <constraint firstItem="epz-Tb-czO" firstAttribute="centerX" secondItem="SXq-U9-aLi" secondAttribute="centerX" id="gCc-67-QLX"/>
                                     <constraint firstAttribute="trailing" secondItem="8KQ-AF-9oi" secondAttribute="trailing" constant="16" id="gFv-af-yei"/>
@@ -2102,8 +2099,17 @@ supprimer le Hub ?</string>
                                         <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KHO-F1-akS">
+                                        <rect key="frame" x="8" y="72" width="359" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="Vsa-lp-0Jy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="SkC-u8-YVP">
-                                        <rect key="frame" x="0.0" y="77" width="375" height="292"/>
+                                        <rect key="frame" x="0.0" y="123" width="375" height="246"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="separatorColor" red="0.59215686270000001" green="0.63921568630000003" blue="0.71372549019999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
@@ -2178,11 +2184,14 @@ supprimer le Hub ?</string>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="369" id="0BH-fU-lz4"/>
+                                    <constraint firstItem="SkC-u8-YVP" firstAttribute="top" secondItem="KHO-F1-akS" secondAttribute="bottom" constant="30" id="0lP-fa-OSh"/>
                                     <constraint firstItem="s8o-sp-nlZ" firstAttribute="centerY" secondItem="4sY-ce-k0T" secondAttribute="centerY" id="1dL-5O-7c0"/>
+                                    <constraint firstAttribute="trailing" secondItem="KHO-F1-akS" secondAttribute="trailing" constant="8" id="1rk-RR-Lx8"/>
+                                    <constraint firstItem="KHO-F1-akS" firstAttribute="leading" secondItem="Yyn-qI-pgu" secondAttribute="leading" constant="8" id="D6e-KP-arn"/>
                                     <constraint firstItem="4sY-ce-k0T" firstAttribute="top" secondItem="Yyn-qI-pgu" secondAttribute="top" constant="20" id="HbW-BS-POH"/>
                                     <constraint firstAttribute="bottom" secondItem="SkC-u8-YVP" secondAttribute="bottom" id="JcI-B7-SH6"/>
                                     <constraint firstItem="SkC-u8-YVP" firstAttribute="leading" secondItem="Yyn-qI-pgu" secondAttribute="leading" id="M9A-sI-xcQ"/>
-                                    <constraint firstItem="SkC-u8-YVP" firstAttribute="top" secondItem="4sY-ce-k0T" secondAttribute="bottom" constant="25" id="q2M-bI-EIp"/>
+                                    <constraint firstItem="KHO-F1-akS" firstAttribute="top" secondItem="s8o-sp-nlZ" secondAttribute="bottom" constant="25" id="XCn-hG-CQk"/>
                                     <constraint firstItem="s8o-sp-nlZ" firstAttribute="centerX" secondItem="Yyn-qI-pgu" secondAttribute="centerX" id="u7W-g5-z9i"/>
                                     <constraint firstAttribute="trailing" secondItem="SkC-u8-YVP" secondAttribute="trailing" id="xFB-eq-xRQ"/>
                                     <constraint firstAttribute="trailing" secondItem="4sY-ce-k0T" secondAttribute="trailing" constant="16" id="xIr-n0-FqE"/>
@@ -2201,6 +2210,7 @@ supprimer le Hub ?</string>
                         <outlet property="menuView" destination="Yyn-qI-pgu" id="oDJ-QZ-oVh"/>
                         <outlet property="menuViewHeight" destination="0BH-fU-lz4" id="8YS-q4-dEH"/>
                         <outlet property="settingTable" destination="SkC-u8-YVP" id="ihC-4m-ZTS"/>
+                        <outlet property="subTitleLbl" destination="KHO-F1-akS" id="jab-DW-pUy"/>
                         <outlet property="titleLbl" destination="s8o-sp-nlZ" id="A8u-ED-zZJ"/>
                     </connections>
                 </viewController>

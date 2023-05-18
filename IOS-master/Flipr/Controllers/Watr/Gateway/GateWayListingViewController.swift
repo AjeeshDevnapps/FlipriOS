@@ -14,6 +14,10 @@ import JGProgressHUD
 
 class GateWayListingViewController: BaseViewController {
     
+    @IBOutlet weak var cancelBtn: UIButton!
+    @IBOutlet weak var controllerTitle: UILabel!
+    @IBOutlet weak var subTitleLable: UILabel!
+
     var gateWays = [NWEndpoint]()
     var gatewayArray = [String]()
     @IBOutlet weak var tableView: UITableView!
@@ -22,6 +26,10 @@ class GateWayListingViewController: BaseViewController {
         self.hidCustombackbutton = true
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated: true)
+        
+        self.controllerTitle.text = "Branchez la passerelle au moyen du câble USB et restez à proximité.\n\nAttendez quelques secondes...".localized
+        self.subTitleLable.text = "".localized
+        cancelBtn.setTitle("Cancel".localized(), for: .normal)
 
         NotificationCenter.default.addObserver(forName: K.Notifications.GatewayDiscovered, object: nil, queue: nil) { (notification) in
             //            self.scanningAlertContainerView.isHidden = true
@@ -102,6 +110,7 @@ extension GateWayListingViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let serialNo = gatewayArray[indexPath.row]
         self.addGatewayInUserAccount(serialNo: serialNo)
         

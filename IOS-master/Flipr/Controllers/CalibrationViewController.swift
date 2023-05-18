@@ -17,7 +17,7 @@ enum CalibrationType: String {
 
 class CalibrationViewController: UIViewController {
     
-    var measuresInterval:Double = 30
+    var measuresInterval:Double = 150
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var headerLabel: UILabel!
@@ -39,15 +39,20 @@ class CalibrationViewController: UIViewController {
     var dismissEnabled = false
     
     var isFlipr2 = false
+    var isShowingPH4View = false
+    
+    var isRemovedObserver = false
+
+
     
     @IBOutlet weak var stackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
-            self.measuresInterval = Double(curretnValue) ?? 60
-        }
+//        if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+//            self.measuresInterval = Double(curretnValue) ?? 60
+//        }
         if let module = Module.currentModule {
             if module.isForSpa {
                 //backgroundImageView.image = UIImage(named:"BG_spa")
@@ -147,7 +152,7 @@ class CalibrationViewController: UIViewController {
         self.perform(#selector(self.checkForDeviceSearchingTimeOut), with: nil, afterDelay: 60)
         self.perform(#selector(self.checkForDeviceConnectingTimeOut), with: nil, afterDelay: 60)
         isCalibrationStrucked = true
-        self.checkCalibrationStruckTimer = Timer.scheduledTimer(timeInterval: 180,
+        self.checkCalibrationStruckTimer = Timer.scheduledTimer(timeInterval: 240,
                                                   target: self,
                                                   selector: #selector(self.checkForAppStrucked),
                                                   userInfo: nil,
@@ -167,7 +172,8 @@ class CalibrationViewController: UIViewController {
             
             let serial = name.replacingOccurrences(of: occuranceString, with: "").trimmed
             
-            if Module.currentModule?.serial == serial{
+            if Module.currentModule?.serial == serial
+            {
                 
                 BLEManager.shared.startMeasure { (error) in
                     
@@ -210,6 +216,7 @@ class CalibrationViewController: UIViewController {
                 }
 
             }else{
+                print("Taking data of flipr diff from saved module")
                 connectCurrentModuleFlipr()
             }
         }else{
@@ -223,15 +230,19 @@ class CalibrationViewController: UIViewController {
     func connectCurrentModuleFlipr(){
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprConnected, object: nil, queue: nil) { (notification) in
             NotificationCenter.default.removeObserver(self)
-            self.startMeasureReading()
+            NotificationCenter.default.removeObserver(self, name: K.Notifications.FliprConnected, object: nil)
+            if self.isRemovedObserver == false{
+                self.startMeasureReading()
+            }
+            self.isRemovedObserver = true
         }
         BLEManager.shared.startUpCentralManager(connectAutomatically: true, sendMeasure: false)
 
     }
     
     func startMeasureReading(){
+        
         BLEManager.shared.startMeasure { (error) in
-            
             BLEManager.shared.doAcq = false
             if error != nil {
                 self.stackView.alpha = 1
@@ -360,9 +371,25 @@ class CalibrationViewController: UIViewController {
                         self.stackView.alpha = 1
                         self.view.hideStateView()
                         
-                        self.showError(title: "Error".localized, message: error?.localizedDescription)
+                        if self.calibrationType == .simpleMeasure {
+                            self.invalidateStruckChecktimer()
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                        /*
+                        else if self.calibrationType == .ph7 {
+                            Module.currentModule?.pH7CalibrationDone = true
+                            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "CalibrationViewControllerID") as? CalibrationViewController {
+                                self.invalidateStruckChecktimer()
+                                viewController.calibrationType = .ph4
+                                viewController.recalibration = self.recalibration
+                                self.navigationController?.pushViewController(viewController, animated: true)
+                            }
+                        }
+                        */
+                        else{
+                            self.showError(title: "Error".localized, message: error?.localizedDescription)
+                        }
                         
-                        self.view.hideStateView()
                         self.stackView.alpha = 1
                         self.progressView.isHidden = true
                         

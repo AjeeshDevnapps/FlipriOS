@@ -15,7 +15,7 @@ class Ph7CalibrationViewController: BaseViewController {
     @IBOutlet weak var msgLbl: UILabel!
     @IBOutlet weak var successLbl: UILabel!
 
-    var measuresInterval:Double = 60
+    var measuresInterval:Double = 150
     var recalibration = false
     var calibrationType:CalibrationType = .ph7
     var measuresTimer : Timer?
@@ -25,17 +25,18 @@ class Ph7CalibrationViewController: BaseViewController {
     var checkCalibrationStruckTimer : Timer?
     var isCalibrationStrucked = false
     var isAddingNewDevice = false
+    var isShowingClorinView = false
 
-    var timerVal:Double = 180
+    var timerVal:Double = 240
 
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLbl.text  = "Calibrage en cours".localized
         msgLbl.text  = "Cette opération prend environs 2 minutes. Veuillez rester à proximité immédiate de votre téléphone et de l’appareil Flipr. Maintenez l’application ouverte et active.".localized
         successLbl.text  = "Calibration Ph7 réussie".localized
-        if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
-            self.measuresInterval = Double(curretnValue) ?? 60
-        }
+//        if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+//            self.measuresInterval = Double(curretnValue) ?? 60
+//        }
         self.calibrate()
         // Do any additional setup after loading the view.
     }
@@ -86,11 +87,11 @@ class Ph7CalibrationViewController: BaseViewController {
                     isFlipr2 = true
                 }
                 if version == 3{
-                    timerVal = 60
-                    self.measuresInterval = 60
-                    if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
-                        self.measuresInterval = Double(curretnValue) ?? 60
-                    }
+                    //timerVal = 60
+                    self.measuresInterval = 150
+//                    if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+//                        self.measuresInterval = Double(curretnValue) ?? 60
+//                    }
                 }
             }
         }
@@ -101,7 +102,7 @@ class Ph7CalibrationViewController: BaseViewController {
         else {
             
         }
-        self.perform(#selector(self.checkForDeviceSearchingTimeOut), with: nil, afterDelay: 20)
+        self.perform(#selector(self.checkForDeviceSearchingTimeOut), with: nil, afterDelay: 60)
 //        self.perform(#selector(self.checkForDeviceConnectingTimeOut), with: nil, afterDelay: 60)
         isCalibrationStrucked = true
         self.checkCalibrationStruckTimer = Timer.scheduledTimer(timeInterval: timerVal,
@@ -117,10 +118,10 @@ class Ph7CalibrationViewController: BaseViewController {
             }
             AppSharedData.sharedInstance.isFirstCalibrations = true
             if AppSharedData.sharedInstance.isFlipr3 {
-                self.measuresInterval = 60
-                if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
-                    self.measuresInterval = Double(curretnValue) ?? 60
-                }
+                self.measuresInterval = 150
+//                if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+//                    self.measuresInterval = Double(curretnValue) ?? 60
+//                }
             }
         }else{
             
@@ -223,6 +224,7 @@ class Ph7CalibrationViewController: BaseViewController {
                 BLEManager.shared.sendCalibrationMeasure(type: calibrationType, completion: { (error) in
                     
                     BLEManager.shared.calibrationMeasures = false
+                    BLEManager.shared.disConnectCurrentDevice()
                     if self.isAddingNewDevice{
                         AppSharedData.sharedInstance.isFirstCalibrations = false
                     }else{
@@ -236,9 +238,16 @@ class Ph7CalibrationViewController: BaseViewController {
                         self.showError(title: "Error".localized, message: error?.localizedDescription)
                         
                         self.view.hideStateView()
+                        if self.calibrationType == .ph7 {
+                            Module.currentModule?.pH7CalibrationDone = true
+                            self.loaderView.hideStateView()
+                            self.invalidateStruckChecktimer()
+                            self.showChlorineFlow()
+                        }
                         
                     } else {
                         if self.calibrationType == .simpleMeasure {
+                            self.invalidateStruckChecktimer()
                             self.dismiss(animated: true, completion: nil)
 //                            self.navigationController?.dismiss(animated: true, completion: nil)
                         } else {
@@ -295,6 +304,10 @@ class Ph7CalibrationViewController: BaseViewController {
     
     
     func showChlorineFlow(){
+        if self.isShowingClorinView {
+            return
+        }
+        self.isShowingClorinView = true
         self.successView.isHidden = false
         self.view.bringSubviewToFront( self.successView)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {

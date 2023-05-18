@@ -114,6 +114,10 @@ class FliprHubMenuViewController: UIViewController {
     
     
     func createMenuOrder(){
+        
+//        var info = "UID"
+//        info.append(User.currentUser?.email)
+
         if self.placeDetails.permissionLevel == "Admin"{
             isPlaceOwner = true
         }else{
@@ -121,19 +125,25 @@ class FliprHubMenuViewController: UIViewController {
         }
         
         if let module = Module.currentModule {
+           // info.append(module.u)
             var sNo =  ""
-            if let identifier = Module.currentModule?.serial {
-                self.titleLbl.text = identifier
-                sNo = identifier
-                self.haveFlipr = true
+            var infoStr = AppSharedData.sharedInstance.userInfoTitle
+            if let identifier = Module.currentModule?.serial  {
+                if identifier.isValidString{
+                    infoStr.append(" | FID: ")
+                    infoStr.append("\(identifier)")
+                    sNo = identifier
+                    self.haveFlipr = true
+                }
             }
+            self.titleLbl.text = infoStr
 
             if module.isSubscriptionValid {
                 haveSubscription = true
             }else{
                 
                 if self.haveFlipr{
-                    if sNo.hasPrefix("F3"){
+                    if sNo.hasPrefix("F"){
                         haveSubscription = true
                     }else{
                         haveSubscription = false
@@ -145,6 +155,8 @@ class FliprHubMenuViewController: UIViewController {
             }
         }
         
+        
+         
         
 //        if self.placesModules.isStart{
 //            haveSubscription = true
@@ -158,25 +170,25 @@ class FliprHubMenuViewController: UIViewController {
             if isPlaceOwner && (haveSubscription == false){
                 self.cellTitleList = ["Activer la connexion à distance".localized,"Carnet d’entretien".localized,"Pool House".localized,"Expert mode".localized,"Aide".localized,"Paramètres".localized,"Déconnexion".localized]
                 self.imageNames = ["noSubscription","Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
-                self.menuViewHeight.constant = 601
+                self.menuViewHeight.constant = 665
 
             }else{
                 if isPlaceOwner{
                     self.cellTitleList = ["Carnet d’entretien".localized,"Pool House".localized,"Expert mode".localized,"Aide".localized,"Paramètres".localized,"Déconnexion".localized]
                     self.imageNames = ["Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
-                    self.menuViewHeight.constant = 535
+                    self.menuViewHeight.constant = 599
                 }else{
-                    self.cellTitleList = ["Aide".localized,"Paramètres".localized,"Déconnexion".localized]
-                    self.imageNames = ["Aide","Paramètres","Déconnexion"]
-                    self.menuViewHeight.constant = 337
+                    self.cellTitleList = ["Buy Flipr AnalysR".localized,"Aide".localized,"Paramètres".localized,"Déconnexion".localized]
+                    self.imageNames = ["buy","Aide","Paramètres","Déconnexion"]
+                    self.menuViewHeight.constant = 401
 
                 }
 
             }
         }else{
-            self.cellTitleList = ["Paramètres".localized,"Déconnexion".localized]
-            self.imageNames = ["Paramètres","Déconnexion"]
-            self.menuViewHeight.constant = 271
+            self.cellTitleList = ["Buy Flipr AnalysR".localized,"Paramètres".localized,"Déconnexion".localized]
+            self.imageNames = ["buy","Paramètres","Déconnexion"]
+            self.menuViewHeight.constant = 335
 
         }
         
@@ -234,8 +246,8 @@ class FliprHubMenuViewController: UIViewController {
 //                    if !self.haveHub{
 //                        self.titleLbl.text = hubId
 //                    }
-                    self.cellTitleList = ["Carnet d’entretien".localized,"Pool House".localized,"Flipr Store".localized,"Conseils et astuces".localized,"Settings".localized,"Help".localized,"LOGOUT_TITLE".localized]
-                    self.imageNames = ["menu1","menu4","menu5","menu6","menu7","menu8","menu9"]
+                    self.cellTitleList = ["Buy Flipr AnalysR".localized,"Carnet d’entretien".localized,"Pool House".localized,"Flipr Store".localized,"Conseils et astuces".localized,"Settings".localized,"Help".localized,"LOGOUT_TITLE".localized]
+                    self.imageNames = ["buy","menu1","menu4","menu5","menu6","menu7","menu8","menu9"]
                 }
                 self.settingTable.reloadData()
             }
@@ -333,9 +345,12 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
     
     func handleNoFliprNavigation(indexPath: IndexPath){
         if indexPath.row == 0{
-            showSettings()
+            self.showBuyProducts()
         }
         else if indexPath.row == 1{
+            showSettings()
+        }
+        else if indexPath.row == 2{
             showLogout()
         }
     }
@@ -343,12 +358,15 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
     
     func handleGuestNavigation(indexPath: IndexPath){
         if indexPath.row == 0{
-            showAde()
+            showBuyProducts()
         }
         else if indexPath.row == 1{
-            showSettings()
+            showAde()
         }
         else if indexPath.row == 2{
+            showSettings()
+        }
+        else if indexPath.row == 3{
             showLogout()
         }
     }
@@ -379,6 +397,7 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
     
     
     func handlePlaceOwnerWithOutSubscriptionNavigation(indexPath: IndexPath){
+       
         if indexPath.row == 0{
             self.showSubscriptionView()
         }
@@ -573,6 +592,12 @@ extension FliprHubMenuViewController: UITableViewDelegate,UITableViewDataSource,
 
     }
 
+    func showBuyProducts(){
+        if let url = URL(string: "https://goflipr.com/produit/flipr-analysr-3/") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
     
     func handleHubOnlyNavigation(indexPath: IndexPath){
         

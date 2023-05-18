@@ -56,12 +56,14 @@ class EducationScreenContainerViewController: UIViewController {
     func configurePageViewController(state : Int) {
         let pageCntrl = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         self.pageController = pageCntrl
-        self.pageController?.view.frame = contentView.frame
+//        self.pageController?.view.frame = contentView.frame
         self.contentViewController = self.pageController
         self.addChild(self.contentViewController!)
         self.contentViewController?.didMove(toParent: self)
-        self.contentViewController!.view.frame = contentView.frame
-        self.contentViewController!.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.contentViewController!.view.frame = CGRectMake(0, 78,self.view.frame.size.width, self.contentView.frame.size.height)
+//        self.contentViewController!.view.frame = contentView.frame
+        self.contentViewController?.view.translatesAutoresizingMaskIntoConstraints = false
+     //   self.contentViewController!.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(self.contentViewController!.view)
         self.pageController!.delegate = self
         self.pageController!.dataSource = self

@@ -62,6 +62,8 @@ class GatewayManager: NSObject {
 //    var receptionCharacteristic:CBCharacteristic?
     var passwordCharacteristic:CBCharacteristic?
     
+    var wifiPassword:String?
+
     var module:Module?
     
     var isConnecting = false
@@ -104,7 +106,7 @@ class GatewayManager: NSObject {
             connectedGateway = peripheral
             connectedGateway?.delegate = self
             centralManager.connect(connectedGateway!, options: nil)
-            completion?(nil)
+//            connectCompletionBlock?(nil)
 //            connectedGateway?.discoverServices([GATEWAYBLEParameters.gatewayPasswordUUID,GATEWAYBLEParameters.gatewayPasswordUUID])
 //
         } else {
@@ -120,6 +122,12 @@ class GatewayManager: NSObject {
         } else {
             let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Could not disconnect from HUB".localized])
             completion?(error)
+        }
+    }
+    
+    func removeConnection(){
+        if let gateway = connectedGateway {
+            centralManager.cancelPeripheralConnection(gateway)
         }
     }
     
@@ -178,7 +186,7 @@ class GatewayManager: NSObject {
         if let hub = connectedGateway, let sendChar = ssidCharacteristic {
             let data = ssid.data(using: .utf8)
             connectedGateway?.writeValue(data!, for: ssidCharacteristic!, type: .withResponse)
-            completion?(nil)
+            setWifiCompletionBlock?(nil)
         } else {
             //send error no hub connected or char discovered
             let error = NSError(domain: "Gateway", code: -1, userInfo: [NSLocalizedDescriptionKey:"No Gateway connected :/".localized])
@@ -193,10 +201,11 @@ class GatewayManager: NSObject {
         
         getAvailableWifiCompletionBlock = nil
         setPasswordCompletionBlock = completion
+        self.wifiPassword = password
         if let hub = connectedGateway, let sendChar = passwordCharacteristic {
-            let data = password.data(using: .utf8)
-            connectedGateway?.writeValue(data!, for: passwordCharacteristic!, type: .withResponse)
-            completion?(nil)
+//            let data = password.data(using: .utf8)
+//            connectedGateway?.writeValue(data!, for: passwordCharacteristic!, type: .withResponse)
+//            completion?(nil)
         } else {
             //send error no hub connected or char discovered
             let error = NSError(domain: "Gateway", code: -1, userInfo: [NSLocalizedDescriptionKey:"No Gateway connected :/".localized])
@@ -205,7 +214,7 @@ class GatewayManager: NSObject {
         }
     }
     
-    
+    /*
     func setWifi(network: HUBWifiNetwork, password:String, completion: ((_ error: Error?) -> Void)?) {
         
         getAvailableWifiCompletionBlock = nil
@@ -232,6 +241,7 @@ class GatewayManager: NSObject {
             setWifiCompletionBlock = nil
         }
     }
+    */
     
     func startUpCentralManager(connectAutomatically connect:Bool, sendMeasure send:Bool) {
         
@@ -331,8 +341,10 @@ extension GatewayManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Central manager did connect to Gateway")
-//        connectCompletionBlock?(nil)
-        peripheral.discoverServices([GATEWAYBLEParameters.wifiServiceUUID])
+        self.stopScanning = true
+        connectCompletionBlock?(nil)
+        self.passwordCharacteristic = nil
+        peripheral.discoverServices([GATEWAYBLEParameters.wifiServiceUUID,GATEWAYBLEParameters.gatewayPasswordUUID])
 //                peripheral.discoverServices(nil)
 
 //        peripheral.discoverServices([GATEWAYBLEParameters.gatewayPasswordUUID])
@@ -347,7 +359,7 @@ extension GatewayManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("Central manager did disconnect from device with name: \(peripheral.name), error: \(error?.localizedDescription)")
         cancelConnectionCompletionBlock?(error)
-        setWifiCompletionBlock?(error)
+//        setWifiCompletionBlock?(error)
         connectedGateway = nil
         cancelConnectionCompletionBlock = nil
     }
@@ -391,7 +403,12 @@ extension GatewayManager: CBPeripheralDelegate {
                 }
                 if characteristic.uuid == GATEWAYBLEParameters.gatewayPasswordUUID {
                     passwordCharacteristic = characteristic
-                    peripheral.setNotifyValue(true, for: characteristic)
+                    if self.wifiPassword != nil{
+                        let passwd = self.wifiPassword ?? ""
+                        let data = passwd.data(using: .utf8)
+                        connectedGateway?.writeValue(data!, for: passwordCharacteristic!, type: .withResponse)
+                    }
+//                    peripheral.setNotifyValue(true, for: characteristic)
                 }
 //                if characteristic.uuid == HUBBLEParameters.sendCharactersticUUID {
 //                    sendCharacteristic = characteristic
@@ -457,10 +474,10 @@ extension GatewayManager: CBPeripheralDelegate {
         if let value = characteristic.value {
             switch characteristic.uuid {
             case GATEWAYBLEParameters.gatewaySSIDUUID:
-                print("Channel charateristic value: \(value), hex: \(value.hexEncodedString())")
+                print("Channel  gatewaySSIDUUID charateristic value: \(value), hex: \(value.hexEncodedString())")
                 break
             case GATEWAYBLEParameters.gatewayPasswordUUID:
-                print("Reception charateristic value: \(value), hex: \(value.hexEncodedString())")
+                print("Reception gatewayPasswordUUID charateristic value: \(value), hex: \(value.hexEncodedString())")
 //                if value.bytes.count > 0 {
 //                    let decoded = CBOR.decode(value.bytes)
 //                    print("Reception charateristic decoded value: \(decoded)")
@@ -501,11 +518,17 @@ extension GatewayManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         
         if characteristic.uuid == GATEWAYBLEParameters.gatewaySSIDUUID {
-            print("did write !!!: \(error)")
+            print("did write SSID !!!: \(error)")
             peripheral.readValue(for: characteristic)
         }
         if characteristic.uuid == GATEWAYBLEParameters.gatewayPasswordUUID {
-            print("did write sendCharacterstic: \(error)")
+            print("did write password: \(error)")
+            self.wifiPassword = nil
+            setPasswordCompletionBlock?(error)
+//            if let device = connectedGateway {
+//                centralManager.cancelPeripheralConnection(device)
+//            }
+
 //            if let receptChar = receptionCharacteristic {
 //                print("manually read receptionCharacteristic")
 //                //peripheral.readValue(for: receptChar)

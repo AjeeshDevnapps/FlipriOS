@@ -13,17 +13,21 @@ import JGProgressHUD
 class GateWayViewController: UIViewController {
 
     @IBOutlet weak var gatewayTableView: UITableView!
+    @IBOutlet weak var addGatewayBtn: UIButton!
+
     var gatewayList:[UserGateway]?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Passerelles".localized
         AppSharedData.sharedInstance.isFlipr3 = false
+        addGatewayBtn.setTitle("Add a gateway".localized, for: .normal)
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getGatewayList()
+        GatewayManager.shared.removeConnection()
     }
     
     func getGatewayList() {
@@ -38,6 +42,7 @@ class GateWayViewController: UIViewController {
     }
     
     @IBAction func addButtonAction() {
+        
         
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GateWayListingViewController") as? GateWayListingViewController {
             self.navigationController?.pushViewController(vc, animated: true)

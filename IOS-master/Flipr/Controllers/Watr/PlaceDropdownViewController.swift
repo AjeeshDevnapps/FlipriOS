@@ -44,6 +44,8 @@ class PlaceDropdownViewController: UIViewController {
 
     var delegate:PlaceDropdownDelegate?
     
+    var isExceedPlaceCount = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +90,8 @@ class PlaceDropdownViewController: UIViewController {
                 self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
                 self.hud?.textLabel.text = error?.localizedDescription
                 self.hud?.dismiss(afterDelay: 0)
-            } else {
+            }
+            else {
                 if placesResult != nil{
                    // print(placesResult)
                     self.places = placesResult!
@@ -116,10 +119,31 @@ class PlaceDropdownViewController: UIViewController {
                     self.placesTableView.reloadData()
                 }
             }
-            
+            self.calculatePlaceCount()
         })
     }
     
+    
+    func calculatePlaceCount(){
+        isExceedPlaceCount = false
+        var numberOfModule = 4
+        for obj in self.places {
+            if let owner = obj.permissionLevel{
+                if owner == "Admin"{
+                    numberOfModule = numberOfModule + obj.numberOfModules
+                }else{
+                    
+                }
+            }
+        }
+        
+        let numberPlaces = self.places.count
+        isExceedPlaceCount = numberOfModule > numberPlaces ? false : true
+//        if numberOfModule > numberPlaces{
+//            isExceedPlaceCount =
+//        }
+        
+    }
     
     func getPlaceModules(placeId:String,placeDetails:PlaceDropdown){
         hud?.show(in: self.view)
@@ -437,7 +461,10 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
     
     
     @IBAction func addPlaceButtonClicked(){
-        if placesList.count  < 50{
+        
+        if isExceedPlaceCount{
+            self.showError(title: "Warning!", message: "Exceeded the Max Count")
+        }else{
             let sb = UIStoryboard(name: "NewLocation", bundle: nil)
             if let viewController = sb.instantiateViewController(withIdentifier: "NewLocationViewControllerID") as? NewLocationViewController {
                 //            self.navigationController?.pushViewController(viewController, completion: nil)
@@ -445,9 +472,20 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
                 let nav = UINavigationController.init(rootViewController: viewController)
                 self.present(nav, animated: true)
             }
-        }else{
-            self.showError(title: "Warning!", message: "Exceeded the Max Count 3")
+
         }
+        
+//        if placesList.count  < 50{
+//            let sb = UIStoryboard(name: "NewLocation", bundle: nil)
+//            if let viewController = sb.instantiateViewController(withIdentifier: "NewLocationViewControllerID") as? NewLocationViewController {
+//                //            self.navigationController?.pushViewController(viewController, completion: nil)
+//                //            viewController.modalPresentationStyle = .fullScreen
+//                let nav = UINavigationController.init(rootViewController: viewController)
+//                self.present(nav, animated: true)
+//            }
+//        }else{
+//            self.showError(title: "Warning!", message: "Exceeded the Max Count")
+//        }
        
     }
     

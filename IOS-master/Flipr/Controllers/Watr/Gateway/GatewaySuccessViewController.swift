@@ -9,11 +9,20 @@
 import UIKit
 
 class GatewaySuccessViewController: BaseViewController {
+    @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
 
     override func viewDidLoad() {
         self.hidCustombackbutton = true
         super.viewDidLoad()
+        submitBtn.setTitle("Ok".localized, for: .normal)
+        self.titleLabel.text = "Si la lumière passe au vert, vous êtes connecté!".localized
+        
         self.navigationItem.setHidesBackButton(true, animated: true)
+        GatewayManager.shared.cancelGatewayConnection { error in
+
+        }
+
         // Do any additional setup after loading the view.
     }
     

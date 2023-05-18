@@ -17,7 +17,7 @@ class ChlorineCalibrationViewController: BaseViewController {
     var isAddingNewDevice = false
 
     
-    var measuresInterval:Double = 60
+    var measuresInterval:Double = 150
     var recalibration = false
     var calibrationType:CalibrationType = .ph4
     var measuresTimer : Timer?
@@ -28,16 +28,16 @@ class ChlorineCalibrationViewController: BaseViewController {
     var isCalibrationStrucked = false
     
     var isShowingStripView = false
-    var timerVal:Double = 180
+    var timerVal:Double = 240
 
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLbl.text  = "Calibrage en cours".localized
         msgLbl.text  = "Cette opération prend environs 2 minutes. Veuillez rester à proximité immédiate de votre téléphone et de l’appareil Flipr. Maintenez l’application ouverte et active.".localized
         successLbl.text  = "Calibration pH4 réussie !".localized
-        if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
-            self.measuresInterval = Double(curretnValue) ?? 60
-        }
+//        if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+//            self.measuresInterval = Double(curretnValue) ?? 60
+//        }
         self.calibrate()
         // Do any additional setup after loading the view.
     }
@@ -88,12 +88,12 @@ class ChlorineCalibrationViewController: BaseViewController {
                     isFlipr2 = true
                 }
                 if version == 3{
-                    timerVal = 60
-                    if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
-                        self.measuresInterval = Double(curretnValue) ?? 60
-                    }else{
-                        
-                    }
+                    //timerVal = 180
+//                    if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+//                        self.measuresInterval = Double(curretnValue) ?? 60
+//                    }else{
+//
+//                    }
                 }
             }
         }
@@ -104,7 +104,7 @@ class ChlorineCalibrationViewController: BaseViewController {
         else {
             
         }
-        self.perform(#selector(self.checkForDeviceSearchingTimeOut), with: nil, afterDelay: 20)
+        self.perform(#selector(self.checkForDeviceSearchingTimeOut), with: nil, afterDelay: 60)
 //        self.perform(#selector(self.checkForDeviceConnectingTimeOut), with: nil, afterDelay: 60)
         isCalibrationStrucked = true
         self.checkCalibrationStruckTimer = Timer.scheduledTimer(timeInterval: timerVal,
@@ -116,10 +116,10 @@ class ChlorineCalibrationViewController: BaseViewController {
         if self.isAddingNewDevice{
             AppSharedData.sharedInstance.isFirstCalibrations = true
             if AppSharedData.sharedInstance.isFlipr3 {
-                self.measuresInterval = 60
-                if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
-                    self.measuresInterval = Double(curretnValue) ?? 60
-                }
+                self.measuresInterval = 150
+//                if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
+//                    self.measuresInterval = Double(curretnValue) ?? 60
+//                }
             }
         }else{
             AppSharedData.sharedInstance.isFirstCalibrations = false
@@ -147,8 +147,6 @@ class ChlorineCalibrationViewController: BaseViewController {
 //                    self.view.showEmptyStateViewLoading(title: "CALIBRATION ".localized + self.calibrationType.rawValue.uppercased(), message: "Measurement in progress...\n\nThis operation may take a few minutes, do not quit the app, keep the iPhone active and close to the Flipr.".localized, theme: theme)
                 }
                
-                
-                
                 self.measuresTimer = Timer.scheduledTimer(timeInterval: 0.05,
                                                           target: self,
                                                           selector: #selector(self.updateTime),
@@ -236,9 +234,14 @@ class ChlorineCalibrationViewController: BaseViewController {
                         self.showError(title: "Error".localized, message: error?.localizedDescription)
                         
                         self.view.hideStateView()
+                        if self.calibrationType == .ph4 {
+                            Module.currentModule?.pH4CalibrationDone = true
+                            self.invalidateStruckChecktimer()
+                            self.showStripView()
+                        }
+                        
                         
                     } else {
-                        BLEManager.shared.disConnectCurrentDevice()
                         if self.calibrationType == .simpleMeasure {
                             self.dismiss(animated: true, completion: nil)
 //                            self.navigationController?.dismiss(animated: true, completion: nil)
@@ -266,6 +269,7 @@ class ChlorineCalibrationViewController: BaseViewController {
                                 
                             }
                             Module.saveCurrentModuleLocally()
+                            BLEManager.shared.disConnectCurrentDevice()
                         }
                         
                        

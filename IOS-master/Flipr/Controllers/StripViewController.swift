@@ -94,7 +94,7 @@ class StripViewController: UIViewController {
         let allSubviews = self.view.subviewsRecursive()
         for v in allSubviews {
             if let b = v as? UIButton {
-                print("eeeee: \(b.tag)")
+             //   print("eeeee: \(b.tag)")
                 if b.tag > 0 {
                     b.backgroundColor = version2Colors[b.tag - 1].hexStringColor()
                 }

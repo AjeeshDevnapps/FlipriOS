@@ -15,6 +15,7 @@ import Foundation
     var isNeedtoCallModulesApiForSideMenu : Bool = false
     var serialKey = ""
     var deviceName = ""
+    var userInfoTitle = ""
 
     var isAddingDeviceFromPresentedVCFlow : Bool = false
     var selectedEquipmentCode  = 0

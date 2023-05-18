@@ -10,12 +10,15 @@ import UIKit
 
 class AddGatewayIntroViewController: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var skipButton: UIButton!
+
     @IBOutlet weak var titleLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        submitButton.setTitle("Poursuivre".localized(), for: .normal)
-//        titleLabel.text = "Flipr Start Connecté".localized
+        skipButton.setTitle("Skip".localized(), for: .normal)
+        submitButton.setTitle("Ajouter une passerelle".localized(), for: .normal)
+        titleLabel.text = "Si vous disposez d’une Passerelle (Gateway), nous vous recommandons de la configurer dès maintenant. \n\nSi vous désirez effectuer cette installation plus tard, vous pourrez l’ajouter à partir du menu “Paramètres”.".localized
 
         // Do any additional setup after loading the view.
     }

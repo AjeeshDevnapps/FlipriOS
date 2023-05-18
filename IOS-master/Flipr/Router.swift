@@ -87,6 +87,8 @@ enum Router: URLRequestConvertible {
     case getPoolEquipments(poolId:Int)
     case updatePoolEquipments(poolId:Int, equipmentIds:[Int])
     
+    case deletePoolEquipments(poolId:Int, equipmentIds:Int)
+
     case getStock(poolId:Int)
     case addProduct(product:Product)
     case updateProduct(product:Product)
@@ -269,7 +271,9 @@ enum Router: URLRequestConvertible {
         case .getPoolEquipments:
             return .get
         case .updatePoolEquipments:
-            return .put
+            return .post
+        case .deletePoolEquipments:
+               return .delete
         case .getStock:
             return .get
         case .addProduct:
@@ -497,9 +501,12 @@ enum Router: URLRequestConvertible {
 
             
         case .getPoolEquipments(let poolId):
-            return "pools/\(poolId)/equipments"
+            return "place/\(poolId)/equipments"
         case .updatePoolEquipments(let poolId, _):
-            return "pools/\(poolId)/equipments"
+            return "place/\(poolId)/equipments"
+            
+        case .deletePoolEquipments(let poolId, let equipmentId):
+            return "place/\(poolId)/equipment/\(equipmentId)"
         case .getStock(let poolId):
             return "pools/\(poolId)/stock"
         case .addProduct:
@@ -1013,6 +1020,9 @@ enum Router: URLRequestConvertible {
             urlRequest = try URLEncoding.default.encode(urlRequest, with: [:])
             
         case .deleteModule(moduleId: _):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: [:])
+        
+        case .deletePoolEquipments(poolId: _, equipmentIds: _):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: [:])
 
         case .getPoolSettings(poolId: _):

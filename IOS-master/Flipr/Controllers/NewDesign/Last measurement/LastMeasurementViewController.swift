@@ -27,6 +27,7 @@ class LastMeasurementViewController:BaseViewController {
     
     var hud = JGProgressHUD(style:.dark)
     var measuresTimer : Timer?
+    var isRemovedObserver = false
 
     
     public override func viewDidLoad() {
@@ -168,7 +169,11 @@ class LastMeasurementViewController:BaseViewController {
     func connectCurrentModuleFlipr(){
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprConnected, object: nil, queue: nil) { (notification) in
             NotificationCenter.default.removeObserver(self)
-            self.startMeasureReading()
+            if self.isRemovedObserver == false{
+                self.startMeasureReading()
+            }
+            self.isRemovedObserver = true
+            
         }
         BLEManager.shared.startUpCentralManager(connectAutomatically: true, sendMeasure: false)
 

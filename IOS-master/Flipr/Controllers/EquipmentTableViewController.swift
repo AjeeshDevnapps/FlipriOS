@@ -82,6 +82,13 @@ class EquipmentTableViewController: UITableViewController {
         
         if let aSwitch = sender as? EquipmentSwitch {
             categories[aSwitch.section].equipments[aSwitch.index].active = aSwitch.isOn
+            let eId = categories[aSwitch.section].equipments[aSwitch.index].id
+            if aSwitch.isOn == false{
+                self.delete(eId: eId)
+            }else{
+                self.saveEquipment(eId: eId)
+            }
+            
         }
         
     }
@@ -150,6 +157,108 @@ class EquipmentTableViewController: UITableViewController {
             
         })
     }
+    
+    
+    func delete(eId:Int){
+//        UserDefaults.standard.set(true, forKey: "EquipmentCount")
+//
+//        var activeEquipmentIds = [Int]()
+//        for category in categories {
+//            for equipment in category.equipments {
+//                if equipment.active {
+//                    activeEquipmentIds.append(equipment.id)
+//                }
+//            }
+//        }
+//        print("Active equipments: \(activeEquipmentIds)")
+        
+        let hud = JGProgressHUD(style:.dark)
+//        hud?.show(in: self.navigationController!.view)
+        hud?.show(in: self.view)
+        
+        Alamofire.request(Router.deletePoolEquipments(poolId: Pool.currentPool!.id!, equipmentIds: eId)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success:
+                
+                hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                hud?.dismiss(afterDelay: 1)
+                NotificationCenter.default.post(name: FliprLogDidChanged, object: nil)
+                self.dismiss(animated: true, completion: {
+                   
+                })
+                
+            case .failure(let error):
+                
+//                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                
+//                if let serverError = User.serverError(response: response) {
+//                    hud?.textLabel.text = serverError.localizedDescription
+//                } else {
+//                    hud?.textLabel.text = error.localizedDescription
+//                }
+//
+                
+                hud?.dismiss(afterDelay: 3)
+                
+                
+            }
+            
+        })
+    }
+    
+    
+    func saveEquipment(eId:Int){
+//        UserDefaults.standard.set(true, forKey: "EquipmentCount")
+//
+//        var activeEquipmentIds = [Int]()
+//        for category in categories {
+//            for equipment in category.equipments {
+//                if equipment.active {
+//                    activeEquipmentIds.append(equipment.id)
+//                }
+//            }
+//        }
+//        print("Active equipments: \(activeEquipmentIds)")
+        
+        let hud = JGProgressHUD(style:.dark)
+//        hud?.show(in: self.navigationController!.view)
+        hud?.show(in: self.view)
+        
+        Alamofire.request(Router.updatePoolEquipments(poolId: Pool.currentPool!.id!, equipmentIds: [eId])).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            
+            switch response.result {
+                
+            case .success:
+                
+                hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                hud?.dismiss(afterDelay: 1)
+                NotificationCenter.default.post(name: FliprLogDidChanged, object: nil)
+//                self.dismiss(animated: true, completion: {
+//
+//                })
+                
+            case .failure(let error):
+                
+//                hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                
+//                if let serverError = User.serverError(response: response) {
+//                    hud?.textLabel.text = serverError.localizedDescription
+//                } else {
+//                    hud?.textLabel.text = error.localizedDescription
+//                }
+//
+                
+                hud?.dismiss(afterDelay: 3)
+                
+                
+            }
+            
+        })
+    }
+
+    
     
     // MARK: - Table view data source
 

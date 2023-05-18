@@ -15,13 +15,23 @@ class GatewaywifiViewController: BaseViewController {
     @IBOutlet weak var controllerTitle: UILabel!
     @IBOutlet weak var subTitleLable: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cancelBtn: UIButton!
+
     var serial:String?
     var wifiList = [AnyObject]()
+    var isChangePassword : Bool = false
+    var hud : JGProgressHUD?
+    
+    var isCalledChangePassword : Bool = false
+
+    
     override func viewDidLoad() {
         self.hidCustombackbutton = true
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated: true)
-
+        cancelBtn.setTitle("Cancel".localized(), for: .normal)
+        self.subTitleLable.text = "First connect your iPhone to the wifi network to which you want to connect your gateway".localized
+        self.controllerTitle.text = "Choisissez le réseau Wi-Fi ".localized
 //        GatewayManager.shared.scanForGateways(serials: [serial ?? ""], completion: { (gatewayinfo) in
 //
 //
@@ -71,6 +81,11 @@ class GatewaywifiViewController: BaseViewController {
         }
         return ssid
     }
+    
+    
+
+    
+    
 }
 
 
@@ -103,36 +118,50 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
         let alertController = UIAlertController(title: ssid, message: "Enter wifi password".localized, preferredStyle: .alert)
         let sendAction = UIAlertAction(title: "Connect".localized, style: .default, handler: { (action) -> Void in
 //            GatewayManager.shared.stopScanForGateway()
-            let hud = JGProgressHUD(style:.dark)
-            hud?.show(in: self.navigationController!.view)
-            GatewayManager.shared.setSSID(ssid: ssid) { error in
-                if error != nil{
-                    print("Error")
+            self.hud = JGProgressHUD(style:.dark)
+            self.hud?.show(in: self.navigationController!.view)
 
-//                    GatewayManager.shared.setPassword(password: passwd) { error in
-//                        hud?.dismiss()
-//                        self.dismiss(animated: true)
-//                        if error != nil{
-//                            print("Success")
-//                        }else{
-//                            print("Error")
-//                        }
-//                    }
-                }else{
-                    hud?.dismiss()
-                    print("Success setSSID")
-                    let passwd = passwordTextField?.text ?? ""
-                    GatewayManager.shared.cancelGatewayConnection { error in
-                        if error == nil {
-                            print("Disconnected")
-                            self.reconnectGateway(password: passwd)
+            if self.isChangePassword{
+                let passwd = passwordTextField?.text ?? ""
+                self.writePassword(password: passwd)
+            }else{
+//                self.hud = JGProgressHUD(style:.dark)
+//                self.hud?.show(in: self.navigationController!.view)
+                GatewayManager.shared.setSSID(ssid: ssid) { error in
+                    if error != nil{
+                        print("Error")
+                        //                        self.hud?.dismiss()
+
+                    }else{
+//                        self.hud?.dismiss()
+                        print("Success setSSID")
+                        let passwd = passwordTextField?.text ?? ""
+                                                
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 15.0) {
+                            if self.isCalledChangePassword ==  false{
+                                self.isCalledChangePassword = true
+                                self.reconnectGateway(password: passwd)
+                            }
                         }
-                        else{
-                            print("Error in Disconnection")
+                        
+                        /*
+                        GatewayManager.shared.cancelGatewayConnection { error in
+                            if error == nil {
+                                print("Disconnected after setSSID")
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    self.reconnectGateway(password: passwd)
+                                }
+                            }
+                            else{
+                                print("Error in Disconnection after setSSID")
+                            }
                         }
+                        
+                        */
                     }
                 }
             }
+            
             
            
             
@@ -160,15 +189,15 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     
-    func reconnectGateway(password:String){
+    @objc func reconnectGateway(password:String){
 //        let hud = JGProgressHUD(style:.dark)
 //        hud?.show(in: self.navigationController!.view)
         
         GatewayManager.shared.connect(serial: self.serial ?? "") { error in
             if error != nil{
-                print("Failed Reconnection")
+                print("Failed Reconnection after setSSID")
             }else{
-                print("Reconnection Success")
+                print("Reconnection Success after setSSID ")
                 self.writePassword(password: password)
 
             }
@@ -181,16 +210,16 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
         GatewayManager.shared.setPassword(password: password) { error in
 //            hud?.dismiss()
 //            self.dismiss(animated: true)
+            self.hud?.dismiss()
             if error != nil{
-                print("Failed Gateway")
+                print("Failed add password Gateway!!")
+                
 
             }else{
-                print("Success Gateway")
+                print("Success add password Gateway!!")
                 if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GatewaySuccessViewController") as? GatewaySuccessViewController {
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
-//
-
             }
         }
     }

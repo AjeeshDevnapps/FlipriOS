@@ -130,16 +130,18 @@ class BLEManager: NSObject {
 //        var serialNo = ""
         doAcq = true
         doAcqCompletionBlock = completion
-        if AppSharedData.sharedInstance.isFirstCalibrations {
-            let name = self.flipr?.name ?? ""
-            var occuranceString = "Flipr 00"
-            if name.hasPrefix("Flipr 00") {
-                occuranceString = "Flipr 00"
-            }
-            else if name.hasPrefix("Flipr 0"){
-                occuranceString = "Flipr 0"
-            }
-            var currentSavedserial = name.replacingOccurrences(of: occuranceString, with: "").trimmed
+        let name = self.flipr?.name ?? ""
+        var occuranceString = "Flipr 00"
+        if name.hasPrefix("Flipr 00") {
+            occuranceString = "Flipr 00"
+        }
+        else if name.hasPrefix("Flipr 0"){
+            occuranceString = "Flipr 0"
+        }
+        var currentSavedserial = name.replacingOccurrences(of: occuranceString, with: "").trimmed
+
+        if AppSharedData.sharedInstance.isFirstCalibrations
+        {
             if AppSharedData.sharedInstance.deviceSerialNo.isValidString && currentSavedserial.isValidString{
                 if currentSavedserial == AppSharedData.sharedInstance.deviceSerialNo{
                     if doAcqCharacteristic != nil {
@@ -149,7 +151,7 @@ class BLEManager: NSObject {
                         } else {
                             isConnecting = true
             //                print("Connecting...")
-                            print("Connecting...\(flipr?.name ?? "")")
+                            print("Connecting... startMeasure \(flipr?.name ?? "")")
 
                             centralManager.connect(flipr!, options: nil)
                         }
@@ -158,7 +160,7 @@ class BLEManager: NSObject {
                             flipr?.discoverServices([FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.historicalServiceUUID])
                         } else {
             //                print("Connecting...")
-                            print("Connecting...\(flipr?.name ?? "")")
+                            print("Connecting... startMeasure \(flipr?.name ?? "")")
 
                             isConnecting = true
                             centralManager.connect(flipr!, options: nil)
@@ -177,35 +179,39 @@ class BLEManager: NSObject {
             
             
         }else{
-            if doAcqCharacteristic != nil {
-                if flipr?.state == .connected {
-                    let data = "1".data(using: .utf8)
-                    flipr?.writeValue(data!, for: doAcqCharacteristic!, type: .withResponse)
-                } else {
-                    isConnecting = true
-    //                print("Connecting...")
-                    print("Connecting...\(flipr?.name ?? "")")
+            
+            let currentModuleDevice = Module.currentModule?.serial ?? "TmpSerialNo"
+           
+            if currentSavedserial == currentModuleDevice{
+                if doAcqCharacteristic != nil {
+                    if flipr?.state == .connected {
+                        let data = "1".data(using: .utf8)
+                        flipr?.writeValue(data!, for: doAcqCharacteristic!, type: .withResponse)
+                    } else {
+                        isConnecting = true
+        //                print("Connecting...")
+                        print("Connecting... startMeasure \(flipr?.name ?? "")")
 
-                    centralManager.connect(flipr!, options: nil)
-                }
-            } else if flipr != nil {
-                if flipr?.state == .connected {
-                    flipr?.discoverServices([FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.historicalServiceUUID])
-                } else {
-    //                print("Connecting...")
-                    print("Connecting...\(flipr?.name ?? "")")
+                        centralManager.connect(flipr!, options: nil)
+                    }
+                } else if flipr != nil {
+                    if flipr?.state == .connected {
+                        flipr?.discoverServices([FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.historicalServiceUUID])
+                    } else {
+        //                print("Connecting...")
+                        print("Connecting... startMeasure \(flipr?.name ?? "")")
 
-                    isConnecting = true
-                    centralManager.connect(flipr!, options: nil)
+                        isConnecting = true
+                        centralManager.connect(flipr!, options: nil)
+                    }
+                } else {
+                    startUpCentralManager(connectAutomatically: true, sendMeasure: false)
                 }
-            } else {
+            }else{
                 startUpCentralManager(connectAutomatically: true, sendMeasure: false)
             }
+           
         }
-
-        
-      
-
     }
     
     
@@ -226,7 +232,7 @@ class BLEManager: NSObject {
             if flipr?.state == .connected {
                 flipr?.readValue(for: measuresCharacteristic!)
             } else {
-                print("Connecting...\(flipr?.name ?? "")")
+                print("Connecting... sendCalibrationMeasure \(flipr?.name ?? "")")
                 isConnecting = true
                 centralManager.connect(flipr!, options: nil)
             }
@@ -235,7 +241,7 @@ class BLEManager: NSObject {
                 flipr?.discoverServices([FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.historicalServiceUUID])
             } else {
 //                print("Connecting...")
-                print("Connecting...\(flipr?.name ?? "")")
+                print("Connecting... sendCalibrationMeasure \(flipr?.name ?? "")")
 
                 isConnecting = true
                 centralManager.connect(flipr!, options: nil)
@@ -249,7 +255,7 @@ class BLEManager: NSObject {
     func post(measures:String, type:String) {
         
         if self.currentMeasuringSerial != Module.currentModule?.serial{
-            return;
+//            return;
 //            let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Measuring diff device :/"])
 //            self.calibrationMeasuresCompletionBlock?(error)
 //            self.calibrationMeasuresCompletionBlock = nil
@@ -305,7 +311,11 @@ class BLEManager: NSObject {
                     .responseJSON { response in
                         
                         if (response.result.error == nil) {
-                            NotificationCenter.default.post(name: K.Notifications.FliprMeasuresPosted, object: nil)
+                            if AppSharedData.sharedInstance.isFirstCalibrations {
+                                
+                            }else{
+                                NotificationCenter.default.post(name: K.Notifications.FliprMeasuresPosted, object: nil)
+                            }
                             debugPrint("HTTP Response Body: \(response.data)")
                             
                             //self.calibrationMeasuresCompletionBlock?(nil)
@@ -398,7 +408,7 @@ extension BLEManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         
-        print("advertisementData: %@",advertisementData)
+//        print("advertisementData: %@",advertisementData)
         
 //        print("peripheral: %@",peripheral)
 
@@ -411,7 +421,7 @@ extension BLEManager: CBCentralManagerDelegate {
             
 //            print("Name: %@",name)
             if !name.hasPrefix("Flipr 0") && !name.hasPrefix("FliprHUB") {
-                if !name.hasPrefix("F3"){
+                if !name.hasPrefix("F"){
                     return
                 }
             }
@@ -480,8 +490,10 @@ extension BLEManager: CBCentralManagerDelegate {
                 peripheral.delegate = self
                 isConnecting = true
                 self.currentMeasuringSerial = serial ?? ""
-                print("Connecting...\(flipr?.name ?? "")")
-                central.connect(flipr!, options: nil)
+                print("Discover n Connecting...\(flipr?.name ?? "")")
+                if flipr?.state == .disconnected ||  flipr?.state == .disconnecting{
+                    central.connect(flipr!, options: nil)
+                }
             }
             
         }
@@ -516,9 +528,10 @@ extension BLEManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         isConnecting = false
+        stopScanning = true
         print("Central manager did connect to Flipr: \(peripheral.identifier)")
         NotificationCenter.default.post(name: K.Notifications.FliprConnected, object: nil)
-        peripheral.discoverServices([FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.historicalServiceUUID])
+        peripheral.discoverServices([FliprBLEParameters.measuresServiceUUID,FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.historicalServiceUUID,FliprBLEParameters.modeCharactersticUUID])
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -609,9 +622,9 @@ extension BLEManager: CBPeripheralDelegate {
                     }
                     if characteristic.uuid == FliprBLEParameters.modeCharactersticUUID {
                         if activationNeeded {
-//                            let data = Data(bytes: &activationNeeded, count: MemoryLayout.size(ofValue: activationNeeded))
-                            let data = "1".data(using: .utf8)
-                            flipr?.writeValue(data!, for: characteristic, type: .withResponse)
+                            let data = Data(bytes: &activationNeeded, count: MemoryLayout.size(ofValue: activationNeeded))
+//                            let data = "1".data(using: .utf8)
+                            flipr?.writeValue(data, for: characteristic, type: .withResponse)
                         }
                         if turnOn || turnOff {
                             var value = true
@@ -638,22 +651,31 @@ extension BLEManager: CBPeripheralDelegate {
             switch characteristic.uuid {
             case FliprBLEParameters.measuresCharactersticUUID:
                 print("Measures charateric value: \(value.hexEncodedString())")
-                print("Connecting...\(peripheral.name)")
 
                 if calibrationMeasures {
                     if calibrationType == .simpleMeasure {
+                        print("Posting measurement ... type 0 \(peripheral.name)")
+
                         post(measures: value.hexEncodedString(), type: "0")
                     } else if calibrationType == .ph7 {
+                        print("Posting measurement ... type 2 \(peripheral.name)")
+
                         post(measures: value.hexEncodedString(), type: "2")
                     } else {
+                        print("Posting measurement ... type 1 \(peripheral.name)")
+
                         post(measures: value.hexEncodedString(), type: "1")
                     }
                 } else if sendMeasureAfterConnection {
+                    print("Posting measurement ... type 0 \(peripheral.name)")
+
                     post(measures: value.hexEncodedString(), type: "0")
                     sendMeasureAfterConnection = false
                 }
                 
                 else if fliprReadingVerification {
+                    print("Posting measurement ... type 0 \(peripheral.name)")
+
                     post(measures: value.hexEncodedString(), type: "0")
 //                    sendMeasureAfterConnection = false
                 }
@@ -683,6 +705,11 @@ extension BLEManager: CBPeripheralDelegate {
                 break
             case FliprBLEParameters.modeCharactersticUUID:
                 print("Mode charateristic value: \(value.hexEncodedString())")
+                if value.hexEncodedString() == "01"{
+                    
+                }else{
+                    
+                }
                 break
             default:
                 print("Unknown charateristic value: \(value)")

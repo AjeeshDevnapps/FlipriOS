@@ -13,6 +13,11 @@ import Alamofire
 
 class GatewaySettingsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var deleteBtn: UIButton!
+//    @IBOutlet weak var changeWifiBtn: UIButton!
+    @IBOutlet weak var chanbgeBtnLabel: UILabel!
+
+    
     var placeDetails:PlaceDropdown!
     var placesModules:PlaceModule!
     var hub: HUB?
@@ -96,6 +101,7 @@ class GatewaySettingsViewController: UIViewController {
                 print("Added selected Gateway")
                 if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GatewaywifiViewController") as? GatewaywifiViewController {
                     vc.serial = serialNo
+//                    vc.isChangePassword = true 
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }

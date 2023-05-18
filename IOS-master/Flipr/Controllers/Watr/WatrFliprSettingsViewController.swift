@@ -58,7 +58,7 @@ extension WatrFliprSettingsViewController: UITableViewDataSource,UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 800
+        return 900
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,7 +84,7 @@ extension WatrFliprSettingsViewController: UITableViewDataSource,UITableViewDele
         }
         
         let tmpSerial =  settings?.serial ?? ""
-        if tmpSerial.hasPrefix("F3"){
+        if tmpSerial.hasPrefix("F"){
             isV3flipr =  true
             cell.firmwareUpdateView.alpha = 0.3
         }
@@ -159,7 +159,6 @@ extension WatrFliprSettingsViewController{
         Alamofire.request(Router.deleteModule(moduleId: self.placesModules.serial ?? "")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             
             switch response.result {
-                
             case .success(_):
                 self.dismiss(animated: true, completion: nil)
                 NotificationCenter.default.post(name: K.Notifications.FliprDeviceDeleted, object: nil)
@@ -170,6 +169,9 @@ extension WatrFliprSettingsViewController{
                 self.dismiss(animated: true, completion: nil)
 
             }
+            Module.currentModule?.serial = ""
+            Module.saveCurrentModuleLocally()
+
         })
     }
 

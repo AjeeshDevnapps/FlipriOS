@@ -199,7 +199,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
-        //CLLocationManager().requestWhenInUseAuthorization()
+        CLLocationManager().requestWhenInUseAuthorization()
         
         RemoteControl.sync(ISEEU_REMOTE_CONTROL_FILE_URL)
         
@@ -239,6 +239,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+         
         Alamofire.request(Router.addMobileDevice(token: deviceTokenString)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
             if let error = response.result.error {
                 print("Add mobile device did fail with error: \(error)")
