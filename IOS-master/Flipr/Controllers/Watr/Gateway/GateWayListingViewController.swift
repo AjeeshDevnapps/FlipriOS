@@ -21,6 +21,7 @@ class GateWayListingViewController: BaseViewController {
     var gateWays = [NWEndpoint]()
     var gatewayArray = [String]()
     @IBOutlet weak var tableView: UITableView!
+    var isSkipping = false
     
     override func viewDidLoad() {
         self.hidCustombackbutton = true
@@ -60,8 +61,19 @@ class GateWayListingViewController: BaseViewController {
     
     
     @IBAction func cancelButtonClicked(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        
+        if isSkipping{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+            dashboard.modalTransitionStyle = .flipHorizontal
+            dashboard.modalPresentationStyle = .fullScreen
+            self.present(dashboard, animated: true, completion: {
+                self.navigationController?.popToRootViewController(animated: false)
+            })
 
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     

@@ -17,11 +17,31 @@ class WatrFliprSettingsViewController: UIViewController {
     var placesModules:PlaceModule!
     var settings:AnalysrSettings?
     var isV3flipr = false
+    var fliprMode = ""
+    var isReadMode = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "AnalysR".localized
         tableView.tableFooterView =  UIView()
+        NotificationCenter.default.addObserver(forName: K.Notifications.FliprModeValue, object: nil, queue: nil) { (notification) in
+            //            self.scanningAlertContainerView.isHidden = true
+            //            self.loaderView.hideStateView()
+            FliprModeManager.shared.removeConnection()
+            if let mode = notification.userInfo?["Mode"] as? String {
+                self.fliprMode = mode
+                self.tableView.reloadData()
+            }else{
+                
+            }
+        }
+        
+        NotificationCenter.default.addObserver(forName: K.Notifications.FliprConnecitngForModeValue, object: nil, queue: nil) { (notification) in
+            self.fliprMode = "Connecting"
+            self.tableView.reloadData()
+
+        }
+        
         self.getSettings()
         // Do any additional setup after loading the view.
     }
@@ -34,6 +54,7 @@ class WatrFliprSettingsViewController: UIViewController {
             switch response.result {
                 
             case .success(let responseData):
+                self.readMode()
                 if let settingsDic = responseData as? [String:Any] {
                     self.settings = AnalysrSettings.init(fromDictionary: settingsDic)
                 }
@@ -46,7 +67,31 @@ class WatrFliprSettingsViewController: UIViewController {
             }
         })
     }
+    
+    
+    func readMode(){
+        var serial =  Module.currentModule?.serial ?? ""
+        FliprModeManager.shared.scanForFlipr(serials: [serial], completion: { (info) in
+            
+            
+        })
+        
+    }
+    
+    
+    func showModeChangeVC(){
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "FliprModeChangeViewController") as? FliprModeChangeViewController{
+            vc.modeVal = self.fliprMode
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+    }
 
+    @IBAction func modeChangeAction(_ sender: UIButton) {
+        if self.isReadMode{
+            showModeChangeVC()
+        }
+    }
 }
 
 
@@ -106,8 +151,44 @@ extension WatrFliprSettingsViewController: UITableViewDataSource,UITableViewDele
 
             }
         }
+        cell.modeIndicator.startAnimating()
+        var mode = "Searching Flipr"
+        isReadMode  = false
+        if self.fliprMode == "Connecting"{
+            mode = "Connecting".localized
+        }
+        else if self.fliprMode == "00"{
+            isReadMode  = true
+            cell.modeIndicator.isHidden = true
+            cell.modeIndicator.stopAnimating()
+            mode = "Normal"
+        }
+        else if self.fliprMode == "01"{
+            isReadMode  = true
+            cell.modeIndicator.isHidden = true
+            cell.modeIndicator.stopAnimating()
+            mode = "Eco"
+        }
+        else if self.fliprMode == "02"{
+            isReadMode  = true
+            cell.modeIndicator.isHidden = true
+            cell.modeIndicator.stopAnimating()
+            mode = "Sleep"
+        }
+        else if self.fliprMode == "03"{
+            isReadMode  = true
+            cell.modeIndicator.isHidden = true
+            cell.modeIndicator.stopAnimating()
+            mode = "Boost"
+        }else{
+            mode = fliprMode
+        }
+//        isReadMode = true
+        cell.modeValueLbl.text = mode
         return cell
     }
+    
+    
 }
 
 
@@ -174,6 +255,9 @@ extension WatrFliprSettingsViewController{
 
         })
     }
+    
+    
+    
 
 }
 

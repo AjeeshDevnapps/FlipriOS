@@ -33,7 +33,8 @@ class ExpertMenuViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: K.Notifications.showFirmwereUpgradeScreen, object: nil, queue: nil) { (notification) in
             self.showFirmwereUdpateScreen()
         }
-        
+//        if sNo.hasPrefix("F"){
+
         if let identifier = Module.currentModule?.serial {
             var infoStr = AppSharedData.sharedInstance.userInfoTitle
             infoStr.append(" | FID: ")
@@ -71,9 +72,17 @@ class ExpertMenuViewController: UIViewController {
         }
         
         if haveSubscription{
-            cellTitleList = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostic"]
-             imageNames = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
-            self.menuViewHeight.constant = 600
+             let identifier = Module.currentModule?.serial ?? ""
+                if identifier.hasPrefix("F"){
+                    cellTitleList = ["Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostic"]
+                     imageNames = ["Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+                    self.menuViewHeight.constant = 550
+                }else{
+                    cellTitleList = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostic"]
+                     imageNames = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+                    self.menuViewHeight.constant = 600
+
+                }
         }else{
             cellTitleList = ["Activer la connexion à distance","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostic"]
              imageNames = ["noSubscription","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
@@ -122,19 +131,48 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
             
         }
         if indexPath.row == 0{
-            if let identifier = Module.currentModule?.serial {
-                if identifier.hasPrefix("F"){
-                    cell.contentView.alpha = 0.5
-                }else{
-                    cell.contentView.alpha = 1.0
-                }
-            }
+//            if let identifier = Module.currentModule?.serial {
+//                if identifier.hasPrefix("F"){
+//                    cell.contentView.alpha = 0.5
+//                }else{
+//                    cell.contentView.alpha = 1.0
+//                }
+//            }
         }
         else{
             cell.contentView.alpha = 1.0
         }
         return cell
     }
+    
+    func handlePlaceOwnerWithSubscriptionV3Navigation(indexPath: IndexPath){
+        if indexPath.row == 0{
+            showCalibrationView()
+        }
+        else if indexPath.row == 1{
+            stripTest()
+        }
+        else if indexPath.row == 2{
+            expertView()
+        }
+        else if indexPath.row == 3{
+            history()
+        }
+        else if indexPath.row == 4{
+            drainingWater()
+        }
+        else if indexPath.row == 5{
+            showFirmwereDiagnosticScreen()
+        }
+        else if indexPath.row == 6{
+//            showFirmwereDiagnosticScreen()
+        }
+        else{
+            
+        }
+        
+    }
+    
         
     func handlePlaceOwnerWithSubscriptionNavigation(indexPath: IndexPath){
         if indexPath.row == 0{
@@ -286,7 +324,12 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
     
     func handlePlaceNavigation(indexPath: IndexPath){
         if haveSubscription{
-            self.handlePlaceOwnerWithSubscriptionNavigation(indexPath: indexPath)
+            let identifier = Module.currentModule?.serial ?? ""
+            if identifier.hasPrefix("F"){
+                self.handlePlaceOwnerWithSubscriptionV3Navigation(indexPath: indexPath)
+            }else{
+                self.handlePlaceOwnerWithSubscriptionNavigation(indexPath: indexPath)
+            }
 
         }else{
             self.handlePlaceOwnerWithOutSubscriptionNavigation(indexPath: indexPath)

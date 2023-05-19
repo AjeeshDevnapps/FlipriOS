@@ -11,7 +11,8 @@ import AVKit
 
 class CalibrationChlorineIntroViewController: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
-   
+    @IBOutlet weak var skipButton: UIButton!
+
     @IBOutlet weak var titlLbl: UILabel!
     
     @IBOutlet weak var subTitleLbl: UILabel!
@@ -37,6 +38,14 @@ class CalibrationChlorineIntroViewController: UIViewController {
         contentLine2Lbl.text  = "Versez le contenu du flacon rouge dans le capuchon.".localized
         contentLine3Lbl.text  = "Vissez le capuchon sur l’appareil.".localized
         contentLine4Lbl.text  = "Cliquez sur le bouton \"Initialiser\".".localized
+        
+        if isAddingNewDevice{
+            if AppSharedData.sharedInstance.deviceSerialNo.hasPrefix("F"){
+                self.skipButton.isHidden = false
+            }else{
+                self.skipButton.isHidden = true
+            }
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -61,6 +70,12 @@ class CalibrationChlorineIntroViewController: UIViewController {
         
     }
 
+    @IBAction func skipButton(_ sender: UIButton) {
+        if let vc = UIStoryboard(name: "Gateway", bundle: nil).instantiateViewController(withIdentifier: "GateWayListingViewController") as? GateWayListingViewController{
+            vc.isSkipping = true
+            self.navigationController?.pushViewController(vc)
+        }
+    }
     
 
 }

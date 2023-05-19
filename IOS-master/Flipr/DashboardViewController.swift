@@ -3593,21 +3593,25 @@ class DashboardViewController: UIViewController {
                                 
                                 if lastDate.timeIntervalSinceNow < -4500 {
                                     if self.isPlaceOwner{
-                                        self.readBLEMeasure(completion: { (error) in
-                                            if error != nil {
-                                                if error?.localizedDescription == "Diff Device"{
-                                                    debugPrint("Diff Device error")
-                                                }else{
-                                                    //                                                    self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+                                        if identifier.hasPrefix("F"){
+                                            
+                                        }else{
+                                            self.readBLEMeasure(completion: { (error) in
+                                                if error != nil {
+                                                    if error?.localizedDescription == "Diff Device"{
+                                                        debugPrint("Diff Device error")
+                                                    }else{
+                                                        //                                                    self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
 
-//                                                    self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
-                                                    self.bleStatusView.isHidden = true
+    //                                                    self.showError(title: "Bluetooth connection error".localized, message: error?.localizedDescription)
+                                                        self.bleStatusView.isHidden = true
+                                                    }
+                                                    
+                                                } else {
+                                                    self.bleMeasureHasBeenSent = true
                                                 }
-                                                
-                                            } else {
-                                                self.bleMeasureHasBeenSent = true
-                                            }
-                                        })
+                                            })
+                                        }
                                     }
                                 }
                                 

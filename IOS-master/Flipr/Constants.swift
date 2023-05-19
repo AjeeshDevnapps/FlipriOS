@@ -83,6 +83,8 @@ struct K {
         static let GatewayDiscovered = Notification.Name("fr.isee-u.GatewayDiscovered")
 
         static let GatewayNoteDiscovered = Notification.Name("fr.isee-u.GatewayNoteDiscovered")
+        static let FliprModeValue = Notification.Name("fr.isee-u.FliprModeValue")
+        static let FliprConnecitngForModeValue = Notification.Name("fr.isee-u.FliprConnecitngForModeValue")
 
 
     }

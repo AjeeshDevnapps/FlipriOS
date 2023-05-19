@@ -278,12 +278,16 @@
 		1C40C5D6290FB57A006FD97D /* PoolSettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC4C96A28F6EF4B00D69234 /* PoolSettingsRouter.swift */; };
 		1C437AD92971E45E00E69099 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C437AD82971E45E00E69099 /* PreferenceViewController.swift */; };
 		1C437ADA2971E45E00E69099 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C437AD82971E45E00E69099 /* PreferenceViewController.swift */; };
+		1C4491032A16B401007D55F3 /* FliprModeChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4491022A16B401007D55F3 /* FliprModeChangeViewController.swift */; };
+		1C4491042A16B401007D55F3 /* FliprModeChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4491022A16B401007D55F3 /* FliprModeChangeViewController.swift */; };
 		1C4A6142294B3023006FAE1C /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4A6141294B3022006FAE1C /* LocationInfo.swift */; };
 		1C4A6143294B3023006FAE1C /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4A6141294B3022006FAE1C /* LocationInfo.swift */; };
 		1C4A6145294B3DD0006FAE1C /* WatrInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4A6144294B3DD0006FAE1C /* WatrInputViewController.swift */; };
 		1C4A6146294B3DD0006FAE1C /* WatrInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4A6144294B3DD0006FAE1C /* WatrInputViewController.swift */; };
 		1C504F2926A1A2340042C2DD /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504F2826A1A2340042C2DD /* DeviceType.swift */; };
 		1C504F2F26A1E3500042C2DD /* HubDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504F2E26A1E3500042C2DD /* HubDeviceTableViewCell.swift */; };
+		1C50A7C52A163E5D00EC49F8 /* FliprModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C50A7C42A163E5D00EC49F8 /* FliprModeManager.swift */; };
+		1C50A7C62A163E5D00EC49F8 /* FliprModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C50A7C42A163E5D00EC49F8 /* FliprModeManager.swift */; };
 		1C532615283AA9F1003A4847 /* FlipValueReadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C532614283AA9F1003A4847 /* FlipValueReadingViewController.swift */; };
 		1C57B38B286D8A5A006F1342 /* LastMeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C57B38A286D8A5A006F1342 /* LastMeasurementViewController.swift */; };
 		1C5AE4222751194A008F6643 /* HubSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AE4212751194A008F6643 /* HubSettingsViewController.swift */; };
@@ -653,10 +657,12 @@
 		1C2D66472967578200856D3E /* ControlRSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlRSettings.swift; sourceTree = "<group>"; };
 		1C37AC2028EC4EB500B234E0 /* WatrThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatrThemeViewController.swift; sourceTree = "<group>"; };
 		1C437AD82971E45E00E69099 /* PreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
+		1C4491022A16B401007D55F3 /* FliprModeChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprModeChangeViewController.swift; sourceTree = "<group>"; };
 		1C4A6141294B3022006FAE1C /* LocationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfo.swift; sourceTree = "<group>"; };
 		1C4A6144294B3DD0006FAE1C /* WatrInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatrInputViewController.swift; sourceTree = "<group>"; };
 		1C504F2826A1A2340042C2DD /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		1C504F2E26A1E3500042C2DD /* HubDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubDeviceTableViewCell.swift; sourceTree = "<group>"; };
+		1C50A7C42A163E5D00EC49F8 /* FliprModeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprModeManager.swift; sourceTree = "<group>"; };
 		1C532614283AA9F1003A4847 /* FlipValueReadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipValueReadingViewController.swift; sourceTree = "<group>"; };
 		1C57B38A286D8A5A006F1342 /* LastMeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastMeasurementViewController.swift; sourceTree = "<group>"; };
 		1C5AE4212751194A008F6643 /* HubSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubSettingsViewController.swift; sourceTree = "<group>"; };
@@ -1130,6 +1136,7 @@
 				1CC3F47529533A77004D4480 /* CreatePlaceViewController.swift */,
 				1CAE717929538B2700507574 /* AddDeviceListViewController.swift */,
 				1C5B561029A537820064C729 /* EquipmentsViewController.swift */,
+				1C4491022A16B401007D55F3 /* FliprModeChangeViewController.swift */,
 			);
 			path = Watr;
 			sourceTree = "<group>";
@@ -1819,6 +1826,7 @@
 				B53C5E841E82C72F00C1C0FC /* CityPickerViewController.swift */,
 				B53A7D5B1E8BB95800AC03C0 /* BLEManager.swift */,
 				1CD6478129D6AEB000ECCAB4 /* GatewayManager.swift */,
+				1C50A7C42A163E5D00EC49F8 /* FliprModeManager.swift */,
 				B52A2DDA229D612900967175 /* AppReview.swift */,
 				B53A7D5D1E8BFECF00AC03C0 /* Constants.swift */,
 				1CAD60DC28117FDC00879A45 /* Flipr.cyacd */,
@@ -2358,6 +2366,7 @@
 				1CD8019729DD30AC0011A7D8 /* GatewaySettingsViewController.swift in Sources */,
 				1C044EBE28EA30BE00807F01 /* CyCBManager.m in Sources */,
 				1C5B560F29A530AD0064C729 /* EqipmentsTableViewCell.swift in Sources */,
+				1C4491042A16B401007D55F3 /* FliprModeChangeViewController.swift in Sources */,
 				1C044EBF28EA30BE00807F01 /* UIButton+Activity.swift in Sources */,
 				1CCD7FC428EAD6A600AF1635 /* PlaceDropdownViewController.swift in Sources */,
 				1C044EC028EA30BE00807F01 /* DescribeMyPoolViewController.swift in Sources */,
@@ -2444,6 +2453,7 @@
 				1C044F0128EA30BE00807F01 /* ProductTypeTableViewController.swift in Sources */,
 				1C98B8DF292805C500AF089A /* WatrHubSettingsViewController.swift in Sources */,
 				1CD06B3C29FA81A50011655C /* ChangeDelayViewController.swift in Sources */,
+				1C50A7C62A163E5D00EC49F8 /* FliprModeManager.swift in Sources */,
 				1CD2B3CC28EC18820013BD98 /* PoolShareViewController.swift in Sources */,
 				1C044F0228EA30BE00807F01 /* NewDashboardViewController.swift in Sources */,
 				1CCB034E29E9B10A002DB637 /* GatewaySuccessViewController.swift in Sources */,
@@ -2630,6 +2640,7 @@
 				1CD8019629DD30AC0011A7D8 /* GatewaySettingsViewController.swift in Sources */,
 				B59436E1225652580030F16D /* SubscriptionOptionTableViewCell.swift in Sources */,
 				1C5B560E29A530AD0064C729 /* EqipmentsTableViewCell.swift in Sources */,
+				1C4491032A16B401007D55F3 /* FliprModeChangeViewController.swift in Sources */,
 				1CAD60DB28117F1800879A45 /* CyCBManager.m in Sources */,
 				B518F0F31E9FC0840092156C /* UIButton+Activity.swift in Sources */,
 				1CCD7FC328EAD6A600AF1635 /* PlaceDropdownViewController.swift in Sources */,
@@ -2716,6 +2727,7 @@
 				1CFBFC9E27317FAB00AB5771 /* DashScrollViewItem.swift in Sources */,
 				1C98B8DE292805C500AF089A /* WatrHubSettingsViewController.swift in Sources */,
 				1CD06B3B29FA81A10011655C /* ChangeDelayViewController.swift in Sources */,
+				1C50A7C52A163E5D00EC49F8 /* FliprModeManager.swift in Sources */,
 				B52A68B71EFAA4DF006585F5 /* ProductTypeTableViewController.swift in Sources */,
 				48F91FBC2677AD1200FFD44B /* NewDashboardViewController.swift in Sources */,
 				1CCB034D29E9B10A002DB637 /* GatewaySuccessViewController.swift in Sources */,

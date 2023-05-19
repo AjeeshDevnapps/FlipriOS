@@ -11,6 +11,8 @@ import AVKit
 
 class CalibrationPh7IntroViewController: BaseViewController {
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var skipButton: UIButton!
+
     @IBOutlet weak var subTitleLbl: UILabel!
     @IBOutlet weak var subTitleContainerView: UIView!
 
@@ -45,6 +47,13 @@ class CalibrationPh7IntroViewController: BaseViewController {
         contentLine2Lbl.text  = "Munissez-vous du capuchon. Versez le contenu du flacon bleu dans le capuchon.".localized
         contentLine3Lbl.text  = "Vissez le capuchon sur l’appareil.".localized
         contentLine4Lbl.text  = "Cliquez sur le bouton \"Initialiser\".".localized
+        if isAddingNewDevice{
+            if AppSharedData.sharedInstance.deviceSerialNo.hasPrefix("F"){
+                self.skipButton.isHidden = false
+            }else{
+                self.skipButton.isHidden = true
+            }
+        }
 
 //        self.navigationController?.navigationBar.tintColor = UIColor.blueColor()
 
@@ -78,6 +87,14 @@ class CalibrationPh7IntroViewController: BaseViewController {
             playerViewController.player!.play()
         }
         
+    }
+    
+    
+    @IBAction func skipButton(_ sender: UIButton) {
+        if let vc = UIStoryboard(name: "Gateway", bundle: nil).instantiateViewController(withIdentifier: "GateWayListingViewController") as? GateWayListingViewController{
+            vc.isSkipping = true
+            self.navigationController?.pushViewController(vc)
+        }
     }
 
 }

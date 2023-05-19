@@ -170,17 +170,17 @@ class FliprHubMenuViewController: UIViewController {
             if isPlaceOwner && (haveSubscription == false){
                 self.cellTitleList = ["Activer la connexion à distance".localized,"Carnet d’entretien".localized,"Pool House".localized,"Expert mode".localized,"Aide".localized,"Paramètres".localized,"Déconnexion".localized]
                 self.imageNames = ["noSubscription","Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
-                self.menuViewHeight.constant = 665
+                self.menuViewHeight.constant = 600
 
             }else{
                 if isPlaceOwner{
                     self.cellTitleList = ["Carnet d’entretien".localized,"Pool House".localized,"Expert mode".localized,"Aide".localized,"Paramètres".localized,"Déconnexion".localized]
                     self.imageNames = ["Carnet d’entretien","Pool House","Mode Expert","Aide","Paramètres","Déconnexion"]
-                    self.menuViewHeight.constant = 599
+                    self.menuViewHeight.constant = 550
                 }else{
                     self.cellTitleList = ["Buy Flipr AnalysR".localized,"Aide".localized,"Paramètres".localized,"Déconnexion".localized]
                     self.imageNames = ["buy","Aide","Paramètres","Déconnexion"]
-                    self.menuViewHeight.constant = 401
+                    self.menuViewHeight.constant = 450
 
                 }
 
@@ -188,7 +188,7 @@ class FliprHubMenuViewController: UIViewController {
         }else{
             self.cellTitleList = ["Buy Flipr AnalysR".localized,"Paramètres".localized,"Déconnexion".localized]
             self.imageNames = ["buy","Paramètres","Déconnexion"]
-            self.menuViewHeight.constant = 335
+            self.menuViewHeight.constant = 400
 
         }
         

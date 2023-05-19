@@ -39,7 +39,10 @@ class FliprSettingsTableViewCell: UITableViewCell {
     @IBOutlet weak var generalHeaderTitle: UILabel!
     @IBOutlet weak var diagHeaderTitle: UILabel!
     @IBOutlet weak var settingsHeaderTitle: UILabel!
-    
+    @IBOutlet weak var modeHeaderTitle: UILabel!
+    @IBOutlet weak var modeValueLbl: UILabel!
+    @IBOutlet weak var modeIndicator : UIActivityIndicatorView!
+
     
     @IBOutlet weak var firmwareUpdateView: UIView!
 
@@ -203,6 +206,23 @@ class GatewaySettingsTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+}
+
+
+class FliprModeInfoTableViewCell: UITableViewCell {
+    @IBOutlet weak var modeTitleLbl: UILabel!
+    @IBOutlet weak var selectionImage: UIImageView!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
