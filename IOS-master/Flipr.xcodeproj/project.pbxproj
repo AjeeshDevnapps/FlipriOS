@@ -387,6 +387,8 @@
 		1CD2B3DB28EC35250013BD98 /* WatrSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD2B3D928EC35250013BD98 /* WatrSettingsViewController.swift */; };
 		1CD54B01290A6DBC004AC618 /* UnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD54B00290A6DBC004AC618 /* UnitViewController.swift */; };
 		1CD54B02290A6DBC004AC618 /* UnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD54B00290A6DBC004AC618 /* UnitViewController.swift */; };
+		1CD5C6222A17AEA20069C874 /* NoPlaceIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD5C6212A17AEA20069C874 /* NoPlaceIntroViewController.swift */; };
+		1CD5C6232A17AEA20069C874 /* NoPlaceIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD5C6212A17AEA20069C874 /* NoPlaceIntroViewController.swift */; };
 		1CD6478229D6AEB000ECCAB4 /* GatewayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6478129D6AEB000ECCAB4 /* GatewayManager.swift */; };
 		1CD6478329D6AEB000ECCAB4 /* GatewayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6478129D6AEB000ECCAB4 /* GatewayManager.swift */; };
 		1CD6992726E5F1C400563CBE /* FliprHubMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD6992626E5F1C400563CBE /* FliprHubMenuViewController.swift */; };
@@ -729,6 +731,7 @@
 		1CD2B3D628EC2AB00013BD98 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		1CD2B3D928EC35250013BD98 /* WatrSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatrSettingsViewController.swift; sourceTree = "<group>"; };
 		1CD54B00290A6DBC004AC618 /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
+		1CD5C6212A17AEA20069C874 /* NoPlaceIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPlaceIntroViewController.swift; sourceTree = "<group>"; };
 		1CD6478129D6AEB000ECCAB4 /* GatewayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayManager.swift; sourceTree = "<group>"; };
 		1CD6992626E5F1C400563CBE /* FliprHubMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprHubMenuViewController.swift; sourceTree = "<group>"; };
 		1CD6992926E5F6AF00563CBE /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -1137,6 +1140,7 @@
 				1CAE717929538B2700507574 /* AddDeviceListViewController.swift */,
 				1C5B561029A537820064C729 /* EquipmentsViewController.swift */,
 				1C4491022A16B401007D55F3 /* FliprModeChangeViewController.swift */,
+				1CD5C6212A17AEA20069C874 /* NoPlaceIntroViewController.swift */,
 			);
 			path = Watr;
 			sourceTree = "<group>";
@@ -2602,6 +2606,7 @@
 				1C044F7B28EA30BE00807F01 /* AppSharedData.swift in Sources */,
 				1C044F7C28EA30BE00807F01 /* FirmwareUpgradeSuccessViewController.swift in Sources */,
 				1C044F7D28EA30BE00807F01 /* RoundShadowView.swift in Sources */,
+				1CD5C6232A17AEA20069C874 /* NoPlaceIntroViewController.swift in Sources */,
 				1C044F7E28EA30BE00807F01 /* Module.swift in Sources */,
 				1C044F7F28EA30BE00807F01 /* HubListViewController.swift in Sources */,
 				1C044F8028EA30BE00807F01 /* FirmwareUpgradeFailureViewController.swift in Sources */,
@@ -2876,6 +2881,7 @@
 				48493D6925F54259008672DD /* AppSharedData.swift in Sources */,
 				1C1359092819C20800ED3C56 /* FirmwareUpgradeSuccessViewController.swift in Sources */,
 				1C2E9BB0290B9FD8002D7BB6 /* WatrThemeViewController.swift in Sources */,
+				1CD5C6222A17AEA20069C874 /* NoPlaceIntroViewController.swift in Sources */,
 				481624E625DD91F50085F3C4 /* RoundShadowView.swift in Sources */,
 				B59BEFAE1EA6663800F3AD73 /* Module.swift in Sources */,
 				48F49ABF2666B3D200DFB18B /* HubListViewController.swift in Sources */,
@@ -3128,7 +3134,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3138,7 +3144,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Flipr;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.0.1;
+				MARKETING_VERSION = 4.0.2;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
@@ -3164,7 +3170,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3174,7 +3180,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Flipr;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.0.1;
+				MARKETING_VERSION = 4.0.2;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;

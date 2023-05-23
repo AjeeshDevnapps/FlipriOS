@@ -33,7 +33,13 @@ class FliprModeChangeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Mode"
+        self.title = "Mode".localized
+        self.infoLbl.text = "Le changement de mode ne peut se faire qu’à proximité immédiate du Flipr. \n\nLes modes “Eco et Sleep” préserveront significativement la batterie pendant les périodes d’hivernage.\n\nL’utilisation du mode “Boost” entraine pourra annuler la garantie  de la batterie. Celle-ci se déchargera très rapidement.\n".localized
+        radioBtnTitle1.text = "Normal (20 Measurements / Day)".localized
+        radioBtnTitle2.text = "Eco  (2 Measurements / Day)".localized
+        radioBtnTitle3.text = "Sleep (No measurement)".localized
+        radioBtnTitle4.text = "Boost (700 measurements / Day)".localized
+
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprModeValue, object: nil, queue: nil) { (notification) in
             //            self.scanningAlertContainerView.isHidden = true
             //            self.loaderView.hideStateView()
@@ -53,18 +59,18 @@ class FliprModeChangeViewController: UIViewController {
     
 
     @IBAction func radioBtn1Action(_ sender: UIButton) {
-        self.changeMode(mode: 0)
+        self.changeMode(mode: 1)
         self.selectModeImage(mode: modeVal)
     }
     
     @IBAction func radioBtn2Action(_ sender: UIButton) {
-        self.changeMode(mode: 1)
+        self.changeMode(mode: 2)
         self.selectModeImage(mode: modeVal)
 
     }
     
     @IBAction func radioBtn3Action(_ sender: UIButton) {
-        self.changeMode(mode: 2)
+        self.changeMode(mode: 0)
         self.selectModeImage(mode: modeVal)
         
     }
@@ -81,13 +87,13 @@ class FliprModeChangeViewController: UIViewController {
         radioBtnImg3.image = UIImage(named: "UnSelectRadioBtn")
         radioBtnImg4.image = UIImage(named: "UnSelectRadioBtn")
         if mode == "00"{
-            radioBtnImg1.image = UIImage(named: "SelectedRadioBtn")
+            radioBtnImg3.image = UIImage(named: "SelectedRadioBtn")
         }
         else if mode == "01"{
-            radioBtnImg2.image = UIImage(named: "SelectedRadioBtn")
+            radioBtnImg1.image = UIImage(named: "SelectedRadioBtn")
         }
         else if mode == "02"{
-            radioBtnImg3.image = UIImage(named: "SelectedRadioBtn")
+            radioBtnImg2.image = UIImage(named: "SelectedRadioBtn")
 
         }
         else if mode == "03"{

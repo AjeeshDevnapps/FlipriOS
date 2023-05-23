@@ -253,18 +253,40 @@ class FliprSplashViewController: BaseViewController {
     
     
     func checkPlaceViewFlow(){
-        if AppSharedData.sharedInstance.haveInvitation{
-            self.showPlaceDropdownView()
+        if haveInvitation{
+            if AppSharedData.sharedInstance.havePlace{
+                self.showPlaceDropdownView()
+            }else{
+                showNoPlaceVC()
+            }
         }else{
             if AppSharedData.sharedInstance.havePlace{
                 self.showDashboardView()
             }
             else{
-                self.addPlaceView()
+                showNoPlaceVC()
+//                self.addPlaceView()
             }
         }
     }
     
+    func showNoPlaceVC(){
+        let sb = UIStoryboard.init(name: "Watr", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "NoPlaceIntroViewController") as? NoPlaceIntroViewController {
+            if haveInvitation{
+                viewController.haveInvitation = haveInvitation
+                viewController.invitationList =  self.invitationList
+            }
+//            viewController.delegate = self
+//            viewController.placeTitle = self.selectedPlaceDetailsLbl.text
+//            viewController.modalPresentationStyle = .overCurrentContext
+//            self.present(viewController, animated: true) {
+//            }
+//            viewController.isInvitationFlow = true
+            self.navigationController?.pushViewController(viewController, completion: nil)
+        }
+
+    }
     
     func showPlaceDropdownView(){
         let sb = UIStoryboard.init(name: "Watr", bundle: nil)

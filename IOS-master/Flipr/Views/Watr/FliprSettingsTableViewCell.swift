@@ -63,6 +63,7 @@ class FliprSettingsTableViewCell: UITableViewCell {
         generalHeaderTitle.text = "GENERAL".localized
         diagHeaderTitle.text = "DIAG".localized
         settingsHeaderTitle.text = "REGLAGES".localized
+        modeHeaderTitle.text = "Mode".localized
 
         
         container1.addShadow(offset: CGSize.init(width: 0, height: 0), color: UIColor(hexString: "E3E7F0"), radius: 25.0, opacity: 1.0)

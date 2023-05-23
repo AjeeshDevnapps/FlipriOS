@@ -31,6 +31,8 @@ class CalibrationPh7IntroViewController: BaseViewController {
         super.viewDidLoad()
         submitButton.roundCorner(corner: 12)
         submitButton.setTitle("Initialiser".localized, for: .normal)
+        skipButton.setTitle("Skip".localized, for: .normal)
+
         subTitleContainerView.roundCorner(corner: 12)
         subTitleContainerView.layer.borderWidth = 2.0
         subTitleContainerView.layer.borderColor = UIColor.init(hexString: "3D8FAE").cgColor

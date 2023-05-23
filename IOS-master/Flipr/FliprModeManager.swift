@@ -264,7 +264,6 @@ extension FliprModeManager: CBCentralManagerDelegate {
                                 NotificationCenter.default.post(name: K.Notifications.FliprConnecitngForModeValue, object: nil, userInfo: nil)
                     central.connect(flipr!, options: nil)
                     centralManager.stopScan()
-
                 }
 
 

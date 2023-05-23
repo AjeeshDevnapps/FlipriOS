@@ -29,6 +29,7 @@ class CalibrationChlorineIntroViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         var titleString  = "Calibration".localized
+        skipButton.setTitle("Skip".localized, for: .normal)
         titleString.append(" Ph4")
         titlLbl.text  = titleString
         submitButton.roundCorner(corner: 12)

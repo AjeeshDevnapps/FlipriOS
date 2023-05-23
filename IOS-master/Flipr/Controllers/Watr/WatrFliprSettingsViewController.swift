@@ -28,6 +28,8 @@ class WatrFliprSettingsViewController: UIViewController {
             //            self.scanningAlertContainerView.isHidden = true
             //            self.loaderView.hideStateView()
             FliprModeManager.shared.removeConnection()
+            FliprModeManager.shared.centralManager.stopScan()
+
             if let mode = notification.userInfo?["Mode"] as? String {
                 self.fliprMode = mode
                 self.tableView.reloadData()
@@ -152,7 +154,7 @@ extension WatrFliprSettingsViewController: UITableViewDataSource,UITableViewDele
             }
         }
         cell.modeIndicator.startAnimating()
-        var mode = "Searching Flipr"
+        var mode = "Searching Flipr".localized
         isReadMode  = false
         if self.fliprMode == "Connecting"{
             mode = "Connecting".localized
@@ -161,19 +163,19 @@ extension WatrFliprSettingsViewController: UITableViewDataSource,UITableViewDele
             isReadMode  = true
             cell.modeIndicator.isHidden = true
             cell.modeIndicator.stopAnimating()
-            mode = "Normal"
+            mode = "Sleep"
         }
         else if self.fliprMode == "01"{
             isReadMode  = true
             cell.modeIndicator.isHidden = true
             cell.modeIndicator.stopAnimating()
-            mode = "Eco"
+            mode = "Normal"
         }
         else if self.fliprMode == "02"{
             isReadMode  = true
             cell.modeIndicator.isHidden = true
             cell.modeIndicator.stopAnimating()
-            mode = "Sleep"
+            mode = "Eco"
         }
         else if self.fliprMode == "03"{
             isReadMode  = true

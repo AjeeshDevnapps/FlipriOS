@@ -37,7 +37,7 @@ class WatrSettingsViewController: UIViewController {
         self.title = "Settings".localized
         themTitleLbl.text = "Theme".localized
         systemTitleLbl.text = "Système".localized
-        NotificationLbl.text = "notifications".localized
+        NotificationLbl.text = "Alerts and Notifications".localized
         gatewaysTitleLbl.text = "Passerelles".localized
         equipmentsTitleLbl.text = "Equipments".localized
         
