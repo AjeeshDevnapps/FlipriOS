@@ -44,6 +44,11 @@ class WatrFliprSettingsViewController: UIViewController {
 
         }
         
+        NotificationCenter.default.addObserver(forName: K.Notifications.FliprReadingModeValue, object: nil, queue: nil) { (notification) in
+            self.fliprMode = "Reading"
+            self.tableView.reloadData()
+        }
+        
         self.getSettings()
         // Do any additional setup after loading the view.
     }
@@ -104,6 +109,7 @@ extension WatrFliprSettingsViewController: UITableViewDataSource,UITableViewDele
         return settings == nil ? 0 : 1
     }
     
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 900
     }
@@ -159,6 +165,9 @@ extension WatrFliprSettingsViewController: UITableViewDataSource,UITableViewDele
         if self.fliprMode == "Connecting"{
             mode = "Connecting".localized
         }
+        if self.fliprMode == "Reading"{
+            mode = "Reading".localized
+        }
         else if self.fliprMode == "00"{
             isReadMode  = true
             cell.modeIndicator.isHidden = true
@@ -183,7 +192,7 @@ extension WatrFliprSettingsViewController: UITableViewDataSource,UITableViewDele
             cell.modeIndicator.stopAnimating()
             mode = "Boost"
         }else{
-            mode = fliprMode
+            //mode = fliprMode
         }
 //        isReadMode = true
         cell.modeValueLbl.text = mode
@@ -254,6 +263,8 @@ extension WatrFliprSettingsViewController{
             }
             Module.currentModule?.serial = ""
             Module.saveCurrentModuleLocally()
+            FliprModeManager.shared.stopScanning = true
+            FliprModeManager.shared.removeConnection()
 
         })
     }

@@ -105,15 +105,17 @@ class FliprModeChangeViewController: UIViewController {
     
     func changeMode(mode:UInt8){
         hud?.show(in: self.view)
+        FliprModeManager.shared.isWriteMode = true
+        FliprModeManager.shared.writingValue = mode
         FliprModeManager.shared.connect( completion: { (error) in
-            
             if error == nil{
-                FliprModeManager.shared.setMode(mode: mode, completion: { error in
-                    
-                })
+                FliprModeManager.shared.readModeValue()
             }
+//            if error == nil{
+//                FliprModeManager.shared.setMode(mode: mode, completion: { error in
+//                    
+//                })
+//            }
         })
-        
-        
     }
 }

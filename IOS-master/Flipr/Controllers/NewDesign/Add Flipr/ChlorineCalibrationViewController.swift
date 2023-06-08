@@ -44,6 +44,9 @@ class ChlorineCalibrationViewController: BaseViewController {
     
     
     override func backButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+
+        /*
         if dismissEnabled{
             self.dismiss(animated: true, completion: nil)
         }else{
@@ -70,7 +73,36 @@ class ChlorineCalibrationViewController: BaseViewController {
             self.present(alertController, animated: true, completion: nil)
         }
         
+        */
+        
     }
+    
+    
+    func calibrate(){
+        let theme = EmptyStateViewTheme.shared
+        theme.activityIndicatorType = .ballSpinFadeLoader
+        theme.activityIndicatorColor = .black
+        self.loaderView.showEmptyStateViewLoading(title: nil,
+                                            message: nil,
+                                            theme: theme)
+        CalibrationManager.shared.isStoppedForRedo = false
+        CalibrationManager.shared.isReconnectedAfterFail = false
+        CalibrationManager.shared.readPh4{ (error) in
+            
+            if error != nil{
+                self.navigationController?.popViewController()
+            }else{
+                Module.currentModule?.pH7CalibrationDone = true
+                self.loaderView.hideStateView()
+//                self.invalidateStruckChecktimer()
+                self.showStripView()
+
+            }
+        }
+
+    }
+    
+    /*
 
     func calibrate(){
         let theme = EmptyStateViewTheme.shared
@@ -157,6 +189,8 @@ class ChlorineCalibrationViewController: BaseViewController {
         }
 
     }
+    
+    */
     
     @objc func checkForAppStrucked() {
     

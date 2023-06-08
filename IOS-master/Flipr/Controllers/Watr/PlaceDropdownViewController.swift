@@ -69,6 +69,9 @@ class PlaceDropdownViewController: UIViewController {
         callPlacesApi()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     
     func clearData(){
      //   self.noPlaceMsgLabel.text = "noPlaceMsg".localized

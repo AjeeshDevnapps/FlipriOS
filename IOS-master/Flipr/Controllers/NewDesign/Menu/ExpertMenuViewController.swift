@@ -44,6 +44,12 @@ class ExpertMenuViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        CalibrationManager.shared.removeConnection()
+    }
+    
 
     @IBAction func closeButtonAction(){
         self.dismiss(animated: true, completion: nil)

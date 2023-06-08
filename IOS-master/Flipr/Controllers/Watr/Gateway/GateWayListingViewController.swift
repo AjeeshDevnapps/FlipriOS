@@ -22,6 +22,7 @@ class GateWayListingViewController: BaseViewController {
     var gatewayArray = [String]()
     @IBOutlet weak var tableView: UITableView!
     var isSkipping = false
+    var serialNo = ""
     
     override func viewDidLoad() {
         self.hidCustombackbutton = true
@@ -44,12 +45,10 @@ class GateWayListingViewController: BaseViewController {
                         self.tableView.reloadData()
                     }
                 }
-                //                self.showFliprList(serialKey: serial)
             }else{
                 
             }
         }
-        
         findFliprGatways()
         
     }
@@ -129,6 +128,7 @@ extension GateWayListingViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func addGatewayInUserAccount(serialNo:String){
+        self.serialNo = serialNo
         let hud = JGProgressHUD(style:.dark)
         hud?.show(in: self.view)
         User.currentUser?.activateGateWay(serialNo: serialNo, completion: { gatewayInfo, error in
@@ -139,6 +139,9 @@ extension GateWayListingViewController: UITableViewDataSource, UITableViewDelega
             }else{
                 print(gatewayInfo)
                 GatewayManager.shared.stopScanForGateway()
+                GatewayManager.shared.removeConnection()
+                self.showWifiVC()
+                /*
                 GatewayManager.shared.connect(serial: serialNo) { error in
                     if error != nil {
                         self.showError(title: "Error".localized, message: error?.localizedDescription)
@@ -151,10 +154,19 @@ extension GateWayListingViewController: UITableViewDataSource, UITableViewDelega
                         }
                     }
                 }
+                */
             }
            
         })
        
+    }
+    
+    
+    func showWifiVC(){
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GatewaywifiViewController") as? GatewaywifiViewController {
+            vc.serial = self.serialNo
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     

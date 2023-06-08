@@ -98,7 +98,8 @@ class LastMeasurementViewController:BaseViewController {
         */
 //        startReading()
 
-        readLastMeasurement()
+//        readLastMeasurement()
+        newMeasurement()
         // Do any additional setup after loading the view.
     }
     
@@ -164,6 +165,37 @@ class LastMeasurementViewController:BaseViewController {
             print("No flipr in shared data")
             connectCurrentModuleFlipr()
         }
+    }
+    
+    
+    func newMeasurement(){
+//        let theme = EmptyStateViewTheme.shared
+//        theme.activityIndicatorType = .ballSpinFadeLoader
+//        theme.activityIndicatorColor = .black
+//        self.view.showEmptyStateViewLoading(title: nil,
+//                                            message: nil,
+//                                            theme: theme)
+        NewMeasurementManager.shared.resetValues()
+        NewMeasurementManager.shared.connectDevice{ (error) in
+            
+            
+            if error != nil{
+                self.hud?.textLabel.text = "Something went wrong"
+                self.hud?.dismiss(afterDelay: 1)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.dismiss(animated: true)
+                }
+            }else{
+                self.view.hideStateView()
+                self.readingSuccess()
+            }
+        }
+
+    }
+    
+    
+    @objc func dismissAfterDelay(){
+        
     }
     
     func connectCurrentModuleFlipr(){

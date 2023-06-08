@@ -185,11 +185,11 @@ class GatewaySettingsTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        nameLblTitle.text = "Type" .localized
+        nameLblTitle.text = "SSID WIFI" .localized
         
 //        ownerLblTitle.text = "Propriétaire".localized
-        locationLblTitle.text = "State".localized
-        serialNoLblTitle.text = "Last connection".localized
+        locationLblTitle.text = "Connection ".localized
+        serialNoLblTitle.text = "Software Version".localized
 //        deleteHeaderTitle.text = "Mode".localized
         changeeWifiTitle.text = "Changer le réseau Wifi".localized
 //        settingsLblTitle.text = "Paramètres de connexion".localized

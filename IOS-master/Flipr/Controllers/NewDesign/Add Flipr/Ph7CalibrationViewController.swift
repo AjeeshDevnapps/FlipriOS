@@ -43,6 +43,9 @@ class Ph7CalibrationViewController: BaseViewController {
     
     
     override func backButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+
+        /*
         if dismissEnabled{
             self.dismiss(animated: true, completion: nil)
         }else{
@@ -68,9 +71,37 @@ class Ph7CalibrationViewController: BaseViewController {
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
         }
+        */
         
     }
 
+    
+    func calibrate(){
+        let theme = EmptyStateViewTheme.shared
+        theme.activityIndicatorType = .ballSpinFadeLoader
+        theme.activityIndicatorColor = .black
+        self.loaderView.showEmptyStateViewLoading(title: nil,
+                                            message: nil,
+                                            theme: theme)
+        CalibrationManager.shared.resetValues()
+        CalibrationManager.shared.connectDevice{ (error) in
+            
+            if error != nil{
+                self.navigationController?.popViewController()
+            }else{
+                Module.currentModule?.pH7CalibrationDone = true
+                self.loaderView.hideStateView()
+//                self.invalidateStruckChecktimer()
+                self.showChlorineFlow()
+
+            }
+        }
+
+    }
+    
+    
+    
+    /*
     func calibrate(){
         let theme = EmptyStateViewTheme.shared
         theme.activityIndicatorType = .ballSpinFadeLoader
@@ -159,6 +190,9 @@ class Ph7CalibrationViewController: BaseViewController {
         }
 
     }
+    
+    
+    */
     
     @objc func checkForAppStrucked() {
     

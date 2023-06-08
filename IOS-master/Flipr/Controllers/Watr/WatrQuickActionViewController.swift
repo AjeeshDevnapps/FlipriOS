@@ -15,7 +15,7 @@ class WatrQuickActionViewController: UIViewController {
     @IBOutlet weak var settingTable: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var subTitleLbl: UILabel!
-
+    
     @IBOutlet weak var subScriptiontitleLbl: UILabel!
     @IBOutlet weak var subScriptionView: UIView!
     @IBOutlet weak var subScriptionViewHeight: NSLayoutConstraint!
@@ -36,12 +36,9 @@ class WatrQuickActionViewController: UIViewController {
     var placeDetails:PlaceDropdown!
     var placesModules:PlaceModule!
     var isV3 = false
-
     
     
-    // var cellTitleList = ["Carnet d’entretien","Flipr Predict","Flipr Expert","Pool House","Flipr Store","Conseils et astuces","Paramètres","Aide","Déconnexion"]
     
-    // var imageNames = ["menu1","menu2","menu3","menu4","menu5","menu6","menu7","menu8","menu9"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,18 +69,12 @@ class WatrQuickActionViewController: UIViewController {
     
     func showGatewayListing(){
         if let vc = UIStoryboard(name: "Gateway", bundle: nil).instantiateViewController(withIdentifier: "GateWayListingViewController") as? GateWayListingViewController {
-//            vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         }
         
     }
     
     @IBAction func closeButtonAction(){
-        //        let sb = UIStoryboard.init(name: "Calibration", bundle: nil)
-        //        if let viewController = sb.instantiateViewController(withIdentifier: "CalibrationPh7IntroViewController") as? CalibrationPh7IntroViewController {
-        //           // viewController.modalPresentationStyle = .overCurrentContext
-        //            self.present(viewController, animated: true)
-        //        }
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -95,33 +86,6 @@ class WatrQuickActionViewController: UIViewController {
     }
     
     func arrangeMenu(){
-        
-        /*
-         if HUB.currentHUB != nil {
-         self.haveHub = true
-         }
-         if let identifier = Module.currentModule?.serial {
-         self.titleLbl.text = identifier
-         self.haveFlipr = true
-         
-         if let module = Module.currentModule {
-         if module.isSubscriptionValid {
-         self.subScriptionViewHeight.constant = 0
-         self.subScriptionView.isHidden = true
-         }else{
-         self.subScriptionView.isHidden = false
-         self.subScriptiontitleLbl.text  = "Activer la connexion à distance".localized
-         self.subScriptionViewHeight.constant = 64
-         }
-         }
-         self.cellTitleList = ["Carnet d’entretien".localized,"History".localized,"Actions".localized,"Pool House".localized,"Flipr Store".localized,"Conseils et astuces".localized,"Settings".localized,"Help".localized,"LOGOUT_TITLE".localized]
-         self.imageNames = ["menu1","menu2","menu3","menu4","menu5","menu6","menu7","menu8","menu9"]
-         }else{
-         self.cellTitleList = ["Carnet d’entretien".localized,"Pool House".localized,"Flipr Store".localized,"Conseils et astuces".localized,"Settings".localized,"Help".localized,"LOGOUT_TITLE".localized]
-         self.imageNames = ["menu1","menu4","menu5","menu6","menu7","menu8","menu9"]
-         }
-         self.settingTable.reloadData()
-         */
         createMenuOrder()
     }
     
@@ -161,166 +125,48 @@ class WatrQuickActionViewController: UIViewController {
             }
         }
         
-        
-        //        if self.placesModules.isStart{
-        //            haveSubscription = true
-        //        }else{
-        //            haveSubscription = false
-        //        }
-        //
-        
-        //        var haveFlipr = true
-        //         "buy",
-        //        "Buy Flipr AnalysR",
-        //
+   
         
         if haveFlipr{
             
             if isPlaceOwner {
                 if isV3{
-                    self.cellTitleList = ["Entrée manuelle".localized,
+                    self.cellTitleList = ["Entrée manuelle".localized, "Retrieve the last measurement".localized, "Flipr AI".localized,
                                           "Vue Expert".localized]
-                    self.imageNames = ["Entrée manuelle (DipR)","Vue Expert"]
-                    self.menuViewHeight.constant = 270
+                    self.imageNames = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","AI", "Vue Expert"]
+                    self.menuViewHeight.constant = 400
                 }
                 else{
                     if haveSubscription{
-                        self.cellTitleList = ["Entrée manuelle".localized,"Retrieve the last measurement".localized,"Vue Expert".localized]
-                        self.imageNames = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert"]
-                        self.menuViewHeight.constant = 340
+                        self.cellTitleList = ["Entrée manuelle".localized,"Retrieve the last measurement".localized,"Flipr AI".localized,"Vue Expert".localized]
+                        self.imageNames = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","AI","Vue Expert"]
+                        self.menuViewHeight.constant = 404
                     }else{
                         self.cellTitleList = ["Activer la connexion à distance".localized,"Entrée manuelle".localized,
-                                              "Retrieve the last measurement".localized,"Vue Expert".localized]
-                        self.imageNames = ["noSubscription","Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert"]
-                        self.menuViewHeight.constant = 400
+                                              "Retrieve the last measurement".localized,"Flipr AI".localized,"Vue Expert".localized]
+                        self.imageNames = ["noSubscription","Entrée manuelle (DipR)","Récupérer la dernière mesure","AI","Vue Expert"]
+                        self.menuViewHeight.constant = 464
                     }
                 }
             }else{
-                self.cellTitleList = ["Buy Flipr AnalysR".localized,"Vue Expert".localized]
-                self.imageNames = ["buy","Vue Expert"]
-                self.menuViewHeight.constant = 270
+                self.cellTitleList = ["Buy Flipr AnalysR".localized,"Flipr AI".localized,"Vue Expert".localized]
+                self.imageNames = ["buy","AI","Vue Expert"]
+                self.menuViewHeight.constant = 334
             }
             
         }
         else{
-            self.cellTitleList = ["Buy Flipr AnalysR".localized]
-            self.imageNames = ["buy"]
-            self.menuViewHeight.constant = 200
+            self.cellTitleList = ["Flipr AI".localized, "Buy Flipr AnalysR".localized]
+            self.imageNames = ["AI","buy"]
+            self.menuViewHeight.constant = 264
         }
         
-        /*
-         if isPlaceOwner && (haveSubscription == false){
-         if isV3{
-         self.cellTitleList = ["Entrée manuelle".localized,
-         "Vue Expert".localized,"Paramètres".localized]
-         self.imageNames = ["Entrée manuelle (DipR)","Vue Expert","Paramètres"]
-         self.menuViewHeight.constant = 340
-         
-         }else{
-         self.cellTitleList = ["Activer la connexion à distance".localized,"Entrée manuelle".localized,
-         "Retrieve the last measurement".localized,"Vue Expert".localized,"Paramètres".localized]
-         self.imageNames = ["noSubscription","Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres"]
-         self.menuViewHeight.constant = 470
-         }
-         }else{
-         if isPlaceOwner{
-         if isV3{
-         self.cellTitleList = ["Entrée manuelle".localized,"Vue Expert".localized,"Paramètres".localized]
-         self.imageNames = ["Entrée manuelle (DipR)","Vue Expert","Paramètres"]
-         self.menuViewHeight.constant = 340
-         }
-         else{
-         self.cellTitleList = ["Entrée manuelle".localized,"Retrieve the last measurement".localized,"Vue Expert".localized,"Paramètres".localized]
-         self.imageNames = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","Vue Expert","Paramètres"]
-         self.menuViewHeight.constant = 400
-         }
-         
-         }else{
-         if haveSubscription{
-         self.cellTitleList = ["Buy Flipr AnalysR".localized,"Entrée manuelle".localized,"Vue Expert".localized,"Paramètres".localized]
-         self.imageNames = ["buy","Entrée manuelle (DipR)","Vue Expert","Paramètres"]
-         self.menuViewHeight.constant = 400
-         
-         }else{
-         self.cellTitleList = ["Buy Flipr AnalysR".localized,"Entrée manuelle".localized,"Vue Expert".localized,"Paramètres".localized]
-         self.imageNames = ["buy","Entrée manuelle (DipR)","Vue Expert","Paramètres"]
-         self.menuViewHeight.constant = 400
-         }
-         }
-         
-         }
-         }else{
-         self.cellTitleList = ["Buy Flipr AnalysR".localized,"Paramètres".localized]
-         self.imageNames = ["buy","Paramètres"]
-         self.menuViewHeight.constant = 280
-         }
-         
-         */
-
+        
         self.settingTable.reloadData()
     }
     
     
     
-    /*
-    
-    func getDeviceDetails(){
-        hud?.show(in: self.view)
-        
-        User.currentUser?.getModuleList(completion: { [self] (devices,error) in
-            self.hud?.dismiss()
-            if let modules = devices as? [[String:Any]] {
-                var hubId = ""
-                for mod in modules {
-                    if let type = mod["ModuleType_Id"] as? Int {
-                        if type == 1 {
-                            self.haveFlipr = true
-                            if let name = mod["Serial"] as? String  {
-                                hubId = name
-                                self.titleLbl.text = name
-                                AppSharedData.sharedInstance.serialKey = name
-                            }
-                        }else{
-                            self.haveHub = true
-                            
-                            //                            if let name = mod["Serial"] as? String  {
-                            //                                hubId = name
-                            //                                AppSharedData.sharedInstance.serialKey = name
-                            //                            }
-                        }
-                    }
-                }
-                if self.haveFlipr{
-                    //if !self.haveFlipr{
-                    //                        self.titleLbl.text = hubId
-                    //}
-                    if let module = Module.currentModule {
-                        if module.isSubscriptionValid {
-                            self.subScriptionViewHeight.constant = 0
-                            self.subScriptionView.isHidden = true
-                        }else{
-                            self.subScriptionView.isHidden = false
-                            self.subScriptiontitleLbl.text  = "Activer la connexion à distance".localized
-                            self.subScriptionViewHeight.constant = 64
-                        }
-                    }
-                    self.cellTitleList = ["Carnet d’entretien".localized,"History".localized,"Actions".localized,"Pool House".localized,"Flipr Store".localized,"Conseils et astuces".localized,"Settings".localized,"Help".localized,"LOGOUT_TITLE".localized]
-                    self.imageNames = ["menu1","menu2","menu3","menu4","menu5","menu6","menu7","menu8","menu9"]
-                    
-                }else{
-                    //                    if !self.haveHub{
-                    //                        self.titleLbl.text = hubId
-                    //                    }
-                    self.cellTitleList = ["Carnet d’entretien".localized,"Pool House".localized,"Flipr Store".localized,"Conseils et astuces".localized,"Settings".localized,"Help".localized,"LOGOUT_TITLE".localized]
-                    self.imageNames = ["menu1","menu4","menu5","menu6","menu7","menu8","menu9"]
-                }
-                self.settingTable.reloadData()
-            }
-            
-        })
-        
-    }
-    */
     
 }
 
@@ -368,14 +214,19 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                     if indexPath.row == 0{
                         cell.disableView.isHidden = false
                         cell.comingSoonLbl.isHidden = false
-                    }else{
+                    }
+                    else if indexPath.row == 2{
+                        cell.disableView.isHidden = false
+                        cell.comingSoonLbl.isHidden = false
+                    }
+                    else{
                         cell.disableView.isHidden = true
                         cell.comingSoonLbl.isHidden = true
                     }
                 }
                 else{
                     if haveSubscription{
-                        if indexPath.row == 0{
+                        if indexPath.row == 0 || indexPath.row == 2{
                             cell.disableView.isHidden = false
                             cell.comingSoonLbl.isHidden = false
                         }else{
@@ -383,7 +234,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                             cell.comingSoonLbl.isHidden = true
                         }
                     }else{
-                        if indexPath.row == 1{
+                        if indexPath.row == 1 || indexPath.row == 4{
                             cell.disableView.isHidden = false
                             cell.comingSoonLbl.isHidden = false
                         }else{
@@ -393,98 +244,29 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                     }
                 }
             }else{
+                
+                if indexPath.row == 1{
+                    cell.disableView.isHidden = false
+                    cell.comingSoonLbl.isHidden = false
+                }else{
+                    cell.disableView.isHidden = true
+                    cell.comingSoonLbl.isHidden = true
+                }
+                
+            }
+            
+        }
+        else{
+            if indexPath.row == 0{
+                cell.disableView.isHidden = false
+                cell.comingSoonLbl.isHidden = false
+            }else{
                 cell.disableView.isHidden = true
                 cell.comingSoonLbl.isHidden = true
-
             }
             
         }
-        else{
-            cell.disableView.isHidden = true
-            cell.comingSoonLbl.isHidden = true
-
-        }
         
-        /*
-        if haveFlipr{
-            
-            if isPlaceOwner && (haveSubscription == false){
-                if isV3{
-                    if indexPath.row == 0{
-                        cell.disableView.isHidden = false
-                        cell.comingSoonLbl.isHidden = false
-                    }else{
-                        cell.disableView.isHidden = true
-                        cell.comingSoonLbl.isHidden = true
-                        
-                    }
-                }else{
-                    if indexPath.row == 1{
-                        cell.disableView.isHidden = false
-                        cell.comingSoonLbl.isHidden = false
-                    }else{
-                        cell.disableView.isHidden = true
-                        cell.comingSoonLbl.isHidden = true
-                        
-                    }
-                }
-                
-//                if indexPath.row == 1{
-//                    cell.disableView.isHidden = false
-//                    cell.comingSoonLbl.isHidden = false
-//                }else{
-//                    cell.disableView.isHidden = true
-//                    cell.comingSoonLbl.isHidden = true
-//
-//                }
-            }
-            else{
-                
-                if isPlaceOwner{
-                    if indexPath.row == 0{
-                        cell.disableView.isHidden = false
-                        cell.comingSoonLbl.isHidden = false
-                    }else{
-                        cell.disableView.isHidden = true
-                        cell.comingSoonLbl.isHidden = true
-                        
-                    }
-                }
-                else{
-                    
-                    if haveSubscription{
-                        if indexPath.row == 0{
-                            cell.disableView.isHidden = false
-                            cell.comingSoonLbl.isHidden = false
-                        }else{
-                            cell.disableView.isHidden = true
-                            cell.comingSoonLbl.isHidden = true
-                            
-                        }
-                    }
-                    else{
-                        if indexPath.row == 1{
-                            cell.disableView.isHidden = false
-                            cell.comingSoonLbl.isHidden = false
-                        }else{
-                            cell.disableView.isHidden = true
-                            cell.comingSoonLbl.isHidden = true
-                            
-                        }
-                        
-                    }
-                }
-                
-                
-               
-            }
-        }
-        else{
-            cell.disableView.isHidden = true
-            cell.comingSoonLbl.isHidden = true
-        }
-        
-        */
         return cell
     }
     
@@ -492,9 +274,9 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-       
         
-       handlePlaceNavigation(indexPath: indexPath)
+        
+        handlePlaceNavigation(indexPath: indexPath)
     }
     
     
@@ -507,7 +289,16 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                     if indexPath.row == 0{
                         
                     }
-                    else if indexPath.row == 1{
+                    
+                    if indexPath.row == 1{
+                        showLastMeasurement()
+                    }
+                    
+                    else if indexPath.row == 2{
+//                        self.showExpertView()
+                    }
+                    
+                    else if indexPath.row == 3{
                         self.showExpertView()
                     }
                     
@@ -520,7 +311,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                         else if indexPath.row == 1{
                             showLastMeasurement()
                         }
-                        else if indexPath.row == 2{
+                        else if indexPath.row == 3{
                             showExpertView()
                         }
                         
@@ -534,11 +325,14 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                             self.showSubscriptionView()
                         }
                         else if indexPath.row == 1{
+                            
                         }
                         else if indexPath.row == 2{
                             showLastMeasurement()
                         }
                         else if indexPath.row == 3{
+                        }
+                        else if indexPath.row == 4{
                             showExpertView()
                         }
                         
@@ -551,14 +345,14 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                 if indexPath.row == 0{
                     self.showBuyProducts()
                 }
-                else if indexPath.row == 1{
+                else if indexPath.row == 2{
                     showExpertView()
                 }
             }
             
         }
         else{
-            if indexPath.row == 0{
+            if indexPath.row == 1{
                 self.showBuyProducts()
             }
             else{
@@ -566,30 +360,30 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
             }
             
         }
-       /*
-        
-        if haveFlipr{
-            if isPlaceOwner && (haveSubscription == false){
-                self.handlePlaceOwnerWithOutSubscriptionNavigation(indexPath: indexPath)
-            }
-            else{
-                if isPlaceOwner{
-                    self.handlePlaceOwnerWithSubscriptionNavigation(indexPath: indexPath)
-                }else{
-                    self.handleGuestNavigation(indexPath: indexPath)
-                }
-            }
-        }else{
-            self.handleNoFliprNavigation(indexPath: indexPath)
-        }
-        
-        */
+        /*
+         
+         if haveFlipr{
+         if isPlaceOwner && (haveSubscription == false){
+         self.handlePlaceOwnerWithOutSubscriptionNavigation(indexPath: indexPath)
+         }
+         else{
+         if isPlaceOwner{
+         self.handlePlaceOwnerWithSubscriptionNavigation(indexPath: indexPath)
+         }else{
+         self.handleGuestNavigation(indexPath: indexPath)
+         }
+         }
+         }else{
+         self.handleNoFliprNavigation(indexPath: indexPath)
+         }
+         
+         */
         
     }
     
     
     func handleNoFliprNavigation(indexPath: IndexPath){
-       
+        
         if indexPath.row == 0{
             self.showBuyProducts()
         }
@@ -603,7 +397,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
     
     
     func handleGuestNavigation(indexPath: IndexPath){
-       if indexPath.row == 0{
+        if indexPath.row == 0{
             
         }
         else if indexPath.row == 1{
@@ -624,10 +418,10 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
     
     func handlePlaceOwnerWithSubscriptionNavigation(indexPath: IndexPath){
         
-//        if indexPath.row == 0{
-//            self.showBuyProducts()
-//        }
-//        else
+        //        if indexPath.row == 0{
+        //            self.showBuyProducts()
+        //        }
+        //        else
         if indexPath.row == 0{
             
         }
@@ -648,10 +442,10 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
     
     
     func handlePlaceOwnerWithOutSubscriptionNavigation(indexPath: IndexPath){
-       
+        
         if isV3{
             if indexPath.row == 0{
-          
+                
             }
             else if indexPath.row == 1{
                 showExpertView()
@@ -683,7 +477,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
             }
         }
         
-       
+        
         
         
     }

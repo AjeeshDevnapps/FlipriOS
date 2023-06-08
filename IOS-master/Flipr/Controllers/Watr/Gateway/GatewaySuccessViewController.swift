@@ -16,7 +16,7 @@ class GatewaySuccessViewController: BaseViewController {
         self.hidCustombackbutton = true
         super.viewDidLoad()
         submitBtn.setTitle("Ok".localized, for: .normal)
-        self.titleLabel.text = "Si la lumière passe au vert, vous êtes connecté!".localized
+        self.titleLabel.text = "Si la lumière passe au vert (Vraiment vert!), vous êtes connecté et votre Flipr Connect est prêt à recevoir des mesures Flipr! \n\nUn flash bleu intermittent indique que Flipr AnalysR est à portée.\n\nNe débranchez pas Flipr Connect. Les mesures sont exclusivement récupérées et transmises  par cette passerelle.\n\nSi vous changez de réseau Wifi, veuillez refaire la configuration à partir du menu Paramètres.\n".localized
         
         self.navigationItem.setHidesBackButton(true, animated: true)
         GatewayManager.shared.cancelGatewayConnection { error in

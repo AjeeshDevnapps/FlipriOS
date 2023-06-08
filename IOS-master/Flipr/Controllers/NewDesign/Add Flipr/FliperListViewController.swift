@@ -119,12 +119,13 @@ extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
         let skey = fliprList[indexPath.row]
         hud?.show(in: self.view)
         Module.activate(serial:skey, activationKey: "123456", completion: { (error) in
-            self.hud?.dismiss(afterDelay: 0)
             if error != nil {
+                self.hud?.dismiss(afterDelay: 0)
                 self.showError(title: "Error".localized, message: error?.localizedDescription)
             } else {
                 self.serialKey = skey
-                self.showSuccessScreen()
+                self.activateFliprMode()
+//                self.showSuccessScreen()
             }
         })
         
@@ -146,6 +147,20 @@ extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
         
     }
     
+    
+    
+    
+    func activateFliprMode(){
+        FliprActivationManager.shared.scanForFlipr(serial: self.serialKey ?? "") { error in
+            FliprActivationManager.shared.removeConnection()
+            self.hud?.dismiss(afterDelay: 0)
+            if error != nil{
+                self.showError(title: error?.domain ?? "Flipr" , message: error?.localizedDescription ?? "Error")
+            }else{
+                self.showSuccessScreen()
+            }
+        }
+    }
     
     
     func showSuccessScreen(){

@@ -24,6 +24,12 @@ class GatewaySettingsViewController: UIViewController {
     var settings:ControlRSettings?
     var info:UserGateway?
     var isShowingWifiListScreen  = false
+    var isReadAllValues = true
+    var ssid:String = ""
+    var connectionStatus:String = ""
+    var swVersion:String = ""
+
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,28 +45,55 @@ class GatewaySettingsViewController: UIViewController {
                 if self.isShowingWifiListScreen{
                     
                 }else{
-                    self.isShowingWifiListScreen = true
+//                    self.isShowingWifiListScreen = true
                     DispatchQueue.main.async {
-                        self.reconnectGateway()
+                        if self.isReadAllValues{
+                            self.connectGateway()
+                        }else{
+                            self.reconnectGateway()
+                        }
                     }
                 }
-//                if let index = self.gatewayArray.firstIndex(of: serial) {
-//                    print(index) // Output: 4
-//                }else{
-//                    self.gatewayArray.append(serial)
-//                    DispatchQueue.main.async {
-//                        self.tableView.reloadData()
-//                    }
-//                }
-                //                self.showFliprList(serialKey: serial)
             }else{
                 
             }
         }
         
 
-//        self.getSettings()
-        // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(forName: K.Notifications.GatewaySSIDRead, object: nil, queue: nil) { (notification) in
+            if let ssidVal = notification.userInfo?["ssid"] as? String {
+                print("ssid \(ssidVal)")
+                self.ssid = ssidVal
+                self.tableView.reloadData()
+            }
+        }
+        
+        NotificationCenter.default.addObserver(forName: K.Notifications.GatewaySoftwareVersion, object: nil, queue: nil) { (notification) in
+            if let swVal = notification.userInfo?["sw"] as? String {
+                print("sw \(swVal)")
+                self.swVersion = swVal
+                self.tableView.reloadData()
+
+            }
+        }
+        
+        NotificationCenter.default.addObserver(forName: K.Notifications.GatewayConnectionStatus, object: nil, queue: nil) { (notification) in
+            if let csVal = notification.userInfo?["connectionStatus"] as? String {
+                print("connectionStatus \(csVal)")
+                self.connectionStatus = csVal
+                self.tableView.reloadData()
+
+            }
+        }
+        
+        self.readGateWayInfo()
+        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        GatewayManager.shared.removeConnection()
     }
     
     func getSettings(){
@@ -85,8 +118,30 @@ class GatewaySettingsViewController: UIViewController {
         })
     }
     
+    
+    func readGateWayInfo(){
+        let serial = self.info?.serial ?? ""
+        GatewayManager.shared.scanForGateways(serials: [serial], completion: { (gatewayinfo) in
+            
+        })
+    }
+    
     @IBAction func renameButtonAction(_ sender: Any) {
 //        self.showRename()
+    }
+    
+    
+    func connectGateway(){
+        GatewayManager.shared.stopScanForGateway()
+        let serialNo = self.info?.serial ?? ""
+        GatewayManager.shared.connect(serial: serialNo) { error in
+            if error != nil {
+                self.showError(title: "Error".localized, message: error?.localizedDescription)
+            }
+            else {
+                
+            }
+        }
     }
     
     
@@ -130,8 +185,22 @@ extension GatewaySettingsViewController: UITableViewDataSource,UITableViewDelega
         if let serial = self.info?.serial {
 //            cell.ownerLbl.text = serial
         }
-//        cell.locationLbl.text = settings?.placeName
-//        cell.serialNoLbl.text = settings?.serial
+        cell.serialNoLbl.text = swVersion
+        cell.nameLbl.text = ssid
+        var contnStatus = ""
+        if connectionStatus == "WF:CNX NOK"{
+            contnStatus =  "Disconnected"
+        }
+        else if connectionStatus == "WF:CNX EN COURS"{
+            contnStatus =  "Connecting"
+        }
+        else if connectionStatus == "WF:CNX OK"{
+            contnStatus =  "Connected"
+        }
+        else if connectionStatus == "WF:ERROR"{
+            contnStatus =  "Error"
+        }
+        cell.locationLbl.text = contnStatus
 
 //        let mode = settings?.mode ?? ""
 //        cell.modeLbl.text = mode.capitalized
