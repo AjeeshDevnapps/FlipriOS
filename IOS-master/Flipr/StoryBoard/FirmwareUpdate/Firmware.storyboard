@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,7 +40,7 @@
             <objects>
                 <navigationController storyboardIdentifier="FirmwareNav" id="aff-vG-6Kr" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0aE-35-Sfe">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -60,7 +60,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gW2-NZ-Gr3">
-                                <rect key="frame" x="0.0" y="88" width="414" height="0.0"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="0.0"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgx-Ud-7hA">
                                         <rect key="frame" x="132" y="0.0" width="150" height="0.0"/>
@@ -100,7 +100,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1I-cY-hWR">
-                                <rect key="frame" x="16" y="401" width="382" height="115"/>
+                                <rect key="frame" x="16" y="405" width="382" height="115"/>
                                 <string key="text">La mise à jour du logiciel peut rendre votre Flipr inopérant si la procédure est interrompue.
 
 Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une distance inférieure à 50 cm.</string>
@@ -109,34 +109,34 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unable to locate your Flipr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeI-gn-juH">
-                                <rect key="frame" x="111.5" y="288" width="191" height="20"/>
+                                <rect key="frame" x="111.5" y="292" width="191" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="languer" translatesAutoresizingMaskIntoConstraints="NO" id="QsK-g8-fnQ">
-                                <rect key="frame" x="158.5" y="261" width="97" height="97"/>
+                                <rect key="frame" x="158.5" y="265" width="97" height="97"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="517-Iq-cIU"/>
                                     <constraint firstAttribute="height" constant="97" id="z4k-yO-g2J"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="measure" translatesAutoresizingMaskIntoConstraints="NO" id="heq-Lk-oAl">
-                                <rect key="frame" x="161" y="536" width="92" height="92"/>
+                                <rect key="frame" x="161" y="540" width="92" height="92"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="92" id="D4b-TM-gSK"/>
                                     <constraint firstAttribute="width" constant="92" id="nar-f9-0lL"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XsB-d7-yc6">
-                                <rect key="frame" x="0.0" y="88" width="414" height="130"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="130"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="SqL-Uw-JuQ"/>
                                 </constraints>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="peripheralCell" rowHeight="81" id="Bhf-1u-OeP" customClass="ScannedPeripheralTableViewCell">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="81"/>
+                                        <rect key="frame" x="0.0" y="50" width="414" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bhf-1u-OeP" id="7u7-tA-ePz">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="81"/>
@@ -175,19 +175,19 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="peripheralCellTemp" rowHeight="81" id="1FV-bZ-rAZ" customClass="ScannedPeripheralTableViewCell">
-                                        <rect key="frame" x="0.0" y="125.5" width="414" height="81"/>
+                                        <rect key="frame" x="0.0" y="131" width="414" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1FV-bZ-rAZ" id="cu2-L4-NyM">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:72:35:40" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKf-ig-lSO">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12:72:35:40" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKf-ig-lSO">
                                                     <rect key="frame" x="31" y="51" width="79" height="18"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                     <color key="textColor" red="0.047058823530000002" green="0.2156862745" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RSSI" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFc-zG-edR">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="RSSI" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFc-zG-edR">
                                                     <rect key="frame" x="362" y="15" width="40" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="b5h-lM-W4z"/>
@@ -196,16 +196,16 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                                     <color key="textColor" red="0.047058823530000002" green="0.2156862745" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-53 dBm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UK5-g4-Aw5">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-53 dBm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UK5-g4-Aw5">
                                                     <rect key="frame" x="326" y="46" width="78" height="24"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                                     <color key="textColor" red="0.047058823530000002" green="0.2156862745" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMZ-bp-Jfk">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fMZ-bp-Jfk">
                                                     <rect key="frame" x="16" y="1" width="382" height="79"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CyCustomCell" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IN3-UY-2mD">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="CyCustomCell" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IN3-UY-2mD">
                                                             <rect key="frame" x="8" y="22" width="366" height="35"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="30"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -298,13 +298,13 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Upgrade Option" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Yb-DQ-gF6">
-                                <rect key="frame" x="114.5" y="77" width="185" height="21"/>
+                                <rect key="frame" x="114.5" y="81" width="185" height="21"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
                                 <color key="textColor" red="0.047825396059999997" green="0.15136367079999999" blue="0.40610277649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" tag="203" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVE-e4-6Wv">
-                                <rect key="frame" x="20" y="128" width="374" height="74"/>
+                                <rect key="frame" x="20" y="132" width="374" height="74"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="74" id="cHU-l6-OWP"/>
@@ -325,7 +325,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="204" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="GdJ-I1-DBR">
-                                <rect key="frame" x="20" y="232" width="374" height="40"/>
+                                <rect key="frame" x="20" y="236" width="374" height="40"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="gom-18-dIc"/>
@@ -346,7 +346,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="205" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="BIa-eb-1ll">
-                                <rect key="frame" x="20" y="302" width="374" height="40"/>
+                                <rect key="frame" x="20" y="306" width="374" height="40"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="4Zq-N7-J7a"/>
@@ -367,7 +367,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Files Being Upgraded..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0NP-d6-tTh">
-                                <rect key="frame" x="123" y="364" width="168.5" height="19"/>
+                                <rect key="frame" x="123" y="368" width="168.5" height="19"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="16"/>
                                 <color key="textColor" red="0.047825396059999997" green="0.15136367079999999" blue="0.40610277649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -481,7 +481,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NnO-OE-OY7" userLabel="File1View">
-                                <rect key="frame" x="30" y="345" width="354" height="50"/>
+                                <rect key="frame" x="30" y="349" width="354" height="50"/>
                                 <subviews>
                                     <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dV-pA-Xu2" userLabel="Progress Label1">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="50"/>
@@ -554,7 +554,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pas touche minouche" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFm-YA-bVM">
-                                <rect key="frame" x="114" y="79" width="186" height="48"/>
+                                <rect key="frame" x="114" y="83" width="186" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="186" id="KdV-n5-6nB"/>
                                 </constraints>
@@ -563,7 +563,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hourglassprogress" translatesAutoresizingMaskIntoConstraints="NO" id="kP1-Ag-z4p">
-                                <rect key="frame" x="162" y="174" width="90" height="90"/>
+                                <rect key="frame" x="162" y="178" width="90" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="7mr-58-jtY"/>
                                     <constraint firstAttribute="height" constant="90" id="C4i-lS-61n"/>
@@ -829,10 +829,10 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2PE-0f-r3U">
-                                <rect key="frame" x="0.0" y="104" width="414" height="225"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="221"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Characteristic" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgH-qT-p00">
-                                        <rect key="frame" x="30" y="112.5" width="110" height="20"/>
+                                        <rect key="frame" x="30" y="110.5" width="110" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="110" id="2uW-Eh-YbO"/>
                                         </constraints>
@@ -841,7 +841,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUz-Hj-m5U">
-                                        <rect key="frame" x="30" y="85.5" width="110" height="20"/>
+                                        <rect key="frame" x="30" y="83.5" width="110" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="110" id="EcQ-e0-ArC"/>
                                         </constraints>
@@ -850,7 +850,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="bpQ-W0-XED">
-                                        <rect key="frame" x="166" y="85.5" width="238" height="20"/>
+                                        <rect key="frame" x="166" y="83.5" width="238" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Gnh-ko-0DN"/>
                                         </constraints>
@@ -859,7 +859,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="FcK-QH-epZ">
-                                        <rect key="frame" x="166" y="111.5" width="238" height="20"/>
+                                        <rect key="frame" x="166" y="109.5" width="238" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Qdw-ya-KdA"/>
                                         </constraints>
@@ -868,13 +868,13 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vq2-4i-Fvp">
-                                        <rect key="frame" x="148" y="85.5" width="5" height="21"/>
+                                        <rect key="frame" x="148" y="83.5" width="5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Apx-P6-4Kr">
-                                        <rect key="frame" x="148" y="111.5" width="5" height="21"/>
+                                        <rect key="frame" x="148" y="109.5" width="5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1001,7 +1001,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attendre" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7QR-0r-lQa">
-                                <rect key="frame" x="167" y="74" width="80.5" height="24"/>
+                                <rect key="frame" x="167" y="78" width="80.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="textColor" red="0.33333333329999998" green="0.51764705879999995" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1207,14 +1207,14 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwK-YP-T71">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="209"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="213"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMQ-wA-iSW">
-                                <rect key="frame" x="0.0" y="176" width="414" height="720"/>
+                                <rect key="frame" x="0.0" y="180" width="414" height="716"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-h8-WSK">
-                                        <rect key="frame" x="88.5" y="322" width="237.5" height="76.5"/>
+                                        <rect key="frame" x="88.5" y="320" width="237.5" height="76.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="237.5" id="6K9-zR-sOH"/>
                                         </constraints>
@@ -1225,7 +1225,7 @@ de la mise à jour</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CpF-GS-LPS">
-                                        <rect key="frame" x="16" y="640" width="382" height="50"/>
+                                        <rect key="frame" x="16" y="636" width="382" height="50"/>
                                         <color key="backgroundColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="EdO-TS-Rgl"/>
@@ -1297,14 +1297,14 @@ de la mise à jour</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fS-rS-JCM">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="209"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="213"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B83-qZ-x00">
-                                <rect key="frame" x="0.0" y="176" width="414" height="720"/>
+                                <rect key="frame" x="0.0" y="180" width="414" height="716"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtB-Hg-Wnm">
-                                        <rect key="frame" x="77" y="322" width="260" height="76.5"/>
+                                        <rect key="frame" x="77" y="320" width="260" height="76.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="260" id="mAD-UV-aDg"/>
                                         </constraints>
@@ -1315,7 +1315,7 @@ de la mise à jour</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufA-Wj-mfg">
-                                        <rect key="frame" x="16" y="640" width="382" height="50"/>
+                                        <rect key="frame" x="16" y="636" width="382" height="50"/>
                                         <color key="backgroundColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="GFP-A4-rv0"/>
@@ -1383,7 +1383,7 @@ de la mise à jour</string>
             <objects>
                 <navigationController storyboardIdentifier="DiganosticNav" id="9gs-w9-47L" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bJb-Lg-UA6">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1419,7 +1419,7 @@ de la mise à jour</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hjV-y1-PLk">
-                                <rect key="frame" x="0.0" y="88" width="414" height="0.0"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="0.0"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kd3-1r-nYy">
                                         <rect key="frame" x="132" y="0.0" width="150" height="0.0"/>
@@ -1440,7 +1440,7 @@ de la mise à jour</string>
                                 </constraints>
                             </view>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kIp-Ec-tns">
-                                <rect key="frame" x="25" y="318" width="309.5" height="19.5"/>
+                                <rect key="frame" x="25" y="322" width="309.5" height="19.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tickBlack" translatesAutoresizingMaskIntoConstraints="NO" id="9zs-gi-8Uc">
                                         <rect key="frame" x="0.0" y="0.0" width="25" height="19"/>
@@ -1494,7 +1494,7 @@ de la mise à jour</string>
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1W-u8-s19">
-                                <rect key="frame" x="16" y="401" width="382" height="115"/>
+                                <rect key="frame" x="16" y="405" width="382" height="115"/>
                                 <string key="text">La mise à jour du logiciel peut rendre votre Flipr inopérant si la procédure est interrompue.
 
 Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une distance inférieure à 50 cm.</string>
@@ -1503,34 +1503,34 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unable to locate your Flipr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhn-37-QU0">
-                                <rect key="frame" x="112" y="288" width="190.5" height="19.5"/>
+                                <rect key="frame" x="112" y="292" width="190.5" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="diagnosticIcon" translatesAutoresizingMaskIntoConstraints="NO" id="SAc-jW-aeP">
-                                <rect key="frame" x="158.5" y="261" width="97" height="97"/>
+                                <rect key="frame" x="158.5" y="265" width="97" height="97"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="97" id="DKm-9v-7fG"/>
                                     <constraint firstAttribute="width" constant="97" id="lDn-hT-Ajm"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="measure" translatesAutoresizingMaskIntoConstraints="NO" id="gRo-Ff-B4M">
-                                <rect key="frame" x="161" y="536" width="92" height="92"/>
+                                <rect key="frame" x="161" y="540" width="92" height="92"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="92" id="7ZF-Qa-h64"/>
                                     <constraint firstAttribute="height" constant="92" id="iAT-5S-4KR"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="K00-f0-oOT">
-                                <rect key="frame" x="0.0" y="88" width="414" height="130"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="130"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="HqM-Kd-8oB"/>
                                 </constraints>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="peripheralCell" rowHeight="81" id="cJx-Bk-LFX" customClass="ScannedPeripheralTableViewCell">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="81"/>
+                                        <rect key="frame" x="0.0" y="50" width="414" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cJx-Bk-LFX" id="vf9-od-xF0">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="81"/>
@@ -1569,19 +1569,19 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="peripheralCellTemp" rowHeight="81" id="tMb-qb-Qcj" customClass="ScannedPeripheralTableViewCell">
-                                        <rect key="frame" x="0.0" y="125.5" width="414" height="81"/>
+                                        <rect key="frame" x="0.0" y="131" width="414" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tMb-qb-Qcj" id="U14-6i-2Le">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:72:35:40" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2U-wq-r59">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12:72:35:40" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2U-wq-r59">
                                                     <rect key="frame" x="31" y="51.5" width="79.5" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                     <color key="textColor" red="0.047058823530000002" green="0.2156862745" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RSSI" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxp-dH-SCQ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="RSSI" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxp-dH-SCQ">
                                                     <rect key="frame" x="362" y="15" width="40" height="17.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="xKN-7L-Xfx"/>
@@ -1590,16 +1590,16 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                                     <color key="textColor" red="0.047058823530000002" green="0.2156862745" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-53 dBm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3M-8N-tEO">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-53 dBm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3M-8N-tEO">
                                                     <rect key="frame" x="325.5" y="46.5" width="78.5" height="23.5"/>
                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                                     <color key="textColor" red="0.047058823530000002" green="0.2156862745" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gk6-pV-b7N">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gk6-pV-b7N">
                                                     <rect key="frame" x="16" y="1" width="382" height="79"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CyCustomCell" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fLG-C4-UaI">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="CyCustomCell" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fLG-C4-UaI">
                                                             <rect key="frame" x="8" y="22" width="366" height="35"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="30"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1722,7 +1722,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="AWu-ZW-DfY">
-                                <rect key="frame" x="30" y="134" width="304" height="19"/>
+                                <rect key="frame" x="30" y="138" width="304" height="19"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tickBlack" translatesAutoresizingMaskIntoConstraints="NO" id="9uC-Lq-eIl">
                                         <rect key="frame" x="0.0" y="0.0" width="25" height="19"/>
@@ -1736,7 +1736,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                 </subviews>
                             </stackView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" alignment="top" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="Zey-xv-LNY">
-                                <rect key="frame" x="30" y="183" width="248.5" height="19"/>
+                                <rect key="frame" x="30" y="187" width="248.5" height="19"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tickBlack" translatesAutoresizingMaskIntoConstraints="NO" id="s6d-oJ-HtP">
                                         <rect key="frame" x="0.0" y="0.0" width="25" height="19"/>
@@ -1750,7 +1750,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moA-b7-fk2">
-                                <rect key="frame" x="207" y="74" width="0.0" height="0.0"/>
+                                <rect key="frame" x="207" y="78" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1853,7 +1853,7 @@ Positionnez votre téléphone au plus prés de votre AnalysR, idéalement à une
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8V9-9j-TGx">
-                                <rect key="frame" x="30" y="229" width="354" height="210.5"/>
+                                <rect key="frame" x="30" y="233" width="354" height="210.5"/>
                                 <string key="text">Impossible de voir votre Flipr
 
 Positionnez votre téléphone au plus prés de votre Flipr, idéalement à une distance inférieure à 50 cm.
@@ -1911,7 +1911,7 @@ Il est probable que la batterie soit déchargée. Contactez le support.</string>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="measure" translatesAutoresizingMaskIntoConstraints="NO" id="9Ai-MI-Caz">
-                                <rect key="frame" x="161" y="94" width="92" height="85"/>
+                                <rect key="frame" x="161" y="98" width="92" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="X3f-98-gvq"/>
                                     <constraint firstAttribute="width" constant="92" id="ubZ-dj-DVI"/>
@@ -1956,7 +1956,7 @@ Il est probable que la batterie soit déchargée. Contactez le support.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="50O-vi-b5K">
-                                <rect key="frame" x="30" y="107" width="304" height="19"/>
+                                <rect key="frame" x="30" y="111" width="304" height="19"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tickBlack" translatesAutoresizingMaskIntoConstraints="NO" id="fT7-ED-Nii">
                                         <rect key="frame" x="0.0" y="0.0" width="25" height="19"/>
@@ -1970,7 +1970,7 @@ Il est probable que la batterie soit déchargée. Contactez le support.</string>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="O1B-y7-UfG">
-                                <rect key="frame" x="30" y="156" width="247" height="23"/>
+                                <rect key="frame" x="30" y="160" width="247" height="23"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="diagnosticError" translatesAutoresizingMaskIntoConstraints="NO" id="TAb-Hd-hV3">
                                         <rect key="frame" x="0.0" y="0.0" width="23" height="23"/>
@@ -1988,7 +1988,7 @@ Il est probable que la batterie soit déchargée. Contactez le support.</string>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sts-bB-pbh">
-                                <rect key="frame" x="207" y="77" width="0.0" height="0.0"/>
+                                <rect key="frame" x="207" y="81" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -2032,13 +2032,13 @@ Il est probable que la batterie soit déchargée. Contactez le support.</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nous pouvons communiquer en bluetooth avec Flipr mais nous ne parvenons pas à récupérer les mesures" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITM-ac-Vny">
-                                <rect key="frame" x="30" y="219" width="354" height="57.5"/>
+                                <rect key="frame" x="30" y="223" width="354" height="57.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1zP-rc-9Ap">
-                                <rect key="frame" x="0.0" y="320.5" width="414" height="64"/>
+                                <rect key="frame" x="0.0" y="324.5" width="414" height="64"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="diagnostic" translatesAutoresizingMaskIntoConstraints="NO" id="M0U-cV-d3c">
                                         <rect key="frame" x="16" y="14.5" width="35" height="35"/>
@@ -2077,7 +2077,7 @@ Il est probable que la batterie soit déchargée. Contactez le support.</string>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lI0-a3-GMu">
-                                <rect key="frame" x="0.0" y="384.5" width="414" height="64"/>
+                                <rect key="frame" x="0.0" y="388.5" width="414" height="64"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="batteryBlack" translatesAutoresizingMaskIntoConstraints="NO" id="EgP-96-bCP">
                                         <rect key="frame" x="16" y="14.5" width="35" height="35"/>
@@ -2235,7 +2235,7 @@ Il est probable que la batterie soit déchargée. Contactez le support.</string>
             <objects>
                 <navigationController storyboardIdentifier="LastMeasurementNavigation" id="Qip-Qv-S8p" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="dsj-qx-yIk">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -2245,6 +2245,22 @@ Il est probable que la batterie soit déchargée. Contactez le support.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wdw-MF-bAg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="187" y="2228"/>
+        </scene>
+        <!--New Measurement View Controller-->
+        <scene sceneID="o6F-pv-8PQ">
+            <objects>
+                <viewController storyboardIdentifier="NewMeasurementViewController" id="uIK-cM-g1h" customClass="NewMeasurementViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mNC-Vb-87v">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="xrr-bc-dhl"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ob6-Rw-CCb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cbR-8n-FhN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1777" y="2228"/>
         </scene>
     </scenes>
     <resources>

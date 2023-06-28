@@ -60,5 +60,12 @@ class FliprActivationSuccessViewController: BaseViewController {
         
     }
 
+    
+    func showStripView(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "StripViewControllerID") as! StripViewController
+//        vc.recalibration = self.recalibration
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
 
 }

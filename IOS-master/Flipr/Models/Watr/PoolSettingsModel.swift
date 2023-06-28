@@ -158,7 +158,7 @@ struct Owner : Codable {
 //    let notifyPoolsHealth : Bool?
 //    let notifyProbeIssues : Bool?
     let phoneNumber : String?
-    let societyId : String?
+    let societyId : Int?
     let systemPauseNotifications : Bool?
     let isActivated : Bool?
     let isDesactivated : Bool?

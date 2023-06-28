@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -332,7 +332,7 @@ Choisissez le réseau wifi
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0dg-qW-cT1">
-                                <rect key="frame" x="0.0" y="452.5" width="414" height="319.5"/>
+                                <rect key="frame" x="0.0" y="452.5" width="414" height="239.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WifiListTableViewCell" rowHeight="105" id="AQz-8Y-c0Y" customClass="WifiListTableViewCell" customModule="Flipr" customModuleProvider="target">
@@ -431,26 +431,64 @@ Choisissez le réseau wifi
                                     <constraint firstAttribute="width" constant="100" id="m3M-rS-cJi"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKA-7c-1ya">
+                                <rect key="frame" x="16" y="712" width="382" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AE6-t5-GM0">
+                                        <rect key="frame" x="141.5" y="24.5" width="99.5" height="21"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBe-YW-8lP">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="70"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title=" "/>
+                                        <connections>
+                                            <action selector="manulEnteryButtonClicked" destination="Tbs-Xj-R1V" eventType="touchUpInside" id="wnM-Qk-INK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="AE6-t5-GM0" firstAttribute="centerY" secondItem="gKA-7c-1ya" secondAttribute="centerY" id="5Mt-vo-wUa"/>
+                                    <constraint firstItem="AE6-t5-GM0" firstAttribute="centerX" secondItem="gKA-7c-1ya" secondAttribute="centerX" id="5rJ-6Y-S8X"/>
+                                    <constraint firstItem="UBe-YW-8lP" firstAttribute="top" secondItem="gKA-7c-1ya" secondAttribute="top" id="7hy-CR-w8p"/>
+                                    <constraint firstAttribute="bottom" secondItem="UBe-YW-8lP" secondAttribute="bottom" id="MIa-xG-Ku5"/>
+                                    <constraint firstItem="UBe-YW-8lP" firstAttribute="centerY" secondItem="gKA-7c-1ya" secondAttribute="centerY" id="OpR-EP-Gre"/>
+                                    <constraint firstItem="UBe-YW-8lP" firstAttribute="leading" secondItem="gKA-7c-1ya" secondAttribute="leading" id="VuU-Uw-zzH"/>
+                                    <constraint firstAttribute="trailing" secondItem="UBe-YW-8lP" secondAttribute="trailing" id="Xap-Yf-eIs"/>
+                                    <constraint firstAttribute="height" constant="70" id="elQ-j8-GZp"/>
+                                    <constraint firstItem="UBe-YW-8lP" firstAttribute="centerX" secondItem="gKA-7c-1ya" secondAttribute="centerX" id="x0d-GG-G36"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="IrX-SU-H2g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="45y-AB-1JC" firstAttribute="top" secondItem="IrX-SU-H2g" secondAttribute="top" constant="50" id="0QH-df-zgh"/>
+                            <constraint firstItem="gKA-7c-1ya" firstAttribute="top" secondItem="0dg-qW-cT1" secondAttribute="bottom" constant="20" id="222-D5-KSR"/>
                             <constraint firstItem="IrX-SU-H2g" firstAttribute="trailing" secondItem="0dg-qW-cT1" secondAttribute="trailing" id="6Wk-FC-YuI"/>
                             <constraint firstItem="0dg-qW-cT1" firstAttribute="top" secondItem="nCW-PW-Kre" secondAttribute="bottom" constant="20" id="A7g-wf-JtJ"/>
+                            <constraint firstItem="gKA-7c-1ya" firstAttribute="leading" secondItem="IrX-SU-H2g" secondAttribute="leading" constant="16" id="DqW-3X-yQN"/>
                             <constraint firstItem="45y-AB-1JC" firstAttribute="centerX" secondItem="uK6-U5-9nY" secondAttribute="centerX" id="Fw6-rg-Jcx"/>
                             <constraint firstItem="nCW-PW-Kre" firstAttribute="top" secondItem="45y-AB-1JC" secondAttribute="bottom" constant="16" id="KE9-ae-SwI"/>
                             <constraint firstItem="IrX-SU-H2g" firstAttribute="bottom" secondItem="JQZ-Jy-jZQ" secondAttribute="bottom" constant="30" id="Kwe-fT-HMY"/>
                             <constraint firstAttribute="trailing" secondItem="nCW-PW-Kre" secondAttribute="trailing" constant="16" id="OAk-60-4vP"/>
+                            <constraint firstItem="IrX-SU-H2g" firstAttribute="trailing" secondItem="gKA-7c-1ya" secondAttribute="trailing" constant="16" id="Q9w-ah-Icr"/>
+                            <constraint firstItem="gKA-7c-1ya" firstAttribute="centerX" secondItem="uK6-U5-9nY" secondAttribute="centerX" id="UfL-gi-sNE"/>
+                            <constraint firstItem="JQZ-Jy-jZQ" firstAttribute="top" secondItem="gKA-7c-1ya" secondAttribute="bottom" id="WSK-7B-KIC"/>
                             <constraint firstItem="nCW-PW-Kre" firstAttribute="leading" secondItem="IrX-SU-H2g" secondAttribute="leading" constant="16" id="XW2-rZ-gEf"/>
                             <constraint firstItem="0dg-qW-cT1" firstAttribute="leading" secondItem="IrX-SU-H2g" secondAttribute="leading" id="eS7-Mz-5E7"/>
                             <constraint firstItem="JQZ-Jy-jZQ" firstAttribute="leading" secondItem="IrX-SU-H2g" secondAttribute="leading" constant="16" id="m7K-3k-VcY"/>
-                            <constraint firstItem="JQZ-Jy-jZQ" firstAttribute="top" secondItem="0dg-qW-cT1" secondAttribute="bottom" constant="10" id="q0M-Rm-c7B"/>
                             <constraint firstItem="IrX-SU-H2g" firstAttribute="trailing" secondItem="JQZ-Jy-jZQ" secondAttribute="trailing" constant="16" id="uVb-RQ-MV6"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cancelBtn" destination="JQZ-Jy-jZQ" id="vPG-hK-n7Q"/>
+                        <outlet property="manualEntryLabel" destination="AE6-t5-GM0" id="MSM-u1-2BU"/>
                         <outlet property="subTitleLable" destination="nCW-PW-Kre" id="5D1-8a-fFO"/>
                         <outlet property="tableView" destination="0dg-qW-cT1" id="MPE-OI-NfQ"/>
                     </connections>
@@ -833,6 +871,7 @@ Choisissez le réseau wifi
                     </view>
                     <navigationItem key="navigationItem" id="2jX-lB-sV8"/>
                     <connections>
+                        <outlet property="gwGifImageView" destination="XCL-YK-MFJ" id="2Jx-Ph-0qU"/>
                         <outlet property="tableView" destination="BRQ-7z-AqW" id="zzt-OX-8iZ"/>
                     </connections>
                 </viewController>
@@ -848,15 +887,8 @@ Choisissez le réseau wifi
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwgreen" translatesAutoresizingMaskIntoConstraints="NO" id="pe1-yP-fEL">
-                                <rect key="frame" x="59.5" y="48" width="295" height="239"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="239" id="VUi-3d-Bi6"/>
-                                    <constraint firstAttribute="width" constant="295" id="VnE-am-hdj"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDk-y4-IX3">
-                                <rect key="frame" x="16" y="680.5" width="382" height="50"/>
+                                <rect key="frame" x="16" y="566.5" width="382" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="gMl-32-mgC"/>
@@ -887,8 +919,11 @@ Choisissez le réseau wifi
                                     <action selector="okButtonClicked:" destination="Qo9-FW-pWF" eventType="touchUpInside" id="7h5-b2-6yb"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwNew" translatesAutoresizingMaskIntoConstraints="NO" id="TJr-Mg-f7e">
+                                <rect key="frame" x="30" y="68" width="354" height="161"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iki-3G-aCx">
-                                <rect key="frame" x="16" y="363" width="382" height="267.5"/>
+                                <rect key="frame" x="16" y="249" width="382" height="267.5"/>
                                 <string key="text">Si la lumière passe au vert (Vraiment vert!), vous êtes connecté et votre Flipr Connect est prêt à recevoir des mesures Flipr! 
 
 Un flash bleu intermittent indique que Flipr AnalysR est à portée.
@@ -901,36 +936,23 @@ Si vous changez de réseau Wifi, veuillez refaire la configuration à partir du 
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8pg-OX-thP">
-                                <rect key="frame" x="187" y="303" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.4484339356" green="0.96349495650000005" blue="0.29017007350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="5sV-To-rg6"/>
-                                    <constraint firstAttribute="width" constant="40" id="iRx-dt-QXj"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pwW-gf-5nw"/>
                         <color key="backgroundColor" red="0.89411764709999997" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Iki-3G-aCx" firstAttribute="leading" secondItem="pwW-gf-5nw" secondAttribute="leading" constant="16" id="02A-D5-tcb"/>
                             <constraint firstItem="sDk-y4-IX3" firstAttribute="leading" secondItem="pwW-gf-5nw" secondAttribute="leading" constant="16" id="2c4-Mv-v9E"/>
+                            <constraint firstItem="Iki-3G-aCx" firstAttribute="top" secondItem="TJr-Mg-f7e" secondAttribute="bottom" constant="20" id="2dS-jx-SGQ"/>
                             <constraint firstItem="pwW-gf-5nw" firstAttribute="trailing" secondItem="sDk-y4-IX3" secondAttribute="trailing" constant="16" id="AuN-1E-WiZ"/>
-                            <constraint firstItem="Iki-3G-aCx" firstAttribute="top" secondItem="8pg-OX-thP" secondAttribute="bottom" constant="20" id="B98-We-iyI"/>
-                            <constraint firstItem="pe1-yP-fEL" firstAttribute="centerX" secondItem="dSF-4P-fRo" secondAttribute="centerX" id="CfN-gi-evc"/>
                             <constraint firstItem="pwW-gf-5nw" firstAttribute="trailing" secondItem="Iki-3G-aCx" secondAttribute="trailing" constant="16" id="PuP-xQ-DFn"/>
                             <constraint firstItem="sDk-y4-IX3" firstAttribute="top" secondItem="Iki-3G-aCx" secondAttribute="bottom" constant="50" id="YZj-2f-Mgj"/>
-                            <constraint firstItem="8pg-OX-thP" firstAttribute="top" secondItem="pe1-yP-fEL" secondAttribute="bottom" constant="16" id="cWJ-ac-VWk"/>
-                            <constraint firstItem="pe1-yP-fEL" firstAttribute="top" secondItem="pwW-gf-5nw" secondAttribute="top" id="j28-Bb-ofq"/>
-                            <constraint firstItem="8pg-OX-thP" firstAttribute="centerX" secondItem="dSF-4P-fRo" secondAttribute="centerX" id="vab-5P-dkq"/>
+                            <constraint firstItem="TJr-Mg-f7e" firstAttribute="top" secondItem="pwW-gf-5nw" secondAttribute="top" constant="20" id="btk-bd-9bm"/>
+                            <constraint firstItem="pwW-gf-5nw" firstAttribute="trailing" secondItem="TJr-Mg-f7e" secondAttribute="trailing" constant="30" id="k12-pQ-Gll"/>
+                            <constraint firstItem="TJr-Mg-f7e" firstAttribute="leading" secondItem="pwW-gf-5nw" secondAttribute="leading" constant="30" id="yQu-82-SrV"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="gwGifImageView" destination="TJr-Mg-f7e" id="N41-D0-se7"/>
                         <outlet property="submitBtn" destination="sDk-y4-IX3" id="zOe-mg-4dg"/>
                         <outlet property="titleLabel" destination="Iki-3G-aCx" id="e5L-21-TRJ"/>
                     </connections>
@@ -945,7 +967,6 @@ Si vous changez de réseau Wifi, veuillez refaire la configuration à partir du 
         <image name="gatewayAddIcon" width="295" height="239"/>
         <image name="gatewayIcon" width="30" height="30"/>
         <image name="gwNew" width="353" height="161"/>
-        <image name="gwgreen" width="295" height="237"/>
         <image name="settingPlace" width="40" height="40"/>
         <image name="wifiIconSmall" width="100" height="71"/>
         <systemColor name="systemBackgroundColor">

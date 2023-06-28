@@ -164,16 +164,34 @@ extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
     
     
     func showSuccessScreen(){
-        BLEManager.shared.stopScanning = true
-        let sb = UIStoryboard(name: "FliprDevice", bundle: nil)
-        if let viewController = sb.instantiateViewController(withIdentifier: "FliprActivationSuccessViewController") as? FliprActivationSuccessViewController {
-            self.navigationController?.pushViewController(viewController)
-            viewController.serialKey = self.serialKey
-        }
+        self.showStripTest()
+//        BLEManager.shared.stopScanning = true
+//        let sb = UIStoryboard(name: "FliprDevice", bundle: nil)
+//        if let viewController = sb.instantiateViewController(withIdentifier: "FliprActivationSuccessViewController") as? FliprActivationSuccessViewController {
+//            self.navigationController?.pushViewController(viewController)
+//            viewController.serialKey = self.serialKey
+//        }
     }
 
     
     
+    func showStripTest(){
+        var isFlipr3 = false
+        if serialKey != nil && serialKey.count > 0{
+            if serialKey.hasPrefix("F"){
+                isFlipr3 = true
+                AppSharedData.sharedInstance.isFlipr3 = true
+            }else{
+                AppSharedData.sharedInstance.isFlipr3 = false
+            }
+        }
+
+        AppSharedData.sharedInstance.deviceSerialNo = serialKey
+        let sb = UIStoryboard(name: "Calibration", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "StripViewControllerID") as! StripViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
     
     
 }

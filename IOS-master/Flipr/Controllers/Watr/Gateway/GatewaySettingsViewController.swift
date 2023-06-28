@@ -16,6 +16,7 @@ class GatewaySettingsViewController: UIViewController {
     @IBOutlet weak var deleteBtn: UIButton!
 //    @IBOutlet weak var changeWifiBtn: UIButton!
     @IBOutlet weak var chanbgeBtnLabel: UILabel!
+    @IBOutlet weak var gwGifImageView: UIImageView!
 
     
     var placeDetails:PlaceDropdown!
@@ -28,6 +29,8 @@ class GatewaySettingsViewController: UIViewController {
     var ssid:String = ""
     var connectionStatus:String = ""
     var swVersion:String = ""
+    
+    var isDirectSettings = false
 
 
 
@@ -36,7 +39,18 @@ class GatewaySettingsViewController: UIViewController {
         self.title = info?.serial
         tableView.tableFooterView =  UIView()
         self.tableView.reloadData()
-        
+        let jeremyGif = UIImage.gifImageWithName("gwgif")
+        gwGifImageView.image = jeremyGif
+        if isDirectSettings{
+            self.navigationItem.setHidesBackButton(true, animated: true)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done".localized, style: .plain, target: self, action: #selector(doneTapped))
+        }
+
+//        let imageView = UIImageView(image: jeremyGif)
+//        imageView.frame = CGRect(x: 20.0, y: 50.0, width: self.view.frame.size.width - 40, height: 150.0)
+//        view.addSubview(imageView)
+    
+//        gwGifImageView.image =
         NotificationCenter.default.addObserver(forName: K.Notifications.GatewayDiscovered, object: nil, queue: nil) { (notification) in
             //            self.scanningAlertContainerView.isHidden = true
             //            self.loaderView.hideStateView()
@@ -94,6 +108,13 @@ class GatewaySettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         GatewayManager.shared.removeConnection()
+    }
+    
+    
+    @objc func doneTapped(){
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 5], animated: true)
+
     }
     
     func getSettings(){
@@ -188,17 +209,23 @@ extension GatewaySettingsViewController: UITableViewDataSource,UITableViewDelega
         cell.serialNoLbl.text = swVersion
         cell.nameLbl.text = ssid
         var contnStatus = ""
+                
+        
+        if connectionStatus == "WF:INIT"{
+            contnStatus =  "Initialization".localized
+        }
+        
         if connectionStatus == "WF:CNX NOK"{
-            contnStatus =  "Disconnected"
+            contnStatus =  "Disconnected".localized
         }
         else if connectionStatus == "WF:CNX EN COURS"{
-            contnStatus =  "Connecting"
+            contnStatus =  "Connecting".localized
         }
         else if connectionStatus == "WF:CNX OK"{
-            contnStatus =  "Connected"
+            contnStatus =  "Connected".localized
         }
         else if connectionStatus == "WF:ERROR"{
-            contnStatus =  "Error"
+            contnStatus =  "Error".localized
         }
         cell.locationLbl.text = contnStatus
 
@@ -227,6 +254,8 @@ extension GatewaySettingsViewController{
     
     @IBAction func updateButtonClicked(_ sender: UIButton) {
 //        self.showSettings()
+        self.isReadAllValues = false
+        GatewayManager.shared.removeConnection()
         let serial = self.info?.serial ?? ""
         GatewayManager.shared.scanForGateways(serials: [serial], completion: { (gatewayinfo) in
             

@@ -28,8 +28,8 @@
                                 <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ia-JB-zVR">
-                                <rect key="frame" x="116" y="129.5" width="200" height="200"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ia-JB-zVR">
+                                <rect key="frame" x="107" y="66.5" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="Vzf-qW-qdS"/>
                                     <constraint firstAttribute="width" constant="200" id="nE8-Dz-Dzu"/>
@@ -38,14 +38,14 @@
                                     <action selector="playVideoButtonAction:" destination="D0x-lg-INm" eventType="touchUpInside" id="sEO-o8-uuq"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Video" translatesAutoresizingMaskIntoConstraints="NO" id="oD3-1g-EEf">
-                                <rect key="frame" x="0.0" y="106.5" width="432" height="246"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ph7Demo" translatesAutoresizingMaskIntoConstraints="NO" id="oD3-1g-EEf">
+                                <rect key="frame" x="10" y="106.5" width="394" height="120"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="246" id="Lm8-mJ-WhN"/>
+                                    <constraint firstAttribute="height" constant="120" id="Lm8-mJ-WhN"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8mA-Ya-K35">
-                                <rect key="frame" x="16" y="376.5" width="382" height="56"/>
+                                <rect key="frame" x="16" y="250.5" width="382" height="56"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="infoBlue" translatesAutoresizingMaskIntoConstraints="NO" id="jdc-rA-x3G">
                                         <rect key="frame" x="16" y="16" width="24" height="24"/>
@@ -73,7 +73,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="tl3-0l-V9S">
-                                <rect key="frame" x="16" y="456.5" width="382" height="107.5"/>
+                                <rect key="frame" x="16" y="330.5" width="382" height="107.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdV-R7-1l7">
                                         <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
@@ -94,7 +94,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="kDj-de-mce">
-                                <rect key="frame" x="16" y="576" width="382" height="43"/>
+                                <rect key="frame" x="16" y="450" width="382" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZO1-1B-xIh">
                                         <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
@@ -114,7 +114,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Pws-Fx-euC">
-                                <rect key="frame" x="16" y="631" width="382" height="21.5"/>
+                                <rect key="frame" x="16" y="505" width="382" height="21.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJx-KF-Xrv">
                                         <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
@@ -134,7 +134,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vsv-cO-6Em">
-                                <rect key="frame" x="16" y="664.5" width="382" height="21.5"/>
+                                <rect key="frame" x="16" y="538.5" width="382" height="21.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTp-LE-EGL">
                                         <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
@@ -185,14 +185,13 @@
                         <viewLayoutGuide key="safeArea" id="zNA-Cx-9M0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="oD3-1g-EEf" firstAttribute="leading" secondItem="zNA-Cx-9M0" secondAttribute="leading" id="2NU-X4-yMw"/>
                             <constraint firstItem="qqI-vb-DOu" firstAttribute="top" secondItem="zNA-Cx-9M0" secondAttribute="top" id="5sP-13-FmH"/>
                             <constraint firstItem="iSf-Or-Gef" firstAttribute="top" secondItem="gYB-E2-PHi" secondAttribute="bottom" id="7wg-ah-uSe"/>
                             <constraint firstItem="zNA-Cx-9M0" firstAttribute="bottom" secondItem="iSf-Or-Gef" secondAttribute="bottom" id="8kc-fZ-aRQ"/>
+                            <constraint firstItem="oD3-1g-EEf" firstAttribute="leading" secondItem="zNA-Cx-9M0" secondAttribute="leading" constant="10" id="Caj-yG-HKc"/>
                             <constraint firstItem="qqI-vb-DOu" firstAttribute="centerX" secondItem="zgN-JH-I6l" secondAttribute="centerX" id="I5q-Fx-J3H"/>
                             <constraint firstItem="Pws-Fx-euC" firstAttribute="leading" secondItem="zgN-JH-I6l" secondAttribute="leading" constant="16" id="NOE-Jf-Kd0"/>
                             <constraint firstItem="tl3-0l-V9S" firstAttribute="top" secondItem="8mA-Ya-K35" secondAttribute="bottom" constant="24" id="Nkg-H7-bEj"/>
-                            <constraint firstAttribute="trailing" secondItem="oD3-1g-EEf" secondAttribute="trailing" constant="-18" id="NzI-ge-4Xa"/>
                             <constraint firstItem="vsv-cO-6Em" firstAttribute="leading" secondItem="zgN-JH-I6l" secondAttribute="leading" constant="16" id="RQg-eU-IOl"/>
                             <constraint firstItem="8mA-Ya-K35" firstAttribute="leading" secondItem="zgN-JH-I6l" secondAttribute="leading" constant="16" id="VNJ-sf-8b7"/>
                             <constraint firstItem="vsv-cO-6Em" firstAttribute="top" secondItem="Pws-Fx-euC" secondAttribute="bottom" constant="12" id="VnK-3p-3AW"/>
@@ -204,6 +203,7 @@
                             <constraint firstAttribute="trailing" secondItem="8mA-Ya-K35" secondAttribute="trailing" constant="16" id="fCJ-cG-B8h"/>
                             <constraint firstItem="0Ia-JB-zVR" firstAttribute="centerX" secondItem="oD3-1g-EEf" secondAttribute="centerX" id="gdg-to-UJk"/>
                             <constraint firstAttribute="trailing" secondItem="vsv-cO-6Em" secondAttribute="trailing" constant="16" id="hhV-nm-eVO"/>
+                            <constraint firstItem="zNA-Cx-9M0" firstAttribute="trailing" secondItem="oD3-1g-EEf" secondAttribute="trailing" constant="10" id="iXR-M8-XiI"/>
                             <constraint firstItem="gYB-E2-PHi" firstAttribute="centerX" secondItem="zgN-JH-I6l" secondAttribute="centerX" id="lbo-rO-3BA"/>
                             <constraint firstItem="zNA-Cx-9M0" firstAttribute="trailing" secondItem="iSf-Or-Gef" secondAttribute="trailing" constant="16" id="lzb-Kx-931"/>
                             <constraint firstItem="kDj-de-mce" firstAttribute="top" secondItem="tl3-0l-V9S" secondAttribute="bottom" constant="12" id="mJL-6i-AMm"/>
@@ -283,7 +283,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="ugi-nJ-zz8">
-                                        <rect key="frame" x="16" y="387" width="382" height="122.5"/>
+                                        <rect key="frame" x="16" y="357.5" width="382" height="181"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check-circle" translatesAutoresizingMaskIntoConstraints="NO" id="jjc-6p-7eY">
                                                 <rect key="frame" x="167.5" y="0.0" width="47" height="47"/>
@@ -296,6 +296,12 @@
                                                 <rect key="frame" x="19" y="84" width="344" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                 <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Okv-4J-2tW">
+                                                <rect key="frame" x="188.5" y="159.5" width="5" height="21.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -326,6 +332,7 @@
                     <connections>
                         <outlet property="loaderView" destination="5Ql-jt-17a" id="2pn-1I-h6Y"/>
                         <outlet property="msgLbl" destination="91N-pJ-RXr" id="mwS-eq-Nme"/>
+                        <outlet property="successInfoLbl" destination="Okv-4J-2tW" id="2Ne-92-Bw3"/>
                         <outlet property="successLbl" destination="5Kv-vj-Ffb" id="cyB-Yc-jWM"/>
                         <outlet property="successView" destination="qFW-0S-yZW" id="vtj-XQ-qfR"/>
                         <outlet property="titleLbl" destination="xDc-7i-bAt" id="FKM-oa-Jah"/>
@@ -591,7 +598,7 @@ des conseils précis.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7yt-YS-LHc">
-                                <rect key="frame" x="16" y="376.5" width="382" height="56"/>
+                                <rect key="frame" x="16" y="250.5" width="382" height="56"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="infoBlue" translatesAutoresizingMaskIntoConstraints="NO" id="UhQ-KC-HX6">
                                         <rect key="frame" x="16" y="16" width="24" height="24"/>
@@ -619,7 +626,7 @@ des conseils précis.</string>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="XZf-Mi-VQK">
-                                <rect key="frame" x="16" y="588" width="382" height="21.5"/>
+                                <rect key="frame" x="16" y="462" width="382" height="21.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bQ-5Y-Jh8">
                                         <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
@@ -639,7 +646,7 @@ des conseils précis.</string>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="X8h-y1-dJI">
-                                <rect key="frame" x="16" y="533" width="382" height="43"/>
+                                <rect key="frame" x="16" y="407" width="382" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7s-uo-d6l">
                                         <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
@@ -659,7 +666,7 @@ des conseils précis.</string>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="frw-Z0-cT5">
-                                <rect key="frame" x="16" y="456.5" width="382" height="64.5"/>
+                                <rect key="frame" x="16" y="330.5" width="382" height="64.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDF-Jr-dMc">
                                         <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
@@ -681,7 +688,7 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="sLO-Ab-yZy">
-                                <rect key="frame" x="16" y="621.5" width="382" height="21.5"/>
+                                <rect key="frame" x="16" y="495.5" width="382" height="21.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yma-22-I4K">
                                         <rect key="frame" x="0.0" y="0.0" width="8" height="20.5"/>
@@ -700,14 +707,14 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Video-2" translatesAutoresizingMaskIntoConstraints="NO" id="hbK-1f-FCc">
-                                <rect key="frame" x="0.0" y="106.5" width="432" height="246"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PH4Demo" translatesAutoresizingMaskIntoConstraints="NO" id="hbK-1f-FCc">
+                                <rect key="frame" x="10" y="106.5" width="394" height="120"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="246" id="Qfh-xh-J3E"/>
+                                    <constraint firstAttribute="height" constant="120" id="Qfh-xh-J3E"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuB-GE-MwI">
-                                <rect key="frame" x="116" y="129.5" width="200" height="200"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuB-GE-MwI">
+                                <rect key="frame" x="107" y="66.5" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="JOk-9b-IOa"/>
                                     <constraint firstAttribute="width" constant="200" id="xfK-m6-5BF"/>
@@ -753,7 +760,6 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                             <constraint firstItem="frw-Z0-cT5" firstAttribute="leading" secondItem="dbm-AY-PzV" secondAttribute="leading" constant="16" id="8Mj-8B-z5q"/>
                             <constraint firstAttribute="trailing" secondItem="sLO-Ab-yZy" secondAttribute="trailing" constant="16" id="9sG-Jr-QHs"/>
                             <constraint firstAttribute="trailing" secondItem="XZf-Mi-VQK" secondAttribute="trailing" constant="16" id="AFO-OH-fZX"/>
-                            <constraint firstAttribute="trailing" secondItem="hbK-1f-FCc" secondAttribute="trailing" constant="-18" id="JhM-Yv-xnW"/>
                             <constraint firstItem="uyU-RN-u3r" firstAttribute="trailing" secondItem="Z3d-cO-sio" secondAttribute="trailing" constant="16" id="KFk-zI-xCf"/>
                             <constraint firstAttribute="trailing" secondItem="frw-Z0-cT5" secondAttribute="trailing" constant="16" id="Nso-Dz-n3W"/>
                             <constraint firstItem="uyU-RN-u3r" firstAttribute="bottom" secondItem="Z3d-cO-sio" secondAttribute="bottom" id="QSn-kN-pfQ"/>
@@ -762,7 +768,7 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                             <constraint firstItem="X8h-y1-dJI" firstAttribute="leading" secondItem="dbm-AY-PzV" secondAttribute="leading" constant="16" id="Ugt-eY-uVf"/>
                             <constraint firstItem="k9M-2F-ioF" firstAttribute="centerX" secondItem="dbm-AY-PzV" secondAttribute="centerX" id="WuF-LX-RcR"/>
                             <constraint firstItem="hbK-1f-FCc" firstAttribute="top" secondItem="24t-0U-2xp" secondAttribute="bottom" constant="20" id="ZyG-rN-A04"/>
-                            <constraint firstItem="hbK-1f-FCc" firstAttribute="leading" secondItem="uyU-RN-u3r" secondAttribute="leading" id="a9E-30-mEu"/>
+                            <constraint firstItem="hbK-1f-FCc" firstAttribute="leading" secondItem="uyU-RN-u3r" secondAttribute="leading" constant="10" id="a9E-30-mEu"/>
                             <constraint firstItem="hbK-1f-FCc" firstAttribute="top" secondItem="24t-0U-2xp" secondAttribute="bottom" constant="20" id="bkJ-Gj-P1y"/>
                             <constraint firstItem="7yt-YS-LHc" firstAttribute="top" secondItem="hbK-1f-FCc" secondAttribute="bottom" constant="24" id="efY-c1-Kpb"/>
                             <constraint firstItem="XZf-Mi-VQK" firstAttribute="leading" secondItem="dbm-AY-PzV" secondAttribute="leading" constant="16" id="jVh-q8-sSK"/>
@@ -775,6 +781,7 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                             <constraint firstItem="24t-0U-2xp" firstAttribute="centerX" secondItem="dbm-AY-PzV" secondAttribute="centerX" id="rix-2b-zfK"/>
                             <constraint firstAttribute="trailing" secondItem="X8h-y1-dJI" secondAttribute="trailing" constant="16" id="t8Y-m4-f0x"/>
                             <constraint firstItem="X8h-y1-dJI" firstAttribute="top" secondItem="frw-Z0-cT5" secondAttribute="bottom" constant="12" id="tcY-tO-jP5"/>
+                            <constraint firstItem="uyU-RN-u3r" firstAttribute="trailing" secondItem="hbK-1f-FCc" secondAttribute="trailing" constant="10" id="vgi-aH-qb3"/>
                             <constraint firstItem="Z3d-cO-sio" firstAttribute="top" secondItem="k9M-2F-ioF" secondAttribute="bottom" id="z6X-fg-Xqz"/>
                         </constraints>
                     </view>
@@ -846,7 +853,7 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="afn-xQ-fmI">
-                                        <rect key="frame" x="16" y="387" width="382" height="122.5"/>
+                                        <rect key="frame" x="16" y="357.5" width="382" height="181"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check-circle" translatesAutoresizingMaskIntoConstraints="NO" id="p4e-7V-RF7">
                                                 <rect key="frame" x="167.5" y="0.0" width="47" height="47"/>
@@ -859,6 +866,12 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                                                 <rect key="frame" x="7.5" y="84" width="367.5" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                 <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIT-7m-Cs1">
+                                                <rect key="frame" x="188.5" y="159.5" width="5" height="21.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -889,6 +902,7 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                     <connections>
                         <outlet property="loaderView" destination="lYF-pU-ekC" id="kHb-LP-Ux9"/>
                         <outlet property="msgLbl" destination="HTe-3h-qE0" id="1Li-z6-IAK"/>
+                        <outlet property="successInfoLbl" destination="KIT-7m-Cs1" id="ud4-S8-DBs"/>
                         <outlet property="successLbl" destination="ZYj-FA-GMp" id="t7f-XX-ya5"/>
                         <outlet property="successView" destination="Lz1-zL-KCd" id="HIC-2h-shY"/>
                         <outlet property="titleLbl" destination="zah-np-gUh" id="niV-qP-rbp"/>
@@ -2404,12 +2418,12 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
     <resources>
         <image name="Button Close" width="32" height="32"/>
         <image name="Group 127" width="165" height="266"/>
-        <image name="Video" width="360" height="224"/>
-        <image name="Video-2" width="360" height="224"/>
+        <image name="PH4Demo" width="300" height="120"/>
         <image name="arrow_back-1" width="25" height="25"/>
         <image name="check-circle" width="56" height="56"/>
         <image name="infoBlue" width="24" height="24"/>
-        <image name="sun" width="22" height="22"/>
+        <image name="ph7Demo" width="300" height="120"/>
+        <image name="sun" width="24" height="24"/>
         <systemColor name="lightTextColor">
             <color white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

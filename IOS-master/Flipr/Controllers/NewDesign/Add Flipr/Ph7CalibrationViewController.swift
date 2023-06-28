@@ -14,6 +14,8 @@ class Ph7CalibrationViewController: BaseViewController {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var msgLbl: UILabel!
     @IBOutlet weak var successLbl: UILabel!
+    @IBOutlet weak var successInfoLbl: UILabel!
+    var noStripTest = false
 
     var measuresInterval:Double = 150
     var recalibration = false
@@ -34,6 +36,7 @@ class Ph7CalibrationViewController: BaseViewController {
         titleLbl.text  = "Calibrage en cours".localized
         msgLbl.text  = "Cette opération prend environs 2 minutes. Veuillez rester à proximité immédiate de votre téléphone et de l’appareil Flipr. Maintenez l’application ouverte et active.".localized
         successLbl.text  = "Calibration Ph7 réussie".localized
+        successInfoLbl.text = "Vous pouvez récupérer la solution de calibrage et la conserver une semaine en cas de besoin.".localized
 //        if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
 //            self.measuresInterval = Double(curretnValue) ?? 60
 //        }
@@ -347,6 +350,7 @@ class Ph7CalibrationViewController: BaseViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "CalibrationChlorineIntroViewController") as! CalibrationChlorineIntroViewController
             vc.recalibration = self.recalibration
+            vc.noStripTest = self.noStripTest
             if self.isAddingNewDevice{
                 vc.isAddingNewDevice =  self.isAddingNewDevice
             }

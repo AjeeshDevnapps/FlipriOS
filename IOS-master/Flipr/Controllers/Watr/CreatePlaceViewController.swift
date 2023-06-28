@@ -26,9 +26,9 @@ class CreatePlaceViewController: UIViewController {
         hud?.show(in: self.view)
         User.currentUser?.createPlace( completion: { (settings,error) in
             if (error != nil) {
-                self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
-                self.hud?.textLabel.text = error?.localizedDescription
-                self.hud?.dismiss(afterDelay: 3)
+//                self.hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+//                self.hud?.textLabel.text = error?.localizedDescription
+//                self.hud?.dismiss(afterDelay: 3)
             } else {
                 self.hud?.dismiss(afterDelay: 0)
                 self.poolSettings = settings

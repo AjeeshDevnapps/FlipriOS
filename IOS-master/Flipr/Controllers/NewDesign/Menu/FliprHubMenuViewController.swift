@@ -51,6 +51,9 @@ class FliprHubMenuViewController: UIViewController {
 //        settingTable.tableFooterView = UIView(frame: CGRect(x: 0, y: -1, width: settingTable.frame.size.width, height: 1))
      
 //        getDeviceDetails()
+        NotificationCenter.default.addObserver(forName: K.Notifications.DismissMenuView, object: nil, queue: nil) { (notification) in
+            self.dismiss(animated: false)
+        }
         self.arrangeMenu()
        
         // Do any additional setup after loading the view.

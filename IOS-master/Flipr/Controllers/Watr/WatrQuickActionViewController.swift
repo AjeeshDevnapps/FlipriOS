@@ -119,7 +119,7 @@ class WatrQuickActionViewController: UIViewController {
                     if identifier.hasPrefix("F"){
                         haveSubscription = true
                     }else{
-                        haveSubscription = false
+//                        haveSubscription = false
                     }
                 }
             }
@@ -295,7 +295,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                     }
                     
                     else if indexPath.row == 2{
-//                        self.showExpertView()
+                        self.showAIView()
                     }
                     
                     else if indexPath.row == 3{
@@ -310,6 +310,9 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                         }
                         else if indexPath.row == 1{
                             showLastMeasurement()
+                        }
+                        else if indexPath.row == 2{
+                            showAIView()
                         }
                         else if indexPath.row == 3{
                             showExpertView()
@@ -331,6 +334,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                             showLastMeasurement()
                         }
                         else if indexPath.row == 3{
+                            self.showAIView()
                         }
                         else if indexPath.row == 4{
                             showExpertView()
@@ -345,6 +349,9 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                 if indexPath.row == 0{
                     self.showBuyProducts()
                 }
+                else if indexPath.row == 1{
+                    self.showAIView()
+                }
                 else if indexPath.row == 2{
                     showExpertView()
                 }
@@ -354,6 +361,9 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
         else{
             if indexPath.row == 1{
                 self.showBuyProducts()
+            }
+            else if indexPath.row == 0{
+                self.showAIView()
             }
             else{
                 
@@ -482,6 +492,13 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
         
     }
     
+    
+    func showAIView(){
+        if let vc = UIStoryboard(name: "FliprAI", bundle: nil).instantiateInitialViewController() {
+                        vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
     
     
     func showBuyProducts(){

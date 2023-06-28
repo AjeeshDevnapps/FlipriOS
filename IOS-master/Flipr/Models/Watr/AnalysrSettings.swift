@@ -14,6 +14,7 @@ class AnalysrSettings{
 	var tensionBattery : Double!
 	var userName : String!
 	var version : Int!
+    var swVersion : Int!
 
 
 	/**
@@ -28,6 +29,7 @@ class AnalysrSettings{
 		tensionBattery = dictionary["TensionBattery"] as? Double
 		userName = dictionary["UserName"] as? String
 		version = dictionary["Version"] as? Int
+        swVersion = dictionary["SoftwareVersion"] as? Int
 	}
 
 }

@@ -211,7 +211,8 @@ class StripViewController: UIViewController {
                         NotificationCenter.default.post(name: FliprLogDidChanged, object: nil)
                         self.dismiss(animated: true, completion: nil)
                     } else {
-                        self.showFliprSuccessScreen()
+                        self.showGWInfoView()
+//                        self.showFliprSuccessScreen()
 //                        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "StartViewControllerID") {
 //                            self.navigationController?.pushViewController(viewController, animated: true)
 //                        }
@@ -237,6 +238,27 @@ class StripViewController: UIViewController {
         let viewController = sb.instantiateViewController(withIdentifier: "CalibrationSuccessViewController") as! CalibrationSuccessViewController
         viewController.recalibration = self.recalibration
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showGWInfoView(){
+        if AppSharedData.sharedInstance.isFlipr3{
+            showGatewaySetup()
+        }else{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+            dashboard.modalTransitionStyle = .flipHorizontal
+            dashboard.modalPresentationStyle = .fullScreen
+            self.present(dashboard, animated: true, completion: {
+                self.navigationController?.popToRootViewController(animated: false)
+            })
+        }
+    }
+    
+    
+    func showGatewaySetup(){
+        let storyboard = UIStoryboard(name: "FliprDevice", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AddGatewayIntroViewController") as! AddGatewayIntroViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

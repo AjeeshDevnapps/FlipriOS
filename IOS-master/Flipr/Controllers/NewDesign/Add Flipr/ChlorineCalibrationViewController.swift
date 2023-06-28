@@ -14,6 +14,10 @@ class ChlorineCalibrationViewController: BaseViewController {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var msgLbl: UILabel!
     @IBOutlet weak var successLbl: UILabel!
+    @IBOutlet weak var successInfoLbl: UILabel!
+    var noStripTest = false
+
+    
     var isAddingNewDevice = false
 
     
@@ -38,6 +42,8 @@ class ChlorineCalibrationViewController: BaseViewController {
 //        if let curretnValue = UserDefaults.standard.string(forKey: "DelayTime") {
 //            self.measuresInterval = Double(curretnValue) ?? 60
 //        }
+        successInfoLbl.text = "Vous pouvez récupérer la solution de calibrage et la conserver une semaine en cas de besoin.".localized
+
         self.calibrate()
         // Do any additional setup after loading the view.
     }
@@ -88,15 +94,22 @@ class ChlorineCalibrationViewController: BaseViewController {
         CalibrationManager.shared.isStoppedForRedo = false
         CalibrationManager.shared.isReconnectedAfterFail = false
         CalibrationManager.shared.readPh4{ (error) in
-            
             if error != nil{
                 self.navigationController?.popViewController()
             }else{
                 Module.currentModule?.pH7CalibrationDone = true
                 self.loaderView.hideStateView()
-//                self.invalidateStruckChecktimer()
-                self.showStripView()
+                if self.noStripTest == true{
+                    self.successView.isHidden = false
+                    self.view.bringSubviewToFront( self.successView)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        self.dismiss(animated: true)
+                        NotificationCenter.default.post(name: K.Notifications.FliprCalibrationCompleted, object: nil)
 
+                    }
+                }else{
+                    self.showStripView()
+                }
             }
         }
 

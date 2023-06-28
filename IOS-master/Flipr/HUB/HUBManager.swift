@@ -249,6 +249,8 @@ extension HUBManager: CBCentralManagerDelegate {
                 return
             }
             
+            
+            
             print("Hub device discovered with name:\(peripheral.name) , identifier: \(peripheral.identifier)")
             
             let serial = name.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "FliprHUB", with: "").trimmed

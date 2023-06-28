@@ -181,3 +181,22 @@ class GatewayInfoTableViewCell: UITableViewCell {
     }
 
 }
+
+
+class AITnCableViewCell: UITableViewCell {
+    @IBOutlet weak var tncLabel: UILabel!
+
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        tncLabel.text = "AItnc".localized
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+}

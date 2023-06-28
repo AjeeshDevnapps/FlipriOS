@@ -29,7 +29,8 @@ class GateWayListingViewController: BaseViewController {
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated: true)
         
-        self.controllerTitle.text = "Branchez la passerelle au moyen du câble USB et restez à proximité.\n\nAttendez quelques secondes...".localized
+//        self.controllerTitle.text = "Branchez la passerelle au moyen du câble USB et restez à proximité.\n\nAttendez quelques secondes...".localized
+        self.controllerTitle.text = "Branchez la passerelle au moyen du câble USB et restez à proximité.\n\nChoisissez la passerelle à associer".localized
         self.subTitleLable.text = "".localized
         cancelBtn.setTitle("Cancel".localized(), for: .normal)
 

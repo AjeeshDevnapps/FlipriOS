@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import JGProgressHUD
+
 
 class GatewaySuccessViewController: BaseViewController {
     @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
+    var gatewayList:[UserGateway]?
+    @IBOutlet weak var gwGifImageView: UIImageView!
+
+
+    var serial:String?
 
     override func viewDidLoad() {
         self.hidCustombackbutton = true
@@ -19,6 +26,9 @@ class GatewaySuccessViewController: BaseViewController {
         self.titleLabel.text = "Si la lumière passe au vert (Vraiment vert!), vous êtes connecté et votre Flipr Connect est prêt à recevoir des mesures Flipr! \n\nUn flash bleu intermittent indique que Flipr AnalysR est à portée.\n\nNe débranchez pas Flipr Connect. Les mesures sont exclusivement récupérées et transmises  par cette passerelle.\n\nSi vous changez de réseau Wifi, veuillez refaire la configuration à partir du menu Paramètres.\n".localized
         
         self.navigationItem.setHidesBackButton(true, animated: true)
+        let jeremyGif = UIImage.gifImageWithName("gwgif")
+        gwGifImageView.image = jeremyGif
+
         GatewayManager.shared.cancelGatewayConnection { error in
 
         }
@@ -33,12 +43,44 @@ class GatewaySuccessViewController: BaseViewController {
             AppSharedData.sharedInstance.isFlipr3 = false
             showDashboard()
         }else{
-            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 4], animated: true)
+            self.showSettingsView()
+//            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+//            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 4], animated: true)
+
 
         }
 
     }
+    
+    
+    func showSettingsView(){
+        getGatewayList()
+    }
+    
+    func getGatewayList() {
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.view)
+        User.currentUser?.getUserGateways(completion: { gateways, error in
+            hud?.dismiss()
+            self.gatewayList = gateways
+            if self.gatewayList != nil && self.serial != nil{
+                var selectedItem:UserGateway?
+                for(_,item) in self.gatewayList!.enumerated(){
+                    let serialNo = self.serial ?? ""
+                    if serialNo == item.serial{
+                        selectedItem = item
+                    }
+                }
+                if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GatewaySettingsViewController") as? GatewaySettingsViewController {
+                    vc.info = selectedItem
+                    vc.isDirectSettings = true
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+           
+        })
+    }
+    
     
 
     func showDashboard(){

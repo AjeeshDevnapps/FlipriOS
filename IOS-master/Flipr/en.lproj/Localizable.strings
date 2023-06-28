@@ -677,14 +677,14 @@
 "La partie basse contient du liquide. Gardez Flipr à la verticale lors du dévissage." = "The bottom part contains liquid. Keep Flipr upright when unscrewing.";
 "Initialiser" = "Initialize ";
 "Dévissez la partie basse du Flipr. La partie basse se compose soit du capuchon de Flipr (cache plein), soit d’un cache ajouré. Si vous dévissez le capuchon, du liquide se trouve dedans : vous pouvez le jeter." = "Unscrew the lower part of the Flipr. The lower part consists of either the Flipr cap (full cover) or an openwork cover. If you unscrew the cap, there is liquid in it: you can throw it away.";
-"Munissez-vous du capuchon. Versez le contenu du flacon bleu dans le capuchon." = "Take the cap. Pour the contents of the blue bottle into the cap.";
+"Munissez-vous du capuchon. Versez le contenu du flacon bleu dans le capuchon." = "Get the cap. Pour the contents of the blue or marked PH 7 bottle into the cap.";
 "Vissez le capuchon sur l’appareil." = "Screw the cap onto the device.";
 "Cliquez sur le bouton \"Initialiser\"." = "Click on the \"Initialize\" button.";
 "Calibrage en cours" = "Calibration in progress";
 "Cette opération prend environs 2 minutes. Veuillez rester à proximité immédiate de votre téléphone et de l’appareil Flipr. Maintenez l’application ouverte et active." = "This process takes about 2 minutes. Please stay in close proximity to your phone and the Flipr device and keep the application open and active.";
 "Calibration Ph7 réussie" = "Successful pH7 calibration!";
 "Dévissez la partie basse du Flipr.Versez le liquide précédemment utilisé dans un récipient." = "Unscrew the lower part of the Flipr and pour the previously used liquid into a container.";
-"Versez le contenu du flacon rouge dans le capuchon." = "Pour the contents of the red bottle into the cap.";
+"Versez le contenu du flacon rouge dans le capuchon." = "Pour the contents of the red or marked PH 4 bottle into the cap.";
 "Calibration pH4 réussie !" = "Successful pH4 calibration!";
 "Contrôle bandelette" = "Strip control";
 "Ce test permet de vérifier que les premières mesures de Flipr sont en adéquation avec la qualité de votre eau. Saisissez la languette fournie sans toucher les carrés colorés, puis plongez-la dans l’eau de votre bassin à mi-bras pendant 2 secondes. Reportez ensuite les couleurs obtenues, ligne par ligne." = "This test allows you to check that the first Flipr measurements are in line with the quality of your water. Take the tab provided without touching the coloured squares, then dip it into the water of your pond at mid-arm for 2 seconds. Then record the colours obtained, line by line.";
@@ -1167,6 +1167,7 @@ This action is irreversible";
 "Define" = "Define";
 "System" = "System";
 "Manual entry (DipR)" = "Manual Entry";
+"Manual entry" = "Manual Entry";
 "Invitations" = "Invitations";
 "Account deleted successfully" = "Account deleted successfully";
 "Skip" = "Skip";
@@ -1228,7 +1229,6 @@ This action is irreversible";
 "Alerts and Notifications" = "Alerts and Notifications";
 "Delete my User" = "Delete my Account";
 
-*On opening app without places*/
 /*Fuzzy*/
 "Welcome aboard. You must create a Place or be invited in order to enjoy Flipr. " = "Welcome aboard. You must create a Place or be invited in order to enjoy Flipr. ";
 
@@ -1275,6 +1275,74 @@ This action is irreversible";
 "Buy Flipr AnalysR" = "Buy Flipr AnalysR";
 "Connect your gateway" = "Connect your Gateway";
 
-"Flipr Connect  fonctionne exclusivement sur les réseaux wifi 2.4GHz. Si votre réseau est en 5GHz ou 6 GHz assurez vous qu’il prend également en charge le 2.4GHz.\n\nSur iPhone connectez au préalable votre téléphone sur le réseau wifi  2.4GHz auquel vous souhaitez connecter votre Flipr Connect.\n\nChoisissez le réseau wifi \n\n👇\n " = "Flipr Connect works exclusively on 2.4GHz wifi networks. If your network is 5GHz or 6GHz make sure it also supports 2.4GHz.\n\nOn iPhone, first connect your phone to the 2.4GHz wifi network to which you want to connect your Flipr Connect.\n\nChoose wifi network\n\n👇\n ";
+"WifiText!" = "Flipr Connect works exclusively on 2.4GHz wifi networks. If your network is 5GHz or 6GHz make sure it also supports 2.4GHz.\n\n On iPhone, first connect your phone to the 2.4GHz wifi network to which you want to connect your Flipr Connect.\n\n Choose wifi network";
+
 
 "Si la lumière passe au vert (Vraiment vert!), vous êtes connecté et votre Flipr Connect est prêt à recevoir des mesures Flipr! \n\nUn flash bleu intermittent indique que Flipr AnalysR est à portée.\n\nNe débranchez pas Flipr Connect. Les mesures sont exclusivement récupérées et transmises  par cette passerelle.\n\nSi vous changez de réseau Wifi, veuillez refaire la configuration à partir du menu Paramètres.\n" = "If the light turns green (Really green!), you are connected and your Flipr Connect is ready to receive Flipr measurements!\n\nAn intermittent blue flash indicates that Flipr AnalyseR is in range.\n\nDo not unplug Flipr Connect. The measurements are exclusively retrieved and transmitted by this gateway.\n\nIf you change the WiFi network, please redo the configuration from the Settings menu.\n";
+
+
+/*Gateway status*/
+/*Fuzzy*/
+"Initialization" = "Initialization 🔨";
+
+/*Gateway status*/
+/*Fuzzy*/
+"Connecting" = "Connecting ⏳";
+
+/*Gateway status*/
+/*Fuzzy*/
+"Connected" = "Connected ✅";
+
+/*Gateway status*/
+/*Fuzzy*/
+"Disconnected" = "Disconnected ❌";
+
+/*Gateway Status*/
+/*Fuzzy*/
+"Error" = "Error ⁉️";
+
+"Vous pouvez récupérer la solution de calibrage et la conserver une semaine en cas de besoin." = "You can recover the calibration solution and keep it for a week if needed.";
+
+"Calibration Alert" = "We recommend that you perform a calibration in order to obtain more accurate measurements.
+
+Calibration is available from the Expert Menu.";
+
+"AItnc" = "Flipr AI est une intelligence artificielle qui essaiera de répondre à vos questions relatives à la piscine et au traitement de l’eau.
+
+Ce service est en version d’essai et est gratuit pour une période limitée.
+
+En utilisant ce service, vous acceptez les CGU de Flipr pour l’utilisation de Flipr AI.
+
+Conditions générales d'utilisation - Responsabilité des réponses de Flipr AI
+
+Les présentes conditions générales d'utilisation (ci-après dénommées les 'CGU') régissent l'utilisation du service de Flipr AI (ci-après dénommé 'le Service') fourni par OpenAI. En utilisant le Service, vous acceptez d'être lié par les présentes CGU. Veuillez les lire attentivement avant d'accéder au Service.
+
+Nature du Service
+Le Service fournit une assistance conversationnelle basée sur des modèles de langage avancés et l'intelligence artificielle. Les réponses générées par le Flipr AI sont basées sur des données d'entraînement préalablement collectées et ne représentent pas les opinions, les conseils ou les positions d'OpenAI. Elles sont générées de manière automatisée et ne reflètent pas nécessairement la réalité, l'exactitude ou l'exhaustivité des informations fournies.
+
+Limitation de responsabilité
+a. Utilisation à vos propres risques : Vous reconnaissez et acceptez que l'utilisation du Service se fait à vos propres risques. OpenAI ne peut pas garantir l'exactitude, la pertinence, la fiabilité ou l'exhaustivité des réponses générées par le Flipr AI. Vous devez vérifier et évaluer de manière indépendante les informations obtenues par le biais du Service.
+
+b. Décharge de responsabilité : Dans toute la mesure permise par la loi applicable, Flipr AI décline expressément toute responsabilité, quelle qu'elle soit, découlant de l'utilisation du Service ou de la confiance accordée aux réponses générées par le Flipr AI. Flipr AI ne sera pas responsable des dommages directs, indirects, accessoires, consécutifs ou spéciaux résultant de l'utilisation ou de l'incapacité d'utiliser le Service.
+
+c. Contenu des utilisateurs : Les utilisateurs du Service sont responsables du contenu qu'ils soumettent ou partagent lors de l'utilisation du Service. Flipr AI ne vérifie pas ni n'assume la responsabilité du contenu des utilisateurs. Vous comprenez que les réponses générées par le Flipr AI peuvent contenir des informations incorrectes, trompeuses, offensantes ou illégales en raison du contenu des utilisateurs.
+
+Obligations de l'utilisateur
+a. Utilisation raisonnable : Vous vous engagez à utiliser le Service de manière raisonnable et à respecter les lois et réglementations applicables lors de son utilisation. Vous ne devez pas utiliser le Service de manière abusive, frauduleuse, diffamatoire, nuisible, offensante ou contraire à l'éthique.
+
+b. Validation indépendante : Vous acceptez que vous êtes seul responsable de l'évaluation, de la vérification et de l'utilisation des informations obtenues par le biais du Service. Vous devez consulter des sources supplémentaires et obtenir des conseils professionnels appropriés avant de prendre des décisions ou d'agir en fonction des réponses générées par  Flipr AI.
+
+Modifications et interruption du Service
+OpenAI se réserve le droit de modifier, suspendre ou interrompre le Service à tout moment, temporairement ou définitivement, sans préavis ni responsabilité envers vous ou tout tiers.
+
+Propriété intellectuelle
+Tous les droits de propriété intellectuelle relatifs au Service et aux réponses générées par le Flipr AI restent la propriété exclusive d'OpenAI. Vous ne pouvez pas reproduire, distribuer, modifier, créer des œuvres dérivées, afficher publiquement, exécuter publiquement, republier, télécharger, stocker ou transmettre tout contenu du Service sans autorisation écrite préalable d'OpenAI.
+
+Dispositions générales
+a. Indépendance des clauses : Si une disposition des présentes CGU est jugée invalide ou inapplicable, les autres dispositions resteront pleinement en vigueur et effet.
+
+b. Loi applicable : Les présentes CGU seront régies et interprétées conformément aux lois en vigueur.
+
+c. Résiliation : Flipr se réserve le droit de résilier ou de restreindre votre accès au Service en cas de violation des présentes CGU.
+
+En utilisant le Service, vous reconnaissez avoir lu, compris et accepté les présentes Conditions générales d'utilisation. Si vous n'acceptez pas ces termes, veuillez ne pas utiliser le Service.";

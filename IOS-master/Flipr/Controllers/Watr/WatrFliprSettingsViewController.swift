@@ -147,7 +147,7 @@ extension WatrFliprSettingsViewController: UITableViewDataSource,UITableViewDele
         cell.batteryInfoLbl.text = "\(batteryInfo) V"
 //        settings?.tensionBattery ?? 0
 //        cell.batteryInfoLbl.text = "\(Int(batteryInfo)) V"
-        let version = settings?.version ?? 0
+        let version = settings?.swVersion ?? 0
         cell.firmwareVerLbl.text = "\(version)"
         
         if let dateString = settings?.lastMeasureDateTime as? String {

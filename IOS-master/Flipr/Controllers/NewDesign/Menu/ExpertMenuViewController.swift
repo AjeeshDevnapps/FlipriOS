@@ -33,6 +33,13 @@ class ExpertMenuViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: K.Notifications.showFirmwereUpgradeScreen, object: nil, queue: nil) { (notification) in
             self.showFirmwereUdpateScreen()
         }
+        NotificationCenter.default.addObserver(forName: K.Notifications.FliprCalibrationCompleted, object: nil, queue: nil) { (notification) in
+            self.dismiss(animated: false)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                NotificationCenter.default.post(name: K.Notifications.DismissMenuView, object: nil)
+
+            }
+        }
 //        if sNo.hasPrefix("F"){
 
         if let identifier = Module.currentModule?.serial {
@@ -80,9 +87,9 @@ class ExpertMenuViewController: UIViewController {
         if haveSubscription{
              let identifier = Module.currentModule?.serial ?? ""
                 if identifier.hasPrefix("F"){
-                    cellTitleList = ["Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostic"]
-                     imageNames = ["Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
-                    self.menuViewHeight.constant = 550
+                    cellTitleList = ["Nouveau calibrage","Déclencher une mesure","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostic"]
+                     imageNames = ["Nouveau calibrage","Déclencher une mesure","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+                    self.menuViewHeight.constant = 610
                 }else{
                     cellTitleList = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostic"]
                      imageNames = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
@@ -155,22 +162,27 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
         if indexPath.row == 0{
             showCalibrationView()
         }
+        
         else if indexPath.row == 1{
+            triggerMesurement()
+        }
+        
+        else if indexPath.row == 2{
             stripTest()
         }
-        else if indexPath.row == 2{
+        else if indexPath.row == 3{
             expertView()
         }
-        else if indexPath.row == 3{
+        else if indexPath.row == 4{
             history()
         }
-        else if indexPath.row == 4{
+        else if indexPath.row == 5{
             drainingWater()
         }
-        else if indexPath.row == 5{
+        else if indexPath.row == 6{
             showFirmwereDiagnosticScreen()
         }
-        else if indexPath.row == 6{
+        else if indexPath.row == 7{
 //            showFirmwereDiagnosticScreen()
         }
         else{
@@ -274,6 +286,16 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
     
     func triggerMesurement(){
         
+        let mainSb = UIStoryboard.init(name: "Firmware", bundle: nil)
+        if let viewController = mainSb.instantiateViewController(withIdentifier: "NewMeasurementViewController") as? NewMeasurementViewController {
+//            viewController.calibrationType = .simpleMeasure
+            let nav = UINavigationController.init(rootViewController: viewController)
+            nav.modalPresentationStyle = .fullScreen
+
+            self.present(nav, animated: true, completion: nil)
+        }
+/*
+        
         if let identifier = Module.currentModule?.serial {
             if identifier.hasPrefix("F") || identifier.hasPrefix("f"){
                 return
@@ -285,6 +307,8 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
             viewController.modalPresentationStyle = .fullScreen
             self.present(viewController, animated: true, completion: nil)
         }
+        */
+        
     }
     
     
@@ -455,6 +479,7 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
         let vc = sb.instantiateViewController(withIdentifier: "CalibrationPh7IntroViewController") as! CalibrationPh7IntroViewController
         vc.isPresentedFlow = true
         vc.recalibration = true
+        vc.noStripTest = true
         let navigationController = UINavigationController.init(rootViewController: vc)
         navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)

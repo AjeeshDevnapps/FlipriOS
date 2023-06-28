@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Intro View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="AIIntroViewController" id="Y6W-OH-hqX" customClass="AIIntroViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pxf-Qp-hbf">
+                                <rect key="frame" x="0.0" y="59" width="393" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQ5-GK-RfR">
+                                        <rect key="frame" x="21" y="7.6666666666666714" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="8x0-rB-bth"/>
+                                            <constraint firstAttribute="height" constant="30" id="Qj5-HZ-9gl"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="AIClose" title=" "/>
+                                        <connections>
+                                            <action selector="closeButtonAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="NrM-Hh-Lo5"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AILogo" translatesAutoresizingMaskIntoConstraints="NO" id="mpt-hk-oUT">
+                                        <rect key="frame" x="73" y="7.6666666666666714" width="108" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="108" id="Mi1-wR-5i3"/>
+                                            <constraint firstAttribute="height" constant="30" id="ltu-8H-wcX"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="mpt-hk-oUT" firstAttribute="centerY" secondItem="Pxf-Qp-hbf" secondAttribute="centerY" id="GLh-L5-k81"/>
+                                    <constraint firstAttribute="height" constant="45" id="Gfg-bS-3tL"/>
+                                    <constraint firstItem="mpt-hk-oUT" firstAttribute="leading" secondItem="nQ5-GK-RfR" secondAttribute="trailing" constant="22" id="k8t-PE-mJD"/>
+                                    <constraint firstItem="nQ5-GK-RfR" firstAttribute="leading" secondItem="Pxf-Qp-hbf" secondAttribute="leading" constant="21" id="n4N-eJ-SRE"/>
+                                    <constraint firstItem="nQ5-GK-RfR" firstAttribute="centerY" secondItem="Pxf-Qp-hbf" secondAttribute="centerY" id="vPW-78-kMr"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Har-3R-ZHc">
+                                <rect key="frame" x="21" y="104" width="351" height="655"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AITnCableViewCell" id="b9o-B0-LNT" customClass="AITnCableViewCell" customModule="Flipr" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="351" height="2092.666748046875"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b9o-B0-LNT" id="W3n-sh-rWb">
+                                            <rect key="frame" x="0.0" y="0.0" width="351" height="2092.666748046875"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OXr-4g-8bv">
+                                                    <rect key="frame" x="0.0" y="0.0" width="351" height="2092.6666666666665"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozw-vP-rGu">
+                                                            <rect key="frame" x="4" y="8" width="343" height="2076.6666666666665"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <mutableString key="text">Flipr AI est une intelligence artificielle qui essaiera de répondre à vos questions relatives à la piscine et au traitement de l’eau.
+
+Ce service est en version d’essai et est gratuit pour une période limitée.
+
+En utilisant ce service, vous acceptez les CGU de Flipr pour l’utilisation de Flipr AI.
+
+Conditions générales d'utilisation - Responsabilité des réponses de Flipr AI
+
+Les présentes conditions générales d'utilisation (ci-après dénommées les "CGU") régissent l'utilisation du service de Flipr AI (ci-après dénommé "le Service") fourni par OpenAI. En utilisant le Service, vous acceptez d'être lié par les présentes CGU. Veuillez les lire attentivement avant d'accéder au Service.
+
+Nature du Service
+Le Service fournit une assistance conversationnelle basée sur des modèles de langage avancés et l'intelligence artificielle. Les réponses générées par le Flipr AI sont basées sur des données d'entraînement préalablement collectées et ne représentent pas les opinions, les conseils ou les positions d'OpenAI. Elles sont générées de manière automatisée et ne reflètent pas nécessairement la réalité, l'exactitude ou l'exhaustivité des informations fournies.
+
+Limitation de responsabilité
+a. Utilisation à vos propres risques : Vous reconnaissez et acceptez que l'utilisation du Service se fait à vos propres risques. OpenAI ne peut pas garantir l'exactitude, la pertinence, la fiabilité ou l'exhaustivité des réponses générées par le Flipr AI. Vous devez vérifier et évaluer de manière indépendante les informations obtenues par le biais du Service.
+
+b. Décharge de responsabilité : Dans toute la mesure permise par la loi applicable, Flipr AI décline expressément toute responsabilité, quelle qu'elle soit, découlant de l'utilisation du Service ou de la confiance accordée aux réponses générées par le Flipr AI. Flipr AI ne sera pas responsable des dommages directs, indirects, accessoires, consécutifs ou spéciaux résultant de l'utilisation ou de l'incapacité d'utiliser le Service.
+
+c. Contenu des utilisateurs : Les utilisateurs du Service sont responsables du contenu qu'ils soumettent ou partagent lors de l'utilisation du Service. Flipr AI ne vérifie pas ni n'assume la responsabilité du contenu des utilisateurs. Vous comprenez que les réponses générées par le Flipr AI peuvent contenir des informations incorrectes, trompeuses, offensantes ou illégales en raison du contenu des utilisateurs.
+
+Obligations de l'utilisateur
+a. Utilisation raisonnable : Vous vous engagez à utiliser le Service de manière raisonnable et à respecter les lois et réglementations applicables lors de son utilisation. Vous ne devez pas utiliser le Service de manière abusive, frauduleuse, diffamatoire, nuisible, offensante ou contraire à l'éthique.
+
+b. Validation indépendante : Vous acceptez que vous êtes seul responsable de l'évaluation, de la vérification et de l'utilisation des informations obtenues par le biais du Service. Vous devez consulter des sources supplémentaires et obtenir des conseils professionnels appropriés avant de prendre des décisions ou d'agir en fonction des réponses générées par  Flipr AI.
+
+Modifications et interruption du Service
+OpenAI se réserve le droit de modifier, suspendre ou interrompre le Service à tout moment, temporairement ou définitivement, sans préavis ni responsabilité envers vous ou tout tiers.
+
+Propriété intellectuelle
+Tous les droits de propriété intellectuelle relatifs au Service et aux réponses générées par le Flipr AI restent la propriété exclusive d'OpenAI. Vous ne pouvez pas reproduire, distribuer, modifier, créer des œuvres dérivées, afficher publiquement, exécuter publiquement, republier, télécharger, stocker ou transmettre tout contenu du Service sans autorisation écrite préalable d'OpenAI.
+
+Dispositions générales
+a. Indépendance des clauses : Si une disposition des présentes CGU est jugée invalide ou inapplicable, les autres dispositions resteront pleinement en vigueur et effet.
+
+b. Loi applicable : Les présentes CGU seront régies et interprétées conformément aux lois en vigueur.
+
+c. Résiliation : Flipr se réserve le droit de résilier ou de restreindre votre accès au Service en cas de violation des présentes CGU.
+
+En utilisant le Service, vous reconnaissez avoir lu, compris et accepté les présentes Conditions générales d'utilisation. Si vous n'acceptez pas ces termes, veuillez ne pas utiliser le Service.</mutableString>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.29411764709999999" green="0.65098039220000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="ozw-vP-rGu" firstAttribute="leading" secondItem="OXr-4g-8bv" secondAttribute="leading" constant="4" id="CbA-l6-YVp"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ozw-vP-rGu" secondAttribute="trailing" constant="4" id="JhB-H2-Q9Y"/>
+                                                        <constraint firstItem="ozw-vP-rGu" firstAttribute="top" secondItem="OXr-4g-8bv" secondAttribute="top" constant="8" id="Poa-b6-k1p"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ozw-vP-rGu" secondAttribute="bottom" constant="8" id="adc-hm-f16"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="OXr-4g-8bv" firstAttribute="top" secondItem="W3n-sh-rWb" secondAttribute="top" id="E1l-uz-csC"/>
+                                                <constraint firstAttribute="trailing" secondItem="OXr-4g-8bv" secondAttribute="trailing" id="Pa8-yP-Xn0"/>
+                                                <constraint firstItem="OXr-4g-8bv" firstAttribute="leading" secondItem="W3n-sh-rWb" secondAttribute="leading" id="TIp-LQ-jrf"/>
+                                                <constraint firstAttribute="bottom" secondItem="OXr-4g-8bv" secondAttribute="bottom" id="tPN-zU-SZC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="tncLabel" destination="ozw-vP-rGu" id="Jt3-DX-dHW"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="fCY-JU-SE9"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="RFl-cA-r5h"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="go0-UR-AKn">
+                                <rect key="frame" x="25" y="784" width="343" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="fd7-yk-Yym"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Accept T&amp;Cs">
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Pxf-Qp-hbf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Cvt-k0-t7H"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Har-3R-ZHc" secondAttribute="trailing" constant="21" id="Gqe-UG-8dr"/>
+                            <constraint firstItem="go0-UR-AKn" firstAttribute="top" secondItem="Har-3R-ZHc" secondAttribute="bottom" constant="25" id="NCH-Gu-eCN"/>
+                            <constraint firstItem="Pxf-Qp-hbf" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="P8V-VA-b6U"/>
+                            <constraint firstItem="go0-UR-AKn" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="8" id="Z7t-Zd-Hj6"/>
+                            <constraint firstItem="go0-UR-AKn" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="25" id="cM3-SW-jmK"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="go0-UR-AKn" secondAttribute="trailing" constant="25" id="gsx-mu-zQu"/>
+                            <constraint firstItem="Har-3R-ZHc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="21" id="ppj-sR-TAf"/>
+                            <constraint firstItem="Pxf-Qp-hbf" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="rZL-Hb-SzE"/>
+                            <constraint firstItem="Har-3R-ZHc" firstAttribute="top" secondItem="Pxf-Qp-hbf" secondAttribute="bottom" id="zh6-di-0wZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Har-3R-ZHc" id="PZu-AM-eVj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="113.74045801526717" y="-16.197183098591552"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="AIClose" width="30" height="30"/>
+        <image name="AILogo" width="108" height="30"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

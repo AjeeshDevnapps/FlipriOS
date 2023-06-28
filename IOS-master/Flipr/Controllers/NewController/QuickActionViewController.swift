@@ -380,6 +380,7 @@ class QuickActionViewController: UIViewController {
         let vc = sb.instantiateViewController(withIdentifier: "CalibrationPh7IntroViewController") as! CalibrationPh7IntroViewController
         vc.isPresentedFlow = true
         vc.recalibration = true
+        vc.noStripTest = true
         let navigationController = UINavigationController.init(rootViewController: vc)
         navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)

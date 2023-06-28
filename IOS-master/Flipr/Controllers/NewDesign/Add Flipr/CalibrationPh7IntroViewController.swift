@@ -21,6 +21,7 @@ class CalibrationPh7IntroViewController: BaseViewController {
     @IBOutlet weak var contentLine3Lbl: UILabel!
     @IBOutlet weak var contentLine4Lbl: UILabel!
     var isAddingNewDevice = false
+    var noStripTest = false
 
     
     var recalibration = false
@@ -66,6 +67,7 @@ class CalibrationPh7IntroViewController: BaseViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Ph7CalibrationViewController") as! Ph7CalibrationViewController
         vc.recalibration = self.recalibration
         vc.dismissEnabled = self.isPresentedFlow
+        vc.noStripTest = self.noStripTest
         if isAddingNewDevice{
             vc.isAddingNewDevice =  self.isAddingNewDevice
         }
