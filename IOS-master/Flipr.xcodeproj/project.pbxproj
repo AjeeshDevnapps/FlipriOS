@@ -530,6 +530,12 @@
 		48FC119125DFE3C1001E1885 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119025DFE3C1001E1885 /* DeviceViewController.swift */; };
 		48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */; };
 		48FC119725DFE45D001E1885 /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48FC119625DFE45D001E1885 /* Devices.storyboard */; };
+		7872CB3F2A5549C600D115C5 /* CalibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */; };
+		7872CB402A554A0000D115C5 /* CalibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */; };
+		7872CB422A554D3C00D115C5 /* GetMeasurmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7872CB412A554D3C00D115C5 /* GetMeasurmentManager.swift */; };
+		788ECC662A5718290005DD31 /* NewMeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788ECC652A5718280005DD31 /* NewMeasurementViewController.swift */; };
+		788ECC682A571A920005DD31 /* NewMeasurementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788ECC672A571A920005DD31 /* NewMeasurementManager.swift */; };
+		78C4D6D22A58825E0065585D /* FliprActivateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C4D6D12A58825E0065585D /* FliprActivateManager.swift */; };
 		B50009841F0101DB00A84A4F /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50009831F0101DB00A84A4F /* StockTableViewCell.swift */; };
 		B503971022C4AD56005B9D30 /* Flipr-eau2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B503970F22C4AD56005B9D30 /* Flipr-eau2.mp4 */; };
 		B503971222C50A58005B9D30 /* FunCamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503971122C50A58005B9D30 /* FunCamViewController.swift */; };
@@ -894,6 +900,11 @@
 		48FC119625DFE45D001E1885 /* Devices.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Devices.storyboard; sourceTree = "<group>"; };
 		48FDE2F92680C2FA004BC2D5 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
 		48FDE2FA2680C2FB004BC2D5 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalibrationManager.swift; path = ../../../../Documents/CalibrationManager.swift; sourceTree = "<group>"; };
+		7872CB412A554D3C00D115C5 /* GetMeasurmentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetMeasurmentManager.swift; path = ../../../GetMeasurmentManager.swift; sourceTree = "<group>"; };
+		788ECC652A5718280005DD31 /* NewMeasurementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMeasurementViewController.swift; sourceTree = "<group>"; };
+		788ECC672A571A920005DD31 /* NewMeasurementManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMeasurementManager.swift; sourceTree = "<group>"; };
+		78C4D6D12A58825E0065585D /* FliprActivateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprActivateManager.swift; sourceTree = "<group>"; };
 		8BB72430FBD3BA6A43E81AFA /* Pods-Watr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Watr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Watr/Pods-Watr.debug.xcconfig"; sourceTree = "<group>"; };
 		B50009831F0101DB00A84A4F /* StockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
 		B503970F22C4AD56005B9D30 /* Flipr-eau2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Flipr-eau2.mp4"; sourceTree = "<group>"; };
@@ -1320,6 +1331,7 @@
 		1CF7D8FE29C4882400118F25 /* Gateway */ = {
 			isa = PBXGroup;
 			children = (
+				788ECC652A5718280005DD31 /* NewMeasurementViewController.swift */,
 				1CFAF11129DBFD0A00B9953A /* GatewayActivate.swift */,
 				1CF7D8FF29C4885100118F25 /* GateWayViewController.swift */,
 				1CFABBF429D1C85400A34E21 /* GateWayListingViewController.swift */,
@@ -1830,7 +1842,11 @@
 				B53C5E841E82C72F00C1C0FC /* CityPickerViewController.swift */,
 				B53A7D5B1E8BB95800AC03C0 /* BLEManager.swift */,
 				1CD6478129D6AEB000ECCAB4 /* GatewayManager.swift */,
+				788ECC672A571A920005DD31 /* NewMeasurementManager.swift */,
+				7872CB412A554D3C00D115C5 /* GetMeasurmentManager.swift */,
+				7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */,
 				1C50A7C42A163E5D00EC49F8 /* FliprModeManager.swift */,
+				78C4D6D12A58825E0065585D /* FliprActivateManager.swift */,
 				B52A2DDA229D612900967175 /* AppReview.swift */,
 				B53A7D5D1E8BFECF00AC03C0 /* Constants.swift */,
 				1CAD60DC28117FDC00879A45 /* Flipr.cyacd */,
@@ -2398,6 +2414,7 @@
 				1C044ED028EA30BE00807F01 /* HUBProgramViewController.swift in Sources */,
 				1C044ED128EA30BE00807F01 /* HUB.swift in Sources */,
 				1C044ED228EA30BE00807F01 /* Error+Code.swift in Sources */,
+				7872CB402A554A0000D115C5 /* CalibrationManager.swift in Sources */,
 				1C044ED328EA30BE00807F01 /* UIAlertController+Additions.m in Sources */,
 				1C044ED428EA30BE00807F01 /* BLEManager.swift in Sources */,
 				1C044ED528EA30BE00807F01 /* PoolUsageViewController.swift in Sources */,
@@ -2673,6 +2690,7 @@
 				B56F2EBA1F00FD890026A962 /* Stock.swift in Sources */,
 				B5713F18241164A500278166 /* HUBManager.swift in Sources */,
 				B5BF6D6D225CCE5400FA70D5 /* SubscriptionPageViewController.swift in Sources */,
+				7872CB3F2A5549C600D115C5 /* CalibrationManager.swift in Sources */,
 				B5CB380E247F9FF000D2F61D /* HUBProgramViewController.swift in Sources */,
 				B519F849244D801600477DD1 /* HUB.swift in Sources */,
 				B532455A1EB34B500001A46F /* Error+Code.swift in Sources */,
@@ -2741,6 +2759,7 @@
 				B5F457B324C07365006C309A /* CablesSelectionViewController.swift in Sources */,
 				B52B3D2D22EEE4DE00283FD3 /* PoolLogEditViewController.swift in Sources */,
 				B5EE69F71EB1F31300ABF2B7 /* StripViewController.swift in Sources */,
+				78C4D6D22A58825E0065585D /* FliprActivateManager.swift in Sources */,
 				1CD6992726E5F1C400563CBE /* FliprHubMenuViewController.swift in Sources */,
 				1CD8DF122807634C004412D9 /* BPModel.m in Sources */,
 				1C5AE4222751194A008F6643 /* HubSettingsViewController.swift in Sources */,
@@ -2752,6 +2771,7 @@
 				B53245621EB376320001A46F /* LightNavigationViewController.swift in Sources */,
 				480CF2D325DD305800429906 /* NotificationSwitchTableViewCell.swift in Sources */,
 				B53245581EB33F980001A46F /* Strip.swift in Sources */,
+				788ECC662A5718290005DD31 /* NewMeasurementViewController.swift in Sources */,
 				B551E9D0242503CF00C1788F /* HUBWifiNetwork.swift in Sources */,
 				1CAD60BA281127E000879A45 /* BatteryServiceModel.m in Sources */,
 				48FC119125DFE3C1001E1885 /* DeviceViewController.swift in Sources */,
@@ -2815,6 +2835,7 @@
 				1CA9A29329106EB90035F671 /* LocationTypeTableViewCell.swift in Sources */,
 				1CD8DF3428076E8B004412D9 /* DropDownView.m in Sources */,
 				B52A2DDB229D612900967175 /* AppReview.swift in Sources */,
+				7872CB422A554D3C00D115C5 /* GetMeasurmentManager.swift in Sources */,
 				4895F7522667F4D300FA8ED3 /* SignUpProfileController.swift in Sources */,
 				1CD8DF0D2807634C004412D9 /* DevieInformationModel.m in Sources */,
 				1CDE0B2E285A482300FB44B5 /* BackupFliprReaderViewController.swift in Sources */,
@@ -2887,6 +2908,7 @@
 				48F49ABF2666B3D200DFB18B /* HubListViewController.swift in Sources */,
 				1CDF0B14281AFC7600C699E4 /* FirmwareUpgradeFailureViewController.swift in Sources */,
 				1C5AE42627512240008F6643 /* HubRenameViewController.swift in Sources */,
+				788ECC682A571A920005DD31 /* NewMeasurementManager.swift in Sources */,
 				1CA9A28C290FFC720035F671 /* PlaceTypeRouter.swift in Sources */,
 				1CD8DF102807634C004412D9 /* ThermometerModel.m in Sources */,
 				1CEA4F9029351F3400D4619E /* InvitationTableViewCell.swift in Sources */,
@@ -3070,7 +3092,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -3115,7 +3137,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(PROJECT_NAME)-Swift.h";
@@ -3142,7 +3164,7 @@
 				);
 				INFOPLIST_FILE = Flipr/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Flipr;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 4.0.2;
 				NEW_SETTING = "";
@@ -3178,7 +3200,7 @@
 				);
 				INFOPLIST_FILE = Flipr/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Flipr;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 4.0.2;
 				NEW_SETTING = "";

@@ -139,6 +139,7 @@ class BLEManager: NSObject {
             occuranceString = "Flipr 0"
         }
         var currentSavedserial = name.replacingOccurrences(of: occuranceString, with: "").trimmed
+        
 
         if AppSharedData.sharedInstance.isFirstCalibrations
         {
@@ -419,8 +420,8 @@ extension BLEManager: CBCentralManagerDelegate {
         }
         if let name = peripheral.name {
             
-//            print("Name: %@",name)
-            if !name.hasPrefix("Flipr 0") && !name.hasPrefix("FliprHUB") {
+            print("Name: %@",name)
+            if !name.hasPrefix("Flipr 0"){
                 if !name.hasPrefix("F"){
                     return
                 }
@@ -443,9 +444,23 @@ extension BLEManager: CBCentralManagerDelegate {
             
             var serial = name.replacingOccurrences(of: occuranceString, with: "").trimmed
             
-            if name.hasPrefix("FliprHUB") {
-                serial = name.replacingOccurrences(of: "FliprHUB", with: "").trimmed
+            if serial.hasPrefix("F"){
+                if serial.count > 8 {
+                    return
+                }
+            }else{
+                if serial.count > 7 {
+                    return
+                }
             }
+            
+            
+            print("Name after fiter : %@",name)
+
+            
+//            if name.hasPrefix("FliprHUB") {
+//                serial = name.replacingOccurrences(of: "FliprHUB", with: "").trimmed
+//            }
             
 //            self.currentMeasuringSerial = serial ?? ""
 //            print("Flipr device discovered with serial:\(serial) , Module.currentModule?.serial: \(Module.currentModule?.serial)")

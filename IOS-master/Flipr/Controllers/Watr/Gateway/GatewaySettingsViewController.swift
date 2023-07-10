@@ -39,8 +39,8 @@ class GatewaySettingsViewController: UIViewController {
         self.title = info?.serial
         tableView.tableFooterView =  UIView()
         self.tableView.reloadData()
-        let jeremyGif = UIImage.gifImageWithName("gwgif")
-        gwGifImageView.image = jeremyGif
+//        let jeremyGif = UIImage.gifImageWithName("gwgif")
+//        gwGifImageView.image = jeremyGif
         if isDirectSettings{
             self.navigationItem.setHidesBackButton(true, animated: true)
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done".localized, style: .plain, target: self, action: #selector(doneTapped))

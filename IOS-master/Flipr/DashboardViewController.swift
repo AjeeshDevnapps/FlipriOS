@@ -3201,6 +3201,17 @@ class DashboardViewController: UIViewController {
                     print("JSON: Flipr Data \(JSON)")
                     
                     if let fliprData = JSON["fliprSection"] as? [String:Any] {
+                        
+                        if let needCalib = fliprData["NeedCalib"] as? Bool {
+                            if needCalib{
+                                self.showCalibrationAlert()
+                            }
+                            else{
+                                self.showCalibrationAlert()
+                            }
+                        }
+                        
+                        
                         if let deviceName = fliprData["CommercialType"] as? String {
                             if deviceName == "Flipr Analyzer"
                             {
@@ -3529,6 +3540,13 @@ class DashboardViewController: UIViewController {
                     if let current = JSON["Current"] as? [String:Any] {
                         
                         print("JSON Current: \(current)")
+                        
+                        
+                        
+                        
+                        if let sourceId = current["ModeId"] as? Int {
+                            self.handleSettingsButton(mode: sourceId)
+                        }
                         
                         self.view.hideStateView()
                         
@@ -3979,19 +3997,40 @@ class DashboardViewController: UIViewController {
                                 if module.isSubscriptionValid == false {
                                     //                                    self.subscriptionView.alpha = 1
                                     self.signalStrengthImageView.isHidden = false
-                                    self.signalStrengthImageView.image = UIImage(named: "Bluetooth icon")
+                                   // self.signalStrengthImageView.image = UIImage(named: "Bluetooth icon")
                                     self.signalStrengthLabel.isHidden = false
-                                    self.showSubscriptionButton()
+//                                    self.showSubscriptionButton()
                                 } else {
                                     self.signalStrengthLabel.isHidden = false
                                     self.signalStrengthImageView.isHidden = false
                                     //                                    self.subscriptionView.alpha = 0
                                     //                                    self.subscriptionButton.isHidden = true
                                 }
+                                
+                                var cType = 0
+                                if let fliprData = JSON["fliprSection"] as? [String:Any] {
+                                    if let deviceName = fliprData["CommercialType_Id"] as? Int {
+                                        cType = deviceName
+                                    }
+                                }
+                                
+                                if cType == 1 && module.isSubscriptionValid == false {
+                                    if self.isPlaceOwner{
+                                        self.showSubscriptionButton()
+                                    }else{
+                                        self.subscriptionButton.isHidden = true
+                                    }
+                                }else{
+                                    self.subscriptionButton.isHidden = true
+                                }
                             }
                         }, completion: { (success) in
                             
                         })
+                        
+                        if let sourceId = current["SourceId"] as? Int {
+                            self.handleConnectionStatus(mode: sourceId)
+                        }
                         
                         let value = UserDefaults.standard.bool(forKey: notificationOnOffValuesKey)
                         if value{
@@ -4005,6 +4044,8 @@ class DashboardViewController: UIViewController {
                             }
                         }
                     }
+                  
+                    
                     else {
                         
                         if self.isLoadedDashboard{
@@ -5231,16 +5272,7 @@ extension DashboardViewController: HubSettingViewDelegate{
     //MUMP
     
     @IBAction func settingsButtonClicked(){
-        /*
-        AppSharedData.sharedInstance.isAddPlaceFlow = true
-        let sb = UIStoryboard(name: "NewLocation", bundle: nil)
-        if let viewController = sb.instantiateViewController(withIdentifier: "NewLocationViewControllerID") as? NewLocationViewController {
-            //            self.navigationController?.pushViewController(viewController, completion: nil)
-            //            viewController.modalPresentationStyle = .fullScreen
-            let nav = UINavigationController.init(rootViewController: viewController)
-            self.present(nav, animated: true)
-        }
-        */
+       
 
         if self.placesModules != nil && self.placeDetails != nil{
             let vc = UIStoryboard(name:"WatrFlipr", bundle: nil).instantiateViewController(withIdentifier: "WatrFliprSettingsViewController") as! WatrFliprSettingsViewController
@@ -5251,7 +5283,21 @@ extension DashboardViewController: HubSettingViewDelegate{
         }
       
         
-        
+        /*
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.view)
+        FliprActivateManager.shared.scanForFlipr(serial: Module.currentModule?.serial ?? "") { error in
+            FliprActivateManager.shared.removeConnection()
+            hud?.dismiss(afterDelay: 0)
+            if error != nil{
+                print("Activation failed")
+
+//                self.showError(title: error.domain ?? "Flipr" , message: error.localizedDescription ?? "Error")
+            }else{
+                print("Activation success")
+            }
+        }
+        */
        
     }
     
@@ -5544,6 +5590,77 @@ extension DashboardViewController:PlaceDropdownDelegate{
     }
     
     
+    
+    
+    
 }
 
 
+extension DashboardViewController{
+    
+    func handleSettingsButton(mode:Int){
+        var imageName  = ""
+        switch (mode){
+            case 0: imageName = "SleepMode"
+            case 1: imageName = "NormalMode"
+            case 2: imageName = "ecoMode"
+            case 3: imageName = "OtherMode"
+
+        default: break
+        }
+        
+        self.settingsButton.setImage(UIImage(named: imageName), for: .normal)
+    }
+    
+    
+    func handleConnectionStatus(mode:Int){
+        var imageName  = ""
+        switch (mode){
+            case 0: imageName = "sifoxConnection"
+            case 1: imageName = "bleConnection"
+            case 2: imageName = "wifiConnection"
+            case 3: imageName = "gateWayConnection"
+            case 10: imageName = "MannualConnection"
+
+        default: break
+        }
+        self.signalStrengthImageView.isHidden = false
+        self.signalStrengthImageView.image = UIImage(named: imageName)
+    }
+    
+    
+    func showCalibrationAlert(){
+        let alertController = UIAlertController(title: nil, message: "Calibration Alert".localized, preferredStyle: UIAlertController.Style.alert)
+        
+        
+        let okAction = UIAlertAction(title: "Ok".localized, style: UIAlertAction.Style.default)
+        {
+            (result : UIAlertAction) -> Void in
+            
+            self.callAddDelayApi()
+           
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func callAddDelayApi(){
+        if let module = Module.currentModule {
+            let hud = JGProgressHUD(style:.dark)
+            hud?.show(in: self.view)
+            Alamofire.request(Router.addDelay(serial: module.serial ?? "")).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                
+                switch response.result {
+                    
+                case .success(let value):
+                    hud?.dismiss(afterDelay: 0)
+                case .failure(let error):
+                    hud?.dismiss(afterDelay: 0)
+                    print("callAddDelayApi did fail with error: \(error)")
+                    
+                }
+            })
+        }
+    }
+   
+}

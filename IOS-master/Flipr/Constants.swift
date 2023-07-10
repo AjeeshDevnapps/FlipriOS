@@ -85,7 +85,17 @@ struct K {
         static let GatewayNoteDiscovered = Notification.Name("fr.isee-u.GatewayNoteDiscovered")
         static let FliprModeValue = Notification.Name("fr.isee-u.FliprModeValue")
         static let FliprConnecitngForModeValue = Notification.Name("fr.isee-u.FliprConnecitngForModeValue")
+        static let FliprCalibrationCompleted = Notification.Name("fr.isee-u.FliprCalibrationCompleted")
+        static let DismissMenuView = Notification.Name("fr.isee-u.DismissMenuView")
 
+        
+        static let GatewaySSIDRead = Notification.Name("fr.isee-u.GatewaySSIDRead")
+        static let GatewaySoftwareVersion = Notification.Name("fr.isee-u.GatewaySoftwareVersion")
+        static let GatewayConnectionStatus = Notification.Name("fr.isee-u.GatewayConnectionStatus")
+        
+        static let FliprReadingModeValue = Notification.Name("fr.isee-u.FliprReadingModeValue")
 
+        
+        
     }
 }

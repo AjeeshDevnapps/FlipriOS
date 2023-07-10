@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w65-E9-iq8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w65-E9-iq8">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -179,17 +178,10 @@
                                     <constraint firstAttribute="width" constant="267" id="rCj-2a-09c"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RIP Olivier" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdh-OF-1El">
-                                <rect key="frame" x="169.5" y="675" width="75.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                <color key="textColor" red="0.2901960784" green="0.33333333329999998" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pQ1-zd-El3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="tdh-OF-1El" firstAttribute="centerX" secondItem="8ay-du-7KN" secondAttribute="centerX" id="1yi-mu-acg"/>
                             <constraint firstItem="2ne-T6-itH" firstAttribute="centerX" secondItem="8ay-du-7KN" secondAttribute="centerX" id="20k-Xq-JzU"/>
                             <constraint firstAttribute="bottom" secondItem="FhN-00-VhX" secondAttribute="bottom" id="2zN-Ib-UHK"/>
                             <constraint firstAttribute="trailing" secondItem="HPS-tn-teW" secondAttribute="trailing" constant="-7" id="3Te-QH-wSX"/>
@@ -204,7 +196,6 @@
                             <constraint firstItem="oMO-4I-VQV" firstAttribute="leading" secondItem="pQ1-zd-El3" secondAttribute="leading" id="UFS-wA-mX3"/>
                             <constraint firstItem="FaH-p3-YNy" firstAttribute="top" secondItem="2ne-T6-itH" secondAttribute="bottom" constant="100" id="ioD-dv-Jag"/>
                             <constraint firstItem="HPS-tn-teW" firstAttribute="leading" secondItem="pQ1-zd-El3" secondAttribute="leading" id="m6u-Cg-Itp"/>
-                            <constraint firstItem="tdh-OF-1El" firstAttribute="top" secondItem="FaH-p3-YNy" secondAttribute="bottom" constant="120" id="wBW-N2-LY2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mkV-9B-R8F"/>

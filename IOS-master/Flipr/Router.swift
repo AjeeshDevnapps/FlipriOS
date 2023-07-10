@@ -47,6 +47,7 @@ enum Router: URLRequestConvertible {
     case getPlaceModules(placeId: String)
     case getUserEquipments
     case getUserGateways
+    case addDelay(serial: String)
 
 
 
@@ -206,6 +207,8 @@ enum Router: URLRequestConvertible {
             return .delete
         case .getPlaces:
             return .get
+        case .addDelay:
+            return .post
         
         case .getUserEquipments:
             return .get
@@ -364,6 +367,10 @@ enum Router: URLRequestConvertible {
     
     var path: String {
         switch self {
+        
+        case .addDelay(let serial):
+            return "\(serial)/addDelay"
+            
         case .createPlace(let typeId):
             return "place"
         case .updatePlace(let placeId):
@@ -1041,7 +1048,7 @@ enum Router: URLRequestConvertible {
             let placeInfo = AppSharedData.sharedInstance.addPlaceInfo
             let placeLoc = AppSharedData.sharedInstance.addPlaceLocationInfo
             
-            let parameters: [String : Any] = ["PrivateName": AppSharedData.sharedInstance.addPlaceName,"BuiltYear": 2022,"ElectrolyzerThreshold": 0.0,"Id" : placeLoc.palceId, "IsPublic" : false, "Latitude" : placeInfo.latitude ?? 123.9, "Longitude" : placeInfo.longitude ?? 123.9, "NumberOfUsers" : placeInfo.numberOfUsers ?? 0, "NumberOfPlaces" : 0, "Surface" : 17.25, "Volume" : placeInfo.volume ?? 0.0, "City" : ["Latitude" : placeInfo.latitude ?? 123.9 , "Longitude" : placeInfo.longitude ?? 23.0, "Name" : placeInfo.city?.name ?? "",  "ZipCode" : placeInfo.city?.zipCode ?? ""], "Coating" : ["Id" : placeInfo.coating?.id ?? 0, "Name" : placeInfo.coating?.label ?? "" ], "Filtration" : ["Id" : placeInfo.filtration?.id ?? 0, "Name" : placeInfo.filtration?.label ?? "" ], "Integration" : ["Id" : placeInfo.integration?.id ?? 0, "Name" : placeInfo.integration?.label ?? "" ], "Mode" : ["Id" : placeInfo.mode?.id ?? 0, "Name" : placeInfo.mode?.label ?? "" ], "Shape" : ["Id" : placeInfo.shape?.id ?? 0, "Name" : placeInfo.shape?.label ?? "" ],  "Treatment" : ["Id" : placeInfo.treatment?.id ?? 0, "Name" : placeInfo.treatment?.label ?? "" ],  "Location" : ["Id" : 1, "Name" : placeInfo.spaKind?.label ?? "" ] ,"Type" : ["id" : placeLoc.palceId ]]
+            let parameters: [String : Any] = ["PrivateName": AppSharedData.sharedInstance.addPlaceName,"BuiltYear": 2022,"ElectrolyzerThreshold": 0.0,"Id" : placeLoc.palceId, "IsPublic" : false, "Latitude" : placeInfo.latitude ?? 123.9, "Longitude" : placeInfo.longitude ?? 123.9, "NumberOfUsers" : placeInfo.numberOfUsers ?? 0, "NumberOfPlaces" : 0, "Volume" : placeInfo.volume ?? 0.0, "City" : ["Latitude" : placeInfo.latitude ?? 123.9 , "Longitude" : placeInfo.longitude ?? 23.0, "Name" : placeInfo.city?.name ?? "",  "ZipCode" : placeInfo.city?.zipCode ?? ""], "Coating" : ["Id" : placeInfo.coating?.id ?? 0, "Name" : placeInfo.coating?.label ?? "" ], "Filtration" : ["Id" : placeInfo.filtration?.id ?? 0, "Name" : placeInfo.filtration?.label ?? "" ], "Integration" : ["Id" : placeInfo.integration?.id ?? 0, "Name" : placeInfo.integration?.label ?? "" ], "Mode" : ["Id" : placeInfo.mode?.id ?? 0, "Name" : placeInfo.mode?.label ?? "" ], "Shape" : ["Id" : placeInfo.shape?.id ?? 0, "Name" : placeInfo.shape?.label ?? "" ],  "Treatment" : ["Id" : placeInfo.treatment?.id ?? 0, "Name" : placeInfo.treatment?.label ?? "" ],  "Location" : ["Id" : 1, "Name" : placeInfo.spaKind?.label ?? "" ] ,"Type" : ["id" : placeLoc.palceId ]]
             
             print("Posting create place with params: \(parameters)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
@@ -1050,7 +1057,7 @@ enum Router: URLRequestConvertible {
             
             let placeInfo = AppSharedData.sharedInstance.updatePlaceInfo
             
-            let parameters: [String : Any] = ["PrivateName": placeInfo.privateName ?? "","BuiltYear": placeInfo.builtYear ?? 2023,"ElectrolyzerThreshold": 0.0,"Id" : placeInfo.id ?? 0, "IsPublic" : false, "Latitude" : placeInfo.latitude ?? 123.9, "Longitude" : placeInfo.longitude ?? 123.9, "NumberOfUsers" : placeInfo.numberOfUsers ?? 0, "NumberOfPlaces" : 0, "Surface" : 17.25, "Volume" : placeInfo.volume ?? 0.0, "City" : ["Latitude" : placeInfo.latitude ?? 123.9 , "Longitude" : placeInfo.longitude ?? 23.0, "Name" : placeInfo.city?.name ?? "",  "ZipCode" : placeInfo.city?.zipCode ?? ""], "Coating" : ["Id" : placeInfo.coating?.id ?? 0, "Name" : placeInfo.coating?.name ?? "" ], "Filtration" : ["Id" : placeInfo.filtration?.id ?? 0, "Name" : placeInfo.filtration?.name ?? "" ], "Integration" : ["Id" : placeInfo.integration?.id ?? 0, "Name" : placeInfo.integration?.name ?? "" ], "Mode" : ["Id" : placeInfo.mode?.id ?? 0, "Name" : placeInfo.mode?.name ?? "" ], "Shape" : ["Id" : placeInfo.shape?.id ?? 0, "Name" : placeInfo.shape?.name ?? "" ],  "Treatment" : ["Id" : placeInfo.treatment?.id ?? 0, "Name" : placeInfo.treatment?.name ?? "" ], "Location" : ["Id" : placeInfo.location?.id ?? 0, "Name" : placeInfo.location?.name ?? "" ] ,"Type" : ["id" : placeInfo.type?.id ?? 0, "IsAvailableAsPlace" : placeInfo.type?.isAvailableAsPlace ?? true ]]
+            let parameters: [String : Any] = ["PrivateName": placeInfo.privateName ?? "","BuiltYear": placeInfo.builtYear ?? 2023,"ElectrolyzerThreshold": 0.0,"Id" : placeInfo.id ?? 0, "IsPublic" : false, "Latitude" : placeInfo.latitude ?? 123.9, "Longitude" : placeInfo.longitude ?? 123.9, "NumberOfUsers" : placeInfo.numberOfUsers ?? 0, "NumberOfPlaces" : 0, "Volume" : placeInfo.volume ?? 0.0, "City" : ["Latitude" : placeInfo.latitude ?? 123.9 , "Longitude" : placeInfo.longitude ?? 23.0, "Name" : placeInfo.city?.name ?? "",  "ZipCode" : placeInfo.city?.zipCode ?? ""], "Coating" : ["Id" : placeInfo.coating?.id ?? 0, "Name" : placeInfo.coating?.name ?? "" ], "Filtration" : ["Id" : placeInfo.filtration?.id ?? 0, "Name" : placeInfo.filtration?.name ?? "" ], "Integration" : ["Id" : placeInfo.integration?.id ?? 0, "Name" : placeInfo.integration?.name ?? "" ], "Mode" : ["Id" : placeInfo.mode?.id ?? 0, "Name" : placeInfo.mode?.name ?? "" ], "Shape" : ["Id" : placeInfo.shape?.id ?? 0, "Name" : placeInfo.shape?.name ?? "" ],  "Treatment" : ["Id" : placeInfo.treatment?.id ?? 0, "Name" : placeInfo.treatment?.name ?? "" ], "Location" : ["Id" : placeInfo.location?.id ?? 0, "Name" : placeInfo.location?.name ?? "" ] ,"Type" : ["id" : placeInfo.type?.id ?? 0, "IsAvailableAsPlace" : placeInfo.type?.isAvailableAsPlace ?? true ]]
             
             print("Posting create place with params: \(parameters)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)

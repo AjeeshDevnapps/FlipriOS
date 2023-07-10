@@ -1,15 +1,17 @@
 //
-//  LastMeasurementViewController.swift
+//  NewMeasurementViewController.swift
 //  Flipr
 //
-//  Created by Ajeesh on 30/06/22.
-//  Copyright © 2022 I See U. All rights reserved.
+//  Created by Ajeesh on 09/06/23.
+//  Copyright © 2023 I See U. All rights reserved.
 //
+
+
 
 import UIKit
 import JGProgressHUD
 
-class LastMeasurementViewController:BaseViewController {
+class NewMeasurementViewController:BaseViewController {
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var relaunchButton: UIButton!
 
@@ -32,12 +34,12 @@ class LastMeasurementViewController:BaseViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.title =  "Last Measurement".localized
+        self.title =  "New Measurement".localized
 //        self.navigationItem.hidesBackButton = true
-        relaunchButton.roundCorner(corner: 12)
+//        relaunchButton.roundCorner(corner: 12)
 //        let hud = JGProgressHUD(style:.dark)
         
-        relaunchButton.setTitle("Relaunch".localized, for: .normal)
+//        relaunchButton.setTitle("Relaunch".localized, for: .normal)
         
         addCloseButton()
         hud?.textLabel.text = "Flipr data fetching".localized
@@ -175,23 +177,23 @@ class LastMeasurementViewController:BaseViewController {
 //        self.view.showEmptyStateViewLoading(title: nil,
 //                                            message: nil,
 //                                            theme: theme)
-        GetMeasurmentManager.shared.resetValues()
-        GetMeasurmentManager.shared.connectDevice{ (error) in
+        NewMeasurementManager.shared.resetValues()
+        NewMeasurementManager.shared.connectDevice{ (error) in
             
             
             if error != nil{
-                self.hud?.textLabel.text = "No new measurement, Please try after some time"
-                self.hud?.dismiss(afterDelay: 4)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+//                self.hud?.textLabel.text = ""
+                self.hud?.dismiss(afterDelay: 1)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.dismiss(animated: true)
                 }
             }else{
                 self.view.hideStateView()
-                self.readingSuccess()
+                
+//                self.readingSuccess()
             }
+            self.dismiss(animated: true)
         }
-        
-        
 
     }
     
@@ -301,7 +303,7 @@ class LastMeasurementViewController:BaseViewController {
         NotificationCenter.default.removeObserver(self)
         measuresTimer?.invalidate()
         BLEManager.shared.stopScanning = true
-        self.relaunchButton.isHidden = true
+//        self.relaunchButton.isHidden = true
 //        self.mesureCompleteLabel.isHidden = false
 //        readingfSuccessStackView.isHidden = false
 //        self.iconImageView.image = UIImage(named: "readingSuccess")
@@ -356,3 +358,4 @@ class LastMeasurementViewController:BaseViewController {
     }
 
 }
+

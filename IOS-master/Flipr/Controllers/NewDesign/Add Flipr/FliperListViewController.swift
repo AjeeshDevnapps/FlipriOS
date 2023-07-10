@@ -151,15 +151,17 @@ extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
     
     
     func activateFliprMode(){
-        FliprActivationManager.shared.scanForFlipr(serial: self.serialKey ?? "") { error in
-            FliprActivationManager.shared.removeConnection()
+        
+        FliprActivateManager.shared.scanForFlipr(serial: self.serialKey ?? "") { error in
+            FliprActivateManager.shared.removeConnection()
             self.hud?.dismiss(afterDelay: 0)
             if error != nil{
-                self.showError(title: error?.domain ?? "Flipr" , message: error?.localizedDescription ?? "Error")
+//                self.showError(title: error.domain ?? "Flipr" , message: error.localizedDescription ?? "Error")
             }else{
                 self.showSuccessScreen()
             }
         }
+        
     }
     
     

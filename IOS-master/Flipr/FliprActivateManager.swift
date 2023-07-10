@@ -1,8 +1,8 @@
 //
-//  FliprModeManager.swift
+//  FliprActivateManager.swift
 //  Flipr
 //
-//  Created by Ajeesh on 18/05/23.
+//  Created by Ajish on 07/07/23.
 //  Copyright © 2023 I See U. All rights reserved.
 //
 
@@ -10,35 +10,10 @@ import Foundation
 import CoreBluetooth
 
 
-struct FlipModeBLENotifications {
-    static let BluetoothReady = "fr.isee-u.flipr.bluetoothReady"
-    static let FoundDevice = "fr.isee-u.flipr.founddevice"
-    static let ConnectionComplete = "fr.isee-u.flipr.connectioncomplete"
-    static let ServiceScanComplete = "fr.isee-u.flipr.servicescancomplete"
-    static let CharacteristicScanComplete = "fr.isee-u.flipr.characteristicsscancomplete"
-    static let DisconnectedDevice = "fr.isee-u.flipr.disconnecteddevice"
-    static let UpdatedData = "fr.isee-u.flipr.updatedcapsense"
+class FliprActivateManager: NSObject {
     
-    static let measuresPostedSuccesfully = "fr.isee-u.flipr.measuresPostedSuccesfully"
-    static let measuresPostDidFail = "fr.isee-u.flipr.measuresPostDidFail"
-    
-    static let BateryLevelDidRead = "fr.isee-u.flipr.bateryLevelDidRead"
-}
-
-struct FlipModeBLEParameters {
-    
-    static let gatewaySSIDUUID = CBUUID(string: "9500")
-    static let gatewayPasswordUUID = CBUUID(string:"9501")
-    static let receptionCharactersticUUID = CBUUID(string:"A9D7166A-D72E-40A9-A002-48044CC30102")
-    static let wifiServiceUUID = CBUUID(string:"0A02F906-0000-1000-8000-00805F9B34FB")
-
-}
-
-
-class FliprModeManager: NSObject {
-    
-    static let shared: FliprModeManager = {
-        let instance = FliprModeManager()
+    static let shared: FliprActivateManager = {
+        let instance = FliprActivateManager()
         return instance
     }()
     
@@ -70,13 +45,12 @@ class FliprModeManager: NSObject {
     
     var stopScanning = false
     
-    var isWriteMode = false
-    
-    var writingValue:UInt8 = 1
+    var serialNo = ""
 
     
-    func scanForFlipr(serials: [String]?, completion: ((_ hubsInfo:[String:CBPeripheral]) -> Void)?) {
-        scanForHubsWithSerials = serials
+    func scanForFlipr(serial: String?, completion: ((_ hubsInfo:[String:CBPeripheral]) -> Void)?) {
+        serialNo = serial ?? ""
+//        scanForHubsWithSerials = serials
         scanForHubsCompletionBlock = completion
         if !centralManagerHasBeenInitialized {
             centralManager = CBCentralManager(delegate: self, queue: nil)
@@ -90,17 +64,6 @@ class FliprModeManager: NSObject {
     }
 
     
-    
-    func readModeValue(){
-        if flipr != nil {
-            if modeCharacteristic !=  nil{
-                flipr!.readValue(for: modeCharacteristic!)
-            }
-        }
-
-    }
-    
-    
     @objc func setTimeLimit(){
         self.stopScanning = true
     }
@@ -108,7 +71,7 @@ class FliprModeManager: NSObject {
     
     func stopScanForGateway() {
         centralManager.stopScan()
-        scanForHubsWithSerials = nil
+//        scanForHubsWithSerials = nil
         scanForHubsCompletionBlock = nil
     }
     
@@ -203,7 +166,7 @@ class FliprModeManager: NSObject {
 }
 
 //MARK: - Core bluetooth central manager delegate
-extension FliprModeManager: CBCentralManagerDelegate {
+extension FliprActivateManager: CBCentralManagerDelegate {
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if #available(iOS 10.0, *) {
@@ -258,7 +221,7 @@ extension FliprModeManager: CBCentralManagerDelegate {
 //            print("Flipr device discovered with name:\(peripheral.name) , identifier: \(peripheral.identifier)")
             var occuranceString = "Flipr 00"
 
-            let serialNo:String = Module.currentModule?.serial ?? ""
+//            let serialNo:String = Module.currentModule?.serial ?? ""
             if name.hasPrefix("Flipr 00") {
                 occuranceString = "Flipr 00"
             }
@@ -275,42 +238,14 @@ extension FliprModeManager: CBCentralManagerDelegate {
                 peripheral.delegate = self
                 isConnecting = true
                 if flipr?.state == .disconnected ||  flipr?.state == .disconnecting{
-                                NotificationCenter.default.post(name: K.Notifications.FliprConnecitngForModeValue, object: nil, userInfo: nil)
+//                                NotificationCenter.default.post(name: K.Notifications.FliprConnecitngForModeValue, object: nil, userInfo: nil)
                     central.connect(flipr!, options: nil)
                     centralManager.stopScan()
                 }
 
-
-//                if flipr == nil{
-//                    central.connect(peripheral, options: nil)
-//
-//                }else{
-//                    if peripheral.state == .disconnected ||  peripheral.state == .disconnecting{
-//                        central.connect(peripheral, options: nil)
-//                        centralManager.stopScan()
-//                    }
-//                }
-                
-               
             }
            
-            
-            //let serial = "DC89C0"
-           /*
-            if !detectedHubs.keys.contains(serial) {
-                if let searchedSerials = scanForHubsWithSerials {
-                    if searchedSerials.contains(serial) {
-                        detectedHubs[serial] = peripheral
-                        scanForHubsCompletionBlock?(detectedHubs)
-                    }
-                } else {
-                    detectedHubs[serial] = peripheral
-                    scanForHubsCompletionBlock?(detectedHubs)
-                }
-                
-                print("Hub device discovered with serial:\(serial)")
-            }
-        */
+          
             
         }
 
@@ -320,7 +255,7 @@ extension FliprModeManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Central manager did connect to Flipr")
         self.stopScanning = true
-//        connectCompletionBlock?(nil)
+        connectCompletionBlock?(nil)
         peripheral.discoverServices([FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.modeCharactersticUUID])
 //                peripheral.discoverServices(nil)
 //        peripheral.discoverServices([GATEWAYBLEParameters.gatewayPasswordUUID])
@@ -345,7 +280,7 @@ extension FliprModeManager: CBCentralManagerDelegate {
 }
 
 //MARK: - Core bluetooth peripheral delegate
-extension FliprModeManager: CBPeripheralDelegate {
+extension FliprActivateManager: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         
@@ -369,14 +304,12 @@ extension FliprModeManager: CBPeripheralDelegate {
                     print("Device characteristic UUID: \(characteristic.uuid)")
                     if characteristic.uuid == FliprBLEParameters.modeCharactersticUUID {
                         self.modeCharacteristic = characteristic
-                        if isWriteMode{
-                            var tmpVal:UInt8 = self.writingValue
-                            let data = Data(bytes: &tmpVal, count: MemoryLayout.size(ofValue: tmpVal))
-                            flipr?.writeValue(data, for: modeCharacteristic!, type: .withResponse)
-                            connectCompletionBlock?(nil)
-                        }else{
-                            peripheral.readValue(for: characteristic)
-                        }
+                        var activationNeeded = true
+                        let data = Data(bytes: &activationNeeded, count: MemoryLayout.size(ofValue: activationNeeded))
+//                            let data = "1".data(using: .utf8)
+                        flipr?.writeValue(data, for: characteristic, type: .withResponse)
+
+//                        peripheral.readValue(for: characteristic)
                     }
                 }
             }
@@ -391,8 +324,10 @@ extension FliprModeManager: CBPeripheralDelegate {
             switch characteristic.uuid {
             case FliprBLEParameters.modeCharactersticUUID:
                 print("Mode charateristic value: \(value.hexEncodedString())")
-                let userInfo = ["Mode": value.hexEncodedString()]
-                NotificationCenter.default.post(name: K.Notifications.FliprModeValue, object: nil, userInfo: userInfo)
+                
+                            let userInfo = ["Mode": value.hexEncodedString()]
+//                            NotificationCenter.default.post(name: K.Notifications.FliprModeValue, object: nil, userInfo: userInfo)
+
                 if value.hexEncodedString() == "01"{
                     
                 }else{
@@ -420,4 +355,3 @@ extension FliprModeManager: CBPeripheralDelegate {
     
     
 }
-

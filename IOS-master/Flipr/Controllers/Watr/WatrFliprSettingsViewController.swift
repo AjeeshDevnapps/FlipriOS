@@ -99,6 +99,8 @@ class WatrFliprSettingsViewController: UIViewController {
             showModeChangeVC()
         }
     }
+    
+    
 }
 
 

@@ -111,11 +111,7 @@ class FliprModeChangeViewController: UIViewController {
             if error == nil{
                 FliprModeManager.shared.readModeValue()
             }
-//            if error == nil{
-//                FliprModeManager.shared.setMode(mode: mode, completion: { error in
-//                    
-//                })
-//            }
         })
+        
     }
 }
