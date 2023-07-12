@@ -126,9 +126,9 @@ class WatrQuickActionViewController: UIViewController {
         }
         
    
-        
+//        haveFlipr = false
         if haveFlipr{
-            
+//            haveSubscription = true
             if isPlaceOwner {
                 if isV3{
                     self.cellTitleList = ["Entrée manuelle".localized, "Retrieve the last measurement".localized, "Flipr AI".localized,
@@ -142,10 +142,10 @@ class WatrQuickActionViewController: UIViewController {
                         self.imageNames = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","AI","Vue Expert"]
                         self.menuViewHeight.constant = 404
                     }else{
-                        self.cellTitleList = ["Activer la connexion à distance".localized,"Entrée manuelle".localized,
+                        self.cellTitleList = ["Activer la connexion à distance".localized,
                                               "Retrieve the last measurement".localized,"Flipr AI".localized,"Vue Expert".localized]
-                        self.imageNames = ["noSubscription","Entrée manuelle (DipR)","Récupérer la dernière mesure","AI","Vue Expert"]
-                        self.menuViewHeight.constant = 464
+                        self.imageNames = ["noSubscription","Récupérer la dernière mesure","AI","Vue Expert"]
+                        self.menuViewHeight.constant = 420
                     }
                 }
             }else{
@@ -234,7 +234,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                             cell.comingSoonLbl.isHidden = true
                         }
                     }else{
-                        if indexPath.row == 1 || indexPath.row == 4{
+                        if indexPath.row == 2{
                             cell.disableView.isHidden = false
                             cell.comingSoonLbl.isHidden = false
                         }else{
@@ -328,16 +328,17 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                             self.showSubscriptionView()
                         }
                         else if indexPath.row == 1{
-                            
+                            showLastMeasurement()
+
                         }
                         else if indexPath.row == 2{
-                            showLastMeasurement()
+                            showAIView()
                         }
                         else if indexPath.row == 3{
-                            self.showAIView()
+                            showExpertView()
                         }
                         else if indexPath.row == 4{
-                            showExpertView()
+//                            showExpertView()
                         }
                         
                         else{
@@ -494,6 +495,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
     
     
     func showAIView(){
+        return
         if let vc = UIStoryboard(name: "FliprAI", bundle: nil).instantiateInitialViewController() {
                         vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
@@ -538,6 +540,8 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
     }
     
     func showExpertView(){
+        showNewExpertView()
+        return
         //            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ExpertMenuViewController") as? ExpertMenuViewController {
         //               // viewController.modalPresentationStyle = .overCurrentContext
         //                self.present(viewController, animated: true)
@@ -551,6 +555,14 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                 navigationController.setViewControllers([viewController], animated: false)
                 self.present(navigationController, animated: true, completion: nil)
             }
+        }
+    }
+    
+    func showNewExpertView(){
+        let tmpSb = UIStoryboard.init(name: "ExpertView", bundle: nil)
+        if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertViewViewController") as? ExpertViewViewController {
+//            viewController.isDirectPresenting = true
+            self.present(viewController, animated: true)
         }
     }
     

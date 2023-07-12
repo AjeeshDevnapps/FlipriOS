@@ -3206,9 +3206,7 @@ class DashboardViewController: UIViewController {
                             if needCalib{
                                 self.showCalibrationAlert()
                             }
-                            else{
-                                self.showCalibrationAlert()
-                            }
+                            
                         }
                         
                         
@@ -3540,10 +3538,6 @@ class DashboardViewController: UIViewController {
                     if let current = JSON["Current"] as? [String:Any] {
                         
                         print("JSON Current: \(current)")
-                        
-                        
-                        
-                        
                         if let sourceId = current["ModeId"] as? Int {
                             self.handleSettingsButton(mode: sourceId)
                         }
@@ -3981,8 +3975,8 @@ class DashboardViewController: UIViewController {
                                 }else{
                                     // self.handleSubscriptionButton()
                                 }
-                                Module.currentModule?.isSubscriptionValid = isValid
-                                Module.saveCurrentModuleLocally()
+//                                Module.currentModule?.isSubscriptionValid = isValid
+//                                Module.saveCurrentModuleLocally()
                             }
                         }
                         
@@ -4016,11 +4010,21 @@ class DashboardViewController: UIViewController {
                                 
                                 if cType == 1 && module.isSubscriptionValid == false {
                                     if self.isPlaceOwner{
-                                        self.showSubscriptionButton()
+                                        if identifier.hasPrefix("F"){
+                                            Module.currentModule?.isSubscriptionValid = true
+                                            Module.saveCurrentModuleLocally()
+                                            self.subscriptionButton.isHidden = true
+                                        }else{
+                                            self.showSubscriptionButton()
+                                        }
                                     }else{
+                                        Module.currentModule?.isSubscriptionValid = true
+                                        Module.saveCurrentModuleLocally()
                                         self.subscriptionButton.isHidden = true
                                     }
                                 }else{
+                                    Module.currentModule?.isSubscriptionValid = true
+                                    Module.saveCurrentModuleLocally()
                                     self.subscriptionButton.isHidden = true
                                 }
                             }

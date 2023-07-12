@@ -17,8 +17,8 @@ class ExpertMenuViewController: UIViewController {
     var haveSubscription = false
     @IBOutlet weak var menuView: UIView!
 
-    var cellTitleList = ["Activer la connexion à distance","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostic"]
-    var imageNames = ["noSubscription","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+    var cellTitleList = ["Activer la connexion à distance","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
+    var imageNames = ["noSubscription","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
 
 //    var cellTitleList = ["Activer la connexion à distance","Mode Expert","Trigger a measurement","Nouveau calibrage","Nouveau test bandelette","Vidange de la piscine","Diagnostic","Flipr Firmware Update"]
 //    var imageNames = ["noSubscription","expertMenu1","expertMenu2","expertMenu3","expertMenu4","expertMenu5","diagnostic","upgradebtn"]
@@ -87,18 +87,18 @@ class ExpertMenuViewController: UIViewController {
         if haveSubscription{
              let identifier = Module.currentModule?.serial ?? ""
                 if identifier.hasPrefix("F"){
-                    cellTitleList = ["Nouveau calibrage","Déclencher une mesure","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostic"]
-                     imageNames = ["Nouveau calibrage","Déclencher une mesure","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+                    cellTitleList = ["Nouveau calibrage","Déclencher une mesure","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
+                     imageNames = ["Nouveau calibrage","Déclencher une mesure","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
                     self.menuViewHeight.constant = 610
                 }else{
-                    cellTitleList = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostic"]
-                     imageNames = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+                    cellTitleList = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
+                     imageNames = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
                     self.menuViewHeight.constant = 600
 
                 }
         }else{
-            cellTitleList = ["Activer la connexion à distance","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostic"]
-             imageNames = ["noSubscription","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostique"]
+            cellTitleList = ["Activer la connexion à distance","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
+             imageNames = ["noSubscription","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
             self.menuViewHeight.constant = 670
 
         }

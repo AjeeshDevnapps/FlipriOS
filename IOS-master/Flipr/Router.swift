@@ -369,8 +369,7 @@ enum Router: URLRequestConvertible {
         switch self {
         
         case .addDelay(let serial):
-            return "\(serial)/addDelay"
-            
+            return "modules/\(serial)/addDelay"
         case .createPlace(let typeId):
             return "place"
         case .updatePlace(let placeId):

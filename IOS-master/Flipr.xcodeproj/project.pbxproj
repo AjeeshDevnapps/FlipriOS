@@ -530,6 +530,9 @@
 		48FC119125DFE3C1001E1885 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119025DFE3C1001E1885 /* DeviceViewController.swift */; };
 		48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */; };
 		48FC119725DFE45D001E1885 /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48FC119625DFE45D001E1885 /* Devices.storyboard */; };
+		78334EA22A5EB5F40057E05F /* ExpertView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78334EA12A5EB5F40057E05F /* ExpertView.storyboard */; };
+		78334EA52A5EBD560057E05F /* ExpertViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78334EA42A5EBD560057E05F /* ExpertViewViewController.swift */; };
+		78334EA72A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78334EA62A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift */; };
 		7872CB3F2A5549C600D115C5 /* CalibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */; };
 		7872CB402A554A0000D115C5 /* CalibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */; };
 		7872CB422A554D3C00D115C5 /* GetMeasurmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7872CB412A554D3C00D115C5 /* GetMeasurmentManager.swift */; };
@@ -900,6 +903,9 @@
 		48FC119625DFE45D001E1885 /* Devices.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Devices.storyboard; sourceTree = "<group>"; };
 		48FDE2F92680C2FA004BC2D5 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
 		48FDE2FA2680C2FB004BC2D5 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		78334EA12A5EB5F40057E05F /* ExpertView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ExpertView.storyboard; sourceTree = "<group>"; };
+		78334EA42A5EBD560057E05F /* ExpertViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertViewViewController.swift; sourceTree = "<group>"; };
+		78334EA62A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertviewInfoTableViewCell.swift; sourceTree = "<group>"; };
 		7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalibrationManager.swift; path = ../../../../Documents/CalibrationManager.swift; sourceTree = "<group>"; };
 		7872CB412A554D3C00D115C5 /* GetMeasurmentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetMeasurmentManager.swift; path = ../../../GetMeasurmentManager.swift; sourceTree = "<group>"; };
 		788ECC652A5718280005DD31 /* NewMeasurementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMeasurementViewController.swift; sourceTree = "<group>"; };
@@ -1123,6 +1129,7 @@
 				1CD2B3D628EC2AB00013BD98 /* Settings.storyboard */,
 				1C03AB33290AC18300DA0FB3 /* WatrSplash.storyboard */,
 				1C98B8D42927C8C000AF089A /* WatrFlipr.storyboard */,
+				78334EA12A5EB5F40057E05F /* ExpertView.storyboard */,
 			);
 			path = Watr;
 			sourceTree = "<group>";
@@ -1648,6 +1655,14 @@
 			path = Devices;
 			sourceTree = "<group>";
 		};
+		78334EA32A5EBD2C0057E05F /* ExpertView */ = {
+			isa = PBXGroup;
+			children = (
+				78334EA42A5EBD560057E05F /* ExpertViewViewController.swift */,
+			);
+			path = ExpertView;
+			sourceTree = "<group>";
+		};
 		8DE53968CCEDEEDDE573FE5B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1663,6 +1678,7 @@
 			isa = PBXGroup;
 			children = (
 				1CFAF11429DC06FA00B9953A /* GatewayTableViewCell.swift */,
+				78334EA62A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift */,
 				1CCD7FC928EAE42900AF1635 /* Watr */,
 				488FC81F267A7C3900D41EB4 /* New Design */,
 				4895F7562667FCF000FA8ED3 /* DeviceList */,
@@ -1679,6 +1695,7 @@
 		B518F0EA1E9F8DAF0092156C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				78334EA32A5EBD2C0057E05F /* ExpertView */,
 				1CCD7FC128EAD67D00AF1635 /* Watr */,
 				48980EA726171DFA009A0F24 /* BaseViewContorller */,
 				489BD3D72614749D007E9BEF /* NewDesign */,
@@ -2096,6 +2113,7 @@
 				48FC119725DFE45D001E1885 /* Devices.storyboard in Resources */,
 				4895F76A2668002D00FA8ED3 /* HUBDevicePairing.storyboard in Resources */,
 				B5CB6FE51E801D58007F82BC /* Lato-Light.ttf in Resources */,
+				78334EA22A5EB5F40057E05F /* ExpertView.storyboard in Resources */,
 				B519F84F2450114F00477DD1 /* HUB.xcassets in Resources */,
 				B5F457C124C07BF6006C309A /* GUIDE_3.mp4 in Resources */,
 				B5CB6FE61E801D58007F82BC /* Lato-Regular.ttf in Resources */,
@@ -2793,6 +2811,7 @@
 				B555AF5F1EA8EC720053163F /* UIView+EmptyStateView.swift in Sources */,
 				1CCD7FC728EADC0700AF1635 /* PlaceDropdown.swift in Sources */,
 				B54676C82062B8C30052E131 /* ProductAttributesViewController.swift in Sources */,
+				78334EA72A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift in Sources */,
 				48B2A7EC25E19B45001CCBCC /* DeviceInfoTableViewCell.swift in Sources */,
 				4828D37525C0705200F95683 /* NotificationsAlertViewController.swift in Sources */,
 				B57DE98C1F028FF300594261 /* RemoteControl.swift in Sources */,
@@ -2839,6 +2858,7 @@
 				4895F7522667F4D300FA8ED3 /* SignUpProfileController.swift in Sources */,
 				1CD8DF0D2807634C004412D9 /* DevieInformationModel.m in Sources */,
 				1CDE0B2E285A482300FB44B5 /* BackupFliprReaderViewController.swift in Sources */,
+				78334EA52A5EBD560057E05F /* ExpertViewViewController.swift in Sources */,
 				4895F75F2668000E00FA8ED3 /* OnboardingCollectionViewCell.swift in Sources */,
 				1C2E9BAF290B9FB4002D7BB6 /* PlaceModule.swift in Sources */,
 				1CD8DF112807634C004412D9 /* GlucoseModel.m in Sources */,
