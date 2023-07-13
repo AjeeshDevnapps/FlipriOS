@@ -36,7 +36,7 @@ class ExpertViewViewController: UIViewController {
     func createOrder(){
         cellOrder.append(.infoCell)
         cellOrder.append(.calibration)
-
+        cellOrder.append(.stripTest)
     }
 }
 
@@ -65,6 +65,14 @@ extension ExpertViewViewController: UITableViewDelegate,UITableViewDataSource {
             let cell =  tableView.dequeueReusableCell(withIdentifier:"ExpertviewCalibrationInfoTableViewCell",
                                                   for: indexPath) as! ExpertviewCalibrationInfoTableViewCell
             return cell
+            
+            case .stripTest:
+            let cell =  tableView.dequeueReusableCell(withIdentifier:"ExpertviewStripTestInfoTableViewCell",
+                                              for: indexPath) as! ExpertviewStripTestInfoTableViewCell
+            return cell
+
+            
+            
 
         default:
             let cell =  tableView.dequeueReusableCell(withIdentifier:"ExpertviewInfoTableViewCell",
