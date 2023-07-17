@@ -103,3 +103,67 @@ class ExpertviewStripTestInfoTableViewCell: UITableViewCell {
     }
 
 }
+
+
+class ExpertviewTrendInfoTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var calibrationTilteLbl: UILabel!
+
+    @IBOutlet weak var ph4ValLbl: UILabel!
+    @IBOutlet weak var ph4Lbl: UILabel!
+    @IBOutlet weak var ph4DateLbl: UILabel!
+
+    
+    @IBOutlet weak var ph7ValLbl: UILabel!
+    @IBOutlet weak var ph7Lbl: UILabel!
+    @IBOutlet weak var ph7DateLbl: UILabel!
+
+    
+    @IBOutlet weak var newCalibrationBtn: UIButton!
+
+    
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+}
+
+
+class ExpertviewthresholdInfoTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var calibrationTilteLbl: UILabel!
+
+    @IBOutlet weak var ph4ValLbl: UILabel!
+    @IBOutlet weak var ph4Lbl: UILabel!
+    @IBOutlet weak var ph4DateLbl: UILabel!
+
+    
+    @IBOutlet weak var ph7ValLbl: UILabel!
+    @IBOutlet weak var ph7Lbl: UILabel!
+    @IBOutlet weak var ph7DateLbl: UILabel!
+
+    
+    @IBOutlet weak var newCalibrationBtn: UIButton!
+
+    
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+}

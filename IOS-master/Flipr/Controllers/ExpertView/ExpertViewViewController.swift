@@ -37,6 +37,9 @@ class ExpertViewViewController: UIViewController {
         cellOrder.append(.infoCell)
         cellOrder.append(.calibration)
         cellOrder.append(.stripTest)
+        cellOrder.append(.trend)
+        cellOrder.append(.threshold)
+
     }
 }
 
@@ -71,7 +74,15 @@ extension ExpertViewViewController: UITableViewDelegate,UITableViewDataSource {
                                               for: indexPath) as! ExpertviewStripTestInfoTableViewCell
             return cell
 
+            case .trend:
+            let cell =  tableView.dequeueReusableCell(withIdentifier:"ExpertviewTrendInfoTableViewCell",
+                                                  for: indexPath) as! ExpertviewTrendInfoTableViewCell
+            return cell
             
+            case .threshold:
+            let cell =  tableView.dequeueReusableCell(withIdentifier:"ExpertviewthresholdInfoTableViewCell",
+                                              for: indexPath) as! ExpertviewthresholdInfoTableViewCell
+            return cell
             
 
         default:
