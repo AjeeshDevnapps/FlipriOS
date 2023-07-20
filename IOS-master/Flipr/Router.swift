@@ -145,6 +145,10 @@ enum Router: URLRequestConvertible {
     //Gateway
     
     case activateGateway(serial: String)
+    
+    //Expert View
+    case expertView(placeId: String)
+
 
     
     //Legacy
@@ -360,6 +364,9 @@ enum Router: URLRequestConvertible {
             return .post
         case .activateGateway:
             return .post
+        
+        case .expertView:
+            return .get
             
         }
         
@@ -603,6 +610,9 @@ enum Router: URLRequestConvertible {
 
         case .activateGateway(let serial):
             return "modules/activateGateway/\(serial)"
+            
+        case .expertView(let placeId):
+            return "place/\(placeId)/ExpertView"
 
         }
 

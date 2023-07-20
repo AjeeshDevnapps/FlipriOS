@@ -536,6 +536,13 @@
 		7872CB3F2A5549C600D115C5 /* CalibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */; };
 		7872CB402A554A0000D115C5 /* CalibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */; };
 		7872CB422A554D3C00D115C5 /* GetMeasurmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7872CB412A554D3C00D115C5 /* GetMeasurmentManager.swift */; };
+		787E588A2A691D4500FE61B2 /* LastCalibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E58832A691D3E00FE61B2 /* LastCalibration.swift */; };
+		787E588B2A691D4500FE61B2 /* RootClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E58842A691D3E00FE61B2 /* RootClass.swift */; };
+		787E588C2A691D4500FE61B2 /* SliderStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E58852A691D3F00FE61B2 /* SliderStrip.swift */; };
+		787E588D2A691D4500FE61B2 /* Threshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E58862A691D4000FE61B2 /* Threshold.swift */; };
+		787E588E2A691D4500FE61B2 /* LastStripValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E58872A691D4200FE61B2 /* LastStripValue.swift */; };
+		787E588F2A691D4500FE61B2 /* PhMax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E58882A691D4300FE61B2 /* PhMax.swift */; };
+		787E58902A691D4500FE61B2 /* LSI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E58892A691D4500FE61B2 /* LSI.swift */; };
 		788ECC662A5718290005DD31 /* NewMeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788ECC652A5718280005DD31 /* NewMeasurementViewController.swift */; };
 		788ECC682A571A920005DD31 /* NewMeasurementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788ECC672A571A920005DD31 /* NewMeasurementManager.swift */; };
 		78C4D6D22A58825E0065585D /* FliprActivateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C4D6D12A58825E0065585D /* FliprActivateManager.swift */; };
@@ -908,6 +915,13 @@
 		78334EA62A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertviewInfoTableViewCell.swift; sourceTree = "<group>"; };
 		7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalibrationManager.swift; path = ../../../../Documents/CalibrationManager.swift; sourceTree = "<group>"; };
 		7872CB412A554D3C00D115C5 /* GetMeasurmentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetMeasurmentManager.swift; path = ../../../GetMeasurmentManager.swift; sourceTree = "<group>"; };
+		787E58832A691D3E00FE61B2 /* LastCalibration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastCalibration.swift; sourceTree = "<group>"; };
+		787E58842A691D3E00FE61B2 /* RootClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootClass.swift; sourceTree = "<group>"; };
+		787E58852A691D3F00FE61B2 /* SliderStrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderStrip.swift; sourceTree = "<group>"; };
+		787E58862A691D4000FE61B2 /* Threshold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Threshold.swift; sourceTree = "<group>"; };
+		787E58872A691D4200FE61B2 /* LastStripValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastStripValue.swift; sourceTree = "<group>"; };
+		787E58882A691D4300FE61B2 /* PhMax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhMax.swift; sourceTree = "<group>"; };
+		787E58892A691D4500FE61B2 /* LSI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSI.swift; sourceTree = "<group>"; };
 		788ECC652A5718280005DD31 /* NewMeasurementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMeasurementViewController.swift; sourceTree = "<group>"; };
 		788ECC672A571A920005DD31 /* NewMeasurementManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMeasurementManager.swift; sourceTree = "<group>"; };
 		78C4D6D12A58825E0065585D /* FliprActivateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprActivateManager.swift; sourceTree = "<group>"; };
@@ -1663,6 +1677,20 @@
 			path = ExpertView;
 			sourceTree = "<group>";
 		};
+		787E58822A691D1D00FE61B2 /* ExpertView */ = {
+			isa = PBXGroup;
+			children = (
+				787E58832A691D3E00FE61B2 /* LastCalibration.swift */,
+				787E58872A691D4200FE61B2 /* LastStripValue.swift */,
+				787E58892A691D4500FE61B2 /* LSI.swift */,
+				787E58882A691D4300FE61B2 /* PhMax.swift */,
+				787E58842A691D3E00FE61B2 /* RootClass.swift */,
+				787E58852A691D3F00FE61B2 /* SliderStrip.swift */,
+				787E58862A691D4000FE61B2 /* Threshold.swift */,
+			);
+			path = ExpertView;
+			sourceTree = "<group>";
+		};
 		8DE53968CCEDEEDDE573FE5B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1735,6 +1763,7 @@
 		B518F0ED1E9F90AC0092156C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				787E58822A691D1D00FE61B2 /* ExpertView */,
 				1CCD7FC528EADBEF00AF1635 /* Watr */,
 				1C5AE4292751363B008F6643 /* WeatherForHour.swift */,
 				1C5AE427275135DE008F6643 /* NextDaysWeatherData.swift */,
@@ -2746,12 +2775,14 @@
 				B581672B1EB0C65B00E2CDC7 /* StartViewController.swift in Sources */,
 				4895F782266803D000FA8ED3 /* ElectricalVideoViewController.swift in Sources */,
 				B503971222C50A58005B9D30 /* FunCamViewController.swift in Sources */,
+				787E58902A691D4500FE61B2 /* LSI.swift in Sources */,
 				1CAD60CF281177CF00879A45 /* HomeViewController.m in Sources */,
 				4880E1F426558C09006D4472 /* PoolSettingsStartViewController.swift in Sources */,
 				1CD2B3BC28EC15720013BD98 /* FliprShare.swift in Sources */,
 				4895F7682668002D00FA8ED3 /* HUBPairingSuccessViewController.swift in Sources */,
 				B5BE18D724485DB8006CCB1E /* ModuleTypeSelectionViewController.swift in Sources */,
 				1CAD60CC28114B8200879A45 /* FirmwareBaseViewController.m in Sources */,
+				787E588A2A691D4500FE61B2 /* LastCalibration.swift in Sources */,
 				B5BD60261EF90F0D00B3A403 /* ProductTableViewController.swift in Sources */,
 				B5B7B00520776D0E006DF6E7 /* ActionsTableViewController.swift in Sources */,
 				B54AED031EB8B02200174870 /* ValuePickerController.swift in Sources */,
@@ -2845,6 +2876,7 @@
 				B53A7D5E1E8BFECF00AC03C0 /* Constants.swift in Sources */,
 				B5FBF6A822EB5995003FBF49 /* LogTypeTableViewController.swift in Sources */,
 				1CD54B01290A6DBC004AC618 /* UnitViewController.swift in Sources */,
+				787E588F2A691D4500FE61B2 /* PhMax.swift in Sources */,
 				B545E0AF1EC2133E004A484E /* Alert.swift in Sources */,
 				1C8AD93928167BAD006AA386 /* FirmwereUpdateAlertViewController.swift in Sources */,
 				B551E9CE2425020A00C1788F /* HUBWifiTableViewController.swift in Sources */,
@@ -2860,6 +2892,7 @@
 				1CDE0B2E285A482300FB44B5 /* BackupFliprReaderViewController.swift in Sources */,
 				78334EA52A5EBD560057E05F /* ExpertViewViewController.swift in Sources */,
 				4895F75F2668000E00FA8ED3 /* OnboardingCollectionViewCell.swift in Sources */,
+				787E588B2A691D4500FE61B2 /* RootClass.swift in Sources */,
 				1C2E9BAF290B9FB4002D7BB6 /* PlaceModule.swift in Sources */,
 				1CD8DF112807634C004412D9 /* GlucoseModel.m in Sources */,
 				483E23C325DEB89E00D2E619 /* PasswordViewController.swift in Sources */,
@@ -2887,6 +2920,7 @@
 				B518F0F41E9FC0840092156C /* UIViewController+Error.swift in Sources */,
 				1C5AE428275135DE008F6643 /* NextDaysWeatherData.swift in Sources */,
 				1CD8DF082807634C004412D9 /* RGBModel.m in Sources */,
+				787E588D2A691D4500FE61B2 /* Threshold.swift in Sources */,
 				1CD6992A26E5F6AF00563CBE /* MenuTableViewCell.swift in Sources */,
 				1CD6AF982837F07500572108 /* DiaganosticHomeViewController.m in Sources */,
 				1CD8DF3128076E8B004412D9 /* UNUserNotificationCenter+Additions.m in Sources */,
@@ -2897,6 +2931,7 @@
 				48C8E4F6265D6DC60000FDA8 /* FliprActivationSuccessViewController.swift in Sources */,
 				1CC3F47629533A77004D4480 /* CreatePlaceViewController.swift in Sources */,
 				1CD8DF0F2807634C004412D9 /* FindMeModel.m in Sources */,
+				787E588C2A691D4500FE61B2 /* SliderStrip.swift in Sources */,
 				1C57B38B286D8A5A006F1342 /* LastMeasurementViewController.swift in Sources */,
 				B57F99F61EC4510300417C0F /* Bundle+version.swift in Sources */,
 				1CD8DEE528076327004412D9 /* CBPeripheralExt.m in Sources */,
@@ -2930,6 +2965,7 @@
 				1C5AE42627512240008F6643 /* HubRenameViewController.swift in Sources */,
 				788ECC682A571A920005DD31 /* NewMeasurementManager.swift in Sources */,
 				1CA9A28C290FFC720035F671 /* PlaceTypeRouter.swift in Sources */,
+				787E588E2A691D4500FE61B2 /* LastStripValue.swift in Sources */,
 				1CD8DF102807634C004412D9 /* ThermometerModel.m in Sources */,
 				1CEA4F9029351F3400D4619E /* InvitationTableViewCell.swift in Sources */,
 				48FC118D25DFE3B1001E1885 /* DevicesViewController.swift in Sources */,

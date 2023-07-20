@@ -561,7 +561,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
     func showNewExpertView(){
         let tmpSb = UIStoryboard.init(name: "ExpertView", bundle: nil)
         if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertViewViewController") as? ExpertViewViewController {
-//            viewController.isDirectPresenting = true
+            viewController.placeId = placeDetails.placeId?.string ?? ""
             self.present(viewController, animated: true)
         }
     }

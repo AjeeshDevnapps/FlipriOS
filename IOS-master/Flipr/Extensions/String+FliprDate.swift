@@ -31,6 +31,27 @@ public extension String {
         }
         return nil
     }
+    
+    public var fliprDate1: Date? {
+
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "dd/mm/yyyy HH:mm"
+        if let date = formatter.date(from: self)?.addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT())) {
+            return date
+        } else {
+            formatter.dateFormat = "dd/mm/yyyy HH:mm"
+            if let date = formatter.date(from: self)?.addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT())) {
+                return date
+            } else {
+                formatter.dateFormat = "dd/mm/yyyy HH:mm".remotable("WTF_DATE_FORMAT")
+                if let date = formatter.date(from: self)?.addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT())) {
+                    return date
+                }
+            }
+        }
+        return nil
+    }
 }
 
 public extension String {
