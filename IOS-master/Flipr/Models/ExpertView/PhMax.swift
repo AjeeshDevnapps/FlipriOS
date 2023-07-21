@@ -8,7 +8,7 @@ import Foundation
 class PhMax : NSObject, NSCoding{
 
 	var isDefaultValue : Bool!
-	var value : Float!
+	var value : Double!
 
 
 	/**
@@ -16,7 +16,7 @@ class PhMax : NSObject, NSCoding{
 	 */
 	init(fromDictionary dictionary: [String:Any]){
 		isDefaultValue = dictionary["IsDefaultValue"] as? Bool
-		value = dictionary["Value"] as? Float
+		value = dictionary["Value"] as? Double
 	}
 
 	/**
@@ -41,7 +41,7 @@ class PhMax : NSObject, NSCoding{
     @objc required init(coder aDecoder: NSCoder)
 	{
          isDefaultValue = aDecoder.decodeObject(forKey: "IsDefaultValue") as? Bool
-         value = aDecoder.decodeObject(forKey: "Value") as? Float
+         value = aDecoder.decodeObject(forKey: "Value") as? Double
 
 	}
 

@@ -7,7 +7,7 @@ import Foundation
 
 class LSI : NSObject, NSCoding{
 
-	var lSICoeff : Float!
+	var lSICoeff : Double!
 	var lSIStr : String!
 
 
@@ -15,7 +15,7 @@ class LSI : NSObject, NSCoding{
 	 * Instantiate the instance using the passed dictionary values to set the properties values
 	 */
 	init(fromDictionary dictionary: [String:Any]){
-		lSICoeff = dictionary["LSI_Coeff"] as? Float
+		lSICoeff = dictionary["LSI_Coeff"] as? Double
 		lSIStr = dictionary["LSI_Str"] as? String
 	}
 
@@ -40,7 +40,7 @@ class LSI : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-         lSICoeff = aDecoder.decodeObject(forKey: "LSI_Coeff") as? Float
+         lSICoeff = aDecoder.decodeObject(forKey: "LSI_Coeff") as? Double
          lSIStr = aDecoder.decodeObject(forKey: "LSI_Str") as? String
 
 	}

@@ -110,18 +110,25 @@ extension ExpertViewViewController: UITableViewDelegate,UITableViewDataSource {
             
             cell.sliderInfo = self.expertViewInfo?.sliderStrip
             cell.stripValues = self.expertViewInfo?.lastStripValues
-
             cell.loadData()
             return cell
 
             case .trend:
             let cell =  tableView.dequeueReusableCell(withIdentifier:"ExpertviewTrendInfoTableViewCell",
                                                   for: indexPath) as! ExpertviewTrendInfoTableViewCell
+            cell.lsiInfo = self.expertViewInfo?.sliderStrip
+            cell.lsiStateValues = self.expertViewInfo?.lastStripValues
+            cell.lsiValues = self.expertViewInfo?.lSI
+
+            cell.loadData()
+
             return cell
             
             case .threshold:
             let cell =  tableView.dequeueReusableCell(withIdentifier:"ExpertviewthresholdInfoTableViewCell",
                                               for: indexPath) as! ExpertviewthresholdInfoTableViewCell
+            cell.thresholdValues = self.expertViewInfo?.thresholds
+            cell.loadData()
             return cell
             
 

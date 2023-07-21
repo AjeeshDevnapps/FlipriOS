@@ -375,55 +375,75 @@ class ExpertviewStripTestInfoTableViewCell: UITableViewCell {
 }
 
 
-class ExpertviewTrendInfoTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var calibrationTilteLbl: UILabel!
 
-    @IBOutlet weak var ph4ValLbl: UILabel!
-    @IBOutlet weak var ph4Lbl: UILabel!
-    @IBOutlet weak var ph4DateLbl: UILabel!
-
-    
-    @IBOutlet weak var ph7ValLbl: UILabel!
-    @IBOutlet weak var ph7Lbl: UILabel!
-    @IBOutlet weak var ph7DateLbl: UILabel!
-
-    
-    @IBOutlet weak var newCalibrationBtn: UIButton!
-
-    
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-}
 
 
 class ExpertviewthresholdInfoTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var calibrationTilteLbl: UILabel!
+    @IBOutlet weak var thresholdTilteLbl: UILabel!
+    @IBOutlet weak var thresholdInfoLbl: UILabel!
 
-    @IBOutlet weak var ph4ValLbl: UILabel!
-    @IBOutlet weak var ph4Lbl: UILabel!
-    @IBOutlet weak var ph4DateLbl: UILabel!
+
+    @IBOutlet weak var phMinValLbl: UILabel!
+    @IBOutlet weak var phMaxValLbl: UILabel!
+    @IBOutlet weak var tempMinValLbl: UILabel!
+    @IBOutlet weak var tempMaxValLbl: UILabel!
+    @IBOutlet weak var redoxValLbl: UILabel!
+    
+    @IBOutlet weak var defaultThresholdBtn: UIButton!
+    
+    @IBOutlet weak var redoxBtn: UIButton!
+    @IBOutlet weak var phMinBtn: UIButton!
+    @IBOutlet weak var phMaxBtn: UIButton!
+    @IBOutlet weak var tempMinBtn: UIButton!
+    @IBOutlet weak var tempMaxBtn: UIButton!
+
+    var thresholdValues :Threshold?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+    func loadData(){
+        thresholdTilteLbl.text = "Thresholds".localized
+        thresholdInfoLbl.text = "⚠️  Default thresholds are for normal use and should not be altered by inexperienced users. They affect the algorithms and may generate inconsistencies between gauges and alerts. Flipr does not provide any support for pools whose thresholds have been modified.".localized
+        
+        defaultThresholdBtn.setTitle("Default Thresholds".localized, for: .normal)
+        redoxBtn.setTitle((thresholdValues?.redox.value ?? 0).string, for: .normal)
+        phMinBtn.setTitle((thresholdValues?.phMin.value ?? 0).string, for: .normal)
+        phMaxBtn.setTitle((thresholdValues?.phMax.value ?? 0).string, for: .normal)
+        tempMinBtn.setTitle((thresholdValues?.temperature.value ?? 0).string, for: .normal)
+        tempMaxBtn.setTitle((thresholdValues?.temperatureMax.value ?? 0).string, for: .normal)
+    }
+
+}
+
+
+class ExpertviewTrendInfoTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var analysisTilteLbl: UILabel!
+
+    @IBOutlet weak var lsiValLbl: UILabel!
+    @IBOutlet weak var lsiLbl: UILabel!
+    @IBOutlet weak var lsiSlider: UIImageView!
+
+    @IBOutlet weak var lsiInfo1Lbl: UILabel!
+    @IBOutlet weak var lsiInfo2Lbl: UILabel!
+    @IBOutlet weak var lsiInfo3Lbl: UILabel!
 
     
-    @IBOutlet weak var ph7ValLbl: UILabel!
-    @IBOutlet weak var ph7Lbl: UILabel!
-    @IBOutlet weak var ph7DateLbl: UILabel!
+    var lsiInfo:SliderStrip?
+    var lsiStateValues:LastStripValue?
 
-    
-    @IBOutlet weak var newCalibrationBtn: UIButton!
+    var lsiValues:LSI?
 
-    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -435,5 +455,23 @@ class ExpertviewthresholdInfoTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func loadData(){
+        analysisTilteLbl.text = "Trens & Analysis".localized
+        lsiLbl.text = "LSI".localized
+        if let lsiState  = lsiInfo?.lSI{
+            lsiSlider.image = UIImage(named: "hSlider\(lsiState)")
+        }
+        var lsiStr = "Your LSI is".localized
+        if let lsiVal  = lsiValues?.lSICoeff{
+            let valStr =  String(format: "%.2f", lsiVal)
+            lsiValLbl.text = valStr
+
+            lsiStr = lsiStr.appending(" \(valStr) : ")
+            lsiStr = lsiStr.appending("The water is considered scaling, indicating a tendency to deposit calcium carbonate. This can lead to the formation of scale on surfaces, such as pipes, fixtures, or heating elements.".localized)
+            lsiInfo3Lbl.text = lsiStr
+        }
+    }
 
 }
+
