@@ -25,7 +25,8 @@ class GatewaywifiViewController: BaseViewController {
     var hud : JGProgressHUD?
     var selectedSsid:String = ""
     var ssid:String = ""
-    
+    var password:String = ""
+
     var isCalledChangePassword : Bool = false
 
     
@@ -117,9 +118,6 @@ class GatewaywifiViewController: BaseViewController {
         
     }
     
-  
-
-    
     
 }
 
@@ -147,8 +145,9 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
         if let info  = wifiList[indexPath.row] as? NSDictionary{
             self.ssid = info["SSID"] as? String ?? ""
             selectedSsid = info["SSID"] as? String ?? ""
+            self.newFlow()
         }
-        findSelectedGateway()
+//        findSelectedGateway()
         /*
         var ssid = ""
         if let info  = wifiList[indexPath.row] as? NSDictionary{
@@ -174,6 +173,10 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     
+    func newFlow(){
+        self.newShowPasswordInputView(ssid: self.ssid)
+    }
+    
     func setSsid(){
         GatewayManager.shared.setSSID(ssid: self.ssid) { error in
             GatewayManager.shared.removeConnection()
@@ -186,6 +189,67 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
             }
             
         }
+    }
+    
+    func newSetSsid(){
+        GatewayManager.shared.setSSID(ssid: self.ssid) { error in
+            GatewayManager.shared.removeConnection()
+            if error != nil{
+                print("Error")
+                self.navigationController?.popViewController()
+
+            }else{
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    self.newReconnectGateway()
+                }
+//                self.showPasswordInputView(ssid: self.ssid)
+            }
+            
+        }
+    }
+    
+    
+    func newShowPasswordInputView(ssid:String){
+        selectedSsid = ssid
+        var passwordTextField: UITextField?
+        let alertController = UIAlertController(title: ssid, message: "Enter wifi password".localized, preferredStyle: .alert)
+        let sendAction = UIAlertAction(title: "Connect".localized, style: .default, handler: { (action) -> Void in
+            self.hud = JGProgressHUD(style:.dark)
+            self.hud?.show(in: self.navigationController!.view)
+
+            if self.isChangePassword{
+                let passwd = passwordTextField?.text ?? ""
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    self.writePassword(password: passwd)
+                }
+            }else{
+                print("Success setSSID")
+                let passwd = passwordTextField?.text ?? ""
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    self.connectGateway(password: passwd)
+//                    if self.isCalledChangePassword ==  false{
+//                        self.isCalledChangePassword = true
+//                        self.reconnectGateway(password: passwd)
+//                    }
+                }
+            }
+        })
+        
+        //sendAction.isEnabled = (loginTextField?.text?.isEmail)!
+        
+        let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel) { (action) -> Void in
+            print("Cancel Button Pressed")
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(sendAction)
+        alertController.preferredAction = sendAction
+        alertController.addTextField { (textField) -> Void in
+            passwordTextField = textField
+            let pwStr = "Password".localized
+            passwordTextField?.placeholder = "\(pwStr)..."
+        }
+        alertController.view.tintColor = #colorLiteral(red: 0.08259455115, green: 0.1223137602, blue: 0.2131385803, alpha: 1)
+        present(alertController, animated: true, completion: nil)
     }
     
     func showPasswordInputView(ssid:String){
@@ -228,6 +292,43 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
         }
         alertController.view.tintColor = #colorLiteral(red: 0.08259455115, green: 0.1223137602, blue: 0.2131385803, alpha: 1)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    @objc func connectGateway(password:String){
+//        let hud = JGProgressHUD(style:.dark)
+//        hud?.show(in: self.navigationController!.view)
+        self.password = password
+        GatewayManager.shared.connect(serial: self.serial ?? "") { error in
+            if error != nil{
+                print("Failed Reconnection after setSSID")
+            }else{
+                print("Reconnection Success after setSSID ")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.newSetSsid()
+//                    self.writePassword(password: password)
+                }
+            }
+        }
+      
+    }
+    
+    
+    @objc func newReconnectGateway(){
+//        let hud = JGProgressHUD(style:.dark)
+//        hud?.show(in: self.navigationController!.view)
+        
+        GatewayManager.shared.connect(serial: self.serial ?? "") { error in
+            if error != nil{
+                print("Failed Reconnection after setSSID")
+            }else{
+                print("Reconnection Success after setSSID ")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.writePassword(password: self.password)
+                }
+            }
+        }
+      
     }
     
     

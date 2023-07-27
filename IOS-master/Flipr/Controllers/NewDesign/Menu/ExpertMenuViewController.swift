@@ -338,14 +338,23 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
     
     
     func expertView(){
-        let tmpSb = UIStoryboard.init(name: "Main", bundle: nil)
-        if let navigationController = tmpSb.instantiateViewController(withIdentifier: "SettingsNavingation") as? UINavigationController {
-            if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertModeViewController") as? ExpertModeViewController {
-                navigationController.modalPresentationStyle = .fullScreen
-                viewController.isDirectPresenting = true
-                navigationController.setViewControllers([viewController], animated: false)
-                self.present(navigationController, animated: true, completion: nil)
+//        let tmpSb = UIStoryboard.init(name: "Main", bundle: nil)
+//        if let navigationController = tmpSb.instantiateViewController(withIdentifier: "SettingsNavingation") as? UINavigationController {
+//            if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertModeViewController") as? ExpertModeViewController {
+//                navigationController.modalPresentationStyle = .fullScreen
+//                viewController.isDirectPresenting = true
+//                navigationController.setViewControllers([viewController], animated: false)
+//                self.present(navigationController, animated: true, completion: nil)
+//            }
+//        }
+        
+        
+        let tmpSb = UIStoryboard.init(name: "ExpertView", bundle: nil)
+        if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertViewViewController") as? ExpertViewViewController {
+            if let placeId =  Module.currentModule?.placeId?.string {
+                viewController.placeId = placeId
             }
+            self.present(viewController, animated: true)
         }
     }
     
@@ -476,6 +485,8 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
     
   
     func showCalibrationView(){
+        
+        
         
         let sb = UIStoryboard(name: "Calibration", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "CalibrationPh7IntroViewController") as! CalibrationPh7IntroViewController

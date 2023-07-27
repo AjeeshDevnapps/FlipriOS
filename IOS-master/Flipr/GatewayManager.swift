@@ -30,6 +30,10 @@ struct GATEWAYBLEParameters {
     
     static let gatewaySSIDUUID = CBUUID(string: "9500")
     static let gatewayPasswordUUID = CBUUID(string:"9501")
+    
+    static let getSoftwareInfo = CBUUID(string: "9505")
+    static let getConnectionStatus = CBUUID(string:"9506")
+
     static let receptionCharactersticUUID = CBUUID(string:"A9D7166A-D72E-40A9-A002-48044CC30102")
     static let wifiServiceUUID = CBUUID(string:"0A02F906-0000-1000-8000-00805F9B34FB")
 
@@ -203,8 +207,8 @@ class GatewayManager: NSObject {
         setPasswordCompletionBlock = completion
         self.wifiPassword = password
         if let hub = connectedGateway, let sendChar = passwordCharacteristic {
-//            let data = password.data(using: .utf8)
-//            connectedGateway?.writeValue(data!, for: passwordCharacteristic!, type: .withResponse)
+            let data = password.data(using: .utf8)
+            connectedGateway?.writeValue(data!, for: passwordCharacteristic!, type: .withResponse)
 //            completion?(nil)
         } else {
             //send error no hub connected or char discovered
@@ -213,6 +217,9 @@ class GatewayManager: NSObject {
             setWifiCompletionBlock = nil
         }
     }
+    
+    
+    
     
     /*
     func setWifi(network: HUBWifiNetwork, password:String, completion: ((_ error: Error?) -> Void)?) {
@@ -295,7 +302,7 @@ extension GatewayManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
        print(advertisementData)
         if self.stopScanning{
-//            central.stopScan()
+            central.stopScan()
             NotificationCenter.default.post(name: K.Notifications.GatewayNoteDiscovered, object: nil)
             return
         }
@@ -344,7 +351,7 @@ extension GatewayManager: CBCentralManagerDelegate {
         self.stopScanning = true
         connectCompletionBlock?(nil)
         self.passwordCharacteristic = nil
-        peripheral.discoverServices([GATEWAYBLEParameters.wifiServiceUUID,GATEWAYBLEParameters.gatewayPasswordUUID])
+        peripheral.discoverServices([GATEWAYBLEParameters.wifiServiceUUID,GATEWAYBLEParameters.gatewayPasswordUUID,GATEWAYBLEParameters.getSoftwareInfo,GATEWAYBLEParameters.getConnectionStatus,GATEWAYBLEParameters.gatewaySSIDUUID])
 //                peripheral.discoverServices(nil)
 
 //        peripheral.discoverServices([GATEWAYBLEParameters.gatewayPasswordUUID])
@@ -391,7 +398,19 @@ extension GatewayManager: CBPeripheralDelegate {
                 print("- CHARACTERISTIC [\(i)] : \(characteristic)")
                 i = i+1
                 //peripheral.readValue(for: characteristic)
+                
+               
+                
+                if characteristic.uuid == GATEWAYBLEParameters.getSoftwareInfo {
+                    peripheral.readValue(for: characteristic)
+                }
+                
+                if characteristic.uuid == GATEWAYBLEParameters.getConnectionStatus {
+                    peripheral.readValue(for: characteristic)
+                }
+                
                 if characteristic.uuid == GATEWAYBLEParameters.gatewaySSIDUUID {
+                    peripheral.readValue(for: characteristic)
                     ssidCharacteristic = characteristic
                     //let data = Data(bytes:[UInt8(1)])
                     //peripheral.writeValue(data, for: characteristic, type: .withResponse)
@@ -475,38 +494,31 @@ extension GatewayManager: CBPeripheralDelegate {
             switch characteristic.uuid {
             case GATEWAYBLEParameters.gatewaySSIDUUID:
                 print("Channel  gatewaySSIDUUID charateristic value: \(value), hex: \(value.hexEncodedString())")
+                if let val = String.init(data:value, encoding: .utf8){
+                    let userInfo = ["ssid": val]
+                    NotificationCenter.default.post(name: K.Notifications.GatewaySSIDRead, object: nil, userInfo: userInfo)
+                }
                 break
             case GATEWAYBLEParameters.gatewayPasswordUUID:
                 print("Reception gatewayPasswordUUID charateristic value: \(value), hex: \(value.hexEncodedString())")
-//                if value.bytes.count > 0 {
-//                    let decoded = CBOR.decode(value.bytes)
-//                    print("Reception charateristic decoded value: \(decoded)")
-//                    if let dict = decoded as? [String:Any] {
-//                        print("wifi name: \(dict["r"])")
-//                        if dict["r"] == nil {
-//                            print("KEK")
-//
-//                            print(dict["s"])
-//                            if("\(dict["s"])" == "Optional(1)")
-//                            {
-//                                let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Password error :/".localized])
-//                                setWifiCompletionBlock?(error)
-//                                setWifiCompletionBlock = nil
-//                            }else{
-//                                setWifiCompletionBlock?(nil)
-//                                setWifiCompletionBlock = nil
-//                            }
-//                        } else {
-//                            if let network = HUBWifiNetwork(withJSON: dict) {
-//                                getAvailableWifiCompletionBlock?(network ,error)
-//                            }
-//                        }
-//                    }
-//                }
                 break
-            case HUBBLEParameters.sendCharactersticUUID:
-                print("Send charateristic value: \(value), hex: \(value.hexEncodedString())")
+                
+            case GATEWAYBLEParameters.getSoftwareInfo:
+                print("getSoftwareInfoc value: \(value), hex: \(value.hexEncodedString())")
+                if let val = String.init(data:value, encoding: .utf8){
+                    let userInfo = ["sw": val]
+                    NotificationCenter.default.post(name: K.Notifications.GatewaySoftwareVersion, object: nil, userInfo: userInfo)
+                }
                 break
+                
+            case GATEWAYBLEParameters.getConnectionStatus:
+//                print("getConnectionStatus value: \(value), hex: \(value.hexEncodedString())")
+                if let val = String.init(data:value, encoding: .utf8){
+                    let userInfo = ["connectionStatus": val]
+                    NotificationCenter.default.post(name: K.Notifications.GatewayConnectionStatus, object: nil, userInfo: userInfo)
+                }
+                break
+
             default:
                 print("Unknown charateristic value: \(value), hex: \(value.hexEncodedString())")
                 break

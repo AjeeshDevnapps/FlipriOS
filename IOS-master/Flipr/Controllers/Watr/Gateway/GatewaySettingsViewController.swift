@@ -177,7 +177,7 @@ class GatewaySettingsViewController: UIViewController {
                 print("Added selected Gateway")
                 if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GatewaywifiViewController") as? GatewaywifiViewController {
                     vc.serial = serialNo
-//                    vc.isChangePassword = true 
+                    vc.isChangePassword = true
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }

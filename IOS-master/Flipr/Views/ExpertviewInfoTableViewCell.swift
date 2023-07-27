@@ -40,7 +40,7 @@ class ExpertviewInfoTableViewCell: UITableViewCell {
     }
     
     func loadData(){
-        self.titleLabel.text = "Données brutes".latinized
+        self.titleLabel.text = "Raw data".latinized
 
         phLbl.text = "pH".localized
         redoxLbl.text = "Redox".localized
@@ -462,13 +462,44 @@ class ExpertviewTrendInfoTableViewCell: UITableViewCell {
         if let lsiState  = lsiInfo?.lSI{
             lsiSlider.image = UIImage(named: "hSlider\(lsiState)")
         }
+       
+        var infoStrPart = ""
+        if let type = self.lsiValues?.lSIStr{
+            if type == "CorrosionDanger"{
+                infoStrPart = "If the Langelier Saturation Index (LSI) is less than -0.6, the water is corrosive and has a high potential to cause damage to metal surfaces.".localized
+            }
+            else  if type == "MinorCorrosion"{
+                infoStrPart = "If the Langelier Saturation Index (LSI) falls within the range of -0.6 to -0.4, the water is considered corrosive, indicating a moderate potential for causing damage to metal surfaces.".localized
+            }
+            else  if type == "BalancedWater"{
+                if let lsiVal  = lsiValues?.lSICoeff{
+                    if lsiVal <= 0.1{
+                        infoStrPart = "If the Langelier Saturation Index (LSI) is between -0.4 and -0.2, the water is still corrosive but with a lower potential for causing damage to metal surfaces.".localized
+                    }
+                    else if lsiVal > 0.1{
+                        infoStrPart = "If the Langelier Saturation Index (LSI) is between 0.1 and 0.3, the water is considered to have a slight scaling potential. It indicates that the water has a tendency to deposit some scale on surfaces but still remains within an acceptable range." .localized
+                    }
+                }
+            }
+            else  if type == "IdealyBalancedWater"{
+                infoStrPart =  "If the Langelier Saturation Index (LSI) falls within the range of -0.2 to 0.1, the water is considered to be in a balanced state. It indicates that the water has a relatively low potential for both scaling and corrosion.".localized
+
+            }
+            else  if type == "MinorScaling"{
+                infoStrPart =  "If the Langelier Saturation Index (LSI) falls within the range of 0.3 to 0.5, the water is considered to have a moderate scaling potential. It suggests that the water has an increased likelihood of depositing scale on surfaces, and precautions should be taken to manage and prevent scaling issues.".localized
+
+            }
+            else  if type == "ScalingDanger"{
+                infoStrPart =  "If the Langelier Saturation Index (LSI) is greater than 0.5, the water is considered to have a high scaling potential. It indicates that the water has a significant tendency to deposit scale on surfaces, which can lead to clogging, reduced efficiency, and other operational problems in equipment and plumbing systems. Proper measures should be taken to control scaling in water systems.".localized
+            }
+        }
+        
         var lsiStr = "Your LSI is".localized
         if let lsiVal  = lsiValues?.lSICoeff{
             let valStr =  String(format: "%.2f", lsiVal)
             lsiValLbl.text = valStr
-
             lsiStr = lsiStr.appending(" \(valStr) : ")
-            lsiStr = lsiStr.appending("The water is considered scaling, indicating a tendency to deposit calcium carbonate. This can lead to the formation of scale on surfaces, such as pipes, fixtures, or heating elements.".localized)
+            lsiStr = lsiStr.appending(infoStrPart)
             lsiInfo3Lbl.text = lsiStr
         }
     }
