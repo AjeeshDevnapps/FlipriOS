@@ -441,6 +441,8 @@ extension PlaceDropdownViewController: UITableViewDelegate,UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
         let moduelsNo = self.places[indexPath.row].numberOfModules
         if moduelsNo > 0 {
             let placeId:String = "\(String(describing: self.places[indexPath.row].placeId ?? 0))"

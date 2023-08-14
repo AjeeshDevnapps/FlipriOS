@@ -116,6 +116,13 @@ class BLEManager: NSObject {
         
     }
     
+    func removeConnection(){
+        if let conectedflipr = flipr {
+            centralManager.cancelPeripheralConnection(conectedflipr)
+        }
+    }
+    
+    
     
     func disConnectCurrentDevice(){
         if self.flipr != nil{

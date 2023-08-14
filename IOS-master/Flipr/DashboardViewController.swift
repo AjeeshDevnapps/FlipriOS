@@ -4400,7 +4400,7 @@ class DashboardViewController: UIViewController {
                 viewController.placeDetails = self.placeDetails
                 
                 self.present(viewController, animated: true) {
-                    //                viewController.showBackgroundView()
+                    viewController.showBackgroundView()
                 }
             }
             

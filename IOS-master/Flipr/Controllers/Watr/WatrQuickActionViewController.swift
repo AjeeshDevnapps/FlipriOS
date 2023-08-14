@@ -21,7 +21,8 @@ class WatrQuickActionViewController: UIViewController {
     @IBOutlet weak var subScriptionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var menuViewHeight: NSLayoutConstraint!
-    
+    @IBOutlet weak var tapView: UIView!
+
     var isShowSubscription = false
     var haveFlipr = false
     var haveHub = false
@@ -56,7 +57,9 @@ class WatrQuickActionViewController: UIViewController {
         menuView.layer.cornerRadius = 14
         menuView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         settingTable.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0.001))
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        self.tapView.addGestureRecognizer(tap)
+
         //        settingTable.tableFooterView = UIView()
         //        settingTable.tableFooterView = UIView(frame: CGRect(x: 0, y: -1, width: settingTable.frame.size.width, height: 1))
         
@@ -66,6 +69,12 @@ class WatrQuickActionViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        self.tapView.backgroundColor = UIColor.clear
+        self.dismiss(animated: true, completion: nil)
+        print("Hello World")
+    }
     
     func showGatewayListing(){
         if let vc = UIStoryboard(name: "Gateway", bundle: nil).instantiateViewController(withIdentifier: "GateWayListingViewController") as? GateWayListingViewController {
@@ -89,6 +98,13 @@ class WatrQuickActionViewController: UIViewController {
         createMenuOrder()
     }
     
+    func showBackgroundView(){
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn, animations: {
+                    self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+                }, completion: nil)
+
+//        self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+    }
     
     func createMenuOrder(){
         if self.placeDetails.permissionLevel == "Admin"{

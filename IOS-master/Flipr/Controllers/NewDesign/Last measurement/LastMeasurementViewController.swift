@@ -168,13 +168,42 @@ class LastMeasurementViewController:BaseViewController {
     }
     
     
+    func newLastReadMeasurement(){
+            
+        let theme = EmptyStateViewTheme.shared
+        theme.activityIndicatorType = .ballSpinFadeLoader
+        theme.activityIndicatorColor = .black
+//        self.loaderView.showEmptyStateViewLoading(title: nil,
+//                                            message: nil,
+//                                            theme: theme)
+//        CalibrationManager.shared.isStoppedForRedo = false
+        GetLastMeasurementManager.shared.isReconnectedAfterFail = false
+        GetLastMeasurementManager.shared.readLastMeasurement{ (error) in
+            if error != nil{
+                self.hud?.textLabel.text = "No new measurement, Please try after some time"
+                self.hud?.dismiss(afterDelay: 4)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                    self.dismiss(animated: true)
+                }
+            }else{
+                self.view.hideStateView()
+                self.readingSuccess()
+            }
+        }
+    }
+    
+    
+    
     func newMeasurement(){
+        newLastReadMeasurement()
+        
 //        let theme = EmptyStateViewTheme.shared
 //        theme.activityIndicatorType = .ballSpinFadeLoader
 //        theme.activityIndicatorColor = .black
 //        self.view.showEmptyStateViewLoading(title: nil,
 //                                            message: nil,
 //                                            theme: theme)
+       /*
         GetMeasurmentManager.shared.resetValues()
         GetMeasurmentManager.shared.connectDevice{ (error) in
             
@@ -191,7 +220,7 @@ class LastMeasurementViewController:BaseViewController {
             }
         }
         
-        
+        */
 
     }
     

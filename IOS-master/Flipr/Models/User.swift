@@ -1021,6 +1021,17 @@ class User {
         })
     }
 
+    
+    func disconnectAllBleDevices(){
+        BLEManager.shared.removeConnection()
+        NewMeasurementManager.shared.removeConnection()
+        GetMeasurmentManager.shared.removeConnection()
+        GetLastMeasurementManager.shared.removeConnection()
+        CalibrationManager.shared.removeConnection()
+        FliprActivateManager.shared.removeConnection()
+        FliprModeManager.shared.removeConnection()
+        GatewayManager.shared.removeConnection()
+    }
 
 }
 

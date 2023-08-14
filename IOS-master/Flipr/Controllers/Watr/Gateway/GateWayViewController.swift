@@ -42,7 +42,6 @@ class GateWayViewController: UIViewController {
     }
     
     @IBAction func addButtonAction() {
-               
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GateWayListingViewController") as? GateWayListingViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -71,5 +70,8 @@ extension GateWayViewController: GatewayTableViewCellDelegate {
             vc.info = cell.info
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        
+        
+        
     }
 }

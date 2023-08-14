@@ -183,11 +183,12 @@ class NewMeasurementViewController:BaseViewController {
             
             if error != nil{
 //                self.hud?.textLabel.text = ""
-                self.hud?.dismiss(afterDelay: 1)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.hud?.dismiss(afterDelay: 0)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
                     self.dismiss(animated: true)
                 }
             }else{
+                NotificationCenter.default.post(name: K.Notifications.FliprMeasuresPosted, object: nil)
                 self.view.hideStateView()
                 
 //                self.readingSuccess()

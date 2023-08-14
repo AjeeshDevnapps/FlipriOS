@@ -37,7 +37,7 @@ class GatewaywifiViewController: BaseViewController {
         cancelBtn.setTitle("Cancel".localized(), for: .normal)
 //        self.subTitleLable.text = "First connect your iPhone to the wifi network to which you want to connect your gateway".localized
         var str1 = "WifiText!".localized
-        str1.append(" \n\n👇\n ")
+        str1.append(" \n\n👇")
         self.subTitleLable.text =  str1
 //        self.manualEntryLabel.text = "Manual entry".localized
         
@@ -73,8 +73,8 @@ class GatewaywifiViewController: BaseViewController {
 
     }
     
-    func getAllWiFiNameList() -> String? {
-        var ssid: String?
+    func getAllWiFiNameList() {
+//        var ssid: String?
         if let interfaces = CNCopySupportedInterfaces() as NSArray? {
             for interface in interfaces {
                 if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
@@ -86,7 +86,7 @@ class GatewaywifiViewController: BaseViewController {
                 }
             }
         }
-        return ssid
+//        return ssid
     }
     
     
@@ -97,7 +97,10 @@ class GatewaywifiViewController: BaseViewController {
             let ssid = ssidTextField?.text ?? ""
             self.ssid = ssid
             self.selectedSsid = ssid
-            self.findSelectedGateway()
+            self.newFlow()
+//            self.showPasswordInputView(ssid: ssid)
+
+//            self.findSelectedGateway()
         })
         
         let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel) { (action) -> Void in

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -801,6 +800,103 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
             </objects>
             <point key="canvasLocation" x="804" y="-30"/>
         </scene>
+        <!--Strip Test Intro View Controller-->
+        <scene sceneID="cZ2-WI-TIt">
+            <objects>
+                <viewController storyboardIdentifier="StripTestIntroViewController" id="Cs0-WT-bwr" customClass="StripTestIntroViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AtP-LX-lIV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T6u-la-WVT">
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0n-mc-OVu" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="709.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rainbow" translatesAutoresizingMaskIntoConstraints="NO" id="6bB-Sj-wUe">
+                                                <rect key="frame" x="157" y="15" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="BM6-vx-GVB"/>
+                                                    <constraint firstAttribute="width" constant="100" id="ZGB-Wt-39Z"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eF5-7Y-pCG">
+                                                <rect key="frame" x="19" y="130" width="376" height="494.5"/>
+                                                <mutableString key="text">Flipr was designed to spare you from the hassle of daily strip tests. However, the initial and annual strip tests are essential to unveil some juicy, hidden physico-chemical secrets not captured by our sensors – think hardness, alkalinity, and the elusive presence of stabilizers! You don't want our algorithms to miss out on the spicy details, do you?
+
+Pro tip: Don't forget to redo the test after a pool drain or some fancy treatments related to hardness or alkalinity. If you neglect this vital information, Flipr's suggestions might end up feeling a bit wobbly!
+
+But fear not, my adventurous pool owner! You can check out all these exciting data in the expert view of Flipr. Get ready to dive into a world of detailed pool water wonders, where precision meets party! Keep an eye on those numbers, and you'll be swimming in the ultimate pool enjoyment. Cowabunga! 🏊‍♂️🌊😎</mutableString>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eid-Ug-PUk">
+                                                <rect key="frame" x="19" y="639.5" width="376" height="50"/>
+                                                <color key="backgroundColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="CtD-2X-6fQ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Next">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="nextButtonAction" destination="Cs0-WT-bwr" eventType="touchUpInside" id="cH0-IU-z5O"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="eid-Ug-PUk" secondAttribute="trailing" constant="19" id="8BM-Y6-Kho"/>
+                                            <constraint firstAttribute="bottom" secondItem="eid-Ug-PUk" secondAttribute="bottom" constant="20" id="Kbp-ss-oSm"/>
+                                            <constraint firstItem="6bB-Sj-wUe" firstAttribute="top" secondItem="e0n-mc-OVu" secondAttribute="top" constant="15" id="RB2-zk-OQa"/>
+                                            <constraint firstItem="eF5-7Y-pCG" firstAttribute="leading" secondItem="e0n-mc-OVu" secondAttribute="leading" constant="19" id="Rgm-LP-lHR"/>
+                                            <constraint firstItem="6bB-Sj-wUe" firstAttribute="centerX" secondItem="e0n-mc-OVu" secondAttribute="centerX" id="Wt9-i7-HTo"/>
+                                            <constraint firstItem="eid-Ug-PUk" firstAttribute="top" secondItem="eF5-7Y-pCG" secondAttribute="bottom" constant="15" id="Yhf-hj-w1N"/>
+                                            <constraint firstItem="eF5-7Y-pCG" firstAttribute="top" secondItem="6bB-Sj-wUe" secondAttribute="bottom" constant="15" id="mzU-Tg-JEq"/>
+                                            <constraint firstItem="eid-Ug-PUk" firstAttribute="leading" secondItem="e0n-mc-OVu" secondAttribute="leading" constant="19" id="pgX-xg-QmT"/>
+                                            <constraint firstAttribute="trailing" secondItem="eF5-7Y-pCG" secondAttribute="trailing" constant="19" id="uBy-cd-FMU"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="e0n-mc-OVu" firstAttribute="bottom" secondItem="QrM-O1-I2E" secondAttribute="bottom" id="PRw-LK-hp7"/>
+                                    <constraint firstItem="QrM-O1-I2E" firstAttribute="top" secondItem="e0n-mc-OVu" secondAttribute="top" id="cZv-ru-ge6"/>
+                                    <constraint firstItem="e0n-mc-OVu" firstAttribute="leading" secondItem="QrM-O1-I2E" secondAttribute="leading" id="fRO-5A-wFf"/>
+                                    <constraint firstItem="e0n-mc-OVu" firstAttribute="trailing" secondItem="QrM-O1-I2E" secondAttribute="trailing" id="iHi-bF-hpy"/>
+                                    <constraint firstItem="e0n-mc-OVu" firstAttribute="width" secondItem="tuJ-P6-7Uj" secondAttribute="width" id="q1T-sn-o24"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="QrM-O1-I2E"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="tuJ-P6-7Uj"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="o02-48-bXd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="T6u-la-WVT" firstAttribute="leading" secondItem="o02-48-bXd" secondAttribute="leading" id="DdV-dN-s4F"/>
+                            <constraint firstItem="T6u-la-WVT" firstAttribute="top" secondItem="o02-48-bXd" secondAttribute="top" id="Fd6-06-dL5"/>
+                            <constraint firstItem="T6u-la-WVT" firstAttribute="trailing" secondItem="o02-48-bXd" secondAttribute="trailing" id="lTy-31-Gz7"/>
+                            <constraint firstItem="T6u-la-WVT" firstAttribute="bottom" secondItem="o02-48-bXd" secondAttribute="bottom" id="rsL-Po-9Aw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nextButton" destination="eid-Ug-PUk" id="j2e-ha-IDx"/>
+                        <outlet property="subTitleLbl" destination="eF5-7Y-pCG" id="xaM-K4-yfn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lfy-Gi-KCm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="802.89855072463774" y="677.67857142857144"/>
+        </scene>
         <!--Chlorine Calibration View Controller-->
         <scene sceneID="MiR-os-EzH">
             <objects>
@@ -934,7 +1030,7 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="327"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contrôle bandelette" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Dz-9H-697">
-                                                        <rect key="frame" x="16" y="90" width="382" height="38.5"/>
+                                                        <rect key="frame" x="16" y="15" width="382" height="113.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                         <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -960,7 +1056,7 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="3Dz-9H-697" firstAttribute="top" secondItem="vhj-nN-QhJ" secondAttribute="top" constant="90" id="6jv-rM-2my"/>
+                                                    <constraint firstItem="3Dz-9H-697" firstAttribute="top" secondItem="vhj-nN-QhJ" secondAttribute="top" constant="15" id="6jv-rM-2my"/>
                                                     <constraint firstItem="gi4-a7-igg" firstAttribute="top" secondItem="3Dz-9H-697" secondAttribute="bottom" constant="16" id="8VZ-kc-EDD"/>
                                                     <constraint firstItem="3Dz-9H-697" firstAttribute="leading" secondItem="vhj-nN-QhJ" secondAttribute="leading" constant="16" id="F9X-rz-6Pe"/>
                                                     <constraint firstAttribute="bottom" secondItem="gi4-a7-igg" secondAttribute="bottom" constant="32" id="Gi3-Uc-hev"/>
@@ -2423,7 +2519,8 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
         <image name="check-circle" width="56" height="56"/>
         <image name="infoBlue" width="24" height="24"/>
         <image name="ph7Demo" width="300" height="120"/>
-        <image name="sun" width="24" height="24"/>
+        <image name="rainbow" width="100" height="100"/>
+        <image name="sun" width="22" height="22"/>
         <systemColor name="lightTextColor">
             <color white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

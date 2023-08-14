@@ -541,7 +541,10 @@ enum Router: URLRequestConvertible {
         case .getShopUrl(let poolId):
             return "pools/\(poolId)/Shop"
         case .getLog(let poolId,_, _):
-            return "pools/\(poolId)/Log"
+            let placeId = Module.currentModule?.placeId ?? 0
+            return "place/\(placeId)/Log"
+
+//            return "pools/\(poolId)/Log"
         case .deleteLog(let poolId, let logId):
             return "pools/\(poolId)/Log/\(logId)"
         case .getLogTypes:

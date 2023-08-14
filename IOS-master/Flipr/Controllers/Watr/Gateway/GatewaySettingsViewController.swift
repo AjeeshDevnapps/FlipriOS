@@ -177,7 +177,7 @@ class GatewaySettingsViewController: UIViewController {
                 print("Added selected Gateway")
                 if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GatewaywifiViewController") as? GatewaywifiViewController {
                     vc.serial = serialNo
-                    vc.isChangePassword = true
+                    vc.isChangePassword = false
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
@@ -253,48 +253,26 @@ extension GatewaySettingsViewController{
  
     
     @IBAction func updateButtonClicked(_ sender: UIButton) {
-//        self.showSettings()
-        self.isReadAllValues = false
-        GatewayManager.shared.removeConnection()
-        let serial = self.info?.serial ?? ""
-        GatewayManager.shared.scanForGateways(serials: [serial], completion: { (gatewayinfo) in
-            
-        })
-    }
-    
-    func showSettings(){
-        let sb = UIStoryboard(name: "HUB", bundle: nil)
-        if let viewController = sb.instantiateViewController(withIdentifier: "HUBWifiTableViewControllerID") as? HUBWifiTableViewController {
-            viewController.serial = hub?.serial ?? ""
-            viewController.fromSetting = false
-            let nav = UINavigationController.init(rootViewController: viewController)
-            self.present(nav, animated: true, completion: nil)
-//            self.navigationController?.pushViewController(viewController, animated: true)
-//            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GatewaywifiViewController") as? GatewaywifiViewController {
+            vc.serial = self.info?.serial ?? ""
+//            let serialNo = self.info?.serial ?? ""
+
+            vc.isChangePassword = false
+            self.navigationController?.pushViewController(vc, animated: true)
         }
-//        let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
-//        if let viewController = sb.instantiateViewController(withIdentifier: "HubSettingsViewController") as? HubSettingsViewController {
-//            viewController.hub = hub
-//            viewController.delegate = self
-//           // viewController.modalPresentationStyle = .overCurrentContext
-//            self.present(viewController, animated: true) {
-//            }
-//        }
+        
+//        self.isReadAllValues = false
+//        GatewayManager.shared.removeConnection()
+//        let serial = self.info?.serial ?? ""
+//        GatewayManager.shared.scanForGateways(serials: [serial], completion: { (gatewayinfo) in
+//
+//        })
     }
     
+   
     
     func showRename(){
-//        let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
-//        if let viewController = sb.instantiateViewController(withIdentifier: "HubRenameViewController") as? HubRenameViewController {
-//            viewController.hub = hub
-//            viewController.completion(block: { (inputValue) in
-//                if inputValue != nil{
-//                    self.settings?.moduleName =  inputValue
-//                    self.tableView.reloadData()
-//                }
-//                })
-//            self.present(viewController, animated: true, completion: nil)
-//        }
     }
     
     

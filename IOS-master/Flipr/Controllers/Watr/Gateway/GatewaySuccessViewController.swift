@@ -26,8 +26,8 @@ class GatewaySuccessViewController: BaseViewController {
         self.titleLabel.text = "Si la lumière passe au vert (Vraiment vert!), vous êtes connecté et votre Flipr Connect est prêt à recevoir des mesures Flipr! \n\nUn flash bleu intermittent indique que Flipr AnalysR est à portée.\n\nNe débranchez pas Flipr Connect. Les mesures sont exclusivement récupérées et transmises  par cette passerelle.\n\nSi vous changez de réseau Wifi, veuillez refaire la configuration à partir du menu Paramètres.\n".localized
         
         self.navigationItem.setHidesBackButton(true, animated: true)
-//        let jeremyGif = UIImage.gifImageWithName("gwgif")
-//        gwGifImageView.image = jeremyGif
+        let jeremyGif = UIImage.gifImageWithName("gwgif")
+        gwGifImageView.image = jeremyGif
 
         GatewayManager.shared.cancelGatewayConnection { error in
 

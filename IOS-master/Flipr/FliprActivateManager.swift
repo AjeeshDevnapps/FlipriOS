@@ -26,6 +26,9 @@ class FliprActivateManager: NSObject {
     var scanForHubsCompletionBlock:(_ : (_ hubsInfo:[String:CBPeripheral]) -> Void)?
     
 //    var connectedGateway:CBPeripheral?
+    
+    var activationCompletionBlock:(_ : (_ error:Error?) -> Void)?
+
     var connectCompletionBlock:(_ : (_ error:Error?) -> Void)?
     var cancelConnectionCompletionBlock:(_ : (_ error:Error?) -> Void)?
     var getAvailableWifiCompletionBlock:(_ : (_ networks: HUBWifiNetwork?, _ error:Error?) -> Void)?
@@ -48,10 +51,11 @@ class FliprActivateManager: NSObject {
     var serialNo = ""
 
     
-    func scanForFlipr(serial: String?, completion: ((_ hubsInfo:[String:CBPeripheral]) -> Void)?) {
+    func scanForFlipr(serial: String?, completion: ((_ error: Error?) -> Void)?) {
+
         serialNo = serial ?? ""
 //        scanForHubsWithSerials = serials
-        scanForHubsCompletionBlock = completion
+        activationCompletionBlock = completion
         if !centralManagerHasBeenInitialized {
             centralManager = CBCentralManager(delegate: self, queue: nil)
             centralManagerHasBeenInitialized = true
@@ -71,7 +75,7 @@ class FliprActivateManager: NSObject {
     
     func stopScanForGateway() {
         centralManager.stopScan()
-//        scanForHubsWithSerials = nil
+        activationCompletionBlock = nil
         scanForHubsCompletionBlock = nil
     }
     
@@ -255,7 +259,7 @@ extension FliprActivateManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Central manager did connect to Flipr")
         self.stopScanning = true
-        connectCompletionBlock?(nil)
+//        connectCompletionBlock?(nil)
         peripheral.discoverServices([FliprBLEParameters.deviceServiceUUID,FliprBLEParameters.modeCharactersticUUID])
 //                peripheral.discoverServices(nil)
 //        peripheral.discoverServices([GATEWAYBLEParameters.gatewayPasswordUUID])
@@ -346,8 +350,11 @@ extension FliprActivateManager: CBPeripheralDelegate {
         
         if characteristic.uuid == FliprBLEParameters.modeCharactersticUUID {
             print("did write MODE !!!: \(String(describing: error))")
+            activationCompletionBlock?(nil)
 //            peripheral.readValue(for: characteristic)
         }else{
+            activationCompletionBlock?(error)
+
             print("Mode : \(String(describing: error))")
         }
         

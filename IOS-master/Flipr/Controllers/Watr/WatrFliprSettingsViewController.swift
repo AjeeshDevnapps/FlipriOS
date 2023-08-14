@@ -22,6 +22,7 @@ class WatrFliprSettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        User.currentUser?.disconnectAllBleDevices()
         self.title = "AnalysR".localized
         tableView.tableFooterView =  UIView()
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprModeValue, object: nil, queue: nil) { (notification) in

@@ -320,11 +320,12 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
         alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
             let sb:UIStoryboard = UIStoryboard.init(name: "Calibration", bundle: nil)
-            if let viewController = sb.instantiateViewController(withIdentifier: "StripViewControllerID") as? StripViewController {
+            if let viewController = sb.instantiateViewController(withIdentifier: "StripTestIntroViewController") as? StripTestIntroViewController {
                 viewController.recalibration = true
                 viewController.isPresentView = true
                 viewController.modalPresentationStyle = .fullScreen
-                self.present(viewController, animated: true, completion: nil)
+                let nav = UINavigationController.init(rootViewController: viewController)
+                self.present(nav, animated: true, completion: nil)
 
             }
         }))

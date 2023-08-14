@@ -7,46 +7,46 @@ import Foundation
 
 class LastCalibration : NSObject, NSCoding{
 
-	var conductivity : Float!
+	var conductivity : Double!
 	var data : String!
 	var dataType : Int!
 	var dateTime : String!
 	var deviceId : String!
 	var isInactivated : Bool!
 	var mesureId : Int!
-	var oxydoReducPotentiel : Float!
+	var oxydoReducPotentiel : Double!
 	var rawBatteryLevel : Int!
 	var rawBestOrp : Int!
 	var rawConductivity : Int!
 	var rawOxydoReducPotentiel : Int!
-	var rawPH : Float!
+	var rawPH : Double!
 	var rawPhSensorVoltage : Int!
 	var rawTemperature : Int!
 	var source : String!
-	var temperature : Float!
+	var temperature : Double!
 
 
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
 	 */
 	init(fromDictionary dictionary: [String:Any]){
-		conductivity = dictionary["Conductivity"] as? Float
+		conductivity = dictionary["Conductivity"] as? Double
 		data = dictionary["Data"] as? String
 		dataType = dictionary["DataType"] as? Int
 		dateTime = dictionary["DateTime"] as? String
 		deviceId = dictionary["DeviceId"] as? String
 		isInactivated = dictionary["IsInactivated"] as? Bool
 		mesureId = dictionary["MesureId"] as? Int
-		oxydoReducPotentiel = dictionary["OxydoReducPotentiel"] as? Float
+		oxydoReducPotentiel = dictionary["OxydoReducPotentiel"] as? Double
 		rawBatteryLevel = dictionary["RawBatteryLevel"] as? Int
 		rawBestOrp = dictionary["RawBestOrp"] as? Int
 		rawConductivity = dictionary["RawConductivity"] as? Int
 		rawOxydoReducPotentiel = dictionary["RawOxydoReducPotentiel"] as? Int
-		rawPH = dictionary["RawPH"] as? Float
+		rawPH = dictionary["RawPH"] as? Double
 		rawPhSensorVoltage = dictionary["RawPhSensorVoltage"] as? Int
 		rawTemperature = dictionary["RawTemperature"] as? Int
 		source = dictionary["Source"] as? String
-		temperature = dictionary["Temperature"] as? Float
+		temperature = dictionary["Temperature"] as? Double
 	}
 
 	/**
@@ -115,23 +115,23 @@ class LastCalibration : NSObject, NSCoding{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-         conductivity = aDecoder.decodeObject(forKey: "Conductivity") as? Float
+         conductivity = aDecoder.decodeObject(forKey: "Conductivity") as? Double
          data = aDecoder.decodeObject(forKey: "Data") as? String
          dataType = aDecoder.decodeObject(forKey: "DataType") as? Int
          dateTime = aDecoder.decodeObject(forKey: "DateTime") as? String
          deviceId = aDecoder.decodeObject(forKey: "DeviceId") as? String
          isInactivated = aDecoder.decodeObject(forKey: "IsInactivated") as? Bool
          mesureId = aDecoder.decodeObject(forKey: "MesureId") as? Int
-         oxydoReducPotentiel = aDecoder.decodeObject(forKey: "OxydoReducPotentiel") as? Float
+         oxydoReducPotentiel = aDecoder.decodeObject(forKey: "OxydoReducPotentiel") as? Double
          rawBatteryLevel = aDecoder.decodeObject(forKey: "RawBatteryLevel") as? Int
          rawBestOrp = aDecoder.decodeObject(forKey: "RawBestOrp") as? Int
          rawConductivity = aDecoder.decodeObject(forKey: "RawConductivity") as? Int
          rawOxydoReducPotentiel = aDecoder.decodeObject(forKey: "RawOxydoReducPotentiel") as? Int
-         rawPH = aDecoder.decodeObject(forKey: "RawPH") as? Float
+         rawPH = aDecoder.decodeObject(forKey: "RawPH") as? Double
          rawPhSensorVoltage = aDecoder.decodeObject(forKey: "RawPhSensorVoltage") as? Int
          rawTemperature = aDecoder.decodeObject(forKey: "RawTemperature") as? Int
          source = aDecoder.decodeObject(forKey: "Source") as? String
-         temperature = aDecoder.decodeObject(forKey: "Temperature") as? Float
+         temperature = aDecoder.decodeObject(forKey: "Temperature") as? Double
 
 	}
 

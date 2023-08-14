@@ -9,11 +9,12 @@
 import UIKit
 
 
-class StripViewController: UIViewController {
-    let imageView = UIImageView(image: UIImage(named: "bkWaves.pdf"))
+class StripViewController: BaseViewController {
+    let imageView1 = UIImageView(image: UIImage(named: "bkWaves.pdf"))
 
     var recalibration = false
     var isPresentView = false
+    var isNewFlowwithIntro = false
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
@@ -39,9 +40,16 @@ class StripViewController: UIViewController {
     let version2Colors = ["305DAA","3F5EA6","465DA4","5159A4","5B5AA5","5A59A4","6658A2","6E59A4","7955A6","8155A0","F9F1C6","E9ECC6","D8E7C7","C9E2C5","B8DDC8","AAD8C8","9CD4C9","8DD0C8","81CDC8","72C9C7","E8EBC0","E8EBC0","CECBC0","C4B8B7","B7A7B3","AA96B0","A184AC","9178A6","8D62A6","83559D","DBB154","DBA855","DA9E4F","E09253","DE8854","E17C5A","E4705C","DE685D","E85960","E54F5F","C6D376","BBC372","ADB569","9FA961","85A365","6A9D6B","55986F","407A69","2F605F","204655","D8C160","DCA05E","E07E5C","E75C5A","E75A6B","E6597E","E5578F","BD4D8F","99408D","73378B"]
     
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))
+        self.navigationItem.setHidesBackButton(false, animated: false)
+        self.navigationItem.hidesBackButton = false
+
+        if isNewFlowwithIntro{
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeButtonTapped))
+        }
         doneButton.roundCorner(corner: 12)
 //        addBackground()
         /*
@@ -85,8 +93,8 @@ class StripViewController: UIViewController {
     
     func addBackground(){
         self.view.backgroundColor =  UIColor.init(hexString: "#F2F9FE")
-        imageView.frame = CGRect(x: 0, y: self.view.height - 316, width: self.view.frame.width, height: 316)
-        view.addSubview(imageView)
+        imageView1.frame = CGRect(x: 0, y: self.view.height - 316, width: self.view.frame.width, height: 316)
+        view.addSubview(imageView1)
     }
     
     func useNewStripVersion() {

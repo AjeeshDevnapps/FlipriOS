@@ -111,10 +111,10 @@ class ExpertviewCalibrationInfoTableViewCell: UITableViewCell {
         newCalibrationBtn.setTitle("New Calibration".localized, for: .normal)
 
         if let list = lastCalibrations {
-            for item in list.enumerated(){
-                if let obj = item as? LastCalibration{
+            for (i,obj) in list.enumerated(){
+//                if let obj = item as? LastCalibration{
                     if obj.dataType == 2{
-                        ph7ValLbl.text = "\(obj.rawPH)"
+                        ph7ValLbl.text = "\(obj.rawPH ?? 0.0)"
                         if let dateString = obj.dateTime as? String {
                             if let lastDate = dateString.fliprDate {
                                 let dateFormatter = DateFormatter()
@@ -123,7 +123,7 @@ class ExpertviewCalibrationInfoTableViewCell: UITableViewCell {
                             }
                         }
                     }else{
-                           ph4ValLbl.text = "\(obj.rawPH)"
+                        ph4ValLbl.text = "\(obj.rawPH ?? 0.0)"
                            if let dateString = obj.dateTime as? String {
                                if let lastDate = dateString.fliprDate {
                                    let dateFormatter = DateFormatter()
@@ -132,7 +132,7 @@ class ExpertviewCalibrationInfoTableViewCell: UITableViewCell {
                                }
                            }
                     }
-                }
+//                }
                 
             }
         }

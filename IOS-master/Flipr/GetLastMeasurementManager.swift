@@ -1,8 +1,8 @@
 //
-//  NewMeasurementManager.swift
+//  GetLastMeasurementManager.swift
 //  Flipr
 //
-//  Created by Ajeesh on 09/06/23.
+//  Created by Ajish on 03/08/23.
 //  Copyright © 2023 I See U. All rights reserved.
 //
 
@@ -12,9 +12,9 @@ import Alamofire
 import SwifterSwift
 
 
-class NewMeasurementManager: NSObject {
-    static let shared: NewMeasurementManager = {
-        let instance = NewMeasurementManager()
+class GetLastMeasurementManager: NSObject {
+    static let shared: GetLastMeasurementManager = {
+        let instance = GetLastMeasurementManager()
         return instance
     }()
     var stopScanning = false
@@ -104,7 +104,7 @@ class NewMeasurementManager: NSObject {
     }
     
     
-    func readPh4(completion: ((_ error: Error?) -> Void)?) {
+    func readLastMeasurement(completion: ((_ error: Error?) -> Void)?) {
         self.calibrationMeasuresCompletionBlock = completion
         self.isPh4Calibration = true
         let tmp = self.newMeasureValue
@@ -136,7 +136,7 @@ class NewMeasurementManager: NSObject {
 
 
 //MARK: - Core bluetooth central manager delegate
-extension NewMeasurementManager: CBCentralManagerDelegate {
+extension GetLastMeasurementManager: CBCentralManagerDelegate {
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if #available(iOS 10.0, *) {
@@ -299,7 +299,7 @@ extension NewMeasurementManager: CBCentralManagerDelegate {
 }
 
 //MARK: - Core bluetooth peripheral delegate
-extension NewMeasurementManager: CBPeripheralDelegate {
+extension GetLastMeasurementManager: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         
@@ -332,13 +332,13 @@ extension NewMeasurementManager: CBPeripheralDelegate {
             if let characteristics = service.characteristics {
                 for characteristic in characteristics {
                     if characteristic.uuid == FliprBLEParameters.measuresCharactersticUUID {
-                        if !self.isPh4Calibration{
+//                        if !self.isPh4Calibration{
                             self.measuresCharacteristic = characteristic
                             self.isReadP0Value = true
                             perform(#selector(readMeasurementValue), with: nil, afterDelay: 1.0)
-                        }else{
-                            
-                        }
+//                        }else{
+//
+//                        }
                     }
                 }
             }
@@ -351,9 +351,9 @@ extension NewMeasurementManager: CBPeripheralDelegate {
                     }
                     if characteristic.uuid == FliprBLEParameters.doAcqCharactersticUUID {
                         doAcqCharacteristic = characteristic
-                        if self.isPh4Calibration{
-                            perform(#selector(writeAcqValue), with: nil, afterDelay: 1.0)
-                        }
+//                        if self.isPh4Calibration{
+//                            perform(#selector(writeAcqValue), with: nil, afterDelay: 1.0)
+//                        }
                     }
                 }
             }
@@ -387,20 +387,20 @@ extension NewMeasurementManager: CBPeripheralDelegate {
             self.isReconnectedAfterFail = false
             self.isStoppedForRedo = true
             self.sendMeasure(measures: self.newMeasureValue ?? "", type: "0")
-            /*
-            if (newPh > 5){
-                print("********** Got ph 7")
-                self.sendMeasure(measures: self.newMeasureValue ?? "", type: "2")
-//                self.centralManager.cancelPeripheralConnection(self.flipr!)
-                return
-                //ph 7
-            }else{
-                print("************* Got ph 4")
-                self.sendMeasure(measures: self.newMeasureValue ?? "", type: "1")
-//                self.centralManager.cancelPeripheralConnection(self.flipr!)
-                return
-                //ph 4
-            */
+
+//            if (newPh > 5){
+//                print("********** Got ph 7")
+//                self.sendMeasure(measures: self.newMeasureValue ?? "", type: "2")
+////                self.centralManager.cancelPeripheralConnection(self.flipr!)
+//                return
+//                //ph 7
+//            }else{
+//                print("************* Got ph 4")
+//                self.sendMeasure(measures: self.newMeasureValue ?? "", type: "1")
+////                self.centralManager.cancelPeripheralConnection(self.flipr!)
+//                return
+//                //ph 4
+//            }
         }else{
             perform(#selector(readMeasurementValue), with: nil, afterDelay: 5.0)
         }
@@ -528,6 +528,7 @@ extension NewMeasurementManager: CBPeripheralDelegate {
     }
     
     
+    
     @objc func readMeasurementValueAfter20sDelay(){
         self.isRead20SecondDelay = true
         if flipr?.state == .connected {
@@ -555,7 +556,7 @@ extension NewMeasurementManager: CBPeripheralDelegate {
 }
 
 
-extension NewMeasurementManager{
+extension GetLastMeasurementManager{
     
     func sendMeasure(measures:String, type:String) {
         
@@ -609,13 +610,13 @@ extension NewMeasurementManager{
                     
                 }
                 
-                if self.isPh4Calibration{
-                    let tmp = self.newMeasureValue
-                    self.oldMeasureValue = tmp
-                    self.centralManager.cancelPeripheralConnection(self.flipr!)
-                    self.oldMeasureValue =  nil
-                    self.isReadP0Value = false
-                }
+//                if self.isPh4Calibration{
+//                    let tmp = self.newMeasureValue
+//                    self.oldMeasureValue = tmp
+//                    self.centralManager.cancelPeripheralConnection(self.flipr!)
+//                    self.oldMeasureValue =  nil
+//                    self.isReadP0Value = false
+//                }
                 self.calibrationMeasuresCompletionBlock?(response.result.error)
                 self.calibrationMeasuresCompletionBlock = nil
                 //                self.sendMeasuresCompletionBlock?(response.result.error)
