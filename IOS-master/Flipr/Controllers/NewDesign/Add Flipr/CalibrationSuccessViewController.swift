@@ -23,10 +23,10 @@ class CalibrationSuccessViewController: UIViewController {
         submitButton.roundCorner(corner: 12)
         submitButton.setTitle("Suivant".localized, for: .normal)
         titlLbl.text  = "Étalonnage réussi".localized
-        contentLine1Lbl.text  = "Dévissez le capuchon.".localized
-        contentLine2Lbl.text  = "Jetez le liquide qui se trouve dedans, ainsi que le liquide précédemment conservé dans un récipient.".localized
-        contentLine3Lbl.text  = "Vissez la grille (cache ajouré).".localized
-        contentLine4Lbl.text  = "Placez Flipr dans votre bassin, directement dans l'eau.".localized
+        contentLine1Lbl.text  = "1. Unscrew the storage cap\n2. Screw on the protective Grille \n3. Place Flipr in your pool".localized
+        contentLine2Lbl.text  = "The initial measurements are expected to be received within 1.5 hours, but they might be inaccurate for a few hours due to the calibration solutions.\n\nCalibration fluids can be stored for several days provided they remain uncontaminated. If you are uncertain about their condition, it is advisable to dispose of them.".localized
+//        contentLine3Lbl.text  = "Vissez la grille (cache ajouré).".localized
+//        contentLine4Lbl.text  = "Placez Flipr dans votre bassin, directement dans l'eau.".localized
         // Do any additional setup after loading the view.
     }
     

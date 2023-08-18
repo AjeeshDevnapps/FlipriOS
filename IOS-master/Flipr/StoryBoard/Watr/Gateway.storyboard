@@ -909,44 +909,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDk-y4-IX3">
-                                <rect key="frame" x="16" y="566.5" width="382" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="gMl-32-mgC"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="OK">
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="0.0" height="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" red="0.89019607840000003" green="0.90588235289999997" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="addButtonAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="TPC-aF-UEp"/>
-                                    <action selector="okButtonClicked:" destination="Qo9-FW-pWF" eventType="touchUpInside" id="7h5-b2-6yb"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwNew" translatesAutoresizingMaskIntoConstraints="NO" id="TJr-Mg-f7e">
-                                <rect key="frame" x="30" y="68" width="354" height="161"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iki-3G-aCx">
-                                <rect key="frame" x="16" y="249" width="382" height="267.5"/>
-                                <string key="text">Si la lumière passe au vert (Vraiment vert!), vous êtes connecté et votre Flipr Connect est prêt à recevoir des mesures Flipr! 
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3q-IQ-3cq">
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvY-7F-PSH" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="573.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gwNew" translatesAutoresizingMaskIntoConstraints="NO" id="TJr-Mg-f7e">
+                                                <rect key="frame" x="30" y="20" width="354" height="161"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="354" id="5hx-VK-snN"/>
+                                                    <constraint firstAttribute="height" constant="161" id="Ysr-EC-B8z"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iki-3G-aCx">
+                                                <rect key="frame" x="16" y="201" width="382" height="267.5"/>
+                                                <string key="text">Si la lumière passe au vert (Vraiment vert!), vous êtes connecté et votre Flipr Connect est prêt à recevoir des mesures Flipr! 
 
 Un flash bleu intermittent indique que Flipr AnalysR est à portée.
 
@@ -954,23 +932,77 @@ Ne débranchez pas Flipr Connect. Les mesures sont exclusivement récupérées e
 
 Si vous changez de réseau Wifi, veuillez refaire la configuration à partir du menu Paramètres.
 </string>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDk-y4-IX3">
+                                                <rect key="frame" x="16" y="498.5" width="382" height="50"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="gMl-32-mgC"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="OK">
+                                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="0.0" height="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="25"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" red="0.89019607840000003" green="0.90588235289999997" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="addButtonAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="TPC-aF-UEp"/>
+                                                    <action selector="okButtonClicked:" destination="Qo9-FW-pWF" eventType="touchUpInside" id="7h5-b2-6yb"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="TJr-Mg-f7e" firstAttribute="top" secondItem="LvY-7F-PSH" secondAttribute="top" constant="20" id="0pD-Kl-Ghs"/>
+                                            <constraint firstItem="TJr-Mg-f7e" firstAttribute="leading" secondItem="LvY-7F-PSH" secondAttribute="leading" constant="30" id="8Os-Ox-idb"/>
+                                            <constraint firstAttribute="trailing" secondItem="TJr-Mg-f7e" secondAttribute="trailing" constant="30" id="Fdb-hV-svE"/>
+                                            <constraint firstItem="Iki-3G-aCx" firstAttribute="top" secondItem="TJr-Mg-f7e" secondAttribute="bottom" constant="20" id="Kyg-QG-Gyc"/>
+                                            <constraint firstItem="sDk-y4-IX3" firstAttribute="leading" secondItem="LvY-7F-PSH" secondAttribute="leading" constant="16" id="Xna-Ic-JUb"/>
+                                            <constraint firstItem="sDk-y4-IX3" firstAttribute="top" secondItem="Iki-3G-aCx" secondAttribute="bottom" constant="30" id="ZxN-LX-HBk"/>
+                                            <constraint firstItem="Iki-3G-aCx" firstAttribute="leading" secondItem="LvY-7F-PSH" secondAttribute="leading" constant="16" id="bQu-ba-UuT"/>
+                                            <constraint firstAttribute="bottom" secondItem="sDk-y4-IX3" secondAttribute="bottom" constant="25" id="klJ-j0-vCK"/>
+                                            <constraint firstAttribute="trailing" secondItem="Iki-3G-aCx" secondAttribute="trailing" constant="16" id="pHB-sJ-q8B"/>
+                                            <constraint firstAttribute="trailing" secondItem="sDk-y4-IX3" secondAttribute="trailing" constant="16" id="tj4-OB-5j6"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="LvY-7F-PSH" firstAttribute="bottom" secondItem="abK-pX-Gxi" secondAttribute="bottom" id="Mpa-S1-k8E"/>
+                                    <constraint firstItem="LvY-7F-PSH" firstAttribute="top" secondItem="abK-pX-Gxi" secondAttribute="top" id="Xkg-ro-QdV"/>
+                                    <constraint firstItem="LvY-7F-PSH" firstAttribute="trailing" secondItem="abK-pX-Gxi" secondAttribute="trailing" id="Zm5-hB-gMy"/>
+                                    <constraint firstItem="LvY-7F-PSH" firstAttribute="leading" secondItem="abK-pX-Gxi" secondAttribute="leading" id="chZ-dc-iKH"/>
+                                    <constraint firstItem="LvY-7F-PSH" firstAttribute="width" secondItem="7RY-yn-5jZ" secondAttribute="width" id="lup-wg-1i0"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="abK-pX-Gxi"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="7RY-yn-5jZ"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pwW-gf-5nw"/>
                         <color key="backgroundColor" red="0.89411764709999997" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Iki-3G-aCx" firstAttribute="leading" secondItem="pwW-gf-5nw" secondAttribute="leading" constant="16" id="02A-D5-tcb"/>
-                            <constraint firstItem="sDk-y4-IX3" firstAttribute="leading" secondItem="pwW-gf-5nw" secondAttribute="leading" constant="16" id="2c4-Mv-v9E"/>
-                            <constraint firstItem="Iki-3G-aCx" firstAttribute="top" secondItem="TJr-Mg-f7e" secondAttribute="bottom" constant="20" id="2dS-jx-SGQ"/>
-                            <constraint firstItem="pwW-gf-5nw" firstAttribute="trailing" secondItem="sDk-y4-IX3" secondAttribute="trailing" constant="16" id="AuN-1E-WiZ"/>
-                            <constraint firstItem="pwW-gf-5nw" firstAttribute="trailing" secondItem="Iki-3G-aCx" secondAttribute="trailing" constant="16" id="PuP-xQ-DFn"/>
-                            <constraint firstItem="sDk-y4-IX3" firstAttribute="top" secondItem="Iki-3G-aCx" secondAttribute="bottom" constant="50" id="YZj-2f-Mgj"/>
-                            <constraint firstItem="TJr-Mg-f7e" firstAttribute="top" secondItem="pwW-gf-5nw" secondAttribute="top" constant="20" id="btk-bd-9bm"/>
-                            <constraint firstItem="pwW-gf-5nw" firstAttribute="trailing" secondItem="TJr-Mg-f7e" secondAttribute="trailing" constant="30" id="k12-pQ-Gll"/>
-                            <constraint firstItem="TJr-Mg-f7e" firstAttribute="leading" secondItem="pwW-gf-5nw" secondAttribute="leading" constant="30" id="yQu-82-SrV"/>
+                            <constraint firstItem="pwW-gf-5nw" firstAttribute="bottom" secondItem="o3q-IQ-3cq" secondAttribute="bottom" id="fim-MR-moc"/>
+                            <constraint firstItem="o3q-IQ-3cq" firstAttribute="top" secondItem="pwW-gf-5nw" secondAttribute="top" id="hmF-nQ-VTP"/>
+                            <constraint firstItem="o3q-IQ-3cq" firstAttribute="leading" secondItem="pwW-gf-5nw" secondAttribute="leading" id="llw-EM-aiB"/>
+                            <constraint firstItem="o3q-IQ-3cq" firstAttribute="trailing" secondItem="pwW-gf-5nw" secondAttribute="trailing" id="wGg-gc-Uxx"/>
                         </constraints>
                     </view>
                     <connections>
@@ -981,7 +1013,7 @@ Si vous changez de réseau Wifi, veuillez refaire la configuration à partir du 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qKA-Gb-j6S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2352" y="42"/>
+            <point key="canvasLocation" x="2350.7246376811595" y="41.517857142857139"/>
         </scene>
     </scenes>
     <resources>

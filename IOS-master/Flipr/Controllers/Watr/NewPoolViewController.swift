@@ -308,7 +308,6 @@ class NewPoolViewController: UIViewController {
             
             if shares != nil{
                 if shares!.count > 0 {
-                    
                     self.loadedShares =  shares!.filter { $0.isInvited == true }
                     self.contacts =  shares!.filter { $0.isInvited == false }
 
@@ -317,8 +316,14 @@ class NewPoolViewController: UIViewController {
                         self.tableView.reloadData()
                     }
                 }
+                else{
+                    self.loadedShares.removeAll()
+                    self.tableView.reloadData()
+                }
+            }else{
+                self.loadedShares.removeAll()
+                self.tableView.reloadData()
             }
-            
         }
     }
     
@@ -1111,6 +1116,7 @@ extension NewPoolViewController: UITableViewDelegate {
 //                return
 
             }else{
+                
             }
             self.getCurrentShares()
         }

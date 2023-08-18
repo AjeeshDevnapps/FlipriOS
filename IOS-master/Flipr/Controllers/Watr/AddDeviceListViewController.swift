@@ -46,6 +46,14 @@ class AddDeviceListViewController: UIViewController {
         viewController.isSignupFlow = self.isSignupFlow
         AppSharedData.sharedInstance.isAddDeviceStarted = true
         self.navigationController?.pushViewController(viewController, animated: true)
+        
+//        let fliprStoryboard = UIStoryboard(name: "NewPool", bundle: nil)
+//        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddV3IntroViewController") as! AddV3IntroViewController
+//        viewController.isPushFlow = self.isPushFlow
+//        viewController.isSignupFlow = self.isSignupFlow
+//        AppSharedData.sharedInstance.isAddDeviceStarted = true
+//        self.navigationController?.pushViewController(viewController, animated: true)
+
 
     }
     

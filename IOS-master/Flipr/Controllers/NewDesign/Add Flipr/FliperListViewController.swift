@@ -18,6 +18,14 @@ class FliprListViewController: BaseViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var serialTitleLabel: UILabel!
     @IBOutlet weak var selectButton: UIButton!
+    
+    
+    @IBOutlet weak var subTitleLbl: UILabel!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var introScrollView: UIScrollView!
+
+    
     var fliprList = [String]()
     let hud = JGProgressHUD(style:.dark)
 
@@ -35,6 +43,12 @@ class FliprListViewController: BaseViewController {
         self.typeLabel.text = flipType
         titleLabel.text = "Choisissez le Flipr Start à associer".localized
         serialTitleLabel.text = "Serial".localized
+        
+        nextButton.setTitle("Next".localized(), for: .normal)
+        cancelButton.setTitle("Cancel".localized(), for: .normal)
+        let trnText = "addV3Intro".localized
+        subTitleLbl.text = trnText
+
 //        selectButton.addTarget(self, action: #selector(fliprSelectButtonAction), for: .touchUpInside)
         // Do any additional setup after loading the view.
     }
@@ -95,6 +109,22 @@ class FliprListViewController: BaseViewController {
         }
     }
 
+    
+    @IBAction func cancelButtonAction(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func nextButtonAction(){
+        hud?.show(in: self.view)
+        Module.activate(serial: self.serialKey, activationKey: "123456", completion: { (error) in
+            if error != nil {
+                self.hud?.dismiss(afterDelay: 0)
+                self.showError(title: "Error".localized, message: error?.localizedDescription)
+            } else {
+                self.activateFliprMode()
+            }
+        })
+    }
 }
 
 extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
@@ -117,18 +147,27 @@ extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let skey = fliprList[indexPath.row]
-        hud?.show(in: self.view)
-        Module.activate(serial:skey, activationKey: "123456", completion: { (error) in
-            if error != nil {
-                self.hud?.dismiss(afterDelay: 0)
-                self.showError(title: "Error".localized, message: error?.localizedDescription)
-            } else {
-                self.serialKey = skey
-                self.activateFliprMode()
-//                self.showSuccessScreen()
-            }
-        })
+        self.serialKey = skey
         
+        if skey.hasPrefix("F"){
+            self.introScrollView.isHidden = false
+        }else{
+            hud?.show(in: self.view)
+            Module.activate(serial:skey, activationKey: "123456", completion: { (error) in
+                if error != nil {
+                    self.hud?.dismiss(afterDelay: 0)
+                    self.showError(title: "Error".localized, message: error?.localizedDescription)
+                } else {
+                    self.serialKey = skey
+                    self.activateFliprMode()
+                }
+            })
+            
+        }
+        
+/*
+        
+        */
 //        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "KeyEnterViewController") as? KeyEnterViewController{
 //            vc.serialKey = fliprList[indexPath.row]
 //            vc.flipType = flipType
@@ -175,6 +214,15 @@ extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
 //        }
     }
 
+//    func v3IntroScreen(){
+//        let fliprStoryboard = UIStoryboard(name: "NewPool", bundle: nil)
+//        let viewController = fliprStoryboard.instantiateViewController(withIdentifier: "AddV3IntroViewController") as! AddV3IntroViewController
+////        viewController.isPushFlow = self.isPushFlow
+////        viewController.isSignupFlow = self.isSignupFlow
+////        AppSharedData.sharedInstance.isAddDeviceStarted = true
+//        self.navigationController?.pushViewController(viewController, animated: true)
+//
+//    }
     
     
     func showStripTest(){

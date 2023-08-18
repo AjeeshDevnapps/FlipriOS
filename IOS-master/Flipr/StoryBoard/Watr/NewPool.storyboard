@@ -1190,12 +1190,160 @@
             </objects>
             <point key="canvasLocation" x="5519" y="-106"/>
         </scene>
+        <!--AddV3 Intro View Controller-->
+        <scene sceneID="mZC-Wf-dwX">
+            <objects>
+                <viewController storyboardIdentifier="AddV3IntroViewController" id="Dcn-gJ-fin" customClass="AddV3IntroViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="S2r-hb-HNB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GhO-ms-4yi">
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="03l-gH-ets" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="803"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flipr-analysr-intro-logo" translatesAutoresizingMaskIntoConstraints="NO" id="lEh-E7-the">
+                                                <rect key="frame" x="26" y="15" width="362" height="52"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="52" id="pMo-6X-IhW"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="db0-eS-blo">
+                                                <rect key="frame" x="19" y="85" width="376" height="38.5"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                                <color key="textColor" red="0.0078431372549019607" green="0.25882352941176467" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ci-u4-WGa">
+                                                <rect key="frame" x="26" y="138.5" width="362" height="485"/>
+                                                <mutableString key="text">You're about to install a Flipr AnalysR V3.
+
+The first step is to link your device to your account and, if necessary, set it to a nominal operating mode, enabling it to automatically perform around twenty measurements a day.
+
+Once this has been done, we'll ask you to measure the characteristics of your pool or spa using a test strip. This is a very important step, as it enables our algorithms to take into account certain parameters that the Flipr probes do not measure (total alkalinity, total hardness and stabilizer levels).
+
+Finally, we'll ask you to connect your Flipr Connect (Gateway) to enable your Flipr AnalysR to transmit data to our systems. 
+
+Flipr Connect is essential for automatic data retrieval. You will need to leave it plugged in and connected to your Wifi network. Please note that Flipr Connect V1 only works on 2.4 GHz Wifi networks.
+
+Should any of these steps fail, it will still be possible to perform them individually from the settings menu.
+
+All Flipr AnalysRs are factory-calibrated, but you will be asked to perform a calibration after a certain period of use to refine the measured data. </mutableString>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🚀" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsW-Tm-2HI">
+                                                <rect key="frame" x="195" y="638.5" width="24" height="21.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ws0-4J-5Zm">
+                                                <rect key="frame" x="26" y="675" width="362" height="50"/>
+                                                <color key="backgroundColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="XSQ-de-RB5"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Next">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="nextButtonAction" destination="Dcn-gJ-fin" eventType="touchUpInside" id="sGD-aw-dzf"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3c-mY-vfe">
+                                                <rect key="frame" x="19" y="733" width="376" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="UYH-SA-YRj"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="cancelButtonAction" destination="Dcn-gJ-fin" eventType="touchUpInside" id="fOO-1L-75d"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="lEh-E7-the" secondAttribute="trailing" constant="26" id="429-WX-Cfu"/>
+                                            <constraint firstAttribute="trailing" secondItem="o3c-mY-vfe" secondAttribute="trailing" constant="19" id="M2B-Rn-dZq"/>
+                                            <constraint firstItem="db0-eS-blo" firstAttribute="leading" secondItem="03l-gH-ets" secondAttribute="leading" constant="19" id="N0b-nA-aC9"/>
+                                            <constraint firstItem="lEh-E7-the" firstAttribute="leading" secondItem="03l-gH-ets" secondAttribute="leading" constant="26" id="NRU-34-saC"/>
+                                            <constraint firstItem="CsW-Tm-2HI" firstAttribute="centerX" secondItem="03l-gH-ets" secondAttribute="centerX" id="Q58-BP-u9V"/>
+                                            <constraint firstItem="Ws0-4J-5Zm" firstAttribute="leading" secondItem="03l-gH-ets" secondAttribute="leading" constant="26" id="Srf-Xv-4gU"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ws0-4J-5Zm" secondAttribute="trailing" constant="26" id="VeS-Xs-CbD"/>
+                                            <constraint firstAttribute="bottom" secondItem="o3c-mY-vfe" secondAttribute="bottom" constant="20" id="a6c-eH-slk"/>
+                                            <constraint firstAttribute="trailing" secondItem="db0-eS-blo" secondAttribute="trailing" constant="19" id="ege-L5-UZJ"/>
+                                            <constraint firstItem="CsW-Tm-2HI" firstAttribute="top" secondItem="1ci-u4-WGa" secondAttribute="bottom" constant="15" id="fYl-Ou-HUG"/>
+                                            <constraint firstItem="lEh-E7-the" firstAttribute="centerX" secondItem="03l-gH-ets" secondAttribute="centerX" id="faB-nN-hpS"/>
+                                            <constraint firstItem="1ci-u4-WGa" firstAttribute="top" secondItem="db0-eS-blo" secondAttribute="bottom" constant="15" id="hF3-Tb-Q3t"/>
+                                            <constraint firstItem="1ci-u4-WGa" firstAttribute="leading" secondItem="03l-gH-ets" secondAttribute="leading" constant="26" id="hUJ-oc-gd4"/>
+                                            <constraint firstItem="Ws0-4J-5Zm" firstAttribute="top" secondItem="CsW-Tm-2HI" secondAttribute="bottom" constant="15" id="jG9-wE-9dr"/>
+                                            <constraint firstItem="o3c-mY-vfe" firstAttribute="top" secondItem="Ws0-4J-5Zm" secondAttribute="bottom" constant="8" id="ldk-hQ-ybV"/>
+                                            <constraint firstItem="o3c-mY-vfe" firstAttribute="leading" secondItem="03l-gH-ets" secondAttribute="leading" constant="19" id="oQK-P4-Mt7"/>
+                                            <constraint firstItem="db0-eS-blo" firstAttribute="top" secondItem="lEh-E7-the" secondAttribute="bottom" constant="18" id="orw-FJ-XR4"/>
+                                            <constraint firstItem="lEh-E7-the" firstAttribute="top" secondItem="03l-gH-ets" secondAttribute="top" constant="15" id="ppn-qh-sy9"/>
+                                            <constraint firstAttribute="trailing" secondItem="1ci-u4-WGa" secondAttribute="trailing" constant="26" id="sNk-Pi-vTi"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="03l-gH-ets" firstAttribute="bottom" secondItem="bsu-3N-dfd" secondAttribute="bottom" id="BZ2-Tn-AZb"/>
+                                    <constraint firstItem="03l-gH-ets" firstAttribute="trailing" secondItem="bsu-3N-dfd" secondAttribute="trailing" id="XiM-LZ-rdS"/>
+                                    <constraint firstItem="03l-gH-ets" firstAttribute="width" secondItem="fii-08-ccH" secondAttribute="width" id="bOE-wZ-oco"/>
+                                    <constraint firstItem="bsu-3N-dfd" firstAttribute="top" secondItem="03l-gH-ets" secondAttribute="top" id="cVi-AE-xca"/>
+                                    <constraint firstItem="03l-gH-ets" firstAttribute="leading" secondItem="bsu-3N-dfd" secondAttribute="leading" id="xEK-0C-aH0"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="bsu-3N-dfd"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="fii-08-ccH"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ahr-xZ-gFe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="GhO-ms-4yi" firstAttribute="top" secondItem="Ahr-xZ-gFe" secondAttribute="top" id="7Xc-9n-uy7"/>
+                            <constraint firstItem="GhO-ms-4yi" firstAttribute="trailing" secondItem="Ahr-xZ-gFe" secondAttribute="trailing" id="EmZ-En-Ls8"/>
+                            <constraint firstItem="GhO-ms-4yi" firstAttribute="leading" secondItem="Ahr-xZ-gFe" secondAttribute="leading" id="FaB-nY-XWp"/>
+                            <constraint firstItem="Ahr-xZ-gFe" firstAttribute="bottom" secondItem="GhO-ms-4yi" secondAttribute="bottom" id="igY-ig-oxx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="o3c-mY-vfe" id="iJN-U2-dFx"/>
+                        <outlet property="nextButton" destination="Ws0-4J-5Zm" id="jZu-7p-22P"/>
+                        <outlet property="subTitleLbl" destination="1ci-u4-WGa" id="gFq-aZ-yYt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KjW-nt-hcA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6257.971014492754" y="-106.47321428571428"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AnyserNewIconpng" width="27" height="56.5"/>
         <image name="ButtonClose" width="32" height="32"/>
         <image name="DiprNewiconpng" width="27" height="56.5"/>
         <image name="createPlace" width="155" height="155"/>
+        <image name="flipr-analysr-intro-logo" width="323" height="52"/>
         <image name="hubBk" width="46" height="46"/>
         <image name="link" width="24" height="24"/>
         <image name="location" width="25" height="25"/>
