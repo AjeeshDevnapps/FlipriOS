@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,20 +13,20 @@
             <objects>
                 <viewController storyboardIdentifier="NewLocationViewControllerID" id="Y6W-OH-hqX" customClass="NewLocationViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nouvel Emplacement" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smP-3Q-qJD">
-                                <rect key="frame" x="88.5" y="56" width="237" height="29"/>
+                                <rect key="frame" x="69" y="32" width="237" height="29"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fliprLogo" translatesAutoresizingMaskIntoConstraints="NO" id="KZx-t3-YNq">
-                                <rect key="frame" x="151.5" y="118" width="111" height="45"/>
+                                <rect key="frame" x="132" y="94" width="111" height="45"/>
                             </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQC-0x-IOF">
-                                <rect key="frame" x="16" y="203" width="382" height="45"/>
+                                <rect key="frame" x="16" y="179" width="343" height="45"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="ocm-7S-kQx"/>
@@ -39,7 +38,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1mF-nX-L16">
-                                <rect key="frame" x="35" y="203" width="344" height="45"/>
+                                <rect key="frame" x="35" y="179" width="305" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="o6w-DF-va8"/>
@@ -53,17 +52,14 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="I9T-3W-GAT">
-                                <rect key="frame" x="16" y="278" width="382" height="445"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="445" id="jml-zO-hNG"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="254" width="343" height="310"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewLocationTableViewCellID" id="F9d-ux-hJa" customClass="LocationTypeTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="382" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F9d-ux-hJa" id="bCz-RC-xSB">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZUN-st-B4d">
@@ -74,16 +70,16 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bg6-Fa-RgB">
-                                                    <rect key="frame" x="57" y="13" width="317" height="18"/>
+                                                    <rect key="frame" x="57" y="13" width="278" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view alpha="0.26000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mqo-kl-k36">
-                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming soon" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fL9-W0-Qds">
-                                                            <rect key="frame" x="247" y="23.5" width="120" height="14"/>
+                                                            <rect key="frame" x="208" y="23.5" width="120" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="14" id="cC0-Mg-RUt"/>
                                                                 <constraint firstAttribute="width" constant="120" id="nvb-iD-19f"/>
@@ -130,7 +126,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2C4-YD-3Mt">
-                                <rect key="frame" x="20" y="779" width="374" height="53"/>
+                                <rect key="frame" x="20" y="584" width="335" height="53"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="FG1-G6-7nO"/>
@@ -152,7 +148,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="2C4-YD-3Mt" secondAttribute="bottom" constant="30" id="21a-Jc-GXq"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1mF-nX-L16" secondAttribute="trailing" constant="35" id="3KY-hZ-z1D"/>
                             <constraint firstItem="1mF-nX-L16" firstAttribute="top" secondItem="KZx-t3-YNq" secondAttribute="bottom" constant="40" id="FD1-VL-fkF"/>
-                            <constraint firstItem="2C4-YD-3Mt" firstAttribute="top" secondItem="I9T-3W-GAT" secondAttribute="bottom" priority="250" constant="20" id="J8I-1j-f5N"/>
+                            <constraint firstItem="2C4-YD-3Mt" firstAttribute="top" secondItem="I9T-3W-GAT" secondAttribute="bottom" constant="20" id="J8I-1j-f5N"/>
                             <constraint firstItem="I9T-3W-GAT" firstAttribute="top" secondItem="1mF-nX-L16" secondAttribute="bottom" constant="30" id="Tru-hK-fdM"/>
                             <constraint firstItem="KZx-t3-YNq" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="YID-8l-W66"/>
                             <constraint firstItem="1mF-nX-L16" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="35" id="b0k-pG-bth"/>
@@ -172,7 +168,6 @@
                     </view>
                     <connections>
                         <outlet property="submitButton" destination="2C4-YD-3Mt" id="jjl-eT-pcC"/>
-                        <outlet property="tableHeightConstraint" destination="jml-zO-hNG" id="k9j-yl-ILf"/>
                         <outlet property="tableView" destination="I9T-3W-GAT" id="KFk-af-uoA"/>
                         <outlet property="textField" destination="1mF-nX-L16" id="xcu-gr-xwe"/>
                         <outlet property="titleVC" destination="smP-3Q-qJD" id="nPy-Ff-ptF"/>

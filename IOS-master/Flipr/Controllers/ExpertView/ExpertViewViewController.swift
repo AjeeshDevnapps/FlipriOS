@@ -39,7 +39,6 @@ class ExpertViewViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         callExpertViewApi()
-        createOrder()
     }
     
     func createOrder(){
@@ -64,6 +63,7 @@ class ExpertViewViewController: UIViewController {
                         self.expertViewInfo = info
                     }
                     hud?.dismiss(afterDelay: 0)
+                    self.createOrder()
                     self.tableView.reloadData()
                 case .failure(let error):
                     hud?.dismiss(afterDelay: 0)

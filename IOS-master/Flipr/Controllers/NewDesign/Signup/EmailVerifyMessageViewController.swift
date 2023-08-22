@@ -55,7 +55,8 @@ class EmailVerifyMessageViewController: BaseViewController {
     }
     
     @IBAction func reEnterEmail(_ sender: UIButton) {
-        self.navigationController?.popViewController()
+        goBack()
+//        self.navigationController?.popViewController()
 //        self.navigationController?.popToViewController(navigationController!.viewControllers[1], animated: true)
     }
     
@@ -101,6 +102,8 @@ class EmailVerifyMessageViewController: BaseViewController {
                             }
                         }
                     }
+                }else{
+                    self.showError(title: "Erreur", message: "Oups, we're sorry but something went wrong :/".localized)
                 }
             } else {
                 self.showError(title: "Erreur", message: error?.localizedDescription)

@@ -87,7 +87,7 @@ class PoolSettingsStartViewController: BaseViewController {
     
     @IBAction func nextButton(_ sender: UIButton) {
         let sb = UIStoryboard(name: "Calibration", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "CalibrationPh7IntroViewController") as! CalibrationPh7IntroViewController
+        let vc = sb.instantiateViewController(withIdentifier: "CalibrationIntroViewController") as! CalibrationIntroViewController
         if isAddingNewDevice{
             vc.isAddingNewDevice =  self.isAddingNewDevice
         }
@@ -104,6 +104,12 @@ extension UIViewController {
     }
     
     @objc func goBack() {
-        self.navigationController?.popViewController(animated: true)
+        backTwo()
+//        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func backTwo() {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
     }
 }

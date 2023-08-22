@@ -36,13 +36,15 @@ class LoadingViewController: BaseViewController {
                 let verificationVC = self.storyboard?.instantiateViewController(withIdentifier: "EmailVerifyMessageViewController") as! EmailVerifyMessageViewController
                 verificationVC.email = self.email
                 self.navigationController?.pushViewController(verificationVC, completion: {
-                    if let index = self.navigationController?.viewControllers.index(of: self) {
-                        self.navigationController?.viewControllers.remove(at: index)
-                    }
+                   
+//                    if let index = self.navigationController?.viewControllers.index(of: self) {
+//                        self.navigationController?.viewControllers.remove(at: index)
+//                    }
+                    
                 })
             } else {
                 self.showAlert(title: "Error".localized, message: error?.localizedDescription) { _ in
-                    self.navigationController?.popViewController()
+//                    self.navigationController?.popViewController()
                 }
             }
         }

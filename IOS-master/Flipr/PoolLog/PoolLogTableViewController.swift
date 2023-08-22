@@ -30,6 +30,14 @@ class PoolLogTableViewController: UITableViewController, PoolLogViewControllerDe
             navigationController?.navigationBar.largeTitleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue:UIColor.white])
         }
         
+        NotificationCenter.default.addObserver(forName: FliprLogDidChanged, object: nil, queue: nil) { (notification) in
+            self.logs = [Log]()
+            self.tableView.reloadData()
+            self.page = 1
+            self.view.showEmptyStateViewLoading(title: nil, message: nil)
+            self.refresh()
+        }
+        
 //        if let module = Module.currentModule {
 ////            if module.isSubscriptionValid {
 //                NotificationCenter.default.addObserver(forName: FliprLogDidChanged, object: nil, queue: nil) { (notification) in
@@ -60,15 +68,17 @@ class PoolLogTableViewController: UITableViewController, PoolLogViewControllerDe
     override func viewWillAppear(_ animated: Bool) {
         if let module = Module.currentModule {
 //            if module.isSubscriptionValid {
-                NotificationCenter.default.addObserver(forName: FliprLogDidChanged, object: nil, queue: nil) { (notification) in
-                    self.logs = [Log]()
-                    self.tableView.reloadData()
-                    self.page = 1
-                    self.view.showEmptyStateViewLoading(title: nil, message: nil)
-                    self.refresh()
-                }
+//                NotificationCenter.default.addObserver(forName: FliprLogDidChanged, object: nil, queue: nil) { (notification) in
+//                    self.logs = [Log]()
+//                    self.tableView.reloadData()
+//                    self.page = 1
+//                    self.view.showEmptyStateViewLoading(title: nil, message: nil)
+//                    self.refresh()
+//                }
                 
                 self.view.showEmptyStateViewLoading(title: nil, message: nil)
+                self.page = 1
+                self.logs.removeAll()
                 refresh()
 //            } else {
 //                self.view.showEmptyStateView(image: nil, title: "[Texte à mettre]", message: "[Texte à mettre]", buttonTitle: "Upgrade to Flipr Infinite".localized) {

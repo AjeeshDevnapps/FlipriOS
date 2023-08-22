@@ -488,6 +488,7 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
     func showCalibrationView(){
         let sb = UIStoryboard(name: "Calibration", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "CalibrationIntroViewController") as! CalibrationIntroViewController
+        vc.isPresentingView = true
         let navigationController = UINavigationController.init(rootViewController: vc)
         navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)

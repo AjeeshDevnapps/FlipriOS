@@ -59,8 +59,8 @@ class NewLocationViewController: UIViewController {
 
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                self.tableHeightConstraint.constant = CGFloat(50 * self.placeTypes.count)
-                self.view.layoutIfNeeded()
+//                self.tableHeightConstraint.constant = CGFloat(50 * self.placeTypes.count)
+//                self.view.layoutIfNeeded()
 //                self.tableView.addShadow(offset: CGSize(width: 0, height: 3), color: UIColor.black, radius: 2.0, opacity: 0.35)
             }
         }

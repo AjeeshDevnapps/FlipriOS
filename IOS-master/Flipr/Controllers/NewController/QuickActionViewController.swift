@@ -377,7 +377,7 @@ class QuickActionViewController: UIViewController {
     func showCalibrationView(){
         
         let sb = UIStoryboard(name: "Calibration", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "CalibrationPh7IntroViewController") as! CalibrationPh7IntroViewController
+        let vc = sb.instantiateViewController(withIdentifier: "CalibrationIntroViewController") as! CalibrationIntroViewController
         vc.isPresentedFlow = true
         vc.recalibration = true
         vc.noStripTest = true

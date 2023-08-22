@@ -24,6 +24,9 @@ class ExpertviewInfoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lastMeasureDateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var expertViewInfoLbl: UILabel!
+
 
     var lastMeasureInfo : LastCalibration?
     
@@ -40,7 +43,11 @@ class ExpertviewInfoTableViewCell: UITableViewCell {
     }
     
     func loadData(){
-        self.titleLabel.text = "Raw data".latinized
+        self.titleLabel.text = "Raw data".localized
+        
+        
+        self.expertViewInfoLbl.text = "Expert View provides access to raw data that is not processed or simplified like the data displayed in dashboards. Interpreting this data requires specialized skills and domain expertise. It is intended for experts and diagnostic purposes, not for direct comparison with dashboard data. While dashboards offer quick insights for most users, Expert View targets professionals seeking in-depth analysis and precise information. Proper interpretation of raw data is crucial as it forms the basis for dashboard visualizations.".localized
+
 
         phLbl.text = "pH".localized
         redoxLbl.text = "Redox".localized
@@ -114,7 +121,8 @@ class ExpertviewCalibrationInfoTableViewCell: UITableViewCell {
             for (i,obj) in list.enumerated(){
 //                if let obj = item as? LastCalibration{
                     if obj.dataType == 2{
-                        ph7ValLbl.text = "\(obj.rawPH ?? 0.0)"
+                        let tmpPh7 = obj.rawPH ?? 0.0
+                        ph7ValLbl.text =  String(format:"%.2f", tmpPh7)
                         if let dateString = obj.dateTime as? String {
                             if let lastDate = dateString.fliprDate {
                                 let dateFormatter = DateFormatter()
@@ -123,7 +131,8 @@ class ExpertviewCalibrationInfoTableViewCell: UITableViewCell {
                             }
                         }
                     }else{
-                        ph4ValLbl.text = "\(obj.rawPH ?? 0.0)"
+                        let tmpPh4 = obj.rawPH ?? 0.0
+                        ph4ValLbl.text =  String(format:"%.2f", tmpPh4)
                            if let dateString = obj.dateTime as? String {
                                if let lastDate = dateString.fliprDate {
                                    let dateFormatter = DateFormatter()
@@ -462,6 +471,8 @@ class ExpertviewTrendInfoTableViewCell: UITableViewCell {
         if let lsiState  = lsiInfo?.lSI{
             lsiSlider.image = UIImage(named: "hSlider\(lsiState)")
         }
+        
+        lsiInfo1Lbl.text = "The Langelier Saturation Index (LSI) is used to assess the saturation state of calcium carbonate in water.".localized
        
         var infoStrPart = ""
         if let type = self.lsiValues?.lSIStr{

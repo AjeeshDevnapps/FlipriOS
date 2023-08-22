@@ -23,11 +23,11 @@
                                 <color key="separatorColor" red="0.59215686274509804" green="0.63921568627450975" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpertviewInfoTableViewCell" rowHeight="343" id="xk5-lr-q9P" customClass="ExpertviewInfoTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="359" height="343"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpertviewInfoTableViewCell" rowHeight="393" id="xk5-lr-q9P" customClass="ExpertviewInfoTableViewCell" customModule="Flipr" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="359" height="393"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xk5-lr-q9P" id="bes-i6-I1n">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="343"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="393"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Données brutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aM-IV-SuB">
@@ -40,16 +40,22 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last measurement : tue. 20/06 13:41" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhr-RK-Sys">
-                                                    <rect key="frame" x="0.0" y="47.333333333333336" width="351" height="15"/>
+                                                    <rect key="frame" x="0.0" y="54.333333333333336" width="351" height="15.000000000000007"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="YbL-p2-rPp"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last measurement : tue. 20/06 13:41" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wrd-Z4-v6Y">
+                                                    <rect key="frame" x="0.0" y="99.333333333333329" width="359" height="17.666666666666671"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XAF-ah-G4K">
-                                                    <rect key="frame" x="0.0" y="98" width="359" height="225"/>
+                                                    <rect key="frame" x="0.0" y="137" width="359" height="236"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="smr-Mh-eUn">
                                                             <rect key="frame" x="179" y="0.0" width="1" height="234"/>
@@ -101,7 +107,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L8y-v8-EcP">
-                                                            <rect key="frame" x="0.0" y="117" width="171" height="108"/>
+                                                            <rect key="frame" x="0.0" y="128" width="171" height="108"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R01-3d-bRT">
                                                                     <rect key="frame" x="4" y="35" width="163" height="38.333333333333343"/>
@@ -183,7 +189,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RjK-0n-um2">
-                                                            <rect key="frame" x="188" y="117" width="171" height="108"/>
+                                                            <rect key="frame" x="188" y="128" width="171" height="108"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30h-Uo-yVA">
                                                                     <rect key="frame" x="4" y="35" width="163" height="38.333333333333343"/>
@@ -247,13 +253,16 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="Uhr-RK-Sys" firstAttribute="leading" secondItem="bes-i6-I1n" secondAttribute="leading" id="1Nd-5M-JJ3"/>
+                                                <constraint firstItem="Wrd-Z4-v6Y" firstAttribute="leading" secondItem="bes-i6-I1n" secondAttribute="leading" id="6HE-tX-lAY"/>
+                                                <constraint firstAttribute="trailing" secondItem="Wrd-Z4-v6Y" secondAttribute="trailing" id="Dkd-oi-ank"/>
+                                                <constraint firstItem="Wrd-Z4-v6Y" firstAttribute="top" secondItem="Uhr-RK-Sys" secondAttribute="bottom" constant="30" id="EHj-mu-CE5"/>
                                                 <constraint firstItem="XAF-ah-G4K" firstAttribute="leading" secondItem="bes-i6-I1n" secondAttribute="leading" id="EWZ-X5-njA"/>
                                                 <constraint firstAttribute="trailing" secondItem="Uhr-RK-Sys" secondAttribute="trailing" constant="8" id="JrV-UV-Kwd"/>
                                                 <constraint firstAttribute="bottom" secondItem="XAF-ah-G4K" secondAttribute="bottom" constant="20" id="Kwv-Tb-zFY"/>
+                                                <constraint firstItem="XAF-ah-G4K" firstAttribute="top" secondItem="Wrd-Z4-v6Y" secondAttribute="bottom" constant="20" id="Ptr-U5-1Yb"/>
                                                 <constraint firstItem="5aM-IV-SuB" firstAttribute="leading" secondItem="bes-i6-I1n" secondAttribute="leading" id="WAe-CD-Blr"/>
-                                                <constraint firstItem="Uhr-RK-Sys" firstAttribute="top" secondItem="5aM-IV-SuB" secondAttribute="bottom" constant="8" id="bRR-VK-FCX"/>
+                                                <constraint firstItem="Uhr-RK-Sys" firstAttribute="top" secondItem="5aM-IV-SuB" secondAttribute="bottom" constant="15" id="bRR-VK-FCX"/>
                                                 <constraint firstAttribute="trailing" secondItem="XAF-ah-G4K" secondAttribute="trailing" id="ctX-D2-27R"/>
-                                                <constraint firstItem="XAF-ah-G4K" firstAttribute="top" secondItem="Uhr-RK-Sys" secondAttribute="bottom" constant="35.670000000000002" id="f9Q-Lt-gYr"/>
                                                 <constraint firstItem="5aM-IV-SuB" firstAttribute="top" secondItem="bes-i6-I1n" secondAttribute="top" constant="20" id="ha6-Ye-due"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -261,6 +270,7 @@
                                         <connections>
                                             <outlet property="airTempLbl" destination="BvD-Z2-xNb" id="cmy-aW-aKG"/>
                                             <outlet property="airTempValLbl" destination="R01-3d-bRT" id="vGf-v2-U3X"/>
+                                            <outlet property="expertViewInfoLbl" destination="Wrd-Z4-v6Y" id="fP8-Gm-Ul4"/>
                                             <outlet property="lastMeasureDateLabel" destination="Uhr-RK-Sys" id="ZcR-fZ-tg5"/>
                                             <outlet property="phLbl" destination="M28-C4-ZBf" id="Pb5-en-V2w"/>
                                             <outlet property="phValLbl" destination="QPh-el-fWa" id="a8y-Fm-d5W"/>
@@ -272,7 +282,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ExpertviewCalibrationInfoTableViewCell" rowHeight="230" id="UOR-Kz-3cY" customClass="ExpertviewCalibrationInfoTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="393" width="359" height="230"/>
+                                        <rect key="frame" x="0.0" y="443" width="359" height="230"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UOR-Kz-3cY" id="WZb-YC-s2F">
                                             <rect key="frame" x="0.0" y="0.0" width="359" height="230"/>
@@ -457,7 +467,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ExpertviewStripTestInfoTableViewCell" rowHeight="1080" id="ukB-Kd-L3g" customClass="ExpertviewStripTestInfoTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="623" width="359" height="1080"/>
+                                        <rect key="frame" x="0.0" y="673" width="359" height="1080"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ukB-Kd-L3g" id="t1p-40-8jm">
                                             <rect key="frame" x="0.0" y="0.0" width="359" height="1080"/>
@@ -906,7 +916,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ExpertviewthresholdInfoTableViewCell" rowHeight="600" id="u6E-tj-xab" customClass="ExpertviewthresholdInfoTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1703" width="359" height="600"/>
+                                        <rect key="frame" x="0.0" y="1753" width="359" height="600"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="u6E-tj-xab" id="gK3-DT-wvp">
                                             <rect key="frame" x="0.0" y="0.0" width="359" height="600"/>
@@ -1242,7 +1252,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ExpertviewTrendInfoTableViewCell" rowHeight="304" id="LZh-ew-esP" customClass="ExpertviewTrendInfoTableViewCell" customModule="Flipr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="2303" width="359" height="304"/>
+                                        <rect key="frame" x="0.0" y="2353" width="359" height="304"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LZh-ew-esP" id="AQC-vC-bOr">
                                             <rect key="frame" x="0.0" y="0.0" width="359" height="304"/>
@@ -1312,19 +1322,19 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="The Langelier Saturation Index (LSI) is used to assess the saturation state of calcium carbonate in water. " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qr5-hx-6L1">
-                                                            <rect key="frame" x="0.0" y="111.66666666666669" width="359" height="33.666666666666629"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Langelier Saturation Index (LSI) is used to assess the saturation state of calcium carbonate in water. " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qr5-hx-6L1">
+                                                            <rect key="frame" x="0.0" y="111.66666666666667" width="359" height="33.666666666666671"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="LSI = pH + 2.303 * (log10(T) - 4.3) + 2 * log10(ACY) + log10(TH) - 12.1" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBu-Xx-DLS">
-                                                            <rect key="frame" x="0.0" y="165.33333333333337" width="359" height="33.666666666666657"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="LSI = pH + 2.303 * (log10(T) - 4.3) + 2 * log10(ACY) + log10(TH) - 12.1" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBu-Xx-DLS">
+                                                            <rect key="frame" x="0.0" y="165.33333333333334" width="359" height="33.666666666666657"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOX-38-RGq">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOX-38-RGq">
                                                             <rect key="frame" x="0.0" y="219" width="359" height="50.333333333333314"/>
                                                             <string key="text">Your LSI is -0,23 : The water is considered balanced or close to being balanced, indicating that it is neither corrosive nor scaling.</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1336,9 +1346,9 @@
                                                     <constraints>
                                                         <constraint firstItem="qOX-38-RGq" firstAttribute="top" secondItem="YBu-Xx-DLS" secondAttribute="bottom" constant="20" id="4v9-xb-3ct"/>
                                                         <constraint firstItem="qOX-38-RGq" firstAttribute="leading" secondItem="zuA-Dl-Tp0" secondAttribute="leading" id="7JX-1t-ZeT"/>
+                                                        <constraint firstAttribute="bottom" secondItem="qOX-38-RGq" secondAttribute="bottom" constant="34.670000000000002" id="9m2-T6-bmy"/>
                                                         <constraint firstItem="ESR-Jf-ZSD" firstAttribute="leading" secondItem="zuA-Dl-Tp0" secondAttribute="leading" id="AIX-gP-kbJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="qOX-38-RGq" secondAttribute="trailing" id="I5b-rT-Gpf"/>
-                                                        <constraint firstAttribute="bottom" secondItem="qOX-38-RGq" secondAttribute="bottom" constant="34.670000000000002" id="QJE-RK-tSD"/>
                                                         <constraint firstItem="qr5-hx-6L1" firstAttribute="leading" secondItem="zuA-Dl-Tp0" secondAttribute="leading" id="RZK-NC-86d"/>
                                                         <constraint firstItem="YBu-Xx-DLS" firstAttribute="leading" secondItem="zuA-Dl-Tp0" secondAttribute="leading" id="Tbk-PS-3sD"/>
                                                         <constraint firstAttribute="trailing" secondItem="mEx-cp-f8H" secondAttribute="trailing" id="UZb-y7-vhq"/>
