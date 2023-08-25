@@ -30,6 +30,7 @@ class ExpertViewViewController: UIViewController {
         super.viewDidLoad()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 80
+        self.title = "Vue Expert".localized
 //        tableView.contentInset =  UIEdgeInsets.init(top: 64, left: 0, bottom: 0, right: 0)
 //        tableView.scrollIndicatorInsets = UIEdgeInsets.init(top: 54, left: 0, bottom: 0, right: 0)
 
@@ -67,6 +68,8 @@ class ExpertViewViewController: UIViewController {
                     self.tableView.reloadData()
                 case .failure(let error):
                     hud?.dismiss(afterDelay: 0)
+                    self.showError(title: "Error".localized, message: "Oups, we're sorry but something went wrong :/".localized)
+
                     print("callAddDelayApi did fail with error: \(error)")
                     
                 }
@@ -218,4 +221,232 @@ extension ExpertViewViewController: UITableViewDelegate,UITableViewDataSource {
         
     }
     
+}
+
+
+extension ExpertViewViewController {
+    
+    @IBAction func minPhBtnClicked(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
+        vc.currentType = .Ph
+        vc.titleStr = "pH Thresholds"
+        vc.delegate = self
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true) {
+            vc.showBackgroundView()
+        }
+    }
+    
+    @IBAction func maxPhBtnClicked(){
+
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
+        vc.currentType = .Ph
+        vc.titleStr = "pH Thresholds"
+        vc.delegate = self
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true) {
+            vc.showBackgroundView()
+        }
+    }
+    
+    @IBAction func tempMinBtnClicked(){
+
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
+        vc.currentType = .Temp
+        vc.titleStr = "Temperature Thresholds"
+        vc.delegate = self
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true) {
+            vc.showBackgroundView()
+        }
+    }
+    
+    @IBAction func tempMaxBtnClicked(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
+        vc.currentType = .Temp
+        vc.titleStr = "Temperature Thresholds"
+
+        vc.delegate = self
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true) {
+            vc.showBackgroundView()
+        }
+    }
+    
+    @IBAction func redoxBtnClicked(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
+        vc.titleStr = "Redox Mini"
+        vc.currentType = .Redox
+        vc.delegate = self
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true) {
+            vc.showBackgroundView()
+        }
+    }
+    
+}
+
+
+extension ExpertViewViewController : ExpertViewPickerViewControllerDelegate {
+    
+    func didSelectPikcer(type:ExpertViewPickerType, value1:String, value2:String ){
+        
+        if let module = Module.currentModule {
+            
+            let hud = JGProgressHUD(style:.dark)
+            hud?.show(in: self.navigationController!.view)
+            var parameters: [String : Any]!
+            var name = "Conductivity"
+            if type == .Ph {
+                var min = 0.0
+                min = value1.doubleValue
+                var max = 0.0
+                max = value2.doubleValue
+
+                parameters = [
+                    "PhMin": ["IsDefaultValue":false,
+                        "Value":min],
+                    "PhMax": ["IsDefaultValue":false,
+                        "Value":max],
+                    ]
+                
+            } else if  type == .Temp {
+                
+                var min = 0
+                min = Int(value1) ?? 0
+                var max = 0
+                max = Int(value2) ?? 0
+
+                parameters = [
+                    "Temperature": ["IsDefaultValue":false,
+                        "Value":min],
+                    "TemperatureMax": ["IsDefaultValue":false,
+                        "Value":max],
+                    ]
+            }
+            else{
+                var redoxVal = 0
+                redoxVal = Int(value1) ?? 0
+
+                parameters = [
+                    "Redox": ["IsDefaultValue":false,
+                        "Value":redoxVal],
+                    ]
+            }
+          
+            Alamofire.request(Router.updateModuleThresholdNew(serialId: module.serial, values: parameters)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                
+//                    if response.response?.statusCode == 401 {
+//                        NotificationCenter.default.post(name: K.Notifications.SessionExpired, object: nil)
+//                    }
+                
+                switch response.result {
+                    
+                case .success(let value):
+                    
+                    print("update with success: \(value)")
+                    
+                    if let JSON = value as? [String:Any] {
+                        self.checkDefaultValueChanged(JSON:JSON)
+                    }
+                    
+                    
+                    
+                    hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    hud?.dismiss(afterDelay: 0)
+                    self.callExpertViewApi()
+                case .failure(let error):
+                    
+                    print("reset threshold error: \(error)")
+                    
+                    if let serverError = User.serverError(response: response) {
+                        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                        hud?.textLabel.text = serverError.localizedDescription
+                        hud?.dismiss(afterDelay: 3)
+                    } else {
+                        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                        hud?.textLabel.text = error.localizedDescription
+                        hud?.dismiss(afterDelay: 3)
+                    }
+                }
+                
+            })
+            
+        }
+
+    }
+    
+    func checkDefaultValueChanged(JSON: [String:Any]){
+        
+            if let phMax = JSON["PhMax"] as? [String:Any] {
+                if let _ = phMax["Value"] as? Double, let isDefaultValue = phMax["IsDefaultValue"] as? Bool {
+                    if !isDefaultValue {
+                        UserDefaults.standard.set(false, forKey: userDefaultPhvalueMaxValuesKey)
+                        NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
+                        
+                    } else {
+                        UserDefaults.standard.set(true, forKey: userDefaultPhvalueMaxValuesKey)
+                        NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
+                    }
+                }
+            }
+            
+            if let phMax = JSON["PhMin"] as? [String:Any] {
+                if let _ = phMax["Value"] as? Double, let isDefaultValue = phMax["IsDefaultValue"] as? Bool {
+                    if !isDefaultValue {
+                        UserDefaults.standard.set(false, forKey: userDefaultPhvalueMinValuesKey)
+                        NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
+                        
+                    } else {
+                        UserDefaults.standard.set(true, forKey: userDefaultPhvalueMinValuesKey)
+                        NotificationCenter.default.post(name: K.Notifications.NotificationPhDefalutValueChangedChanged, object: nil)
+                    }
+                }
+            }
+            
+            if let redox = JSON["Redox"] as? [String:Any] {
+                if let _ = redox["Value"] as? Double, let isDefaultValue = redox["IsDefaultValue"] as? Bool {
+                    if !isDefaultValue {
+                        UserDefaults.standard.set(false, forKey: userDefaultThresholdValuesKey)
+                        NotificationCenter.default.post(name: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil)
+                    } else {
+                        
+                        UserDefaults.standard.set(true, forKey: userDefaultThresholdValuesKey)
+                        NotificationCenter.default.post(name: K.Notifications.NotificationThresholdDefalutValueChangedChanged, object: nil)
+                    }
+                }
+            }
+            
+            if let temp = JSON["Temperature"] as? [String:Any] {
+                
+                if let _ = temp["Value"] as? Double, let isDefaultValue = temp["IsDefaultValue"] as? Bool {
+                    if !isDefaultValue {
+                        UserDefaults.standard.set(false, forKey: userDefaultTemperatureMinValuesKey)
+                        NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
+                    } else {
+                        UserDefaults.standard.set(true, forKey: userDefaultTemperatureMinValuesKey)
+                        NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
+                    }
+                }
+                
+            }
+            
+            if let temp = JSON["TemperatureMax"] as? [String:Any] {
+                
+                if let _ = temp["Value"] as? Double, let isDefaultValue = temp["IsDefaultValue"] as? Bool {
+                    if !isDefaultValue {
+                        UserDefaults.standard.set(false, forKey: userDefaultTemperatureMaxValuesKey)
+                        NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
+                    } else {
+                        UserDefaults.standard.set(true, forKey: userDefaultTemperatureMaxValuesKey)
+                        NotificationCenter.default.post(name: K.Notifications.NotificationTmpDefalutValueChangedChanged, object: nil)
+                    }
+                }
+                
+            }
+        
+        
+    }
+
+
 }

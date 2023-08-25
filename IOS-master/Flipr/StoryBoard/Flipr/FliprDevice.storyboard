@@ -582,25 +582,25 @@ Si vous désirez effectuer cette installation plus tard, vous pourrez l’ajoute
                                 </constraints>
                             </imageView>
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iC0-iO-uC5">
-                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujj-4e-DXn" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="803"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="848"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flipr-analysr-intro-logo" translatesAutoresizingMaskIntoConstraints="NO" id="nbO-8P-n4R">
-                                                <rect key="frame" x="26" y="15" width="362" height="52"/>
+                                                <rect key="frame" x="26" y="40" width="362" height="52"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="52" id="PYf-OZ-AU1"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBh-7W-RUS">
-                                                <rect key="frame" x="19" y="85" width="376" height="38.5"/>
+                                                <rect key="frame" x="19" y="110" width="376" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                 <color key="textColor" red="0.0078431372550000003" green="0.25882352939999997" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ccu-G3-7oG">
-                                                <rect key="frame" x="26" y="138.5" width="362" height="485"/>
+                                                <rect key="frame" x="26" y="163.5" width="362" height="485"/>
                                                 <string key="text">You're about to install a Flipr AnalysR V3.
 
 The first step is to link your device to your account and, if necessary, set it to a nominal operating mode, enabling it to automatically perform around twenty measurements a day.
@@ -619,13 +619,13 @@ All Flipr AnalysRs are factory-calibrated, but you will be asked to perform a ca
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🚀" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jh1-cX-jXq">
-                                                <rect key="frame" x="195" y="638.5" width="24" height="21.5"/>
+                                                <rect key="frame" x="195" y="663.5" width="24" height="21.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lOO-cv-v6k">
-                                                <rect key="frame" x="26" y="675" width="362" height="50"/>
+                                                <rect key="frame" x="26" y="700" width="362" height="50"/>
                                                 <color key="backgroundColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="6L5-qL-dfm"/>
@@ -645,7 +645,7 @@ All Flipr AnalysRs are factory-calibrated, but you will be asked to perform a ca
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSq-mb-P7e">
-                                                <rect key="frame" x="19" y="733" width="376" height="50"/>
+                                                <rect key="frame" x="19" y="758" width="376" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="oZv-0d-DgG"/>
@@ -667,8 +667,8 @@ All Flipr AnalysRs are factory-calibrated, but you will be asked to perform a ca
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="TSq-mb-P7e" secondAttribute="bottom" constant="20" id="Bi4-0r-MEz"/>
-                                            <constraint firstItem="nbO-8P-n4R" firstAttribute="top" secondItem="ujj-4e-DXn" secondAttribute="top" constant="15" id="BzR-eM-sj1"/>
+                                            <constraint firstAttribute="bottom" secondItem="TSq-mb-P7e" secondAttribute="bottom" constant="40" id="Bi4-0r-MEz"/>
+                                            <constraint firstItem="nbO-8P-n4R" firstAttribute="top" secondItem="ujj-4e-DXn" secondAttribute="top" constant="40" id="BzR-eM-sj1"/>
                                             <constraint firstAttribute="trailing" secondItem="Ccu-G3-7oG" secondAttribute="trailing" constant="26" id="GCi-bQ-s4P"/>
                                             <constraint firstAttribute="trailing" secondItem="lOO-cv-v6k" secondAttribute="trailing" constant="26" id="GpD-75-5Ya"/>
                                             <constraint firstItem="TSq-mb-P7e" firstAttribute="top" secondItem="lOO-cv-v6k" secondAttribute="bottom" constant="8" id="Iqj-EV-Fdt"/>
@@ -689,7 +689,7 @@ All Flipr AnalysRs are factory-calibrated, but you will be asked to perform a ca
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.89019607840000003" green="0.90980392160000001" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="ujj-4e-DXn" firstAttribute="leading" secondItem="1ff-xE-dsQ" secondAttribute="leading" id="8zF-Sv-n7W"/>
                                     <constraint firstItem="ujj-4e-DXn" firstAttribute="bottom" secondItem="1ff-xE-dsQ" secondAttribute="bottom" id="KLK-q0-IrS"/>
@@ -709,15 +709,15 @@ All Flipr AnalysRs are factory-calibrated, but you will be asked to perform a ca
                             <constraint firstItem="M2a-E8-14R" firstAttribute="top" secondItem="r7q-Pl-sUf" secondAttribute="bottom" constant="16" id="A8J-hE-mXQ"/>
                             <constraint firstItem="gLj-QX-ewb" firstAttribute="top" secondItem="r7q-Pl-sUf" secondAttribute="bottom" constant="16" id="ANJ-Aw-Vrk"/>
                             <constraint firstItem="iC0-iO-uC5" firstAttribute="trailing" secondItem="KFo-Gn-Ndo" secondAttribute="trailing" id="EJf-nl-ZHd"/>
+                            <constraint firstAttribute="bottom" secondItem="iC0-iO-uC5" secondAttribute="bottom" id="EJh-wl-zaI"/>
                             <constraint firstItem="gLj-QX-ewb" firstAttribute="bottom" secondItem="KFo-Gn-Ndo" secondAttribute="bottom" id="Gv0-4X-CzF"/>
                             <constraint firstItem="M2a-E8-14R" firstAttribute="leading" secondItem="KFo-Gn-Ndo" secondAttribute="leading" constant="16" id="N86-MD-WQW"/>
                             <constraint firstItem="iC0-iO-uC5" firstAttribute="leading" secondItem="KFo-Gn-Ndo" secondAttribute="leading" id="R2r-w3-CRE"/>
                             <constraint firstItem="Nxc-cP-OgQ" firstAttribute="height" secondItem="QD9-nG-kUC" secondAttribute="height" multiplier="0.345982" id="SFz-t6-2lG"/>
                             <constraint firstItem="r7q-Pl-sUf" firstAttribute="top" secondItem="Nxc-cP-OgQ" secondAttribute="bottom" constant="40" id="T0N-Ol-E87"/>
                             <constraint firstItem="r7q-Pl-sUf" firstAttribute="leading" secondItem="KFo-Gn-Ndo" secondAttribute="leading" constant="16" id="Wsh-TO-6eC"/>
-                            <constraint firstItem="KFo-Gn-Ndo" firstAttribute="bottom" secondItem="iC0-iO-uC5" secondAttribute="bottom" id="Xd9-jI-5rX"/>
-                            <constraint firstItem="iC0-iO-uC5" firstAttribute="top" secondItem="KFo-Gn-Ndo" secondAttribute="top" id="evw-Za-uc2"/>
                             <constraint firstItem="Nxc-cP-OgQ" firstAttribute="top" secondItem="KFo-Gn-Ndo" secondAttribute="top" constant="35" id="k1j-Xj-z2R"/>
+                            <constraint firstItem="iC0-iO-uC5" firstAttribute="top" secondItem="QD9-nG-kUC" secondAttribute="top" id="nRi-DM-nHH"/>
                             <constraint firstItem="Nxc-cP-OgQ" firstAttribute="centerX" secondItem="QD9-nG-kUC" secondAttribute="centerX" id="p2a-qG-sFr"/>
                             <constraint firstItem="KFo-Gn-Ndo" firstAttribute="trailing" secondItem="M2a-E8-14R" secondAttribute="trailing" constant="16" id="xlc-te-Dai"/>
                         </constraints>

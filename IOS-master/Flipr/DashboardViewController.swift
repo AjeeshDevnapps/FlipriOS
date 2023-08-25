@@ -4398,7 +4398,6 @@ class DashboardViewController: UIViewController {
                 viewController.modalPresentationStyle = .overCurrentContext
                 viewController.placesModules = self.placesModules
                 viewController.placeDetails = self.placeDetails
-                
                 self.present(viewController, animated: true) {
                     viewController.showBackgroundView()
                 }

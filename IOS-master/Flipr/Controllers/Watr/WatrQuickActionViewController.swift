@@ -578,7 +578,8 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
         let tmpSb = UIStoryboard.init(name: "ExpertView", bundle: nil)
         if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertViewViewController") as? ExpertViewViewController {
             viewController.placeId = placeDetails.placeId?.string ?? ""
-            self.present(viewController, animated: true)
+            let nav = UINavigationController.init(rootViewController: viewController)
+            self.present(nav, animated: true)
         }
     }
     

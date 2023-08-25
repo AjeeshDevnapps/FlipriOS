@@ -982,6 +982,9 @@
                                                                     <real key="value" value="5"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="minPhBtnClicked" destination="Y6W-OH-hqX" eventType="touchUpInside" id="3pz-Q6-B3W"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1022,6 +1025,9 @@
                                                                     <real key="value" value="5"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="maxPhBtnClicked" destination="Y6W-OH-hqX" eventType="touchUpInside" id="3z0-qr-zFm"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1069,6 +1075,9 @@
                                                                     <real key="value" value="5"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="tempMinBtnClicked" destination="Y6W-OH-hqX" eventType="touchUpInside" id="S5o-1E-nyj"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1109,6 +1118,9 @@
                                                                     <real key="value" value="5"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="tempMaxBtnClicked" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jqJ-ef-vSa"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1149,6 +1161,9 @@
                                                                     <real key="value" value="5"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="redoxBtnClicked" destination="Y6W-OH-hqX" eventType="touchUpInside" id="MVT-bJ-7H6"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1531,6 +1546,103 @@ Free Chlorine  = 0.6 ppm</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tb4-nb-JZ4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="937" y="10"/>
+        </scene>
+        <!--Expert View Picker View Controller-->
+        <scene sceneID="pAQ-WX-gOw">
+            <objects>
+                <viewController storyboardIdentifier="ExpertViewPickerViewController" id="joY-t7-ArB" customClass="ExpertViewPickerViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yS5-ji-LEN">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wlz-9t-jBb">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="464"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ySy-Nb-xEe">
+                                <rect key="frame" x="0.0" y="444" width="393" height="408"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pH Thresholds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmb-7r-l3s">
+                                        <rect key="frame" x="133.66666666666666" y="20" width="125.99999999999997" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="textColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdh-cX-apR">
+                                        <rect key="frame" x="16" y="51.666666666666686" width="361" height="0.6666666666666643"/>
+                                        <color key="backgroundColor" red="0.59215686270000001" green="0.63921568630000003" blue="0.71372549019999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="qMR-ei-c98"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="159-SV-BJn">
+                                        <rect key="frame" x="16" y="318" width="361" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Xp0-u2-I0z"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Confirm">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="submitButtonAction" destination="joY-t7-ArB" eventType="touchUpInside" id="W2n-ps-Oxl"/>
+                                        </connections>
+                                    </button>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fz8-rG-Veo">
+                                        <rect key="frame" x="16" y="72.333333333333371" width="361" height="216"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="joY-t7-ArB" id="rtc-J6-Xce"/>
+                                            <outlet property="delegate" destination="joY-t7-ArB" id="uTe-Am-oeV"/>
+                                        </connections>
+                                    </pickerView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Fz8-rG-Veo" firstAttribute="top" secondItem="vdh-cX-apR" secondAttribute="bottom" constant="20" id="1sU-At-bBh"/>
+                                    <constraint firstAttribute="trailing" secondItem="Fz8-rG-Veo" secondAttribute="trailing" constant="16" id="8dk-eo-wvU"/>
+                                    <constraint firstItem="Fz8-rG-Veo" firstAttribute="centerX" secondItem="ySy-Nb-xEe" secondAttribute="centerX" id="8yB-7S-lV3"/>
+                                    <constraint firstItem="Fz8-rG-Veo" firstAttribute="leading" secondItem="ySy-Nb-xEe" secondAttribute="leading" constant="16" id="9U0-oi-msl"/>
+                                    <constraint firstAttribute="height" constant="408" id="M2I-Sa-EK4"/>
+                                    <constraint firstItem="159-SV-BJn" firstAttribute="leading" secondItem="ySy-Nb-xEe" secondAttribute="leading" constant="16" id="MtC-Ih-tsI"/>
+                                    <constraint firstAttribute="trailing" secondItem="vdh-cX-apR" secondAttribute="trailing" constant="16" id="Pep-A5-AHh"/>
+                                    <constraint firstAttribute="trailing" secondItem="159-SV-BJn" secondAttribute="trailing" constant="16" id="cSM-a7-jAN"/>
+                                    <constraint firstItem="kmb-7r-l3s" firstAttribute="centerX" secondItem="ySy-Nb-xEe" secondAttribute="centerX" id="gX5-qM-pWA"/>
+                                    <constraint firstItem="kmb-7r-l3s" firstAttribute="top" secondItem="ySy-Nb-xEe" secondAttribute="top" constant="20" id="nP1-s6-hPo"/>
+                                    <constraint firstItem="vdh-cX-apR" firstAttribute="leading" secondItem="ySy-Nb-xEe" secondAttribute="leading" constant="16" id="rGL-bc-tF4"/>
+                                    <constraint firstAttribute="bottom" secondItem="159-SV-BJn" secondAttribute="bottom" constant="40" id="vKi-Td-BX6"/>
+                                    <constraint firstItem="vdh-cX-apR" firstAttribute="top" secondItem="kmb-7r-l3s" secondAttribute="bottom" constant="10" id="wlN-cT-zhl"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6tq-5E-Z4Q"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ySy-Nb-xEe" firstAttribute="top" secondItem="Wlz-9t-jBb" secondAttribute="bottom" constant="-20" id="K3A-cE-2rb"/>
+                            <constraint firstAttribute="bottom" secondItem="ySy-Nb-xEe" secondAttribute="bottom" id="NXn-3o-ok5"/>
+                            <constraint firstItem="ySy-Nb-xEe" firstAttribute="trailing" secondItem="6tq-5E-Z4Q" secondAttribute="trailing" id="Rdg-9Y-tIv"/>
+                            <constraint firstItem="Wlz-9t-jBb" firstAttribute="top" secondItem="yS5-ji-LEN" secondAttribute="top" id="Ron-ON-AKu"/>
+                            <constraint firstItem="Wlz-9t-jBb" firstAttribute="trailing" secondItem="6tq-5E-Z4Q" secondAttribute="trailing" id="aM5-7w-thr"/>
+                            <constraint firstItem="Wlz-9t-jBb" firstAttribute="leading" secondItem="6tq-5E-Z4Q" secondAttribute="leading" id="jf8-V9-o3K"/>
+                            <constraint firstItem="ySy-Nb-xEe" firstAttribute="leading" secondItem="6tq-5E-Z4Q" secondAttribute="leading" id="tx3-v1-TjL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="ySy-Nb-xEe" id="Ygk-bC-wpU"/>
+                        <outlet property="pickerView" destination="Fz8-rG-Veo" id="5Tu-AU-hcH"/>
+                        <outlet property="submitButton" destination="159-SV-BJn" id="XGc-du-IRC"/>
+                        <outlet property="tapView" destination="Wlz-9t-jBb" id="vpe-SU-2GM"/>
+                        <outlet property="titleLbl" destination="kmb-7r-l3s" id="DpQ-MJ-N6W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WQL-nr-OVJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1687.7862595419847" y="270.42253521126764"/>
         </scene>
     </scenes>
     <resources>

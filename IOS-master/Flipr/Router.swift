@@ -67,6 +67,8 @@ enum Router: URLRequestConvertible {
     case resetModuleThresholds(serialId: String)
     case resetModuleThreshold(serialId: String, name:String)
     case updateModuleThreshold(serialId: String, name:String, value:Double)
+    case updateModuleThresholdNew(serialId: String, values:[String : Any])
+
     
     case getFormValues(apiPath: String)
     
@@ -236,6 +238,9 @@ enum Router: URLRequestConvertible {
             return .put
         case .updateModuleThreshold:
             return .put
+        case .updateModuleThresholdNew:
+            return .put
+            
         case .sendModuleMetrics:
             return .post
         case .readModuleHourlyMetrics:
@@ -454,6 +459,12 @@ enum Router: URLRequestConvertible {
             return "modules/\(serialId)/thresholds"
         case .updateModuleThreshold(let serialId,_,_):
             return "modules/\(serialId)/thresholds"
+            
+        
+        case .updateModuleThresholdNew(let serialId,_):
+            return "modules/\(serialId)/Thresholds"
+
+            
         case .sendModuleMetrics(let placeId,_,_,_):
             return "callback/newBluetooth/\(placeId)"
             
@@ -820,6 +831,16 @@ enum Router: URLRequestConvertible {
                 ]
             print("updateModuleThreshold parameters \(parameters)")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+            
+        
+        case .updateModuleThresholdNew(_, let dict):
+//            let parameters: [String : Any] = [
+//                name: ["IsDefaultValue":false,
+//                    "Value":value],
+//                ]
+            print("updateModuleThreshold parameters \(dict)")
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: dict)
+
             
         case .createPool(_, let attributes):
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: attributes)

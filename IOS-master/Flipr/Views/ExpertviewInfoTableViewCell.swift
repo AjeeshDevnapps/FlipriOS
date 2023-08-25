@@ -296,7 +296,7 @@ class ExpertviewStripTestInfoTableViewCell: UITableViewCell {
                 valInfo = valInfo.appending(" : ")
             }
 
-            valInfo = valInfo.appending("°f")
+            valInfo = valInfo.appending("ppm")
             thLbl.text = valInfo
         }
         if let thVal  = sliderInfo?.totalHardness{

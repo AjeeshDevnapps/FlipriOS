@@ -355,7 +355,9 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
             if let placeId =  Module.currentModule?.placeId?.string {
                 viewController.placeId = placeId
             }
-            self.present(viewController, animated: true)
+            let nav = UINavigationController.init(rootViewController: viewController)
+            self.present(nav, animated: true)
+
         }
     }
     
