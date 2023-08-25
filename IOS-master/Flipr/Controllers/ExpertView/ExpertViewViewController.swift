@@ -278,6 +278,7 @@ extension ExpertViewViewController {
         vc.titleStr = "Redox Mini"
         vc.currentType = .Redox
         vc.delegate = self
+        vc.isSingleItem = true  
         vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: true) {
             vc.showBackgroundView()

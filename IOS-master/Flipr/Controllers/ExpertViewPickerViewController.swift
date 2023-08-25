@@ -76,12 +76,20 @@ class ExpertViewPickerViewController: UIViewController {
 //        self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
     }
     
+    @IBAction func closeButtonClicked(){
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func submitButtonAction(){
         let row1 = pickerView.selectedRow(inComponent: 0)
         selectedItem1 = firstItemArray[row1]
-        let row2 = pickerView.selectedRow(inComponent: 1)
-        selectedItem2 = secondItemArray[row2]
+        if !isSingleItem{
+            let row2 = pickerView.selectedRow(inComponent: 1)
+            selectedItem2 = secondItemArray[row2]
+            
+        }else{
+            selectedItem2 = "0"
+        }
 
         self.delegate?.didSelectPikcer(type: self.currentType, value1: selectedItem1, value2: selectedItem2)
         self.dismiss(animated: true)
@@ -118,8 +126,8 @@ extension ExpertViewPickerViewController:  UIPickerViewDelegate,UIPickerViewData
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedItem1 = firstItemArray[row]
-        selectedItem2 = secondItemArray[row]
+//        selectedItem1 = firstItemArray[row]
+//        selectedItem2 = secondItemArray[row]
     }
     
 }
