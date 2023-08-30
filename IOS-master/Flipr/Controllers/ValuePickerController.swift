@@ -207,7 +207,8 @@ class ValuePickerController: UITableViewController {
             showFiltrationView()
             case 4:
             AppSharedData.sharedInstance.addPlaceInfo.filtration = value
-            showNoOfUsers()
+            self.showCreatePlaceVC()
+//            showNoOfUsers()
             case 5:
             AppSharedData.sharedInstance.addPlaceInfo.spaKind = value
                 self.showCreatePlaceVC()

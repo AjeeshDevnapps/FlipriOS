@@ -40,6 +40,6 @@ struct NewPoolTitles {
         case UsagePublic = "Public"
         case UsersCount = "Utilisateurs"
         case Status = "Statut"
-        case Interior = "En intérieur"
+        case Interior = "Extérieur"
     }
 }

@@ -84,6 +84,27 @@ class NewPoolViewController: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
+//    @objc func switchChanged(mySwitch: UISwitch) {
+//       let value = mySwitch.isOn
+//      // Do something
+//   }
+    
+    @objc func switchChanged(mySwitch: UISwitch) {
+            let value = mySwitch.isOn
+        if mySwitch.tag == 0 {
+            poolSettings?.isPublic = value
+        }else{
+            var loc = poolSettings?.location?.id ?? 0
+            poolSettings?.location?.id = value ? 2 : 1
+            poolSettings?.location?.name = value ? "Outdoor" : "Indoor"
+        }
+            // Do something
+            print("switch value changed \(value)")
+        self.updatePlaceDetails()
+        
+    }
+    
+    
     @IBAction func submitAction(_ sender: UIButton) {
         if parametersButton.isSelected {
             self.deletePlacePrompt()
@@ -565,7 +586,7 @@ extension NewPoolViewController: UITableViewDataSource {
                         isSwitchSelected = poolSettings?.isPublic ?? false
                     } else if indexPath.row == 3 {
                         let loc = poolSettings?.location?.id ?? 0
-                        isSwitchSelected = (loc == 1) ? true : false
+                        isSwitchSelected = (loc == 2) ? true : false
                     }
                 }
                 default: break;
@@ -681,8 +702,13 @@ extension NewPoolViewController: UITableViewDataSource {
                 }
                 tableViewCell.detailTextLabel?.font = UIFont.systemFont(ofSize: 16)
                 let indicator = UISwitch()
+//                indicator.addTarget(NewPoolViewController.self, action: Selector("switchChanged:"), for: .valueChanged)
+                indicator.addTarget(self, action: #selector(switchChanged), for:UIControl.Event.valueChanged)
+                indicator.tag = indexPath.row
                 indicator.isOn = isSwitchSelected
                 tableViewCell.accessoryView = hasSwitch ? indicator : nil
+                
+                
                 if !isSwitchSelected {
                     tableViewCell.accessoryType = .disclosureIndicator
                 }
@@ -692,8 +718,11 @@ extension NewPoolViewController: UITableViewDataSource {
                     }
                 }
                 tableViewCell.selectionStyle = .none
+                
                 return tableViewCell
-            } else {
+            }
+        
+        else {
                 
                 if indexPath.section == 0{
                     
@@ -1155,6 +1184,9 @@ extension NewPoolViewController: UITableViewDelegate {
 
             }
     }
+    
+   
+
     
 }
 

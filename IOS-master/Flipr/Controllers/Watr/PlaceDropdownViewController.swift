@@ -558,6 +558,7 @@ extension PlaceDropdownViewController: PlaceDropdownCellDelegate{
                 if let viewController = sb.instantiateViewController(withIdentifier: "NewPoolViewControllerSettings") as? NewPoolViewController {
                     viewController.placeTitle = self.placeTitle
                     viewController.placeDetails = selectedPlace
+                    AppSharedData.sharedInstance.isAddPlaceFlow = false
                     let nav = UINavigationController.init(rootViewController: viewController)
 //                    nav.modalPresentationStyle = .fullScreen
                     self.present(nav, animated: true, completion: nil)
