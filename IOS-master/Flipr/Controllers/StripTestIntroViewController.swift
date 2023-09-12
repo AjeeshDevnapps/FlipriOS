@@ -11,10 +11,12 @@ import UIKit
 class StripTestIntroViewController: BaseViewController {
     @IBOutlet weak var subTitleLbl: UILabel!
     @IBOutlet weak var nextButton: UIButton!
-
+    
     var recalibration = false
     var isPresentView = false
+    var isFromExpertView = false
 
+    
     override func viewDidLoad() {
         self.hidCustombackbutton = true
         super.viewDidLoad()
@@ -36,7 +38,10 @@ class StripTestIntroViewController: BaseViewController {
             viewController.recalibration = true
             viewController.isPresentView = false
             viewController.isNewFlowwithIntro = false
-            
+            viewController.isFromExpertView = self.isFromExpertView
+            if self.isFromExpertView {
+                viewController.recalibration = false
+            }
             self.navigationController?.pushViewController(viewController)
 //            viewController.modalPresentationStyle = .fullScreen
 //            self.present(viewController, animated: true, completion: nil)

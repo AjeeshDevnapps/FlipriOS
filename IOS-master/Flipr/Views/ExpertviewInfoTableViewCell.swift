@@ -213,9 +213,10 @@ class ExpertviewStripTestInfoTableViewCell: UITableViewCell {
         if let dateString = sliderInfo?.datetime as? String {
             if let lastDate = dateString.fliprDate1 {
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd/mm/yyyy HH:mm"
+                dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
                 var titleStr = "Strip test".localized
                 titleStr = titleStr.appending(":  ")
+//                titleStr = titleStr.appending(dateString )
                 titleStr = titleStr.appending("\(dateFormatter.string(from: lastDate))")
                 self.stripTestTilteLbl.text = titleStr
             }
@@ -408,6 +409,8 @@ class ExpertviewthresholdInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var tempMaxBtn: UIButton!
 
     var thresholdValues :Threshold?
+    var defaultThresholdValues :DefaultThreshold?
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -426,10 +429,32 @@ class ExpertviewthresholdInfoTableViewCell: UITableViewCell {
         
         defaultThresholdBtn.setTitle("Default Thresholds".localized, for: .normal)
         redoxBtn.setTitle((thresholdValues?.redox.value ?? 0).string, for: .normal)
+//        if (thresholdValues?.redox.isDefaultValue ?? false ){
+//            redoxBtn.setTitle((defaultThresholdValues?.redox.value ?? 0).string, for: .normal)
+//        }
         phMinBtn.setTitle((thresholdValues?.phMin.value ?? 0).string, for: .normal)
+        
+//        if (thresholdValues?.phMin.isDefaultValue ?? false ){
+//            phMinBtn.setTitle((defaultThresholdValues?.phMin.value ?? 0).string, for: .normal)
+//        }
+        
         phMaxBtn.setTitle((thresholdValues?.phMax.value ?? 0).string, for: .normal)
+        
+//        if (thresholdValues?.phMax.isDefaultValue ?? false ){
+//            phMaxBtn.setTitle((defaultThresholdValues?.phMax.value ?? 0).string, for: .normal)
+//        }
+        
         tempMinBtn.setTitle((thresholdValues?.temperature.value ?? 0).string, for: .normal)
+//        if (thresholdValues?.temperature.isDefaultValue ?? false ){
+//            tempMinBtn.setTitle((defaultThresholdValues?.temperature.value ?? 0).string, for: .normal)
+//        }
+        
+        
         tempMaxBtn.setTitle((thresholdValues?.temperatureMax.value ?? 0).string, for: .normal)
+        
+//        if (thresholdValues?.temperatureMax.isDefaultValue ?? false ){
+//            tempMaxBtn.setTitle((defaultThresholdValues?.temperatureMax.value ?? 0).string, for: .normal)
+//        }
     }
 
 }

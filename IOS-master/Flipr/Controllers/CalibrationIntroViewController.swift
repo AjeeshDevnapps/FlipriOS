@@ -22,7 +22,7 @@ class CalibrationIntroViewController: BaseViewController {
         super.viewDidLoad()
         self.title = "Calibration".localized
         nextButton.setTitle("Next".localized(), for: .normal)
-        let trnText = "addV3Intro".localized
+        let trnText = "CalibrationIntro".localized
         subTitleLbl.text = trnText
 
         // Do any additional setup after loading the view.

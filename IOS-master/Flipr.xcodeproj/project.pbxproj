@@ -548,6 +548,8 @@
 		787E58902A691D4500FE61B2 /* LSI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E58892A691D4500FE61B2 /* LSI.swift */; };
 		788ECC662A5718290005DD31 /* NewMeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788ECC652A5718280005DD31 /* NewMeasurementViewController.swift */; };
 		788ECC682A571A920005DD31 /* NewMeasurementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788ECC672A571A920005DD31 /* NewMeasurementManager.swift */; };
+		7894C1FC2A9FBFC50060338C /* DefaultThreshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7894C1FA2A9FBFC50060338C /* DefaultThreshold.swift */; };
+		7894C1FF2A9FC0510060338C /* FliprThreshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7894C1FE2A9FC0510060338C /* FliprThreshold.swift */; };
 		78A67CF22A8A385600F2BEA2 /* StripTestIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A67CF12A8A385600F2BEA2 /* StripTestIntroViewController.swift */; };
 		78C4D6D22A58825E0065585D /* FliprActivateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C4D6D12A58825E0065585D /* FliprActivateManager.swift */; };
 		78CD11332A8A9636004EB6AB /* AddV3IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD11322A8A9636004EB6AB /* AddV3IntroViewController.swift */; };
@@ -934,6 +936,8 @@
 		787E58892A691D4500FE61B2 /* LSI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSI.swift; sourceTree = "<group>"; };
 		788ECC652A5718280005DD31 /* NewMeasurementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMeasurementViewController.swift; sourceTree = "<group>"; };
 		788ECC672A571A920005DD31 /* NewMeasurementManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMeasurementManager.swift; sourceTree = "<group>"; };
+		7894C1FA2A9FBFC50060338C /* DefaultThreshold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultThreshold.swift; sourceTree = "<group>"; };
+		7894C1FE2A9FC0510060338C /* FliprThreshold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FliprThreshold.swift; path = "../../../../../Model Classes/FliprThreshold.swift"; sourceTree = "<group>"; };
 		78A67CF12A8A385600F2BEA2 /* StripTestIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripTestIntroViewController.swift; sourceTree = "<group>"; };
 		78C4D6D12A58825E0065585D /* FliprActivateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprActivateManager.swift; sourceTree = "<group>"; };
 		78CD11322A8A9636004EB6AB /* AddV3IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddV3IntroViewController.swift; sourceTree = "<group>"; };
@@ -1694,6 +1698,8 @@
 		787E58822A691D1D00FE61B2 /* ExpertView */ = {
 			isa = PBXGroup;
 			children = (
+				7894C1FA2A9FBFC50060338C /* DefaultThreshold.swift */,
+				7894C1FE2A9FC0510060338C /* FliprThreshold.swift */,
 				787E58832A691D3E00FE61B2 /* LastCalibration.swift */,
 				787E58872A691D4200FE61B2 /* LastStripValue.swift */,
 				787E58892A691D4500FE61B2 /* LSI.swift */,
@@ -2734,6 +2740,7 @@
 				1C5B560E29A530AD0064C729 /* EqipmentsTableViewCell.swift in Sources */,
 				1C4491032A16B401007D55F3 /* FliprModeChangeViewController.swift in Sources */,
 				1CAD60DB28117F1800879A45 /* CyCBManager.m in Sources */,
+				7894C1FF2A9FC0510060338C /* FliprThreshold.swift in Sources */,
 				B518F0F31E9FC0840092156C /* UIButton+Activity.swift in Sources */,
 				1CCD7FC328EAD6A600AF1635 /* PlaceDropdownViewController.swift in Sources */,
 				1CFABBF529D1C85400A34E21 /* GateWayListingViewController.swift in Sources */,
@@ -2878,6 +2885,7 @@
 				B5C8AF61208779C5007EB73D /* WaterLevelTableViewCell.swift in Sources */,
 				B58A37361E79859B00C67F6C /* AppDelegate.swift in Sources */,
 				1CAD60BC281128DC00879A45 /* Utilities.m in Sources */,
+				7894C1FC2A9FBFC50060338C /* DefaultThreshold.swift in Sources */,
 				1CD8DF0C2807634C004412D9 /* RSCModel.m in Sources */,
 				48600E672685042600749C28 /* ProgramCollectionViewCell.swift in Sources */,
 				48C39C5C2618A0F5006EF569 /* ForgotPasswordViewController.swift in Sources */,
@@ -3240,7 +3248,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3276,7 +3284,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

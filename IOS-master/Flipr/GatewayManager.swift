@@ -190,7 +190,7 @@ class GatewayManager: NSObject {
         if let hub = connectedGateway, let sendChar = ssidCharacteristic {
             let data = ssid.data(using: .utf8)
             connectedGateway?.writeValue(data!, for: ssidCharacteristic!, type: .withResponse)
-            setWifiCompletionBlock?(nil)
+//            setWifiCompletionBlock?(nil)
         } else {
             //send error no hub connected or char discovered
             let error = NSError(domain: "Gateway", code: -1, userInfo: [NSLocalizedDescriptionKey:"No Gateway connected :/".localized])
@@ -206,9 +206,18 @@ class GatewayManager: NSObject {
         getAvailableWifiCompletionBlock = nil
         setPasswordCompletionBlock = completion
         self.wifiPassword = password
-        if let hub = connectedGateway, let sendChar = passwordCharacteristic {
+        if let gatewayObj = connectedGateway, let sendChar = passwordCharacteristic {
             let data = password.data(using: .utf8)
             connectedGateway?.writeValue(data!, for: passwordCharacteristic!, type: .withResponse)
+
+            /*
+            if let data = password.data(using: .utf8){
+                gatewayObj.writeValue(data, for: sendChar, type: .withResponse)
+            }else{
+                let error = NSError(domain: "Gateway", code: -1, userInfo: [NSLocalizedDescriptionKey:"Password Error :/".localized])
+                setPasswordCompletionBlock?(error)
+            }
+            */
 //            completion?(nil)
         } else {
             //send error no hub connected or char discovered
@@ -349,7 +358,7 @@ extension GatewayManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Central manager did connect to Gateway")
         self.stopScanning = true
-        connectCompletionBlock?(nil)
+//        connectCompletionBlock?(nil)
         self.passwordCharacteristic = nil
         peripheral.discoverServices([GATEWAYBLEParameters.wifiServiceUUID,GATEWAYBLEParameters.gatewayPasswordUUID,GATEWAYBLEParameters.getSoftwareInfo,GATEWAYBLEParameters.getConnectionStatus,GATEWAYBLEParameters.gatewaySSIDUUID])
 //                peripheral.discoverServices(nil)
@@ -395,7 +404,7 @@ extension GatewayManager: CBPeripheralDelegate {
         if let characteristics = service.characteristics {
             var i = 1
             for characteristic in characteristics {
-                print("- CHARACTERISTIC [\(i)] : \(characteristic)")
+                print("\n    - CHARACTERISTIC [\(i)] : \(characteristic)")
                 i = i+1
                 //peripheral.readValue(for: characteristic)
                 
@@ -425,7 +434,7 @@ extension GatewayManager: CBPeripheralDelegate {
                     if self.wifiPassword != nil{
                         let passwd = self.wifiPassword ?? ""
                         let data = passwd.data(using: .utf8)
-                        connectedGateway?.writeValue(data!, for: passwordCharacteristic!, type: .withResponse)
+                       // connectedGateway?.writeValue(data!, for: passwordCharacteristic!, type: .withResponse)
                     }
 //                    peripheral.setNotifyValue(true, for: characteristic)
                 }
@@ -435,6 +444,8 @@ extension GatewayManager: CBPeripheralDelegate {
             }
         }
         
+        connectCompletionBlock?(nil)
+
         
         /*
         if service.uuid == HUBBLEParameters.measuresServiceUUID {
@@ -532,6 +543,7 @@ extension GatewayManager: CBPeripheralDelegate {
         if characteristic.uuid == GATEWAYBLEParameters.gatewaySSIDUUID {
             print("did write SSID !!!: \(error)")
             peripheral.readValue(for: characteristic)
+            self.setWifiCompletionBlock?(error)
         }
         if characteristic.uuid == GATEWAYBLEParameters.gatewayPasswordUUID {
             print("did write password: \(error)")

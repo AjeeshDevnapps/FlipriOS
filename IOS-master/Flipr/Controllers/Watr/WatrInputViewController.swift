@@ -35,13 +35,23 @@ class WatrInputViewController: UIViewController {
             self.submitButton.isHidden = false
         }else{
             self.textField.text = defaultValue
-            setCustomBackbtn()
+            setCustomBackbutton()
         }
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.submitButton.isHidden = false
         manageUnit()
         
 
+    }
+    
+    func setCustomBackbutton() {
+        let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "arrow_back-1"), style: .plain, target: self, action: #selector(goBackClicked))
+        backButton.tintColor = .black
+        self.navigationItem.setLeftBarButton(backButton, animated: false)
+    }
+    
+    @objc func goBackClicked() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func manageUnit(){

@@ -68,6 +68,7 @@ enum Router: URLRequestConvertible {
     case resetModuleThreshold(serialId: String, name:String)
     case updateModuleThreshold(serialId: String, name:String, value:Double)
     case updateModuleThresholdNew(serialId: String, values:[String : Any])
+    case getDefaultThresholds(serialId: String)
 
     
     case getFormValues(apiPath: String)
@@ -232,6 +233,10 @@ enum Router: URLRequestConvertible {
             return .get
         case .readModuleThresholds:
             return .get
+         
+        case .getDefaultThresholds:
+            return .get
+
         case .resetModuleThresholds:
             return .put
         case .resetModuleThreshold:
@@ -453,8 +458,12 @@ enum Router: URLRequestConvertible {
             
         case .readModuleThresholds(let serialId):
             return "modules/\(serialId)/thresholds"
+        case .getDefaultThresholds(let serialId):
+            return "modules/\(serialId)/DefaultThresholds"
+
+            
         case .resetModuleThresholds(let serialId):
-            return "modules/\(serialId)/thresholds"
+            return "modules/\(serialId)/DefaultThresholds"
         case .resetModuleThreshold(let serialId,_):
             return "modules/\(serialId)/thresholds"
         case .updateModuleThreshold(let serialId,_,_):

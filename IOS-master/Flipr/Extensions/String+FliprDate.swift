@@ -36,15 +36,15 @@ public extension String {
 
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "dd/mm/yyyy HH:mm"
+        formatter.dateFormat = "dd/MM/yyyy hh:mm"
         if let date = formatter.date(from: self)?.addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT())) {
             return date
         } else {
-            formatter.dateFormat = "dd/mm/yyyy HH:mm"
+            formatter.dateFormat = "dd/MM/yyyy hh:mm"
             if let date = formatter.date(from: self)?.addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT())) {
                 return date
             } else {
-                formatter.dateFormat = "dd/mm/yyyy HH:mm".remotable("WTF_DATE_FORMAT")
+                formatter.dateFormat = "dd/MM/yyyy hh:mm".remotable("WTF_DATE_FORMAT")
                 if let date = formatter.date(from: self)?.addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT())) {
                     return date
                 }

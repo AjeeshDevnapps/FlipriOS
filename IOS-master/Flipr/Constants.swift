@@ -94,8 +94,8 @@ struct K {
         static let GatewayConnectionStatus = Notification.Name("fr.isee-u.GatewayConnectionStatus")
         
         static let FliprReadingModeValue = Notification.Name("fr.isee-u.FliprReadingModeValue")
+        static let FliprDidLastMeasurement = Notification.Name("fr.isee-u.FliprDidLastMeasurement")
 
-        
         
     }
 }

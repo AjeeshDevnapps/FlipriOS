@@ -338,6 +338,7 @@ class LastMeasurementViewController:BaseViewController {
         //        hud?.indicatorView = JGProgressHUDErrorIndicatorView()
 //        hud?.textLabel.text = "Success"
         hud?.dismiss(afterDelay: 0)
+        NotificationCenter.default.post(name: K.Notifications.FliprDidLastMeasurement, object: nil, userInfo: nil)
         self.dismiss(animated: true, completion: nil)
 
     }

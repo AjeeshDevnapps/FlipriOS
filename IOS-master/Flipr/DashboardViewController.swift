@@ -427,6 +427,9 @@ class DashboardViewController: UIViewController {
             self.refresh()
         }
         
+        NotificationCenter.default.addObserver(forName: K.Notifications.FliprDidLastMeasurement, object: nil, queue: nil) { (notification) in
+            self.refresh()
+        }
         
         
         NotificationCenter.default.addObserver(forName: K.Notifications.FliprDiscovered, object: nil, queue: nil) { (notification) in
@@ -3226,6 +3229,9 @@ class DashboardViewController: UIViewController {
                         
                         if let upgradeStatus = fliprData["EnableFliprFirmwareUpgrade"] as? Int {
                             isNeedtoShowUpgrade = upgradeStatus
+//                            AppSharedData.sharedInstance.haveNewFirmwereUpdate = FALSE
+                        }else{
+                            
                         }
                         if let latestVersion = fliprData["FleetCurrentSoftwareVersion"] as? String {
                             self.firmwereLatestVersion = latestVersion

@@ -84,23 +84,30 @@ class ExpertMenuViewController: UIViewController {
             }
         }
         
+        self.cellTitleList = ["Entrée manuelle".localized, "Retrieve the last measurement".localized, "Flipr AI".localized,
+                              "Vue Expert".localized]
+        self.imageNames = ["Entrée manuelle (DipR)","Récupérer la dernière mesure","AI", "Vue Expert"]
+        
         if haveSubscription{
              let identifier = Module.currentModule?.serial ?? ""
                 if identifier.hasPrefix("F"){
-                    cellTitleList = ["Nouveau calibrage","Déclencher une mesure","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
-                     imageNames = ["Nouveau calibrage","Déclencher une mesure","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
-                    self.menuViewHeight.constant = 610
+                    cellTitleList = ["Nouveau calibrage","Retrieve the last measurement","Déclencher une mesure","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
+                     imageNames = ["Nouveau calibrage","Récupérer la dernière mesure","Déclencher une mesure","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
+                    self.menuViewHeight.constant = 600
                 }else{
-                    cellTitleList = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
-                     imageNames = ["Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
+                    cellTitleList = ["Déclencher une mesure","Retrieve the last measurement","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
+                     imageNames = ["Déclencher une mesure","Récupérer la dernière mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
                     self.menuViewHeight.constant = 600
 
                 }
         }else{
-            cellTitleList = ["Activer la connexion à distance","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
-             imageNames = ["noSubscription","Déclencher une mesure","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
-            self.menuViewHeight.constant = 670
+//            cellTitleList = ["Activer la connexion à distance","Déclencher une mesure","Retrieve the last measurement","Nouveau calibrage","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
+//             imageNames = ["noSubscription","Déclencher une mesure","Nouveau calibrage","Récupérer la dernière mesure", "Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine"]
+            self.menuViewHeight.constant = 730
+            
 
+            cellTitleList = ["Activer la connexion à distance","Nouveau calibrage","Retrieve the last measurement","Déclencher une mesure","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","Diagnostic"]
+            imageNames = ["noSubscription","Nouveau calibrage","Récupérer la dernière mesure","Déclencher une mesure","Nouveau test bandelette","Vue Expert","Flipr Predict","Vidange de la piscine","diagnosticExpertView"]
         }
 
         
@@ -158,31 +165,54 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        handlePlaceNavigation(indexPath: indexPath)
+    }
+    
+    func handlePlaceNavigation(indexPath: IndexPath){
+        if haveSubscription{
+            let identifier = Module.currentModule?.serial ?? ""
+            if identifier.hasPrefix("F"){
+                self.handlePlaceOwnerWithSubscriptionV3Navigation(indexPath: indexPath)
+            }else{
+                self.handlePlaceOwnerWithSubscriptionNavigation(indexPath: indexPath)
+            }
+
+        }else{
+            self.handlePlaceOwnerWithOutSubscriptionNavigation(indexPath: indexPath)
+        }
+
+    }
+    
     func handlePlaceOwnerWithSubscriptionV3Navigation(indexPath: IndexPath){
         if indexPath.row == 0{
             showCalibrationView()
         }
         
         else if indexPath.row == 1{
-            triggerMesurement()
+            showLastMeasurement()
         }
         
         else if indexPath.row == 2{
+            triggerMesurement()
+        }
+        
+        else if indexPath.row == 3{
             stripTest()
         }
-        else if indexPath.row == 3{
+        else if indexPath.row == 4{
             expertView()
         }
-        else if indexPath.row == 4{
+        else if indexPath.row == 5{
             history()
         }
-        else if indexPath.row == 5{
+        else if indexPath.row == 6{
             drainingWater()
         }
-        else if indexPath.row == 6{
+        else if indexPath.row == 7{
             showFirmwereDiagnosticScreen()
         }
-        else if indexPath.row == 7{
+        else if indexPath.row == 8{
 //            showFirmwereDiagnosticScreen()
         }
         else{
@@ -197,24 +227,27 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
             triggerMesurement()
         }
         else if indexPath.row == 1{
-            showCalibrationView()
+            showLastMeasurement()
         }
         else if indexPath.row == 2{
-            stripTest()
+            showCalibrationView()
         }
         else if indexPath.row == 3{
-            expertView()
+            stripTest()
         }
         else if indexPath.row == 4{
-            history()
+            expertView()
         }
         else if indexPath.row == 5{
-            drainingWater()
+            history()
         }
         else if indexPath.row == 6{
-            showFirmwereDiagnosticScreen()
+            drainingWater()
         }
         else if indexPath.row == 7{
+            showFirmwereDiagnosticScreen()
+        }
+        else if indexPath.row == 8{
 //            showFirmwereDiagnosticScreen()
         }
         else{
@@ -228,24 +261,30 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
             showSubscriptionView()
         }
         else if indexPath.row == 1{
-            triggerMesurement()
-        }
-        else if indexPath.row == 2{
             showCalibrationView()
         }
+        else if indexPath.row == 2{
+            showLastMeasurement()
+        }
         else if indexPath.row == 3{
-            stripTest()
+            triggerMesurement()
+
         }
         else if indexPath.row == 4{
-            expertView()
+            stripTest()
         }
         else if indexPath.row == 5{
+            expertView()
+        }
+        
+        else if indexPath.row == 6{
             history()
         }
-        else if indexPath.row == 6{
+        
+        else if indexPath.row == 7{
             drainingWater()
         }
-        else if indexPath.row == 7{
+        else if indexPath.row == 8{
             showFirmwereDiagnosticScreen()
         }
         else{
@@ -281,6 +320,15 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
         if let vc = UIStoryboard(name: "Subscription", bundle: nil).instantiateInitialViewController() {
 //            vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    
+    func showLastMeasurement(){
+        let tmpSb = UIStoryboard.init(name: "Firmware", bundle: nil)
+        if let navigationController = tmpSb.instantiateViewController(withIdentifier: "LastMeasurementNavigation") as? UINavigationController {
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
     
@@ -362,24 +410,7 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        handlePlaceNavigation(indexPath: indexPath)
-    }
-    
-    func handlePlaceNavigation(indexPath: IndexPath){
-        if haveSubscription{
-            let identifier = Module.currentModule?.serial ?? ""
-            if identifier.hasPrefix("F"){
-                self.handlePlaceOwnerWithSubscriptionV3Navigation(indexPath: indexPath)
-            }else{
-                self.handlePlaceOwnerWithSubscriptionNavigation(indexPath: indexPath)
-            }
-
-        }else{
-            self.handlePlaceOwnerWithOutSubscriptionNavigation(indexPath: indexPath)
-        }
-
-    }
+   
     /*
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
@@ -491,6 +522,7 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
         let sb = UIStoryboard(name: "Calibration", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "CalibrationIntroViewController") as! CalibrationIntroViewController
         vc.isPresentingView = true
+        vc.noStripTest = true
         let navigationController = UINavigationController.init(rootViewController: vc)
         navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)

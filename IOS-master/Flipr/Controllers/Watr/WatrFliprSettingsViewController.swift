@@ -139,11 +139,17 @@ extension WatrFliprSettingsViewController: UITableViewDataSource,UITableViewDele
             cell.typeLbl.text?.append(type)
         }
         
-        let tmpSerial =  settings?.serial ?? ""
-        if tmpSerial.hasPrefix("F"){
-            isV3flipr =  true
-            cell.firmwareUpdateView.alpha = 0.3
+        if AppSharedData.sharedInstance.haveNewFirmwereUpdate{
+            
+        }else{
+             cell.firmwareUpdateView.alpha = 0.3
         }
+        
+//        let tmpSerial =  settings?.serial ?? ""
+//        if tmpSerial.hasPrefix("F"){
+//            isV3flipr =  true
+//            cell.firmwareUpdateView.alpha = 0.3
+//        }
 
         cell.lastMesureLbl.text = settings?.lastMeasureDateTime
         let batteryInfo = String(format: "%.2f", settings?.tensionBattery ?? 0.0)
@@ -213,8 +219,10 @@ extension WatrFliprSettingsViewController{
     }
     
     @IBAction func updateButtonClicked(_ sender: UIButton) {
-        if isV3flipr{return}
-        self.showFirmwereUdpateScreen()
+//        if isV3flipr{return}
+        if AppSharedData.sharedInstance.haveNewFirmwereUpdate{
+            self.showFirmwereUdpateScreen()
+        }
     }
     
     @IBAction func diagnosticButtonClicked(_ sender: UIButton) {

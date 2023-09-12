@@ -17,6 +17,7 @@ class GatewaywifiViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var manualEntryLabel: UILabel!
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
 
 
     var serial:String?
@@ -80,11 +81,13 @@ class GatewaywifiViewController: BaseViewController {
                 if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
                     print(interfaceInfo)
                     wifiList.append(interfaceInfo)
-                    self.tableView.reloadData()
 //                    ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
 //                    break
                 }
             }
+            let count = wifiList.count
+//            self.tableViewHeight.constant = CGFloat(80 * count)
+            self.tableView.reloadData()
         }
 //        return ssid
     }
@@ -177,12 +180,36 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
     
     
     func newFlow(){
-        self.newShowPasswordInputView(ssid: self.ssid)
+        self.connectGateway()
+//        self.newShowPasswordInputView(ssid: self.ssid)
     }
     
+    
+    @objc func connectGateway(){
+//        let hud = JGProgressHUD(style:.dark)
+//        hud?.show(in: self.navigationController!.view)
+//        self.password = password
+        GatewayManager.shared.connect(serial: self.serial ?? "") { error in
+            if error != nil{
+                print("Failed Reconnection after setSSID")
+            }else{
+                print("Reconnection Success after setSSID ")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.newSetSsid()
+//                    self.writePassword(password: password)
+                }
+            }
+        }
+      
+    }
+    
+    
     func setSsid(){
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.navigationController!.view)
         GatewayManager.shared.setSSID(ssid: self.ssid) { error in
             GatewayManager.shared.removeConnection()
+            hud?.dismiss()
             if error != nil{
                 print("Error")
                 self.navigationController?.popViewController()
@@ -195,17 +222,20 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func newSetSsid(){
-        GatewayManager.shared.setSSID(ssid: self.ssid) { error in
+        GatewayManager.shared.setSSID(ssid: self.selectedSsid) { error in
             GatewayManager.shared.removeConnection()
             if error != nil{
                 print("Error")
                 self.navigationController?.popViewController()
 
             }else{
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                    self.newReconnectGateway()
-                }
-//                self.showPasswordInputView(ssid: self.ssid)
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+//                    self.newReconnectGateway()
+//                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+               // self.newReconnectGateway()
+                self.newShowPasswordInputView(ssid: self.selectedSsid)
             }
             
         }
@@ -215,7 +245,8 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
     func newShowPasswordInputView(ssid:String){
         selectedSsid = ssid
         var passwordTextField: UITextField?
-        let alertController = UIAlertController(title: ssid, message: "Enter wifi password".localized, preferredStyle: .alert)
+        passwordTextField?.delegate = self
+        let alertController = UIAlertController(title: ssid, message: "Entrez le mot de passe Wi-Fi\n(32 caractères max)".localized, preferredStyle: .alert)
         let sendAction = UIAlertAction(title: "Connect".localized, style: .default, handler: { (action) -> Void in
             self.hud = JGProgressHUD(style:.dark)
             self.hud?.show(in: self.navigationController!.view)
@@ -226,10 +257,11 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
                     self.writePassword(password: passwd)
                 }
             }else{
-                print("Success setSSID")
+              //  print("Success setSSID")
                 let passwd = passwordTextField?.text ?? ""
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                    self.connectGateway(password: passwd)
+                self.password = passwd
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+                    self.newReconnectGateway()
 //                    if self.isCalledChangePassword ==  false{
 //                        self.isCalledChangePassword = true
 //                        self.reconnectGateway(password: passwd)
@@ -248,6 +280,7 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
         alertController.preferredAction = sendAction
         alertController.addTextField { (textField) -> Void in
             passwordTextField = textField
+            passwordTextField?.delegate = self
             let pwStr = "Password".localized
             passwordTextField?.placeholder = "\(pwStr)..."
         }
@@ -271,10 +304,11 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
             }else{
                 print("Success setSSID")
                 let passwd = passwordTextField?.text ?? ""
+                self.password = passwd
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                     if self.isCalledChangePassword ==  false{
                         self.isCalledChangePassword = true
-                        self.reconnectGateway(password: passwd)
+//                        self.reconnectGateway()
                     }
                 }
             }
@@ -298,35 +332,19 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     
-    @objc func connectGateway(password:String){
-//        let hud = JGProgressHUD(style:.dark)
-//        hud?.show(in: self.navigationController!.view)
-        self.password = password
-        GatewayManager.shared.connect(serial: self.serial ?? "") { error in
-            if error != nil{
-                print("Failed Reconnection after setSSID")
-            }else{
-                print("Reconnection Success after setSSID ")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.newSetSsid()
-//                    self.writePassword(password: password)
-                }
-            }
-        }
-      
-    }
+ 
     
     
     @objc func newReconnectGateway(){
 //        let hud = JGProgressHUD(style:.dark)
 //        hud?.show(in: self.navigationController!.view)
-        
+//        GatewayManager.shared.wifiPassword = self.password
         GatewayManager.shared.connect(serial: self.serial ?? "") { error in
             if error != nil{
                 print("Failed Reconnection after setSSID")
             }else{
                 print("Reconnection Success after setSSID ")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self.writePassword(password: self.password)
                 }
             }
@@ -334,7 +352,7 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
       
     }
     
-    
+  /*
     @objc func reconnectGateway(password:String){
 //        let hud = JGProgressHUD(style:.dark)
 //        hud?.show(in: self.navigationController!.view)
@@ -352,9 +370,11 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
       
     }
     
+    */
+    
     func writePassword(password:String){
         
-        GatewayManager.shared.setPassword(password: password) { error in
+        GatewayManager.shared.setPassword(password: self.password) { error in
 //            hud?.dismiss()
 //            self.dismiss(animated: true)
             self.hud?.dismiss()
@@ -364,6 +384,7 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
                 self.showPasswordInputView(ssid: self.selectedSsid)
             }else{
                 print("Success add password Gateway!!")
+               // GatewayManager.shared.removeConnection()
                 if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GatewaySuccessViewController") as? GatewaySuccessViewController {
                     vc.serial = self.serial
                     self.navigationController?.pushViewController(vc, animated: true)
@@ -377,4 +398,20 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
 
     }
     
+}
+
+extension GatewaywifiViewController: UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // get the current text, or use an empty string if that failed
+        let currentText = textField.text ?? ""
+
+        // attempt to read the range they are trying to change, or exit if we can't
+        guard let stringRange = Range(range, in: currentText) else { return false }
+
+        // add their new text to the existing text
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+
+        // make sure the result is under 16 characters
+        return updatedText.count <= 32
+    }
 }

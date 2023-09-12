@@ -15,6 +15,7 @@ class StripViewController: BaseViewController {
     var recalibration = false
     var isPresentView = false
     var isNewFlowwithIntro = false
+    var isFromExpertView = false
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
@@ -200,9 +201,9 @@ class StripViewController: BaseViewController {
     @IBAction func doneButtonAction(_ sender: Any) {
 
 //        doneButtonWidthConstraint.constant = 44
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.layoutIfNeeded()
-        }) { (success) in
+//        UIView.animate(withDuration: 0.25, animations: {
+//            self.view.layoutIfNeeded()
+//        }) { (success) in
             
                 
             self.doneButton.showActivityIndicator(type: .ballClipRotatePulse)
@@ -230,12 +231,12 @@ class StripViewController: BaseViewController {
                 
                 self.doneButton.hideActivityIndicator()
 //                self.doneButtonWidthConstraint.constant = 200
-                UIView.animate(withDuration: 0.25, animations: {
-                    self.view.layoutIfNeeded()
-                })
+//                UIView.animate(withDuration: 0.25, animations: {
+//                    self.view.layoutIfNeeded()
+//                })
             })
             
-        }
+//        }
         
     }
     
@@ -249,17 +250,23 @@ class StripViewController: BaseViewController {
     }
     
     func showGWInfoView(){
-        if AppSharedData.sharedInstance.isFlipr3{
-            showGatewaySetup()
+        if isFromExpertView{
+            self.navigationController?.popToRootViewController(animated: true)
         }else{
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
-            dashboard.modalTransitionStyle = .flipHorizontal
-            dashboard.modalPresentationStyle = .fullScreen
-            self.present(dashboard, animated: true, completion: {
-                self.navigationController?.popToRootViewController(animated: false)
-            })
+            if AppSharedData.sharedInstance.isFlipr3{
+                showGatewaySetup()
+            }else{
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+                dashboard.modalTransitionStyle = .flipHorizontal
+                dashboard.modalPresentationStyle = .fullScreen
+                self.present(dashboard, animated: true, completion: {
+                    self.navigationController?.popToRootViewController(animated: false)
+                })
+            }
         }
+        
+   
     }
     
     

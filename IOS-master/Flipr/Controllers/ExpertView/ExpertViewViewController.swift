@@ -25,6 +25,7 @@ class ExpertViewViewController: UIViewController {
     
     var placeId = ""
     var expertViewInfo:ExpertViewData?
+    var defaulthreshold:DefaultThreshold?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ class ExpertViewViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         callExpertViewApi()
+//        getDefaultThreshold()
     }
     
     func createOrder(){
@@ -50,6 +52,10 @@ class ExpertViewViewController: UIViewController {
         cellOrder.append(.trend)
         cellOrder.append(.threshold)
     }
+    
+    func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+       return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+   }
     
     func callExpertViewApi(){
         
@@ -78,9 +84,36 @@ class ExpertViewViewController: UIViewController {
     }
     
     @IBAction func newStripTestBtnClicked(){
-        let sb = UIStoryboard(name: "Calibration", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "StripViewControllerID") as! StripViewController
-        self.present(vc, animated: true)
+//        let sb = UIStoryboard(name: "Calibration", bundle: nil)
+//        let vc = sb.instantiateViewController(withIdentifier: "StripViewControllerID") as! StripViewController
+//        vc.isFromExpertView = true
+//        self.navigationController?.pushViewController(vc)
+//        self.present(vc, animated: true)
+        
+        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
+        let alert = UIAlertController(title: "Strip test".localized, message:"Are you sure you want to do a new strip test?".localized, preferredStyle:.alert)
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
+            let sb:UIStoryboard = UIStoryboard.init(name: "Calibration", bundle: nil)
+            if let viewController = sb.instantiateViewController(withIdentifier: "StripTestIntroViewController") as? StripTestIntroViewController {
+                viewController.recalibration = false
+                viewController.isPresentView = true
+                viewController.isFromExpertView = true
+                        self.navigationController?.pushViewController(viewController)
+
+//                viewController.modalPresentationStyle = .fullScreen
+                
+//                let nav = UINavigationController.init(rootViewController: viewController)
+//                self.present(nav, animated: true, completion: nil)
+
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Order a calibration kit".localized, style: .default, handler: { (action) in
+            if let url = URL(string:"https://www.goflipr.com/produit/kit-de-calibration/".remotable) {
+                UIApplication.shared.open(url, options: self.convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func defaultTresholdBtnClicked(){
@@ -141,14 +174,25 @@ class ExpertViewViewController: UIViewController {
     }
     
     func showCalibrationView(){
+//        let sb = UIStoryboard(name: "Calibration", bundle: nil)
+//        let vc = sb.instantiateViewController(withIdentifier: "CalibrationPh7IntroViewController") as! CalibrationPh7IntroViewController
+//        vc.isPresentedFlow = true
+//        vc.recalibration = true
+//        vc.noStripTest = true
+//        let navigationController = UINavigationController.init(rootViewController: vc)
+//        navigationController.modalPresentationStyle = .fullScreen
+//        self.present(navigationController, animated: true, completion: nil)
+        
         let sb = UIStoryboard(name: "Calibration", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "CalibrationPh7IntroViewController") as! CalibrationPh7IntroViewController
-        vc.isPresentedFlow = true
-        vc.recalibration = true
+        let vc = sb.instantiateViewController(withIdentifier: "CalibrationIntroViewController") as! CalibrationIntroViewController
+        vc.isPresentingView = true
         vc.noStripTest = true
+        vc.recalibration = true
+
         let navigationController = UINavigationController.init(rootViewController: vc)
         navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)
+
     }
 }
 
@@ -206,7 +250,12 @@ extension ExpertViewViewController: UITableViewDelegate,UITableViewDataSource {
             let cell =  tableView.dequeueReusableCell(withIdentifier:"ExpertviewthresholdInfoTableViewCell",
                                               for: indexPath) as! ExpertviewthresholdInfoTableViewCell
             cell.thresholdValues = self.expertViewInfo?.thresholds
+//            if self.defaulthreshold != nil{
+//                cell.defaultThresholdValues = self.defaulthreshold
+//                cell.loadData()
+//            }
             cell.loadData()
+
             return cell
             
 
@@ -231,6 +280,10 @@ extension ExpertViewViewController {
         vc.currentType = .Ph
         vc.titleStr = "pH Thresholds"
         vc.delegate = self
+        
+        vc.defaultValue1 = (self.expertViewInfo?.thresholds?.phMin.value ?? 0).string
+        vc.defaultValue2 = (self.expertViewInfo?.thresholds?.phMax.value ?? 0).string
+
         vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: true) {
             vc.showBackgroundView()
@@ -241,6 +294,9 @@ extension ExpertViewViewController {
 
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
         vc.currentType = .Ph
+        vc.defaultValue1 = (self.expertViewInfo?.thresholds?.phMin.value ?? 0).string
+        vc.defaultValue2 = (self.expertViewInfo?.thresholds?.phMax.value ?? 0).string
+
         vc.titleStr = "pH Thresholds"
         vc.delegate = self
         vc.modalPresentationStyle = .overCurrentContext
@@ -253,6 +309,9 @@ extension ExpertViewViewController {
 
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
         vc.currentType = .Temp
+        vc.defaultValue1 = (self.expertViewInfo?.thresholds?.temperature.value ?? 0).string
+        vc.defaultValue2 = (self.expertViewInfo?.thresholds?.temperatureMax.value ?? 0).string
+
         vc.titleStr = "Temperature Thresholds"
         vc.delegate = self
         vc.modalPresentationStyle = .overCurrentContext
@@ -265,6 +324,8 @@ extension ExpertViewViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
         vc.currentType = .Temp
         vc.titleStr = "Temperature Thresholds"
+        vc.defaultValue1 = (self.expertViewInfo?.thresholds?.temperature.value ?? 0).string
+        vc.defaultValue2 = (self.expertViewInfo?.thresholds?.temperatureMax.value ?? 0).string
 
         vc.delegate = self
         vc.modalPresentationStyle = .overCurrentContext
@@ -277,6 +338,8 @@ extension ExpertViewViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
         vc.titleStr = "Redox Mini"
         vc.currentType = .Redox
+        vc.defaultValue1 = (self.expertViewInfo?.thresholds?.redox.value ?? 0).string
+
         vc.delegate = self
         vc.isSingleItem = true  
         vc.modalPresentationStyle = .overCurrentContext
@@ -309,29 +372,52 @@ extension ExpertViewViewController : ExpertViewPickerViewControllerDelegate {
                         "Value":min],
                     "PhMax": ["IsDefaultValue":false,
                         "Value":max],
+                    "Redox": ["IsDefaultValue":self.expertViewInfo?.thresholds.redox.isDefaultValue ?? false,
+                              "Value":self.expertViewInfo?.thresholds.redox.value ?? 0.0],
+                    "Temperature": ["IsDefaultValue":self.expertViewInfo?.thresholds.temperature.isDefaultValue ?? false,
+                              "Value":self.expertViewInfo?.thresholds.temperature.value ?? 0.0],
+                    "TemperatureMax": ["IsDefaultValue":self.expertViewInfo?.thresholds.temperatureMax.isDefaultValue ?? false,
+                              "Value":self.expertViewInfo?.thresholds.temperatureMax.value ?? 0.0]
+                    
                     ]
                 
             } else if  type == .Temp {
                 
-                var min = 0
-                min = Int(value1) ?? 0
-                var max = 0
-                max = Int(value2) ?? 0
+                var min = 0.0
+                min = value1.doubleValue
+                var max = 0.0
+                max = value2.doubleValue
 
                 parameters = [
                     "Temperature": ["IsDefaultValue":false,
                         "Value":min],
                     "TemperatureMax": ["IsDefaultValue":false,
                         "Value":max],
+                    "Redox": ["IsDefaultValue":self.expertViewInfo?.thresholds.redox.isDefaultValue ?? false,
+                              "Value":self.expertViewInfo?.thresholds.redox.value ?? 0.0],
+                    "PhMin": ["IsDefaultValue":self.expertViewInfo?.thresholds.phMin.isDefaultValue ?? false,
+                              "Value":self.expertViewInfo?.thresholds.phMin.value ?? 0.0],
+                    "PhMax": ["IsDefaultValue":self.expertViewInfo?.thresholds.phMax.isDefaultValue ?? false,
+                              "Value":self.expertViewInfo?.thresholds.phMax.value ?? 0.0]
+
                     ]
             }
             else{
-                var redoxVal = 0
-                redoxVal = Int(value1) ?? 0
-
+                var redoxVal = 0.0
+                redoxVal = value1.doubleValue
                 parameters = [
                     "Redox": ["IsDefaultValue":false,
                         "Value":redoxVal],
+                    "Temperature": ["IsDefaultValue":self.expertViewInfo?.thresholds.temperature.isDefaultValue ?? false,
+                              "Value":self.expertViewInfo?.thresholds.temperature.value ?? 0.0],
+                    "TemperatureMax": ["IsDefaultValue":self.expertViewInfo?.thresholds.temperatureMax.isDefaultValue ?? false,
+                              "Value":self.expertViewInfo?.thresholds.temperatureMax.value ?? 0.0],
+                    
+                    "PhMin": ["IsDefaultValue":self.expertViewInfo?.thresholds.phMin.isDefaultValue ?? false,
+                              "Value":self.expertViewInfo?.thresholds.phMin.value ?? 0.0],
+                    "PhMax": ["IsDefaultValue":self.expertViewInfo?.thresholds.phMax.isDefaultValue ?? false,
+                              "Value":self.expertViewInfo?.thresholds.phMax.value ?? 0.0]
+
                     ]
             }
           
@@ -351,11 +437,16 @@ extension ExpertViewViewController : ExpertViewPickerViewControllerDelegate {
                         self.checkDefaultValueChanged(JSON:JSON)
                     }
                     
+                    if let data = value as? [String:Any] {
+                      let newThresholdObj = Threshold.init(fromDictionary: data)
+                        self.expertViewInfo?.thresholds = newThresholdObj
+                        self.tableView.reloadData()
+                    }
                     
                     
                     hud?.indicatorView = JGProgressHUDSuccessIndicatorView()
                     hud?.dismiss(afterDelay: 0)
-                    self.callExpertViewApi()
+//                    self.callExpertViewApi()
                 case .failure(let error):
                     
                     print("reset threshold error: \(error)")
@@ -445,9 +536,50 @@ extension ExpertViewViewController : ExpertViewPickerViewControllerDelegate {
                 }
                 
             }
-        
-        
     }
 
+    
+   
+
+    func getDefaultThreshold() {
+        
+        if let module = Module.currentModule {
+            
+//            let hud = JGProgressHUD(style:.dark)
+//            hud?.show(in: self.navigationController!.view)
+//
+            Alamofire.request(Router.getDefaultThresholds(serialId: module.serial)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                
+//                hud?.dismiss()
+                
+                switch response.result {
+                    
+                case .success(let value):
+                    
+                    print("get default thresholds response.result.value: \(value)")
+                    if let data = value as? [String:Any] {
+                      let defaultThresholdObj = DefaultThreshold.init(fromDictionary: data)
+                        self.defaulthreshold = defaultThresholdObj
+                        self.tableView.reloadData()
+                    }
+                   
+                    
+                case .failure(let error):
+                    
+                    print("get default thresholds did fail with error: \(error)")
+                    
+//                    if let serverError = User.serverError(response: response) {
+//                        self.showError(title: "Error".localized, message: serverError.localizedDescription)
+//                    } else {
+//                        self.showError(title: "Error".localized, message: error.localizedDescription)
+//                    }
+                }
+                
+                })
+                
+                
+            }
+        
+    }
 
 }

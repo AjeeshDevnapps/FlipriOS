@@ -36,7 +36,7 @@ class NewPoolLocationViewController: UIViewController, CLLocationManagerDelegate
             self.submitButton.isHidden = false
         }else{
             self.submitButton.isHidden = true
-            setCustomBackbtn()
+            setCustomBackbutton()
         }
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.submitButton.isHidden = true
@@ -55,6 +55,16 @@ class NewPoolLocationViewController: UIViewController, CLLocationManagerDelegate
         }
     }
     
+    
+    func setCustomBackbutton() {
+        let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "arrow_back-1"), style: .plain, target: self, action: #selector(goBackClicked))
+        backButton.tintColor = .black
+        self.navigationItem.setLeftBarButton(backButton, animated: false)
+    }
+    
+    @objc func goBackClicked() {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     @IBAction func submitAction(_ sender: UIButton) {
         if AppSharedData.sharedInstance.isAddPlaceFlow{
