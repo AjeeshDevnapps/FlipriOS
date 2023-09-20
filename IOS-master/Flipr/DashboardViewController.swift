@@ -4325,6 +4325,13 @@ class DashboardViewController: UIViewController {
     
     
     @IBAction func thresholdSettingsButtonAction(_ sender: Any) {
+        let tmpSb = UIStoryboard.init(name: "ExpertView", bundle: nil)
+        if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertViewViewController") as? ExpertViewViewController {
+            viewController.placeId = placeDetails.placeId?.string ?? ""
+            let nav = UINavigationController.init(rootViewController: viewController)
+            self.present(nav, animated: true)
+        }
+       /*
         let tmpSb = UIStoryboard.init(name: "Main", bundle: nil)
         if let navigationController = tmpSb.instantiateViewController(withIdentifier: "SettingsNavingation") as? UINavigationController {
             if let viewController = tmpSb.instantiateViewController(withIdentifier: "ExpertModeViewController") as? ExpertModeViewController {
@@ -4334,6 +4341,8 @@ class DashboardViewController: UIViewController {
                 self.present(navigationController, animated: true, completion: nil)
             }
         }
+        
+        */
         //        let sb = UIStoryboard.init(name: "Notifications", bundle: nil)
         //        if let viewController = sb.instantiateViewController(withIdentifier: "NotificationsAlertViewController") as? NotificationsAlertViewController {
         //            viewController.alertType = .Threshold

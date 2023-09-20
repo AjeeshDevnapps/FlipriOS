@@ -530,6 +530,15 @@
 		48FC119125DFE3C1001E1885 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119025DFE3C1001E1885 /* DeviceViewController.swift */; };
 		48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */; };
 		48FC119725DFE45D001E1885 /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48FC119625DFE45D001E1885 /* Devices.storyboard */; };
+		78250A412AB4A2F700AD60BC /* FliprThreshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78250A402AB4A2F700AD60BC /* FliprThreshold.swift */; };
+		78250A462AB4A31F00AD60BC /* FliprAIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78250A432AB4A31C00AD60BC /* FliprAIList.swift */; };
+		78250A472AB4A31F00AD60BC /* FliprAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78250A442AB4A31D00AD60BC /* FliprAI.swift */; };
+		78250A482AB4A31F00AD60BC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78250A452AB4A31F00AD60BC /* Message.swift */; };
+		78250A4A2AB4A3BA00AD60BC /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78250A492AB4A3BA00AD60BC /* Dialog.swift */; };
+		78250A4C2AB4A41B00AD60BC /* AIReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78250A4B2AB4A41B00AD60BC /* AIReply.swift */; };
+		78250A4E2AB4AAC400AD60BC /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78250A4D2AB4AAC400AD60BC /* ChatTableViewCell.swift */; };
+		782962552AB1FE9300EF0B41 /* FliprAI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 782962542AB1FE9300EF0B41 /* FliprAI.storyboard */; };
+		782962582AB201F400EF0B41 /* FliprAIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782962572AB201F400EF0B41 /* FliprAIViewController.swift */; };
 		78334EA22A5EB5F40057E05F /* ExpertView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78334EA12A5EB5F40057E05F /* ExpertView.storyboard */; };
 		78334EA52A5EBD560057E05F /* ExpertViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78334EA42A5EBD560057E05F /* ExpertViewViewController.swift */; };
 		78334EA72A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78334EA62A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift */; };
@@ -549,7 +558,6 @@
 		788ECC662A5718290005DD31 /* NewMeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788ECC652A5718280005DD31 /* NewMeasurementViewController.swift */; };
 		788ECC682A571A920005DD31 /* NewMeasurementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788ECC672A571A920005DD31 /* NewMeasurementManager.swift */; };
 		7894C1FC2A9FBFC50060338C /* DefaultThreshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7894C1FA2A9FBFC50060338C /* DefaultThreshold.swift */; };
-		7894C1FF2A9FC0510060338C /* FliprThreshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7894C1FE2A9FC0510060338C /* FliprThreshold.swift */; };
 		78A67CF22A8A385600F2BEA2 /* StripTestIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A67CF12A8A385600F2BEA2 /* StripTestIntroViewController.swift */; };
 		78C4D6D22A58825E0065585D /* FliprActivateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C4D6D12A58825E0065585D /* FliprActivateManager.swift */; };
 		78CD11332A8A9636004EB6AB /* AddV3IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD11322A8A9636004EB6AB /* AddV3IntroViewController.swift */; };
@@ -919,6 +927,15 @@
 		48FC119625DFE45D001E1885 /* Devices.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Devices.storyboard; sourceTree = "<group>"; };
 		48FDE2F92680C2FA004BC2D5 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
 		48FDE2FA2680C2FB004BC2D5 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		78250A402AB4A2F700AD60BC /* FliprThreshold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FliprThreshold.swift; sourceTree = "<group>"; };
+		78250A432AB4A31C00AD60BC /* FliprAIList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FliprAIList.swift; sourceTree = "<group>"; };
+		78250A442AB4A31D00AD60BC /* FliprAI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FliprAI.swift; sourceTree = "<group>"; };
+		78250A452AB4A31F00AD60BC /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		78250A492AB4A3BA00AD60BC /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
+		78250A4B2AB4A41B00AD60BC /* AIReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AIReply.swift; sourceTree = "<group>"; };
+		78250A4D2AB4AAC400AD60BC /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		782962542AB1FE9300EF0B41 /* FliprAI.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FliprAI.storyboard; sourceTree = "<group>"; };
+		782962572AB201F400EF0B41 /* FliprAIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprAIViewController.swift; sourceTree = "<group>"; };
 		78334EA12A5EB5F40057E05F /* ExpertView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ExpertView.storyboard; sourceTree = "<group>"; };
 		78334EA42A5EBD560057E05F /* ExpertViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertViewViewController.swift; sourceTree = "<group>"; };
 		78334EA62A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertviewInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -937,7 +954,6 @@
 		788ECC652A5718280005DD31 /* NewMeasurementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMeasurementViewController.swift; sourceTree = "<group>"; };
 		788ECC672A571A920005DD31 /* NewMeasurementManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMeasurementManager.swift; sourceTree = "<group>"; };
 		7894C1FA2A9FBFC50060338C /* DefaultThreshold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultThreshold.swift; sourceTree = "<group>"; };
-		7894C1FE2A9FC0510060338C /* FliprThreshold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FliprThreshold.swift; path = "../../../../../Model Classes/FliprThreshold.swift"; sourceTree = "<group>"; };
 		78A67CF12A8A385600F2BEA2 /* StripTestIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripTestIntroViewController.swift; sourceTree = "<group>"; };
 		78C4D6D12A58825E0065585D /* FliprActivateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprActivateManager.swift; sourceTree = "<group>"; };
 		78CD11322A8A9636004EB6AB /* AddV3IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddV3IntroViewController.swift; sourceTree = "<group>"; };
@@ -1418,6 +1434,7 @@
 		4828D36F25C0602300F95683 /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
+				782962532AB1FE5E00EF0B41 /* AI */,
 				1CCD7FBD28EACB4300AF1635 /* Watr */,
 				1CAD60BD2811424500879A45 /* FirmwareUpdate */,
 				48F91FB62677A3BD00FFD44B /* Dashboard */,
@@ -1687,6 +1704,34 @@
 			path = Devices;
 			sourceTree = "<group>";
 		};
+		78250A422AB4A30E00AD60BC /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				78250A4B2AB4A41B00AD60BC /* AIReply.swift */,
+				78250A492AB4A3BA00AD60BC /* Dialog.swift */,
+				78250A442AB4A31D00AD60BC /* FliprAI.swift */,
+				78250A452AB4A31F00AD60BC /* Message.swift */,
+				78250A432AB4A31C00AD60BC /* FliprAIList.swift */,
+			);
+			path = AI;
+			sourceTree = "<group>";
+		};
+		782962532AB1FE5E00EF0B41 /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				782962542AB1FE9300EF0B41 /* FliprAI.storyboard */,
+			);
+			path = AI;
+			sourceTree = "<group>";
+		};
+		782962562AB201DB00EF0B41 /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				782962572AB201F400EF0B41 /* FliprAIViewController.swift */,
+			);
+			path = AI;
+			sourceTree = "<group>";
+		};
 		78334EA32A5EBD2C0057E05F /* ExpertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1698,8 +1743,8 @@
 		787E58822A691D1D00FE61B2 /* ExpertView */ = {
 			isa = PBXGroup;
 			children = (
+				78250A402AB4A2F700AD60BC /* FliprThreshold.swift */,
 				7894C1FA2A9FBFC50060338C /* DefaultThreshold.swift */,
-				7894C1FE2A9FC0510060338C /* FliprThreshold.swift */,
 				787E58832A691D3E00FE61B2 /* LastCalibration.swift */,
 				787E58872A691D4200FE61B2 /* LastStripValue.swift */,
 				787E58892A691D4500FE61B2 /* LSI.swift */,
@@ -1726,6 +1771,7 @@
 			isa = PBXGroup;
 			children = (
 				1CFAF11429DC06FA00B9953A /* GatewayTableViewCell.swift */,
+				78250A4D2AB4AAC400AD60BC /* ChatTableViewCell.swift */,
 				78334EA62A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift */,
 				1CCD7FC928EAE42900AF1635 /* Watr */,
 				488FC81F267A7C3900D41EB4 /* New Design */,
@@ -1743,6 +1789,7 @@
 		B518F0EA1E9F8DAF0092156C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				782962562AB201DB00EF0B41 /* AI */,
 				78334EA32A5EBD2C0057E05F /* ExpertView */,
 				1CCD7FC128EAD67D00AF1635 /* Watr */,
 				48980EA726171DFA009A0F24 /* BaseViewContorller */,
@@ -1787,6 +1834,7 @@
 		B518F0ED1E9F90AC0092156C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				78250A422AB4A30E00AD60BC /* AI */,
 				787E58822A691D1D00FE61B2 /* ExpertView */,
 				1CCD7FC528EADBEF00AF1635 /* Watr */,
 				1C5AE4292751363B008F6643 /* WeatherForHour.swift */,
@@ -2197,6 +2245,7 @@
 				1CA9A287290FFC540035F671 /* NewLocation.storyboard in Resources */,
 				1C98B8D52927C8C000AF089A /* WatrFlipr.storyboard in Resources */,
 				1CF7D8FC29C47DF800118F25 /* Gateway.storyboard in Resources */,
+				782962552AB1FE9300EF0B41 /* FliprAI.storyboard in Resources */,
 				4895F7602668000E00FA8ED3 /* HUBOnboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2260,6 +2309,7 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/GrowingTextView/GrowingTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MSCircularSlider/MSCircularSlider.framework",
@@ -2287,6 +2337,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseMessaging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GrowingTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSCircularSlider.framework",
@@ -2324,6 +2375,7 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/GrowingTextView/GrowingTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MSCircularSlider/MSCircularSlider.framework",
@@ -2351,6 +2403,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseMessaging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GrowingTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSCircularSlider.framework",
@@ -2740,7 +2793,6 @@
 				1C5B560E29A530AD0064C729 /* EqipmentsTableViewCell.swift in Sources */,
 				1C4491032A16B401007D55F3 /* FliprModeChangeViewController.swift in Sources */,
 				1CAD60DB28117F1800879A45 /* CyCBManager.m in Sources */,
-				7894C1FF2A9FC0510060338C /* FliprThreshold.swift in Sources */,
 				B518F0F31E9FC0840092156C /* UIButton+Activity.swift in Sources */,
 				1CCD7FC328EAD6A600AF1635 /* PlaceDropdownViewController.swift in Sources */,
 				1CFABBF529D1C85400A34E21 /* GateWayListingViewController.swift in Sources */,
@@ -2753,6 +2805,7 @@
 				78CD11332A8A9636004EB6AB /* AddV3IntroViewController.swift in Sources */,
 				B5FE6BF1241F71E70031853D /* Extensions.swift in Sources */,
 				4895F7542667F4D300FA8ED3 /* EmailVerifyViewController.swift in Sources */,
+				78250A482AB4A31F00AD60BC /* Message.swift in Sources */,
 				48F49ABC2666A44000DFB18B /* AddHubViewController.swift in Sources */,
 				1CD8DF3228076E8B004412D9 /* NSString+hex.m in Sources */,
 				1CD2B3DA28EC35250013BD98 /* WatrSettingsViewController.swift in Sources */,
@@ -2766,6 +2819,7 @@
 				B59BEFAC1EA65EBD00F3AD73 /* ActivationViewController.swift in Sources */,
 				1CFFA9C129DB16E70087C2B2 /* GatewaywifiViewController.swift in Sources */,
 				B56F2EBA1F00FD890026A962 /* Stock.swift in Sources */,
+				78250A472AB4A31F00AD60BC /* FliprAI.swift in Sources */,
 				B5713F18241164A500278166 /* HUBManager.swift in Sources */,
 				B5BF6D6D225CCE5400FA70D5 /* SubscriptionPageViewController.swift in Sources */,
 				7872CB3F2A5549C600D115C5 /* CalibrationManager.swift in Sources */,
@@ -2802,6 +2856,7 @@
 				1CD8DF3028076E8B004412D9 /* ResourceHandler.m in Sources */,
 				48A51776265E9D6D002E56DC /* CalibrationPh7IntroViewController.swift in Sources */,
 				4895F781266803D000FA8ED3 /* SetupFifthStepViewController.swift in Sources */,
+				78250A4C2AB4A41B00AD60BC /* AIReply.swift in Sources */,
 				4895F7532667F4D300FA8ED3 /* UIViewController+Helper.swift in Sources */,
 				4895F76B2668002D00FA8ED3 /* HUBNamingViewController.swift in Sources */,
 				B5BE18D524485B97006CCB1E /* LandingViewController.swift in Sources */,
@@ -2860,6 +2915,7 @@
 				48FC119125DFE3C1001E1885 /* DeviceViewController.swift in Sources */,
 				B5CB6FDD1E80105E007F82BC /* DashboardViewController.swift in Sources */,
 				B5FE6BEF241F71E70031853D /* CBOR.swift in Sources */,
+				78250A4A2AB4A3BA00AD60BC /* Dialog.swift in Sources */,
 				B5FE6BF2241F71E70031853D /* MajorTypes.swift in Sources */,
 				1CD8DF2E28076E8B004412D9 /* Reachability.m in Sources */,
 				1CCB4F0426A34B6E00FDED47 /* EducationScreenContainerViewController.swift in Sources */,
@@ -2914,12 +2970,15 @@
 				787E588F2A691D4500FE61B2 /* PhMax.swift in Sources */,
 				B545E0AF1EC2133E004A484E /* Alert.swift in Sources */,
 				1C8AD93928167BAD006AA386 /* FirmwereUpdateAlertViewController.swift in Sources */,
+				78250A4E2AB4AAC400AD60BC /* ChatTableViewCell.swift in Sources */,
+				78250A462AB4A31F00AD60BC /* FliprAIList.swift in Sources */,
 				B551E9CE2425020A00C1788F /* HUBWifiTableViewController.swift in Sources */,
 				B5713F1A2411667C00278166 /* HUBActivationViewController.swift in Sources */,
 				B50009841F0101DB00A84A4F /* StockTableViewCell.swift in Sources */,
 				1C9A098929394B6100FD4B71 /* CompleteProfileViewController.swift in Sources */,
 				1CA9A29329106EB90035F671 /* LocationTypeTableViewCell.swift in Sources */,
 				784E0DCE2A8B82D000A01C30 /* CalibrationIntroViewController.swift in Sources */,
+				782962582AB201F400EF0B41 /* FliprAIViewController.swift in Sources */,
 				1CD8DF3428076E8B004412D9 /* DropDownView.m in Sources */,
 				B52A2DDB229D612900967175 /* AppReview.swift in Sources */,
 				7872CB422A554D3C00D115C5 /* GetMeasurmentManager.swift in Sources */,
@@ -2996,6 +3055,7 @@
 				1CD5C6222A17AEA20069C874 /* NoPlaceIntroViewController.swift in Sources */,
 				481624E625DD91F50085F3C4 /* RoundShadowView.swift in Sources */,
 				B59BEFAE1EA6663800F3AD73 /* Module.swift in Sources */,
+				78250A412AB4A2F700AD60BC /* FliprThreshold.swift in Sources */,
 				48F49ABF2666B3D200DFB18B /* HubListViewController.swift in Sources */,
 				1CDF0B14281AFC7600C699E4 /* FirmwareUpgradeFailureViewController.swift in Sources */,
 				1C5AE42627512240008F6643 /* HubRenameViewController.swift in Sources */,

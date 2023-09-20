@@ -39,8 +39,6 @@ class WatrQuickActionViewController: UIViewController {
     var isV3 = false
     
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLbl.text = "Quick Actions".localized
@@ -52,20 +50,16 @@ class WatrQuickActionViewController: UIViewController {
             self.subTitleLbl.text = infoStr
         }
         
-        
         //        self.menuView.roundCorners([.topLeft, .topRight], radius: 14.0)
         menuView.layer.cornerRadius = 14
         menuView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         settingTable.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0.001))
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.tapView.addGestureRecognizer(tap)
-
         //        settingTable.tableFooterView = UIView()
         //        settingTable.tableFooterView = UIView(frame: CGRect(x: 0, y: -1, width: settingTable.frame.size.width, height: 1))
-        
         //        getDeviceDetails()
         self.arrangeMenu()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -80,7 +74,6 @@ class WatrQuickActionViewController: UIViewController {
         if let vc = UIStoryboard(name: "Gateway", bundle: nil).instantiateViewController(withIdentifier: "GateWayListingViewController") as? GateWayListingViewController {
             self.present(vc, animated: true, completion: nil)
         }
-        
     }
     
     @IBAction func closeButtonAction(){
@@ -101,11 +94,10 @@ class WatrQuickActionViewController: UIViewController {
     
     func showBackgroundView(){
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn, animations: {
-                    self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
-                }, completion: nil)
-
-//        self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+            self.tapView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+        }, completion: nil)
     }
+    
     
     func createMenuOrder(){
         if self.placeDetails.permissionLevel == "Admin"{
@@ -177,15 +169,11 @@ class WatrQuickActionViewController: UIViewController {
             self.imageNames = ["buy","AI"]
             self.menuViewHeight.constant = 264
         }
-        
-        
         self.settingTable.reloadData()
     }
     
-    
-    
-    
 }
+
 
 extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSource,UITableViewDragDelegate {
     
@@ -505,16 +493,12 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
             }
         }
         
-        
-        
-        
     }
     
     
     func showAIView(){
-        return
-        if let vc = UIStoryboard(name: "FliprAI", bundle: nil).instantiateInitialViewController() {
-                        vc.modalPresentationStyle = .fullScreen
+        if let vc = UIStoryboard(name: "FliprAI", bundle: nil).instantiateViewController(withIdentifier: "FliprAIViewController") as? FliprAIViewController {
+            vc.modalPresentationStyle = .overCurrentContext
             self.present(vc, animated: true, completion: nil)
         }
     }

@@ -338,8 +338,15 @@ extension ExpertViewViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
         vc.titleStr = "Redox Mini"
         vc.currentType = .Redox
-        vc.defaultValue1 = (self.expertViewInfo?.thresholds?.redox.value ?? 0).string
+        let tmpVal = (self.expertViewInfo?.thresholds?.redox.value ?? 0).string
+        let tripValArray = tmpVal.components(separatedBy: ".")
+        let val    = tripValArray[0]
 
+        vc.defaultValue1 = val
+
+        
+        
+        
         vc.delegate = self
         vc.isSingleItem = true  
         vc.modalPresentationStyle = .overCurrentContext

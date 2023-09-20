@@ -27,6 +27,8 @@ class ExpertviewInfoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var expertViewInfoLbl: UILabel!
 
+    
+    
 
     var lastMeasureInfo : LastCalibration?
     
@@ -126,7 +128,7 @@ class ExpertviewCalibrationInfoTableViewCell: UITableViewCell {
                         if let dateString = obj.dateTime as? String {
                             if let lastDate = dateString.fliprDate {
                                 let dateFormatter = DateFormatter()
-                                dateFormatter.dateFormat = "EEE dd/MM HH:mm"
+                                dateFormatter.dateFormat = "dd/MM/YYYY HH:mm"
                                 self.ph7DateLbl.text = "\(dateFormatter.string(from: lastDate))"
                             }
                         }
@@ -136,7 +138,7 @@ class ExpertviewCalibrationInfoTableViewCell: UITableViewCell {
                            if let dateString = obj.dateTime as? String {
                                if let lastDate = dateString.fliprDate {
                                    let dateFormatter = DateFormatter()
-                                   dateFormatter.dateFormat = "EEE dd/MM HH:mm"
+                                   dateFormatter.dateFormat = "dd/MM/YYYY HH:mm"
                                    self.ph4DateLbl.text = "\(dateFormatter.string(from: lastDate))"
                                }
                            }
@@ -428,29 +430,40 @@ class ExpertviewthresholdInfoTableViewCell: UITableViewCell {
         thresholdInfoLbl.text = "⚠️  Default thresholds are for normal use and should not be altered by inexperienced users. They affect the algorithms and may generate inconsistencies between gauges and alerts. Flipr does not provide any support for pools whose thresholds have been modified.".localized
         
         defaultThresholdBtn.setTitle("Default Thresholds".localized, for: .normal)
-        redoxBtn.setTitle((thresholdValues?.redox.value ?? 0).string, for: .normal)
+        redoxBtn.setTitle(String(format: "%.0f",(thresholdValues?.redox.value ?? 0)), for: .normal)
+
+//        redoxBtn.setTitle((thresholdValues?.redox.value ?? 0).string, for: .normal)
 //        if (thresholdValues?.redox.isDefaultValue ?? false ){
 //            redoxBtn.setTitle((defaultThresholdValues?.redox.value ?? 0).string, for: .normal)
 //        }
-        phMinBtn.setTitle((thresholdValues?.phMin.value ?? 0).string, for: .normal)
+//        phMinBtn.setTitle((thresholdValues?.phMin.value ?? 0).string, for: .normal)
+        
+        phMinBtn.setTitle(String(format: "%.1f",(thresholdValues?.phMin.value ?? 0)), for: .normal)
+
         
 //        if (thresholdValues?.phMin.isDefaultValue ?? false ){
 //            phMinBtn.setTitle((defaultThresholdValues?.phMin.value ?? 0).string, for: .normal)
 //        }
         
-        phMaxBtn.setTitle((thresholdValues?.phMax.value ?? 0).string, for: .normal)
+//        phMaxBtn.setTitle((thresholdValues?.phMax.value ?? 0).string, for: .normal)
+        phMaxBtn.setTitle(String(format: "%.1f",(thresholdValues?.phMax.value ?? 0)), for: .normal)
+
         
 //        if (thresholdValues?.phMax.isDefaultValue ?? false ){
 //            phMaxBtn.setTitle((defaultThresholdValues?.phMax.value ?? 0).string, for: .normal)
 //        }
         
-        tempMinBtn.setTitle((thresholdValues?.temperature.value ?? 0).string, for: .normal)
+//        tempMinBtn.setTitle((thresholdValues?.temperature.value ?? 0).string, for: .normal)
+        tempMinBtn.setTitle(String(format: "%.1f",(thresholdValues?.temperature.value ?? 0)), for: .normal)
+
 //        if (thresholdValues?.temperature.isDefaultValue ?? false ){
 //            tempMinBtn.setTitle((defaultThresholdValues?.temperature.value ?? 0).string, for: .normal)
 //        }
         
         
-        tempMaxBtn.setTitle((thresholdValues?.temperatureMax.value ?? 0).string, for: .normal)
+//        tempMaxBtn.setTitle((thresholdValues?.temperatureMax.value ?? 0).string, for: .normal)
+        tempMaxBtn.setTitle(String(format: "%.1f",(thresholdValues?.temperatureMax.value ?? 0)), for: .normal)
+
         
 //        if (thresholdValues?.temperatureMax.isDefaultValue ?? false ){
 //            tempMaxBtn.setTitle((defaultThresholdValues?.temperatureMax.value ?? 0).string, for: .normal)

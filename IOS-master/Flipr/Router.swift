@@ -152,7 +152,15 @@ enum Router: URLRequestConvertible {
     //Expert View
     case expertView(placeId: String)
 
+    case getAIinfo
+    
+    case sendAiMsg(msg:String)
+    
+    case deleteAiMsg
 
+    case acceptAI
+
+    
     
     //Legacy
     //static let baseURLString = K.Server.BaseUrl + K.Server.ApiPath
@@ -168,6 +176,16 @@ enum Router: URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
+        case .getAIinfo:
+            return .get
+        case .acceptAI:
+            return .post
+        
+        case .deleteAiMsg:
+            return .delete
+            
+        case .sendAiMsg:
+            return .put
         case .createPlace:
             return .post
         case .updatePlace:
@@ -384,7 +402,15 @@ enum Router: URLRequestConvertible {
     
     var path: String {
         switch self {
-        
+        case .acceptAI:
+            return "fliprAi/conditions"
+        case .getAIinfo:
+            return "fliprAI"
+        case .sendAiMsg:
+            return "fliprAI/tchat"
+        case .deleteAiMsg:
+            return "fliprAI/tchat"
+
         case .addDelay(let serial):
             return "modules/\(serial)/addDelay"
         case .createPlace(let typeId):
@@ -661,6 +687,40 @@ enum Router: URLRequestConvertible {
         urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         
         switch self {
+            
+            
+        case .acceptAI:
+            var lang = "en"
+            if let preferredLanguage = Locale.current.languageCode {
+                lang = preferredLanguage
+            }
+            let parameters: [String : Any] = [
+                "lang": lang
+            ]
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+
+
+        case .sendAiMsg(let msg):
+//            let pjson = msg.toJSONString(prettyPrint: false)
+
+//            var lang = "en"
+//            if let preferredLanguage = Locale.current.languageCode {
+//                lang = preferredLanguage
+//            }
+//            let parameters: [String : Any] = [
+//                "lang": lang
+//            ]
+//            var memberJson : String = ""
+//            urlRequest = try JSONEncoding.default.encode(urlRequest, with: nil)
+//            let jsonEncoder = JSONEncoder()
+//            let jsonData = try jsonEncoder.encode(yourJson)
+//            memberJson = String(data: jsonData, encoding: String.Encoding.utf8)!
+
+
+            break
+
+
+            
         case .createNewUser(let email):
             var lang = "en"
             if let preferredLanguage = Locale.current.languageCode {
@@ -670,8 +730,8 @@ enum Router: URLRequestConvertible {
                 "email": email,
                 "lang": lang
             ]
-            urlRequest = try URLEncoding.queryString.encode(urlRequest, with: parameters)
             
+            urlRequest = try URLEncoding.queryString.encode(urlRequest, with: parameters)
             
             
         case .updateUserProfile(let firstName, let lastName, let password):
@@ -682,6 +742,9 @@ enum Router: URLRequestConvertible {
             if let url = urlRequest.url?.absoluteString {
                 urlRequest.url = URL(string: url + "?NewPass=\(password)")
             }
+            
+           // urlRequest = try JSONEncoding.default.encode(URLRequestConvertible)
+            
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
           
         case .getPlaceModules(let placeId):
