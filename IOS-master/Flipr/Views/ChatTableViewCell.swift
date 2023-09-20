@@ -8,9 +8,10 @@
 
 import UIKit
 import JGProgressHUD
+import GhostTypewriter
 
 class ChatTableViewCell: UITableViewCell {
-    @IBOutlet weak var chatLabel: UILabel!
+    @IBOutlet weak var chatLabel: TypewriterLabel!
     @IBOutlet weak var chatCellBackGround: UIView!
     @IBOutlet weak var loader: UIActivityIndicatorView!
 
