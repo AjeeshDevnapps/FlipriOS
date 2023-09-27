@@ -160,8 +160,9 @@ enum Router: URLRequestConvertible {
 
     case acceptAI
 
-    
-    
+    case updateRawData(serial: String, measureId:Int, action:Int)
+
+    case setDefaultCalibration(serial: String)
     //Legacy
     //static let baseURLString = K.Server.BaseUrl + K.Server.ApiPath
     
@@ -176,6 +177,10 @@ enum Router: URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
+        case .setDefaultCalibration:
+            return .post
+        case .updateRawData:
+            return .put
         case .getAIinfo:
             return .get
         case .acceptAI:
@@ -402,6 +407,11 @@ enum Router: URLRequestConvertible {
     
     var path: String {
         switch self {
+            
+        case .setDefaultCalibration(let serial):
+            return "modules/\(serial)/defaultCalibration"
+        case .updateRawData:
+            return "modules/modifRaw"
         case .acceptAI:
             return "fliprAi/conditions"
         case .getAIinfo:
@@ -688,7 +698,16 @@ enum Router: URLRequestConvertible {
         
         switch self {
             
+        case .updateRawData(let serial, let measureId, let action):
+            let parameters: [String : Any] = [
+                "Serial": serial,
+                "MesureId": measureId,
+                "Action": action
+            ]
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+            break
             
+     /*
         case .acceptAI:
             var lang = "en"
             if let preferredLanguage = Locale.current.languageCode {
@@ -698,7 +717,7 @@ enum Router: URLRequestConvertible {
                 "lang": lang
             ]
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-
+*/
 
         case .sendAiMsg(let msg):
 //            let pjson = msg.toJSONString(prettyPrint: false)

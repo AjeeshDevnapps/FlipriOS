@@ -14,6 +14,8 @@ class ExpertViewData : NSObject, NSCoding{
 	var sliderStrip : SliderStrip!
 	var thresholds : Threshold!
 
+    var rawList : [LastCalibration]!
+    var taylorBalance : TaylorBalance!
 
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
@@ -41,6 +43,16 @@ class ExpertViewData : NSObject, NSCoding{
 		if let thresholdsData = dictionary["Thresholds"] as? [String:Any]{
 			thresholds = Threshold(fromDictionary: thresholdsData)
 		}
+        rawList = [LastCalibration]()
+        if let rawListArray = dictionary["RawList"] as? [[String:Any]]{
+            for dic in rawListArray{
+                let value = LastCalibration(fromDictionary: dic)
+                rawList.append(value)
+            }
+        }
+        if let taylorBalanceData = dictionary["TaylorBalance"] as? [String:Any]{
+            taylorBalance = TaylorBalance(fromDictionary: taylorBalanceData)
+        }
 	}
 
 	/**

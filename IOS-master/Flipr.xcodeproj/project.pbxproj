@@ -540,6 +540,7 @@
 		78334EA22A5EB5F40057E05F /* ExpertView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78334EA12A5EB5F40057E05F /* ExpertView.storyboard */; };
 		78334EA52A5EBD560057E05F /* ExpertViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78334EA42A5EBD560057E05F /* ExpertViewViewController.swift */; };
 		78334EA72A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78334EA62A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift */; };
+		7834825F2AC30927002D0A4E /* TaylorBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7834825E2AC30927002D0A4E /* TaylorBalance.swift */; };
 		7837D8B62A7BC2FB00CEA4DA /* GifAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7837D8B52A7BC2FB00CEA4DA /* GifAnimation.swift */; };
 		7837D8B82A7BC37200CEA4DA /* gwgif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7837D8B72A7BC37200CEA4DA /* gwgif.gif */; };
 		784E0DCE2A8B82D000A01C30 /* CalibrationIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E0DCD2A8B82D000A01C30 /* CalibrationIntroViewController.swift */; };
@@ -936,6 +937,7 @@
 		78334EA12A5EB5F40057E05F /* ExpertView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ExpertView.storyboard; sourceTree = "<group>"; };
 		78334EA42A5EBD560057E05F /* ExpertViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertViewViewController.swift; sourceTree = "<group>"; };
 		78334EA62A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpertviewInfoTableViewCell.swift; sourceTree = "<group>"; };
+		7834825E2AC30927002D0A4E /* TaylorBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaylorBalance.swift; sourceTree = "<group>"; };
 		7837D8B52A7BC2FB00CEA4DA /* GifAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifAnimation.swift; sourceTree = "<group>"; };
 		7837D8B72A7BC37200CEA4DA /* gwgif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gwgif.gif; sourceTree = "<group>"; };
 		784E0DCD2A8B82D000A01C30 /* CalibrationIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationIntroViewController.swift; sourceTree = "<group>"; };
@@ -1743,6 +1745,7 @@
 				787E58882A691D4300FE61B2 /* PhMax.swift */,
 				787E58842A691D3E00FE61B2 /* RootClass.swift */,
 				787E58852A691D3F00FE61B2 /* SliderStrip.swift */,
+				7834825E2AC30927002D0A4E /* TaylorBalance.swift */,
 				787E58862A691D4000FE61B2 /* Threshold.swift */,
 			);
 			path = ExpertView;
@@ -2783,6 +2786,7 @@
 				484BEE3B25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift in Sources */,
 				48C8E4F3265D21490000FDA8 /* KeyEnterViewController.swift in Sources */,
 				1CD8019629DD30AC0011A7D8 /* GatewaySettingsViewController.swift in Sources */,
+				7834825F2AC30927002D0A4E /* TaylorBalance.swift in Sources */,
 				B59436E1225652580030F16D /* SubscriptionOptionTableViewCell.swift in Sources */,
 				1C5B560E29A530AD0064C729 /* EqipmentsTableViewCell.swift in Sources */,
 				1C4491032A16B401007D55F3 /* FliprModeChangeViewController.swift in Sources */,
@@ -3302,7 +3306,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3312,7 +3316,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Flipr;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.0.7;
+				MARKETING_VERSION = 4.0.8;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
@@ -3338,7 +3342,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6M9RZXR8UH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3348,7 +3352,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Flipr;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.0.7;
+				MARKETING_VERSION = 4.0.8;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;

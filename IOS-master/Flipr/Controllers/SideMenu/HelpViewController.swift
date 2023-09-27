@@ -61,7 +61,9 @@ class HelpViewController: UIViewController {
     
     
     @IBAction func helpButtonClicked(){
-        if let url = URL(string: "HELP_DESK_URL".localized.remotable) {
+//        if let url = URL(string: "HELP_DESK_URL".localized.remotable) {
+        if let url = URL(string: "https://fliprshop.zohodesk.com/") {
+
             let vc = SFSafariViewController(url: url, entersReaderIfAvailable: false)
             self.present(vc, animated: true)
         }

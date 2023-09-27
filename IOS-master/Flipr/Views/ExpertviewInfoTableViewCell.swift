@@ -95,6 +95,8 @@ class ExpertviewCalibrationInfoTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var newCalibrationBtn: UIButton!
+    @IBOutlet weak var setFactoryBtn: UIButton!
+
     
     var lastCalibrations:[LastCalibration]?
 
@@ -118,6 +120,8 @@ class ExpertviewCalibrationInfoTableViewCell: UITableViewCell {
         
         
         newCalibrationBtn.setTitle("New Calibration".localized, for: .normal)
+        setFactoryBtn.setTitle("3876:63376" .localized, for: .normal)
+
 
         if let list = lastCalibrations {
             for (i,obj) in list.enumerated(){
@@ -295,15 +299,19 @@ class ExpertviewStripTestInfoTableViewCell: UITableViewCell {
             
             if let thVal  = stripValues?.totalHardness{
                 valInfo = valInfo.appending(" ")
-                valInfo = valInfo.appending(thVal.string)
+                 let intVal = Int(thVal)
+                    valInfo = valInfo.appending(intVal.string)
+//                }else{
+//                    valInfo = valInfo.appending(thVal.string)
+//                }
                 valInfo = valInfo.appending(" : ")
             }
 
             valInfo = valInfo.appending("ppm")
             thLbl.text = valInfo
         }
-        if let thVal  = sliderInfo?.totalHardness{
-            thSlider.image = UIImage(named: "vSlider\(thVal)")
+        if let thValh  = sliderInfo?.totalHardness{
+            thSlider.image = UIImage(named: "vSlider\(thValh)")
         }
 
         
@@ -340,7 +348,9 @@ class ExpertviewStripTestInfoTableViewCell: UITableViewCell {
             
             if let thVal  = stripValues?.totalAlk{
                 alklnInfo = alklnInfo.appending(": ")
-                alklnInfo = alklnInfo.appending(thVal.string)
+                let intVal = Int(thVal)
+
+                alklnInfo = alklnInfo.appending(intVal.string)
                 alklnInfo = alklnInfo.appending(" ppm")
             }
             alklnLbl.text = alklnInfo
@@ -376,7 +386,8 @@ class ExpertviewStripTestInfoTableViewCell: UITableViewCell {
             
             if let stabVal  = stripValues?.stabilizer{
                 stabilixerInfo = stabilixerInfo.appending(": ")
-                stabilixerInfo = stabilixerInfo.appending(stabVal.string)
+                let intVal = Int(stabVal)
+                stabilixerInfo = stabilixerInfo.appending(intVal.string)
                 stabilixerInfo = stabilixerInfo.appending(" ppm")
             }
             stabilizerLbl.text = stabilixerInfo
@@ -555,3 +566,171 @@ class ExpertviewTrendInfoTableViewCell: UITableViewCell {
 
 }
 
+
+class RawDataTableViewCell: UITableViewCell {
+    
+
+    @IBOutlet weak var infoLbl: UILabel!
+    var data:LastCalibration?
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+    func loadData(){
+        var info = ""
+        if let dateString = data?.dateTime as? String {
+            if let lastDate = dateString.fliprDate {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd/MM HH:mm"
+                let title = "Last Measurement".localized
+                info = (dateFormatter.string(from: lastDate))
+            }
+        }
+        
+        info = info.appending(" |  pH: ")
+        
+        info = info.appending(String(format: "%.1f",(data?.rawPH ?? 0)))
+        
+        info = info.appending(" |  ORP: ")
+
+        info = info.appending(String(format: "%.1f",(data?.oxydoReducPotentiel ?? 0)))
+
+        
+        info = info.appending("mv")
+
+        info = info.appending(" |  Temp: ")
+
+        info = info.appending(String(format: "%.1f",(data?.temperature ?? 0)))
+
+        info = info.appending("°C | S: ")
+
+        var source = "SYS"
+        switch (data?.source) {
+        case  "Sigfox" :
+            source = "SIG"
+        case "Bluetooth":
+            source = "BLE"
+        case "Wifi":
+            source = "WIF"
+        case "Gateway":
+            source = "GTW"
+        case "EditedByHand" :
+            source = "USR"
+        case .none:
+            source = "SYS"
+        case .some(_):
+            source = "SYS"
+        }
+        info = info.appending(source)
+        infoLbl.text = info
+
+//        analysisTilteLbl.text = "Trens & Analysis".localized
+    }
+
+}
+
+class RawDataTitleTableViewCell: UITableViewCell {
+    
+
+    @IBOutlet weak var titleLbl: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+    func loadData(){
+        titleLbl.text = "Raw Data"
+//        analysisTilteLbl.text = "Trens & Analysis".localized
+    }
+
+}
+
+
+class ExpertviewTaylorBalanceTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var tilteLbl: UILabel!
+    @IBOutlet weak var introLbl: UILabel!
+    @IBOutlet weak var phBalanceLbl: UILabel!
+    @IBOutlet weak var phBalanceInfoLbl: UILabel!
+    @IBOutlet weak var thValLbl: UILabel!
+    @IBOutlet weak var thInfoLbl: UILabel!
+    
+    
+    var data:TaylorBalance?
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        // Configure the view for the selected state
+    }
+    
+    func loadData(){
+        self.tilteLbl.text = "Taylor Balance".localized
+        self.introLbl.text = "The Taylor Balance represents the carbonate-calcium equilibrium of water. It takes into account only TH (Total Hardness), TAC (Total Alkalinity), and pH.".localized
+        
+        let phval = "Your Ph balance is :  ".localized
+        self.phBalanceLbl.text = phval + " \(data?.pheValue ?? 0)"
+        
+        if let phcode = data?.pheTextId{
+            var textStr = ""
+            if phcode == 1{
+                textStr = "The water has a scaling tendency"
+            }
+            else  if phcode == 2{
+                textStr = "The water pH is balanced"
+            }
+            else  if phcode == 3{
+                textStr = "The water has a corrosive tendency"
+            }
+           
+            self.phBalanceInfoLbl.text = textStr.localized
+        }
+        
+        var thStr = "TAC x TH = "
+        thStr.append("\(data?.tacThValue ?? 0)")
+        self.thValLbl.text = thStr
+        
+        if let thcCode = data?.tacThTextId{
+            var textThStr = ""
+            
+             if thcCode == 1{
+                 textThStr = "The concentrations are too low. Increasing the TH and/or TAC is imperative."
+            }
+            else  if thcCode == 2{
+                textThStr = "We can live with it, but we will ensure to keep the pH fairly high to counteract any potential aggressive trend."
+            }
+            
+            else if thcCode == 3{
+                textThStr = "No problem, in principle. Only the pH remains to be determined."
+            }
+            else  if thcCode == 4{
+                textThStr = "This is definitely hard water, so we will pay special attention to keeping the pH close to 7."
+            }
+            else  if thcCode == 5{
+                textThStr = "The concentrations are very high. Reducing the TAC is the first response to the situation. That of the TH is exceptional. The pH is as low as possible."
+            }
+            self.thInfoLbl.text = textThStr.localized
+        }
+    }
+    
+}

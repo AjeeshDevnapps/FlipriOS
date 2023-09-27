@@ -15,7 +15,10 @@ enum ExpertViewCellOrder: Int{
     case calibration
     case stripTest
     case trend
+    case rawData
     case threshold
+    case taylor
+    
 }
 
 class ExpertViewViewController: UIViewController {
@@ -49,7 +52,13 @@ class ExpertViewViewController: UIViewController {
         cellOrder.append(.infoCell)
         cellOrder.append(.calibration)
         cellOrder.append(.stripTest)
+        cellOrder.append(.taylor)
         cellOrder.append(.trend)
+        if let list = self.expertViewInfo?.rawList{
+            if list.count > 0 {
+                cellOrder.append(.rawData)
+            }
+        }
         cellOrder.append(.threshold)
     }
     
@@ -199,9 +208,16 @@ class ExpertViewViewController: UIViewController {
 
 extension ExpertViewViewController: UITableViewDelegate,UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        cellOrder.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return cellOrder.count
+        if cellOrder[section] == .rawData{
+            let count = self.expertViewInfo?.rawList.count ?? 0
+            return (count + 1)
+        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -211,7 +227,7 @@ extension ExpertViewViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        switch (cellOrder[indexPath.row]) {
+        switch (cellOrder[indexPath.section]) {
             case .infoCell:
             let cell =  tableView.dequeueReusableCell(withIdentifier:"ExpertviewInfoTableViewCell",
                                                       for: indexPath) as! ExpertviewInfoTableViewCell
@@ -258,7 +274,27 @@ extension ExpertViewViewController: UITableViewDelegate,UITableViewDataSource {
 
             return cell
             
+        case .rawData:
+            if indexPath.row == 0{
+                let cell =  tableView.dequeueReusableCell(withIdentifier:"RawDataTitleTableViewCell",
+                                                  for: indexPath) as! RawDataTitleTableViewCell
+                return cell
 
+            }else{
+                let cell =  tableView.dequeueReusableCell(withIdentifier:"RawDataTableViewCell",
+                                                  for: indexPath) as! RawDataTableViewCell
+                cell.data = self.expertViewInfo?.rawList[indexPath.row - 1]
+                cell.loadData()
+                return cell
+
+            }
+            
+        case .taylor:
+            let cell =  tableView.dequeueReusableCell(withIdentifier:"ExpertviewTaylorBalanceTableViewCell",
+                                              for: indexPath) as! ExpertviewTaylorBalanceTableViewCell
+            cell.data = self.expertViewInfo?.taylorBalance
+            cell.loadData()
+            return cell
         default:
             let cell =  tableView.dequeueReusableCell(withIdentifier:"ExpertviewInfoTableViewCell",
                                                       for: indexPath) as! ExpertviewInfoTableViewCell
@@ -266,14 +302,147 @@ extension ExpertViewViewController: UITableViewDelegate,UITableViewDataSource {
 
         }
         
-      
         
     }
+    
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if cellOrder[indexPath.section] == .rawData{
+            if indexPath.row == 0{
+                return false
+            }else{
+                return true
+            }
+        }else{
+            return false
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+    }
+   
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
+        
+        if cellOrder[indexPath.section] == .rawData{
+            if indexPath.row == 0{
+                return nil
+            }else{
+                let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
+                    // delete the item here
+                    self.callDeleteAction(indexPath: indexPath)
+                    completionHandler(true)
+                }
+                deleteAction.image = UIImage(named: "cellDelete")
+                deleteAction.backgroundColor = .systemRed
+                
+                let ph4Action = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
+                    // delete the item here
+                    self.callPh4Action(indexPath: indexPath)
+                    completionHandler(true)
+                }
+//                ph4Action.image = UIImage(named: "")
+                ph4Action.title = "pH4"
+                ph4Action.backgroundColor = UIColor(hexString: "73BED8")
+                
+                let ph7Action = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
+                    // delete the item here
+                    self.callPh7Action(indexPath: indexPath)
+                    completionHandler(true)
+                }
+//                ph7Action.image = UIImage(named: "")
+                ph7Action.title = "pH7"
+                ph7Action.backgroundColor = UIColor(hexString: "EC7EE1")
+//
+                let configuration = UISwipeActionsConfiguration(actions: [ph7Action,ph4Action,deleteAction])
+                return configuration
+            }
+        }else{
+            return nil
+        }
+    }
+
+    
+    func callDeleteAction(indexPath: IndexPath){
+        
+        let alert = UIAlertController(title: "Delete this measurement".localized, message:"Be careful, modifying a measurement leads to significant changes in the behavior of your pool".localized, preferredStyle:.actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Confirm".localized, style: .destructive, handler: { (action) in
+            if let data = self.expertViewInfo?.rawList[indexPath.row - 1]{
+                self.callRawModifyApi(serial:data.deviceId ?? "0", measureId: data.mesureId ?? 0, action: 0)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func callPh4Action(indexPath: IndexPath){
+        let alert = UIAlertController(title: "Transform as pH4 Calibration".localized, message:"Be careful, modifying a measurement leads to significant changes in the behavior of your pool".localized, preferredStyle:.actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Confirm".localized, style: .destructive, handler: { (action) in
+            if let data = self.expertViewInfo?.rawList[indexPath.row - 1]{
+                self.callRawModifyApi(serial:data.deviceId ?? "0", measureId: data.mesureId ?? 0, action: 1)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func callPh7Action(indexPath: IndexPath){
+        let alert = UIAlertController(title: "Transform as pH7 Calibration".localized, message:"Be careful, modifying a measurement leads to significant changes in the behavior of your pool".localized, preferredStyle:.actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Confirm".localized, style: .destructive, handler: { (action) in
+            if let data = self.expertViewInfo?.rawList[indexPath.row - 1]{
+                self.callRawModifyApi(serial:data.deviceId ?? "0", measureId: data.mesureId ?? 0, action: 2)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func callRawModifyApi(serial: String, measureId:Int, action:Int){
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.view)
+        Alamofire.request(Router.updateRawData(serial: serial, measureId: measureId, action: action)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let value):
+                hud?.dismiss(afterDelay: 0)
+                self.callExpertViewApi()
+            case .failure(let error):
+                hud?.dismiss(afterDelay: 0)
+//                self.showError(title: "Error".localized, message: "Oups, we're sorry but something went wrong :/".localized)
+            }
+        })
+    }
+//
     
 }
 
 
 extension ExpertViewViewController {
+    
+    
+    @IBAction func setFactoryBtnClicked(){
+        let alert = UIAlertController(title: nil, message:"4292:67566".localized, preferredStyle:.actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Confirm".localized, style: .destructive, handler: { (action) in
+            let hud = JGProgressHUD(style:.dark)
+            hud?.show(in: self.view)
+            let serial = self.expertViewInfo?.lastMeasure.deviceId ?? "0"
+            Alamofire.request(Router.setDefaultCalibration(serial: serial)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let value):
+                    hud?.dismiss(afterDelay: 0)
+                    self.callExpertViewApi()
+                case .failure(let error):
+                    hud?.dismiss(afterDelay: 0)
+    //                self.showError(title: "Error".localized, message: "Oups, we're sorry but something went wrong :/".localized)
+                }
+            })
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     @IBAction func minPhBtnClicked(){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
@@ -344,9 +513,6 @@ extension ExpertViewViewController {
 
         vc.defaultValue1 = val
 
-        
-        
-        
         vc.delegate = self
         vc.isSingleItem = true  
         vc.modalPresentationStyle = .overCurrentContext

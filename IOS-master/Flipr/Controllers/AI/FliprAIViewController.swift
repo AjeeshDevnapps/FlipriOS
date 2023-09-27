@@ -20,12 +20,11 @@ class FliprAIViewController: UIViewController {
     
     @IBOutlet weak var chatTableView: UITableView!
     @IBOutlet weak var tNcButton: UIButton!
+
     //@IBOutlet weak
     var resetButton: UIButton!
+    var creditInfoLbl: UILabel!
     
-    
-
-
     var intro : FliprAIList?
     var chats = [AIQustnNreply]()
     var chatTextLimit =  200
@@ -35,6 +34,7 @@ class FliprAIViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setCustomNavigation()
+        hideKeyboardWhenTappedAround()
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.enable = false
 
@@ -75,7 +75,18 @@ class FliprAIViewController: UIViewController {
          resetButton.setImage(UIImage(named: "AiReset"), for: .normal)
          resetButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
          resetButton.addTarget(self, action: #selector(resetBtnAction), for: .touchUpInside)
-         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: resetButton)
+         
+         creditInfoLbl = UILabel.init(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
+         creditInfoLbl.textColor = .black
+         creditInfoLbl.backgroundColor = .clear
+         creditInfoLbl.font = UIFont.systemFont(ofSize: 12.0)
+         
+         let creditBarButton    = UIBarButtonItem.init(customView: creditInfoLbl)
+         let resetBarButton    = UIBarButtonItem.init(customView: resetButton)
+
+         self.creditInfoLbl.isHidden = true
+         self.navigationItem.rightBarButtonItems = [resetBarButton,creditBarButton]
+//         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: resetButton)
     }
     
     
@@ -153,20 +164,15 @@ class FliprAIViewController: UIViewController {
     
     func showNoCreditAlert(){
         let alertController = UIAlertController(title: nil, message: "Your trial quota has been exceeded. Please contact our sales department for further information.".localized, preferredStyle: UIAlertController.Style.alert)
-        
 //        let cancelAction =  UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.cancel)
-        
         let okAction = UIAlertAction(title: "Confirm".localized, style: UIAlertAction.Style.destructive)
         {
             (result : UIAlertAction) -> Void in
             print("You pressed OK")
-            
 //            self.callResetAiApi()
-            
         }
         alertController.addAction(okAction)
 //        alertController.addAction(cancelAction)
-
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -174,19 +180,29 @@ class FliprAIViewController: UIViewController {
     
     @IBAction func sendButtonClicked(){
         view.endEditing(true)
-        if textView.text.isValidString{
-            let qustn = textView.text ?? ""
-            let obj = AIQustnNreply()
-            obj.qustion = qustn
-            self.chats.append(obj)
-            self.chatTableView.reloadData()
-            textView.text = ""
-            sentMsg(msg:"\"\(String(describing: qustn)) \"")
-//            sentMsg(msg:"\"\(String(describing: textView.text))\"")
+        
+        let used = self.limitDetails?.creditUsed ?? 0
+        let allowed = self.limitDetails?.creditAllowed ?? 0
 
+        if used == allowed{
+            self.showNoCreditMessage()
         }else{
-            
+            if textView.text.isValidString{
+                let qustn = textView.text ?? ""
+                let obj = AIQustnNreply()
+                obj.qustion = qustn
+                self.chats.append(obj)
+                self.chatTableView.reloadData()
+                textView.text = ""
+                sentMsg(msg:"\"\(String(describing: qustn)) \"")
+    //            sentMsg(msg:"\"\(String(describing: textView.text))\"")
+
+            }else{
+                
+            }
         }
+        
+      
     }
     
     func sentMsg(msg:String){
@@ -214,21 +230,22 @@ class FliprAIViewController: UIViewController {
             switch response.result {
                 
                 case .success(let value):
-                UIView.transition(with: self.inputToolbar, duration: 0.4,
-                                  options: .transitionCrossDissolve,
-                                  animations: {
-                    self.inputToolbar.isHidden = false
-                              })
+//                UIView.transition(with: self.inputToolbar, duration: 0.4,
+//                                  options: .transitionCrossDissolve,
+//                                  animations: {
+//                    self.inputToolbar.isHidden = false
+//                              })
                     print(value)
                     if let JSON = value as? [String:Any] {
                         let reply:AIReply = AIReply(fromDictionary: JSON)
                         let obj = self.chats[self.chats.count - 1]
                         obj.message = reply.message
                         self.limitDetails = reply.fliprAI
-                        self.checkLimit()
 //                        self.chatTableView
 //                        self.chats.append(reply)
                     }
+                    self.checkLimit()
+                    self.showCreditInfo()
 //                    hud?.dismiss(afterDelay: 0)
                     self.chatTableView.reloadData()
                 case .failure(let error):
@@ -261,7 +278,7 @@ class FliprAIViewController: UIViewController {
                 hud?.dismiss(afterDelay: 0)
                 let used = self.limitDetails?.creditUsed ?? 0
                 let allowed = self.limitDetails?.creditAllowed ?? 0
-                var hasAccept = self.limitDetails?.hasAccept ?? true
+                let hasAccept = self.limitDetails?.hasAccept ?? true
                // hasAccept = false
                 self.isHaveAccept = hasAccept
                 if hasAccept == false{
@@ -270,6 +287,7 @@ class FliprAIViewController: UIViewController {
                     self.checkLimit()
                 }
                 else{
+                    self.showCreditInfo()
                     self.tNcButton.isHidden = true
                     self.inputToolbar.isHidden = false
                     if used == allowed{
@@ -290,8 +308,16 @@ class FliprAIViewController: UIViewController {
                           
     }
     
+    func showCreditInfo(){
+        let used = self.limitDetails?.creditUsed ?? 0
+        let allowed = self.limitDetails?.creditAllowed ?? 0
+        self.creditInfoLbl.isHidden = false
+        self.creditInfoLbl.text = "\(used)/\(allowed)"
+
+    }
     
     func showAcceptScreen(){
+        self.creditInfoLbl.isHidden = false
         self.tNcButton.isHidden = false
         self.inputToolbar.isHidden = true
     }
@@ -346,6 +372,7 @@ class FliprAIViewController: UIViewController {
                 self.isHaveAccept = true
                 self.tNcButton.isHidden = true
                 self.inputToolbar.isHidden = false
+                self.showCreditInfo()
                 self.chatTableView.reloadData()
             case .failure(let error):
                 hud?.dismiss(afterDelay: 0)
@@ -449,14 +476,22 @@ extension FliprAIViewController: UITableViewDelegate,UITableViewDataSource {
                     cell.addLoader()
                     cell.chatLabel.text =  " \n  "
                     cell.chatCellBackGround.backgroundColor = UIColor.white
-
                 }else{
                     cell.removeLoader()
                     cell.chatLabel.text = chats[indexPath.section - 1].message?.content ?? ""
                     cell.chatCellBackGround.backgroundColor = UIColor.white
                     cell.chatLabel.textColor = .black
                     if chats.count == indexPath.section{
-                        cell.chatLabel.startTypewritingAnimation()
+                        cell.chatLabel.typingTimeInterval = 0.03
+                        cell.chatLabel.startTypewritingAnimation{
+                            let used = self.limitDetails?.creditUsed ?? 0
+                            let allowed = self.limitDetails?.creditAllowed ?? 0
+                            if used == allowed{
+                                self.showNoCreditMessage()
+                            }else{
+                                self.inputToolbar.isHidden = false
+                            }
+                        }
                     }else{
                         
                     }

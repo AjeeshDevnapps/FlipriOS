@@ -188,7 +188,7 @@ class GatewaySettingsTableViewCell: UITableViewCell {
         nameLblTitle.text = "SSID WIFI" .localized
         
 //        ownerLblTitle.text = "Propriétaire".localized
-        locationLblTitle.text = "Connection ".localized
+        locationLblTitle.text = "Connection".localized
         serialNoLblTitle.text = "Software Version".localized
 //        deleteHeaderTitle.text = "Mode".localized
         changeeWifiTitle.text = "Changer le réseau Wifi".localized

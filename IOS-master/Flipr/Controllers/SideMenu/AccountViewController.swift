@@ -52,7 +52,7 @@ class AccountViewController: UIViewController {
         self.subscriptionInfoLabel.text = "You can unsubscribe anytime from App Store settings".localized
         self.tapToChangeLabel.text = "Tap to change".localized
         self.titleLabel.text  = "My info".localized
-        self.deleteAccountButton.setTitle("Delete Account", for: .normal)
+        self.deleteAccountButton.setTitle("Delete Account".localized, for: .normal)
 
         firstNameTxtFld.delegate = self
         lastNameTxtFld.delegate = self
