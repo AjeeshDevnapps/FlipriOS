@@ -298,16 +298,16 @@ class ExpertviewStripTestInfoTableViewCell: UITableViewCell {
             }
             
             if let thVal  = stripValues?.totalHardness{
-                valInfo = valInfo.appending(" ")
+//                valInfo = valInfo.appending(" ")
                  let intVal = Int(thVal)
+                    valInfo = valInfo.appending(": ")
                     valInfo = valInfo.appending(intVal.string)
 //                }else{
 //                    valInfo = valInfo.appending(thVal.string)
 //                }
-                valInfo = valInfo.appending(" : ")
             }
 
-            valInfo = valInfo.appending("ppm")
+            valInfo = valInfo.appending(" ppm")
             thLbl.text = valInfo
         }
         if let thValh  = sliderInfo?.totalHardness{
@@ -343,7 +343,9 @@ class ExpertviewStripTestInfoTableViewCell: UITableViewCell {
                 
             }
             else{
-                
+                alklnInfo = alklnInfo.appending("Very Hight".localized)
+                alklnInfoLbl.text = "A very high alkalinity in a swimming pool, characterized by elevated levels of alkaline substances, can lead to pH imbalance, scale formation, poor water clarity, and discomfort for swimmers, which can be addressed through acid treatment, dilution, and regular monitoring and balancing of the water chemistry.".localized
+
             }
             
             if let thVal  = stripValues?.totalAlk{
@@ -595,22 +597,22 @@ class RawDataTableViewCell: UITableViewCell {
             }
         }
         
-        info = info.appending(" |  pH: ")
+        info = info.appending(" | ")
         
         info = info.appending(String(format: "%.1f",(data?.rawPH ?? 0)))
         
-        info = info.appending(" |  ORP: ")
+        info = info.appending(" | ")
 
         info = info.appending(String(format: "%.1f",(data?.oxydoReducPotentiel ?? 0)))
 
         
         info = info.appending("mv")
 
-        info = info.appending(" |  Temp: ")
+        info = info.appending(" | ")
 
         info = info.appending(String(format: "%.1f",(data?.temperature ?? 0)))
 
-        info = info.appending("°C | S: ")
+        info = info.appending("°C | ")
 
         var source = "SYS"
         switch (data?.source) {
@@ -689,7 +691,8 @@ class ExpertviewTaylorBalanceTableViewCell: UITableViewCell {
         self.introLbl.text = "The Taylor Balance represents the carbonate-calcium equilibrium of water. It takes into account only TH (Total Hardness), TAC (Total Alkalinity), and pH.".localized
         
         let phval = "Your Ph balance is :  ".localized
-        self.phBalanceLbl.text = phval + " \(data?.pheValue ?? 0)"
+        self.phBalanceLbl.text = phval + String(format: " %.1f",(data?.pheValue ?? 0))
+//        " \(data?.pheValue ?? 0)"
         
         if let phcode = data?.pheTextId{
             var textStr = ""
@@ -707,7 +710,10 @@ class ExpertviewTaylorBalanceTableViewCell: UITableViewCell {
         }
         
         var thStr = "TAC x TH = "
-        thStr.append("\(data?.tacThValue ?? 0)")
+//        thStr.append("\(data?.tacThValue ?? 0)")
+        
+        thStr.append(String(format: "%.1f",(data?.tacThValue ?? 0)))
+        
         self.thValLbl.text = thStr
         
         if let thcCode = data?.tacThTextId{
@@ -734,3 +740,4 @@ class ExpertviewTaylorBalanceTableViewCell: UITableViewCell {
     }
     
 }
+    

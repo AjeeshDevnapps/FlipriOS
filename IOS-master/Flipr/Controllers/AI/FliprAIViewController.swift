@@ -284,7 +284,7 @@ class FliprAIViewController: UIViewController {
                 if hasAccept == false{
                     self.showAcceptScreen()
                     self.chatTableView.reloadData()
-                    self.checkLimit()
+//                    self.checkLimit()
                 }
                 else{
                     self.showCreditInfo()
@@ -463,7 +463,6 @@ extension FliprAIViewController: UITableViewDelegate,UITableViewDataSource {
                 }
                 cell.removeLoader()
             }
-            
            
         }else{
             if indexPath.row == 0{
