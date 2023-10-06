@@ -221,8 +221,8 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                         cell.comingSoonLbl.isHidden = false
                     }
                     else if indexPath.row == 1{
-                        cell.disableView.isHidden = false
-                        cell.comingSoonLbl.isHidden = false
+                        cell.disableView.isHidden = true
+                        cell.comingSoonLbl.isHidden = true
                     }
                     else{
                         cell.disableView.isHidden = true
@@ -236,8 +236,8 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                             cell.comingSoonLbl.isHidden = false
                         }
                         else if indexPath.row == 1{
-                            cell.disableView.isHidden = false
-                            cell.comingSoonLbl.isHidden = false
+                            cell.disableView.isHidden = true
+                            cell.comingSoonLbl.isHidden = true
                         }
                         else{
                             cell.disableView.isHidden = true
@@ -245,8 +245,8 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                         }
                     }else{
                         if indexPath.row == 1{
-                            cell.disableView.isHidden = false
-                            cell.comingSoonLbl.isHidden = false
+                            cell.disableView.isHidden = true
+                            cell.comingSoonLbl.isHidden = true
                         }else{
                             cell.disableView.isHidden = true
                             cell.comingSoonLbl.isHidden = true
@@ -256,8 +256,8 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
             }else{
                 
                 if indexPath.row == 1{
-                    cell.disableView.isHidden = false
-                    cell.comingSoonLbl.isHidden = false
+                    cell.disableView.isHidden = true
+                    cell.comingSoonLbl.isHidden = true
                 }else{
                     cell.disableView.isHidden = true
                     cell.comingSoonLbl.isHidden = true
@@ -268,13 +268,12 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
         }
         else{
             if indexPath.row == 1{
-                cell.disableView.isHidden = false
-                cell.comingSoonLbl.isHidden = false
+                cell.disableView.isHidden = true
+                cell.comingSoonLbl.isHidden = true
             }else{
                 cell.disableView.isHidden = true
                 cell.comingSoonLbl.isHidden = true
             }
-            
         }
         
         return cell
@@ -502,7 +501,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
     
     
     func showAIView(){
-       // return
+      
         
         if let vc = UIStoryboard(name: "FliprAI", bundle: nil).instantiateViewController(withIdentifier: "FliprAIViewController") as? FliprAIViewController {
             vc.modalPresentationStyle = .fullScreen

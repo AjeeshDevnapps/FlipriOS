@@ -93,12 +93,22 @@ class ExpertViewViewController: UIViewController {
     }
     
     @IBAction func newStripTestBtnClicked(){
+        
+        let sb:UIStoryboard = UIStoryboard.init(name: "Calibration", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "StripTestIntroViewController") as? StripTestIntroViewController {
+            viewController.recalibration = false
+            viewController.isPresentView = true
+            viewController.isFromExpertView = true
+            self.navigationController?.pushViewController(viewController)
+        }
+        
 //        let sb = UIStoryboard(name: "Calibration", bundle: nil)
 //        let vc = sb.instantiateViewController(withIdentifier: "StripViewControllerID") as! StripViewController
 //        vc.isFromExpertView = true
 //        self.navigationController?.pushViewController(vc)
 //        self.present(vc, animated: true)
         
+        /*
         let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
         let alert = UIAlertController(title: "Strip test".localized, message:"Are you sure you want to do a new strip test?".localized, preferredStyle:.alert)
         alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
@@ -123,6 +133,7 @@ class ExpertViewViewController: UIViewController {
             }
         }))
         self.present(alert, animated: true, completion: nil)
+        */
     }
     
     @IBAction func defaultTresholdBtnClicked(){

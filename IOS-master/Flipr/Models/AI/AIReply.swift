@@ -11,6 +11,10 @@ class AIReply{
 	var limitCharact : Int!
 	var message : Dialog!
 	var totalTokens : Int!
+    
+    
+    
+    
 	/**
 	 * Instantiate the instance using the passed dictionary values to set the properties values
 	 */

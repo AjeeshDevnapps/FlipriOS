@@ -480,8 +480,13 @@ enum Router: URLRequestConvertible {
         
         //case .addStripTest(let poolId,_):
         //    return "pools/\(poolId)/strip"
+            
+            // old strip test
+//        case .addStripTest:
+//            return "data/strip"
+
         case .addStripTest:
-            return "data/strip"
+            return "place/newStrip"
 
         case .readModuleLastMetrics(let serialId):
             return "data/\(serialId)/report/last"

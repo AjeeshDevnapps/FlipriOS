@@ -812,7 +812,7 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                                 <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0n-mc-OVu" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="709.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="770.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rainbow" translatesAutoresizingMaskIntoConstraints="NO" id="6bB-Sj-wUe">
                                                 <rect key="frame" x="157" y="15" width="100" height="100"/>
@@ -833,7 +833,7 @@ But fear not, my adventurous pool owner! You can check out all these exciting da
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eid-Ug-PUk">
-                                                <rect key="frame" x="19" y="639.5" width="376" height="50"/>
+                                                <rect key="frame" x="19" y="700.5" width="376" height="50"/>
                                                 <color key="backgroundColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="CtD-2X-6fQ"/>
@@ -852,15 +852,61 @@ But fear not, my adventurous pool owner! You can check out all these exciting da
                                                     <action selector="nextButtonAction" destination="Cs0-WT-bwr" eventType="touchUpInside" id="cH0-IU-z5O"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8zd-Bm-S08">
+                                                <rect key="frame" x="113" y="634.5" width="188" height="56"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BuyTestStrip" translatesAutoresizingMaskIntoConstraints="NO" id="NVg-bk-Ojl">
+                                                        <rect key="frame" x="10" y="9.5" width="40" height="37"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="40" id="SQ2-uo-Dpc"/>
+                                                            <constraint firstAttribute="height" constant="37" id="V4x-g5-s1o"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy Test Strip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovn-gq-1kz">
+                                                        <rect key="frame" x="64" y="21" width="116" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efq-hZ-1pd">
+                                                        <rect key="frame" x="0.0" y="0.0" width="188" height="56"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="buyStripTextButtonAction" destination="Cs0-WT-bwr" eventType="touchUpInside" id="W3b-vH-c1F"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" red="1" green="0.81960784313725488" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="Efq-hZ-1pd" secondAttribute="trailing" id="6gU-zJ-yoX"/>
+                                                    <constraint firstItem="ovn-gq-1kz" firstAttribute="centerY" secondItem="8zd-Bm-S08" secondAttribute="centerY" id="Hek-pp-zGh"/>
+                                                    <constraint firstItem="Efq-hZ-1pd" firstAttribute="leading" secondItem="8zd-Bm-S08" secondAttribute="leading" id="J20-GO-qHV"/>
+                                                    <constraint firstItem="ovn-gq-1kz" firstAttribute="leading" secondItem="NVg-bk-Ojl" secondAttribute="trailing" constant="14" id="PXF-Oc-7vC"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ovn-gq-1kz" secondAttribute="trailing" constant="8" id="TBS-2o-Kgc"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Efq-hZ-1pd" secondAttribute="bottom" id="XZs-gC-JhL"/>
+                                                    <constraint firstItem="Efq-hZ-1pd" firstAttribute="top" secondItem="8zd-Bm-S08" secondAttribute="top" id="Yd3-aK-hhe"/>
+                                                    <constraint firstItem="NVg-bk-Ojl" firstAttribute="centerY" secondItem="8zd-Bm-S08" secondAttribute="centerY" id="buN-K6-vwk"/>
+                                                    <constraint firstAttribute="width" constant="188" id="hsu-w4-ysS"/>
+                                                    <constraint firstItem="NVg-bk-Ojl" firstAttribute="leading" secondItem="8zd-Bm-S08" secondAttribute="leading" constant="10" id="maT-lM-ncL"/>
+                                                    <constraint firstAttribute="height" constant="56" id="z8Q-C7-HmG"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="eid-Ug-PUk" firstAttribute="top" secondItem="8zd-Bm-S08" secondAttribute="bottom" constant="10" id="75E-Y7-X5r"/>
                                             <constraint firstAttribute="trailing" secondItem="eid-Ug-PUk" secondAttribute="trailing" constant="19" id="8BM-Y6-Kho"/>
                                             <constraint firstAttribute="bottom" secondItem="eid-Ug-PUk" secondAttribute="bottom" constant="20" id="Kbp-ss-oSm"/>
+                                            <constraint firstItem="8zd-Bm-S08" firstAttribute="centerX" secondItem="e0n-mc-OVu" secondAttribute="centerX" id="QnP-L1-Vg2"/>
                                             <constraint firstItem="6bB-Sj-wUe" firstAttribute="top" secondItem="e0n-mc-OVu" secondAttribute="top" constant="15" id="RB2-zk-OQa"/>
                                             <constraint firstItem="eF5-7Y-pCG" firstAttribute="leading" secondItem="e0n-mc-OVu" secondAttribute="leading" constant="19" id="Rgm-LP-lHR"/>
                                             <constraint firstItem="6bB-Sj-wUe" firstAttribute="centerX" secondItem="e0n-mc-OVu" secondAttribute="centerX" id="Wt9-i7-HTo"/>
-                                            <constraint firstItem="eid-Ug-PUk" firstAttribute="top" secondItem="eF5-7Y-pCG" secondAttribute="bottom" constant="15" id="Yhf-hj-w1N"/>
+                                            <constraint firstItem="8zd-Bm-S08" firstAttribute="top" secondItem="eF5-7Y-pCG" secondAttribute="bottom" constant="10" id="cdr-hI-5Qf"/>
                                             <constraint firstItem="eF5-7Y-pCG" firstAttribute="top" secondItem="6bB-Sj-wUe" secondAttribute="bottom" constant="15" id="mzU-Tg-JEq"/>
                                             <constraint firstItem="eid-Ug-PUk" firstAttribute="leading" secondItem="e0n-mc-OVu" secondAttribute="leading" constant="19" id="pgX-xg-QmT"/>
                                             <constraint firstAttribute="trailing" secondItem="eF5-7Y-pCG" secondAttribute="trailing" constant="19" id="uBy-cd-FMU"/>
@@ -889,13 +935,14 @@ But fear not, my adventurous pool owner! You can check out all these exciting da
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buyStripTitleLbl" destination="ovn-gq-1kz" id="5iC-82-wJ2"/>
                         <outlet property="nextButton" destination="eid-Ug-PUk" id="j2e-ha-IDx"/>
                         <outlet property="subTitleLbl" destination="eF5-7Y-pCG" id="xaM-K4-yfn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lfy-Gi-KCm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="696" y="670"/>
+            <point key="canvasLocation" x="695.6521739130435" y="669.64285714285711"/>
         </scene>
         <!--Chlorine Calibration View Controller-->
         <scene sceneID="MiR-os-EzH">
@@ -2346,8 +2393,8 @@ But fear not, my adventurous pool owner! You can check out all these exciting da
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umd-2U-glx">
                                                 <rect key="frame" x="19" y="280.5" width="376" height="150.5"/>
-                                                <mutableString key="text">Although our probes are perfectly calibrated and tested before leaving the factory, there are times when unexpected situations arise, and a little recalibration might be necessary, even on new equipment. Yes, even the best equipment can encounter such challenges!
-</mutableString>
+                                                <string key="text">Although our probes are perfectly calibrated and tested before leaving the factory, there are times when unexpected situations arise, and a little recalibration might be necessary, even on new equipment. Yes, even the best equipment can encounter such challenges!
+</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2449,13 +2496,13 @@ But fear not, my adventurous pool owner! You can check out all these exciting da
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJJ-fM-T92">
                                                 <rect key="frame" x="19" y="130" width="376" height="537.5"/>
-                                                <mutableString key="text">Although our probes are perfectly calibrated and tested before leaving the factory, there are times when unexpected situations arise, and a little recalibration might be necessary, even on new equipment. Yes, even the best equipment can encounter such challenges!
+                                                <string key="text">Although our probes are perfectly calibrated and tested before leaving the factory, there are times when unexpected situations arise, and a little recalibration might be necessary, even on new equipment. Yes, even the best equipment can encounter such challenges!
 
 To ensure precise measurements and avoid any mishaps, we highly recommend regular calibration. It's like giving your probes a little energy boost!
 
 Remember to take good care of your probes by performing calibration at least once per season. They will definitely show their appreciation in a hundredfold!
 
-Oh, and just a heads up, we understand that sometimes Bluetooth can get a bit temperamental in certain electromagnetic environments. If that happens, don't worry! Our friendly technical team will guide you through a calibration process in disconnected mode. We always have a solution, even when dealing with Bluetooth's quirks! 😉</mutableString>
+Oh, and just a heads up, we understand that sometimes Bluetooth can get a bit temperamental in certain electromagnetic environments. If that happens, don't worry! Our friendly technical team will guide you through a calibration process in disconnected mode. We always have a solution, even when dealing with Bluetooth's quirks! 😉</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2528,6 +2575,7 @@ Oh, and just a heads up, we understand that sometimes Bluetooth can get a bit te
     </scenes>
     <resources>
         <image name="Button Close" width="32" height="32"/>
+        <image name="BuyTestStrip" width="40" height="37"/>
         <image name="PH4Demo" width="300" height="120"/>
         <image name="arrow_back-1" width="25" height="25"/>
         <image name="calibrationIntro" width="100" height="100"/>

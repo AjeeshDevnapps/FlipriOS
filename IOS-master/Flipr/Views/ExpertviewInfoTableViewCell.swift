@@ -63,6 +63,15 @@ class ExpertviewInfoTableViewCell: UITableViewCell {
         
         airTempValLbl.text = Module.currentModule?.airTemperature
         waterTempValLbl.text = Module.currentModule?.rawWaterTemperature
+        
+        if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+            if currentUnit == 2{
+                
+//                unitLbl.text = "Impérial : Feets,  °F"
+            }else{
+//                unitLbl.text = "Métrique (m, m°C)"
+            }
+        }
 
         
         if let dateString = lastMeasureInfo?.dateTime as? String {

@@ -363,6 +363,16 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
     
     
     func stripTest(){
+        let sb:UIStoryboard = UIStoryboard.init(name: "Calibration", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "StripTestIntroViewController") as? StripTestIntroViewController {
+            viewController.recalibration = true
+            viewController.isPresentView = true
+            viewController.modalPresentationStyle = .fullScreen
+            let nav = UINavigationController.init(rootViewController: viewController)
+            self.present(nav, animated: true, completion: nil)
+
+        }
+        /*
         let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
         let alert = UIAlertController(title: "Strip test".localized, message:"Are you sure you want to do a new strip test?".localized, preferredStyle:.alert)
         alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
@@ -383,6 +393,8 @@ extension ExpertMenuViewController: UITableViewDelegate,UITableViewDataSource {
             }
         }))
         self.present(alert, animated: true, completion: nil)
+        
+        */
     }
     
     

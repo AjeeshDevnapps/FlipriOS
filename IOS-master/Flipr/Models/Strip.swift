@@ -17,10 +17,14 @@ class Strip {
     var hydrotimetricTitle:Double?
     var cyanudricAcid:Double?
     var testTime = Date()
-    
+    //olf version is 1
     var version = 1
     
+    var stripVersion = 0
 
+    var placeId = ""
+    
+/*
     func send(completion: ((_ error:Error?) -> Void)?) {
         
         if (chloreBrome == nil) || (totalChlore == nil) || (alcalinity == nil) || (pH == nil) || (hydrotimetricTitle == nil) || (cyanudricAcid == nil) {
@@ -31,6 +35,51 @@ class Strip {
         if let serial = Module.currentModule?.serial { //, let poolId = Pool.currentPool?.id {
             
             let params:[String : Any] = ["DeviceId":serial,"ChloreBrome":chloreBrome!,"TotalChlore":totalChlore!,"Alcalinity":alcalinity!,"PH":pH!,"HydrotimetricTitle":hydrotimetricTitle!,"CyanudricAcid":cyanudricAcid!,"Version":version]
+            
+            print("Send Strip Test with parmams: \(params)")
+            
+            Alamofire.request(Router.addStripTest(params: params)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in
+                
+                switch response.result {
+                    
+                case .success(let value):
+                    
+                    completion?(nil)
+                    
+                    
+                case .failure(let error):
+                    
+                    if let serverError = User.serverError(response: response) {
+                        completion?(serverError)
+                    } else {
+                        completion?(error)
+                    }
+                }
+                
+            })
+            
+        } else {
+            completion?(NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"No current module :/"]))
+            return
+        }
+        
+        
+        
+    }
+    
+    */
+    
+    
+    func send(completion: ((_ error:Error?) -> Void)?) {
+        
+        if (chloreBrome == nil) || (totalChlore == nil) || (alcalinity == nil) || (pH == nil) || (hydrotimetricTitle == nil) || (cyanudricAcid == nil) {
+            completion?(NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Toutes les valeurs sont obligatoires".localized]))
+            return
+        }
+        
+        if let placeID = Module.currentModule?.placeId { //, let poolId = Pool.currentPool?.id {
+            
+            let params:[String : Any] = ["placeId":placeID,"TotalChlBr":chloreBrome!,"FreeChlorine":totalChlore!,"TAC":alcalinity!,"PH":pH!,"TH":hydrotimetricTitle!,"Stabilizer":cyanudricAcid!,"StripVersion":stripVersion]
             
             print("Send Strip Test with parmams: \(params)")
             

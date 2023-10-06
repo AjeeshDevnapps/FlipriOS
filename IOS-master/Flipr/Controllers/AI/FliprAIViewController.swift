@@ -30,6 +30,8 @@ class FliprAIViewController: UIViewController {
     var chatTextLimit =  200
     var limitDetails:FliprAI?
     var isHaveAccept = true
+    var isLastConversation = false
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -179,26 +181,29 @@ class FliprAIViewController: UIViewController {
     
     
     @IBAction func sendButtonClicked(){
-        view.endEditing(true)
         
-        let used = self.limitDetails?.creditUsed ?? 0
-        let allowed = self.limitDetails?.creditAllowed ?? 0
+        if textView.text.isValidString{
+            view.endEditing(true)
+            
+            let used = self.limitDetails?.creditUsed ?? 0
+            let allowed = self.limitDetails?.creditAllowed ?? 0
 
-        if used == allowed{
-            self.showNoCreditMessage()
-        }else{
-            if textView.text.isValidString{
-                let qustn = textView.text ?? ""
-                let obj = AIQustnNreply()
-                obj.qustion = qustn
-                self.chats.append(obj)
-                self.chatTableView.reloadData()
-                textView.text = ""
-                sentMsg(msg:"\"\(String(describing: qustn)) \"")
-    //            sentMsg(msg:"\"\(String(describing: textView.text))\"")
-
+            if used == allowed{
+                self.showNoCreditMessage()
             }else{
-                
+                if textView.text.isValidString{
+                    let qustn = textView.text ?? ""
+                    let obj = AIQustnNreply()
+                    obj.qustion = qustn
+                    self.chats.append(obj)
+                    self.chatTableView.reloadData()
+                    textView.text = ""
+                    sentMsg(msg:"\"\(String(describing: qustn)) \"")
+        //            sentMsg(msg:"\"\(String(describing: textView.text))\"")
+
+                }else{
+                    
+                }
             }
         }
         
@@ -207,6 +212,7 @@ class FliprAIViewController: UIViewController {
     
     func sentMsg(msg:String){
         view.endEditing(true)
+        self.isLastConversation = false
         self.inputToolbar.isHidden = true
         resetButton.isHidden = false
 //        let hud = JGProgressHUD(style:.dark)
@@ -244,7 +250,9 @@ class FliprAIViewController: UIViewController {
 //                        self.chatTableView
 //                        self.chats.append(reply)
                     }
-                    self.checkLimit()
+                    self.inputToolbar.isHidden = false
+
+                    //self.checkLimit()
                     self.showCreditInfo()
 //                    hud?.dismiss(afterDelay: 0)
                     self.chatTableView.reloadData()
@@ -274,10 +282,11 @@ class FliprAIViewController: UIViewController {
                         self.intro = info
                         self.limitDetails = info.fliprAI
                         self.chatTextLimit = self.intro?.limitCharact ?? 0
+                        self.checkLastConversation()
                     }
                 hud?.dismiss(afterDelay: 0)
-                let used = self.limitDetails?.creditUsed ?? 0
-                let allowed = self.limitDetails?.creditAllowed ?? 0
+//                let used = self.limitDetails?.creditUsed ?? 0
+//                let allowed = self.limitDetails?.creditAllowed ?? 0
                 let hasAccept = self.limitDetails?.hasAccept ?? true
                // hasAccept = false
                 self.isHaveAccept = hasAccept
@@ -290,11 +299,11 @@ class FliprAIViewController: UIViewController {
                     self.showCreditInfo()
                     self.tNcButton.isHidden = true
                     self.inputToolbar.isHidden = false
-                    if used == allowed{
-                        self.showNoCreditMessage()
-                    }else{
+//                    if used == allowed{
+//                        self.showNoCreditMessage()
+//                    }else{
                         self.chatTableView.reloadData()
-                    }
+//                    }
                 }
                 
                
@@ -307,6 +316,25 @@ class FliprAIViewController: UIViewController {
         })
                           
     }
+    
+    
+    func checkLastConversation(){
+        if let conversations = self.intro?.dialog{
+            self.resetButton.isHidden = false
+            self.isLastConversation = true
+            for (i,obj) in conversations.enumerated() {
+                if (i % 2 == 0){
+                    let qstn = AIQustnNreply()
+                    qstn.qustion = obj.content ?? ""
+                    self.chats.append(qstn)
+                }else{
+                    let qustn = self.chats[self.chats.count - 1]
+                    qustn.message = obj
+                }
+            }
+        }
+    }
+    
     
     func showCreditInfo(){
         let used = self.limitDetails?.creditUsed ?? 0
@@ -323,7 +351,7 @@ class FliprAIViewController: UIViewController {
     }
     
     func showNoCreditMessage(){
-        self.inputToolbar.isHidden = true
+//        self.inputToolbar.isHidden = true
         self.showNoCreditAlert()
     }
     
@@ -373,7 +401,9 @@ class FliprAIViewController: UIViewController {
                 self.tNcButton.isHidden = true
                 self.inputToolbar.isHidden = false
                 self.showCreditInfo()
-                self.chatTableView.reloadData()
+//                self.chatTableView.reloadData()
+                self.callAIinfoApi()
+
             case .failure(let error):
                 hud?.dismiss(afterDelay: 0)
                 //                self.showError(title: "Error".localized, message: "Oups, we're sorry but something went wrong :/".localized)
@@ -481,16 +511,21 @@ extension FliprAIViewController: UITableViewDelegate,UITableViewDataSource {
                     cell.chatCellBackGround.backgroundColor = UIColor.white
                     cell.chatLabel.textColor = .black
                     if chats.count == indexPath.section{
-                        cell.chatLabel.typingTimeInterval = 0.03
-                        cell.chatLabel.startTypewritingAnimation{
-                            let used = self.limitDetails?.creditUsed ?? 0
-                            let allowed = self.limitDetails?.creditAllowed ?? 0
-                            if used == allowed{
-                                self.showNoCreditMessage()
-                            }else{
-                                self.inputToolbar.isHidden = false
+                        if isLastConversation {
+                            
+                        }else{
+                            cell.chatLabel.typingTimeInterval = 0.02
+                            cell.chatLabel.startTypewritingAnimation{
+                                let used = self.limitDetails?.creditUsed ?? 0
+                                let allowed = self.limitDetails?.creditAllowed ?? 0
+                                if used == allowed{
+    //                                self.showNoCreditMessage()
+                                }else{
+                                    self.inputToolbar.isHidden = false
+                                }
                             }
                         }
+                        
                     }else{
                         
                     }
