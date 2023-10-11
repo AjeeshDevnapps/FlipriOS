@@ -2485,7 +2485,7 @@ But fear not, my adventurous pool owner! You can check out all these exciting da
                                 <rect key="frame" x="0.0" y="48" width="414" height="759"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JSb-GT-U0c" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="682.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="753.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calibrationIntro" translatesAutoresizingMaskIntoConstraints="NO" id="H7J-SF-hqh">
                                                 <rect key="frame" x="157" y="15" width="100" height="100"/>
@@ -2507,14 +2507,61 @@ Oh, and just a heads up, we understand that sometimes Bluetooth can get a bit te
                                                 <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZaV-X4-3Kj">
+                                                <rect key="frame" x="113" y="682.5" width="188" height="56"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BuyTestStrip" translatesAutoresizingMaskIntoConstraints="NO" id="6Sz-cs-xbB">
+                                                        <rect key="frame" x="10" y="9.5" width="40" height="37"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="37" id="amR-Qb-lf8"/>
+                                                            <constraint firstAttribute="width" constant="40" id="utn-7L-qmf"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy Calibration Kit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5UG-MY-228">
+                                                        <rect key="frame" x="64" y="21" width="116" height="14.5"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVg-K1-knT">
+                                                        <rect key="frame" x="0.0" y="0.0" width="188" height="56"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="buyStripTextButtonAction" destination="AhF-LR-nmg" eventType="touchUpInside" id="Ev7-kJ-vGt"/>
+                                                            <action selector="buyStripTextButtonAction" destination="Cs0-WT-bwr" eventType="touchUpInside" id="eCT-ZI-kEH"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" red="1" green="0.81960784310000001" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="5UG-MY-228" firstAttribute="centerY" secondItem="ZaV-X4-3Kj" secondAttribute="centerY" id="1Uz-AG-gRm"/>
+                                                    <constraint firstItem="oVg-K1-knT" firstAttribute="top" secondItem="ZaV-X4-3Kj" secondAttribute="top" id="5Am-0Y-3Zo"/>
+                                                    <constraint firstItem="6Sz-cs-xbB" firstAttribute="leading" secondItem="ZaV-X4-3Kj" secondAttribute="leading" constant="10" id="8xO-TO-P3B"/>
+                                                    <constraint firstAttribute="trailing" secondItem="oVg-K1-knT" secondAttribute="trailing" id="Al3-bh-r8n"/>
+                                                    <constraint firstAttribute="height" constant="56" id="C7m-Ad-8ob"/>
+                                                    <constraint firstItem="5UG-MY-228" firstAttribute="leading" secondItem="6Sz-cs-xbB" secondAttribute="trailing" constant="14" id="FuW-B5-tRT"/>
+                                                    <constraint firstAttribute="bottom" secondItem="oVg-K1-knT" secondAttribute="bottom" id="Que-Xc-9R2"/>
+                                                    <constraint firstItem="oVg-K1-knT" firstAttribute="leading" secondItem="ZaV-X4-3Kj" secondAttribute="leading" id="Xns-Pe-ZWf"/>
+                                                    <constraint firstAttribute="width" constant="188" id="ZV6-HH-Bc6"/>
+                                                    <constraint firstItem="6Sz-cs-xbB" firstAttribute="centerY" secondItem="ZaV-X4-3Kj" secondAttribute="centerY" id="eSv-Sm-b22"/>
+                                                    <constraint firstAttribute="trailing" secondItem="5UG-MY-228" secondAttribute="trailing" constant="8" id="zf8-cK-NK0"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="AJJ-fM-T92" firstAttribute="top" secondItem="H7J-SF-hqh" secondAttribute="bottom" constant="15" id="16u-01-BL1"/>
-                                            <constraint firstAttribute="bottom" secondItem="AJJ-fM-T92" secondAttribute="bottom" constant="15" id="9Cp-Dc-Ka5"/>
+                                            <constraint firstItem="ZaV-X4-3Kj" firstAttribute="top" secondItem="AJJ-fM-T92" secondAttribute="bottom" constant="15" id="AaP-wW-KGc"/>
+                                            <constraint firstAttribute="bottom" secondItem="ZaV-X4-3Kj" secondAttribute="bottom" constant="15" id="Izx-og-5Bt"/>
                                             <constraint firstItem="H7J-SF-hqh" firstAttribute="centerX" secondItem="JSb-GT-U0c" secondAttribute="centerX" id="dUl-wU-Ptz"/>
                                             <constraint firstItem="AJJ-fM-T92" firstAttribute="leading" secondItem="JSb-GT-U0c" secondAttribute="leading" constant="19" id="pde-dP-QYK"/>
                                             <constraint firstItem="H7J-SF-hqh" firstAttribute="top" secondItem="JSb-GT-U0c" secondAttribute="top" constant="15" id="pfK-Ek-Q2C"/>
+                                            <constraint firstItem="ZaV-X4-3Kj" firstAttribute="centerX" secondItem="JSb-GT-U0c" secondAttribute="centerX" id="qy6-5l-ZSX"/>
                                             <constraint firstAttribute="trailing" secondItem="AJJ-fM-T92" secondAttribute="trailing" constant="19" id="xjb-7j-QcR"/>
                                         </constraints>
                                     </view>
@@ -2564,13 +2611,14 @@ Oh, and just a heads up, we understand that sometimes Bluetooth can get a bit te
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buyStripTitleLbl" destination="5UG-MY-228" id="Ead-8Z-YE1"/>
                         <outlet property="nextButton" destination="sVH-ls-STb" id="pNc-j8-GLF"/>
                         <outlet property="subTitleLbl" destination="AJJ-fM-T92" id="Ubx-8E-CUR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qS4-ay-3VN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1552" y="670"/>
+            <point key="canvasLocation" x="1549" y="636"/>
         </scene>
     </scenes>
     <resources>

@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import SafariServices
 
 class CalibrationIntroViewController: BaseViewController {
 
     @IBOutlet weak var subTitleLbl: UILabel!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var buyStripTitleLbl: UILabel!
+
     var isPresentedFlow = false
     var recalibration = false
     var noStripTest = false
@@ -41,5 +44,11 @@ class CalibrationIntroViewController: BaseViewController {
     }
     
    
+    @IBAction func buyStripTextButtonAction(){
+        if let url = URL(string: "https://goflipr.com/produit/kit-de-calibration/") {
+            let vc = SFSafariViewController(url: url)
+            self.present(vc, animated: true)
+        }
+    }
 
 }

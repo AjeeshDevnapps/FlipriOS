@@ -79,7 +79,7 @@ class Strip {
         
         if let placeID = Module.currentModule?.placeId { //, let poolId = Pool.currentPool?.id {
             
-            let params:[String : Any] = ["placeId":placeID,"TotalChlBr":chloreBrome!,"FreeChlorine":totalChlore!,"TAC":alcalinity!,"PH":pH!,"TH":hydrotimetricTitle!,"Stabilizer":cyanudricAcid!,"StripVersion":stripVersion]
+            let params:[String : Any] = ["placeId":placeID,"TotalChlBr":totalChlore!,"FreeChlorine":chloreBrome!,"TAC":alcalinity!,"PH":pH!,"TH":hydrotimetricTitle!,"Stabilizer":cyanudricAcid!,"StripVersion":stripVersion]
             
             print("Send Strip Test with parmams: \(params)")
             

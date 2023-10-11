@@ -57,22 +57,41 @@ class ExpertviewInfoTableViewCell: UITableViewCell {
         waterTempLbl.text = "Water".localized
 
         
-        phValLbl.text = Module.currentModule?.rawPH
+//        phValLbl.text = Module.currentModule?.rawPH
         redoxValLbl.text = Module.currentModule?.rawRedox
         
         
         airTempValLbl.text = Module.currentModule?.airTemperature
         waterTempValLbl.text = Module.currentModule?.rawWaterTemperature
         
-        if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
-            if currentUnit == 2{
-                
-//                unitLbl.text = "Impérial : Feets,  °F"
-            }else{
-//                unitLbl.text = "Métrique (m, m°C)"
-            }
+        if let phTmp = lastMeasureInfo?.rawPH {
+            self.phValLbl.text = String(format: "%.2f", phTmp)
         }
 
+        if let airTemperature = lastMeasureInfo?.temperature {
+            let tmp = airTemperature
+            if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+                if currentUnit == 2{
+                    let funit = (tmp * 9/5) + 32
+                    self.waterTempValLbl.text = String(format: "%.2f", funit) + "°F"
+                }else{
+                    self.waterTempValLbl.text = String(format: "%.2f", tmp) + "°C"
+                }
+            }
+        }
+//
+//        if let waterTemperature = Module.currentModule?.rawWaterTemperature {
+//            let tmp = waterTemperature.doubleValue
+//            if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+//                if currentUnit == 2{
+//                    let funit = (tmp * 9/5) + 32
+//                    self.waterTempValLbl.text = String(format: "%.0f", funit) + "°F"
+//                }else{
+//                }
+//            }
+//        }
+      
+      
         
         if let dateString = lastMeasureInfo?.dateTime as? String {
             if let lastDate = dateString.fliprDate {
@@ -485,6 +504,25 @@ class ExpertviewthresholdInfoTableViewCell: UITableViewCell {
         
 //        tempMaxBtn.setTitle((thresholdValues?.temperatureMax.value ?? 0).string, for: .normal)
         tempMaxBtn.setTitle(String(format: "%.1f",(thresholdValues?.temperatureMax.value ?? 0)), for: .normal)
+        
+        
+        if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+            if currentUnit == 2{
+                if let temp = thresholdValues?.temperatureMax.value as? Double {
+                    let funit = (temp * 9/5) + 32
+                    let str = String(format: "%.0f", funit) + "°F"
+                    tempMaxBtn.setTitle(str, for: .normal)
+                }
+                
+                if let temp = thresholdValues?.temperature.value as? Double {
+                    let funit = (temp * 9/5) + 32
+                    let str = String(format: "%.0f", funit) + "°F"
+                    tempMinBtn.setTitle(str, for: .normal)
+                }
+                
+               
+            }
+        }
 
         
 //        if (thresholdValues?.temperatureMax.isDefaultValue ?? false ){
@@ -619,9 +657,23 @@ class RawDataTableViewCell: UITableViewCell {
 
         info = info.appending(" | ")
 
-        info = info.appending(String(format: "%.1f",(data?.temperature ?? 0)))
+        
+        if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+            if currentUnit == 2{
+                if let temp = data?.temperature as? Double {
+                    let funit = (temp * 9/5) + 32
+                    let str = String(format: "%.0f", funit) + "°F"
+                    info = info.appending(str)
+                }
+            }else{
+                info = info.appending(String(format: "%.1f",(data?.temperature ?? 0)))
+                info = info.appending("°C | ")
+            }
+        }else{
+            info = info.appending(String(format: "%.1f",(data?.temperature ?? 0)))
+            info = info.appending("°C | ")
+        }
 
-        info = info.appending("°C | ")
 
         var source = "SYS"
         switch (data?.source) {

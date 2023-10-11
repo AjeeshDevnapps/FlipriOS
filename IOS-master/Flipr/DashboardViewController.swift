@@ -223,6 +223,8 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var placeDropdownArrowImage: UIImageView!
     
     
+    @IBOutlet weak var addFliprTitleLbl: UILabel!
+
     
     
     var hubTabWaveTopConstraintPreValue = 0
@@ -279,6 +281,7 @@ class DashboardViewController: UIViewController {
         super.viewDidLoad()
         BLEManager.shared.disConnectCurrentDevice()
         self.placeDropdownArrowImage.isHidden = true
+        self.addFliprTitleLbl.text = "Add Flipr Start".localized
         manageFlipTabTitle()
         setUpStatusScroll()
         //        if -300 > -400{
@@ -2271,13 +2274,16 @@ class DashboardViewController: UIViewController {
                             
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°C"
                             self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°C"
+                            Module.currentModule?.airTemperature = String(format: "%.0f", temperature) + "°C"
                             
                             if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
                                 if currentUnit == 2{
                                     let funit = (temperature * 9/5) + 32
                                     self.airTemperatureLabel.text = String(format: "%.0f", funit) + "°F"
                                     self.airTemperatureLabelHubTab.text = String(format: "%.0f", funit) + "°F"
+                                    Module.currentModule?.airTemperature =  String(format: "%.0f", funit) + "°F"
                                 }else{
+                                    
                                 }
                             }
                             
@@ -2905,12 +2911,15 @@ class DashboardViewController: UIViewController {
                             
                             self.airTemperatureLabel.text = String(format: "%.0f", temperature) + "°C"
                             self.airTemperatureLabelHubTab.text = String(format: "%.0f", temperature) + "°C"
-                            
+                            Module.currentModule?.airTemperature = String(format: "%.0f", temperature) + "°C"
+
                             if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
                                 if currentUnit == 2{
                                     let funit = (temperature * 9/5) + 32
                                     self.airTemperatureLabel.text = String(format: "%.0f", funit) + "°F"
                                     self.airTemperatureLabelHubTab.text = String(format: "%.0f", funit) + "°F"
+                                    Module.currentModule?.airTemperature = String(format: "%.0f", funit) + "°F"
+
                                 }else{
                                 }
                             }
@@ -3417,8 +3426,9 @@ class DashboardViewController: UIViewController {
                                     let funit = (temperature * 9/5) + 32
                                     self.airTemperatureLabel.text = String(format: "%.0f", funit) + "°F"
                                     self.airTemperatureLabelHubTab.text = String(format: "%.0f", funit) + "°F"
-                                    Module.currentModule?.airTemperature = String(format: "%.2f", temperature) + "°F"
+                                    Module.currentModule?.airTemperature = String(format: "%.2f", funit) + "°F"
                                 }else{
+                                    
                                 }
                             }
                             
@@ -3609,7 +3619,7 @@ class DashboardViewController: UIViewController {
                                 
                                 
                                 
-                                if lastDate.timeIntervalSinceNow < -4500 {
+                                if lastDate.timeIntervalSinceNow > -4500 {
                                     if self.isPlaceOwner{
                                         if identifier.hasPrefix("F"){
                                             
@@ -3732,24 +3742,37 @@ class DashboardViewController: UIViewController {
                             self.waterTemperatureLabel.text = String(format: "%.0f", temp) + "°C"
                             self.hubTabAirValLabel.text = String(format: "%.0f", temp) + "°C"
                             Module.currentModule?.rawWaterTemperature = String(format: "%.2f", temp) + "°C"
+                          /*
                             if temp > 0 && temp < 41{
                                 
                             }else{
                                 self.waterTemperatureLabel.text = "NA"
                                 self.hubTabAirValLabel.text = "NA"
                             }
+                            */
                             if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
                                 if currentUnit == 2{
                                     let funit = (temp * 9/5) + 32
-                                    if funit > 0 && funit < 41{
+                                    if funit > 0 && funit < 106{ //106
                                         self.waterTemperatureLabel.text = String(format: "%.0f", funit) + "°F"
-                                        self.hubTabAirValLabel.text = String(format: "%.0f", funit) + "°F"
+//                                        self.hubTabAirValLabel.text = String(format: "%.0f", funit) + "°F"
                                         Module.currentModule?.rawWaterTemperature = String(format: "%.2f", temp) + "°F"
                                     }else{
                                         self.waterTemperatureLabel.text = "NA"
-                                        self.hubTabAirValLabel.text = "NA"
+//                                        self.hubTabAirValLabel.text = "NA"
+                                        Module.currentModule?.rawWaterTemperature = "NA"
                                     }
                                 }else{
+                                    let funit = temp
+                                    if funit > 0 && funit < 41{ //106
+                                        self.waterTemperatureLabel.text = String(format: "%.0f", funit) + "°C"
+//                                        self.hubTabAirValLabel.text = String(format: "%.0f", funit) + "°C"
+                                        Module.currentModule?.rawWaterTemperature = String(format: "%.2f", temp) + "°C"
+                                    }else{
+                                        self.waterTemperatureLabel.text = "NA"
+//                                        self.hubTabAirValLabel.text = "NA"
+                                        Module.currentModule?.rawWaterTemperature = "NA"
+                                    }
                                 }
                             }
                             

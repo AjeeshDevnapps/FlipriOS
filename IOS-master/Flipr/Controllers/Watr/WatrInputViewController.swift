@@ -122,7 +122,6 @@ class WatrInputViewController: UIViewController {
         }else{
             completionBlock?(textField.text ?? "")
             navigationController?.popViewController()
-
         }
     }
     

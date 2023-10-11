@@ -491,7 +491,19 @@ extension ExpertViewViewController {
         vc.currentType = .Temp
         vc.defaultValue1 = (self.expertViewInfo?.thresholds?.temperature.value ?? 0).string
         vc.defaultValue2 = (self.expertViewInfo?.thresholds?.temperatureMax.value ?? 0).string
+        if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+            if currentUnit == 2{
+                let val = self.expertViewInfo?.thresholds?.temperature.value ?? 0
+                let tmp = (val * 9/5) + 32
 
+                let val1 = self.expertViewInfo?.thresholds?.temperatureMax.value ?? 0
+                let tmp1 = (val1 * 9/5) + 32
+
+                vc.defaultValue1 = tmp.string
+                vc.defaultValue2 = tmp1.string
+            }
+        }
+        
         vc.titleStr = "Temperature Thresholds"
         vc.delegate = self
         vc.modalPresentationStyle = .overCurrentContext
@@ -562,7 +574,6 @@ extension ExpertViewViewController : ExpertViewPickerViewControllerDelegate {
                               "Value":self.expertViewInfo?.thresholds.temperature.value ?? 0.0],
                     "TemperatureMax": ["IsDefaultValue":self.expertViewInfo?.thresholds.temperatureMax.isDefaultValue ?? false,
                               "Value":self.expertViewInfo?.thresholds.temperatureMax.value ?? 0.0]
-                    
                     ]
                 
             } else if  type == .Temp {
@@ -571,7 +582,18 @@ extension ExpertViewViewController : ExpertViewPickerViewControllerDelegate {
                 min = value1.doubleValue
                 var max = 0.0
                 max = value2.doubleValue
+                if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+                    if currentUnit == 2{
+                        let tmp = (min - 32) * 5 / 9
+                        min = tmp
+                        
+                        let tmp1 = (max - 32) * 5 / 9
+                        max = tmp1
 
+                    }else{
+                        
+                    }
+                }
                 parameters = [
                     "Temperature": ["IsDefaultValue":false,
                         "Value":min],
