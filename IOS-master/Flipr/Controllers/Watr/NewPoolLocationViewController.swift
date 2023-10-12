@@ -71,6 +71,8 @@ class NewPoolLocationViewController: UIViewController, CLLocationManagerDelegate
             if self.selectedCity != nil{
                 let listVC = self.storyboard?.instantiateViewController(withIdentifier: "WatrInputViewController") as! WatrInputViewController
                 listVC.order = 0
+                listVC.imageName = "volicon"
+          //      listVC.iconImageView.image = UIImage(named: "volicon")
                 listVC.title = NewPoolTitles.Characteristics.Volume.rawValue
                 navigationController?.pushViewController(listVC, animated: true)
             }

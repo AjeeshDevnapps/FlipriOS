@@ -26,6 +26,8 @@ class ExpertviewInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var expertViewInfoLbl: UILabel!
+    
+
 
     
     
@@ -46,7 +48,7 @@ class ExpertviewInfoTableViewCell: UITableViewCell {
     
     func loadData(){
         self.titleLabel.text = "Raw data".localized
-        
+
         
         self.expertViewInfoLbl.text = "Expert View provides access to raw data that is not processed or simplified like the data displayed in dashboards. Interpreting this data requires specialized skills and domain expertise. It is intended for experts and diagnostic purposes, not for direct comparison with dashboard data. While dashboards offer quick insights for most users, Expert View targets professionals seeking in-depth analysis and precise information. Proper interpretation of raw data is crucial as it forms the basis for dashboard visualizations.".localized
 
@@ -223,6 +225,9 @@ class ExpertviewStripTestInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var stabilizerSlider: UIImageView!
 
     
+    @IBOutlet weak var oneYearStripTestLbl: UILabel!
+
+    
     var sliderInfo:SliderStrip?
     var stripValues:LastStripValue?
 
@@ -241,6 +246,7 @@ class ExpertviewStripTestInfoTableViewCell: UITableViewCell {
     
     func loadData(){
         newStripTestBtn.setTitle("New strip test".localized, for: .normal)
+
         stripTestTilteLbl.text = "Strip test".localized
         self.phInfoLbl.text = "Control data not processed by Flipr algorithms".localized
         phLbl.text = "pH".localized

@@ -32,7 +32,9 @@ class FormValue {
 }
 
 class ValuePickerController: UITableViewController {
-    
+    @IBOutlet weak var iconImageView: UIImageView!
+    var imageName = ""
+
     var apiPath:String?
     var values = [FormValue]()
     var selectedValue:FormValue?
@@ -50,7 +52,7 @@ class ValuePickerController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        iconImageView.image = UIImage(named: imageName)
         if AppSharedData.sharedInstance.isAddPlaceFlow{
 //            self.navigationItem.setHidesBackButton(true, animated: true)
             /*
@@ -194,7 +196,7 @@ class ValuePickerController: UITableViewController {
         switch order{
             case 0:
             AppSharedData.sharedInstance.addPlaceInfo.shape = value
-            self.showCoatingView()
+            self.showTreatmentView()
             break;
             case 1:
             AppSharedData.sharedInstance.addPlaceInfo.coating = value
@@ -222,7 +224,9 @@ class ValuePickerController: UITableViewController {
     
     func showCreatePlaceVC(){
         
-    
+        AppSharedData.sharedInstance.addPlaceInfo.coating = FormValue.init(id: 2, label: "Coating")
+        AppSharedData.sharedInstance.addPlaceInfo.integration = FormValue.init(id: 6, label: "Integration")
+
         
         let sb = UIStoryboard(name: "NewPool", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "CreatePlaceViewController") as? CreatePlaceViewController {
@@ -282,6 +286,7 @@ class ValuePickerController: UITableViewController {
             viewController.order = 3
             viewController.apiPath = "treatment"
             viewController.title = "Treatement".localized
+            viewController.imageName = "treatmentIcon"
             viewController.completion(block: { (formValue) in
             })
             navigationController?.pushViewController(viewController)
@@ -295,6 +300,7 @@ class ValuePickerController: UITableViewController {
             viewController.order = 4
             viewController.apiPath = "filtrations"
             viewController.title = "Filtration".localized
+            viewController.imageName = "filtrationIcon"
             viewController.completion(block: { (formValue) in
              })
             navigationController?.pushViewController(viewController)

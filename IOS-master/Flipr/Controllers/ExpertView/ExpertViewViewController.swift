@@ -14,6 +14,7 @@ enum ExpertViewCellOrder: Int{
     case infoCell
     case calibration
     case stripTest
+    case stripTestOneYear
     case trend
     case rawData
     case threshold
@@ -51,7 +52,19 @@ class ExpertViewViewController: UIViewController {
         cellOrder.removeAll()
         cellOrder.append(.infoCell)
         cellOrder.append(.calibration)
-        cellOrder.append(.stripTest)
+        if let dateString = self.expertViewInfo?.lastMeasure.dateTime{
+            if let lastDate = dateString.fliprDate {
+                if lastDate.timeIntervalSinceNow < -31536000 {
+                    cellOrder.append(.stripTestOneYear)
+                }else{
+                    cellOrder.append(.stripTest)
+                }
+            }else{
+                cellOrder.append(.stripTest)
+            }
+        }else{
+            cellOrder.append(.stripTest)
+        }
         cellOrder.append(.taylor)
         cellOrder.append(.trend)
         if let list = self.expertViewInfo?.rawList{
@@ -59,6 +72,10 @@ class ExpertViewViewController: UIViewController {
                 cellOrder.append(.rawData)
             }
         }
+        
+       
+        
+    
         cellOrder.append(.threshold)
     }
     
@@ -92,8 +109,17 @@ class ExpertViewViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func oneYearStripTestBtnClicked(){
+        showStripTest()
+    }
+    
     @IBAction func newStripTestBtnClicked(){
-        
+        showStripTest()
+    }
+    
+    
+    func showStripTest(){
         let sb:UIStoryboard = UIStoryboard.init(name: "Calibration", bundle: nil)
         if let viewController = sb.instantiateViewController(withIdentifier: "StripTestIntroViewController") as? StripTestIntroViewController {
             viewController.recalibration = false
@@ -101,39 +127,6 @@ class ExpertViewViewController: UIViewController {
             viewController.isFromExpertView = true
             self.navigationController?.pushViewController(viewController)
         }
-        
-//        let sb = UIStoryboard(name: "Calibration", bundle: nil)
-//        let vc = sb.instantiateViewController(withIdentifier: "StripViewControllerID") as! StripViewController
-//        vc.isFromExpertView = true
-//        self.navigationController?.pushViewController(vc)
-//        self.present(vc, animated: true)
-        
-        /*
-        let mainSb = UIStoryboard.init(name: "Main", bundle: nil)
-        let alert = UIAlertController(title: "Strip test".localized, message:"Are you sure you want to do a new strip test?".localized, preferredStyle:.alert)
-        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
-            let sb:UIStoryboard = UIStoryboard.init(name: "Calibration", bundle: nil)
-            if let viewController = sb.instantiateViewController(withIdentifier: "StripTestIntroViewController") as? StripTestIntroViewController {
-                viewController.recalibration = false
-                viewController.isPresentView = true
-                viewController.isFromExpertView = true
-                        self.navigationController?.pushViewController(viewController)
-
-//                viewController.modalPresentationStyle = .fullScreen
-                
-//                let nav = UINavigationController.init(rootViewController: viewController)
-//                self.present(nav, animated: true, completion: nil)
-
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "Order a calibration kit".localized, style: .default, handler: { (action) in
-            if let url = URL(string:"https://www.goflipr.com/produit/kit-de-calibration/".remotable) {
-                UIApplication.shared.open(url, options: self.convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
-            }
-        }))
-        self.present(alert, animated: true, completion: nil)
-        */
     }
     
     @IBAction func defaultTresholdBtnClicked(){
@@ -261,6 +254,15 @@ extension ExpertViewViewController: UITableViewDelegate,UITableViewDataSource {
             cell.stripValues = self.expertViewInfo?.lastStripValues
             cell.loadData()
             return cell
+            
+            case .stripTestOneYear:
+                let cell =  tableView.dequeueReusableCell(withIdentifier:"OneYearExpertviewStripTestInfoTableViewCell",
+                                              for: indexPath) as! ExpertviewStripTestInfoTableViewCell
+                cell.sliderInfo = self.expertViewInfo?.sliderStrip
+                cell.stripValues = self.expertViewInfo?.lastStripValues
+                cell.oneYearStripTestLbl.text = "4416:64259".localized
+                cell.loadData()
+                return cell
 
             case .trend:
             let cell =  tableView.dequeueReusableCell(withIdentifier:"ExpertviewTrendInfoTableViewCell",

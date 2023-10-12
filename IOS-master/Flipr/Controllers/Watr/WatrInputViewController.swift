@@ -12,6 +12,9 @@ class WatrInputViewController: UIViewController {
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var iconImageView: UIImageView!
+    var imageName = ""
+
     var order = 0
     var defaultValue:String?
     var titleStr:String?
@@ -30,6 +33,8 @@ class WatrInputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         submitButton.setTitle("Suivant".localized, for: .normal)
+        self.iconImageView.image = UIImage(named: imageName)
+
         if AppSharedData.sharedInstance.isAddPlaceFlow{
 //            self.navigationItem.setHidesBackButton(true, animated: true)
             self.submitButton.isHidden = false
@@ -173,6 +178,7 @@ class WatrInputViewController: UIViewController {
         if let viewController = sb.instantiateViewController(withIdentifier: "ValuePickerController") as? ValuePickerController {
             viewController.title = "Shape".localized
             viewController.apiPath = "shapes"
+            viewController.imageName = "shapeIcon"
             viewController.completion(block: { (formValue) in
             })
             navigationController?.pushViewController(viewController)

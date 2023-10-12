@@ -246,28 +246,42 @@ extension GatewaywifiViewController: UITableViewDataSource, UITableViewDelegate 
         selectedSsid = ssid
         var passwordTextField: UITextField?
         passwordTextField?.delegate = self
-        let alertController = UIAlertController(title: ssid, message: "Entrez le mot de passe Wi-Fi\n(32 caractères max)".localized, preferredStyle: .alert)
+        let alertController = UIAlertController(title: ssid, message: "2346:66155".localized, preferredStyle: .alert)
         let sendAction = UIAlertAction(title: "Connect".localized, style: .default, handler: { (action) -> Void in
-            self.hud = JGProgressHUD(style:.dark)
-            self.hud?.show(in: self.navigationController!.view)
+            
+            let passwd = passwordTextField?.text ?? ""
+            if passwd.count < 8{
+                let errorHud = JGProgressHUD(style:.dark)
+                errorHud?.show(in: self.navigationController!.view)
+                errorHud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                errorHud?.textLabel.text = "2346:66155".localized
+                errorHud?.dismiss(afterDelay: 3)
+            }
+            else{
+                self.hud = JGProgressHUD(style:.dark)
+                self.hud?.show(in: self.navigationController!.view)
 
-            if self.isChangePassword{
-                let passwd = passwordTextField?.text ?? ""
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                    self.writePassword(password: passwd)
-                }
-            }else{
-              //  print("Success setSSID")
-                let passwd = passwordTextField?.text ?? ""
-                self.password = passwd
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
-                    self.newReconnectGateway()
-//                    if self.isCalledChangePassword ==  false{
-//                        self.isCalledChangePassword = true
-//                        self.reconnectGateway(password: passwd)
-//                    }
+                if self.isChangePassword{
+                    let passwd = passwordTextField?.text ?? ""
+                   
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                        self.writePassword(password: passwd)
+                    }
+                }else{
+                  //  print("Success setSSID")
+                    let passwd = passwordTextField?.text ?? ""
+                    self.password = passwd
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+                        self.newReconnectGateway()
+    //                    if self.isCalledChangePassword ==  false{
+    //                        self.isCalledChangePassword = true
+    //                        self.reconnectGateway(password: passwd)
+    //                    }
+                    }
                 }
             }
+            
+            
         })
         
         //sendAction.isEnabled = (loginTextField?.text?.isEmail)!

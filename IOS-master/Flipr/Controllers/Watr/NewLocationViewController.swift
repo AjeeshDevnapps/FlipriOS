@@ -131,7 +131,7 @@ class NewLocationViewController: UIViewController {
     func showLocationSelectionVC(){
         let sb = UIStoryboard(name: "NewPool", bundle: nil)
         if let locationVC = sb.instantiateViewController(withIdentifier: "NewPoolLocationViewController") as? NewPoolLocationViewController {
-            locationVC.title = "Localisation"
+            locationVC.title = "Location".localized
             AppSharedData.sharedInstance.isAddPlaceFlow = true 
             navigationController?.pushViewController(locationVC)
         }

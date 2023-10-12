@@ -877,7 +877,7 @@ extension NewPoolViewController: UITableViewDelegate {
                     break
                 case 3:
                     let locationVC = storyboard?.instantiateViewController(withIdentifier: "NewPoolLocationViewController") as! NewPoolLocationViewController
-                    locationVC.title = "Localisation"
+                    locationVC.title = "Location".localized
                     locationVC.completion { value, latitude, longitude in
                         self.poolSettings?.longitude = longitude
                         self.poolSettings?.latitude = latitude
