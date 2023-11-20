@@ -1343,7 +1343,7 @@ class DashboardViewController: UIViewController {
          */
         
         return
-        
+        /*
         if self.hub != nil {
             if HUB.currentHUB!.plannings.count == 0 {
                 self.addNewProgramView.isHidden = false
@@ -1370,6 +1370,8 @@ class DashboardViewController: UIViewController {
             self.isShowingAddFirstProgramView = false
             self.isShowingHubView = false
         }
+        
+        */
     }
     
     /*

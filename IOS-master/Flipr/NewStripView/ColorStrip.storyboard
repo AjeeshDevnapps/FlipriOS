@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kY9-eu-fsf">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Strip Test First View Controller-->
+        <scene sceneID="i2j-eR-biL">
+            <objects>
+                <viewController storyboardIdentifier="StripTestFirstViewController" id="487-ph-Orm" customClass="StripTestFirstViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JXE-6t-mxt">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uDm-jh-e29">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="pua-LO-fC5">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="169"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRK-7s-acV">
+                                            <rect key="frame" x="20" y="20" width="353" height="59"/>
+                                            <color key="backgroundColor" red="0.97547549010000001" green="0.82775801419999995" blue="0.4665727019" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="70" id="Aia-Q1-JVL"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Buy Test Strip">
+                                                <color key="baseForegroundColor" red="0.035294117649999998" green="0.035294117649999998" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </buttonConfiguration>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="buyTestStrip:" destination="487-ph-Orm" eventType="touchUpInside" id="yuJ-ro-rmO"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMB-hg-h1k">
+                                            <rect key="frame" x="20" y="99" width="353" height="50"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="MRI-jB-vAM"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Next">
+                                                <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="nextAction:" destination="487-ph-Orm" eventType="touchUpInside" id="xAy-k0-kLE"/>
+                                            </connections>
+                                        </button>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NNl-ML-6wJ">
+                                            <rect key="frame" x="20" y="20" width="60" height="59"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="TBS-9d-mNl"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="gRK-7s-acV" secondAttribute="trailing" constant="20" id="2VT-gn-81F"/>
+                                        <constraint firstAttribute="bottom" secondItem="uMB-hg-h1k" secondAttribute="bottom" constant="20" id="2iS-sI-8JO"/>
+                                        <constraint firstItem="gRK-7s-acV" firstAttribute="leading" secondItem="pua-LO-fC5" secondAttribute="leading" constant="20" id="5eG-kG-EAF"/>
+                                        <constraint firstItem="gRK-7s-acV" firstAttribute="top" secondItem="pua-LO-fC5" secondAttribute="top" constant="20" id="AxC-ex-uIR"/>
+                                        <constraint firstItem="NNl-ML-6wJ" firstAttribute="height" secondItem="gRK-7s-acV" secondAttribute="height" id="ERm-xC-CyG"/>
+                                        <constraint firstItem="uMB-hg-h1k" firstAttribute="leading" secondItem="pua-LO-fC5" secondAttribute="leading" constant="20" id="IYW-it-hej"/>
+                                        <constraint firstItem="NNl-ML-6wJ" firstAttribute="top" secondItem="gRK-7s-acV" secondAttribute="top" id="c6v-X4-2Vw"/>
+                                        <constraint firstItem="NNl-ML-6wJ" firstAttribute="bottom" secondItem="gRK-7s-acV" secondAttribute="bottom" id="iCa-aH-24q"/>
+                                        <constraint firstAttribute="trailing" secondItem="uMB-hg-h1k" secondAttribute="trailing" constant="20" id="jmE-sC-KcP"/>
+                                        <constraint firstItem="uMB-hg-h1k" firstAttribute="top" secondItem="gRK-7s-acV" secondAttribute="bottom" constant="20" id="pa7-16-fz6"/>
+                                        <constraint firstItem="NNl-ML-6wJ" firstAttribute="leading" secondItem="gRK-7s-acV" secondAttribute="leading" id="rGE-vf-rv4"/>
+                                    </constraints>
+                                </view>
+                                <connections>
+                                    <outlet property="dataSource" destination="487-ph-Orm" id="KGw-eH-LA7"/>
+                                    <outlet property="delegate" destination="487-ph-Orm" id="FPn-5L-IWE"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KsT-FM-Ecq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KsT-FM-Ecq" firstAttribute="trailing" secondItem="uDm-jh-e29" secondAttribute="trailing" id="0lo-Td-9Sb"/>
+                            <constraint firstItem="uDm-jh-e29" firstAttribute="top" secondItem="KsT-FM-Ecq" secondAttribute="top" id="8mf-c8-SCW"/>
+                            <constraint firstItem="KsT-FM-Ecq" firstAttribute="bottom" secondItem="uDm-jh-e29" secondAttribute="bottom" id="Ol5-Tx-LT3"/>
+                            <constraint firstItem="uDm-jh-e29" firstAttribute="leading" secondItem="KsT-FM-Ecq" secondAttribute="leading" id="jku-rt-kTf"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ktK-ag-gdp"/>
+                    <connections>
+                        <outlet property="buyTestStrip" destination="gRK-7s-acV" id="XIR-aJ-pBI"/>
+                        <outlet property="nextButton" destination="uMB-hg-h1k" id="boN-oT-5Ua"/>
+                        <outlet property="tableView" destination="uDm-jh-e29" id="V3f-Yp-2Of"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n8h-9j-Smj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-40.458015267175568" y="-35.211267605633807"/>
+        </scene>
+        <!--Strip Test Second View Controller-->
+        <scene sceneID="dhA-sp-Hy1">
+            <objects>
+                <viewController storyboardIdentifier="StripTestSecondViewController" id="QmY-M7-YM1" customClass="StripTestSecondViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dUq-On-Gxo">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0cn-Xs-cvu">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="Vto-GG-hBB">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="249"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4GD-cW-YB2">
+                                            <rect key="frame" x="20" y="20.000000000000004" width="353" height="56.333333333333343"/>
+                                            <color key="backgroundColor" red="0.99607843137254903" green="0.30196078431372547" blue="0.68627450980392157" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="LfJ-1k-VBp"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="New Strip - 7 Tabs">
+                                                <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="newStrip7Tabs:" destination="QmY-M7-YM1" eventType="touchUpInside" id="Avx-ud-xc7"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1P-v4-u1A">
+                                            <rect key="frame" x="20" y="96.333333333333329" width="353" height="56.333333333333329"/>
+                                            <color key="backgroundColor" red="0.14509803921568626" green="0.29803921568627451" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Old Strip - 6 Tabs">
+                                                <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="newStrip6Tabs:" destination="QmY-M7-YM1" eventType="touchUpInside" id="Fc1-cz-wl7"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ZN-ov-DWs">
+                                            <rect key="frame" x="20" y="172.66666666666666" width="353" height="56.333333333333343"/>
+                                            <color key="backgroundColor" red="1" green="0.49803921568627452" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Manual Entry">
+                                                <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="manualEntry:" destination="QmY-M7-YM1" eventType="touchUpInside" id="35Y-mT-EiQ"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="1ZN-ov-DWs" firstAttribute="leading" secondItem="Vto-GG-hBB" secondAttribute="leading" constant="20" id="4wD-bq-v0c"/>
+                                        <constraint firstItem="w1P-v4-u1A" firstAttribute="top" secondItem="4GD-cW-YB2" secondAttribute="bottom" constant="20" id="68a-EJ-fgX"/>
+                                        <constraint firstItem="4GD-cW-YB2" firstAttribute="leading" secondItem="Vto-GG-hBB" secondAttribute="leading" constant="20" id="8rO-yC-XFy"/>
+                                        <constraint firstItem="w1P-v4-u1A" firstAttribute="leading" secondItem="Vto-GG-hBB" secondAttribute="leading" constant="20" id="9Og-XC-q0x"/>
+                                        <constraint firstAttribute="trailing" secondItem="w1P-v4-u1A" secondAttribute="trailing" constant="20" id="9jh-bF-Eaw"/>
+                                        <constraint firstAttribute="bottom" secondItem="1ZN-ov-DWs" secondAttribute="bottom" constant="20" id="RjJ-yh-szC"/>
+                                        <constraint firstAttribute="trailing" secondItem="1ZN-ov-DWs" secondAttribute="trailing" constant="20" id="Yy2-y5-yKW"/>
+                                        <constraint firstItem="4GD-cW-YB2" firstAttribute="top" secondItem="Vto-GG-hBB" secondAttribute="top" constant="20" id="cVK-BT-9UK"/>
+                                        <constraint firstAttribute="trailing" secondItem="4GD-cW-YB2" secondAttribute="trailing" constant="20" id="e57-Qg-uQN"/>
+                                        <constraint firstItem="1ZN-ov-DWs" firstAttribute="top" secondItem="w1P-v4-u1A" secondAttribute="bottom" constant="20" id="k55-3F-zWc"/>
+                                        <constraint firstItem="4GD-cW-YB2" firstAttribute="height" secondItem="1ZN-ov-DWs" secondAttribute="height" id="rIT-5p-6xr"/>
+                                        <constraint firstItem="4GD-cW-YB2" firstAttribute="height" secondItem="w1P-v4-u1A" secondAttribute="height" id="v7R-XE-YQi"/>
+                                    </constraints>
+                                </view>
+                                <connections>
+                                    <outlet property="dataSource" destination="QmY-M7-YM1" id="jQw-8u-kZz"/>
+                                    <outlet property="delegate" destination="QmY-M7-YM1" id="pep-Fq-Q1d"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6VS-C1-tvk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0cn-Xs-cvu" firstAttribute="top" secondItem="6VS-C1-tvk" secondAttribute="top" id="7PX-ll-f3A"/>
+                            <constraint firstItem="6VS-C1-tvk" firstAttribute="trailing" secondItem="0cn-Xs-cvu" secondAttribute="trailing" id="XWA-hI-LZG"/>
+                            <constraint firstItem="6VS-C1-tvk" firstAttribute="bottom" secondItem="0cn-Xs-cvu" secondAttribute="bottom" id="fYK-pw-DNa"/>
+                            <constraint firstItem="0cn-Xs-cvu" firstAttribute="leading" secondItem="6VS-C1-tvk" secondAttribute="leading" id="j0m-nL-2Up"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="0cn-Xs-cvu" id="Q6D-0A-R4X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Abg-sf-rdd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768.70229007633588" y="-33.802816901408455"/>
+        </scene>
+        <!--New Strip View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="NewStripViewController" id="Y6W-OH-hqX" customClass="NewStripViewController" customModule="Flipr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rpb-w9-Fgp">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StripTableViewCell" rowHeight="321" id="llQ-GR-VWh" customClass="StripTableViewCell" customModule="Flipr" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="321"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="llQ-GR-VWh" id="xPr-G4-b1y">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="321"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qmj-fV-hbJ" customClass="StripsView" customModule="Flipr" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="11" width="353" height="299"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="qmj-fV-hbJ" secondAttribute="bottom" id="MYc-D0-IyL"/>
+                                                <constraint firstItem="qmj-fV-hbJ" firstAttribute="top" secondItem="xPr-G4-b1y" secondAttribute="topMargin" id="Rkl-5Y-fhn"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="qmj-fV-hbJ" secondAttribute="trailing" id="fn1-Ls-gHW"/>
+                                                <constraint firstItem="qmj-fV-hbJ" firstAttribute="leading" secondItem="xPr-G4-b1y" secondAttribute="leadingMargin" id="o9k-D6-f65"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="stripView" destination="qmj-fV-hbJ" id="QtN-QV-h5K"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="muo-W5-1Xa"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="YhY-yH-o2T"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="rpb-w9-Fgp" secondAttribute="bottom" id="BLm-U4-tsu"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="rpb-w9-Fgp" secondAttribute="trailing" id="P7O-as-4w5"/>
+                            <constraint firstItem="rpb-w9-Fgp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="gw0-TI-1Xd"/>
+                            <constraint firstItem="rpb-w9-Fgp" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="mET-hH-oNK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="rpb-w9-Fgp" id="ZOm-s6-wys"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1615" y="-37"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5rK-Zq-XL8">
+            <objects>
+                <navigationController storyboardIdentifier="StripNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="kY9-eu-fsf" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WQ7-gf-YmE">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="487-ph-Orm" kind="relationship" relationship="rootViewController" id="KTT-h0-4xk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WgB-Qm-W6c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-967.17557251908397" y="-35.211267605633807"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -36,9 +36,11 @@ class StripTestIntroViewController: BaseViewController {
     }
 
     @IBAction func nextButtonAction(){
-        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "StripViewControllerID") as? StripViewController {
+        
+        let sb = UIStoryboard.init(name: "ColorStrip", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "StripTestSecondViewController") as? StripTestSecondViewController {
             viewController.recalibration = true
-            viewController.isPresentView = false
+            viewController.isPresentedFlow = false
             viewController.isNewFlowwithIntro = false
             viewController.isFromExpertView = self.isFromExpertView
             if self.isFromExpertView {

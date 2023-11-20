@@ -464,10 +464,28 @@
 		482A08DA26176F6300E8F3D8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482A08D926176F6300E8F3D8 /* LoginViewController.swift */; };
 		483E23C325DEB89E00D2E619 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483E23C225DEB89E00D2E619 /* PasswordViewController.swift */; };
 		48493D6925F54259008672DD /* AppSharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48493D6825F54259008672DD /* AppSharedData.swift */; };
+		484B721F2B0A75320031BA85 /* Colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 484B72192B0A75310031BA85 /* Colors.json */; };
+		484B72202B0A75320031BA85 /* ColorStrip.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 484B721A2B0A75310031BA85 /* ColorStrip.storyboard */; };
 		484BEE3B25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484BEE3A25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift */; };
+		484BFE972B06A48800572DA2 /* GetMeasurmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484BFE962B06A48800572DA2 /* GetMeasurmentManager.swift */; };
+		484BFE992B06A49D00572DA2 /* CalibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484BFE982B06A49D00572DA2 /* CalibrationManager.swift */; };
 		484CEB9D25E2AAE2005CD208 /* SideMenuViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 484CEB9C25E2AAE2005CD208 /* SideMenuViews.storyboard */; };
 		484CEBA025E2B06E005CD208 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484CEB9F25E2B06E005CD208 /* HelpViewController.swift */; };
 		484CEBA425E2DAC9005CD208 /* QuickActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484CEBA325E2DAC9005CD208 /* QuickActionViewController.swift */; };
+		485403FB2B0B5EA70012EC2D /* ColorBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485403F92B0B5EA70012EC2D /* ColorBase.swift */; };
+		485403FC2B0B5EA70012EC2D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485403FA2B0B5EA70012EC2D /* Color.swift */; };
+		485404022B0B5EC50012EC2D /* StripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485404002B0B5EC50012EC2D /* StripsView.swift */; };
+		485404032B0B5EC50012EC2D /* StripsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 485404012B0B5EC50012EC2D /* StripsView.xib */; };
+		4854040B2B0B5EE10012EC2D /* StripImagwTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 485404042B0B5EDE0012EC2D /* StripImagwTableViewCell.xib */; };
+		4854040C2B0B5EE10012EC2D /* LabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 485404052B0B5EDF0012EC2D /* LabelTableViewCell.xib */; };
+		4854040D2B0B5EE10012EC2D /* PaletteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 485404062B0B5EDF0012EC2D /* PaletteCollectionViewCell.xib */; };
+		4854040E2B0B5EE10012EC2D /* PaletteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485404072B0B5EDF0012EC2D /* PaletteCollectionViewCell.swift */; };
+		4854040F2B0B5EE10012EC2D /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485404082B0B5EE00012EC2D /* LabelTableViewCell.swift */; };
+		485404102B0B5EE10012EC2D /* StripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485404092B0B5EE00012EC2D /* StripTableViewCell.swift */; };
+		485404112B0B5EE10012EC2D /* StripImagwTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4854040A2B0B5EE10012EC2D /* StripImagwTableViewCell.swift */; };
+		485404152B0B5EFD0012EC2D /* NewStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485404122B0B5EFC0012EC2D /* NewStripViewController.swift */; };
+		485404162B0B5EFD0012EC2D /* StripTestSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485404132B0B5EFC0012EC2D /* StripTestSecondViewController.swift */; };
+		485404172B0B5EFD0012EC2D /* StripTestFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485404142B0B5EFD0012EC2D /* StripTestFirstViewController.swift */; };
 		48600E672685042600749C28 /* ProgramCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48600E662685042600749C28 /* ProgramCollectionViewCell.swift */; };
 		48691A41265EB11E00E977BB /* CalibrationChlorineIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48691A40265EB11E00E977BB /* CalibrationChlorineIntroViewController.swift */; };
 		48691A5C265EC23500E977BB /* ChlorineCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48691A5B265EC23500E977BB /* ChlorineCalibrationViewController.swift */; };
@@ -528,6 +546,7 @@
 		48FC119125DFE3C1001E1885 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119025DFE3C1001E1885 /* DeviceViewController.swift */; };
 		48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC119325DFE3CE001E1885 /* AddnewDeviceViewController.swift */; };
 		48FC119725DFE45D001E1885 /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48FC119625DFE45D001E1885 /* Devices.storyboard */; };
+		6CEC65C96BE5C7BFF6D422E7 /* Pods_Flipr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119C27F19918647AA55DBEDB /* Pods_Flipr.framework */; };
 		78250A412AB4A2F700AD60BC /* FliprThreshold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78250A402AB4A2F700AD60BC /* FliprThreshold.swift */; };
 		78250A462AB4A31F00AD60BC /* FliprAIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78250A432AB4A31C00AD60BC /* FliprAIList.swift */; };
 		78250A472AB4A31F00AD60BC /* FliprAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78250A442AB4A31D00AD60BC /* FliprAI.swift */; };
@@ -544,9 +563,6 @@
 		7837D8B62A7BC2FB00CEA4DA /* GifAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7837D8B52A7BC2FB00CEA4DA /* GifAnimation.swift */; };
 		7837D8B82A7BC37200CEA4DA /* gwgif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7837D8B72A7BC37200CEA4DA /* gwgif.gif */; };
 		784E0DCE2A8B82D000A01C30 /* CalibrationIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E0DCD2A8B82D000A01C30 /* CalibrationIntroViewController.swift */; };
-		7872CB3F2A5549C600D115C5 /* CalibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */; };
-		7872CB402A554A0000D115C5 /* CalibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */; };
-		7872CB422A554D3C00D115C5 /* GetMeasurmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7872CB412A554D3C00D115C5 /* GetMeasurmentManager.swift */; };
 		787E588A2A691D4500FE61B2 /* LastCalibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E58832A691D3E00FE61B2 /* LastCalibration.swift */; };
 		787E588B2A691D4500FE61B2 /* RootClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E58842A691D3E00FE61B2 /* RootClass.swift */; };
 		787E588C2A691D4500FE61B2 /* SliderStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E58852A691D3F00FE61B2 /* SliderStrip.swift */; };
@@ -673,9 +689,11 @@
 		B5FE6BF0241F71E70031853D /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6BEA241F71E70031853D /* Encoder.swift */; };
 		B5FE6BF1241F71E70031853D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6BEB241F71E70031853D /* Extensions.swift */; };
 		B5FE6BF2241F71E70031853D /* MajorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6BEC241F71E70031853D /* MajorTypes.swift */; };
+		D07EDD699226FA9BA5B72B78 /* Pods_Watr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67EDFDC85C0C9190F6FC8B9E /* Pods_Watr.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		119C27F19918647AA55DBEDB /* Pods_Flipr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flipr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C03AB33290AC18300DA0FB3 /* WatrSplash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WatrSplash.storyboard; sourceTree = "<group>"; };
 		1C044FBC28EA30BE00807F01 /* Watr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C1186D72812977E001DC5BB /* FirmwareUpgradeHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirmwareUpgradeHomeViewController.h; sourceTree = "<group>"; };
@@ -859,10 +877,28 @@
 		482A08D926176F6300E8F3D8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		483E23C225DEB89E00D2E619 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		48493D6825F54259008672DD /* AppSharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSharedData.swift; sourceTree = "<group>"; };
+		484B72192B0A75310031BA85 /* Colors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Colors.json; sourceTree = "<group>"; };
+		484B721A2B0A75310031BA85 /* ColorStrip.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ColorStrip.storyboard; sourceTree = "<group>"; };
 		484BEE3A25DAFD6C00A1D6AC /* ProductsAndEquipmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsAndEquipmentsViewController.swift; sourceTree = "<group>"; };
+		484BFE962B06A48800572DA2 /* GetMeasurmentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMeasurmentManager.swift; sourceTree = "<group>"; };
+		484BFE982B06A49D00572DA2 /* CalibrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalibrationManager.swift; sourceTree = "<group>"; };
 		484CEB9C25E2AAE2005CD208 /* SideMenuViews.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenuViews.storyboard; sourceTree = "<group>"; };
 		484CEB9F25E2B06E005CD208 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		484CEBA325E2DAC9005CD208 /* QuickActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionViewController.swift; sourceTree = "<group>"; };
+		485403F92B0B5EA70012EC2D /* ColorBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorBase.swift; sourceTree = "<group>"; };
+		485403FA2B0B5EA70012EC2D /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		485404002B0B5EC50012EC2D /* StripsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripsView.swift; sourceTree = "<group>"; };
+		485404012B0B5EC50012EC2D /* StripsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StripsView.xib; sourceTree = "<group>"; };
+		485404042B0B5EDE0012EC2D /* StripImagwTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StripImagwTableViewCell.xib; sourceTree = "<group>"; };
+		485404052B0B5EDF0012EC2D /* LabelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelTableViewCell.xib; sourceTree = "<group>"; };
+		485404062B0B5EDF0012EC2D /* PaletteCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaletteCollectionViewCell.xib; sourceTree = "<group>"; };
+		485404072B0B5EDF0012EC2D /* PaletteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteCollectionViewCell.swift; sourceTree = "<group>"; };
+		485404082B0B5EE00012EC2D /* LabelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		485404092B0B5EE00012EC2D /* StripTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripTableViewCell.swift; sourceTree = "<group>"; };
+		4854040A2B0B5EE10012EC2D /* StripImagwTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripImagwTableViewCell.swift; sourceTree = "<group>"; };
+		485404122B0B5EFC0012EC2D /* NewStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewStripViewController.swift; sourceTree = "<group>"; };
+		485404132B0B5EFC0012EC2D /* StripTestSecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripTestSecondViewController.swift; sourceTree = "<group>"; };
+		485404142B0B5EFD0012EC2D /* StripTestFirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripTestFirstViewController.swift; sourceTree = "<group>"; };
 		48600E662685042600749C28 /* ProgramCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramCollectionViewCell.swift; sourceTree = "<group>"; };
 		48691A40265EB11E00E977BB /* CalibrationChlorineIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationChlorineIntroViewController.swift; sourceTree = "<group>"; };
 		48691A5B265EC23500E977BB /* ChlorineCalibrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChlorineCalibrationViewController.swift; sourceTree = "<group>"; };
@@ -925,6 +961,7 @@
 		48FC119625DFE45D001E1885 /* Devices.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Devices.storyboard; sourceTree = "<group>"; };
 		48FDE2F92680C2FA004BC2D5 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
 		48FDE2FA2680C2FB004BC2D5 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		67EDFDC85C0C9190F6FC8B9E /* Pods_Watr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Watr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78250A402AB4A2F700AD60BC /* FliprThreshold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FliprThreshold.swift; sourceTree = "<group>"; };
 		78250A432AB4A31C00AD60BC /* FliprAIList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FliprAIList.swift; sourceTree = "<group>"; };
 		78250A442AB4A31D00AD60BC /* FliprAI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FliprAI.swift; sourceTree = "<group>"; };
@@ -941,8 +978,6 @@
 		7837D8B52A7BC2FB00CEA4DA /* GifAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifAnimation.swift; sourceTree = "<group>"; };
 		7837D8B72A7BC37200CEA4DA /* gwgif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gwgif.gif; sourceTree = "<group>"; };
 		784E0DCD2A8B82D000A01C30 /* CalibrationIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationIntroViewController.swift; sourceTree = "<group>"; };
-		7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalibrationManager.swift; path = ../../../../Documents/CalibrationManager.swift; sourceTree = "<group>"; };
-		7872CB412A554D3C00D115C5 /* GetMeasurmentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetMeasurmentManager.swift; path = ../../../GetMeasurmentManager.swift; sourceTree = "<group>"; };
 		787E58832A691D3E00FE61B2 /* LastCalibration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastCalibration.swift; sourceTree = "<group>"; };
 		787E58842A691D3E00FE61B2 /* RootClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootClass.swift; sourceTree = "<group>"; };
 		787E58852A691D3F00FE61B2 /* SliderStrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderStrip.swift; sourceTree = "<group>"; };
@@ -1091,6 +1126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C044F8D28EA30BE00807F01 /* Omnisense.framework in Frameworks */,
+				D07EDD699226FA9BA5B72B78 /* Pods_Watr.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1100,6 +1136,7 @@
 			files = (
 				B532455C1EB363770001A46F /* Omnisense.framework in Frameworks */,
 				3C090DDB6374A15B7CED57E7 /* Pods_Flipr.framework in Frameworks */,
+				6CEC65C96BE5C7BFF6D422E7 /* Pods_Flipr.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1465,6 +1502,19 @@
 			path = PoolSettings;
 			sourceTree = "<group>";
 		};
+		484B72172B0A75100031BA85 /* NewStripView */ = {
+			isa = PBXGroup;
+			children = (
+				485403FF2B0B5EBA0012EC2D /* StripsView */,
+				485403FE2B0B5EB70012EC2D /* TableViewCells */,
+				485403FD2B0B5EB50012EC2D /* ViewControllers */,
+				484B72192B0A75310031BA85 /* Colors.json */,
+				484B721A2B0A75310031BA85 /* ColorStrip.storyboard */,
+				485403F82B0B5E950012EC2D /* Modal */,
+			);
+			path = NewStripView;
+			sourceTree = "<group>";
+		};
 		484BEE3925DAFD2300A1D6AC /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -1485,6 +1535,48 @@
 				1CC9930A26C515AB00E85B47 /* MeasureAlertViewController.swift */,
 			);
 			path = NewController;
+			sourceTree = "<group>";
+		};
+		485403F82B0B5E950012EC2D /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				485403FA2B0B5EA70012EC2D /* Color.swift */,
+				485403F92B0B5EA70012EC2D /* ColorBase.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		485403FD2B0B5EB50012EC2D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				485404122B0B5EFC0012EC2D /* NewStripViewController.swift */,
+				485404142B0B5EFD0012EC2D /* StripTestFirstViewController.swift */,
+				485404132B0B5EFC0012EC2D /* StripTestSecondViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		485403FE2B0B5EB70012EC2D /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				485404082B0B5EE00012EC2D /* LabelTableViewCell.swift */,
+				485404052B0B5EDF0012EC2D /* LabelTableViewCell.xib */,
+				485404072B0B5EDF0012EC2D /* PaletteCollectionViewCell.swift */,
+				485404062B0B5EDF0012EC2D /* PaletteCollectionViewCell.xib */,
+				4854040A2B0B5EE10012EC2D /* StripImagwTableViewCell.swift */,
+				485404042B0B5EDE0012EC2D /* StripImagwTableViewCell.xib */,
+				485404092B0B5EE00012EC2D /* StripTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		485403FF2B0B5EBA0012EC2D /* StripsView */ = {
+			isa = PBXGroup;
+			children = (
+				485404002B0B5EC50012EC2D /* StripsView.swift */,
+				485404012B0B5EC50012EC2D /* StripsView.xib */,
+			);
+			path = StripsView;
 			sourceTree = "<group>";
 		};
 		488FC81F267A7C3900D41EB4 /* New Design */ = {
@@ -1929,6 +2021,7 @@
 		B58A37341E79859B00C67F6C /* Flipr */ = {
 			isa = PBXGroup;
 			children = (
+				484B72172B0A75100031BA85 /* NewStripView */,
 				4828D36F25C0602300F95683 /* StoryBoard */,
 				B57DE98B1F028FF300594261 /* RemoteControl.swift */,
 				B532455B1EB363770001A46F /* Omnisense.framework */,
@@ -1957,9 +2050,9 @@
 				B53A7D5B1E8BB95800AC03C0 /* BLEManager.swift */,
 				1CD6478129D6AEB000ECCAB4 /* GatewayManager.swift */,
 				788ECC672A571A920005DD31 /* NewMeasurementManager.swift */,
-				7872CB412A554D3C00D115C5 /* GetMeasurmentManager.swift */,
 				78D7D9912A7AFA01003E98D6 /* GetLastMeasurementManager.swift */,
-				7872CB3E2A5549C600D115C5 /* CalibrationManager.swift */,
+				484BFE962B06A48800572DA2 /* GetMeasurmentManager.swift */,
+				484BFE982B06A49D00572DA2 /* CalibrationManager.swift */,
 				1C50A7C42A163E5D00EC49F8 /* FliprModeManager.swift */,
 				78C4D6D12A58825E0065585D /* FliprActivateManager.swift */,
 				B52A2DDA229D612900967175 /* AppReview.swift */,
@@ -2031,6 +2124,8 @@
 		EF51DA7FDCFD3864856CF089 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				119C27F19918647AA55DBEDB /* Pods_Flipr.framework */,
+				67EDFDC85C0C9190F6FC8B9E /* Pods_Watr.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2202,6 +2297,7 @@
 				489BD3D426146A33007E9BEF /* LoginSignup.storyboard in Resources */,
 				484CEB9D25E2AAE2005CD208 /* SideMenuViews.storyboard in Resources */,
 				B5CB6FE41E801D58007F82BC /* Lato-Bold.ttf in Resources */,
+				485404032B0B5EC50012EC2D /* StripsView.xib in Resources */,
 				B503971022C4AD56005B9D30 /* Flipr-eau2.mp4 in Resources */,
 				1CD2B3D728EC2AB00013BD98 /* Settings.storyboard in Resources */,
 				B5713F16241163F800278166 /* HUB.storyboard in Resources */,
@@ -2211,6 +2307,8 @@
 				4895F76A2668002D00FA8ED3 /* HUBDevicePairing.storyboard in Resources */,
 				B5CB6FE51E801D58007F82BC /* Lato-Light.ttf in Resources */,
 				78334EA22A5EB5F40057E05F /* ExpertView.storyboard in Resources */,
+				484B721F2B0A75320031BA85 /* Colors.json in Resources */,
+				4854040B2B0B5EE10012EC2D /* StripImagwTableViewCell.xib in Resources */,
 				B519F84F2450114F00477DD1 /* HUB.xcassets in Resources */,
 				B5F457C124C07BF6006C309A /* GUIDE_3.mp4 in Resources */,
 				B5CB6FE61E801D58007F82BC /* Lato-Regular.ttf in Resources */,
@@ -2225,11 +2323,13 @@
 				B5666B491F8F9B7E006D42EF /* InfoPlist.strings in Resources */,
 				481FF002265D7D6E000DC977 /* Calibration.storyboard in Resources */,
 				7837D8B82A7BC37200CEA4DA /* gwgif.gif in Resources */,
+				4854040D2B0B5EE10012EC2D /* PaletteCollectionViewCell.xib in Resources */,
 				4828D37125C0604500F95683 /* Notifications.storyboard in Resources */,
 				1C8697C427B6749800CBC6D7 /* GoogleService-Info.plist in Resources */,
 				4880E1F026558C09006D4472 /* PoolSettings.storyboard in Resources */,
 				1CAD60DD28117FDC00879A45 /* Flipr.cyacd in Resources */,
 				4895F7712668024D00FA8ED3 /* Signup.storyboard in Resources */,
+				4854040C2B0B5EE10012EC2D /* LabelTableViewCell.xib in Resources */,
 				1CFBFC9D27317FAB00AB5771 /* DashScrollViewItem.xib in Resources */,
 				B58A373B1E79859B00C67F6C /* Main.storyboard in Resources */,
 				B5F457C224C07BF6006C309A /* GUIDE_4.mp4 in Resources */,
@@ -2238,6 +2338,7 @@
 				1CA9A287290FFC540035F671 /* NewLocation.storyboard in Resources */,
 				1C98B8D52927C8C000AF089A /* WatrFlipr.storyboard in Resources */,
 				1CF7D8FC29C47DF800118F25 /* Gateway.storyboard in Resources */,
+				484B72202B0A75320031BA85 /* ColorStrip.storyboard in Resources */,
 				782962552AB1FE9300EF0B41 /* FliprAI.storyboard in Resources */,
 				4895F7602668000E00FA8ED3 /* HUBOnboarding.storyboard in Resources */,
 			);
@@ -2539,7 +2640,6 @@
 				1C044ED028EA30BE00807F01 /* HUBProgramViewController.swift in Sources */,
 				1C044ED128EA30BE00807F01 /* HUB.swift in Sources */,
 				1C044ED228EA30BE00807F01 /* Error+Code.swift in Sources */,
-				7872CB402A554A0000D115C5 /* CalibrationManager.swift in Sources */,
 				1C044ED328EA30BE00807F01 /* UIAlertController+Additions.m in Sources */,
 				1C044ED428EA30BE00807F01 /* BLEManager.swift in Sources */,
 				1C044ED528EA30BE00807F01 /* PoolUsageViewController.swift in Sources */,
@@ -2790,9 +2890,11 @@
 				B59436E1225652580030F16D /* SubscriptionOptionTableViewCell.swift in Sources */,
 				1C5B560E29A530AD0064C729 /* EqipmentsTableViewCell.swift in Sources */,
 				1C4491032A16B401007D55F3 /* FliprModeChangeViewController.swift in Sources */,
+				485404112B0B5EE10012EC2D /* StripImagwTableViewCell.swift in Sources */,
 				1CAD60DB28117F1800879A45 /* CyCBManager.m in Sources */,
 				B518F0F31E9FC0840092156C /* UIButton+Activity.swift in Sources */,
 				1CCD7FC328EAD6A600AF1635 /* PlaceDropdownViewController.swift in Sources */,
+				484BFE992B06A49D00572DA2 /* CalibrationManager.swift in Sources */,
 				1CFABBF529D1C85400A34E21 /* GateWayListingViewController.swift in Sources */,
 				1CD2B3CB28EC18820013BD98 /* PoolShareViewController.swift in Sources */,
 				4880E1EF26558C09006D4472 /* DescribeMyPoolViewController.swift in Sources */,
@@ -2820,23 +2922,25 @@
 				78250A472AB4A31F00AD60BC /* FliprAI.swift in Sources */,
 				B5713F18241164A500278166 /* HUBManager.swift in Sources */,
 				B5BF6D6D225CCE5400FA70D5 /* SubscriptionPageViewController.swift in Sources */,
-				7872CB3F2A5549C600D115C5 /* CalibrationManager.swift in Sources */,
 				B5CB380E247F9FF000D2F61D /* HUBProgramViewController.swift in Sources */,
 				B519F849244D801600477DD1 /* HUB.swift in Sources */,
 				B532455A1EB34B500001A46F /* Error+Code.swift in Sources */,
 				1CD8DF2F28076E8B004412D9 /* UIAlertController+Additions.m in Sources */,
 				B53A7D5C1E8BB95800AC03C0 /* BLEManager.swift in Sources */,
+				485404162B0B5EFD0012EC2D /* StripTestSecondViewController.swift in Sources */,
 				4880E1F326558C09006D4472 /* PoolUsageViewController.swift in Sources */,
 				1C98B8DB2927E81E00AF089A /* FliprSettingsTableViewCell.swift in Sources */,
 				480CF2BD25DCEAA800429906 /* SettingsViewController.swift in Sources */,
 				4880E1F226558C09006D4472 /* PoolLocationViewController.swift in Sources */,
 				48980EA526170C15009A0F24 /* LoginEducationViewOneController.swift in Sources */,
+				485404102B0B5EE10012EC2D /* StripTableViewCell.swift in Sources */,
 				1CD8019329DD284C0011A7D8 /* AddGatewayIntroViewController.swift in Sources */,
 				1CC9930B26C515AB00E85B47 /* MeasureAlertViewController.swift in Sources */,
 				1CD6993026E61BE900563CBE /* FliprHubNonSubscriptionMenuViewController.swift in Sources */,
 				7837D8B62A7BC2FB00CEA4DA /* GifAnimation.swift in Sources */,
 				4895F75E2668000E00FA8ED3 /* HUBOnboardingViewController.swift in Sources */,
 				1CD8DF092807634C004412D9 /* capsenseModel.m in Sources */,
+				4854040F2B0B5EE10012EC2D /* LabelTableViewCell.swift in Sources */,
 				481F3637265FF5D100BBD858 /* WelcomeViewController.swift in Sources */,
 				1C8D5DAE283D7C9500FA50BA /* FlipValueReaderViewController.swift in Sources */,
 				B5BD60281EF9574600B3A403 /* Product.swift in Sources */,
@@ -2925,6 +3029,7 @@
 				1C1186DD2812977F001DC5BB /* GATTDBDetailsViewController.m in Sources */,
 				B553649820864EFD00E0727F /* WaterLevel.swift in Sources */,
 				488FB98225E41B1F006C2887 /* BluetoothAlertViewController.swift in Sources */,
+				485404172B0B5EFD0012EC2D /* StripTestFirstViewController.swift in Sources */,
 				48FC119425DFE3CE001E1885 /* AddnewDeviceViewController.swift in Sources */,
 				1C532615283AA9F1003A4847 /* FlipValueReadingViewController.swift in Sources */,
 				B555AF5F1EA8EC720053163F /* UIView+EmptyStateView.swift in Sources */,
@@ -2934,6 +3039,7 @@
 				48B2A7EC25E19B45001CCBCC /* DeviceInfoTableViewCell.swift in Sources */,
 				4828D37525C0705200F95683 /* NotificationsAlertViewController.swift in Sources */,
 				B57DE98C1F028FF300594261 /* RemoteControl.swift in Sources */,
+				484BFE972B06A48800572DA2 /* GetMeasurmentManager.swift in Sources */,
 				1C40C5D6290FB57A006FD97D /* PoolSettingsRouter.swift in Sources */,
 				4895F780266803D000FA8ED3 /* ElectricalCableSelectionViewController.swift in Sources */,
 				B5C8AF61208779C5007EB73D /* WaterLevelTableViewCell.swift in Sources */,
@@ -2979,7 +3085,6 @@
 				782962582AB201F400EF0B41 /* FliprAIViewController.swift in Sources */,
 				1CD8DF3428076E8B004412D9 /* DropDownView.m in Sources */,
 				B52A2DDB229D612900967175 /* AppReview.swift in Sources */,
-				7872CB422A554D3C00D115C5 /* GetMeasurmentManager.swift in Sources */,
 				4895F7522667F4D300FA8ED3 /* SignUpProfileController.swift in Sources */,
 				1CD8DF0D2807634C004412D9 /* DevieInformationModel.m in Sources */,
 				1CDE0B2E285A482300FB44B5 /* BackupFliprReaderViewController.swift in Sources */,
@@ -3021,7 +3126,9 @@
 				1CD2B3C928EC18820013BD98 /* NewPoolViewController.swift in Sources */,
 				B5FE070F1EB9CE2800962AEE /* City.swift in Sources */,
 				48A912A225F8EC2900EF863D /* SideMenuViewController.swift in Sources */,
+				485404022B0B5EC50012EC2D /* StripsView.swift in Sources */,
 				48C8E4F6265D6DC60000FDA8 /* FliprActivationSuccessViewController.swift in Sources */,
+				4854040E2B0B5EE10012EC2D /* PaletteCollectionViewCell.swift in Sources */,
 				1CC3F47629533A77004D4480 /* CreatePlaceViewController.swift in Sources */,
 				1CD8DF0F2807634C004412D9 /* FindMeModel.m in Sources */,
 				787E588C2A691D4500FE61B2 /* SliderStrip.swift in Sources */,
@@ -3033,6 +3140,7 @@
 				1CD8DF162807634C004412D9 /* TemperatureModel.m in Sources */,
 				1CD2B3C528EC18820013BD98 /* NewPoolSimpleListViewController.swift in Sources */,
 				1CD8DF0E2807634C004412D9 /* SensorHubModel.m in Sources */,
+				485403FB2B0B5EA70012EC2D /* ColorBase.swift in Sources */,
 				1CD8DF0B2807634C004412D9 /* HRMModel.m in Sources */,
 				1CD2B3CF28EC18980013BD98 /* NewPoolSettingsTableViewCell.swift in Sources */,
 				1C504F2F26A1E3500042C2DD /* HubDeviceTableViewCell.swift in Sources */,
@@ -3045,6 +3153,7 @@
 				1CD8DF132807634C004412D9 /* BarometerModel.m in Sources */,
 				1CD910162968633100C6D772 /* ContactsWatr.swift in Sources */,
 				1CF7D90029C4885100118F25 /* GateWayViewController.swift in Sources */,
+				485404152B0B5EFD0012EC2D /* NewStripViewController.swift in Sources */,
 				B53086971F598B4600D7EFCF /* Equipment.swift in Sources */,
 				1C4A6142294B3023006FAE1C /* LocationInfo.swift in Sources */,
 				48493D6925F54259008672DD /* AppSharedData.swift in Sources */,
@@ -3067,6 +3176,7 @@
 				1C437AD92971E45E00E69099 /* PreferenceViewController.swift in Sources */,
 				B555AF631EA9FE8E0053163F /* CalibrationViewController.swift in Sources */,
 				4895F74D2667F4D300FA8ED3 /* EmailVerifyMessageViewController.swift in Sources */,
+				485403FC2B0B5EA70012EC2D /* Color.swift in Sources */,
 				B518F0EF1E9F90B70092156C /* User.swift in Sources */,
 				1C8D5DAA283D2CD100FA50BA /* DiagnosticErrorViewController.swift in Sources */,
 				1CD8DF2D28076E8B004412D9 /* NSData+hexString.m in Sources */,

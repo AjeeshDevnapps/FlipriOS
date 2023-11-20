@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StripsView" customModule="ColorStrip" customModuleProvider="target">
+            <connections>
+                <outlet property="bigPalette" destination="5KJ-r9-Eqq" id="eUU-Gq-tgA"/>
+                <outlet property="containerView" destination="cvZ-11-nRi" id="cQs-yE-yWd"/>
+                <outlet property="contentView" destination="Psq-mI-YN2" id="ExG-UG-ktv"/>
+                <outlet property="smallPalette" destination="qUR-k9-bnJ" id="xLO-HK-HqM"/>
+                <outlet property="validateButton" destination="0rt-5Q-MWQ" id="cLZ-Tc-v1h"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Psq-mI-YN2">
+            <rect key="frame" x="0.0" y="0.0" width="946" height="822"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qUR-k9-bnJ">
+                    <rect key="frame" x="10" y="10" width="141" height="768"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9oS-aL-UzV">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="qQn-lE-ZNH"/>
+                        <outlet property="delegate" destination="-1" id="vij-ac-JeK"/>
+                    </connections>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvZ-11-nRi">
+                    <rect key="frame" x="166" y="10" width="765" height="768"/>
+                    <subviews>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="5KJ-r9-Eqq">
+                            <rect key="frame" x="15" y="15" width="735" height="649"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="68h-Y9-3uM">
+                                <size key="itemSize" width="20" height="20"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="2hI-JU-O73"/>
+                                <outlet property="delegate" destination="-1" id="YRO-zM-Apg"/>
+                            </connections>
+                        </collectionView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rt-5Q-MWQ">
+                            <rect key="frame" x="20" y="694" width="725" height="45"/>
+                            <color key="backgroundColor" red="0.92156862745098034" green="0.3529411764705882" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="anh-lO-x9d"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Validate Strip7">
+                                <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="validateStripSelected:" destination="-1" eventType="touchUpInside" id="pML-wA-SGN"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="0rt-5Q-MWQ" firstAttribute="top" secondItem="5KJ-r9-Eqq" secondAttribute="bottom" constant="30" id="BXD-yL-MvI"/>
+                        <constraint firstAttribute="bottom" secondItem="0rt-5Q-MWQ" secondAttribute="bottom" constant="29" id="Ifp-BT-aHe"/>
+                        <constraint firstItem="5KJ-r9-Eqq" firstAttribute="leading" secondItem="cvZ-11-nRi" secondAttribute="leading" constant="15" id="Jau-Bs-GxQ"/>
+                        <constraint firstAttribute="trailing" secondItem="5KJ-r9-Eqq" secondAttribute="trailing" constant="15" id="Oip-CV-cUK"/>
+                        <constraint firstItem="0rt-5Q-MWQ" firstAttribute="leading" secondItem="cvZ-11-nRi" secondAttribute="leading" constant="20" id="ZbW-Hp-02o"/>
+                        <constraint firstAttribute="trailing" secondItem="0rt-5Q-MWQ" secondAttribute="trailing" constant="20" id="emz-ck-UmD"/>
+                        <constraint firstItem="5KJ-r9-Eqq" firstAttribute="top" secondItem="cvZ-11-nRi" secondAttribute="top" constant="15" id="pp5-aY-f4t"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="nIF-gE-vNZ"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="cvZ-11-nRi" firstAttribute="width" secondItem="Psq-mI-YN2" secondAttribute="width" multiplier="0.808668" id="0cM-p6-0Fh"/>
+                <constraint firstItem="nIF-gE-vNZ" firstAttribute="bottom" secondItem="cvZ-11-nRi" secondAttribute="bottom" constant="10" id="AaA-Pd-xH0"/>
+                <constraint firstItem="qUR-k9-bnJ" firstAttribute="leading" secondItem="nIF-gE-vNZ" secondAttribute="leading" constant="10" id="G8v-K7-k13"/>
+                <constraint firstItem="cvZ-11-nRi" firstAttribute="leading" secondItem="qUR-k9-bnJ" secondAttribute="trailing" constant="15" id="L0y-CX-Q2e"/>
+                <constraint firstItem="nIF-gE-vNZ" firstAttribute="trailing" secondItem="cvZ-11-nRi" secondAttribute="trailing" constant="15" id="MOP-da-Dzc"/>
+                <constraint firstItem="qUR-k9-bnJ" firstAttribute="top" secondItem="cvZ-11-nRi" secondAttribute="top" id="QdP-Az-er3"/>
+                <constraint firstItem="qUR-k9-bnJ" firstAttribute="bottom" secondItem="cvZ-11-nRi" secondAttribute="bottom" id="S29-Eb-8eq"/>
+                <constraint firstItem="cvZ-11-nRi" firstAttribute="top" secondItem="Psq-mI-YN2" secondAttribute="top" constant="10" id="nZO-gQ-m3b"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="100.76335877862596" y="10.563380281690142"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
