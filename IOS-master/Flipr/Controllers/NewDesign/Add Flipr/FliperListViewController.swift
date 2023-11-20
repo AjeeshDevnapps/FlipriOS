@@ -237,9 +237,17 @@ extension FliprListViewController: UITableViewDelegate,UITableViewDataSource {
         }
 
         AppSharedData.sharedInstance.deviceSerialNo = serialKey
-        let sb = UIStoryboard(name: "Calibration", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "StripViewControllerID") as! StripViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let sb = UIStoryboard(name: "Calibration", bundle: nil)
+//        let vc = sb.instantiateViewController(withIdentifier: "StripViewControllerID") as! StripViewController
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+        
+        let sb:UIStoryboard = UIStoryboard.init(name: "Calibration", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "StripTestIntroViewController") as? StripTestIntroViewController {
+            viewController.recalibration = false
+            viewController.isPresentView = false
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
 
     }
     

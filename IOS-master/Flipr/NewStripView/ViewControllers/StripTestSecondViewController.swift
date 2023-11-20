@@ -10,6 +10,9 @@ import UIKit
 class StripTestSecondViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var strip7Btn: UIButton!
+    @IBOutlet weak var strip6Btn: UIButton!
+
    
     var isPresentedFlow = false
     var recalibration = false
@@ -22,9 +25,13 @@ class StripTestSecondViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Strip Test"
+        title = "Strip test".localized
+        
+        strip7Btn.setTitle("4427:66348".localized, for: .normal)
+        strip6Btn.setTitle("4427:66351".localized, for: .normal)
+
         let titleLabel = UILabel()
-        titleLabel.text = "Strip Test"
+        titleLabel.text = "Strip test".localized
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.systemFont(ofSize: 30.0, weight: .bold) // Adjust font size and weight as needed
         titleLabel.sizeToFit() // Adjust the size of the label based on its content
@@ -50,14 +57,26 @@ class StripTestSecondViewController: UIViewController {
     @IBAction func newStrip7Tabs(_ sender: UIButton) {
         let newStrip7TabController = storyboard?.instantiateViewController(withIdentifier: "NewStripViewController") as! NewStripViewController
         newStrip7TabController.numberOfRows = 7
+        AppSharedData.sharedInstance.selectedStripOption  = 7
+        newStrip7TabController.recalibration = self.recalibration
+        newStrip7TabController.isPresentView = self.isPresentedFlow
+        newStrip7TabController.isNewFlowwithIntro = self.isNewFlowwithIntro
+        newStrip7TabController.isFromExpertView = self.isFromExpertView
+
         navigationController?.pushViewController(newStrip7TabController, animated: true)
     }
     
     @IBAction func newStrip6Tabs(_ sender: Any) {
         let newStrip7TabController = storyboard?.instantiateViewController(withIdentifier: "NewStripViewController") as! NewStripViewController
         newStrip7TabController.numberOfRows = 6
-        navigationController?.pushViewController(newStrip7TabController, animated: true)
+        AppSharedData.sharedInstance.selectedStripOption  = 6
+        newStrip7TabController.recalibration = self.recalibration
+        newStrip7TabController.isPresentView = self.isPresentedFlow
+        newStrip7TabController.isNewFlowwithIntro = self.isNewFlowwithIntro
+        newStrip7TabController.isFromExpertView = self.isFromExpertView
 
+        navigationController?.pushViewController(newStrip7TabController, animated: true)
+        
     }
     
     @IBAction func manualEntry(_ sender: UIButton) {
@@ -74,10 +93,12 @@ extension StripTestSecondViewController: UITableViewDelegate, UITableViewDataSou
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "StripImagwTableViewCell", for: indexPath) as! StripImagwTableViewCell
             cell.cellImageView.image = UIImage(named: "StripTypeSelection")
+            cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LabelTableViewCell", for: indexPath) as! LabelTableViewCell
-            cell.contentLabel.text = "We've upgraded our test strips. The old version had 6 reactive tabs, while the new one has 7. To choose, simply click the corresponding button in the app."
+            cell.contentLabel.text = "4427:67679".localized
+            cell.selectionStyle = .none
             return cell
         }
 

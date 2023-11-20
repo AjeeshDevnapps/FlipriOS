@@ -8,7 +8,7 @@
 import UIKit
 
 protocol StripsViewDelegate {
-    func selectedStripColors(stripView: StripsView, colors: [Color])
+    func selectedStripColors(stripView: StripsView, colors: [Color?], selectedItemsOrder: [Int: Int])
 }
 
 class StripsView: UIView {
@@ -24,7 +24,10 @@ class StripsView: UIView {
     var numberOfRows: Int = 7
     var allColors = [Color]()
     var selectedIndices = [Int: Int]()
-    var selectedColors = [Color]()
+    
+    var selectedRows = [Int?]()
+
+    var selectedColors = [Color?]()
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -36,6 +39,16 @@ class StripsView: UIView {
     }
     
     private func commonInit() {
+        numberOfRows = AppSharedData.sharedInstance.selectedStripOption
+        if numberOfRows == 7{
+            selectedColors = [nil,nil,nil,nil,nil,nil,nil]
+            selectedRows = [nil,nil,nil,nil,nil,nil,nil]
+
+        }else{
+            selectedColors = [nil,nil,nil,nil,nil,nil]
+            selectedRows = [nil,nil,nil,nil,nil,nil]
+        }
+//        selectedColors.reserveCapacity(numberOfRows)
         Bundle.main.loadNibNamed("StripsView", owner: self)
         addSubview(contentView)
         contentView.frame = self.bounds
@@ -49,14 +62,14 @@ class StripsView: UIView {
         
         validateButton.layer.cornerRadius = 10
         if numberOfRows == 7 {
-            validateButton.setTitle("Validate Strip7", for: .normal)
-            validateButton.backgroundColor = .systemPink
+            validateButton.setTitle("4427:67592".localized, for: .normal)
+            validateButton.backgroundColor = UIColor.init(hexString: "FE4DAF")
         } else {
-            validateButton.setTitle("Validate Strip6", for: .normal)
-            validateButton.backgroundColor = UIColor(red: 38, green: 75, blue: 244, alpha: 1)
+            validateButton.setTitle("4427:67674".localized, for: .normal)
+            validateButton.backgroundColor = UIColor.init(hexString: "124DFF")
         }
-        validateButton.setTitle(numberOfRows == 7 ? "Validate Strip7" : "Validate Strip6",
-                                for: .normal)
+//        validateButton.setTitle(numberOfRows == 7 ? "Validate Strip7" : "Validate Strip6",
+//                                for: .normal)
     }
     
     override func layoutSubviews() {
@@ -88,8 +101,17 @@ class StripsView: UIView {
         smallPalette.layer.cornerRadius = 15
 
     }
+    
     @IBAction func validateStripSelected(_ sender: UIButton) {
-        delegate?.selectedStripColors(stripView: self, colors: selectedColors)
+        
+        for (key,value) in selectedIndices {
+            print("\(key) = \(value)")
+        }
+        if selectedRows.contains(where: {$0 == nil}) {
+            return
+        }
+
+        delegate?.selectedStripColors(stripView: self, colors: selectedColors,selectedItemsOrder: selectedIndices)
     }
 }
 
@@ -126,7 +148,7 @@ extension StripsView: UICollectionViewDataSource, UICollectionViewDelegate {
             }
             cell.backgroundColor = derivedColor
         } else {
-            cell.backgroundColor = .gray
+            cell.backgroundColor = UIColor.init(hexString: "CBD6E7")
         }
         
         return cell
@@ -144,7 +166,10 @@ extension StripsView: UICollectionViewDataSource, UICollectionViewDelegate {
         let color = allColors[(indexPath.section * 10) + indexPath.row]
         let cell = smallPalette.cellForItem(at: IndexPath(row: 0, section: indexPath.section))
         selectedColors.insert(color, at: indexPath.section)
+//        selectedRows.insert(1, at: indexPath.section)
+        selectedRows[indexPath.section] = 1
         cell?.backgroundColor = color.uiColor
+        
     }
 }
 

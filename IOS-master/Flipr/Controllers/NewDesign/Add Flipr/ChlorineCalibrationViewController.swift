@@ -85,6 +85,7 @@ class ChlorineCalibrationViewController: BaseViewController {
     
     
     func calibrate(){
+      
         let theme = EmptyStateViewTheme.shared
         theme.activityIndicatorType = .ballSpinFadeLoader
         theme.activityIndicatorColor = .black
@@ -105,7 +106,6 @@ class ChlorineCalibrationViewController: BaseViewController {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                         self.dismiss(animated: true)
                         NotificationCenter.default.post(name: K.Notifications.FliprCalibrationCompleted, object: nil)
-
                     }
                 }else{
                     self.showStripView()
@@ -113,6 +113,7 @@ class ChlorineCalibrationViewController: BaseViewController {
             }
         }
 
+        
     }
     
     /*

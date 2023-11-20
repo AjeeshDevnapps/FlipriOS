@@ -160,7 +160,7 @@
                                                 <action selector="newStrip6Tabs:" destination="QmY-M7-YM1" eventType="touchUpInside" id="Fc1-cz-wl7"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ZN-ov-DWs">
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ZN-ov-DWs">
                                             <rect key="frame" x="20" y="172.66666666666666" width="353" height="56.333333333333343"/>
                                             <color key="backgroundColor" red="1" green="0.49803921568627452" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <state key="normal" title="Button"/>
@@ -209,6 +209,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="strip6Btn" destination="w1P-v4-u1A" id="0bk-1G-w8A"/>
+                        <outlet property="strip7Btn" destination="4GD-cW-YB2" id="iWG-Sd-0xf"/>
                         <outlet property="tableView" destination="0cn-Xs-cvu" id="Q6D-0A-R4X"/>
                     </connections>
                 </viewController>
@@ -228,7 +230,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StripTableViewCell" rowHeight="321" id="llQ-GR-VWh" customClass="StripTableViewCell" customModule="Flipr" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StripTableViewCell" rowHeight="321" id="llQ-GR-VWh" customClass="StripTableViewCell" customModule="Flipr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="321"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="llQ-GR-VWh" id="xPr-G4-b1y">

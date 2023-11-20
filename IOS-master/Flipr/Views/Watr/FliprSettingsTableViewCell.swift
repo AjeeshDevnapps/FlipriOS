@@ -46,10 +46,14 @@ class FliprSettingsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var firmwareUpdateView: UIView!
 
+    @IBOutlet weak var deleteBtn: UIButton!
+
 
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        deleteBtn.setTitle("Supprimer".localized, for: .normal)
+
         ownerLblTitle.text = "Propriétaire".localized
         locationLblTitle.text = "Emplacement".localized
         serialNoLblTitle.text = "Numéro de série".localized

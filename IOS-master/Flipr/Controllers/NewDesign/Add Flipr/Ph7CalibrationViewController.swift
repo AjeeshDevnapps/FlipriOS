@@ -80,6 +80,7 @@ class Ph7CalibrationViewController: BaseViewController {
 
     
     func calibrate(){
+        
         let theme = EmptyStateViewTheme.shared
         theme.activityIndicatorType = .ballSpinFadeLoader
         theme.activityIndicatorColor = .black
@@ -99,6 +100,7 @@ class Ph7CalibrationViewController: BaseViewController {
 
             }
         }
+         
 
     }
     

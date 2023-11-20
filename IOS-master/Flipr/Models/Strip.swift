@@ -16,6 +16,8 @@ class Strip {
     var pH:Double?
     var hydrotimetricTitle:Double?
     var cyanudricAcid:Double?
+    var totalBr:Double?
+
     var testTime = Date()
     //olf version is 1
     var version = 1
@@ -77,10 +79,21 @@ class Strip {
             return
         }
         
-        if let placeID = Module.currentModule?.placeId { //, let poolId = Pool.currentPool?.id {
+        var placeId:Int?
+        
+        if AppSharedData.sharedInstance.isAddPlaceFlow{
+            placeId = AppSharedData.sharedInstance.addedPlaceId
+        }else{
+            placeId = Module.currentModule?.placeId
+        }
+        
+        if let placeID = placeId { //, let poolId = Pool.currentPool?.id {
             
-            let params:[String : Any] = ["placeId":placeID,"TotalChlBr":totalChlore!,"FreeChlorine":chloreBrome!,"TAC":alcalinity!,"PH":pH!,"TH":hydrotimetricTitle!,"Stabilizer":cyanudricAcid!,"StripVersion":stripVersion]
+            var params:[String : Any] = ["placeId":placeID,"TotalChlBr":totalChlore!,"FreeChlorine":chloreBrome!,"TAC":alcalinity!,"PH":pH!,"TH":hydrotimetricTitle!,"Stabilizer":cyanudricAcid!,"StripVersion":stripVersion]
             
+            if totalBr != nil{
+                params = ["placeId":placeID,"TotalChlBr":totalChlore!,"FreeChlorine":chloreBrome!,"TAC":alcalinity!,"PH":pH!,"TH":hydrotimetricTitle!,"Stabilizer":cyanudricAcid!,"StripVersion":stripVersion, "TotalBr" : totalBr!]
+            }
             print("Send Strip Test with parmams: \(params)")
             
             Alamofire.request(Router.addStripTest(params: params)).validate(statusCode: 200..<300).responseJSON(completionHandler: { (response) in

@@ -37,6 +37,8 @@ import Foundation
     var addedPlaceId : Int  = 0
     
     var updatePlaceInfo = PoolSettingsModel()
+    
+    var selectedStripOption = 7
 
 
     var isAddPlaceFlow = false

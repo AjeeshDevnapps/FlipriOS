@@ -6,12 +6,21 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class NewStripViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var colors: [Color]?
     var numberOfRows = 7
+    var strip = Strip()
+    var recalibration = false
+    var isPresentView = false
+    var isFromExpertView = false
+    var isNewFlowwithIntro = false
+
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 //        view.backgroundColor = .systemGray5
@@ -38,7 +47,9 @@ class NewStripViewController: BaseViewController {
 
     func loadColorsFromJSONFile() -> [Color]? {
         // Get the path to the JSON file
-        guard let path = Bundle.main.path(forResource: "Colors", ofType: "json") else {
+        let filename =  numberOfRows == 7 ? "Colors" : "Colors6"
+        
+        guard let path = Bundle.main.path(forResource: filename, ofType: "json") else {
             print("Unable to find Colors.json")
             return nil
         }
@@ -67,12 +78,12 @@ extension NewStripViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LabelTableViewCell") as! LabelTableViewCell
-            cell.contentLabel.text = "Take the provided strips without touching the colored tabs, then immerse it in your pool water halfway up your arm for 2 seconds. Then record the colors obtained, line by line"
+            cell.contentLabel.text = "4427:66027".localized
             cell.contentImage.image = UIImage(named: "handIcon")
             return cell
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LabelTableViewCell") as! LabelTableViewCell
-            cell.contentLabel.text = "Set screen brightness to maximum"
+            cell.contentLabel.text = "4427:66439".localized
             cell.contentImage.image = UIImage(named: "sun")
 
             return cell
@@ -99,7 +110,97 @@ extension NewStripViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension NewStripViewController: StripsViewDelegate {
-    func selectedStripColors(stripView: StripsView, colors: [Color]) {
-        print(colors)
+   
+    func selectedStripColors(stripView: StripsView, colors: [Color?],selectedItemsOrder: [Int: Int]) {
+        
+        for (key,value) in selectedItemsOrder {
+            print("\(key) = \(value)")
+            if key == 0{
+                strip.hydrotimetricTitle = Double(value + 1)
+            }
+            if key == 1{
+                strip.totalChlore = Double(value + 1)
+            }
+            if key == 2{
+                strip.chloreBrome = Double(value + 1)
+            }
+            if key == 3{
+                strip.pH = Double(value + 1)
+            }
+            if key == 4{
+                strip.alcalinity = Double(value + 1)
+            }
+            if key == 5{
+                strip.cyanudricAcid = Double(value + 1)
+            }
+            if key == 6{
+                strip.totalBr = Double(value + 1)
+            }
+        }
+        
+        
+       
+//        print(colors)
+        let hud = JGProgressHUD(style:.dark)
+        hud?.show(in: self.view)
+
+        self.strip.send(completion: { (error) in
+            if error != nil {
+                if error?.code == 401 {
+                    hud?.dismiss(afterDelay: 0)
+                    self.navigationController?.popToRootViewController(animated: true)
+                } else {
+                    hud?.indicatorView = JGProgressHUDErrorIndicatorView()
+                    hud?.textLabel.text = error?.localizedDescription
+                    hud?.dismiss(afterDelay: 3)
+                }
+            } else {
+                NotificationCenter.default.post(name: K.Notifications.PlaceDeleted, object: nil)
+                hud?.dismiss(afterDelay: 3)
+                if self.recalibration {
+                    NotificationCenter.default.post(name: FliprLogDidChanged, object: nil)
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    self.showGWInfoView()
+//                        self.showFliprSuccessScreen()
+//                        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "StartViewControllerID") {
+//                            self.navigationController?.pushViewController(viewController, animated: true)
+//                        }
+                }
+                
+            }
+            
+//            self.doneButton.hideActivityIndicator()
+//                self.doneButtonWidthConstraint.constant = 200
+//                UIView.animate(withDuration: 0.25, animations: {
+//                    self.view.layoutIfNeeded()
+//                })
+        })
+    }
+    
+    func showGWInfoView(){
+        if isFromExpertView{
+            self.navigationController?.popToRootViewController(animated: true)
+        }else{
+            if AppSharedData.sharedInstance.isFlipr3{
+                showGatewaySetup()
+            }else{
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let dashboard = storyboard.instantiateViewController(withIdentifier: "DashboardViewControllerID")
+                dashboard.modalTransitionStyle = .flipHorizontal
+                dashboard.modalPresentationStyle = .fullScreen
+                self.present(dashboard, animated: true, completion: {
+                    self.navigationController?.popToRootViewController(animated: false)
+                })
+            }
+        }
+        
+   
+    }
+    
+    func showGatewaySetup(){
+        let storyboard = UIStoryboard(name: "FliprDevice", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AddGatewayIntroViewController") as! AddGatewayIntroViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

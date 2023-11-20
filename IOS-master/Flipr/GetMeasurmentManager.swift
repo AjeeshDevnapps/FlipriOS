@@ -47,6 +47,13 @@ class GetMeasurmentManager: NSObject {
     var isPh4Calibration = false
     
     
+    var isRead20SecondDelay = false
+    var isV3 = false
+    var isStoppedForRedo = false
+    var isReconnectedAfterFail = false
+
+    
+    
     func startUpCentralManager(connectAutomatically connect:Bool, sendMeasure send:Bool) {
         //        fliprList.removeAll()
         self.stopScanning = false
@@ -237,6 +244,14 @@ extension GetMeasurmentManager: CBCentralManagerDelegate {
             peripheral.delegate = self
             isConnecting = true
             self.currentMeasuringSerial = serial ?? ""
+            
+            if self.currentMeasuringSerial.hasPrefix("F"){
+                self.isV3 = true
+            }else{
+                self.isV3 = false
+            }
+            
+            
             print("Discover n Connecting...\(flipr?.name ?? "")")
             if flipr?.state == .disconnected ||  flipr?.state == .disconnecting{
                 central.connect(flipr!, options: nil)
@@ -332,7 +347,6 @@ extension GetMeasurmentManager: CBPeripheralDelegate {
                             self.measuresCharacteristic = characteristic
                             self.isReadP0Value = true
                             perform(#selector(readMeasurementValue), with: nil, afterDelay: 0.0)
-                       
                     }
                 }
             }
@@ -360,16 +374,69 @@ extension GetMeasurmentManager: CBPeripheralDelegate {
     
     
     func compareMeasurement(){
-        let newPh = self.calculatePh(payload: self.newMeasureValue ?? "")
         
-        if (oldMeasureValue != newMeasureValue) && (newPh > 2) && (newPh < 9) {
+        var newPh:Double = 0
+        if isV3{
+            newPh = self.convertPayloadV3(payload: self.newMeasureValue ?? "")
+        }else{
+            newPh = self.convertPayloadV2(payload: self.newMeasureValue ?? "")
+        }
+        if (newPh > 2) && (newPh < 9) {
             self.sendMeasure(measures: self.newMeasureValue ?? "", type: "0")
         }else{
             let error = NSError(domain: "flipr", code: -1, userInfo: [NSLocalizedDescriptionKey:"Invalid Ph".localized ])
+            self.centralManager.cancelPeripheralConnection(self.flipr!)
             calibrationMeasuresCompletionBlock?(error)
         }
     }
     
+    
+    func convertPayloadV2(payload: String) -> (Double) {
+        // Extract octets from payload
+        let octet3Str = payload.prefix(6).suffix(2)
+        let octet4Str = payload.prefix(8).suffix(2)
+        let octet3 = Int(octet3Str, radix: 16)!
+        let octet4 = Int(octet4Str, radix: 16)!
+
+        let octet0Str = payload.prefix(2)
+        let octet1Str = payload.prefix(4).suffix(2)
+        let octet0 = Int(octet0Str, radix: 16)!
+        let octet1 = Int(octet1Str, radix: 16)!
+
+        // Compute the temperature
+        let temp = Double(octet1 * 256 + octet0) / 16.0
+
+        let voltage = octet4 * 256 + octet3
+
+        // Calculate pH
+        let ph = (1026.337 - Double(voltage) / 2.0) / (0.941358216 * (59.16 / 298.15) * (temp + 273.15)) + 7
+        return (ph)
+    }
+    
+    
+    func convertPayloadV3(payload: String) -> (Double) {
+        // Extract octets from payload
+        let octet3Str = payload.prefix(6).suffix(2)
+        let octet4Str = payload.prefix(8).suffix(2)
+        let octet3 = Int(octet3Str, radix: 16)!
+        let octet4 = Int(octet4Str, radix: 16)!
+
+        let octet0Str = payload.prefix(2)
+        let octet1Str = payload.prefix(4).suffix(2)
+        let octet0 = Int(octet0Str, radix: 16)!
+        let octet1 = Int(octet1Str, radix: 16)!
+
+        // Compute the temperature
+        let temp = Double(octet1 * 256 + octet0) * 0.06
+
+        // Calculate PH brut
+        let phBrut = Double(octet4 * 256 + octet3) - ((temp - 25) * 0.2)
+
+        // Calculate raw pH
+        let rawPh = ((octet4 * 256 + octet3) / 2 - 900)
+        let valtmp = Double(rawPh) / 59.2
+        return (7 - valtmp)
+    }
     
     
     func calculatePh(payload: String) -> Double{
@@ -387,6 +454,7 @@ extension GetMeasurmentManager: CBPeripheralDelegate {
         if let value = characteristic.value {
             switch characteristic.uuid {
             case FliprBLEParameters.measuresCharactersticUUID:
+                self.newMeasureValue = value.hexEncodedString()
                 self.compareMeasurement()
                 print("Measures charateric value: \(value.hexEncodedString())")
                 break
@@ -471,7 +539,7 @@ extension GetMeasurmentManager{
                     
                 }
                 
-               
+                self.centralManager.cancelPeripheralConnection(self.flipr!)
                 self.calibrationMeasuresCompletionBlock?(response.result.error)
                 self.calibrationMeasuresCompletionBlock = nil
                 //                self.sendMeasuresCompletionBlock?(response.result.error)
@@ -483,4 +551,5 @@ extension GetMeasurmentManager{
     
     
 }
+
 
