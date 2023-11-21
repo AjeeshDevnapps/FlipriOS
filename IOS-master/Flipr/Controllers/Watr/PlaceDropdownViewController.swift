@@ -60,6 +60,10 @@ class PlaceDropdownViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: K.Notifications.PlaceDeleted, object: nil, queue: nil) { (notification) in
             self.callPlacesApi()
         }
+        NotificationCenter.default.addObserver(forName: K.Notifications.PlaceCreated, object: nil, queue: nil) { (notification) in
+            self.callPlacesApi()
+        }
+        
         // Do any additional setup after loading the view.
     }
     

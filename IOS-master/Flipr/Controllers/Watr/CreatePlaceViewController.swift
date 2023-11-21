@@ -33,7 +33,7 @@ class CreatePlaceViewController: UIViewController {
                 self.hud?.dismiss(afterDelay: 0)
                 self.poolSettings = settings
                 
-
+                NotificationCenter.default.post(name: K.Notifications.PlaceCreated, object: nil)
                 AppSharedData.sharedInstance.isAddPlaceSuccess = true 
                 AppSharedData.sharedInstance.addedPlaceId = settings?.id ?? 0
                 self.showAddDeviceScreen()

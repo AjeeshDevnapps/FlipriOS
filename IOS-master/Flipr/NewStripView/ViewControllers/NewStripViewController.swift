@@ -155,7 +155,7 @@ extension NewStripViewController: StripsViewDelegate {
                     hud?.dismiss(afterDelay: 3)
                 }
             } else {
-                NotificationCenter.default.post(name: K.Notifications.PlaceDeleted, object: nil)
+                NotificationCenter.default.post(name: K.Notifications.PlaceCreated, object: nil)
                 hud?.dismiss(afterDelay: 3)
                 if self.recalibration {
                     NotificationCenter.default.post(name: FliprLogDidChanged, object: nil)

@@ -405,7 +405,7 @@ extension GetLastMeasurementManager: CBPeripheralDelegate {
             perform(#selector(readMeasurementValue), with: nil, afterDelay: 5.0)
         }
         readingCount =  readingCount + 1
-        var limit = isV3 ? 19 : 39
+        let limit = isV3 ? 19 : 39
         
         if readingCount > limit{
             self.isStoppedForRedo = true

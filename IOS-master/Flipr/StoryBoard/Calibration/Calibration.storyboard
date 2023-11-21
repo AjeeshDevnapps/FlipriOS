@@ -812,7 +812,7 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                                 <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0n-mc-OVu" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="770.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="627"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rainbow" translatesAutoresizingMaskIntoConstraints="NO" id="6bB-Sj-wUe">
                                                 <rect key="frame" x="157" y="15" width="100" height="100"/>
@@ -821,19 +821,59 @@ Versez le liquide précédemment utilisé dans un récipient.</string>
                                                     <constraint firstAttribute="width" constant="100" id="ZGB-Wt-39Z"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eF5-7Y-pCG">
-                                                <rect key="frame" x="19" y="130" width="376" height="494.5"/>
-                                                <string key="text">Flipr was designed to spare you from the hassle of daily strip tests. However, the initial and annual strip tests are essential to unveil some juicy, hidden physico-chemical secrets not captured by our sensors – think hardness, alkalinity, and the elusive presence of stabilizers! You don't want our algorithms to miss out on the spicy details, do you?
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAd-mu-iTd">
+                                                <rect key="frame" x="19" y="135" width="376" height="346"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FliprInfo" translatesAutoresizingMaskIntoConstraints="NO" id="d2S-1i-eIs">
+                                                        <rect key="frame" x="16" y="163" width="20" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="20" id="961-lj-MTj"/>
+                                                            <constraint firstAttribute="height" constant="20" id="wKz-np-deL"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eF5-7Y-pCG">
+                                                        <rect key="frame" x="44" y="10" width="316" height="326"/>
+                                                        <string key="text">Flipr was designed to spare you from the hassle of daily strip tests. However, the initial and annual strip tests are essential to unveil some juicy, hidden physico-chemical secrets not captured by our sensors – think hardness, alkalinity, and the elusive presence of stabilizers! You don't want our algorithms to miss out on the spicy details, do you?
 
 Pro tip: Don't forget to redo the test after a pool drain or some fancy treatments related to hardness or alkalinity. If you neglect this vital information, Flipr's suggestions might end up feeling a bit wobbly!
 
 But fear not, my adventurous pool owner! You can check out all these exciting data in the expert view of Flipr. Get ready to dive into a world of detailed pool water wonders, where precision meets party! Keep an eye on those numbers, and you'll be swimming in the ultimate pool enjoyment. Cowabunga! 🏊‍♂️🌊😎</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.19215686274509802" green="0.44705882352941173" blue="0.55294117647058827" alpha="0.050860969387755105" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="eF5-7Y-pCG" firstAttribute="top" secondItem="aAd-mu-iTd" secondAttribute="top" constant="10" id="8no-Bn-aCZ"/>
+                                                    <constraint firstItem="d2S-1i-eIs" firstAttribute="leading" secondItem="aAd-mu-iTd" secondAttribute="leading" constant="16" id="TLU-Wd-ml0"/>
+                                                    <constraint firstItem="eF5-7Y-pCG" firstAttribute="leading" secondItem="d2S-1i-eIs" secondAttribute="trailing" constant="8" id="XC1-2m-MEv"/>
+                                                    <constraint firstAttribute="bottom" secondItem="eF5-7Y-pCG" secondAttribute="bottom" constant="10" id="eKJ-4T-sTn"/>
+                                                    <constraint firstItem="d2S-1i-eIs" firstAttribute="centerY" secondItem="aAd-mu-iTd" secondAttribute="centerY" id="epI-4e-tMC"/>
+                                                    <constraint firstAttribute="trailing" secondItem="eF5-7Y-pCG" secondAttribute="trailing" constant="16" id="xDD-8B-xmY"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.23921568630000001" green="0.56078431370000004" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eid-Ug-PUk">
-                                                <rect key="frame" x="19" y="700.5" width="376" height="50"/>
+                                                <rect key="frame" x="19" y="557" width="376" height="50"/>
                                                 <color key="backgroundColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="CtD-2X-6fQ"/>
@@ -852,8 +892,8 @@ But fear not, my adventurous pool owner! You can check out all these exciting da
                                                     <action selector="nextButtonAction" destination="Cs0-WT-bwr" eventType="touchUpInside" id="cH0-IU-z5O"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8zd-Bm-S08">
-                                                <rect key="frame" x="113" y="634.5" width="188" height="56"/>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8zd-Bm-S08">
+                                                <rect key="frame" x="19" y="491" width="376" height="56"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BuyTestStrip" translatesAutoresizingMaskIntoConstraints="NO" id="NVg-bk-Ojl">
                                                         <rect key="frame" x="10" y="9.5" width="40" height="37"/>
@@ -863,14 +903,19 @@ But fear not, my adventurous pool owner! You can check out all these exciting da
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy Test Strip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovn-gq-1kz">
-                                                        <rect key="frame" x="64" y="21" width="116" height="14.5"/>
+                                                        <rect key="frame" x="147.5" y="21" width="81" height="14.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efq-hZ-1pd">
-                                                        <rect key="frame" x="0.0" y="0.0" width="188" height="56"/>
+                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efq-hZ-1pd">
+                                                        <rect key="frame" x="0.0" y="0.0" width="376" height="56"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="12"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="buyStripTextButtonAction" destination="Cs0-WT-bwr" eventType="touchUpInside" id="W3b-vH-c1F"/>
                                                         </connections>
@@ -881,18 +926,16 @@ But fear not, my adventurous pool owner! You can check out all these exciting da
                                                     <constraint firstAttribute="trailing" secondItem="Efq-hZ-1pd" secondAttribute="trailing" id="6gU-zJ-yoX"/>
                                                     <constraint firstItem="ovn-gq-1kz" firstAttribute="centerY" secondItem="8zd-Bm-S08" secondAttribute="centerY" id="Hek-pp-zGh"/>
                                                     <constraint firstItem="Efq-hZ-1pd" firstAttribute="leading" secondItem="8zd-Bm-S08" secondAttribute="leading" id="J20-GO-qHV"/>
-                                                    <constraint firstItem="ovn-gq-1kz" firstAttribute="leading" secondItem="NVg-bk-Ojl" secondAttribute="trailing" constant="14" id="PXF-Oc-7vC"/>
-                                                    <constraint firstAttribute="trailing" secondItem="ovn-gq-1kz" secondAttribute="trailing" constant="8" id="TBS-2o-Kgc"/>
                                                     <constraint firstAttribute="bottom" secondItem="Efq-hZ-1pd" secondAttribute="bottom" id="XZs-gC-JhL"/>
                                                     <constraint firstItem="Efq-hZ-1pd" firstAttribute="top" secondItem="8zd-Bm-S08" secondAttribute="top" id="Yd3-aK-hhe"/>
                                                     <constraint firstItem="NVg-bk-Ojl" firstAttribute="centerY" secondItem="8zd-Bm-S08" secondAttribute="centerY" id="buN-K6-vwk"/>
-                                                    <constraint firstAttribute="width" constant="188" id="hsu-w4-ysS"/>
+                                                    <constraint firstItem="ovn-gq-1kz" firstAttribute="centerX" secondItem="8zd-Bm-S08" secondAttribute="centerX" id="iQ5-wd-03W"/>
                                                     <constraint firstItem="NVg-bk-Ojl" firstAttribute="leading" secondItem="8zd-Bm-S08" secondAttribute="leading" constant="10" id="maT-lM-ncL"/>
                                                     <constraint firstAttribute="height" constant="56" id="z8Q-C7-HmG"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="10"/>
+                                                        <real key="value" value="12"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
@@ -901,15 +944,17 @@ But fear not, my adventurous pool owner! You can check out all these exciting da
                                         <constraints>
                                             <constraint firstItem="eid-Ug-PUk" firstAttribute="top" secondItem="8zd-Bm-S08" secondAttribute="bottom" constant="10" id="75E-Y7-X5r"/>
                                             <constraint firstAttribute="trailing" secondItem="eid-Ug-PUk" secondAttribute="trailing" constant="19" id="8BM-Y6-Kho"/>
+                                            <constraint firstItem="aAd-mu-iTd" firstAttribute="top" secondItem="6bB-Sj-wUe" secondAttribute="bottom" constant="20" id="DZB-j4-f3L"/>
                                             <constraint firstAttribute="bottom" secondItem="eid-Ug-PUk" secondAttribute="bottom" constant="20" id="Kbp-ss-oSm"/>
+                                            <constraint firstItem="8zd-Bm-S08" firstAttribute="leading" secondItem="e0n-mc-OVu" secondAttribute="leading" constant="19" id="LZd-6D-WpY"/>
+                                            <constraint firstItem="aAd-mu-iTd" firstAttribute="leading" secondItem="e0n-mc-OVu" secondAttribute="leading" constant="19" id="Nl5-H3-iKt"/>
                                             <constraint firstItem="8zd-Bm-S08" firstAttribute="centerX" secondItem="e0n-mc-OVu" secondAttribute="centerX" id="QnP-L1-Vg2"/>
                                             <constraint firstItem="6bB-Sj-wUe" firstAttribute="top" secondItem="e0n-mc-OVu" secondAttribute="top" constant="15" id="RB2-zk-OQa"/>
-                                            <constraint firstItem="eF5-7Y-pCG" firstAttribute="leading" secondItem="e0n-mc-OVu" secondAttribute="leading" constant="19" id="Rgm-LP-lHR"/>
                                             <constraint firstItem="6bB-Sj-wUe" firstAttribute="centerX" secondItem="e0n-mc-OVu" secondAttribute="centerX" id="Wt9-i7-HTo"/>
-                                            <constraint firstItem="8zd-Bm-S08" firstAttribute="top" secondItem="eF5-7Y-pCG" secondAttribute="bottom" constant="10" id="cdr-hI-5Qf"/>
-                                            <constraint firstItem="eF5-7Y-pCG" firstAttribute="top" secondItem="6bB-Sj-wUe" secondAttribute="bottom" constant="15" id="mzU-Tg-JEq"/>
+                                            <constraint firstItem="8zd-Bm-S08" firstAttribute="top" secondItem="aAd-mu-iTd" secondAttribute="bottom" constant="10" id="cZ2-UT-CzD"/>
+                                            <constraint firstAttribute="trailing" secondItem="aAd-mu-iTd" secondAttribute="trailing" constant="19" id="mrq-ax-W1i"/>
                                             <constraint firstItem="eid-Ug-PUk" firstAttribute="leading" secondItem="e0n-mc-OVu" secondAttribute="leading" constant="19" id="pgX-xg-QmT"/>
-                                            <constraint firstAttribute="trailing" secondItem="eF5-7Y-pCG" secondAttribute="trailing" constant="19" id="uBy-cd-FMU"/>
+                                            <constraint firstAttribute="trailing" secondItem="8zd-Bm-S08" secondAttribute="trailing" constant="19" id="zvb-eH-uxL"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -2482,10 +2527,10 @@ But fear not, my adventurous pool owner! You can check out all these exciting da
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgL-7T-MjN">
-                                <rect key="frame" x="0.0" y="48" width="414" height="759"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JSb-GT-U0c" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="753.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="410"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calibrationIntro" translatesAutoresizingMaskIntoConstraints="NO" id="H7J-SF-hqh">
                                                 <rect key="frame" x="157" y="15" width="100" height="100"/>
@@ -2494,21 +2539,55 @@ But fear not, my adventurous pool owner! You can check out all these exciting da
                                                     <constraint firstAttribute="height" constant="100" id="Wbl-Yq-j2O"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJJ-fM-T92">
-                                                <rect key="frame" x="19" y="130" width="376" height="537.5"/>
-                                                <string key="text">Although our probes are perfectly calibrated and tested before leaving the factory, there are times when unexpected situations arise, and a little recalibration might be necessary, even on new equipment. Yes, even the best equipment can encounter such challenges!
-
-To ensure precise measurements and avoid any mishaps, we highly recommend regular calibration. It's like giving your probes a little energy boost!
-
-Remember to take good care of your probes by performing calibration at least once per season. They will definitely show their appreciation in a hundredfold!
-
-Oh, and just a heads up, we understand that sometimes Bluetooth can get a bit temperamental in certain electromagnetic environments. If that happens, don't worry! Our friendly technical team will guide you through a calibration process in disconnected mode. We always have a solution, even when dealing with Bluetooth's quirks! 😉</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AnI-q7-Jqj">
+                                                <rect key="frame" x="19" y="135" width="376" height="129"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FliprInfo" translatesAutoresizingMaskIntoConstraints="NO" id="qDr-jY-kux">
+                                                        <rect key="frame" x="16" y="54.5" width="20" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="20" id="kBK-Bs-zfU"/>
+                                                            <constraint firstAttribute="height" constant="20" id="wbw-LQ-Qx0"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUb-zk-TUN">
+                                                        <rect key="frame" x="44" y="10" width="316" height="109"/>
+                                                        <mutableString key="text">Regular calibration is recommended for precise measurements, even on new equipment, to maintain measurement quality and prevent issues. It's advised to calibrate at least once per season. In case of Bluetooth connectivity issues, our technical team can guide you through the recalibration process in disconnected mode.</mutableString>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.19215686269999999" green="0.44705882349999998" blue="0.55294117649999996" alpha="0.050860969390000003" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="qDr-jY-kux" firstAttribute="centerY" secondItem="AnI-q7-Jqj" secondAttribute="centerY" id="6op-75-BwS"/>
+                                                    <constraint firstAttribute="bottom" secondItem="dUb-zk-TUN" secondAttribute="bottom" constant="10" id="7fH-JP-Zda"/>
+                                                    <constraint firstItem="dUb-zk-TUN" firstAttribute="leading" secondItem="qDr-jY-kux" secondAttribute="trailing" constant="8" id="OMb-Ix-ZRc"/>
+                                                    <constraint firstAttribute="trailing" secondItem="dUb-zk-TUN" secondAttribute="trailing" constant="16" id="Oe0-iX-N6U"/>
+                                                    <constraint firstItem="dUb-zk-TUN" firstAttribute="top" secondItem="AnI-q7-Jqj" secondAttribute="top" constant="10" id="h7E-LZ-Yoa"/>
+                                                    <constraint firstItem="qDr-jY-kux" firstAttribute="leading" secondItem="AnI-q7-Jqj" secondAttribute="leading" constant="16" id="tIc-4e-aHY"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.23921568630000001" green="0.56078431370000004" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZaV-X4-3Kj">
-                                                <rect key="frame" x="113" y="682.5" width="188" height="56"/>
+                                                <rect key="frame" x="19" y="274" width="376" height="56"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BuyTestStrip" translatesAutoresizingMaskIntoConstraints="NO" id="6Sz-cs-xbB">
                                                         <rect key="frame" x="10" y="9.5" width="40" height="37"/>
@@ -2518,13 +2597,13 @@ Oh, and just a heads up, we understand that sometimes Bluetooth can get a bit te
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy Calibration Kit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5UG-MY-228">
-                                                        <rect key="frame" x="64" y="21" width="116" height="14.5"/>
+                                                        <rect key="frame" x="134.5" y="21" width="107.5" height="14.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVg-K1-knT">
-                                                        <rect key="frame" x="0.0" y="0.0" width="188" height="56"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="376" height="56"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <connections>
                                                             <action selector="buyStripTextButtonAction" destination="AhF-LR-nmg" eventType="touchUpInside" id="Ev7-kJ-vGt"/>
@@ -2539,12 +2618,10 @@ Oh, and just a heads up, we understand that sometimes Bluetooth can get a bit te
                                                     <constraint firstItem="6Sz-cs-xbB" firstAttribute="leading" secondItem="ZaV-X4-3Kj" secondAttribute="leading" constant="10" id="8xO-TO-P3B"/>
                                                     <constraint firstAttribute="trailing" secondItem="oVg-K1-knT" secondAttribute="trailing" id="Al3-bh-r8n"/>
                                                     <constraint firstAttribute="height" constant="56" id="C7m-Ad-8ob"/>
-                                                    <constraint firstItem="5UG-MY-228" firstAttribute="leading" secondItem="6Sz-cs-xbB" secondAttribute="trailing" constant="14" id="FuW-B5-tRT"/>
+                                                    <constraint firstItem="5UG-MY-228" firstAttribute="centerX" secondItem="ZaV-X4-3Kj" secondAttribute="centerX" id="DB5-w9-qhe"/>
                                                     <constraint firstAttribute="bottom" secondItem="oVg-K1-knT" secondAttribute="bottom" id="Que-Xc-9R2"/>
                                                     <constraint firstItem="oVg-K1-knT" firstAttribute="leading" secondItem="ZaV-X4-3Kj" secondAttribute="leading" id="Xns-Pe-ZWf"/>
-                                                    <constraint firstAttribute="width" constant="188" id="ZV6-HH-Bc6"/>
                                                     <constraint firstItem="6Sz-cs-xbB" firstAttribute="centerY" secondItem="ZaV-X4-3Kj" secondAttribute="centerY" id="eSv-Sm-b22"/>
-                                                    <constraint firstAttribute="trailing" secondItem="5UG-MY-228" secondAttribute="trailing" constant="8" id="zf8-cK-NK0"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -2552,17 +2629,42 @@ Oh, and just a heads up, we understand that sometimes Bluetooth can get a bit te
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="19H-xA-Kiv">
+                                                <rect key="frame" x="19" y="340" width="376" height="50"/>
+                                                <color key="backgroundColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="nJ5-Yt-ZBg"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Next">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="nextButtonAction" destination="AhF-LR-nmg" eventType="touchUpInside" id="H7J-ew-XR3"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="AJJ-fM-T92" firstAttribute="top" secondItem="H7J-SF-hqh" secondAttribute="bottom" constant="15" id="16u-01-BL1"/>
-                                            <constraint firstItem="ZaV-X4-3Kj" firstAttribute="top" secondItem="AJJ-fM-T92" secondAttribute="bottom" constant="15" id="AaP-wW-KGc"/>
-                                            <constraint firstAttribute="bottom" secondItem="ZaV-X4-3Kj" secondAttribute="bottom" constant="15" id="Izx-og-5Bt"/>
+                                            <constraint firstItem="19H-xA-Kiv" firstAttribute="top" secondItem="ZaV-X4-3Kj" secondAttribute="bottom" constant="10" id="2ua-Lv-Uh7"/>
+                                            <constraint firstItem="19H-xA-Kiv" firstAttribute="leading" secondItem="JSb-GT-U0c" secondAttribute="leading" constant="19" id="MOV-8m-bdh"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZaV-X4-3Kj" secondAttribute="trailing" constant="19" id="Obp-Pe-ZGI"/>
+                                            <constraint firstItem="AnI-q7-Jqj" firstAttribute="leading" secondItem="JSb-GT-U0c" secondAttribute="leading" constant="19" id="WA3-39-Dw5"/>
+                                            <constraint firstItem="ZaV-X4-3Kj" firstAttribute="leading" secondItem="JSb-GT-U0c" secondAttribute="leading" constant="19" id="Zyz-ff-926"/>
+                                            <constraint firstAttribute="trailing" secondItem="AnI-q7-Jqj" secondAttribute="trailing" constant="19" id="aaO-Jw-0UO"/>
+                                            <constraint firstItem="AnI-q7-Jqj" firstAttribute="top" secondItem="H7J-SF-hqh" secondAttribute="bottom" constant="20" id="cbA-vY-dwN"/>
                                             <constraint firstItem="H7J-SF-hqh" firstAttribute="centerX" secondItem="JSb-GT-U0c" secondAttribute="centerX" id="dUl-wU-Ptz"/>
-                                            <constraint firstItem="AJJ-fM-T92" firstAttribute="leading" secondItem="JSb-GT-U0c" secondAttribute="leading" constant="19" id="pde-dP-QYK"/>
+                                            <constraint firstAttribute="trailing" secondItem="19H-xA-Kiv" secondAttribute="trailing" constant="19" id="gyR-Uy-pBB"/>
+                                            <constraint firstItem="ZaV-X4-3Kj" firstAttribute="top" secondItem="AnI-q7-Jqj" secondAttribute="bottom" constant="10" id="h1Y-5y-DNW"/>
                                             <constraint firstItem="H7J-SF-hqh" firstAttribute="top" secondItem="JSb-GT-U0c" secondAttribute="top" constant="15" id="pfK-Ek-Q2C"/>
                                             <constraint firstItem="ZaV-X4-3Kj" firstAttribute="centerX" secondItem="JSb-GT-U0c" secondAttribute="centerX" id="qy6-5l-ZSX"/>
-                                            <constraint firstAttribute="trailing" secondItem="AJJ-fM-T92" secondAttribute="trailing" constant="19" id="xjb-7j-QcR"/>
+                                            <constraint firstAttribute="bottom" secondItem="19H-xA-Kiv" secondAttribute="bottom" constant="20" id="ruN-vw-gN8"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -2577,53 +2679,31 @@ Oh, and just a heads up, we understand that sometimes Bluetooth can get a bit te
                                 <viewLayoutGuide key="contentLayoutGuide" id="du0-wu-z4c"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="CwA-8e-5mL"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVH-ls-STb">
-                                <rect key="frame" x="19" y="812" width="376" height="50"/>
-                                <color key="backgroundColor" red="0.066666666669999999" green="0.090196078430000007" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="8lC-Il-32l"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Next">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="nextButtonAction" destination="AhF-LR-nmg" eventType="touchUpInside" id="q8E-Y1-t66"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eua-WW-dEM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="sVH-ls-STb" firstAttribute="top" secondItem="UgL-7T-MjN" secondAttribute="bottom" constant="5" id="0BI-Yi-JdL"/>
-                            <constraint firstItem="eua-WW-dEM" firstAttribute="trailing" secondItem="sVH-ls-STb" secondAttribute="trailing" constant="19" id="4Xk-Kk-pvI"/>
                             <constraint firstItem="UgL-7T-MjN" firstAttribute="top" secondItem="eua-WW-dEM" secondAttribute="top" id="MBK-0n-H7u"/>
                             <constraint firstItem="UgL-7T-MjN" firstAttribute="trailing" secondItem="eua-WW-dEM" secondAttribute="trailing" id="PG0-eN-gGL"/>
-                            <constraint firstItem="eua-WW-dEM" firstAttribute="bottom" secondItem="sVH-ls-STb" secondAttribute="bottom" id="Q2k-0A-iqP"/>
-                            <constraint firstItem="sVH-ls-STb" firstAttribute="leading" secondItem="eua-WW-dEM" secondAttribute="leading" constant="19" id="gJf-R0-3jT"/>
+                            <constraint firstItem="eua-WW-dEM" firstAttribute="bottom" secondItem="UgL-7T-MjN" secondAttribute="bottom" id="UDb-tM-N6f"/>
                             <constraint firstItem="UgL-7T-MjN" firstAttribute="leading" secondItem="eua-WW-dEM" secondAttribute="leading" id="tca-3Y-qu0"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="buyStripTitleLbl" destination="5UG-MY-228" id="Ead-8Z-YE1"/>
-                        <outlet property="nextButton" destination="sVH-ls-STb" id="pNc-j8-GLF"/>
-                        <outlet property="subTitleLbl" destination="AJJ-fM-T92" id="Ubx-8E-CUR"/>
+                        <outlet property="buyStripTitleLbl" destination="5UG-MY-228" id="1gd-4D-sjw"/>
+                        <outlet property="nextButton" destination="19H-xA-Kiv" id="WLK-Gv-ZUP"/>
+                        <outlet property="subTitleLbl" destination="dUb-zk-TUN" id="wkD-tw-dar"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qS4-ay-3VN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1549" y="636"/>
+            <point key="canvasLocation" x="1547.8260869565217" y="635.49107142857144"/>
         </scene>
     </scenes>
     <resources>
         <image name="Button Close" width="32" height="32"/>
         <image name="BuyTestStrip" width="40" height="37"/>
+        <image name="FliprInfo" width="21" height="21"/>
         <image name="PH4Demo" width="300" height="120"/>
         <image name="arrow_back-1" width="25" height="25"/>
         <image name="calibrationIntro" width="100" height="100"/>
@@ -2632,7 +2712,7 @@ Oh, and just a heads up, we understand that sometimes Bluetooth can get a bit te
         <image name="infoBlue" width="24" height="24"/>
         <image name="ph7Demo" width="300" height="120"/>
         <image name="rainbow" width="100" height="100"/>
-        <image name="sun" width="22" height="22"/>
+        <image name="sun" width="24" height="24"/>
         <systemColor name="lightTextColor">
             <color white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

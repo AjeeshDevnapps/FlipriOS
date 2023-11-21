@@ -85,6 +85,9 @@ class Strip {
             placeId = AppSharedData.sharedInstance.addedPlaceId
         }else{
             placeId = Module.currentModule?.placeId
+            if placeId == nil{
+                placeId = AppSharedData.sharedInstance.addedPlaceId
+            }
         }
         
         if let placeID = placeId { //, let poolId = Pool.currentPool?.id {

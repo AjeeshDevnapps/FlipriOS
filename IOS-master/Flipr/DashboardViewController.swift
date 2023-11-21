@@ -5663,6 +5663,7 @@ extension DashboardViewController{
             case 1: imageName = "bleConnection"
             case 2: imageName = "wifiConnection"
             case 3: imageName = "gateWayConnection"
+            case 4: imageName = "StriptestValueIcon"
             case 10: imageName = "MannualConnection"
 
         default: break

@@ -95,6 +95,8 @@ struct K {
         
         static let FliprReadingModeValue = Notification.Name("fr.isee-u.FliprReadingModeValue")
         static let FliprDidLastMeasurement = Notification.Name("fr.isee-u.FliprDidLastMeasurement")
+        
+        static let PlaceCreated = Notification.Name("fr.isee-u.PlaceCreated")
 
         
     }
