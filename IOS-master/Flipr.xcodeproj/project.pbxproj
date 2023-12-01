@@ -539,6 +539,8 @@
 		48C8E4F3265D21490000FDA8 /* KeyEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C8E4F2265D21490000FDA8 /* KeyEnterViewController.swift */; };
 		48C8E4F6265D6DC60000FDA8 /* FliprActivationSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C8E4F5265D6DC50000FDA8 /* FliprActivationSuccessViewController.swift */; };
 		48C9468C265AAADC00C018A7 /* AddFliprViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C9468B265AAADC00C018A7 /* AddFliprViewController.swift */; };
+		48C957CA2B19AE0C00815F22 /* AISettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C957C92B19AE0C00815F22 /* AISettingsViewController.swift */; };
+		48C957CD2B19AE3B00815F22 /* AIModeTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C957CC2B19AE3B00815F22 /* AIModeTitleCell.swift */; };
 		48F49ABC2666A44000DFB18B /* AddHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F49ABB2666A44000DFB18B /* AddHubViewController.swift */; };
 		48F49ABF2666B3D200DFB18B /* HubListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F49ABE2666B3D200DFB18B /* HubListViewController.swift */; };
 		48F91FB82677A45300FFD44B /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48F91FB72677A45300FFD44B /* Dashboard.storyboard */; };
@@ -953,6 +955,8 @@
 		48C8E4F2265D21490000FDA8 /* KeyEnterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEnterViewController.swift; sourceTree = "<group>"; };
 		48C8E4F5265D6DC50000FDA8 /* FliprActivationSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FliprActivationSuccessViewController.swift; sourceTree = "<group>"; };
 		48C9468B265AAADC00C018A7 /* AddFliprViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFliprViewController.swift; sourceTree = "<group>"; };
+		48C957C92B19AE0C00815F22 /* AISettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISettingsViewController.swift; sourceTree = "<group>"; };
+		48C957CC2B19AE3B00815F22 /* AIModeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIModeTitleCell.swift; sourceTree = "<group>"; };
 		48F49ABB2666A44000DFB18B /* AddHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHubViewController.swift; sourceTree = "<group>"; };
 		48F49ABE2666B3D200DFB18B /* HubListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubListViewController.swift; sourceTree = "<group>"; };
 		48F91FB72677A45300FFD44B /* Dashboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
@@ -1741,6 +1745,14 @@
 			path = "Add Flipr";
 			sourceTree = "<group>";
 		};
+		48C957CB2B19AE1B00815F22 /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				48C957CC2B19AE3B00815F22 /* AIModeTitleCell.swift */,
+			);
+			path = AI;
+			sourceTree = "<group>";
+		};
 		48E3F2D62621E833005AF612 /* Signup */ = {
 			isa = PBXGroup;
 			children = (
@@ -1817,6 +1829,7 @@
 			isa = PBXGroup;
 			children = (
 				782962572AB201F400EF0B41 /* FliprAIViewController.swift */,
+				48C957C92B19AE0C00815F22 /* AISettingsViewController.swift */,
 			);
 			path = AI;
 			sourceTree = "<group>";
@@ -1860,6 +1873,7 @@
 		B50009821F0101BC00A84A4F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				48C957CB2B19AE1B00815F22 /* AI */,
 				1CFAF11429DC06FA00B9953A /* GatewayTableViewCell.swift */,
 				78250A4D2AB4AAC400AD60BC /* ChatTableViewCell.swift */,
 				78334EA62A5EEE410057E05F /* ExpertviewInfoTableViewCell.swift */,
@@ -2994,6 +3008,7 @@
 				1C98B8DE292805C500AF089A /* WatrHubSettingsViewController.swift in Sources */,
 				1CD06B3B29FA81A10011655C /* ChangeDelayViewController.swift in Sources */,
 				1C50A7C52A163E5D00EC49F8 /* FliprModeManager.swift in Sources */,
+				48C957CD2B19AE3B00815F22 /* AIModeTitleCell.swift in Sources */,
 				B52A68B71EFAA4DF006585F5 /* ProductTypeTableViewController.swift in Sources */,
 				48F91FBC2677AD1200FFD44B /* NewDashboardViewController.swift in Sources */,
 				1CCB034D29E9B10A002DB637 /* GatewaySuccessViewController.swift in Sources */,
@@ -3185,6 +3200,7 @@
 				1C8D5DAA283D2CD100FA50BA /* DiagnosticErrorViewController.swift in Sources */,
 				1CD8DF2D28076E8B004412D9 /* NSData+hexString.m in Sources */,
 				B5435AAF1EC3014600C7FF10 /* AlertViewController.swift in Sources */,
+				48C957CA2B19AE0C00815F22 /* AISettingsViewController.swift in Sources */,
 				B5F457B124C05D4E006C309A /* VideoHelpViewController.swift in Sources */,
 				1CA9A28A290FFC720035F671 /* PlaceType.swift in Sources */,
 			);
@@ -3430,7 +3446,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Flipr;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 5.0;
+				MARKETING_VERSION = 5.0.1;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;
@@ -3466,7 +3482,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Flipr;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 5.0;
+				MARKETING_VERSION = 5.0.1;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.goflipr.flipr;

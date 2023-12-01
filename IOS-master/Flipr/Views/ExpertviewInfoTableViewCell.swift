@@ -26,10 +26,8 @@ class ExpertviewInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var expertViewInfoLbl: UILabel!
-    
+    @IBOutlet weak var warningInfoLbl: UILabel!
 
-
-    
     
 
     var lastMeasureInfo : LastCalibration?
@@ -48,7 +46,9 @@ class ExpertviewInfoTableViewCell: UITableViewCell {
     
     func loadData(){
         self.titleLabel.text = "Raw data".localized
+        self.warningInfoLbl.text = "4777:64166".localized
 
+        
         
         self.expertViewInfoLbl.text = "Expert View provides access to raw data that is not processed or simplified like the data displayed in dashboards. Interpreting this data requires specialized skills and domain expertise. It is intended for experts and diagnostic purposes, not for direct comparison with dashboard data. While dashboards offer quick insights for most users, Expert View targets professionals seeking in-depth analysis and precise information. Proper interpretation of raw data is crucial as it forms the basis for dashboard visualizations.".localized
 

@@ -95,7 +95,7 @@ class Strip {
             var params:[String : Any] = ["placeId":placeID,"TotalChlBr":totalChlore!,"FreeChlorine":chloreBrome!,"TAC":alcalinity!,"PH":pH!,"TH":hydrotimetricTitle!,"Stabilizer":cyanudricAcid!,"StripVersion":stripVersion]
             
             if totalBr != nil{
-                params = ["placeId":placeID,"TotalChlBr":totalChlore!,"FreeChlorine":chloreBrome!,"TAC":alcalinity!,"PH":pH!,"TH":hydrotimetricTitle!,"Stabilizer":cyanudricAcid!,"StripVersion":stripVersion, "TotalBr" : totalBr!]
+                params = ["placeId":placeID,"TotalChlBr":totalChlore!,"FreeChlorine":chloreBrome!,"TAC":alcalinity!,"PH":pH!,"TH":hydrotimetricTitle!,"Stabilizer":cyanudricAcid!,"StripVersion":1, "TotalBr" : totalBr!]
             }
             print("Send Strip Test with parmams: \(params)")
             

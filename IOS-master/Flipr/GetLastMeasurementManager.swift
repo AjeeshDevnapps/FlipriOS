@@ -110,6 +110,7 @@ class GetLastMeasurementManager: NSObject {
         let tmp = self.newMeasureValue
         self.oldMeasureValue = tmp
         self.stopScanning = false
+        self.isReconnectedAfterFail = false
         if flipr?.state == .connected{
             self.writeAcqValue()
         }else{

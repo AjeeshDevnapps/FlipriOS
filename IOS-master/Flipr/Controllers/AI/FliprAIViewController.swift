@@ -12,7 +12,7 @@ import JGProgressHUD
 import Alamofire
 import IQKeyboardManagerSwift
 
-class FliprAIViewController: UIViewController {
+class FliprAIViewController: UIViewController,AISettingsDelegate {
     
     @IBOutlet weak var inputToolbar: UIView!
     @IBOutlet weak var textView: GrowingTextView!
@@ -74,7 +74,7 @@ class FliprAIViewController: UIViewController {
          self.navigationItem.titleView = imageView
 
          resetButton = UIButton(type: .custom)
-         resetButton.setImage(UIImage(named: "AiReset"), for: .normal)
+         resetButton.setImage(UIImage(named: "AISettings"), for: .normal)
          resetButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
          resetButton.addTarget(self, action: #selector(resetBtnAction), for: .touchUpInside)
          
@@ -98,12 +98,27 @@ class FliprAIViewController: UIViewController {
     
     
     @objc func resetBtnAction(){
-        self.showResetAI()
+        self.showSetttingsVC()
+    }
+    
+    func didResetChat(){
+        self.chats.removeAll()
+        self.chatTableView.reloadData()
+    }
+
+    func showSetttingsVC(){
+        let sb = UIStoryboard.init(name: "FliprAI", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "AISettingsViewController") as? AISettingsViewController {
+            viewController.modalPresentationStyle = .overCurrentContext
+            viewController.delegate = self
+            self.present(viewController, animated: true) {
+                viewController.showBackgroundView()
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.enable = true
     }
@@ -136,8 +151,9 @@ class FliprAIViewController: UIViewController {
     }
     
     @IBAction func resetButtonClicked(){
-        self.showResetAI()
+        self.showSetttingsVC()
     }
+    
     
     @IBAction func tncAcceptButtonClicked(){
         self.callAcceptAI()
@@ -263,9 +279,6 @@ class FliprAIViewController: UIViewController {
                     
             }
         })
-
-        
-    
         
     }
 

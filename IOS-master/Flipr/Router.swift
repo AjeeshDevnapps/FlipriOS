@@ -743,7 +743,21 @@ enum Router: URLRequestConvertible {
 
             break
 
-
+        case .getAIinfo:
+            var lang = "en"
+            if let preferredLanguage = Locale.current.languageCode {
+                lang = preferredLanguage
+            }
+            if let preferredLanguage = Locale.current.languageCode {
+                lang = preferredLanguage
+            }
+            let parameters: [String : Any] = [
+                "lang": lang
+            ]
+            
+            urlRequest = try URLEncoding.queryString.encode(urlRequest, with: parameters)
+            
+            break
             
         case .createNewUser(let email):
             var lang = "en"
