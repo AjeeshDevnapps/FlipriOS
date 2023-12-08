@@ -4421,6 +4421,17 @@ class DashboardViewController: UIViewController {
         }
     }
     
+    
+    func showSetttingsVC(){
+        let sb = UIStoryboard.init(name: "FliprAI", bundle: nil)
+        if let viewController = sb.instantiateViewController(withIdentifier: "AISettingsViewController") as? AISettingsViewController {
+            viewController.modalPresentationStyle = .overCurrentContext
+            self.present(viewController, animated: true) {
+                viewController.showBackgroundView()
+            }
+        }
+    }
+    
     @IBAction func quickActionButtonAction(_ sender: Any) {
         /*
          let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)
@@ -4431,6 +4442,11 @@ class DashboardViewController: UIViewController {
          }
          }
          */
+        
+       
+//        showSetttingsVC()
+//        return
+        
         if  ((self.placesModules != nil) && (self.placeDetails != nil)){
             
             let sb = UIStoryboard.init(name: "SideMenuViews", bundle: nil)

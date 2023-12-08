@@ -48,6 +48,7 @@ enum Router: URLRequestConvertible {
     case getUserEquipments
     case getUserGateways
     case addDelay(serial: String)
+    case manualEntry(data: [String : Any])
 
 
 
@@ -177,6 +178,8 @@ enum Router: URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
+        case .manualEntry:
+            return .post
         case .setDefaultCalibration:
             return .post
         case .updateRawData:
@@ -408,6 +411,8 @@ enum Router: URLRequestConvertible {
     var path: String {
         switch self {
             
+        case .manualEntry(let data):
+            return "modules/ManualEntry"
         case .setDefaultCalibration(let serial):
             return "modules/\(serial)/defaultCalibration"
         case .updateRawData:
@@ -703,6 +708,10 @@ enum Router: URLRequestConvertible {
         
         switch self {
             
+        case .manualEntry(let values):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: values)
+            break
+
         case .updateRawData(let serial, let measureId, let action):
             let parameters: [String : Any] = [
                 "Serial": serial,

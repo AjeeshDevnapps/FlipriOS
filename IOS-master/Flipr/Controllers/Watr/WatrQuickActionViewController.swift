@@ -217,8 +217,8 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
             if isPlaceOwner {
                 if isV3{
                     if indexPath.row == 0{
-                        cell.disableView.isHidden = false
-                        cell.comingSoonLbl.isHidden = false
+                        cell.disableView.isHidden = true
+                        cell.comingSoonLbl.isHidden = true
                     }
                     else if indexPath.row == 1{
                         cell.disableView.isHidden = true
@@ -232,8 +232,8 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                 else{
                     if haveSubscription{
                         if indexPath.row == 0 {
-                            cell.disableView.isHidden = false
-                            cell.comingSoonLbl.isHidden = false
+                            cell.disableView.isHidden = true
+                            cell.comingSoonLbl.isHidden = true
                         }
                         else if indexPath.row == 1{
                             cell.disableView.isHidden = true
@@ -296,7 +296,8 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
             if isPlaceOwner {
                 if isV3{
                     if indexPath.row == 0{
-                        
+                        showManualEntryView()
+
                     }
                     
 //                    if indexPath.row == 1{
@@ -315,7 +316,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                 else{
                     if haveSubscription{
                         if indexPath.row == 0{
-                            
+                            showManualEntryView()
                         }
 //                        else if indexPath.row == 1{
 //                            showLastMeasurement()
@@ -499,6 +500,13 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
         
     }
     
+    func showManualEntryView(){
+        let sb = UIStoryboard(name: "ManualEntry", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "ManualEntryViewController") as! ManualEntryViewController
+                vc.isMetric = true
+                vc.isBrominePool = true
+                self.present(vc, animated: true)
+    }
     
     func showAIView(){
         

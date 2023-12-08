@@ -45,6 +45,8 @@ class ExpertViewPickerViewController: UIViewController {
     var defaultValue2 = ""
     var defaultValue1Index = 0
     var defaultValue2Index =  0
+    
+    var isPhManualEntry = false
 
 
     override func viewDidLoad() {
@@ -62,8 +64,13 @@ class ExpertViewPickerViewController: UIViewController {
         switch (currentType){
             
             case .Ph :
+            if isPhManualEntry{
+                
+            }else{
                 firstItemArray = ["6.0","6.1","6.2","6.3","6.4","6.5","6.6","6.7","6.8","6.9","7.0","7.1","7.2","7.3","7.4","7.5","7.6","7.7","7.8","7.9","8.0","8.1","8.2","8.3","8.4","8.5","8.6","8.7","8.8","8.9","9.0"]
                 secondItemArray = ["6.0","6.1","6.2","6.3","6.4","6.5","6.6","6.7","6.8","6.9","7.0","7.1","7.2","7.3","7.4","7.5","7.6","7.7","7.8","7.9","8.0","8.1","8.2","8.3","8.4","8.5","8.6","8.7","8.8","8.9","9.0"]
+
+            }
 
             break
             case .Temp :
@@ -83,7 +90,7 @@ class ExpertViewPickerViewController: UIViewController {
             }
             break
             case .Redox :
-                firstItemArray = ["50", "100", "150", "200", "250", "300", "350", "400", "450", "500", "550", "600", "650", "700", "750", "800", "850", "900", "950", "1000", "1050", "1100", "1150", "1200", "1250", "1300", "1350", "1400", "1450", "1500"]
+//                firstItemArray = ["50", "100", "150", "200", "250", "300", "350", "400", "450", "500", "550", "600", "650", "700", "750", "800", "850", "900", "950", "1000", "1050", "1100", "1150", "1200", "1250", "1300", "1350", "1400", "1450", "1500"]
             break
 
         }
@@ -198,6 +205,10 @@ extension ExpertViewPickerViewController:  UIPickerViewDelegate,UIPickerViewData
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if currentType == .Redox{
+            return
+        }
+        
+        if isPhManualEntry{
             return
         }
         
