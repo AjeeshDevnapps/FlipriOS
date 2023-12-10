@@ -505,6 +505,7 @@ extension WatrQuickActionViewController: UITableViewDelegate,UITableViewDataSour
                 let vc = sb.instantiateViewController(withIdentifier: "ManualEntryViewController") as! ManualEntryViewController
                 vc.isMetric = true
                 vc.isBrominePool = true
+                vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)
     }
     

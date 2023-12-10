@@ -17,6 +17,8 @@ class ManualEntryViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var validateBtn: UIButton!
+
     var isMetric = true
     var isBrominePool = true
     var combinedEntry = ValidationInputs()
@@ -33,18 +35,30 @@ class ManualEntryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        validateBtn.setTitle("Validate".localized, for: .normal)
         let selectedTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
                                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .bold)]
         let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
                                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .bold)]
         segmentedControl.setTitleTextAttributes(selectedTitleTextAttributes, for: .selected)
         segmentedControl.setTitleTextAttributes(titleTextAttributes, for: .normal)
-    
+        segmentedControl.setTitle("4274:65789".localized, forSegmentAt: 0)
+        segmentedControl.setTitle("4274:65791".localized, forSegmentAt: 1)
+
         
         tableView.allowsSelection = false
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         combinedEntry.pH  = 0
+        
+        if let currentUnit = UserDefaults.standard.object(forKey: "CurrentUnit") as? Int{
+            if currentUnit == 2{
+                isMetric = false
+            }
+            else{
+                isMetric = true
+            }
+        }
+
     }
     
 
@@ -107,7 +121,7 @@ extension ManualEntryViewController: UITableViewDataSource, UITableViewDelegate 
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ManualEntryImageTableViewCell", for: indexPath) as! ManualEntryImageTableViewCell
-            cell.input = DualEntryImage(isMetric: true, imageName: "ph", secondImageName: "ph_sec", text: "pH", secondValueUnit: isMetric ? "°C" : "°F", firstInitialValue: "0", secondInitialValue: "0")
+            cell.input = DualEntryImage(isMetric: isMetric, imageName: "ph", secondImageName: "ph_sec", text: "pH", secondValueUnit: isMetric ? "°C" : "°F", firstInitialValue: "0", secondInitialValue: "0")
             cell.delegate = self
             cell.valueType = .ph
             cell.firstTextField.text = "\(combinedEntry.pH)"
@@ -115,7 +129,7 @@ extension ManualEntryViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ManualEntryTextTableViewCell", for: indexPath) as! ManualEntryTextTableViewCell
-            cell.input = DualEntryText(isMetric: true, imageName: "tac", text: "TAC",firstValueUnit: "ppm", secondValueUnit: "°f", firstInitialValue: "0", secondInitialValue: "0")
+            cell.input = DualEntryText(isMetric: isMetric, imageName: "tac", text: "TAC",firstValueUnit: "ppm", secondValueUnit: "°f", firstInitialValue: "0", secondInitialValue: "0")
             cell.delegate = self
             cell.secondTextField.isEnabled = false
             cell.secondTextField.backgroundColor = .gray
@@ -125,7 +139,7 @@ extension ManualEntryViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ManualEntryTextTableViewCell", for: indexPath) as! ManualEntryTextTableViewCell
-            cell.input = DualEntryText(isMetric: true, imageName: "th", text: "TH",firstValueUnit: "ppm", secondValueUnit: "°f", firstInitialValue: "0", secondInitialValue: "0")
+            cell.input = DualEntryText(isMetric: isMetric, imageName: "th", text: "TH",firstValueUnit: "ppm", secondValueUnit: "°f", firstInitialValue: "0", secondInitialValue: "0")
             cell.delegate = self
             cell.secondTextField.isEnabled = false
             cell.secondTextField.backgroundColor = .gray
@@ -136,9 +150,9 @@ extension ManualEntryViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SingleEntryTableViewCell", for: indexPath) as! SingleEntryTableViewCell
-            cell.input = SingleEntryInput(isMetric: true,
+            cell.input = SingleEntryInput(isMetric: isMetric,
                                           imageName: "stabilizer",
-                                          text: "Stabilizer",
+                                          text: "Stabilizer".localized,
                                           unit: "ppm",
                                           initialValue: "0")
             cell.delegate = self
@@ -148,9 +162,9 @@ extension ManualEntryViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SingleEntryTableViewCell", for: indexPath) as! SingleEntryTableViewCell
-            cell.input = SingleEntryInput(isMetric: true,
+            cell.input = SingleEntryInput(isMetric: isMetric,
                                           imageName: "free_chlorine",
-                                          text: "Free Chlorine",
+                                          text: "4274:66174".localized ,
                                           unit: "ppm",
                                           initialValue: "0")
             cell.delegate = self
@@ -159,9 +173,9 @@ extension ManualEntryViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SingleEntryTableViewCell", for: indexPath) as! SingleEntryTableViewCell
-            cell.input = SingleEntryInput(isMetric: true,
+            cell.input = SingleEntryInput(isMetric: isMetric,
                                           imageName: "total_chlorine",
-                                          text: isBrominePool ? "Total Bromine" : "Total Chlorine",
+                                          text: isBrominePool ? "4274:66198".localized : "4274:65888".localized ,
                                           unit: "ppm",
                                           initialValue: "0")
             cell.delegate = self
@@ -209,14 +223,14 @@ extension ManualEntryViewController: ManualEntryTableViewCellDelegate {
     }
     
     func secondTextFieldUpdated(textField: UITextField?, value: String, valueType: TextValueType) {
-//        switch valueType {
-//        case .tac:
+        switch valueType {
+        case .tac:break
 //            combinedEntry.tacTemperature = Double(value) ?? 0
-//        case .th:
+        case .th:break
 //            combinedEntry.thTemperature = Double(value) ?? 0
-//        case .ph:
-//            combinedEntry.temperature = Double(value) ?? 0
-//        }
+        case .ph:
+            self.showPhPicker()
+        }
     }
 }
 
@@ -231,7 +245,7 @@ extension ManualEntryViewController{
         let vc = sb.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
         vc.currentType = .Ph
         vc.isPhManualEntry = true
-        vc.titleStr = "pH et température de l'eau"
+        vc.titleStr = "4274:65922".localized
         vc.delegate = self
         vc.firstItemArray = ["0","20","30","40","50","60","80","100","125","150","175","200","250","300","400","500","600","700","800","900","1000"]
         vc.secondItemArray = ["0","20","30","40","50","60","80","100","125","150","175","200","250","300","400","500","600","700","800","900","1000"]
@@ -257,7 +271,7 @@ extension ManualEntryViewController{
         let sb = UIStoryboard.init(name: "ExpertView", bundle: nil)
 
         let vc = sb.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
-        vc.titleStr = "TAC - Alkalinity"
+        vc.titleStr = "4274:65959".localized
         vc.currentType = .Redox
         let tmpVal = combinedEntry.tac
         self.currentType = 2
@@ -275,7 +289,7 @@ extension ManualEntryViewController{
         let sb = UIStoryboard.init(name: "ExpertView", bundle: nil)
 
         let vc = sb.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
-        vc.titleStr = "TH - Total Hardness"
+        vc.titleStr = "TH (Total Hardeness)".localized
         vc.currentType = .Redox
         let tmpVal = combinedEntry.th
         self.currentType = 3
@@ -293,7 +307,7 @@ extension ManualEntryViewController{
         let sb = UIStoryboard.init(name: "ExpertView", bundle: nil)
 
         let vc = sb.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
-        vc.titleStr = "Stabilizer"
+        vc.titleStr = "Stabilizer".localized
         vc.currentType = .Redox
         let tmpVal = combinedEntry.stabilizer
         self.currentType = 4
@@ -311,7 +325,7 @@ extension ManualEntryViewController{
         let sb = UIStoryboard.init(name: "ExpertView", bundle: nil)
 
         let vc = sb.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
-        vc.titleStr = "Total Chlorine"
+        vc.titleStr = "4274:66880".localized
         vc.currentType = .Redox
         let tmpVal = combinedEntry.free
         self.currentType = 5
@@ -330,7 +344,7 @@ extension ManualEntryViewController{
         let sb = UIStoryboard.init(name: "ExpertView", bundle: nil)
 
         let vc = sb.instantiateViewController(withIdentifier: "ExpertViewPickerViewController") as! ExpertViewPickerViewController
-        vc.titleStr = "Total Bromine"
+        vc.titleStr = "4274:66198".localized
         vc.currentType = .Redox
         let tmpVal = combinedEntry.total
         self.currentType = 6
